@@ -7,7 +7,7 @@ Este repositorio contiene las reglas, estándares y filosofía que guían el tra
 Un manifiesto contra tres males endémicos en tecnología latinoamericana:
 - **Mercenazgo:** trabajos mediocres sin compromiso real
 - **Egoísmo técnico:** acaparar conocimiento para crear dependencia
-- **Falta de identidad:** acomplejos culturales que degradan la calidad
+- **Falta de identidad:** complejos culturales que degradan la calidad
 
 ## Documentos incluidos
 
@@ -21,19 +21,19 @@ Un manifiesto contra tres males endémicos en tecnología latinoamericana:
 
 ## Especialización técnica
 
-- Ingeniería DevOps con enfoque en Kubernetes nativo
-- Plataformas *bare-metal* sobre Proxmox VE
+- ingeniería DevOps con enfoque en Kubernetes nativo
+- plataformas *bare-metal* sobre Proxmox VE
 - GitOps y automatización declarativa
-- Observabilidad y mallas de servicios
-- Seguridad en entornos distribuidos
+- observabilidad y mallas de servicios
+- seguridad en entornos distribuidos
 
 ## Uso
 
 Estos documentos sirven como referencia para mantener consistencia en:
-- Metodologías de trabajo técnico
-- Estándares de infraestructura y documentación
-- Políticas de licenciamiento
-- Convenciones lingüísticas y culturales
+- metodologías de trabajo técnico
+- estándares de infraestructura y documentación
+- políticas de licenciamiento
+- convenciones lingüísticas y culturales
 
 ---
 
