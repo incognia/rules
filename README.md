@@ -1,4 +1,4 @@
-# Reglas y filosofía profesional de un Ingeniero DevOps
+# Reglas y filosofía profesional de un ingeniero DevOps
 
 Este repositorio contiene las reglas, estándares y filosofía que guían el trabajo técnico y la colaboración en los proyectos de Rodrigo Álvarez.
 
