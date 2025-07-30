@@ -22,12 +22,12 @@ Este documento establece las convenciones y estándares para la autoría, atribu
 
 El rol de Rodrigo se centra en **ingeniería DevOps avanzada**, especializado en plataformas Kubernetes nativas y arquitecturas de observabilidad. Sus contribuciones principales abarcan:
 
-- **Plataformas Kubernetes bare-metal:** Construcción y operación de clústeres sobre Proxmox VE, aprovisionamiento con kubeadm y cloud-init.
-- **GitOps y automatización declarativa:** Implementación de flujos con Argo CD, gestión de Helm charts y manifiestos versionados.
-- **Service mesh y networking avanzado:** Configuración de Istio, Envoy, Cilium, MetalLB, bridges y VLANs.
-- **Observabilidad y trazabilidad distribuida:** Instrumentación con OpenTelemetry, Prometheus, Grafana, Fluentd y Elasticsearch.
-- **CI/CD empresarial:** Diseño de *pipelines* con Jenkins y GitLab CI integrados a flujos GitOps.
-- **Seguridad en mallas de servicios:** Implementación de mTLS, RBAC y políticas de red en entornos productivos.
+- **Plataformas Kubernetes bare-metal:** construcción y operación de clústeres sobre Proxmox VE, aprovisionamiento con kubeadm y cloud-init.
+- **GitOps y automatización declarativa:** implementación de flujos con Argo CD, gestión de Helm charts y manifiestos versionados.
+- **Service mesh y networking avanzado:** configuración de Istio, Envoy, Cilium, MetalLB, bridges y VLANs.
+- **Observabilidad y trazabilidad distribuida:** instrumentación con OpenTelemetry, Prometheus, Grafana, Fluentd y Elasticsearch.
+- **CI/CD empresarial:** diseño de *pipelines* con Jenkins y GitLab CI integrados a flujos GitOps.
+- **Seguridad en mallas de servicios:** implementación de mTLS, RBAC y políticas de red en entornos productivos.
 
 ## 4. Identificadores digitales
 
