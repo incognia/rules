@@ -1,0 +1,94 @@
+# Reglas de autoría, atribución y colaboración
+
+## 1. Propósito
+
+Este documento establece las convenciones y estándares para la autoría, atribución y colaboración en los proyectos desarrollados o mantenidos por Rodrigo Ernesto Álvarez Aguilera. Su objetivo es garantizar consistencia, claridad y respeto por las normas culturales y técnicas en todos los entornos de trabajo.
+
+## 2. Identidad del autor
+
+### 2.1. Nombre completo
+- **Nombre legal:** Rodrigo Ernesto Álvarez Aguilera
+
+### 2.2. Nombres de uso común
+- **Nombre abreviado:** Rodrigo Álvarez
+- **Apellido principal para indexación:** Álvarez
+
+### 2.3. Convención de nombres
+- **Contexto hispanohablante:** Se utilizan dos apellidos, siendo el paterno «Álvarez» y el materno «Aguilera».
+- **Contexto técnico e internacional:** Para garantizar una correcta atribución en sistemas que no manejan nombres compuestos, usar como apellido principal «Álvarez».
+- **Alternativa sin caracteres especiales:** En sistemas que no soporten la `á`, utilizar la versión «Alvarez».
+
+## 3. Especialización profesional
+
+El rol de Rodrigo se centra en **ingeniería DevOps avanzada**, especializado en plataformas Kubernetes nativas y arquitecturas de observabilidad. Sus contribuciones principales abarcan:
+
+- **Plataformas Kubernetes bare-metal:** Construcción y operación de clústeres sobre Proxmox VE, aprovisionamiento con kubeadm y cloud-init.
+- **GitOps y automatización declarativa:** Implementación de flujos con Argo CD, gestión de Helm charts y manifiestos versionados.
+- **Service mesh y networking avanzado:** Configuración de Istio, Envoy, Cilium, MetalLB, bridges y VLANs.
+- **Observabilidad y trazabilidad distribuida:** Instrumentación con OpenTelemetry, Prometheus, Grafana, Fluentd y Elasticsearch.
+- **CI/CD empresarial:** Diseño de *pipelines* con Jenkins y GitLab CI integrados a flujos GitOps.
+- **Seguridad en mallas de servicios:** Implementación de mTLS, RBAC y políticas de red en entornos productivos.
+
+## 4. Identificadores digitales
+
+### 4.1. Personales
+- **GitHub:** `incognia`
+- **GitLab:** `incognia`
+- **Correo electrónico:** `incognia@gmail.com`
+
+### 4.2. Laborales (Promad Business Solutions)
+- **GitHub:** `incogniadev`
+- **GitLab:** `incogniadev`
+- **Correo electrónico:** `ralvarez@promad.com.mx`
+
+## 5. Atribución y menciones
+
+### 5.1. Formatos sugeridos
+- **Contribución personal:** «Desarrollado por Rodrigo Álvarez (@incognia)»
+- **Documentación técnica:** «Documentado por Rodrigo Ernesto Álvarez Aguilera (GitHub: @incognia)»
+- **Contribución laboral:** «Este trabajo fue realizado por Rodrigo Álvarez en su calidad de Ingeniero DevOps para Promad Business Solutions (@incogniadev)»
+
+### 5.2. Firma en commits de Git
+- **Para proyectos personales:**
+  ```bash
+  git config user.name "Rodrigo Álvarez"
+  git config user.email "incognia@gmail.com"
+  ```
+- **Para proyectos laborales (Promad):**
+  ```bash
+  git config user.name "Rodrigo Álvarez"
+  git config user.email "ralvarez@promad.com.mx"
+  ```
+
+## 6. Licenciamiento y firma de contribuciones
+
+### 6.1. Filosofía de licenciamiento
+- **Proyectos profesionales/laborales:** La licencia a utilizar es **MIT**, por su permisividad y compatibilidad.
+- **Proyectos personales:** El licenciamiento puede variar, pero la preferencia es por licencias de código abierto como MIT o Apache 2.0.
+
+### 6.2. Firma de contribuciones (alias)
+- **Contribuciones personales:** Firmar bajo el alias `incognia`.
+- **Contribuciones laborales o bajo contrato:** Firmar bajo el alias `incogniadev`.
+- **Requerimientos legales:** En encabezados de licencia o documentos legales que lo requieran, utilizar el nombre completo: `Rodrigo Ernesto Álvarez Aguilera`.
+
+## 7. Estándares de codificación y documentación
+
+### 7.1. Idioma
+- **Mensajes de *commit* y código:** Los mensajes de *commit* y los comentarios dentro del código deben estar en **inglés internacional**.
+- **Documentación (README, CHANGELOG, etc.):** El idioma será **español mexicano**, a menos que el contexto del proyecto exija explícitamente el inglés. Los títulos y encabezados en español seguirán la capitalización de frase (solo la primera palabra en mayúscula).
+- **Nombres de archivos y directorios:** Siempre en **inglés internacional** para mantener la consistencia técnica.
+
+### 7.2. Mensajes de *commit*
+- **Convención:** Seguir la convención de *Conventional Commits*.
+- **Idioma:** Redactar los mensajes en inglés.
+- **Formato:** Estructurarlos con un prefijo (`feat`, `fix`, `docs`, `refactor`, etc.).
+- **Emojis:** No usar emojis.
+
+### 7.3. Diagramas
+Para la creación de diagramas en archivos Markdown, usar exclusivamente **Mermaid**.
+
+---
+
+*Este documento fue desarrollado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.*
+
+*Copyright © 2025, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*
