@@ -117,12 +117,12 @@ Los proyectos personales bajo GPLv3 contribuyen al *commons* del software libre,
 
 Los detalles específicos de implementación de esta filosofía se encuentran en los siguientes documentos:
 
-- [`~/rules/DEVOPS.md`](./DEVOPS.md) - perfil profesional y contexto técnico
-- [`~/rules/AUTHORING.md`](./AUTHORING.md) - reglas de autoría, atribución y colaboración
-- [`~/rules/COMMITING.md`](./COMMITING.md) - reglas para mensajes de *commit* y gestión de cambios
-- [`~/rules/LICENSING.md`](./LICENSING.md) - reglas de licenciamiento para proyectos
-- [`~/rules/LINGUISTICS.md`](./LINGUISTICS.md) - reglas lingüísticas de español mexicano como referente
-- [`~/rules/GLOSSARY.md`](./GLOSSARY.md) - glosario técnico de términos empleados en estos documentos
+- **[DEVOPS.md](./DEVOPS.md)** - perfil profesional y contexto técnico
+- **[AUTHORING.md](./AUTHORING.md)** - reglas de autoría, atribución y colaboración
+- **[COMMITING.md](./COMMITING.md)** - reglas para mensajes de *commit* y gestión de cambios
+- **[LICENSING.md](./LICENSING.md)** - reglas de licenciamiento para proyectos
+- **[LINGUISTICS.md](./LINGUISTICS.md)** - reglas lingüísticas de español mexicano como referente
+- **[GLOSSARY.md](./GLOSSARY.md)** - glosario técnico de términos empleados en estos documentos
 
 ---
 
