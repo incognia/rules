@@ -4,6 +4,9 @@
 
 ### feat
 - añadir badges informativos al README.md (licencia GPLv3, Markdown, español mexicano)
+
+### style
+- cambiar color de iconos en sección de contacto a --promad para mejor consistencia visual
 - crear STYLING.md con reglas de estilo para documentos Markdown laborales
 - definir paleta de colores corporativa con nombres descriptivos (midnight, electric, lavender)
 - establecer estructura estándar para encabezados y pies de página corporativos

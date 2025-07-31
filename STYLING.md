@@ -61,7 +61,7 @@ Todo documento laboral debe concluir con el siguiente pie de página:
   }
   
   .markdown-body i {
-    color: var(--electric);
+    color: var(--promad);
   }
 </style>
 
