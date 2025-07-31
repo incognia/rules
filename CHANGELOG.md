@@ -3,6 +3,7 @@
 ## [2025-07-31]
 
 ### feat
+- añadir badges informativos al README.md (licencia GPLv3, Markdown, español mexicano)
 - crear STYLING.md con reglas de estilo para documentos Markdown laborales
 - definir paleta de colores corporativa con nombres descriptivos (midnight, electric, lavender)
 - establecer estructura estándar para encabezados y pies de página corporativos
