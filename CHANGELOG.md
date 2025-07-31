@@ -1,5 +1,22 @@
 # Historial de cambios
 
+## [2025-07-31]
+
+### feat
+- crear STYLING.md con reglas de estilo para documentos Markdown laborales
+- definir paleta de colores corporativa con nombres descriptivos (midnight, electric, lavender)
+- establecer estructura estándar para encabezados y pies de página corporativos
+- incluir timestamp dinámico con formato legible en español mexicano
+
+### fix
+- renombrar COMMITING.md a COMMITTING.md para corregir error ortográfico
+
+### docs
+- actualizar PHILOSOPHY.md para reflejar el cambio de nombre de COMMITTING.md
+- añadir referencia a STYLING.md en PHILOSOPHY.md con aclaración de alcance laboral
+- mejorar documentación de colores CSS con nomenclatura más descriptiva
+- clarificar que información de licencia y timestamps deben ser dinámicos, no hardcodeados
+
 ## [2025-01-30]
 
 ### docs

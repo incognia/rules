@@ -119,9 +119,10 @@ Los detalles específicos de implementación de esta filosofía se encuentran en
 
 - **[DEVOPS.md](./DEVOPS.md)** - perfil profesional y contexto técnico
 - **[AUTHORING.md](./AUTHORING.md)** - reglas de autoría, atribución y colaboración
-- **[COMMITING.md](./COMMITING.md)** - reglas para mensajes de *commit* y gestión de cambios
+- **[COMMITTING.md](./COMMITTING.md)** - reglas para mensajes de *commit* y gestión de cambios
 - **[LICENSING.md](./LICENSING.md)** - reglas de licenciamiento para proyectos
 - **[LINGUISTICS.md](./LINGUISTICS.md)** - reglas lingüísticas de español mexicano como referente
+- **[STYLING.md](./STYLING.md)** - reglas de estilo para documentos Markdown (aplica únicamente a proyectos laborales por el momento)
 - **[GLOSSARY.md](./GLOSSARY.md)** - glosario técnico de términos empleados en estos documentos
 
 ---
