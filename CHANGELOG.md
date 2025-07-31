@@ -4,6 +4,7 @@
 
 ### feat
 - añadir badges informativos al README.md (licencia GPLv3, Markdown, español mexicano)
+- crear sección de flujo de decisión en README.md para explicar aplicación de reglas duales (personal/laboral)
 
 ### style
 - cambiar color de iconos en sección de contacto a --promad para mejor consistencia visual

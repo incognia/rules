@@ -33,6 +33,40 @@ Un manifiesto contra tres males endémicos en tecnología latinoamericana:
 - observabilidad y mallas de servicios
 - seguridad en entornos distribuidos
 
+## Flujo de decisión para aplicación de reglas
+
+La mayoría de las reglas en este repositorio tienen una **dualidad de contextos** (personal vs laboral). El flujo de decisión para determinar qué reglas aplicar es el siguiente:
+
+### 1. Identificación del contexto del proyecto
+
+- 💼 **Contexto laboral**: Proyectos desarrollados para o bajo contrato con **Promad Business Solutions**
+- 📺 **Contexto personal**: Proyectos independientes, experimentales o de desarrollo personal
+
+### 2. Aplicación de reglas por contexto
+
+| Aspecto | Personal (`@incognia`) | Laboral (`@incogniadev`) |
+|---------|------------------------|---------------------------|
+| **Licenciamiento** | GPLv3 (copyleft) | MIT (permisiva) |
+| **Autoría** | Rodrigo Álvarez (@incognia) | Rodrigo Álvarez (@incogniadev) |
+| **Email** | incognia@gmail.com | ralvarez@promad.com.mx |
+| **SSH Key** | ~/.ssh/id_ed25519 | ~/.ssh/promad_ed25519 |
+| **Estilo de documentos** | No definido aún | STYLING.md aplicable |
+| **Idioma documentación** | Español mexicano | Español mexicano |
+| **Idioma código/commits** | Inglés internacional | Inglés internacional |
+
+### 3. Reglas universales (aplican a ambos contextos)
+
+- **LINGUISTICS.md**: Español mexicano como estándar cultural
+- **COMMITTING.md**: Conventional Commits en inglés
+- **PHILOSOPHY.md**: Principios generales de trabajo
+- **GLOSSARY.md**: Términos técnicos estandarizados
+
+### 4. Reglas específicas por contexto
+
+- **STYLING.md**: Únicamente para proyectos laborales (por el momento)
+- **LICENSING.md**: Define qué licencia usar según el contexto
+- **AUTHORING.md**: Especifica credenciales y atribución correcta
+
 ## Uso
 
 Estos documentos sirven como referencia para mantener consistencia en:
@@ -40,6 +74,7 @@ Estos documentos sirven como referencia para mantener consistencia en:
 - estándares de infraestructura y documentación
 - políticas de licenciamiento
 - convenciones lingüísticas y culturales
+- aplicación correcta de reglas según el contexto del proyecto
 
 ---
 
