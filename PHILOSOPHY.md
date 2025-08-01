@@ -1,6 +1,6 @@
 # Filosofía de un pinche prieto que a veces *codea* pero siempre se rifa
 
-> «El avance tecnológico no puede considerarse progreso si no es para todos.»
+> «El desarrollo tecnológico y los descubrimientos científicos no pueden considerarse progreso si no están al alcance de todos.»
 >
 > —Rodrigo Álvarez
 

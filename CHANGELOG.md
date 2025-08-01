@@ -17,7 +17,8 @@
 - extender sección de bilingüismo técnico con realidad del inglés en estudiantes mexicanos
 - añadir reflexión sobre distancia cultural vs geográfica con EE.UU. en contexto educativo
 - corregir puntuación y gramática en sección de contexto educativo
-- añadir cita como epígrafe sobre el progreso tecnológico
+- añadir cita como epígrafe sobre el progreso tecnológico y científico
+- mejorar redacción del epígrafe para incluir desarrollo tecnológico y descubrimientos científicos
 - desarrollar TEACHING.md con perfil educativo detallado basado en proyecto Juno
 - incluir metodologías pedagógicas innovadoras usando herramientas DevOps
 - documentar proyecto Juno como caso de estudio principal en educación STEM
