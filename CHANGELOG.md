@@ -11,6 +11,9 @@
 - mantener tono irreverente y español mexicano según LINGUISTICS.md
 - mejorar redacción de párrafo de dualidad profesional-educativa con flow más natural
 - refinar expresiones mexicanas y conexión directa con combate contra mercenazgo del código
+- suavizar transición entre introducción irreverente y sección técnica
+- eliminar redundancias entre introducción y sección de intersección profesional-educativa
+- integrar mejor dualidad de contextos con el mensaje filosófico general
 - desarrollar TEACHING.md con perfil educativo detallado basado en proyecto Juno
 - incluir metodologías pedagógicas innovadoras usando herramientas DevOps
 - documentar proyecto Juno como caso de estudio principal en educación STEM

@@ -12,9 +12,11 @@ Este manifiesto no es solo para rifármela en DevOps desde el escritorio —dond
 
 ## 1. Identidad profesional coherente
 
+Esta dualidad entre ser "Agüelo" y "Hagrid" no es casualidad: refleja una identidad profesional que opera en dos contextos complementarios, cada uno con su propio ecosistema pero unidos por los mismos principios éticos.
+
 ### 1.1. Especialización técnica
 
-La especialización profesional se centra en **ingeniería DevOps**, con enfoque en plataformas Kubernetes nativas y observabilidad avanzada:
+Mi trabajo se centra en **ingeniería DevOps**, con enfoque en plataformas Kubernetes nativas y observabilidad avanzada:
 
 - **Kubernetes sobre Proxmox *bare-metal*:** aprovisionamiento con kubeadm, containerd y cloud-init
 - **GitOps y automatización:** flujos con Argo CD, Helm charts y manifiestos versionados
@@ -23,23 +25,14 @@ La especialización profesional se centra en **ingeniería DevOps**, con enfoque
 - **CI/CD empresarial:** Jenkins, GitLab CI con integración GitOps
 - **Seguridad en mallas de servicios:** mTLS, RBAC, políticas de red
 
-### 1.2. Dualidad de contextos
+### 1.2. Contextos de aplicación
 
-Los proyectos se desarrollan en dos contextos principales:
+Esta especialización técnica se aplica en dos entornos:
 
-- **Personal:** bajo el alias `incognia`.
-- **Laboral:** bajo el alias `incogniadev` para Promad Business Solutions.
+- **Corporativo (`incogniadev`):** proyectos para Promad Business Solutions con licenciamiento MIT
+- **Personal y educativo (`incognia`):** proyectos bajo GPLv3 y metodologías pedagógicas que democratizan el acceso a herramientas profesionales
 
-Esta dualidad requiere una gestión cuidadosa de la identidad digital y la atribución en cada contexto.
-
-### 1.3. Intersección profesional-educativa
-
-La especialización técnica en DevOps se extiende naturalmente al ámbito educativo, creando una intersección única donde las metodologías profesionales se aplican a la pedagogía:
-
-- **Infraestructura educativa como código:** aplicación de Docker Compose y automatización para crear entornos de aprendizaje reproducibles
-- **Democratización técnica:** uso exclusivo de herramientas libres tanto en proyectos profesionales como educativos
-- **Filosofía multiplataforma:** competencia técnica que trasciende preferencias de plataforma, aplicada tanto en entornos corporativos como educativos
-- **Compromiso social:** extensión de principios éticos profesionales hacia programas educativos para poblaciones vulnerables
+En ambos casos, las metodologías DevOps sirven tanto para infraestructura de producción como para crear entornos de aprendizaje reproducibles mediante Docker Compose y automatización.
 
 ## 2. Cultura lingüística como referente
 
