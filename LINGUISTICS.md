@@ -134,7 +134,7 @@
 - ✅ «Script para crear VMs en Proxmox VE»
 - ❌ «Script Para Crear VM En Proxmox VE»
 - ⚠️ Sólo la primera palabra y nombres propios llevan mayúscula inicial
-- ⚠️ Sólo nombres propios llevan mayúscula inicial después de dos puntos y seguido
+- 🔥 **CRÍTICO:** sólo nombres propios llevan mayúscula inicial después de dos puntos y seguido (error MUY frecuente)
 - ⚠️ No se usan puntos en títulos y subtítulos
 
 ### Comillas
@@ -190,6 +190,7 @@ Los siguientes términos generan **rechazo particular** y deben evitarse a toda 
 - 🔥 **Verbos inventados con -ear** -ear (commitear, deployear) - EVITAR
 - 🔥 **Títulos Con Cada Palabra En Mayúscula** - Usar solo inicial en primera palabra
 - 🔥 **Uso de mayúscula donde no corresponde** - «Lunes» por «lunes» o «Julio» por «julio» - INACEPTABLE
+- 🔥 **Mayúscula después de dos puntos** - «Razón: Los nombres...» por «Razón: los nombres...» - ERROR MUY FRECUENTE E INACEPTABLE
 - 🔥 **Pluralizar las siglas** - «VMs/VEs/ONGs» por «VM/VE/ONG» - Sin importar si es uno o 20: INACEPTABLE
 - 🔥 **Escribir en tercera persona** - «Se realizo/Se hizo/Se diseñó/Se configuró» en vez de «Hice/Llevé a cabo/Apliqué/Configuré» - ESPECIALMENTE INACEPTABLE
 
