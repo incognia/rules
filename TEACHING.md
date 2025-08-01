@@ -60,6 +60,25 @@ Mi enfoque pedagógico se fundamenta en tres principios clave:
 
 **Reconocimientos:** Inspirado en el trabajo de Serena Bonaretti ([Learn Python with Jupyter](https://learnpythonwithjupyter.com/))
 
+### Chicxulub | Post-Apocalyptic Programming
+
+**Descripción:** Proyecto de divulgación científica que combina programación Python y geofísica para enseñar conceptos de cartografía y navegación usando el cráter de Chicxulub como caso de estudio.
+
+**Características educativas:**
+- **Interdisciplinariedad:** fusión de programación, matemáticas, geografía y ciencias de la Tierra
+- **Contextualización histórica:** uso del evento de extinción K-Pg como marco narrativo
+- **Aplicación práctica:** conversión de coordenadas geográficas y cálculos de distancia en la superficie terrestre
+- **Fórmulas matemáticas:** implementación de ecuaciones geodésicas en código Python ejecutable
+- **Metodología hands-on:** ejercicios interactivos con datos reales del cráter
+
+**Impacto divulgativo:**
+- Democratiza conceptos de geodesia y cartografía mediante programación accesible
+- Conecta eventos históricos (extinción de dinosaurios) con herramientas técnicas modernas
+- Enseña trigonometría aplicada a través de casos de uso reales
+- Documentación bilingüe (español/código en inglés) siguiendo estándares profesionales
+
+**Repositorio:** [github.com/incognia/Chicxulub](https://github.com/incognia/Chicxulub)
+
 ---
 
 ## Competencias educativas principales

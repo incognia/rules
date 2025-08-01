@@ -8,9 +8,13 @@
 - desarrollar TEACHING.md con perfil educativo detallado basado en proyecto Juno
 - incluir metodologías pedagógicas innovadoras usando herramientas DevOps
 - documentar proyecto Juno como caso de estudio principal en educación STEM
+- añadir proyecto Chicxulub como ejemplo de divulgación científica interdisciplinaria
 - añadir métricas cuantitativas de impacto educativo (6+ años, 50+ estudiantes, 100+ contenedores)
 - especificar herramientas técnicas utilizadas en el aula (Docker, JupyterLab, Python)
 - incluir filosofía de divulgación científica y contribuciones a la comunidad educativa
+- añadir proyecto Chicxulub como segundo caso de estudio en divulgación científica
+- documentar enfoque interdisciplinario (programación + geografía + ciencias de la Tierra)
+- incluir métricas de impacto divulgativo y metodología de contextualización histórica
 
 ## [2025-07-31]
 
