@@ -138,6 +138,17 @@ Mi enfoque pedagógico se fundamenta en tres principios clave:
 - **Ubicación:** Ciudad de México
 - **Idioma de instrucción:** español mexicano con terminología técnica en inglés
 
+### Enfoques pedagógicos
+- **Educación Montessori:** Aplicación de principios de aprendizaje autodirigido, desarrollando la curiosidad innata y la auto-motivación en un entorno cuidadosamente preparado
+- **Secundarias activas:** Promoción de la participación activa de los estudiantes y la co-creación del conocimiento a través de proyectos colaborativos y aprendizaje práctico
+
+### Participación social
+- **Programas educativos en comunidades vulnerables:** Diseño y ejecución de proyectos para ofrecer educación accesible a poblaciones de bajos ingresos utilizando tecnologías abiertas y metodologías inclusivas
+
+### Integración de experiencia y filosofía
+
+Tu experiencia diversa en educación Montessori, secundarias activas y programas sociales te ha permitido entender y aplicar principios de democratización del conocimiento en contextos variados. Al usar herramientas libres en estos entornos, garantizas que todos los estudiantes, independientemente de su trasfondo socioeconómico, tengan acceso a una educación de calidad. Además, fomentas la autonomía y el aprendizaje autodirigido, alineándote con una filosofía educativa que empodera a los estudiantes a ser protagonistas de su propio proceso de aprendizaje.
+
 ### Estudiantes destacados
 - **Carlos (@cgzdev):** desarrollo de funcionalidades avanzadas en proyectos colaborativos
 - **Ian (@calmestprism226):** contribuciones significativas en automatización y scripting

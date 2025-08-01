@@ -50,6 +50,10 @@
 - reorganizar estructura lógica del documento para mejor flujo narrativo
 - mover filosofía multiplataforma a sección de competencias educativas
 - establecer orden coherente: filosofía → especialización → competencias → proyectos → contexto → divulgación
+- ampliar experiencia docente con enfoques Montessori y secundarias activas
+- añadir participación en programas sociales para poblaciones vulnerables
+- incluir sección de integración de experiencia y filosofía educativa
+- conectar experiencia diversa con principios de democratización del conocimiento
 
 ## [2025-07-31]
 
