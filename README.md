@@ -17,7 +17,7 @@ Un manifiesto contra tres males endémicos en tecnología latinoamericana:
 
 - **[PHILOSOPHY.md](./PHILOSOPHY.md)** - filosofía principal y manifiesto de desarrollo
 - **[DEVOPS.md](./DEVOPS.md)** - perfil profesional y contexto técnico
-- **[AUTHORING.md](./AUTHORING.md)** - reglas de autoría, atribución y colaboración
+- **[ATTRIBUTION.md](./ATTRIBUTION.md)** - reglas de atribución personal
 - **[COMMITTING.md](./COMMITTING.md)** - reglas para mensajes de *commit* y gestión de cambios
 - **[LICENSING.md](./LICENSING.md)** - reglas de licenciamiento para proyectos
 - **[LINGUISTICS.md](./LINGUISTICS.md)** - reglas lingüísticas de español mexicano como referente
@@ -67,7 +67,7 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 
 - **STYLING.md**: Únicamente para proyectos laborales (por el momento)
 - **LICENSING.md**: Define qué licencia usar según el contexto
-- **AUTHORING.md**: Especifica credenciales y atribución correcta
+- **ATTRIBUTION.md**: Especifica credenciales y atribución correcta
 
 ## Uso
 

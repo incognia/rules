@@ -17,10 +17,11 @@
 - enfocar GIT.md en configuración de repositorios nuevos
 - enfocar COMMITTING.md en flujo de trabajo de commits y push
 - diferenciar claramente entre AUTHORING.md y LICENSING.md por sus propósitos específicos
-- refactorizar AUTHORING.md para atribución personal en documentos/scripts individuales (solo proyectos personales)
+- refactorizar ATTRIBUTION.md para atribución personal en documentos/scripts individuales (solo proyectos personales)
 - refactorizar LICENSING.md para generación de LICENSE en proyectos completos (personal y laboral)
-- especificar que AUTHORING.md se usa únicamente en contexto personal
+- especificar que ATTRIBUTION.md se usa únicamente en contexto personal
 - especificar que LICENSING.md aplica para ambos contextos
+- renombrar AUTHORING.md a ATTRIBUTION.md para mejor reflejar su propósito
 
 ### feat
 - crear BACKUPS.md con políticas de respaldos y operaciones destructivas
@@ -50,9 +51,9 @@
 ## [2025-01-30]
 
 ### fix
-- corregir uso de mayúsculas después de dos puntos en AUTHORING.md para cumplir con las reglas de LINGUISTICS.md
+- corregir uso de mayúsculas después de dos puntos en ATTRIBUTION.md para cumplir con las reglas de LINGUISTICS.md
 - corregir uso de mayúsculas después de dos puntos en GLOSSARY.md para cumplir con las reglas de LINGUISTICS.md
-- corregir casos restantes de mayúsculas después de dos puntos en AUTHORING.md (sección de especialización profesional)
+- corregir casos restantes de mayúsculas después de dos puntos en ATTRIBUTION.md (sección de especialización profesional)
 - corregir capitalización del título en README.md ("Ingeniero" → "ingeniero")
 
 ### style

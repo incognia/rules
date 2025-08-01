@@ -1,4 +1,4 @@
-# Reglas de autoría y atribución personal
+# Reglas de atribución personal
 
 ## 1. Propósito
 
