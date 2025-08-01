@@ -4,6 +4,11 @@
 
 ## [2025-08-01]
 
+### fix
+- corregir terminología en LICENSING.md: cambiar "desarrollado por" por "elaborado por"
+- alinear terminología con perfil de tecnólogo en lugar de desarrollador
+- aplicar corrección tanto en proyectos laborales como personales
+
 ### docs
 - añadir precisión en LINGUISTICS.md para evitar sobre-corrección de títulos de tercer nivel (###)
 - agregar regla específica sobre NO corregir mayúsculas en títulos ### ya correctos
