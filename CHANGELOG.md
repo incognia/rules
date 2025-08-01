@@ -55,6 +55,9 @@
 - incluir sección de integración de experiencia y filosofía educativa
 - conectar experiencia diversa con principios de democratización del conocimiento
 - especificar enseñanza de C++ con Arduino en programas sociales para comunidades vulnerables
+- añadir sección de intersección profesional-educativa en PHILOSOPHY.md
+- conectar especialización DevOps con aplicación pedagógica de infraestructura como código
+- integrar filosofía de democratización técnica en ambos contextos profesional y educativo
 
 ## [2025-07-31]
 

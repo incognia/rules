@@ -30,6 +30,15 @@ Los proyectos se desarrollan en dos contextos principales:
 
 Esta dualidad requiere una gestión cuidadosa de la identidad digital y la atribución en cada contexto.
 
+### 1.3. Intersección profesional-educativa
+
+La especialización técnica en DevOps se extiende naturalmente al ámbito educativo, creando una intersacción única donde las metodologías profesionales se aplican a la pedagogía:
+
+- **Infraestructura educativa como código:** aplicación de Docker Compose y automatización para crear entornos de aprendizaje reproducibles
+- **Democratización técnica:** uso exclusivo de herramientas libres tanto en proyectos profesionales como educativos
+- **Filosofía multiplataforma:** competencia técnica que trasciende preferencias de plataforma, aplicada tanto en entornos corporativos como educativos
+- **Compromiso social:** extensión de principios éticos profesionales hacia programas educativos para poblaciones vulnerables
+
 ## 2. Cultura lingüística como referente
 
 ### 2.1. Español mexicano como estándar
