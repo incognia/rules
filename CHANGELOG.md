@@ -5,6 +5,10 @@
 ## [2025-08-01]
 
 ### docs
+- extender introducción de PHILOSOPHY.md con dualidad profesional-educativa
+- añadir apodos característicos ("Agüelo" en trabajo, "Hagrid" en aula) para reforzar identidad dual
+- conectar combate contra males endémicos con democratización del conocimiento técnico
+- mantener tono irreverente y español mexicano según LINGUISTICS.md
 - desarrollar TEACHING.md con perfil educativo detallado basado en proyecto Juno
 - incluir metodologías pedagógicas innovadoras usando herramientas DevOps
 - documentar proyecto Juno como caso de estudio principal en educación STEM

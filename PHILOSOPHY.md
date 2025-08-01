@@ -6,7 +6,9 @@ Los entornos de tecnología en Latinoamérica sufren de tres males endémicos qu
 - **Egoísmo técnico:** acaparar conocimiento y herramientas para crear dependencia artificial, obstaculizando el crecimiento de otros por puro interés económico.
 - **Falta de identidad:** el prieto acomplejado que habla un inglés culero, redacta con las nalgas y bastardiza su propio español en un intento desesperado por sentirse gringo.
 
-Contra estos tres males, este documento propone una filosofía de trabajo honesto, conocimiento compartido y la satisfacción genuina que viene de hacer las cosas bien hechas, sin complejos y sin pendejadas.
+Contra estos tres males, aquí está la respuesta: trabajo honesto, compartir el conocimiento y la satisfacción que viene de hacer las cosas bien hechas, sin complejos y sin pendejadas.
+
+Este manifiesto no es solo para rifársela con *DevOps* en la oficina (donde me dicen "Agüelo" por veterano, aunque sigo al día), sino para llevar esa misma filosofía al aula (donde soy Hagrid por corpulento y barbón). Porque al chile, dominar Kubernetes está padre, pero democratizar el conocimiento técnico está con madre. No se trata de guardar secretos como los mercenarios, sino de que le sepan todos a las herramientas que realmente sirven.
 
 ## 1. Identidad profesional coherente
 
