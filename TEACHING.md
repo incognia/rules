@@ -13,6 +13,7 @@ Mi enfoque pedagógico se fundamenta en tres principios clave:
 - **Aprendizaje *hands-on*:** la experiencia práctica es fundamental para el aprendizaje efectivo en STEM
 - **Entornos reproducibles:** cada estudiante debe tener acceso a las mismas herramientas y configuraciones profesionales
 - **Tecnología como facilitador:** las herramientas DevOps eliminan barreras técnicas y permiten enfocarse en el aprendizaje
+- **Compromiso con el software libre:** uso exclusivo de herramientas libres en entornos educativos como principio ético y pedagógico
 
 ---
 
@@ -129,9 +130,11 @@ Mi enfoque pedagógico se fundamenta en tres principios clave:
 
 ### Filosofía de divulgación
 - **Democratización del conocimiento:** herramientas profesionales accesibles para estudiantes
-- **Código abierto:** todos los proyectos educativos bajo licencia GPLv3
+- **Compromiso con la libertad de software:** uso exclusivo de herramientas libres (Linux, Docker, Python, JupyterLab)
+- **Código abierto:** todos los proyectos educativos bajo licencia GPLv3 por principio ético
 - **Documentación exhaustiva:** README detallados, guías paso a paso
 - **Replicabilidad:** entornos completamente reproducibles en diferentes infraestructuras
+- **Educación en libertad:** enseñar con herramientas que los estudiantes pueden usar, modificar y redistribuir libremente
 
 ### Contribuciones a la comunidad
 - **Proyecto Juno:** plataforma educativa open source para enseñanza de programación

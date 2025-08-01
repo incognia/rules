@@ -28,6 +28,12 @@
 - corregir experiencia docente en TEACHING.md de 6+ años a 8 años
 - actualizar métricas de impacto educativo para reflejar experiencia real
 
+### docs
+- añadir filosofía de herramientas libres como parte fundamental de la metodología educativa
+- enfatizar uso exclusivo de software libre en entornos educativos
+- clarificar compromiso con licenciamiento GPL para todos los contenidos educativos
+- documentar principios de libertad de software aplicados a la pedagogía
+
 ## [2025-07-31]
 
 ### docs
