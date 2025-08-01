@@ -136,6 +136,14 @@
 - ⚠️ Sólo la primera palabra y nombres propios llevan mayúscula inicial
 - 🔥 **CRÍTICO:** sólo nombres propios llevan mayúscula inicial después de dos puntos y seguido (error MUY frecuente)
 - ⚠️ No se usan puntos en títulos y subtítulos
+- 🔥 **IMPORTANTE:** En títulos de tercer nivel (###) NO corregir las mayúsculas si ya están bien aplicadas según las reglas anteriores
+
+**Ejemplos correctos de títulos de tercer nivel (###):**
+- ✅ `### Configuración de Proxmox VE` (ya está correcto, NO cambiar)
+- ✅ `### Instalación de Docker` (ya está correcto, NO cambiar)
+- ✅ `### Métricas de observabilidad` (ya está correcto, NO cambiar)
+- ❌ `### configuración de proxmox ve` (este SÍ necesita corrección)
+- ❌ `### Configuración De Proxmox VE` (este SÍ necesita corrección)
 
 **Ejemplos de mayúsculas después de dos puntos:**
 - ✅ **Regla:** los nombres de archivos deben estar en inglés

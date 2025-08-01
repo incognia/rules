@@ -5,6 +5,9 @@
 ## [2025-08-01]
 
 ### docs
+- añadir precisión en LINGUISTICS.md para evitar sobre-corrección de títulos de tercer nivel (###)
+- agregar regla específica sobre NO corregir mayúsculas en títulos ### ya correctos
+- incluir ejemplos claros de títulos de tercer nivel correctos e incorrectos
 - extender introducción de PHILOSOPHY.md con dualidad profesional-educativa
 - añadir apodos característicos ("Agüelo" en trabajo, "Hagrid" en aula) para reforzar identidad dual
 - conectar combate contra males endémicos con democratización del conocimiento técnico
