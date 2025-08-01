@@ -9,6 +9,7 @@
 - incluir BACKUPS.md en la sección de reglas universales que aplican a ambos contextos
 - especificar uso obligatorio de zona horaria CST Ciudad de México en COMMITTING.md para fechas del CHANGELOG.md
 - agregar comandos SSH específicos por contexto en COMMITTING.md (personal vs laboral)
+- crear GIT.md con configuración inicial de cuentas GitHub y GitLab
 
 ### feat
 - crear BACKUPS.md con políticas de respaldos y operaciones destructivas
