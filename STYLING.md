@@ -209,3 +209,7 @@ Antes de publicar un documento, verificar:
 - [ ] CSS corporativo incluido y funcional
 - [ ] Enlaces e imágenes funcionando correctamente
 - [ ] Formato consistente con otros documentos del proyecto
+
+---
+
+*Elaborado por Rodrigo Álvarez (@incognia)*

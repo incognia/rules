@@ -66,6 +66,4 @@ Mi enfoque de trabajo se rige por tres principios clave:
 
 ---
 
-*Este documento fue desarrollado por Rodrigo Álvarez para Promad Business Solutions y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
-
-*Copyright © 2025, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
+*Elaborado por Rodrigo Álvarez (@incognia)*

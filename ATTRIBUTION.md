@@ -20,14 +20,16 @@ Este documento establece cómo darme crédito y atribución en documentos indivi
 
 ## 3. Especialización profesional
 
-El rol de Rodrigo se centra en **ingeniería DevOps avanzada**, especializado en plataformas Kubernetes nativas y arquitecturas de observabilidad. Sus contribuciones principales abarcan:
+Rodrigo es **Ingeniero DevOps** especializado en plataformas Kubernetes nativas, GitOps y observabilidad avanzada. Con experiencia en la construcción y operación de *stacks* completos sobre infraestructura *bare-metal*, enfocado en automatización, confiabilidad y mallas de servicios.
 
-- **Plataformas Kubernetes bare-metal:** construcción y operación de clústeres sobre Proxmox VE, aprovisionamiento con kubeadm y cloud-init.
-- **GitOps y automatización declarativa:** implementación de flujos con Argo CD, gestión de Helm charts y manifiestos versionados.
-- **Service mesh y networking avanzado:** configuración de Istio, Envoy, Cilium, MetalLB, bridges y VLANs.
-- **Observabilidad y trazabilidad distribuida:** instrumentación con OpenTelemetry, Prometheus, Grafana, Fluentd y Elasticsearch.
-- **CI/CD empresarial:** diseño de *pipelines* con Jenkins y GitLab CI integrados a flujos GitOps.
-- **Seguridad en mallas de servicios:** implementación de mTLS, RBAC y políticas de red en entornos productivos.
+Sus competencias técnicas principales incluyen:
+
+- **Plataformas Kubernetes bare-metal:** construcción y operación de clústeres sobre Proxmox VE, aprovisionamiento con kubeadm y cloud-init
+- **GitOps y automatización declarativa:** implementación de flujos con Argo CD, gestión de Helm charts y manifiestos versionados
+- **Service mesh y networking avanzado:** configuración de Istio, Envoy, Cilium, MetalLB, bridges y VLANs
+- **Observabilidad y trazabilidad distribuida:** instrumentación con OpenTelemetry, Prometheus, Grafana, Fluentd y Elasticsearch
+- **CI/CD empresarial:** diseño de *pipelines* con Jenkins y GitLab CI integrados a flujos GitOps
+- **Seguridad en mallas de servicios:** implementación de mTLS, RBAC y políticas de red en entornos productivos
 
 ## 4. Identificadores digitales
 
@@ -44,7 +46,7 @@ El rol de Rodrigo se centra en **ingeniería DevOps avanzada**, especializado en
 ## 5. Atribución y menciones
 
 ### 5.1. Formatos sugeridos
-- **Contribución personal:** «desarrollado por Rodrigo Álvarez (@incognia)»
+- **Contribución personal:** «elaborado por Rodrigo Álvarez (@incognia)»
 - **Documentación técnica:** «documentado por Rodrigo Ernesto Álvarez Aguilera (GitHub: @incognia)»
 - **Contribución laboral:** «este trabajo fue realizado por Rodrigo Álvarez en su calidad de Ingeniero DevOps para Promad Business Solutions (@incogniadev)»
 
@@ -89,8 +91,8 @@ Para la creación de diagramas en archivos Markdown, usar exclusivamente **Merma
 
 ---
 
-*Este documento está diseñado para su uso en proyectos personales, detallando cómo dar atribución adecuada sin requerir un archivo de licencia completo. Para proyectos laborales o con múltiples scripts/documentos, consulta **[LICENSING.md](./LICENSING.md)**.
+*Este documento está diseñado para su uso en proyectos personales, detallando cómo dar atribución adecuada sin requerir un archivo de licencia completo. Para proyectos laborales o con múltiples scripts/documentos, consulta **[LICENSING.md](./LICENSING.md)**.*
 
-Este documento fue desarrollado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.
+---
 
-*Copyright © 2025, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*
+*Elaborado por Rodrigo Álvarez (@incognia)*

@@ -67,3 +67,7 @@
 ### style
 - ajustar README.md para mejor alineación con LINGUISTICS.md (uso de minúsculas en listas y corrección de "acomplejos")
 - actualizar formato de enlaces en PHILOSOPHY.md para que coincida con el estilo de README.md
+
+---
+
+*Elaborado por Rodrigo Álvarez (@incognia)*
