@@ -11,6 +11,12 @@
 - agregar comandos SSH específicos por contexto en COMMITTING.md (personal vs laboral)
 - crear GIT.md con configuración inicial de cuentas GitHub y GitLab
 
+### refactor
+- separar responsabilidades entre GIT.md (setup inicial) y COMMITTING.md (flujo diario)
+- eliminar redundancias entre ambos documentos
+- enfocar GIT.md en configuración de repositorios nuevos
+- enfocar COMMITTING.md en flujo de trabajo de commits y push
+
 ### feat
 - crear BACKUPS.md con políticas de respaldos y operaciones destructivas
 - especificar zona horaria CST obligatoria para todos los timestamps

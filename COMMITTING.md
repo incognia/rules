@@ -98,9 +98,10 @@ GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519" git push origin main
 GIT_SSH_COMMAND="ssh -i ~/.ssh/promad_ed25519" git push origin main
 ```
 
-**Nota importante:** Verificar siempre que la configuración de Git local coincida con el contexto:
-- **Personal:** `git config user.email "incognia@gmail.com"`
-- **Laboral:** `git config user.email "ralvarez@promad.com.mx"`
+**Nota importante:** Verificar que la configuración de Git del repositorio sea correcta (ver [GIT.md](./GIT.md) para configuración inicial):
+```bash
+git config --list | grep user
+```
 
 ---
 

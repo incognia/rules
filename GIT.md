@@ -1,67 +1,110 @@
-# Configuración Inicial de Git para Github y GitLab
+# Configuración inicial de Git para nuevos repositorios
 
-Este documento describe los pasos necesarios para configurar tus cuentas de GitHub y GitLab para proyectos personales y laborales, especificando los ajustes de usuario y las llaves SSH a utilizar.
+Este documento describe la configuración inicial necesaria al clonar o inicializar un nuevo repositorio, especificando los ajustes de usuario y las llaves SSH según el contexto del proyecto.
 
-## 1. Configuración de Usuario
+## 1. Identificación del contexto del proyecto
 
-### Proyectos Personales
-- **User Name:** Rodrigo Álvarez
-- **Email:** incognia@gmail.com
-- **GitHub Username:** incognia
-- **GitLab Username:** incognia
-- **Clave SSH:** `~/.ssh/id_ed25519`
+Antes de configurar, determina si el proyecto es:
+- 💼 **Laboral:** Promad Business Solutions
+- 📺 **Personal:** Proyectos independientes o experimentales
 
-#### Comandos:
+## 2. Configuración local del repositorio
+
+### Proyectos personales
 ```bash
-git config --global user.name "Rodrigo Álvarez"
-git config --global user.email "incognia@gmail.com"
-GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519"
+# Configurar usuario para este repositorio
+git config user.name "Rodrigo Álvarez"
+git config user.email "incognia@gmail.com"
+
+# Verificar configuración
+git config --list | grep user
 ```
 
-### Proyectos Laborales (Promad)
-- **User Name:** Rodrigo Álvarez
-- **Email:** ralvarez@promad.com.mx
-- **GitHub Username:** incogniadev
-- **GitLab Username:** incogniadev
-- **Clave SSH:** `~/.ssh/promad_ed25519`
+**Credenciales de plataforma:**
+- **GitHub:** incognia
+- **GitLab:** incognia
+- **SSH Key:** `~/.ssh/id_ed25519`
 
-#### Comandos:
+### Proyectos laborales (Promad)
 ```bash
-git config --global user.name "Rodrigo Álvarez"
-git config --global user.email "ralvarez@promad.com.mx"
-GIT_SSH_COMMAND="ssh -i ~/.ssh/promad_ed25519"
+# Configurar usuario para este repositorio
+git config user.name "Rodrigo Álvarez"
+git config user.email "ralvarez@promad.com.mx"
+
+# Verificar configuración
+git config --list | grep user
 ```
 
-## 2. Uso de las Claves SSH
+**Credenciales de plataforma:**
+- **GitHub:** incogniadev
+- **GitLab:** incogniadev
+- **SSH Key:** `~/.ssh/promad_ed25519`
 
-Configura tus claves SSH para autenticación en ambas plataformas (GitHub y GitLab):
+## 3. Configuración de claves SSH (solo si es necesario)
 
-### Añadir claves SSH
-- **Personal:**
+### Verificar claves SSH existentes
 ```bash
-ssh-add ~/.ssh/id_ed25519
-```
-- **Laboral:**
-```bash
-ssh-add ~/.ssh/promad_ed25519
-```
-
-Confirma que las claves SSH están correctamente añadidas:
-```bash
+# Listar claves SSH cargadas
 ssh-add -l
+
+# Si las claves no están cargadas, añadirlas:
+ssh-add ~/.ssh/id_ed25519          # Para proyectos personales
+ssh-add ~/.ssh/promad_ed25519      # Para proyectos laborales
 ```
 
-### Verificar la configuración de las claves SSH
-Realiza un `ssh -T` para verificar la conexión a GitHub y GitLab:
-- **Personal:**
+### Probar conexión SSH
 ```bash
+# Verificar conexión con GitHub
 ssh -T git@github.com
-ssh -T git@gitlab.com
-```
-- **Laboral:**
-```bash
-ssh -T git@github.com
+
+# Verificar conexión con GitLab
 ssh -T git@gitlab.com
 ```
 
-Este documento asegura que estén configuradas correctamente tus cuentas y claves para el trabajo diario, evitando problemas de autenticación y facilitando el uso correcto de las políticas definidas en COMMITTING.md.
+## 4. Configuración de repositorio remoto
+
+### Clonar repositorio existente
+```bash
+# Para proyectos personales
+GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519" git clone git@github.com:incognia/repo-name.git
+
+# Para proyectos laborales
+GIT_SSH_COMMAND="ssh -i ~/.ssh/promad_ed25519" git clone git@github.com:incogniadev/repo-name.git
+```
+
+### Inicializar nuevo repositorio
+```bash
+# Inicializar repositorio local
+git init
+
+# Añadir origen remoto (personal)
+git remote add origin git@github.com:incognia/repo-name.git
+
+# Añadir origen remoto (laboral)
+git remote add origin git@github.com:incogniadev/repo-name.git
+
+# Verificar configuración remota
+git remote -v
+```
+
+## 5. Primer commit y push
+
+```bash
+# Añadir archivos
+git add .
+
+# Primer commit
+git commit -m "feat: initial project setup"
+
+# Push inicial (ver COMMITTING.md para comandos específicos por contexto)
+```
+
+---
+
+**Próximo paso:** Una vez configurado el repositorio, consulta **[COMMITTING.md](./COMMITTING.md)** para el flujo de trabajo diario de commits y push.
+
+---
+
+*Este documento fue desarrollado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.*
+
+*Copyright © 2025, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*
