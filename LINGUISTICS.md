@@ -157,11 +157,11 @@ respaldar_vm() {
 - **Criterio**: si el término técnico es universalmente usado en inglés
 
 ### Nomenclatura de archivos
-- **Regla general:** Los nombres de archivos, carpetas y scripts deberán estar en inglés internacional, incluso si el contenido del documento o script está redactado en español mexicano.
-- **Regla específica para Markdown:** Los archivos Markdown deben usar `NOMBRES_EN_MAYUSCULAS.md` (nombre en mayúsculas, extensión en minúsculas).
+- **Regla general:** los nombres de archivos, carpetas y scripts deberán estar en inglés internacional, incluso si el contenido del documento o script está redactado en español mexicano.
+- **Regla específica para Markdown:** los archivos Markdown deben usar `NOMBRES_EN_MAYUSCULAS.md` (nombre en mayúsculas, extensión en minúsculas).
 - **Ejemplos válidos:** `README.md`, `PHILOSOPHY.md`, `LINGUISTICS.md`, `COMMITTING.md`
 - **Ejemplos inválidos:** `readme.md`, `Philosophy.md`, `LINGUISTICS.MD`
-- **Justificación:** Garantiza consistencia técnica, facilita la interoperabilidad en contextos multilingües y mejora la legibilidad en sistemas de archivos.
+- **Justificación:** garantiza consistencia técnica, facilita la interoperabilidad en contextos multilingües y mejora la legibilidad en sistemas de archivos.
 
 ---
 
@@ -185,7 +185,7 @@ respaldar_vm() {
 
 Los siguientes términos generan **rechazo particular** y deben evitarse a toda costa:
 - 🔥 **«Librería»** por «biblioteca» - INACEPTABLE
-- 🔥 **«IT»** por «TI» - Usar siempre el español
+- 🔥 **«IT»** por «TI" - usar siempre el español
 - 🔥 **Peninsularismos** («ordenador», «fichero») - RECHAZADOS
 - 🔥 **Verbos inventados con -ear** -ear (commitear, deployear) - EVITAR
 - 🔥 **Títulos Con Cada Palabra En Mayúscula** - Usar solo inicial en primera palabra
