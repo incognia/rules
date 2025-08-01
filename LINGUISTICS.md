@@ -156,6 +156,10 @@ respaldar_vm() {
 - **Ejemplo**: «Hacer *commit* de los cambios» (no «commitear»)
 - **Criterio**: si el término técnico es universalmente usado en inglés
 
+### Nomenclatura de archivos
+- **Regla:** Los nombres de archivos, carpetas y scripts deberán estar en inglés internacional, incluso si el contenido del documento o script está redactado en español mexicano.
+- **Justificación:** Esto garantiza consistencia técnica y facilita la interoperabilidad en contextos multilingües.
+
 ---
 
 ## 🎯 Justificación

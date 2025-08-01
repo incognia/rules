@@ -19,6 +19,7 @@
 - corregir puntuación y gramática en sección de contexto educativo
 - añadir cita como epígrafe sobre el progreso tecnológico y científico
 - mejorar redacción del epígrafe para incluir desarrollo tecnológico y descubrimientos científicos
+- añadir regla de nomenclatura de archivos en inglés internacional en LINGUISTICS.md
 - desarrollar TEACHING.md con perfil educativo detallado basado en proyecto Juno
 - incluir metodologías pedagógicas innovadoras usando herramientas DevOps
 - documentar proyecto Juno como caso de estudio principal en educación STEM
