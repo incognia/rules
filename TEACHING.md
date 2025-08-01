@@ -2,7 +2,7 @@
 
 ## Resumen educativo
 
-Ingeniero DevOps especializado en la **aplicación de metodologías y herramientas de ingeniería de software modernas para la educación STEM**. Con más de 6 años de experiencia docente, combino conocimientos técnicos avanzados en DevOps con pedagogía práctica para crear entornos de aprendizaje inmersivos y reproducibles.
+Ingeniero DevOps especializado en la **aplicación de metodologías y herramientas de ingeniería de software modernas para la educación STEM**. Con 8 años de experiencia docente, combino conocimientos técnicos avanzados en DevOps con pedagogía práctica para crear entornos de aprendizaje inmersivos y reproducibles.
 
 Mi enfoque va más allá de la enseñanza tradicional: utilizo principios de infraestructura como código, automatización y contenedorización para democratizar el acceso a herramientas de desarrollo profesional en el aula.
 
@@ -106,7 +106,7 @@ Mi enfoque pedagógico se fundamenta en tres principios clave:
 ## Contexto de enseñanza actual
 
 ### Experiencia docente
-- **Años de experiencia:** 6+ años en educación STEM
+- **Años de experiencia:** 8 años en educación STEM
 - **Nivel educativo:** secundaria y preparatoria (12-18 años)
 - **Modalidad:** presencial con laboratorios técnicos
 - **Ubicación:** Ciudad de México
@@ -119,7 +119,7 @@ Mi enfoque pedagógico se fundamenta en tres principios clave:
 
 ### Impacto cuantitativo
 - **Entornos desplegados:** 100+ contenedores Docker administrados
-- **Estudiantes impactados:** 50+ estudiantes a lo largo de 6 años
+- **Estudiantes impactados:** 60+ estudiantes a lo largo de 8 años
 - **Proyectos desarrollados:** 20+ laboratorios automatizados
 - **Tiempo de setup reducido:** de 2 horas a 5 minutos por estudiante
 

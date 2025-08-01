@@ -24,6 +24,10 @@
 - reemplazar anglicismos (troubleshooting → resolución de problemas, feedback → retroalimentación)
 - aplicar formato correcto para préstamos lingüísticos según estándares mexicanos
 
+### fix
+- corregir experiencia docente en TEACHING.md de 6+ años a 8 años
+- actualizar métricas de impacto educativo para reflejar experiencia real
+
 ## [2025-07-31]
 
 ### docs
