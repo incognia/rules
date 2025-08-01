@@ -41,48 +41,6 @@ Mi enfoque pedagógico se fundamenta en tres principios clave:
 
 ---
 
-## Proyectos educativos destacados
-
-### Juno | JupyterLab-Based STEM Learning Environment
-
-**Descripción:** Entorno de aprendizaje STEM inmersivo para estudiantes de secundaria (12-15 años) utilizando JupyterLab desplegado mediante Docker Compose.
-
-**Características técnicas:**
-- **Orquestación automatizada:** script Python genera archivos `compose.yaml` personalizados según la lista de estudiantes
-- **Escalabilidad:** asignación automática de puertos SSH (1022, 1122, 1222...) y JupyterLab (1088, 1188, 1288...)
-- **Persistencia de datos:** volúmenes Docker para preservar configuraciones SSH y directorios home de estudiantes
-- **Distribución de contenido:** script automatizado para copiar notebooks Jupyter a todos los contenedores
-- **Dashboard web:** interfaz Node.js para acceso simplificado y monitoreo de contenedores
-
-**Impacto educativo:**
-- Eliminó barreras técnicas de instalación y configuración
-- Permitió enfoque 100% en programación Python
-- Entornos idénticos para todos los estudiantes
-- Persistencia de trabajo estudiantil entre sesiones
-
-**Reconocimientos:** Inspirado en el trabajo de Serena Bonaretti ([Learn Python with Jupyter](https://learnpythonwithjupyter.com/))
-
-### Chicxulub | Post-Apocalyptic Programming
-
-**Descripción:** Proyecto de divulgación científica que combina programación Python y geofísica para enseñar conceptos de cartografía y navegación usando el cráter de Chicxulub como caso de estudio.
-
-**Características educativas:**
-- **Interdisciplinariedad:** fusión de programación, matemáticas, geografía y ciencias de la Tierra
-- **Contextualización histórica:** uso del evento de extinción K-Pg como marco narrativo
-- **Aplicación práctica:** conversión de coordenadas geográficas y cálculos de distancia en la superficie terrestre
-- **Fórmulas matemáticas:** aplicación de ecuaciones geodésicas en código Python ejecutable
-- **Metodología *hands-on*:** ejercicios interactivos con datos reales del cráter
-
-**Impacto divulgativo:**
-- Democratiza conceptos de geodesia y cartografía mediante programación accesible
-- Conecta eventos históricos (extinción de dinosaurios) con herramientas técnicas modernas
-- Enseña trigonometría aplicada a través de casos de uso reales
-- Documentación bilingüe (español/código en inglés) siguiendo estándares profesionales
-
-**Repositorio:** [github.com/incognia/Chicxulub](https://github.com/incognia/Chicxulub)
-
----
-
 ## Competencias educativas principales
 
 ### Diseño de currícula STEM
@@ -128,8 +86,48 @@ Mi enfoque pedagógico se fundamenta en tres principios clave:
    - Análisis ético de plataformas cerradas y restricciones de desarrollo
    - Enseñanza práctica a pesar de las reservas filosóficas
 
+## Proyectos educativos destacados
+
+### Juno | JupyterLab-Based STEM Learning Environment
+
+**Descripción:** Entorno de aprendizaje STEM inmersivo para estudiantes de secundaria (12-15 años) utilizando JupyterLab desplegado mediante Docker Compose.
+
+**Características técnicas:**
+- **Orquestación automatizada:** script Python genera archivos `compose.yaml` personalizados según la lista de estudiantes
+- **Escalabilidad:** asignación automática de puertos SSH (1022, 1122, 1222...) y JupyterLab (1088, 1188, 1288...)
+- **Persistencia de datos:** volúmenes Docker para preservar configuraciones SSH y directorios home de estudiantes
+- **Distribución de contenido:** script automatizado para copiar notebooks Jupyter a todos los contenedores
+- **Dashboard web:** interfaz Node.js para acceso simplificado y monitoreo de contenedores
+
+**Impacto educativo:**
+- Eliminó barreras técnicas de instalación y configuración
+- Permitió enfoque 100% en programación Python
+- Entornos idénticos para todos los estudiantes
+- Persistencia de trabajo estudiantil entre sesiones
+
+**Reconocimientos:** Inspirado en el trabajo de Serena Bonaretti ([Learn Python with Jupyter](https://learnpythonwithjupyter.com/))
+
+### Chicxulub | Post-Apocalyptic Programming
+
+**Descripción:** Proyecto de divulgación científica que combina programación Python y geofísica para enseñar conceptos de cartografía y navegación usando el cráter de Chicxulub como caso de estudio.
+
+**Características educativas:**
+- **Interdisciplinariedad:** fusión de programación, matemáticas, geografía y ciencias de la Tierra
+- **Contextualización histórica:** uso del evento de extinción K-Pg como marco narrativo
+- **Aplicación práctica:** conversión de coordenadas geográficas y cálculos de distancia en la superficie terrestre
+- **Fórmulas matemáticas:** aplicación de ecuaciones geodésicas en código Python ejecutable
+- **Metodología *hands-on*:** ejercicios interactivos con datos reales del cráter
+
+**Impacto divulgativo:**
+- Democratiza conceptos de geodesia y cartografía mediante programación accesible
+- Conecta eventos históricos (extinción de dinosaurios) con herramientas técnicas modernas
+- Enseña trigonometría aplicada a través de casos de uso reales
+- Documentación bilingüe (español/código en inglés) siguiendo estándares profesionales
+
+**Repositorio:** [github.com/incognia/Chicxulub](https://github.com/incognia/Chicxulub)
 
 ---
+
 
 ## Contexto de enseñanza actual
 

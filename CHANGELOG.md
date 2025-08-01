@@ -47,6 +47,9 @@
 - cambiar "implementación" por "aplicación" en fórmulas matemáticas
 - cambiar "realizar una tarea/trabajo" por "hacer una tarea/trabajo" en analogía de herramientas
 - cambiar "Soporte" por "Compatibilidad" en adaptación tecnológica
+- reorganizar estructura lógica del documento para mejor flujo narrativo
+- mover filosofía multiplataforma a sección de competencias educativas
+- establecer orden coherente: filosofía → especialización → competencias → proyectos → contexto → divulgación
 
 ## [2025-07-31]
 
