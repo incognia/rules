@@ -29,6 +29,7 @@
 - incluir ejemplos específicos para diferenciar reportes (tiempo pasado) vs guías (segunda persona)
 - enfatizar evitar tercera persona impersonal en ambos tipos de documentos
 - especificar en COMMITTING.md que el CHANGELOG.md debe usar únicamente fecha sin hora
+- agregar GIT.md faltante en la lista de documentos incluidos en README.md
 - desarrollar TEACHING.md con perfil educativo detallado basado en proyecto Juno
 - incluir metodologías pedagógicas innovadoras usando herramientas DevOps
 - documentar proyecto Juno como caso de estudio principal en educación STEM

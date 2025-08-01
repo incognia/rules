@@ -20,6 +20,7 @@ Un manifiesto contra tres males endémicos en tecnología latinoamericana:
 - **[TEACHING.md](./TEACHING.md)** - perfil educativo y de divulgación científica
 - **[ATTRIBUTION.md](./ATTRIBUTION.md)** - reglas de atribución personal
 - **[COMMITTING.md](./COMMITTING.md)** - reglas para mensajes de *commit* y gestión de cambios
+- **[GIT.md](./GIT.md)** - configuración inicial de cuentas GitHub y GitLab
 - **[LICENSING.md](./LICENSING.md)** - reglas de licenciamiento para proyectos
 - **[LINGUISTICS.md](./LINGUISTICS.md)** - reglas lingüísticas de español mexicano como referente
 - **[STYLING.md](./STYLING.md)** - reglas de estilo para documentos Markdown (proyectos laborales)
