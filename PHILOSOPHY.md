@@ -126,7 +126,8 @@ Los detalles específicos de implementación de esta filosofía se encuentran or
 
 ### Reglas de uso dual (aplicación diferenciada por contexto)
 - **[LICENSING.md](./LICENSING.md)** - reglas de licenciamiento para proyectos
-- **[DEVOPS.md](./DEVOPS.md)** - perfil profesional y contexto técnico
+- **[CORPORATE.md](./CORPORATE.md)** - perfil profesional corporativo
+- **[TEACHING.md](./TEACHING.md)** - perfil educativo y de divulgación científica
 
 ### Reglas de uso exclusivamente personal
 - **[ATTRIBUTION.md](./ATTRIBUTION.md)** - reglas de atribución personal

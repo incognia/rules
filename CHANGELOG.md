@@ -24,7 +24,7 @@
 - renombrar AUTHORING.md a ATTRIBUTION.md para mejor reflejar su propósito
 - organizar documentos en README.md y PHILOSOPHY.md según su uso: universal, dual, personal único, laboral único
 - clasificar claramente GIT.md como regla universal
-- clasificar DEVOPS.md como regla de uso dual
+- clasificar CORPORATE.md como regla de uso dual
 - especificar ATTRIBUTION.md como uso exclusivamente personal
 - especificar STYLING.md como uso exclusivamente laboral
 

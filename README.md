@@ -16,7 +16,8 @@ Un manifiesto contra tres males endémicos en tecnología latinoamericana:
 ## Documentos incluidos
 
 - **[PHILOSOPHY.md](./PHILOSOPHY.md)** - filosofía principal y manifiesto de desarrollo
-- **[DEVOPS.md](./DEVOPS.md)** - perfil profesional y contexto técnico
+- **[CORPORATE.md](./CORPORATE.md)** - perfil profesional corporativo
+- **[TEACHING.md](./TEACHING.md)** - perfil educativo y de divulgación científica
 - **[ATTRIBUTION.md](./ATTRIBUTION.md)** - reglas de atribución personal
 - **[COMMITTING.md](./COMMITTING.md)** - reglas para mensajes de *commit* y gestión de cambios
 - **[LICENSING.md](./LICENSING.md)** - reglas de licenciamiento para proyectos
@@ -67,7 +68,8 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 ### 4. Reglas de uso dual (diferentes aplicaciones según contexto)
 
 - **LICENSING.md**: define qué licencia usar según el contexto (personal: GPLv3, laboral: MIT)
-- **DEVOPS.md**: perfil profesional adaptado a cada entorno
+- **CORPORATE.md**: perfil profesional adaptado a cada entorno
+- **TEACHING.md**: perfil educativo y de divulgación (contexto personal)
 
 ### 5. Reglas de uso exclusivamente personal
 
