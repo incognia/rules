@@ -54,7 +54,7 @@ Sin embargo, la realidad del trabajo en equipos mexicanos requiere una adaptaci�
 
 **Mensajes de *commit*:** se mantienen en inglés por una razón práctica adicional: los PM y gerentes rara vez leen la documentación técnica extendida. Su interacción con el desarrollo técnico se limita a revisar algunos *commits* (si es que los leen) o simplemente contar la frecuencia en las gráficas de actividad. El inglés en los *commits* mantiene un estándar profesional en esas revisiones superficiales.
 
-**Contexto educativo:** la mayoría de los estudiantes de primaria y secundaria en México no hablan fluidamente inglés, sin importar si vienen de escuelas públicas o privadas. Somos un vecino muy cercano de Estados Unidos en términos geográficos, pero muy distantes en términos culturales. Esta realidad refuerza la importancia de enseñar en español mexicano: democratizar el conocimiento técnico significa hacerlo accesible en el idioma que realmente dominan nuestros estudiantes, no en el que creemos que deberían dominar.
+**Contexto educativo:** la mayoría de los estudiantes de primaria y secundaria en México, sin importar si vienen de escuelas públicas o privadas, no hablan fluidamente inglés. Somos vecinos muy cercanos de EE.UU. en términos geográficos, pero muy distantes en términos culturales. Esta realidad refuerza la importancia de enseñar en español mexicano: democratizar el conocimiento técnico significa hacerlo accesible en el idioma que realmente dominan nuestros estudiantes, no en el que creemos que deberían dominar.
 
 ## 3. Transparencia y trazabilidad
 

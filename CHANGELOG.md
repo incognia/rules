@@ -16,6 +16,7 @@
 - integrar mejor dualidad de contextos con el mensaje filosófico general
 - extender sección de bilingüismo técnico con realidad del inglés en estudiantes mexicanos
 - añadir reflexión sobre distancia cultural vs geográfica con EE.UU. en contexto educativo
+- corregir puntuación y gramática en sección de contexto educativo
 - desarrollar TEACHING.md con perfil educativo detallado basado en proyecto Juno
 - incluir metodologías pedagógicas innovadoras usando herramientas DevOps
 - documentar proyecto Juno como caso de estudio principal en educación STEM
