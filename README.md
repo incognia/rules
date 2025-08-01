@@ -1,4 +1,4 @@
-# Reglas y filosofía profesional de un ingeniero DevOps
+# Reglas y filosofía profesional y académica de un tecnólogo
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)

@@ -133,6 +133,7 @@ Los detalles específicos de implementación de esta filosofía se encuentran or
 - **[BACKUPS.md](./BACKUPS.md)** - políticas de respaldos y operaciones destructivas
 - **[GIT.md](./GIT.md)** - configuración inicial de repositorios
 - **[GLOSSARY.md](./GLOSSARY.md)** - glosario técnico de términos empleados
+- **[CHANGELOG.md](./CHANGELOG.md)** - historial de cambios del proyecto
 
 ### Reglas de uso dual (aplicación diferenciada por contexto)
 - **[LICENSING.md](./LICENSING.md)** - reglas de licenciamiento para proyectos
