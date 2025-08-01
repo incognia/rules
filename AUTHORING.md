@@ -89,6 +89,8 @@ Para la creación de diagramas en archivos Markdown, usar exclusivamente **Merma
 
 ---
 
-*Este documento fue desarrollado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.*
+*Este documento está diseñado para su uso en proyectos personales, detallando cómo dar atribución adecuada sin requerir un archivo de licencia completo. Para proyectos laborales o con múltiples scripts/documentos, consulta **[LICENSING.md](./LICENSING.md)**.
+
+Este documento fue desarrollado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.
 
 *Copyright © 2025, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*

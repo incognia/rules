@@ -14,6 +14,8 @@ Este documento establece las directrices para crear un archivo LICENSE formal en
 - **Licencia recomendada:** GNU GPLv3
 - **Razón:** Asegura que el código y derivados permanezcan libres, promoviendo el *copyleft*.
 
+(Puede aplicarse tanto a proyectos personales como laborales, según las necesidades específicas del proyecto)
+
 ### 2.3. Proyectos de Diseño de Hardware
 - **Licencia estándar:** CERN OHL v2
 - **Razón:** Permite modificar y distribuir libremente en el ámbito de hardware libre.
