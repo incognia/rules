@@ -13,7 +13,7 @@ Cada archivo de respaldo sigue esta estructura de nomenclatura:
 **Componentes:**
 - **Nombre base:** el nombre del archivo original sin su extensión
 - **Separador:** guion bajo (_)
-- **Timestamp:** fecha y hora en formato ISO: `YYYY-MM-DDTHH-MM-SS` (zona horaria CST Ciudad de México)
+- **Timestamp:** fecha y hora en formato ISO: `YYYY-MM-DDTHH-MM-SS` (zona horaria CST Ciudad de México, UTC-6)
 - **Extensión original:** se preserva la extensión del archivo original
 - **Extensión de respaldo:** se añade `.bkp` al final
 
@@ -34,6 +34,8 @@ La inclusión de la hora garantiza nombres únicos y trazabilidad precisa, indep
 Evita sobrescribir respaldos previos. La convención de fecha y hora permite conservar la secuencia histórica de cada copia.
 
 **Zona horaria obligatoria:** todos los timestamps deben generarse usando la zona horaria CST de Ciudad de México (UTC-6). Nunca usar UTC ni la zona horaria local del sistema si es diferente a CST.
+
+⚠️ **ADVERTENCIA CRÍTICA:** No es suficiente añadir el sufijo "CST" a una fecha UTC. Debes restar 6 horas a la fecha UTC para obtener la fecha CST correcta. Usar `TZ="America/Mexico_City"` en comandos `date` garantiza la conversión automática.
 
 ## Política de respaldos antes de operaciones destructivas
 
@@ -59,10 +61,12 @@ Si la ejecución es automatizada (por cron jobs, pipelines, bots u otros proceso
 
 ### Registro y auditoría
 Toda acción de borrado deberá ser registrada con:
-- Fecha y hora (formato 24 horas, zona horaria CST Ciudad de México)
+- Fecha y hora (formato 24 horas, zona horaria CST Ciudad de México, UTC-6)
 - Usuario o proceso que inició la ejecución
 - Resultado del respaldo
 - Elementos afectados por el borrado
+
+⚠️ **IMPORTANTE:** Para el registro de auditoría, usar siempre `TZ="America/Mexico_City" date` para garantizar que la fecha se calcule correctamente en CST (restando 6 horas a UTC), no solo agregando el sufijo CST.
 
 ### Buenas prácticas recomendadas
 - Implementar funciones de respaldo reutilizables en los scripts
@@ -87,9 +91,11 @@ backups/
 #!/bin/bash
 
 # Función para crear respaldo con timestamp
+# IMPORTANTE: TZ="America/Mexico_City" convierte automáticamente UTC a CST (UTC-6)
 create_backup() {
     local source_file="$1"
     local backup_dir="${2:-backups}"
+    # Este comando resta automáticamente 6 horas a UTC para obtener CST
     local timestamp=$(TZ="America/Mexico_City" date +"%Y-%m-%dT%H-%M-%S")
     local filename=$(basename "$source_file")
     local name_without_ext="${filename%.*}"
@@ -127,6 +133,7 @@ safe_delete() {
     
     # Proceder con la eliminación
     rm -f "$target"
+    # TZ="America/Mexico_City" garantiza fecha CST correcta (UTC-6)
     echo "$(TZ="America/Mexico_City" date '+%Y-%m-%d %H:%M:%S') - Eliminado: $target" >> backups/deletion.log
 }
 ```

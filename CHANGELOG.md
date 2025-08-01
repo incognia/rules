@@ -96,6 +96,16 @@
 
 ### fix
 - corregir typo en PHILOSOPHY.md: "intersacción" → "intersección"
+- corregir especificaciones de zona horaria en BACKUPS.md para calcular correctamente CST (UTC-6)
+- añadir advertencia crítica sobre NO usar solo sufijo CST sin convertir fecha UTC
+- especificar que se debe restar 6 horas a UTC o usar TZ="America/Mexico_City" para conversión automática
+- agregar comentarios explicativos en código de ejemplo sobre conversión automática de zona horaria
+- corregir especificaciones de zona horaria en COMMITTING.md para CHANGELOG.md
+- añadir advertencia sobre conversión correcta CST (no solo cambiar sufijo)
+- especificar formato correcto: UTC-6, NO UTC con sufijo CST
+- corregir especificaciones de zona horaria en STYLING.md para timestamps dinámicos
+- añadir ejemplo práctico de conversión (22:21 UTC → 16:21 CST)
+- especificar uso de TZ="America/Mexico_City" date para conversión automática
 
 ## [2025-07-31]
 

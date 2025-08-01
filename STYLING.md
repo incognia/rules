@@ -41,6 +41,8 @@ tags: tag-1, tag-2, tag-3, tag-opcional
 - La fecha de "Última modificación" debe actualizarse con la fecha y hora real al momento de editar el documento (formato: DD de mes de AAAA, HH:MM (CST))
 - **Zona horaria obligatoria:** siempre usar CST de Ciudad de México (UTC-6), nunca UTC ni otra zona horaria
 
+⚠️ **ADVERTENCIA CRÍTICA:** Para generar timestamps CST correctos, NO es suficiente añadir "CST" a una fecha UTC. Debes restar 6 horas a UTC para obtener la fecha CST correcta. Por ejemplo, si UTC es 22:21, CST debe ser 16:21 (22:21 - 6 horas = 16:21). Usar `TZ="America/Mexico_City" date` garantiza la conversión automática.
+
 ### Pie de página estándar
 
 Todo documento laboral debe concluir con el siguiente pie de página:
