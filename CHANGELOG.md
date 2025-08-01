@@ -2,6 +2,16 @@
 
 **Nota:** Todas las fechas y horas están en zona horaria CST de Ciudad de México (UTC-6).
 
+## [2025-08-01]
+
+### docs
+- desarrollar TEACHING.md con perfil educativo detallado basado en proyecto Juno
+- incluir metodologías pedagógicas innovadoras usando herramientas DevOps
+- documentar proyecto Juno como caso de estudio principal en educación STEM
+- añadir métricas cuantitativas de impacto educativo (6+ años, 50+ estudiantes, 100+ contenedores)
+- especificar herramientas técnicas utilizadas en el aula (Docker, JupyterLab, Python)
+- incluir filosofía de divulgación científica y contribuciones a la comunidad educativa
+
 ## [2025-07-31]
 
 ### docs
