@@ -18,6 +18,12 @@
 - enfatizar actualización obligatoria del CHANGELOG.md en COMMITTING.md con proceso paso a paso
 - añadir advertencias y ejemplos de flujo correcto para evitar olvidos en futuras actualizaciones
 
+### fix
+- corregir TEACHING.md para cumplir con reglas de LINGUISTICS.md
+- poner cursivas en términos técnicos sin traducción directa (*hands-on*)
+- reemplazar anglicismos (troubleshooting → resolución de problemas, feedback → retroalimentación)
+- aplicar formato correcto para préstamos lingüísticos según estándares mexicanos
+
 ## [2025-07-31]
 
 ### docs

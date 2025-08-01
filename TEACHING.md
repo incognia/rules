@@ -10,7 +10,7 @@ Mi enfoque va más allá de la enseñanza tradicional: utilizo principios de inf
 
 Mi enfoque pedagógico se fundamenta en tres principios clave:
 
-- **Aprendizaje hands-on:** la experiencia práctica es fundamental para el aprendizaje efectivo en STEM
+- **Aprendizaje *hands-on*:** la experiencia práctica es fundamental para el aprendizaje efectivo en STEM
 - **Entornos reproducibles:** cada estudiante debe tener acceso a las mismas herramientas y configuraciones profesionales
 - **Tecnología como facilitador:** las herramientas DevOps eliminan barreras técnicas y permiten enfocarse en el aprendizaje
 
@@ -69,7 +69,7 @@ Mi enfoque pedagógico se fundamenta en tres principios clave:
 - **Contextualización histórica:** uso del evento de extinción K-Pg como marco narrativo
 - **Aplicación práctica:** conversión de coordenadas geográficas y cálculos de distancia en la superficie terrestre
 - **Fórmulas matemáticas:** implementación de ecuaciones geodésicas en código Python ejecutable
-- **Metodología hands-on:** ejercicios interactivos con datos reales del cráter
+- **Metodología *hands-on*:** ejercicios interactivos con datos reales del cráter
 
 **Impacto divulgativo:**
 - Democratiza conceptos de geodesia y cartografía mediante programación accesible
@@ -85,13 +85,13 @@ Mi enfoque pedagógico se fundamenta en tres principios clave:
 
 ### Diseño de currícula STEM
 - **Programación Python:** desde conceptos básicos hasta algoritmos intermedios
-- **Metodología hands-on:** 80% práctica, 20% teoría
+- **Metodología *hands-on*:** 80% práctica, 20% teoría
 - **Progresión estructurada:** 21 lecciones organizadas por complejidad creciente
 - **Evaluación continua:** ejercicios interactivos en Jupyter Notebooks
 
 ### Gestión de laboratorios tecnológicos
 - **Administración multi-contenedor:** gestión simultánea de 20+ entornos estudiantiles
-- **Troubleshooting en tiempo real:** resolución de problemas de conectividad, permisos y configuración
+- **Resolución de problemas en tiempo real:** resolución de problemas de conectividad, permisos y configuración
 - **Mantenimiento automatizado:** scripts para limpieza, actualización y backup de entornos
 - **Monitoreo de recursos:** supervisión de CPU, memoria y almacenamiento
 
@@ -149,7 +149,7 @@ Mi enfoque pedagógico se fundamenta en tres principios clave:
 
 ### Adaptación tecnológica constante
 - **Actualización de herramientas:** migración de versiones, adopción de nuevas tecnologías
-- **Feedback estudiantil:** incorporación de sugerencias para mejora continua
+- **Retroalimentación estudiantil:** incorporación de sugerencias para mejora continua
 - **Mejores prácticas:** integración de nuevos enfoques pedagógicos y técnicos
 
 ### Desarrollo profesional
