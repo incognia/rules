@@ -28,6 +28,9 @@
 - especificar ATTRIBUTION.md como uso exclusivamente personal
 - especificar STYLING.md como uso exclusivamente laboral
 
+### fix
+- corregir uso de mayúsculas después de dos puntos en README.md para cumplir con LINGUISTICS.md
+
 ### feat
 - crear BACKUPS.md con políticas de respaldos y operaciones destructivas
 - especificar zona horaria CST obligatoria para todos los timestamps

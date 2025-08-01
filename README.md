@@ -40,8 +40,8 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 
 ### 1. Identificación del contexto del proyecto
 
-- 💼 **Contexto laboral**: Proyectos desarrollados para o bajo contrato con **Promad Business Solutions**
-- 📺 **Contexto personal**: Proyectos independientes, experimentales o de desarrollo personal
+- 💼 **Contexto laboral**: proyectos desarrollados para o bajo contrato con **Promad Business Solutions**
+- 📺 **Contexto personal**: proyectos independientes, experimentales o de desarrollo personal
 
 ### 2. Aplicación de reglas por contexto
 
@@ -57,25 +57,25 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 
 ### 3. Reglas universales (aplican a ambos contextos)
 
-- **LINGUISTICS.md**: Español mexicano como estándar cultural
+- **LINGUISTICS.md**: español mexicano como estándar cultural
 - **COMMITTING.md**: Conventional Commits en inglés
-- **PHILOSOPHY.md**: Principios generales de trabajo
-- **BACKUPS.md**: Políticas de respaldos y operaciones destructivas
-- **GLOSSARY.md**: Términos técnicos estandarizados
-- **GIT.md**: Configuración inicial de repositorios
+- **PHILOSOPHY.md**: principios generales de trabajo
+- **BACKUPS.md**: políticas de respaldos y operaciones destructivas
+- **GLOSSARY.md**: términos técnicos estandarizados
+- **GIT.md**: configuración inicial de repositorios
 
 ### 4. Reglas de uso dual (diferentes aplicaciones según contexto)
 
-- **LICENSING.md**: Define qué licencia usar según el contexto (personal: GPLv3, laboral: MIT)
-- **DEVOPS.md**: Perfil profesional adaptado a cada entorno
+- **LICENSING.md**: define qué licencia usar según el contexto (personal: GPLv3, laboral: MIT)
+- **DEVOPS.md**: perfil profesional adaptado a cada entorno
 
 ### 5. Reglas de uso exclusivamente personal
 
-- **ATTRIBUTION.md**: Atribución personal en documentos/scripts individuales
+- **ATTRIBUTION.md**: atribución personal en documentos/scripts individuales
 
 ### 6. Reglas de uso exclusivamente laboral
 
-- **STYLING.md**: Reglas de estilo para documentos Markdown corporativos
+- **STYLING.md**: reglas de estilo para documentos Markdown corporativos
 
 ## Uso
 
