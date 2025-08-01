@@ -22,6 +22,7 @@ Un manifiesto contra tres males endémicos en tecnología latinoamericana:
 - **[LICENSING.md](./LICENSING.md)** - reglas de licenciamiento para proyectos
 - **[LINGUISTICS.md](./LINGUISTICS.md)** - reglas lingüísticas de español mexicano como referente
 - **[STYLING.md](./STYLING.md)** - reglas de estilo para documentos Markdown (proyectos laborales)
+- **[BACKUPS.md](./BACKUPS.md)** - políticas de respaldos y operaciones destructivas
 - **[GLOSSARY.md](./GLOSSARY.md)** - glosario técnico de términos empleados
 - **[CHANGELOG.md](./CHANGELOG.md)** - historial de cambios del proyecto
 
@@ -59,6 +60,7 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 - **LINGUISTICS.md**: Español mexicano como estándar cultural
 - **COMMITTING.md**: Conventional Commits en inglés
 - **PHILOSOPHY.md**: Principios generales de trabajo
+- **BACKUPS.md**: Políticas de respaldos y operaciones destructivas
 - **GLOSSARY.md**: Términos técnicos estandarizados
 
 ### 4. Reglas específicas por contexto

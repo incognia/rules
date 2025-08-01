@@ -123,6 +123,7 @@ Los detalles específicos de implementación de esta filosofía se encuentran en
 - **[LICENSING.md](./LICENSING.md)** - reglas de licenciamiento para proyectos
 - **[LINGUISTICS.md](./LINGUISTICS.md)** - reglas lingüísticas de español mexicano como referente
 - **[STYLING.md](./STYLING.md)** - reglas de estilo para documentos Markdown (aplica únicamente a proyectos laborales por el momento)
+- **[BACKUPS.md](./BACKUPS.md)** - políticas de respaldos y operaciones destructivas
 - **[GLOSSARY.md](./GLOSSARY.md)** - glosario técnico de términos empleados en estos documentos
 
 ---

@@ -4,6 +4,15 @@
 
 ## [2025-07-31]
 
+### docs
+- agregar referencia a BACKUPS.md en README.md y PHILOSOPHY.md
+- incluir BACKUPS.md en la sección de reglas universales que aplican a ambos contextos
+
+### feat
+- crear BACKUPS.md con políticas de respaldos y operaciones destructivas
+- especificar zona horaria CST obligatoria para todos los timestamps
+- actualizar scripts de respaldo para usar TZ="America/Mexico_City"
+
 ### feat
 - añadir badges informativos al README.md (licencia GPLv3, Markdown, español mexicano)
 - crear sección de flujo de decisión en README.md para explicar aplicación de reglas duales (personal/laboral)
