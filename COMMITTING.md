@@ -84,6 +84,24 @@ Updated files
 
 - **Referencia a *issues*:** siempre que sea posible, asociar los *commits* con su *issue*, *ticket* o tarea correspondiente en el pie del mensaje (`Refs: #123`, `Closes: #123`).
 
+### 3.4. Comandos de push por contexto
+
+El comando de push debe usar la clave SSH correspondiente al contexto del proyecto:
+
+#### Proyectos personales (`@incognia`)
+```bash
+GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519" git push origin main
+```
+
+#### Proyectos laborales (`@incogniadev` - Promad)
+```bash
+GIT_SSH_COMMAND="ssh -i ~/.ssh/promad_ed25519" git push origin main
+```
+
+**Nota importante:** Verificar siempre que la configuración de Git local coincida con el contexto:
+- **Personal:** `git config user.email "incognia@gmail.com"`
+- **Laboral:** `git config user.email "ralvarez@promad.com.mx"`
+
 ---
 
 *Este documento fue desarrollado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.*
