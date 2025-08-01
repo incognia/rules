@@ -1,5 +1,7 @@
 # Historial de cambios
 
+**Nota:** Todas las fechas y horas están en zona horaria CST de Ciudad de México (UTC-6).
+
 ## [2025-07-31]
 
 ### feat

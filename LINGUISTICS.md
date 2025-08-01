@@ -209,5 +209,5 @@ Esta regla se aplica en:
 
 *Copyright © 2025, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*
 
-**Creado**: 28 de julio 2025  
+**Creado**: 28 de julio 2025 (CST Ciudad de México)  
 **Objetivo**: mantener consistencia lingüística con el español mexicano

@@ -39,6 +39,7 @@ tags: tag-1, tag-2, tag-3, tag-opcional
 - El logo de PROMAD es obligatorio en documentos corporativos
 - El primer encabezado debe ser claro y conciso
 - La fecha de "Última modificación" debe actualizarse con la fecha y hora real al momento de editar el documento (formato: DD de mes de AAAA, HH:MM (CST))
+- **Zona horaria obligatoria:** siempre usar CST de Ciudad de México (UTC-6), nunca UTC ni otra zona horaria
 
 ### Pie de página estándar
 
