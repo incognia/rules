@@ -137,6 +137,14 @@
 - 🔥 **CRÍTICO:** sólo nombres propios llevan mayúscula inicial después de dos puntos y seguido (error MUY frecuente)
 - ⚠️ No se usan puntos en títulos y subtítulos
 
+**Ejemplos de mayúsculas después de dos puntos:**
+- ✅ **Regla:** los nombres de archivos deben estar en inglés
+- ❌ **Regla:** Los nombres de archivos deben estar en inglés
+- ✅ **Justificación:** garantiza consistencia técnica
+- ❌ **Justificación:** Garantiza consistencia técnica
+- ✅ **Excepción con nombre propio:** el país es México
+- ✅ **Excepción con nombre propio:** el país es México (México es nombre propio, lleva mayúscula)
+
 ### Comillas
 - **Usar comillas angulares «»** en texto markdown
 - **Conservar comillas dobles ""** en comentarios de scripts y código

@@ -24,6 +24,7 @@
 - corregir uso incorrecto de mayúsculas después de dos puntos en LINGUISTICS.md
 - corregir mayúsculas adicionales en sección de nomenclatura de archivos y odios especiales
 - añadir énfasis adicional a regla de mayúsculas después de dos puntos por ser error frecuente
+- añadir ejemplos de uso correcto e incorrecto para mayúsculas después de dos puntos
 - desarrollar TEACHING.md con perfil educativo detallado basado en proyecto Juno
 - incluir metodologías pedagógicas innovadoras usando herramientas DevOps
 - documentar proyecto Juno como caso de estudio principal en educación STEM
