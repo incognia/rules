@@ -40,6 +40,14 @@
 - refinar redacción y estructura de filosofía multiplataforma con secciones claras
 - eliminar redundancias en principios fundamentales de competencia técnica
 
+### fix
+- corregir terminología en TEACHING.md para cumplir completamente con LINGUISTICS.md
+- cambiar "backup" por "respaldo" en mantenimiento automatizado
+- cambiar "debugging" por "depuración" en perfil de estudiantes destacados
+- cambiar "implementación" por "aplicación" en fórmulas matemáticas
+- cambiar "realizar una tarea/trabajo" por "hacer una tarea/trabajo" en analogía de herramientas
+- cambiar "Soporte" por "Compatibilidad" en adaptación tecnológica
+
 ## [2025-07-31]
 
 ### docs

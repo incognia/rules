@@ -70,7 +70,7 @@ Mi enfoque pedagógico se fundamenta en tres principios clave:
 - **Interdisciplinariedad:** fusión de programación, matemáticas, geografía y ciencias de la Tierra
 - **Contextualización histórica:** uso del evento de extinción K-Pg como marco narrativo
 - **Aplicación práctica:** conversión de coordenadas geográficas y cálculos de distancia en la superficie terrestre
-- **Fórmulas matemáticas:** implementación de ecuaciones geodésicas en código Python ejecutable
+- **Fórmulas matemáticas:** aplicación de ecuaciones geodésicas en código Python ejecutable
 - **Metodología *hands-on*:** ejercicios interactivos con datos reales del cráter
 
 **Impacto divulgativo:**
@@ -94,11 +94,11 @@ Mi enfoque pedagógico se fundamenta en tres principios clave:
 ### Gestión de laboratorios tecnológicos
 - **Administración multi-contenedor:** gestión simultánea de 20+ entornos estudiantiles
 - **Resolución de problemas en tiempo real:** resolución de problemas de conectividad, permisos y configuración
-- **Mantenimiento automatizado:** scripts para limpieza, actualización y backup de entornos
+- **Mantenimiento automatizado:** scripts para limpieza, actualización y respaldo de entornos
 - **Monitoreo de recursos:** supervisión de CPU, memoria y almacenamiento
 
 ### Adaptación tecnológica
-- **Soporte multi-distribución:** Ubuntu, Debian, Fedora, RHEL
+- **Compatibilidad multi-distribución:** Ubuntu, Debian, Fedora, RHEL
 - **Instalación automatizada:** scripts que detectan y configuran dependencias por distribución
 - **Personalización cultural:** JupyterLab en español mexicano, comentarios de código bilingües
 - **Accesibilidad:** interfaces web responsivas, documentación clara
@@ -107,9 +107,9 @@ Mi enfoque pedagógico se fundamenta en tres principios clave:
 
 **Principio pedagógico:** Aunque mantengo una preferencia personal y profesional por Linux, mi enfoque educativo busca formar estudiantes competentes en las tres plataformas principales: Linux, Windows y macOS, priorizando en ese orden específico.
 
-**Analogía de las herramientas:** La competencia técnica trasciende las preferencias de marca. Si requiero un destornillador para realizar una tarea, sería absurdo negarme a trabajar hasta conseguir una marca específica. Un profesional competente puede usar cualquier herramienta de calidad para completar su trabajo. Personalmente prefiero los desarmadores de precisión de iFixit, pero esta preferencia no debe impedir desmontar un tornillo con una herramienta de marca distinta.
+**Analogía de las herramientas:** La competencia técnica trasciende las preferencias de marca. Si requiero un destornillador para hacer una tarea, sería absurdo negarme a trabajar hasta conseguir una marca específica. Un profesional competente puede usar cualquier herramienta de calidad para completar su trabajo. Personalmente prefiero los desarmadores de precisión de iFixit, pero esta preferencia no debe impedir desmontar un tornillo con una herramienta de marca distinta.
 
-**Aplicación a sistemas operativos:** El mismo principio aplica a las computadoras. Si realmente dominas la informática, el sistema operativo no debe ser impedimento para realizar tu trabajo. La verdadera competencia técnica se demuestra en la capacidad de adaptarse y ser productivo independientemente de la plataforma disponible.
+**Aplicación a sistemas operativos:** El mismo principio aplica a las computadoras. Si realmente dominas la informática, el sistema operativo no debe ser impedimento para hacer tu trabajo. La verdadera competencia técnica se demuestra en la capacidad de adaptarse y ser productivo independientemente de la plataforma disponible.
 
 **Enfoque pedagógico por plataformas:**
 
@@ -143,7 +143,7 @@ Mi enfoque pedagógico se fundamenta en tres principios clave:
 ### Estudiantes destacados
 - **Carlos (@cgzdev):** desarrollo de funcionalidades avanzadas en proyectos colaborativos
 - **Ian (@calmestprism226):** contribuciones significativas en automatización y scripting
-- **Fernando (@fer1495):** liderazgo en debugging y optimización de entornos
+- **Fernando (@fer1495):** liderazgo en depuración y optimización de entornos
 
 ### Impacto cuantitativo
 - **Entornos desplegados:** 100+ contenedores Docker administrados
