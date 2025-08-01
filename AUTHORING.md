@@ -1,8 +1,8 @@
-# Reglas de autoría, atribución y colaboración
+# Reglas de autoría y atribución personal
 
 ## 1. Propósito
 
-Este documento establece las convenciones y estándares para la autoría, atribución y colaboración en los proyectos desarrollados o mantenidos por Rodrigo Ernesto Álvarez Aguilera. Su objetivo es garantizar consistencia, claridad y respeto por las normas culturales y técnicas en todos los entornos de trabajo.
+Este documento establece cómo darme crédito y atribución en documentos individuales, scripts o archivos que no requieren un archivo LICENSE completo. Para proyectos con múltiples archivos que requieren licenciamiento formal, consulta **[LICENSING.md](./LICENSING.md)**.
 
 ## 2. Identidad del autor
 

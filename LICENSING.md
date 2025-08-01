@@ -1,41 +1,30 @@
-# Reglas de licenciamiento de proyectos
+# Reglas de licenciamiento formal para proyectos completos
 
-## 1. Introducción
+## 1. Propósito
 
-Este documento define la política de licenciamiento a aplicar según el tipo y contexto de cada proyecto, con el fin de asegurar la coherencia y el cumplimiento legal y filosófico.
+Este documento establece las directrices para crear un archivo LICENSE formal en proyectos que contienen múltiples documentos y/o scripts, asegurando coherencia legal y filosófica.
 
-## 2. Tipos de proyectos y licencias aplicables
+## 2. Selección de Licencias por Tipo de Proyecto
 
-### 2.1. Proyectos laborales
+### 2.1. Proyectos Laborales
+- **Licencia recomendada:** MIT
+- **Razón:** Natureza permisiva que facilita integración y adopción comercial.
 
-- **Licencia:** MIT
-- **Justificación:** se utiliza por su naturaleza permisiva y su amplia compatibilidad en el ecosistema de software, lo que facilita la integración y el uso comercial.
+### 2.2. Proyectos Personales (Software)
+- **Licencia recomendada:** GNU GPLv3
+- **Razón:** Asegura que el código y derivados permanezcan libres, promoviendo el *copyleft*.
 
-### 2.2. Proyectos personales (software)
+### 2.3. Proyectos de Diseño de Hardware
+- **Licencia estándar:** CERN OHL v2
+- **Razón:** Permite modificar y distribuir libremente en el ámbito de hardware libre.
 
-- **Licencia:** GNU General Public License v3 (GPLv3)
-- **Justificación:** se elige para garantizar que las contribuciones y derivados del software permanezcan libres y abiertos, fomentando un ecosistema de colaboración bajo los principios del *copyleft*.
+### 2.4. Proyectos de Documentación
+- **Licencia:** GNU LGPLv3
+- **Alternativa:** Creative Commons para documentos generales no ligados a software.
 
-### 2.3. Proyectos de diseño de hardware
-
-- **Licencia:** CERN Open Hardware Licence v2 (Permissive)
-- **Justificación:** esta licencia es un estándar en la comunidad de hardware libre y asegura que los diseños puedan ser estudiados, modificados y distribuidos libremente.
-
-### 2.4. Proyectos de documentación
-
-- **Licencia:** GNU Lesser General Public License v3 (LGPLv3)
-- **Justificación:** permite que la documentación sea libremente utilizada y mejorada, pudiendo ser enlazada desde software con otras licencias.
-- **Alternativa:** para documentación general no ligada a software, considerar Creative Commons.
-
-### 2.5. Proyectos creativos
-
-- **Licencia:** Creative Commons Atribución 4.0 Internacional (CC BY 4.0)
-- **Justificación:** facilita la máxima difusión y reutilización de la obra, requiriendo únicamente la atribución al autor original. Otras variantes de CC pueden ser consideradas según las necesidades específicas del proyecto.
-
-### 2.6. Proyectos privados o para clientes
-
-- **Licencia:** a convenir
-- **Justificación:** las condiciones se establecerán mediante un acuerdo o contrato específico con el cliente, definiendo los derechos de uso, distribución y modificación según los requerimientos del proyecto.
+### 2.5. Proyectos Creativos
+- **Licencia estándar:** CC BY 4.0
+- **Razón:** Facilita máxima difusión y uso, requiriendo solo atribución.
 
 ## 3. Ejemplos de aplicación
 

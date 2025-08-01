@@ -16,6 +16,9 @@
 - eliminar redundancias entre ambos documentos
 - enfocar GIT.md en configuración de repositorios nuevos
 - enfocar COMMITTING.md en flujo de trabajo de commits y push
+- diferenciar claramente entre AUTHORING.md y LICENSING.md por sus propósitos específicos
+- refactorizar AUTHORING.md para atribución personal en documentos/scripts individuales
+- refactorizar LICENSING.md para generación de LICENSE en proyectos completos
 
 ### feat
 - crear BACKUPS.md con políticas de respaldos y operaciones destructivas
