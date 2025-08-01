@@ -175,7 +175,7 @@ respaldar_vm() {
 
 ### Analogía con el inglés
 - El **inglés estadounidense:** es el referente mundial (no el británico)
-- **Razón:** Estados Unidos domina culturalmente (Hollywood, tecnología, medios)
+- **Razón:** estados Unidos domina culturalmente (Hollywood, tecnología, medios)
 - El **español mexicano:** debe ser el referente por las mismas razones
 - **Coherencia:** usar el dialecto del país culturalmente dominante
 

@@ -21,6 +21,7 @@
 - mejorar redacción del epígrafe para incluir desarrollo tecnológico y descubrimientos científicos
 - añadir regla de nomenclatura de archivos en inglés internacional en LINGUISTICS.md
 - añadir regla específica para archivos Markdown con NOMBRES_EN_MAYUSCULAS.md
+- corregir uso incorrecto de mayúsculas después de dos puntos en LINGUISTICS.md
 - desarrollar TEACHING.md con perfil educativo detallado basado en proyecto Juno
 - incluir metodologías pedagógicas innovadoras usando herramientas DevOps
 - documentar proyecto Juno como caso de estudio principal en educación STEM
