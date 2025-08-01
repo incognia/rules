@@ -8,7 +8,7 @@ Los entornos de tecnología en Latinoamérica sufren de tres males endémicos qu
 
 Contra estos tres males, aquí está la respuesta: trabajo honesto, compartir el conocimiento y la satisfacción que viene de hacer las cosas bien hechas, sin complejos y sin pendejadas.
 
-Este manifiesto no es solo para rifársela con *DevOps* en la oficina (donde me dicen "Agüelo" por veterano, aunque sigo al día), sino para llevar esa misma filosofía al aula (donde soy Hagrid por corpulento y barbón). Porque al chile, dominar Kubernetes está padre, pero democratizar el conocimiento técnico está con madre. No se trata de guardar secretos como los mercenarios, sino de que le sepan todos a las herramientas que realmente sirven.
+Este manifiesto no es solo para rifármela en DevOps desde el escritorio —donde me llaman "Agüelo" por veterano, aunque sigo tan actualizado como el último *commit*— sino para aplicar esa misma filosofía en el aula, donde dicen que parezco Hagrid por corpulento y barbón. Porque sí, dominar Kubernetes está chido, pero lo que de verdad está con madre es compartir el conocimiento técnico. No venimos a ser mercenarios del código guardando secretos: venimos a enseñar con todo para que todos le sepan a las herramientas que realmente valen la pena.
 
 ## 1. Identidad profesional coherente
 
