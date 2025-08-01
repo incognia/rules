@@ -64,16 +64,40 @@ Updated files
 
 ## 3. Flujo de trabajo y gestión de cambios
 
-### 3.1. Actualización del `CHANGELOG.md`
+### 3.1. Actualización del `CHANGELOG.md` (CRÍTICO)
 
-**Antes de cada *commit***, actualizar el archivo `CHANGELOG.md`.
+🔥 **REGLA CRÍTICA: SIEMPRE actualizar el archivo `CHANGELOG.md` ANTES de cada *commit*.**
 
-- **Idioma:** el idioma oficial del proyecto (generalmente español mexicano).
-- **Zona horaria:** usar **CST de Ciudad de México (UTC-6)** para todas las fechas. Nunca usar UTC ni la zona horaria local del sistema.
+**PROCESO OBLIGATORIO:**
+1. **PRIMERO:** Actualizar `CHANGELOG.md` con los cambios realizados
+2. **SEGUNDO:** Hacer `git add` de todos los archivos (incluyendo CHANGELOG.md)
+3. **TERCERO:** Hacer `git commit`
+4. **CUARTO:** Hacer `git push`
+
+**⚠️ ADVERTENCIA:** Nunca hacer commit sin haber actualizado primero el CHANGELOG.md. Esta es una regla fundamental del flujo de trabajo.
+
+**Especificaciones del CHANGELOG.md:**
+- **Idioma:** el idioma oficial del proyecto (generalmente español mexicano)
+- **Zona horaria:** usar **CST de Ciudad de México (UTC-6)** para todas las fechas. Nunca usar UTC ni la zona horaria local del sistema
 - **Contenido mínimo:**
-  - Fecha del cambio en formato `[YYYY-MM-DD]` según CST Ciudad de México.
-  - Tipo de cambio (coincidente con el prefijo del *commit*).
-  - Breve descripción del cambio.
+  - Fecha del cambio en formato `[YYYY-MM-DD]` según CST Ciudad de México
+  - Tipo de cambio (coincidente con el prefijo del *commit*)
+  - Breve descripción del cambio
+
+**Ejemplo del flujo correcto:**
+```bash
+# 1. PRIMERO: Editar CHANGELOG.md
+vim CHANGELOG.md
+
+# 2. SEGUNDO: Añadir archivos
+git add .
+
+# 3. TERCERO: Commit
+git commit -m "tipo: descripción del cambio"
+
+# 4. CUARTO: Push
+GIT_SSH_COMMAND="ssh -i ~/.ssh/clave" git push origin main
+```
 
 ### 3.2. Atomicidad de los *commits*
 

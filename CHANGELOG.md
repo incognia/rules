@@ -15,6 +15,8 @@
 - añadir proyecto Chicxulub como segundo caso de estudio en divulgación científica
 - documentar enfoque interdisciplinario (programación + geografía + ciencias de la Tierra)
 - incluir métricas de impacto divulgativo y metodología de contextualización histórica
+- enfatizar actualización obligatoria del CHANGELOG.md en COMMITTING.md con proceso paso a paso
+- añadir advertencias y ejemplos de flujo correcto para evitar olvidos en futuras actualizaciones
 
 ## [2025-07-31]
 
