@@ -59,6 +59,9 @@
 - conectar especialización DevOps con aplicación pedagógica de infraestructura como código
 - integrar filosofía de democratización técnica en ambos contextos profesional y educativo
 
+### fix
+- corregir typo en PHILOSOPHY.md: "intersacción" → "intersección"
+
 ## [2025-07-31]
 
 ### docs
