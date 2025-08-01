@@ -115,16 +115,24 @@ Los proyectos personales bajo GPLv3 contribuyen al *commons* del software libre,
 
 ## Referencias
 
-Los detalles específicos de implementación de esta filosofía se encuentran en los siguientes documentos:
+Los detalles específicos de implementación de esta filosofía se encuentran organizados en los siguientes documentos:
 
-- **[DEVOPS.md](./DEVOPS.md)** - perfil profesional y contexto técnico
-- **[ATTRIBUTION.md](./ATTRIBUTION.md)** - reglas de atribución personal
-- **[COMMITTING.md](./COMMITTING.md)** - reglas para mensajes de *commit* y gestión de cambios
-- **[LICENSING.md](./LICENSING.md)** - reglas de licenciamiento para proyectos
+### Reglas universales (ambos contextos)
 - **[LINGUISTICS.md](./LINGUISTICS.md)** - reglas lingüísticas de español mexicano como referente
-- **[STYLING.md](./STYLING.md)** - reglas de estilo para documentos Markdown (aplica únicamente a proyectos laborales por el momento)
+- **[COMMITTING.md](./COMMITTING.md)** - reglas para mensajes de *commit* y gestión de cambios
 - **[BACKUPS.md](./BACKUPS.md)** - políticas de respaldos y operaciones destructivas
-- **[GLOSSARY.md](./GLOSSARY.md)** - glosario técnico de términos empleados en estos documentos
+- **[GIT.md](./GIT.md)** - configuración inicial de repositorios
+- **[GLOSSARY.md](./GLOSSARY.md)** - glosario técnico de términos empleados
+
+### Reglas de uso dual (aplicación diferenciada por contexto)
+- **[LICENSING.md](./LICENSING.md)** - reglas de licenciamiento para proyectos
+- **[DEVOPS.md](./DEVOPS.md)** - perfil profesional y contexto técnico
+
+### Reglas de uso exclusivamente personal
+- **[ATTRIBUTION.md](./ATTRIBUTION.md)** - reglas de atribución personal
+
+### Reglas de uso exclusivamente laboral
+- **[STYLING.md](./STYLING.md)** - reglas de estilo para documentos Markdown corporativos
 
 ---
 

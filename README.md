@@ -62,12 +62,20 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 - **PHILOSOPHY.md**: Principios generales de trabajo
 - **BACKUPS.md**: Políticas de respaldos y operaciones destructivas
 - **GLOSSARY.md**: Términos técnicos estandarizados
+- **GIT.md**: Configuración inicial de repositorios
 
-### 4. Reglas específicas por contexto
+### 4. Reglas de uso dual (diferentes aplicaciones según contexto)
 
-- **STYLING.md**: Únicamente para proyectos laborales (por el momento)
-- **LICENSING.md**: Define qué licencia usar según el contexto
-- **ATTRIBUTION.md**: Especifica credenciales y atribución correcta
+- **LICENSING.md**: Define qué licencia usar según el contexto (personal: GPLv3, laboral: MIT)
+- **DEVOPS.md**: Perfil profesional adaptado a cada entorno
+
+### 5. Reglas de uso exclusivamente personal
+
+- **ATTRIBUTION.md**: Atribución personal en documentos/scripts individuales
+
+### 6. Reglas de uso exclusivamente laboral
+
+- **STYLING.md**: Reglas de estilo para documentos Markdown corporativos
 
 ## Uso
 
