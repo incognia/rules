@@ -37,6 +37,8 @@
 - incluir analogía de herramientas para justificar enseñanza en múltiples sistemas operativos
 - documentar postura crítica sobre sobreprecio y ética de plataformas cerradas
 - enfatizar enseñanza de WSL en Windows como puente hacia entornos Unix
+- refinar redacción y estructura de filosofía multiplataforma con secciones claras
+- eliminar redundancias en principios fundamentales de competencia técnica
 
 ## [2025-07-31]
 

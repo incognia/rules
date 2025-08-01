@@ -128,7 +128,6 @@ Mi enfoque pedagógico se fundamenta en tres principios clave:
    - Análisis ético de plataformas cerradas y restricciones de desarrollo
    - Enseñanza práctica a pesar de las reservas filosóficas
 
-**Principio fundamental:** Si realmente sabes usar una computadora, el sistema operativo no debe ser impedimento para realizar tu trabajo. La competencia técnica trasciende las preferencias de plataforma.
 
 ---
 
