@@ -7,6 +7,7 @@
 ### docs
 - agregar referencia a BACKUPS.md en README.md y PHILOSOPHY.md
 - incluir BACKUPS.md en la sección de reglas universales que aplican a ambos contextos
+- especificar uso obligatorio de zona horaria CST Ciudad de México en COMMITTING.md para fechas del CHANGELOG.md
 
 ### feat
 - crear BACKUPS.md con políticas de respaldos y operaciones destructivas

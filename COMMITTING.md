@@ -69,8 +69,9 @@ Updated files
 **Antes de cada *commit***, actualizar el archivo `CHANGELOG.md`.
 
 - **Idioma:** el idioma oficial del proyecto (generalmente español mexicano).
+- **Zona horaria:** usar **CST de Ciudad de México (UTC-6)** para todas las fechas. Nunca usar UTC ni la zona horaria local del sistema.
 - **Contenido mínimo:**
-  - Fecha del cambio.
+  - Fecha del cambio en formato `[YYYY-MM-DD]` según CST Ciudad de México.
   - Tipo de cambio (coincidente con el prefijo del *commit*).
   - Breve descripción del cambio.
 
