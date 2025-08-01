@@ -54,6 +54,7 @@
 - añadir participación en programas sociales para poblaciones vulnerables
 - incluir sección de integración de experiencia y filosofía educativa
 - conectar experiencia diversa con principios de democratización del conocimiento
+- especificar enseñanza de C++ con Arduino en programas sociales para comunidades vulnerables
 
 ## [2025-07-31]
 

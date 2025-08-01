@@ -144,6 +144,7 @@ Mi enfoque pedagógico se fundamenta en tres principios clave:
 
 ### Participación social
 - **Programas educativos en comunidades vulnerables:** Diseño y ejecución de proyectos para ofrecer educación accesible a poblaciones de bajos ingresos utilizando tecnologías abiertas y metodologías inclusivas
+- **Enseñanza de C++ con Arduino:** Enfoque en programación de microcontroladores para proyectos prácticos de electrónica y robótica educativa
 
 ### Integración de experiencia y filosofía
 
