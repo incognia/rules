@@ -14,6 +14,7 @@ Mi enfoque pedagógico se fundamenta en tres principios clave:
 - **Entornos reproducibles:** cada estudiante debe tener acceso a las mismas herramientas y configuraciones profesionales
 - **Tecnología como facilitador:** las herramientas DevOps eliminan barreras técnicas y permiten enfocarse en el aprendizaje
 - **Compromiso con el software libre:** uso exclusivo de herramientas libres en entornos educativos como principio ético y pedagógico
+- **Competencia multiplataforma:** enseñanza en Linux, Windows y macOS para formar profesionales versátiles y adaptables
 
 ---
 
@@ -101,6 +102,33 @@ Mi enfoque pedagógico se fundamenta en tres principios clave:
 - **Instalación automatizada:** scripts que detectan y configuran dependencias por distribución
 - **Personalización cultural:** JupyterLab en español mexicano, comentarios de código bilingües
 - **Accesibilidad:** interfaces web responsivas, documentación clara
+
+### Filosofía multiplataforma
+
+**Principio pedagógico:** Aunque mantengo una preferencia personal y profesional por Linux, mi enfoque educativo busca formar estudiantes competentes en las tres plataformas principales: Linux, Windows y macOS, priorizando en ese orden específico.
+
+**Analogía de las herramientas:** La competencia técnica trasciende las preferencias de marca. Si requiero un destornillador para realizar una tarea, sería absurdo negarme a trabajar hasta conseguir una marca específica. Un profesional competente puede usar cualquier herramienta de calidad para completar su trabajo. Personalmente prefiero los desarmadores de precisión de iFixit, pero esta preferencia no debe impedir desmontar un tornillo con una herramienta de marca distinta.
+
+**Aplicación a sistemas operativos:** El mismo principio aplica a las computadoras. Si realmente dominas la informática, el sistema operativo no debe ser impedimento para realizar tu trabajo. La verdadera competencia técnica se demuestra en la capacidad de adaptarse y ser productivo independientemente de la plataforma disponible.
+
+**Enfoque pedagógico por plataformas:**
+
+1. **Linux (preferencia personal y profesional):**
+   - Sistema base para todos los laboratorios y proyectos educativos
+   - Énfasis en distribuciones Debian/Ubuntu para consistencia
+   - Enseñanza de principios Unix y administración de sistemas
+
+2. **Windows (realidad laboral):**
+   - Reconocimiento de su prevalencia en entornos corporativos
+   - Enseñanza obligatoria de WSL (Windows Subsystem for Linux)
+   - WSL como puente hacia entornos Unix sin abandonar Windows
+
+3. **macOS (última opción, con análisis crítico):**
+   - Discusión sobre el sobreprecio artificial de dispositivos Apple
+   - Análisis ético de plataformas cerradas y restricciones de desarrollo
+   - Enseñanza práctica a pesar de las reservas filosóficas
+
+**Principio fundamental:** Si realmente sabes usar una computadora, el sistema operativo no debe ser impedimento para realizar tu trabajo. La competencia técnica trasciende las preferencias de plataforma.
 
 ---
 

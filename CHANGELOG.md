@@ -33,6 +33,10 @@
 - enfatizar uso exclusivo de software libre en entornos educativos
 - clarificar compromiso con licenciamiento GPL para todos los contenidos educativos
 - documentar principios de libertad de software aplicados a la pedagogía
+- añadir filosofía educativa multiplataforma (Linux, Windows, Mac)
+- incluir analogía de herramientas para justificar enseñanza en múltiples sistemas operativos
+- documentar postura crítica sobre sobreprecio y ética de plataformas cerradas
+- enfatizar enseñanza de WSL en Windows como puente hacia entornos Unix
 
 ## [2025-07-31]
 
