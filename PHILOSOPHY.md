@@ -1,5 +1,9 @@
 # Filosofía de un pinche prieto que a veces *codea* pero siempre se rifa
 
+> «El avance tecnológico no puede considerarse progreso si no es para todos.»
+>
+> —Rodrigo Álvarez
+
 Los entornos de tecnología en Latinoamérica sufren de tres males endémicos que este manifiesto combate frontalmente:
 
 - **Mercenazgo:** profesionales que entregan trabajos mediocres porque solo les mueve la lana, sin compromiso real con la excelencia o con el cliente.
