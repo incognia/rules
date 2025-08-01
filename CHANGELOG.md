@@ -25,6 +25,9 @@
 - corregir mayúsculas adicionales en sección de nomenclatura de archivos y odios especiales
 - añadir énfasis adicional a regla de mayúsculas después de dos puntos por ser error frecuente
 - añadir ejemplos de uso correcto e incorrecto para mayúsculas después de dos puntos
+- añadir regla sobre tiempos verbales en documentos: tiempo pasado para reportes, segunda persona para guías
+- incluir ejemplos específicos para diferenciar reportes (tiempo pasado) vs guías (segunda persona)
+- enfatizar evitar tercera persona impersonal en ambos tipos de documentos
 - desarrollar TEACHING.md con perfil educativo detallado basado en proyecto Juno
 - incluir metodologías pedagógicas innovadoras usando herramientas DevOps
 - documentar proyecto Juno como caso de estudio principal en educación STEM

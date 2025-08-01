@@ -140,6 +140,23 @@
 **Ejemplos de mayúsculas después de dos puntos:**
 - ✅ **Regla:** los nombres de archivos deben estar en inglés
 - ❌ **Regla:** Los nombres de archivos deben estar en inglés
+  
+### Tiempos verbales en documentos
+- ✅ **Describir procedimientos realizados:** usar tiempo pasado porque ya concluyeron
+- ✅ **Guiar en procesos a realizar:** usar segunda persona y tiempo presente/futuro, para pasos por realizar
+
+**Ejemplos correctos para reportes (tiempo pasado):**
+- ✅ "Configuré Proxmox en el servidor"
+- ✅ "Instalé Docker y desplegué los contenedores"
+- ✅ "Apliqué las métricas de observabilidad"
+- ❌ "Se configuró Proxmox en el servidor" (tercera persona impersonal)
+
+**Ejemplos correctos para guías (segunda persona, tiempo presente/futuro):**
+- ✅ "Configura Proxmox en tu servidor"
+- ✅ "Instala Docker y despliega los contenedores"
+- ✅ "Debes aplicar las métricas de observabilidad"
+- ❌ "Se debe configurar Proxmox en el servidor" (tercera persona impersonal)
+  
 - ✅ **Justificación:** garantiza consistencia técnica
 - ❌ **Justificación:** Garantiza consistencia técnica
 - ✅ **Excepción con nombre propio:** el país es México
