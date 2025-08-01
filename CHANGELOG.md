@@ -14,6 +14,8 @@
 - suavizar transición entre introducción irreverente y sección técnica
 - eliminar redundancias entre introducción y sección de intersección profesional-educativa
 - integrar mejor dualidad de contextos con el mensaje filosófico general
+- extender sección de bilingüismo técnico con realidad del inglés en estudiantes mexicanos
+- añadir reflexión sobre distancia cultural vs geográfica con EE.UU. en contexto educativo
 - desarrollar TEACHING.md con perfil educativo detallado basado en proyecto Juno
 - incluir metodologías pedagógicas innovadoras usando herramientas DevOps
 - documentar proyecto Juno como caso de estudio principal en educación STEM
