@@ -79,6 +79,7 @@ Updated files
 **Especificaciones del CHANGELOG.md:**
 - **Idioma:** el idioma oficial del proyecto (generalmente español mexicano)
 - **Zona horaria:** usar **CST de Ciudad de México (UTC-6)** para todas las fechas. Nunca usar UTC ni la zona horaria local del sistema
+- **Formato de fecha:** usar únicamente fecha sin hora en formato `[YYYY-MM-DD]` según CST Ciudad de México. La hora NO debe incluirse
 - **Contenido mínimo:**
   - Fecha del cambio en formato `[YYYY-MM-DD]` según CST Ciudad de México
   - Tipo de cambio (coincidente con el prefijo del *commit*)
