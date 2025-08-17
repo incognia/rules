@@ -13,6 +13,10 @@ Un manifiesto contra tres males endémicos en tecnología latinoamericana:
 - **Egoísmo técnico:** acaparar conocimiento para crear dependencia
 - **Falta de identidad:** complejos culturales que degradan la calidad
 
+### Contexto académico relacionado
+- La idea de usar este repositorio como contexto instruccional para LLM se alinea con la línea de investigación «chain-of-thought prompting», que muestra que proporcionar cadenas de razonamiento mejora el desempeño en tareas complejas.
+- Referencia: Jason Wei et al., «Chain-of-Thought Prompting Elicits Reasoning in Large Language Models», arXiv:2201.11903. DOI: https://doi.org/10.48550/arXiv.2201.11903 (resumen: https://arxiv.org/abs/2201.11903).
+
 ## Documentos incluidos
 
 - **[PHILOSOPHY.md](./PHILOSOPHY.md)** - filosofía principal y manifiesto de desarrollo
