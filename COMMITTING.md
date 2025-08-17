@@ -82,6 +82,14 @@ Updated files
 - **Formato de fecha:** usar únicamente fecha sin hora en formato `[YYYY-MM-DD]` según CST Ciudad de México. La hora NO debe incluirse
 
 ⚠️ **ADVERTENCIA CRÍTICA:** Para obtener la fecha CST correcta, NO es suficiente añadir "CST" a una fecha UTC. Debes convertir la fecha restando 6 horas a UTC o usar `TZ="America/Mexico_City" date +"%Y-%m-%d"` para la conversión automática.
+
+**Comandos recomendados (siempre correctos):**
+```bash
+# Fecha en CST (Ciudad de México), independiente de la TZ del sistema
+DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")
+echo "$DATE_CST"
+```
+
 - **Contenido mínimo:**
   - Fecha del cambio en formato `[YYYY-MM-DD]` según CST Ciudad de México (UTC-6, NO UTC con sufijo CST)
   - Tipo de cambio (coincidente con el prefijo del *commit*)
@@ -89,14 +97,19 @@ Updated files
 
 **Ejemplo del flujo correcto:**
 ```bash
-# 1. PRIMERO: Editar CHANGELOG.md
+# 1. PRIMERO: Actualizar CHANGELOG.md con fecha CST
+DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")
+# Opción A (manual): abrir editor
 vim CHANGELOG.md
+# Opción B (no interactiva): anteponer una línea de ejemplo (ajusta el tipo y descripción)
+# Nota: reemplaza "docs" y la descripción según corresponda
+printf "[%s] docs: describe el cambio\n" "$DATE_CST" | cat - CHANGELOG.md > CHANGELOG.tmp && mv CHANGELOG.tmp CHANGELOG.md
 
 # 2. SEGUNDO: Añadir archivos
 git add .
 
-# 3. TERCERO: Commit
-git commit -m "tipo: descripción del cambio"
+# 3. TERCERO: Commit (no interactivo)
+git commit -m "docs(changelog): update entry for $DATE_CST"
 
 # 4. CUARTO: Push
 GIT_SSH_COMMAND="ssh -i ~/.ssh/clave" git push origin main

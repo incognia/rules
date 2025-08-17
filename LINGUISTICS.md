@@ -150,25 +150,38 @@
 - ❌ **Regla:** Los nombres de archivos deben estar en inglés
   
 ### Tiempos verbales en documentos
-- ✅ **Describir procedimientos realizados:** usar tiempo pasado porque ya concluyeron
-- ✅ **Guiar en procesos a realizar:** usar segunda persona y tiempo presente/futuro, para pasos por realizar
+- ✅ Reportes y postmortems: usar tiempo pasado y primera persona («yo» o «nosotros» si es trabajo colectivo).
+- ✅ Guías y manuales: usar segunda persona (tú) en presente/imperativo o futuro para pasos por realizar.
+- ✅ En listas de pasos, se puede omitir el sujeto: «Instala», «Ejecuta», «Verifica».
+- ❌ Evitar construcciones impersonales en tercera persona («se configuró», «se debe…»).
 
-**Ejemplos correctos para reportes (tiempo pasado):**
-- ✅ "Configuré Proxmox en el servidor"
-- ✅ "Instalé Docker y desplegué los contenedores"
-- ✅ "Apliqué las métricas de observabilidad"
-- ❌ "Se configuró Proxmox en el servidor" (tercera persona impersonal)
+**Ejemplos correctos para reportes (pasado, primera persona):**
+- ✅ «Configuré Proxmox en el servidor»
+- ✅ «Instalé Docker y desplegué los contenedores»
+- ✅ «Apliqué las métricas de observabilidad»
+- ❌ «Se configuró Proxmox en el servidor» (tercera persona impersonal)
 
-**Ejemplos correctos para guías (segunda persona, tiempo presente/futuro):**
-- ✅ "Configura Proxmox en tu servidor"
-- ✅ "Instala Docker y despliega los contenedores"
-- ✅ "Debes aplicar las métricas de observabilidad"
-- ❌ "Se debe configurar Proxmox en el servidor" (tercera persona impersonal)
-  
-- ✅ **Justificación:** garantiza consistencia técnica
-- ❌ **Justificación:** Garantiza consistencia técnica
-- ✅ **Excepción con nombre propio:** el país es México
-- ✅ **Excepción con nombre propio:** el país es México (México es nombre propio, lleva mayúscula)
+**Ejemplos correctos para guías (segunda persona, presente/futuro):**
+- ✅ «Configura Proxmox en tu servidor»
+- ✅ «Instala Docker y despliega los contenedores»
+- ✅ «Debes aplicar las métricas de observabilidad»
+- ❌ «Se debe configurar Proxmox en el servidor» (tercera persona impersonal)
+
+**Comprobación rápida:**
+- ¿Lo hiciste ya? → describe en pasado y en primera persona.
+- ¿Lo hará la persona lectora? → instruye en segunda persona (presente/imperativo o futuro).
+
+### Fechas y horas (CST Ciudad de México)
+- Usar formato de 24 horas y zona horaria de la Ciudad de México.
+- Calcular la hora LOCAL correctamente antes de añadir el sufijo «CST». No rotular «CST» una hora calculada en UTC.
+- Zona a usar: «America/Mexico_City» (UTC−06:00; sin horario de verano).
+- Formatos aceptados:
+  - Corto: «2025-07-28 14:30 CST»
+  - Largo: «28 de julio de 2025, 14:30 CST (Ciudad de México)»
+- Ejemplos en shell:
+  - «TZ=America/Mexico_City date '+%F %H:%M %Z'»
+  - «TS=$(TZ=America/Mexico_City date '+%F %H:%M %Z'); echo "$TS"»
+- En scripts y generadores, NO confiar en la zona por defecto del sistema: establecer «TZ=America/Mexico_City» explícitamente.
 
 ### Comillas
 - **Usar comillas angulares «»** en texto markdown
@@ -218,7 +231,7 @@ respaldar_vm() {
 
 Los siguientes términos generan **rechazo particular** y deben evitarse a toda costa:
 - 🔥 **«Librería»** por «biblioteca» - INACEPTABLE
-- 🔥 **«IT»** por «TI" - usar siempre el español
+- 🔥 **«IT»** por «TI» - usar siempre el español
 - 🔥 **Peninsularismos** («ordenador», «fichero») - RECHAZADOS
 - 🔥 **Verbos inventados con -ear** -ear (commitear, deployear) - EVITAR
 - 🔥 **Títulos Con Cada Palabra En Mayúscula** - Usar solo inicial en primera palabra
@@ -250,5 +263,6 @@ Esta regla se aplica en:
 
 *Elaborado por Rodrigo Álvarez (@incognia)*
 
-**Creado**: 28 de julio 2025 (CST Ciudad de México)  
+**Creado**: 28 de julio de 2025 (CST Ciudad de México)  
+**Última modificación**: 17 de agosto de 2025, 01:36 CST (Ciudad de México)  
 **Objetivo**: mantener consistencia lingüística con el español mexicano

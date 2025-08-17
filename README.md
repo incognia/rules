@@ -80,6 +80,28 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 
 - **STYLING.md**: reglas de estilo para documentos Markdown corporativos
 
+## Convenciones de fechas/horas
+
+- Formato: 24 horas, zona «CST (Ciudad de México)».
+- No rotular «CST» a horas calculadas en UTC; convertir explícitamente a la zona local.
+- Zona a usar en scripts: TZ=America/Mexico_City.
+- CHANGELOG.md: solo fecha (YYYY-MM-DD), sin hora.
+
+Ejemplos de comandos
+```bash
+# Fecha (CST) para CHANGELOG.md
+TZ=America/Mexico_City date +"%Y-%m-%d"
+
+# Fecha y hora (CST) legible
+TZ=America/Mexico_City date '+%F %H:%M %Z'
+LC_TIME=es_MX.UTF-8 TZ=America/Mexico_City date '+%d de %B de %Y, %H:%M (%Z)'
+```
+
+Activar hook pre-commit (opcional)
+```bash
+git config core.hooksPath .githooks
+```
+
 ## Uso
 
 Estos documentos sirven como referencia para mantener consistencia en:

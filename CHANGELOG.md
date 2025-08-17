@@ -1,6 +1,6 @@
 # Historial de cambios
 
-**Nota:** Todas las fechas y horas están en zona horaria CST de Ciudad de México (UTC-6).
+**Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 ## [2025-08-01]
 
