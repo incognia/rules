@@ -25,30 +25,36 @@ Fundamento académico: Jason Wei et al., «Chain-of-Thought Prompting Elicits Re
 - Convención de formato: «Razonamiento», «Pasos 1..n», «Conclusión»; delimitadores claros
 - prompts/cot/: crear aritmetica.md (≥5 ejemplos) y devops.md (≥5 ejemplos)
 - Hook pre-commit CoT mínimo: exige ≥3 pasos y «Conclusión» en cada ejemplo
+- Configuración de linters: .vale.ini (reglas básicas) y markdownlint (encabezados/longitud de línea)
 
 Entregables
 - PROMPTS.md publicado
 - prompts/cot/aritmetica.md y prompts/cot/devops.md
 - Hook activable con core.hooksPath
+- .vale.ini y .markdownlint config inicial
 
 ### Iteración 2 (1–14 sep 2025)
 - SELF_CONSISTENCY.md: lineamientos para muestrear N cadenas y seleccionar por mayoría/agrupación
 - EVAL.md: plantilla de evaluación (exactitud, coherencia, cobertura, alucinaciones, terminología es_MX)
-- Linter Vale básico: secciones obligatorias («Razonamiento», «Conclusión»), detectar ‘-ear’, siglas sin plural, ‘CST’ sin TZ
+- Linter Vale: reglas ampliadas (secciones obligatorias, ‘-ear’, siglas sin plural, ‘CST’ sin TZ)
+- Prueba de aceptación: ejecutar 2 evaluaciones con 5 muestras cada una (auto-consistencia) y registrar resultados en EVAL.md
 
 Entregables
 - SELF_CONSISTENCY.md y EVAL.md
 - .vale.ini y estilos en .vale/
+- Reportes de evaluación inicial
 
 ### Iteración 3 (15–30 sep 2025)
 - prompts/cot/: sentido_comun.md y simbolico.md (≥5 ejemplos cada uno)
 - Política bilingüe CoT: reglas para mezclar español mexicano (razonamiento) e inglés (código/identificadores)
 - ERROR_BANK.md: fallas comunes y tácticas de mitigación
+- Revisión de coherencia en documentos de perfil (CORPORATE.md/TEACHING.md): enlaces de retorno a PHILOSOPHY y README; aclarar herramienta «Kro» o reemplazar por «Kustomize» si aplica
 
 Entregables
 - Dos nuevos archivos de ejemplos
 - Política bilingüe publicada
 - Banco de errores y mitigaciones
+- Perfiles con enlaces de retorno y terminología afinada
 
 ### Iteración 4 (1–15 oct 2025)
 - Ampliar prompts/cot/coding.md (≥8 ejemplos con pruebas de razonamiento en refactor y depuración)

@@ -25,7 +25,9 @@ Tareas
 - [ ] Linter de prosa (Vale) para CoT
   - Regla: exigir «Razonamiento» y «Conclusión» en prompts de prompts/cot/.
   - Prohibir ‘CST’ sin TZ=America/Mexico_City, detectar verbos “-ear” spanglish, impedir pluralización de siglas.
-  - Incluir .vale.ini y estilos.
+  - Incluir .vale.ini y estilos; preparar reglas para encabezados y longitud de línea.
+- [ ] markdownlint
+  - Configurar reglas básicas (MD013 longitud de línea, encabezados, listas) y exclusiones según estilo del repo.
 - [ ] Hook pre-commit para ejemplos CoT
   - Validar que cada ejemplo en prompts/cot/ tenga ≥3 pasos numerados y «Conclusión».
   - Integrar a .githooks y documentar activación (core.hooksPath).
@@ -41,6 +43,9 @@ Tareas
 - [ ] Añadir sección CoT al README
   - “Cómo usar este repo con CoT”: enlaces a PROMPTS.md, prompts/cot/, SELF_CONSISTENCY.md y EVAL.md.
   - Recordatorios de es_MX y timestamps CST.
+- [ ] Afinar CORPORATE.md
+  - Añadir nota de derivación a PHILOSOPHY.md y retorno a README.md
+  - Aclarar «Kro» (usar «Kustomize» si aplica) y revisar terminología
 - [ ] Metadatos por ejemplo CoT
   - Frontmatter YAML: domain, task, dificultad, longitud esperada, tiempo estimado, fuentes, validación.
   - Plantilla: prompts/cot/_template.md.

@@ -5,8 +5,8 @@
 ## [2025-08-17]
 
 ### docs
-- PROMPTS.md: guía inicial de CoT (formato, estilo, referencias) en es_MX; añadir sección de rutas de referencia «~/rules/..."
-- prompts/cot/_template.md: añadir uso de rutas «~/rules/...». Ejemplos iniciales: aritmética, devops y kubernetes con referencias cruzadas añadidos
+- PROMPTS.md: guía inicial de CoT (formato, estilo, referencias) en es_MX; añadir sección de rutas de referencia «~/rules..."
+- prompts/cot/_template.md: añadir uso de rutas «~/rules...». Ejemplos iniciales: arithmetic (renombrado desde aritmetica), devops y kubernetes con referencias cruzadas añadidos
 - GLOSSARY.md: añadir término «Cadena de razonamiento (Chain-of-Thought, CoT)» con referencias a PROMPTS.md y arXiv
 - LINGUISTICS.md: corregir comillas; clarificar tiempos verbales; añadir sección de fechas/horas en CST
 - COMMITTING.md: comandos explícitos con TZ=America/Mexico_City; flujo no interactivo para CHANGELOG
