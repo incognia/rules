@@ -53,7 +53,7 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 | **Autoría** | Rodrigo Álvarez (@incognia) | Rodrigo Álvarez (@incogniadev) |
 | **Email** | incognia@gmail.com | ralvarez@promad.com.mx |
 | **SSH Key** | ~/.ssh/id_ed25519 | ~/.ssh/promad_ed25519 |
-| **Estilo de documentos** | No definido aún | STYLING.md aplicable |
+| **Estilo de documentos** | No definido aún | [STYLING.md](./STYLING.md) aplicable |
 | **Idioma documentación** | Español mexicano | Español mexicano |
 | **Idioma código/commits** | Inglés internacional | Inglés internacional |
 
@@ -86,6 +86,8 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 - No rotular «CST» a horas calculadas en UTC; convertir explícitamente a la zona local.
 - Zona a usar en scripts: TZ=America/Mexico_City.
 - CHANGELOG.md: solo fecha (YYYY-MM-DD), sin hora.
+
+Más detalles: ver [LINGUISTICS.md – Fechas y horas (CST Ciudad de México)](./LINGUISTICS.md#fechas-y-horas-cst-ciudad-de-méxico).
 
 Ejemplos de comandos
 ```bash
