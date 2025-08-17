@@ -5,6 +5,7 @@
 ## [2025-08-17]
 
 ### docs
+- prompts/cot/repo_context.md: CoT genérico para obtener contexto completo de repos GitHub/GitLab (estructura, dependencias, CI/CD, despliegue, estilo, pruebas, licencias y contribución)
 - PROMPTS.md: guía inicial de CoT (formato, estilo, referencias) en es_MX; añadir sección de rutas de referencia «~/rules..."
 - prompts/cot/_template.md: añadir uso de rutas «~/rules...». Ejemplos iniciales: arithmetic (renombrado desde aritmetica), devops, kubernetes, linguistics, styling y committing (personal/corporate) con referencias cruzadas añadidos
 - GLOSSARY.md: añadir término «Cadena de razonamiento (Chain-of-Thought, CoT)» con referencias a PROMPTS.md y arXiv
