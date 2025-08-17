@@ -7,7 +7,7 @@ validacion: entrada en CHANGELOG con fecha CST y commit/push exitosos
 ---
 
 Razonamiento:
-- Cumplir el flujo obligatorio: primero CHANGELOG, luego add/commit/push (ver «~/rules/COMMITTING.md»).
+- Cumplir el flujo obligatorio: primero CHANGELOG, luego add/commit/push (ver «~/rules/COMMITTING.md» ([../../COMMITTING.md](../../COMMITTING.md))).
 - Usar fecha en CST (Ciudad de México) calculada con TZ; no rotular CST a horas UTC.
 - Mensaje de commit en inglés con Conventional Commits; documentación en español mexicano.
 
@@ -25,5 +25,5 @@ Pasos:
 
 Conclusión:
 - Verifica que el commit aparece en `git log` y que el CHANGELOG contiene la fecha en CST y el resumen del cambio.
-- Referencias: «~/rules/COMMITTING.md», «~/rules/README.md» (convenciones de fechas/horas), «~/rules/LINGUISTICS.md» (es_MX).
+- Referencias: «~/rules/COMMITTING.md» ([../../COMMITTING.md](../../COMMITTING.md)), «~/rules/README.md» ([../../README.md](../../README.md)) y «~/rules/LINGUISTICS.md» ([../../LINGUISTICS.md](../../LINGUISTICS.md)).
 

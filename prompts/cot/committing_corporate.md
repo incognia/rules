@@ -7,7 +7,7 @@ validacion: commit/push exitosos y CHANGELOG actualizado
 ---
 
 Razonamiento:
-- Este flujo es para proyectos laborales (Promad). Seguir «~/rules/COMMITTING.md».
+- Este flujo es para proyectos laborales (Promad). Seguir «~/rules/COMMITTING.md» ([../../COMMITTING.md](../../COMMITTING.md)).
 - Asegurar fecha en CST para CHANGELOG y mensaje convencional en inglés.
 
 Pasos:
@@ -22,5 +22,5 @@ Pasos:
 
 Conclusión:
 - Confirmar en `git log` y revisar que el CHANGELOG tenga la entrada del día en CST.
-- Referencias: «~/rules/COMMITTING.md», «~/rules/README.md».
+- Referencias: «~/rules/COMMITTING.md» ([../../COMMITTING.md](../../COMMITTING.md)) y «~/rules/README.md» ([../../README.md](../../README.md)).
 

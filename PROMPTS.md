@@ -42,7 +42,7 @@ Reglas de estilo
 - Timestamps: formato 24 h, «CST (Ciudad de México)» y cálculo explícito con TZ=America/Mexico_City.
 
 ## Ejemplos mínimos (esqueleto)
-- Ver plantilla en prompts/cot/_template.md. Cada archivo temático (aritmetica.md, devops.md, etc.) debe incluir 3–8 ejemplos con:
+- Ver plantilla en [prompts/cot/_template.md](prompts/cot/_template.md). Cada archivo temático (arithmetic.md, devops.md, etc.) debe incluir 3–8 ejemplos con:
   - Frontmatter YAML (domain, task, dificultad, etc.)
   - Secciones «Razonamiento», «Pasos», «Conclusión».
 

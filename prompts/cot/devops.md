@@ -7,7 +7,7 @@ validacion: pipeline exitoso tras inyectar secreto
 ---
 
 Razonamiento:
-- Aplicar formato CoT y español mexicano (ver «~/rules/LINGUISTICS.md», «~/rules/PROMPTS.md» y flujo en «~/rules/COMMITTING.md»).
+- Aplicar formato CoT y español mexicano (ver «~/rules/LINGUISTICS.md» ([../../LINGUISTICS.md](../../LINGUISTICS.md)), «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md)) y flujo en «~/rules/COMMITTING.md» ([../../COMMITTING.md](../../COMMITTING.md))).
 - Verificar prerequisitos de CI/CD y secretos de acceso al registry.
 
 Pasos:
