@@ -20,6 +20,7 @@ Un manifiesto contra tres males endémicos en tecnología latinoamericana:
 ## Documentos incluidos
 
 - **[PHILOSOPHY.md](./PHILOSOPHY.md)** - filosofía principal y manifiesto de desarrollo
+- **[PROMPTS.md](./PROMPTS.md)** - guía de Chain-of-Thought (CoT) en es_MX
 - **[ROADMAP.md](./ROADMAP.md)** - ruta de 90 días para CoT y automatizaciones
 - **[TODO.md](./TODO.md)** - tareas tácticas inmediatas (CoT y mejoras)
 - **[CORPORATE.md](./CORPORATE.md)** - perfil profesional corporativo
@@ -85,6 +86,13 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 ### 6. Reglas de uso exclusivamente laboral
 
 - **STYLING.md**: reglas de estilo para documentos Markdown corporativos
+
+## Cómo usar CoT rápidamente
+
+- Guía: lee [PROMPTS.md](./PROMPTS.md)
+- Ejemplos: carpeta [prompts/cot/](./prompts/cot/)
+- Buenas prácticas lingüísticas: [LINGUISTICS.md](./LINGUISTICS.md)
+- Flujo de commits y CHANGELOG: [COMMITTING.md](./COMMITTING.md)
 
 ## Convenciones de fechas/horas
 

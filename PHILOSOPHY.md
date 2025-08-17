@@ -125,7 +125,7 @@ Los proyectos personales bajo GPLv3 contribuyen al *commons* del software libre,
 
 ## Referencias
 
-Los detalles específicos de implementación de esta filosofía se encuentran organizados en los siguientes documentos:
+Los detalles específicos de implementación de esta filosofía se encuentran organizados en los siguientes documentos (para una visión rápida, ver README.md):
 
 ### Reglas universales (ambos contextos)
 - **[LINGUISTICS.md](./LINGUISTICS.md)** - reglas lingüísticas de español mexicano como referente

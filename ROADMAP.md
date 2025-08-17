@@ -26,10 +26,11 @@ Fundamento académico: Jason Wei et al., «Chain-of-Thought Prompting Elicits Re
 - prompts/cot/: crear aritmetica.md (≥5 ejemplos) y devops.md (≥5 ejemplos)
 - Hook pre-commit CoT mínimo: exige ≥3 pasos y «Conclusión» en cada ejemplo
 - Configuración de linters: .vale.ini (reglas básicas) y markdownlint (encabezados/longitud de línea)
+- Publicar ejemplos iniciales: arithmetic, devops, kubernetes, linguistics, styling, committing
 
 Entregables
 - PROMPTS.md publicado
-- prompts/cot/aritmetica.md y prompts/cot/devops.md
+- prompts/cot/ (arithmetic, devops, kubernetes, linguistics, styling, committing)
 - Hook activable con core.hooksPath
 - .vale.ini y .markdownlint config inicial
 
@@ -45,7 +46,7 @@ Entregables
 - Reportes de evaluación inicial
 
 ### Iteración 3 (15–30 sep 2025)
-- prompts/cot/: sentido_comun.md y simbolico.md (≥5 ejemplos cada uno)
+- prompts/cot/: commonsense.md y symbolic.md (≥5 ejemplos cada uno)
 - Política bilingüe CoT: reglas para mezclar español mexicano (razonamiento) e inglés (código/identificadores)
 - ERROR_BANK.md: fallas comunes y tácticas de mitigación
 - Revisión de coherencia en documentos de perfil (CORPORATE.md/TEACHING.md): enlaces de retorno a PHILOSOPHY y README; aclarar herramienta «Kro» o reemplazar por «Kustomize» si aplica

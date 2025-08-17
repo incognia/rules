@@ -8,12 +8,12 @@ Contexto
 - Objetivo: mejorar la calidad y consistencia del razonamiento paso a paso en español mexicano, compatible con LINGUISTICS.md y PHILOSOPHY.md.
 
 Tareas
-- [ ] Escribir PROMPTS.md (guía CoT en es_MX)
+- [x] Escribir PROMPTS.md (guía CoT en es_MX)
   - Principios: cuándo usar CoT, granularidad de pasos, longitud objetivo.
   - Marcadores estandarizados: «Razonamiento», «Pasos», «Acción», «Resultado», «Conclusión».
   - Ejemplos mínimos y reglas de seguridad (no secretos, no datos sensibles).
   - Enlaces cruzados a PHILOSOPHY.md y LINGUISTICS.md.
-- [ ] Crear directorio prompts/cot con ejemplos few-shot
+- [x] Crear directorio prompts/cot con ejemplos few-shot
   - prompts/cot/{aritmetica.md, sentido_comun.md, simbolico.md, devops.md, coding.md}
   - 3–8 ejemplos por archivo en es_MX, pasos numerados, «Razonamiento» y «Conclusión».
 - [ ] Definir convención de formato CoT
@@ -51,8 +51,8 @@ Tareas
   - Plantilla: prompts/cot/_template.md.
 
 Prioridad sugerida (iteraciones cortas)
-1) PROMPTS.md + convención de formato
-2) prompts/cot/ con 2 archivos iniciales (aritmética y devops)
+1) PROMPTS.md + convención de formato ✅
+2) prompts/cot/ con 2 archivos iniciales (arithmetic y devops) ✅; agregar kubernetes, linguistics, styling, committing ✅
 3) Hook pre-commit (validación mínima) + linter Vale básico
 4) EVAL.md + SELF_CONSISTENCY.md
 5) ERROR_BANK.md + política bilingüe
