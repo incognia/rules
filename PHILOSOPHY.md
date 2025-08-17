@@ -134,6 +134,8 @@ Los detalles específicos de implementación de esta filosofía se encuentran or
 - **[GIT.md](./GIT.md)** - configuración inicial de repositorios
 - **[GLOSSARY.md](./GLOSSARY.md)** - glosario técnico de términos empleados
 - **[CHANGELOG.md](./CHANGELOG.md)** - historial de cambios del proyecto
+- **[ROADMAP.md](./ROADMAP.md)** - ruta de implementación a 90 días (CoT y automatizaciones)
+- **[TODO.md](./TODO.md)** - lista de tareas tácticas (siguientes pasos)
 
 ### Reglas de uso dual (aplicación diferenciada por contexto)
 - **[LICENSING.md](./LICENSING.md)** - reglas de licenciamiento para proyectos

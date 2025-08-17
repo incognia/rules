@@ -20,6 +20,8 @@ Un manifiesto contra tres males endémicos en tecnología latinoamericana:
 ## Documentos incluidos
 
 - **[PHILOSOPHY.md](./PHILOSOPHY.md)** - filosofía principal y manifiesto de desarrollo
+- **[ROADMAP.md](./ROADMAP.md)** - ruta de 90 días para CoT y automatizaciones
+- **[TODO.md](./TODO.md)** - tareas tácticas inmediatas (CoT y mejoras)
 - **[CORPORATE.md](./CORPORATE.md)** - perfil profesional corporativo
 - **[TEACHING.md](./TEACHING.md)** - perfil educativo y de divulgación científica
 - **[ATTRIBUTION.md](./ATTRIBUTION.md)** - reglas de atribución personal
