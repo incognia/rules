@@ -1,5 +1,7 @@
 # Perfil educativo y de divulgación científica de Rodrigo Álvarez
 
+> Este perfil educativo se fundamenta en [PHILOSOPHY.md](./PHILOSOPHY.md). Para una visión general y navegación rápida del proyecto, consulta [README.md](./README.md).
+
 ## Resumen educativo
 
 Ingeniero DevOps especializado en la **aplicación de metodologías y herramientas de ingeniería de software modernas para la educación STEM**. Con 8 años de experiencia docente, combino conocimientos técnicos avanzados en DevOps con pedagogía práctica para crear entornos de aprendizaje inmersivos y reproducibles.
@@ -8,25 +10,32 @@ Mi enfoque va más allá de la enseñanza tradicional: utilizo principios de inf
 
 ## Filosofía educativa
 
-Mi enfoque pedagógico se fundamenta en tres principios clave:
+Mi enfoque pedagógico se fundamenta en principios claros y no negociables:
 
 - **Aprendizaje *hands-on*:** la experiencia práctica es fundamental para el aprendizaje efectivo en STEM
 - **Entornos reproducibles:** cada estudiante debe tener acceso a las mismas herramientas y configuraciones profesionales
 - **Tecnología como facilitador:** las herramientas DevOps eliminan barreras técnicas y permiten enfocarse en el aprendizaje
-- **Compromiso con el software libre:** uso exclusivo de herramientas libres en entornos educativos como principio ético y pedagógico
+- **Compromiso con el software libre:** en educación básica y media superior (primaria, secundaria y preparatoria) el uso es exclusivo por principio ético y pedagógico. Fuera de educación superior no hay justificación técnica o pedagógica para usar software privativo; su presencia suele responder al hábito de docentes en plataformas cerradas, no a necesidades reales del alumnado.
 - **Competencia multiplataforma:** enseñanza en Linux, Windows y macOS para formar profesionales versátiles y adaptables
 
 ---
+
+## Principios transversales
+
+- **Política bilingüe (alineada con PHILOSOPHY.md):** el razonamiento, documentación y comentarios se escriben en español mexicano; los identificadores, nombres de archivos y código se mantienen en inglés internacional cuando corresponda por interoperabilidad.
+- **Infraestructura como código y reproducibilidad:** la configuración de laboratorios y contenidos se define declarativamente para garantizar entornos idénticos.
+- **Accesibilidad y cero barreras:** el acceso no depende de plataformas cerradas ni de licencias restrictivas.
+- **Timestamps correctos (CST Ciudad de México):** cuando se incluyan marcas de tiempo en ejemplos o bitácoras, se calculan con TZ=America/Mexico_City en formato de 24 horas.
 
 ## Especialización en educación STEM
 
 ### Metodologías pedagógicas innovadoras
 
 - **Infraestructura educativa como código:** uso de Docker Compose para orquestar entornos de aprendizaje personalizados
-- **Automatización educativa:** scripts Python para distribución automatizada de ejercicios y tareas
+- **Automatización educativa:** scripts en Python para distribución automatizada de ejercicios y tareas
 - **Entornos contenedorizados:** JupyterLab desplegado en contenedores Docker para garantizar consistencia
 - **Gestión de configuraciones:** volúmenes persistentes para preservar el progreso estudiantil
-- **Dashboard de administración:** interfaces web para facilitar el acceso y monitoreo de laboratorios
+- **Panel de administración:** interfaces web (panel web) para facilitar el acceso y el monitoreo de laboratorios
 
 ### Herramientas técnicas en el aula
 
@@ -36,7 +45,7 @@ Mi enfoque pedagógico se fundamenta en tres principios clave:
 | **Automatización** | Python scripts, Bash scripting |
 | **Entorno de desarrollo** | JupyterLab, VS Code, Neovim |
 | **Infraestructura** | Linux (Debian/Ubuntu), SSH, volúmenes persistentes |
-| **Monitoreo** | Node.js dashboard, htop, logs de contenedor |
+|| **Monitoreo** | panel web (Node.js), htop, registros de contenedor |
 | **Distribución de contenido** | Git, symbolic links, automated deployment |
 
 ---
@@ -51,8 +60,8 @@ Mi enfoque pedagógico se fundamenta en tres principios clave:
 
 ### Gestión de laboratorios tecnológicos
 - **Administración multi-contenedor:** gestión simultánea de 20+ entornos estudiantiles
-- **Resolución de problemas en tiempo real:** resolución de problemas de conectividad, permisos y configuración
-- **Mantenimiento automatizado:** scripts para limpieza, actualización y respaldo de entornos
+- **Resolución de problemas en tiempo real:** solución de incidencias de conectividad, permisos y configuración
+- **Mantenimiento automatizado:** scripts en Bash/Python para limpieza, actualización y respaldo de entornos
 - **Monitoreo de recursos:** supervisión de CPU, memoria y almacenamiento
 
 ### Adaptación tecnológica
@@ -63,7 +72,7 @@ Mi enfoque pedagógico se fundamenta en tres principios clave:
 
 ### Filosofía multiplataforma
 
-**Principio pedagógico:** Aunque mantengo una preferencia personal y profesional por Linux, mi enfoque educativo busca formar estudiantes competentes en las tres plataformas principales: Linux, Windows y macOS, priorizando en ese orden específico.
+**Principio pedagógico:** aunque mantengo una preferencia personal y profesional por Linux, mi enfoque educativo busca formar estudiantes competentes en las tres plataformas principales: Linux, Windows y macOS, priorizando en ese orden específico.
 
 **Analogía de las herramientas:** La competencia técnica trasciende las preferencias de marca. Si requiero un destornillador para hacer una tarea, sería absurdo negarme a trabajar hasta conseguir una marca específica. Un profesional competente puede usar cualquier herramienta de calidad para completar su trabajo. Personalmente prefiero los desarmadores de precisión de iFixit, pero esta preferencia no debe impedir desmontar un tornillo con una herramienta de marca distinta.
 
@@ -96,8 +105,8 @@ Mi enfoque pedagógico se fundamenta en tres principios clave:
 - **Orquestación automatizada:** script Python genera archivos `compose.yaml` personalizados según la lista de estudiantes
 - **Escalabilidad:** asignación automática de puertos SSH (1022, 1122, 1222...) y JupyterLab (1088, 1188, 1288...)
 - **Persistencia de datos:** volúmenes Docker para preservar configuraciones SSH y directorios home de estudiantes
-- **Distribución de contenido:** script automatizado para copiar notebooks Jupyter a todos los contenedores
-- **Dashboard web:** interfaz Node.js para acceso simplificado y monitoreo de contenedores
+- **Distribución de contenido:** script automatizado para copiar notebooks de Jupyter a todos los contenedores
+- **Panel web:** interfaz en Node.js para acceso simplificado y monitoreo de contenedores
 
 **Impacto educativo:**
 - Eliminó barreras técnicas de instalación y configuración
@@ -167,16 +176,16 @@ Tu experiencia diversa en educación Montessori, secundarias activas y programas
 
 ### Filosofía de divulgación
 - **Democratización del conocimiento:** herramientas profesionales accesibles para estudiantes
-- **Compromiso con la libertad de software:** uso exclusivo de herramientas libres (Linux, Docker, Python, JupyterLab)
+- **Compromiso con la libertad de software:** uso exclusivo de herramientas libres (Linux, Docker, Python, JupyterLab) por principio ético y pedagógico
 - **Código abierto:** todos los proyectos educativos bajo licencia GPLv3 por principio ético
 - **Documentación exhaustiva:** README detallados, guías paso a paso
 - **Replicabilidad:** entornos completamente reproducibles en diferentes infraestructuras
 - **Educación en libertad:** enseñar con herramientas que los estudiantes pueden usar, modificar y redistribuir libremente
 
 ### Contribuciones a la comunidad
-- **Proyecto Juno:** plataforma educativa open source para enseñanza de programación
+- **Proyecto Juno:** plataforma educativa de software libre para enseñanza de programación
 - **Metodologías DevOps en educación:** aplicación de principios de ingeniería a la pedagogía
-- **Adaptación cultural:** localización de herramientas técnicas para contexto mexicano
+- **Adaptación cultural:** localización de herramientas técnicas para el contexto mexicano
 
 ### Impacto en la comunidad educativa
 - **Inspiración pedagógica:** metodología replicada por otros educadores
@@ -184,6 +193,10 @@ Tu experiencia diversa en educación Montessori, secundarias activas y programas
 - **Mentoría técnica:** formación de nuevos talentos en DevOps y programación
 
 ---
+
+---
+
+**Documento principal:** [PHILOSOPHY.md](./PHILOSOPHY.md) · **Entrada rápida:** [README.md](./README.md)
 
 ## Evolución y aprendizaje continuo
 

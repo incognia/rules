@@ -2,6 +2,21 @@
 
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
+## [2025-08-17]
+
+### docs
+- LINGUISTICS.md: corregir comillas; clarificar tiempos verbales; añadir sección de fechas/horas en CST
+- COMMITTING.md: comandos explícitos con TZ=America/Mexico_City; flujo no interactivo para CHANGELOG
+- STYLING.md: ejemplos de timestamps en CST (formato corto y largo en es_MX)
+- README.md: sección de convenciones de fechas/horas (CST) y enlace a LINGUISTICS; enlaces a ROADMAP y TODO; nota sobre chain-of-thought (Wei et al., arXiv:2201.11903)
+- PHILOSOPHY.md: referencias a ROADMAP y TODO en reglas universales
+- ROADMAP.md: creado roadmap a 90 días (CoT, evaluación, automatización)
+- TODO.md: creado plan táctico CoT (tareas inmediatas)
+- TEACHING.md: restablecer énfasis ético en el uso exclusivo de software libre en K-12 y en divulgación; mejoras de redacción y principios transversales (bilingüismo, reproducibilidad, accesibilidad, CST)
+
+### feat
+- .githooks/pre-commit: hook opcional para bloquear ‘CST’ sin TZ=America/Mexico_City en líneas añadidas
+
 ## [2025-08-01]
 
 ### fix
