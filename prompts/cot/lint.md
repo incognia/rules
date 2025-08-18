@@ -57,4 +57,3 @@ Conclusión:
 - El conjunto de correcciones mecánicas debe reducir sustancialmente los errores del linter y dejar pendientes mínimos.
 - Si persisten avisos específicos (p. ej., MD036 en pies de página), decidir si ajustar el contenido o documentar una excepción local por archivo.
 - Referencias: «~/rules/.markdownlint.yaml», «~/rules/CHANGELOG.md», «~/rules/README.md».
-

@@ -137,7 +137,6 @@ Mi enfoque pedagógico se fundamenta en principios claros y no negociables:
 
 ---
 
-
 ## Contexto de enseñanza actual
 
 ### Experiencia docente
@@ -193,9 +192,7 @@ Tu experiencia diversa en educación Montessori, secundarias activas y programas
 - **Mentoría técnica:** formación de nuevos talentos en DevOps y programación
 
 ---
-
 ---
-
 **Documento principal:** [PHILOSOPHY.md](./PHILOSOPHY.md) · **Entrada rápida:** [README.md](./README.md)
 
 ## Evolución y aprendizaje continuo

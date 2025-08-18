@@ -328,6 +328,5 @@ find backups/manual/ -name "*.bkp*" -mtime +90 -delete
 ```
 
 ---
-
 *Elaborado por Rodrigo Álvarez (@incognia)*
 
