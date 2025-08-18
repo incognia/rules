@@ -1,3 +1,30 @@
 # Ignorar directorio de respaldos locales
 backups/
 
+# Node / npm
+node_modules/
+.npm/
+npm-debug.log*
+package-lock.json
+
+# Editors / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+logs/
+
+# Build / cache (genéricos)
+dist/
+build/
+.tmp/
+.cache/
+
+# Misc
+*.bak
+*.swp
+*.swo
+
