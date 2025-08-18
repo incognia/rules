@@ -36,6 +36,14 @@
 - Añadir verificador de enlaces (.markdownlinkcheck.json) con ajustes de tiempo de espera y cabeceras para shields.io
 - Inicializar package.json con scripts: `lint:md`, `lint:md:fix`, `check:links`
 
+### ci
+- npm install: error E404 al intentar instalar paquete inexistente `markdownlint-cli2-fix@^0.3.0`; se eliminó del package.json
+- Actualizar scripts npm: `lint:md` usa markdownlint-cli2 sin globs (se invoca con npx "**/*.md" "#node_modules")
+- Ejecutar linter de Markdown: `npx markdownlint-cli2 "**/*.md" "#node_modules"` → 938 errores en 40 archivos
+  - Principales reglas: MD013 (line-length), MD022/MD032 (líneas en blanco alrededor de encabezados/listas), MD040/MD031 (bloques de código sin lenguaje y sin líneas en blanco), MD041 (H1 en primera línea en prompts), MD024 (encabezados duplicados en CHANGELOG)
+- Corrección rápida: ajustar enlace en README.md a `./docs/STYLING.md` para evitar 404
+- Pendientes propuestos: relajar MD013 a 120, desactivar MD041 en `prompts/**`, permitir MD024 en CHANGELOG, añadir lenguaje a bloques de código y líneas en blanco alrededor de encabezados/listas
+
 ## [2025-08-17]
 
 ### docs
