@@ -87,6 +87,24 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 
 - **STYLING.md**: reglas de estilo para documentos Markdown corporativos
 
+## Prompts (Chain-of-Thought) y estructura
+
+- Índice general: ver [PROMPTS.md](./PROMPTS.md)
+- Estructura: [prompts/README.md](./prompts/README.md)
+  - CoT: [prompts/cot](./prompts/cot)
+  - Templates: [prompts/templates](./prompts/templates)
+  - Guides: [prompts/guides](./prompts/guides)
+  - Actions: [prompts/actions](./prompts/actions)
+  - Snippets: [prompts/snippets](./prompts/snippets)
+
+## Herramientas y scripts
+
+- Git (post init): scripts/git-init-context.sh
+- Backups:
+  - scripts/backup_file.sh (archivos/directorios, .tar.zst, checksum >=100 MB, log CST)
+  - scripts/backup_rsync_snapshot.sh (incrementales diarios con rsync --link-dest)
+  - scripts/verify_backups.sh (verificación masiva de .sha256)
+
 ## Cómo usar CoT rápidamente
 
 - Guía: lee [PROMPTS.md](./PROMPTS.md)
