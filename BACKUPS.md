@@ -214,6 +214,13 @@ mysql "$MYSQL_DATABASE" < "db_${DATE_CST}.sql"
 ## Ejemplos de implementación
 
 ### Script de respaldo básico
+
+#### Respaldo rápido en el mismo directorio (archivos pequeños)
+```bash
+# Uso: quick_bkp.sh archivo1 [archivo2 ...]
+# Ejemplo: archivo.txt -> archivo_YYYY-MM-DD.txt.bkp
+bash ~/rules/scripts/quick_bkp.sh archivo.txt
+```
 ```bash
 #!/usr/bin/env bash
 set -euo pipefail

@@ -19,12 +19,15 @@
 - PROMPTS.md: añadir índice catalogado de prompts por subdirectorio
 - BACKUPS.md: ampliar con restauración, verificación, zstd, rsync incrementales, cifrado/offsite, systemd y seguridad/permisos; política de checksums solo para archivos >= 100 MB
 - prompts/cot/backup.md y prompts/cot/restore.md: nuevos CoT para ejecutar respaldos y restauraciones
+- BACKUPS.md: documentar respaldo rápido en el mismo directorio y su uso
+- prompts/cot/quick_backup.md: nuevo CoT para respaldo rápido same-dir
 
 ### feat
 - scripts/git-init-context.sh: asistente interactivo para configurar identidad y SSH (por repo) y remoto SSH opcional
 - scripts/backup_file.sh: respaldo de archivo/directorio con compresión zstd y checksums condicionados por tamaño
 - scripts/backup_rsync_snapshot.sh: snapshots diarios incrementales con rsync --link-dest
 - scripts/verify_backups.sh: verificación masiva de checksums
+- scripts/quick_bkp.sh: respaldo rápido en el mismo directorio con fecha CST (YYYY-MM-DD)
 
 ## [2025-08-17]
 
