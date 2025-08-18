@@ -11,6 +11,13 @@
 - CORPORATE.md: alinear con LINGUISTICS.md (título en estilo oración y guion medio, comillas angulares, préstamos tipográficos, «nube pública» en lugar de «cloud público»)
 - TEACHING.md: alinear con LINGUISTICS.md (minúscula tras dos puntos, traducciones en tabla, «preparación» por «setup»)
 - prompts/cot/linguistics.md: ampliar checklist para cubrir todas las reglas de LINGUISTICS.md en orden lógico (calcos, terminología, verbos, préstamos, tipografía, comillas, sutilezas, siglas, tiempos, fechas CST, nomenclatura, odios, expresiones)
+- COMMITTING.md: simplificar flujo a push simple (`git push`) y enlazar a configuración inicial en GIT.md
+- GIT.md: añadir asistente interactivo post `git init` (configura identidad, `core.sshCommand` y remoto SSH opcional)
+- prompts/cot/committing*.md: alinear a push simple y limpiar artefactos
+- prompts/cot/git_init.md: nuevo CoT para inicializar repos con SSH siguiendo GIT.md
+
+### feat
+- scripts/git-init-context.sh: asistente interactivo para configurar identidad y SSH (por repo) y remoto SSH opcional
 
 ## [2025-08-17]
 

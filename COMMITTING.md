@@ -111,8 +111,8 @@ git add .
 # 3. TERCERO: Commit (no interactivo)
 git commit -m "docs(changelog): update entry for $DATE_CST"
 
-# 4. CUARTO: Push
-GIT_SSH_COMMAND="ssh -i ~/.ssh/clave" git push origin main
+# 4. CUARTO: Push (una vez configurado el repo, basta con un push simple)
+git push
 ```
 
 ### 3.2. Atomicidad de los *commits*
@@ -124,23 +124,19 @@ GIT_SSH_COMMAND="ssh -i ~/.ssh/clave" git push origin main
 
 - **Referencia a *issues*:** siempre que sea posible, asociar los *commits* con su *issue*, *ticket* o tarea correspondiente en el pie del mensaje (`Refs: #123`, `Closes: #123`).
 
-### 3.4. Comandos de push por contexto
+### 3.4. Push simplificado
 
-El comando de push debe usar la clave SSH correspondiente al contexto del proyecto:
+Si el repositorio está configurado correctamente (identidad y SSH), el comando de envío es simplemente:
 
-#### Proyectos personales (`@incognia`)
 ```bash
-GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519" git push origin main
+git push
 ```
 
-#### Proyectos laborales (`@incogniadev` - Promad)
-```bash
-GIT_SSH_COMMAND="ssh -i ~/.ssh/promad_ed25519" git push origin main
-```
+Para la primera configuración (elegir entre credenciales personales o laborales) consulta [GIT.md](./GIT.md#configuración-inicial-y-ssh-por-contexto).
 
-**Nota importante:** Verificar que la configuración de Git del repositorio sea correcta (ver [GIT.md](./GIT.md) para configuración inicial):
+**Nota:** Puedes verificar rápidamente la identidad activa del repositorio:
 ```bash
-git config --list | grep user
+git config --list | grep ^user\.
 ```
 
 ---

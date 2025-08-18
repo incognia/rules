@@ -17,7 +17,7 @@ git config user.name "Rodrigo Álvarez"
 git config user.email "incognia@gmail.com"
 
 # Verificar configuración
-git config --list | grep user
+git config --list | grep ^user\.
 ```
 
 **Credenciales de plataforma:**
@@ -32,7 +32,7 @@ git config user.name "Rodrigo Álvarez"
 git config user.email "ralvarez@promad.com.mx"
 
 # Verificar configuración
-git config --list | grep user
+git config --list | grep ^user\.
 ```
 
 **Credenciales de plataforma:**
@@ -40,51 +40,83 @@ git config --list | grep user
 - **GitLab:** incogniadev
 - **SSH Key:** `~/.ssh/promad_ed25519`
 
-## 3. Configuración de claves SSH (solo si es necesario)
+## 3. Configuración inicial y SSH por contexto
 
-### Verificar claves SSH existentes
+Para que en el uso diario baste con un simple `git push` sin alias SSH y sin HTTPS, configura el repositorio justo después de `git init` usando el script interactivo incluido.
+
+### 3.1. Uso del script interactivo
+
 ```bash
-# Listar claves SSH cargadas
-ssh-add -l
+# Tras inicializar el repo
+git init
 
-# Si las claves no están cargadas, añadirlas:
-ssh-add ~/.ssh/id_ed25519          # Para proyectos personales
-ssh-add ~/.ssh/promad_ed25519      # Para proyectos laborales
+# Ejecutar el asistente
+bash scripts/git-init-context.sh
 ```
 
-### Probar conexión SSH
-```bash
-# Verificar conexión con GitHub
-ssh -T git@github.com
+El asistente te preguntará si el repositorio es Personal o Laboral y hará lo siguiente por ti en el repositorio actual:
+- Configurará `user.name` y `user.email`.
+- Configurará `core.sshCommand` para usar la clave adecuada con `ssh -i` (SSH, no HTTPS).
+- Opcionalmente configurará `origin` con una URL SSH (`git@github.com:ORG/REPO.git` o `git@gitlab.com:ORG/REPO.git`).
+- Definirá `main` como rama por defecto si aún no existe.
 
-# Verificar conexión con GitLab
-ssh -T git@gitlab.com
+Al finalizar, podrás usar `git push` directamente.
+
+### 3.2. Pasos manuales (si no usas el script)
+
+```bash
+# Elegir contexto
+# Personal
+git config user.name  "Rodrigo Álvarez"
+git config user.email "incognia@gmail.com"
+git config core.sshCommand "ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes"
+
+# Laboral (Promad)
+# git config user.name  "Rodrigo Álvarez"
+# git config user.email "ralvarez@promad.com.mx"
+# git config core.sshCommand "ssh -i ~/.ssh/promad_ed25519 -o IdentitiesOnly=yes"
+
+# Configurar remoto SSH (ejemplos)
+# GitHub personal:  git@github.com:incognia/REPO.git
+# GitHub laboral:   git@github.com:incogniadev/REPO.git
+# GitLab personal:  git@gitlab.com:incognia/REPO.git
+# GitLab laboral:   git@gitlab.com:incogniadev/REPO.git
+
+git remote add origin git@github.com:ORG/REPO.git
+
+git branch -M main
 ```
 
-## 4. Configuración de repositorio remoto
+### 3.3. Probar conexión SSH
 
-### Clonar repositorio existente
 ```bash
-# Para proyectos personales
-GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519" git clone git@github.com:incognia/repo-name.git
+ssh -T git@github.com || true
+ssh -T git@gitlab.com || true
+```
 
-# Para proyectos laborales
-GIT_SSH_COMMAND="ssh -i ~/.ssh/promad_ed25519" git clone git@github.com:incogniadev/repo-name.git
+## 4. Clonar o inicializar repositorios
+
+### Clonar repositorio existente (SSH siempre)
+```bash
+git clone git@github.com:incognia/repo-name.git              # Personal GitHub
+git clone git@github.com:incogniadev/repo-name.git           # Laboral GitHub
+
+git clone git@gitlab.com:incognia/repo-name.git              # Personal GitLab
+git clone git@gitlab.com:incogniadev/repo-name.git           # Laboral GitLab
 ```
 
 ### Inicializar nuevo repositorio
 ```bash
-# Inicializar repositorio local
+# Inicializar repositorio local y ejecutar el asistente
 git init
+bash scripts/git-init-context.sh
 
-# Añadir origen remoto (personal)
-git remote add origin git@github.com:incognia/repo-name.git
+# Verificar configuración remota (si se configuró)
+git remote -v || true
 
-# Añadir origen remoto (laboral)
-git remote add origin git@github.com:incogniadev/repo-name.git
-
-# Verificar configuración remota
-git remote -v
+# Si deseas tener el script disponible globalmente:
+# install -Dm755 scripts/git-init-context.sh ~/.local/bin/git-init-context
+# Luego: git init && git-init-context
 ```
 
 ## 5. Primer commit y push
@@ -96,7 +128,8 @@ git add .
 # Primer commit
 git commit -m "feat: initial project setup"
 
-# Push inicial (ver COMMITTING.md para comandos específicos por contexto)
+# Push inicial
+git push -u origin main
 ```
 
 ---
