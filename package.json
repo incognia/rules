@@ -5,13 +5,12 @@
   "description": "Reglas y filosofía profesional y académica (.md) con lint y verificación de enlaces",
   "license": "GPL-3.0-or-later",
   "scripts": {
-    "lint:md": "markdownlint-cli2 \"**/*.md\"",
-    "lint:md:fix": "markdownlint-cli2-fix \"**/*.md\"",
+    "lint:md": "markdownlint-cli2",
+    "lint:md:fix": "echo 'Use your editor or manual fixes; autofix not configured'",
     "check:links": "markdown-link-check -q -c .markdownlinkcheck.json \"**/*.md\""
   },
   "devDependencies": {
     "markdownlint-cli2": "^0.13.0",
-    "markdownlint-cli2-fix": "^0.3.0",
     "markdown-link-check": "^3.12.2"
   }
 }

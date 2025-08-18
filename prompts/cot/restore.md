@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD041 -->
 ---
 domain: backups
 task: restaurar respaldo y validar integridad

@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD041 -->
 ---
 domain: workflow
 task: commit/push en contexto laboral (@incogniadev) con push simple

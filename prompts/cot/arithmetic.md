@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD041 -->
 ---
 domain: aritmetica
 task: problema de palabras con sumas y multiplicaciones

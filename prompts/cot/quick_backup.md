@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD041 -->
 ---
 domain: backups
 task: respaldo rápido en el mismo directorio (quick backup)

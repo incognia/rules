@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD041 -->
 ---
 domain: backups
 task: realizar respaldo (archivo o directorio) con checksum y log en CST

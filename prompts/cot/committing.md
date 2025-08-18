@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD041 -->
 ---
 domain: workflow
 task: seguir COMMITTING.md (actualizar CHANGELOG, commit convencional y push simple)

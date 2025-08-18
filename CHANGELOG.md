@@ -2,6 +2,8 @@
 
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
+<!-- markdownlint-disable MD013 MD024 -->
+
 ## [2025-08-18]
 
 ### docs

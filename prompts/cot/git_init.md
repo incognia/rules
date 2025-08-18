@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD041 -->
 ---
 domain: workflow
 task: inicializar repo con Git y SSH (sin HTTPS) siguiendo GIT.md

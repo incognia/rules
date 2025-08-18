@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD041 -->
 ---
 domain: devops
 task: falla de despliegue por autenticación al registry

@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD041 -->
 ---
 domain: devops
 task: diagnostico de despliegue fallido

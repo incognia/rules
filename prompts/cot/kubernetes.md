@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD041 -->
 ---
 domain: kubernetes
 task: localizar microservicio problemático correlacionando logs y pods en múltiples namespaces
