@@ -27,6 +27,7 @@
 - Reorganización: mover documentos temáticos a ./docs/ manteniendo PHILOSOPHY.md en la raíz
 - Enlaces: corregir referencias cruzadas a documentos movidos en README.md, PHILOSOPHY.md, PROMPTS.md y prompts/* (cot, guides, actions)
 - CHANGELOG.md: registrar actualización diaria sin cambios funcionales
+- prompts/cot/committing_personal.md: ejecución del flujo CoT de commit/push (fecha CST, commit no interactivo y push simple)
 
 ### feat
 - scripts/git-init-context.sh: asistente interactivo para configurar identidad y SSH (por repo) y remoto SSH opcional

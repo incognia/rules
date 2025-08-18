@@ -1,12 +1,11 @@
-<!-- markdownlint-disable MD041 -->
 ---
-
 domain: writing
 task: aplicar correctamente las reglas de LINGUISTICS.md a un documento Markdown
 dificultad: media
 longitud_objetivo: media
 validacion: lista de hallazgos + correcciones propuestas alineadas a es_MX y reglas tipográficas
 ---
+<!-- markdownlint-disable MD041 -->
 
 Razonamiento:
 - Regla principal: todo en español mexicano, sin calcos del inglés ni regionalismos ajenos (ver «~/rules/docs/LINGUISTICS.md» ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)) y «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md))).

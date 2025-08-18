@@ -189,8 +189,8 @@ rclone copy backups remote:bucket/path
 
 Ejemplo de unidades (ver carpeta systemd/backups/):
 
-- backup@.service
-- backup@daily.timer
+- `backup@.service`
+- `backup@daily.timer`
 
 Variables recomendadas en el servicio:
 

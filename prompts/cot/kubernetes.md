@@ -1,4 +1,3 @@
-<!-- markdownlint-disable MD041 -->
 ---
 domain: kubernetes
 task: localizar microservicio problemático correlacionando logs y pods en múltiples namespaces
@@ -6,6 +5,7 @@ dificultad: alta
 longitud_objetivo: media
 validacion: identificar servicio/despliegue y lista de pods afectados con ventana temporal y patrón de error
 ---
+<!-- markdownlint-disable MD041 -->
 
 Razonamiento:
 - Usar un recorrido de afuera hacia adentro: eventos recientes → pods inestables → patrones de error → dueño (Deployment/StatefulSet) → Service/Ingress/VirtualService.

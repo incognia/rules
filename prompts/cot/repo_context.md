@@ -5,6 +5,7 @@ dificultad: media
 longitud_objetivo: media
 validacion: inventario de archivos clave, flujos, dependencias y políticas; fuentes citadas (archivos/enlaces)
 ---
+<!-- markdownlint-disable MD041 -->
 
 Razonamiento:
 - Empezar por documentos de entrada, luego pasar a estructura, dependencias, CI/CD, despliegue, estilo, pruebas, licencias y contribución.

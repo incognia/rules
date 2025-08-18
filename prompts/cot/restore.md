@@ -1,4 +1,3 @@
-<!-- markdownlint-disable MD041 -->
 ---
 domain: backups
 task: restaurar respaldo y validar integridad
@@ -6,6 +5,7 @@ Dificultad: baja
 longitud_objetivo: corta
 validacion: archivo/directorio restaurado y checksum verificado, log actualizado
 ---
+<!-- markdownlint-disable MD041 -->
 
 Razonamiento:
 - Verificar integridad antes de restaurar (sha256sum -c) cuando exista .sha256.

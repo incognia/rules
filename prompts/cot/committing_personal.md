@@ -1,4 +1,3 @@
-<!-- markdownlint-disable MD041 -->
 ---
 domain: workflow
 task: commit/push en contexto personal (@incognia) con push simple
@@ -6,6 +5,7 @@ dificultad: baja
 longitud_objetivo: corta
 validacion: commit/push exitosos y CHANGELOG actualizado
 ---
+<!-- markdownlint-disable MD041 -->
 
 Razonamiento:
 - Este flujo es para proyectos personales. Seguir «~/rules/docs/COMMITTING.md» ([../../docs/COMMITTING.md](../../docs/COMMITTING.md)) al pie de la letra.

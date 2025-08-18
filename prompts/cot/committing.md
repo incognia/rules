@@ -1,4 +1,3 @@
-<!-- markdownlint-disable MD041 -->
 ---
 domain: workflow
 task: seguir COMMITTING.md (actualizar CHANGELOG, commit convencional y push simple)
@@ -6,6 +5,7 @@ dificultad: baja
 longitud_objetivo: corta
 validacion: entrada en CHANGELOG con fecha CST y commit/push exitosos
 ---
+<!-- markdownlint-disable MD041 -->
 
 Razonamiento:
 - Cumplir el flujo obligatorio: primero CHANGELOG, luego add/commit/push (ver «~/rules/docs/COMMITTING.md» ([../../docs/COMMITTING.md](../../docs/COMMITTING.md))).

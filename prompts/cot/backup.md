@@ -1,4 +1,3 @@
-<!-- markdownlint-disable MD041 -->
 ---
 domain: backups
 task: realizar respaldo (archivo o directorio) con checksum y log en CST
@@ -6,6 +5,7 @@ Dificultad: baja
 longitud_objetivo: corta
 validacion: respaldo creado, checksum generado y verificado, entrada en log
 ---
+<!-- markdownlint-disable MD041 -->
 
 Razonamiento:
 - Usar siempre CST CDMX para timestamps (TZ=America/Mexico_City) y registrar acciones.

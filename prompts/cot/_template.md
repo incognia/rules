@@ -1,4 +1,3 @@
-<!-- markdownlint-disable MD041 -->
 ---
 domain: devops
 task: diagnostico de despliegue fallido
@@ -6,6 +5,7 @@ dificultad: media
 longitud_objetivo: corta
 validacion: salida de comando coincide con estado esperado
 ---
+<!-- markdownlint-disable MD041 -->
 
 Razonamiento:
 - Identificar el punto de falla en el pipeline de despliegue.

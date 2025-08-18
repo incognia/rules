@@ -1,4 +1,3 @@
-<!-- markdownlint-disable MD041 -->
 ---
 domain: workflow
 task: inicializar repo con Git y SSH (sin HTTPS) siguiendo GIT.md
@@ -6,6 +5,7 @@ Dificultad: baja
 longitud_objetivo: corta
 validacion: repo inicializado, identidad correcta, SSH forzado, remoto en SSH y primer push exitoso
 ---
+<!-- markdownlint-disable MD041 -->
 
 Razonamiento:
 - Evitar HTTPS y alias SSH; usar SSH con clave adecuada por repo (core.sshCommand).

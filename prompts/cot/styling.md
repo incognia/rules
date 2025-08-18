@@ -5,6 +5,7 @@ dificultad: media
 longitud_objetivo: media
 validacion: encabezado/pie correctos, timestamp CST válido, estructura y estilos conformes a STYLING.md
 ---
+<!-- markdownlint-disable MD041 -->
 
 Razonamiento:
 - Usar español mexicano y formato CoT del repo (ver «~/rules/docs/LINGUISTICS.md» ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)), «~/rules/docs/STYLING.md» ([../../docs/STYLING.md](../../docs/STYLING.md)) y «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md))).

@@ -1,4 +1,3 @@
-<!-- markdownlint-disable MD041 -->
 ---
 domain: aritmetica
 task: problema de palabras con sumas y multiplicaciones
@@ -6,6 +5,7 @@ dificultad: media
 longitud_objetivo: corta
 validacion: resultado coincide con cálculo verificado a mano
 ---
+<!-- markdownlint-disable MD041 -->
 
 Razonamiento:
 - Seguir formato CoT del repo y mantener español mexicano (ver «~/rules/docs/LINGUISTICS.md» ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)) y «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md))).

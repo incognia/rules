@@ -1,4 +1,3 @@
-<!-- markdownlint-disable MD041 -->
 ---
 domain: backups
 task: respaldo rápido en el mismo directorio (quick backup)
@@ -6,6 +5,7 @@ Dificultad: muy baja
 longitud_objetivo: muy corta
 validacion: archivo_YYYY-MM-DD.ext.bkp generado junto al original
 ---
+<!-- markdownlint-disable MD041 -->
 
 Razonamiento:
 - Para archivos pequeños de texto, basta un respaldo local inmediato sin compresión ni checksum.

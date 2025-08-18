@@ -1,4 +1,3 @@
-<!-- markdownlint-disable MD041 -->
 ---
 domain: devops
 task: falla de despliegue por autenticación al registry
@@ -6,6 +5,7 @@ dificultad: media
 longitud_objetivo: corta
 validacion: pipeline exitoso tras inyectar secreto
 ---
+<!-- markdownlint-disable MD041 -->
 
 Razonamiento:
 - Aplicar formato CoT y español mexicano (ver «~/rules/docs/LINGUISTICS.md» ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)), «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md)) y flujo en «~/rules/docs/COMMITTING.md» ([../../docs/COMMITTING.md](../../docs/COMMITTING.md))).

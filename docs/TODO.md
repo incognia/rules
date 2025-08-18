@@ -4,7 +4,7 @@ Creado: 17 de agosto de 2025, 01:52 CST (Ciudad de México)
 
 Contexto
 - Este repositorio se usa como “contexto instruccional” para LLM.
-- Alineado con «chain-of-thought prompting»: Jason Wei et al., “Chain-of-Thought Prompting Elicits Reasoning in Large Language Models”, arXiv:2201.11903. DOI: https://doi.org/10.48550/arXiv.2201.11903
+- Alineado con «chain-of-thought prompting»: Jason Wei et al., “Chain-of-Thought Prompting Elicits Reasoning in Large Language Models”, arXiv:2201.11903. DOI: [10.48550/arXiv.2201.11903](https://doi.org/10.48550/arXiv.2201.11903)
 - Objetivo: mejorar la calidad y consistencia del razonamiento paso a paso en español mexicano, compatible con LINGUISTICS.md y PHILOSOPHY.md.
 
 Tareas

@@ -1,6 +1,7 @@
 # Reglas lingüísticas de español mexicano como referente
 
 ## 📋 Regla principal
+
 **Todo el contenido debe escribirse en español mexicano, sin calcos del inglés ni regionalismos de otras variantes del español.**
 
 ---
@@ -8,11 +9,12 @@
 ## ✅ Usar español mexicano
 
 ### Términos técnicos
+
 - **«IA»** (no «AI»)
 - **«Biblioteca»** (no «libreria») [🔥 CRÍTICO]
 - **«TI»** (no «IT»)
 - **«Computadora»** (no «ordenador» ni «computador»)
-- **«Archivo»** (no «fichero») 
+- **«Archivo»** (no «fichero»)
 - **«Carpeta»** (no «directorio»)
 - **«Aplicación»** (no «app» ni «aplicativo»)
 - **«Almacenamiento»** (no «storage»)
@@ -22,6 +24,7 @@
 - **«Métricas»** (con tilde) para datos de observabilidad
 
 ### Verbos técnicos
+
 - **«Desplegar»** (no «deployar»)
 - **«Respaldar»** (no «backupear»)
 - **«Compilar»** (no «buildear»)
@@ -33,6 +36,7 @@
 - **«Descargar»** (no «bajar»)
 
 ### Préstamos técnicos: usar cursivas
+
 - **«Hacer *commit*»** (término técnico específico)
 - **«*Pull request*»** (concepto sin traducción directa)
 - **«*Pipeline* de CI/CD»** («tubería» no capta el concepto)
@@ -46,6 +50,7 @@
 ## ❌ Evitar
 
 ### Calcos del inglés
+
 - ❌ «AI» → ✅ «IA» (inteligencia artificial)
 - ❌ «Realizar» (perform) → ✅ «Hacer/Ejecutar/Llevar a cabo»
 - ❌ «Actualmente» (currently) → ✅ «En este momento/Ahora»
@@ -55,6 +60,7 @@
 - ❌ «Cambios rompedores» (breaking changes) → ✅ «Cambios incompatibles»
 
 ### Peninsularismos (España)
+
 - ❌ «Ordenador» → ✅ «Computadora»
 - ❌ «Fichero» → ✅ «Archivo»
 - ❌ «Aplicativo» → ✅ «Aplicación»
@@ -62,14 +68,17 @@
 - ❌ «Tío/Chaval» → ✅ «Compa/Amigo»
 
 ### Argentinismos
+
 - ❌ «Bárbaro/Genial» → ✅ «Excelente/Perfecto»
 - ❌ «Piola» → ✅ «Bueno/Funciona bien»
 
 ### Colombianismos
+
 - ❌ «Bacano» → ✅ «Bueno»
 - ❌ «Computador» → ✅ «Computadora»
 
 ### Otros regionalismos
+
 - ❌ «Chévere» (Venezuela) → ✅ «Excelente»
 - ❌ «Pana» (Venezuela) → ✅ «Amigo»
 
@@ -78,6 +87,7 @@
 ## 🗣️ Expresiones idiomáticas mexicanas
 
 ### Expresiones técnicas y profesionales
+
 - ✅ **«Inventar el hilo negro»/«Inventar el caldo de pollo»** (no «reinventar la rueda») - Presentar como nuevo algo que ya existe
 - ✅ **«Está padre»** - Funciona excelente, está muy bien hecho (ej. "El clúster de Kubernetes está padre")
 - ✅ **«Le está echando ganas»/«Le está chingando»** - Trabaja con mucho esfuerzo y dedicación
@@ -87,6 +97,7 @@
 - ✅ **«Le sabe un chingo»** - Tiene mucho conocimiento y experiencia (ej. "Le sabe un chingo a Proxmox")
 
 ### Expresiones de evaluación
+
 - ✅ **«Está chido»** - Está bien, funciona correctamente
 - ✅ **«Está padre»** - Funciona muy bien
 - ✅ **«Está con madre»** - Funciona muy bien, excelente calidad
@@ -99,6 +110,7 @@
 - ✅ **«Ya valió madres»** - Se rompió, falló completamente
 
 ### Expresiones de proceso y tiempo
+
 - ✅ **«Al chile»** - Hablando en serio, siendo honesto
 - ✅ **«A toda madre»** - Muy rápido, funcionando perfectamente
 - ✅ **«En chinga»** - Muy rápido, con urgencia
@@ -108,18 +120,22 @@
 - ✅ **«Está cabrón»** - Es muy difícil o complejo (técnicamente)
 
 ### Expresiones de comprensión
+
 - ✅ **«Ya me cayó el veinte»** - Ya entendí, ya me di cuenta
 - ✅ **«Está clarísimo»** - Se entiende perfectamente
 - ✅ **«No le entiendo ni madres»** - No comprendo nada del tema
 - ✅ **«Está bien fácil»** - Es muy sencillo de entender o hacer
 
 ### Uso profesional de expresiones
+
 **Apropiadas en:**
+
 - ✅ Conversaciones informales entre colegas mexicanos (quienes las conocen) y de otras nacionalidades (para que se familiaricen con ellas)
 - ✅ Comentarios en código para proyectos personales
 - ✅ Documentación interna de equipos mexicanos
 
 **Moderar en:**
+
 - ⚠️ Documentación oficial o formal
 - ⚠️ Comunicación con clientes internacionales
 - ⚠️ Presentaciones corporativas formales
@@ -129,6 +145,7 @@
 ## 📐 Reglas tipográficas
 
 ### Títulos y encabezados
+
 - ✅ «Instalación de Prometheus»
 - ❌ «Instalación De Prometheus»
 - ✅ «Script para crear VMs en Proxmox VE»
@@ -150,6 +167,7 @@
 - ❌ **Regla:** Los nombres de archivos deben estar en inglés
   
 ### Tiempos verbales en documentos
+
 - ✅ Reportes y postmortems: usar tiempo pasado y primera persona («yo» o «nosotros» si es trabajo colectivo).
 - ✅ Guías y manuales: usar segunda persona (tú) en presente/imperativo o futuro para pasos por realizar.
 - ✅ En listas de pasos, se puede omitir el sujeto: «Instala», «Ejecuta», «Verifica».
@@ -172,6 +190,7 @@
 - ¿Lo hará la persona lectora? → instruye en segunda persona (presente/imperativo o futuro).
 
 ### Fechas y horas (CST Ciudad de México)
+
 - Usar formato de 24 horas y zona horaria de la Ciudad de México.
 - Calcular la hora LOCAL correctamente antes de añadir el sufijo «CST». No rotular «CST» una hora calculada en UTC.
 - Zona a usar: «America/Mexico_City» (UTC−06:00; sin horario de verano).
@@ -184,9 +203,11 @@
 - En scripts y generadores, NO confiar en la zona por defecto del sistema: establecer «TZ=America/Mexico_City» explícitamente.
 
 ### Comillas
+
 - **Usar comillas angulares «»** en texto markdown
 - **Conservar comillas dobles ""** en comentarios de scripts y código
 - **Ejemplo**: «Biblioteca» (no «librería») en texto markdown
+
 ```bash
 # "Variable para almacenar el respaldo de la VM"
 BACKUP_DIR="/var/backups"
@@ -198,6 +219,7 @@ respaldar_vm() {
 ```
 
 ### Sutilezas de redacción
+
 - **No iniciar oraciones con cifras.** Preferir redactar con palabras o reordenar la frase.
   - ❌ «20 años después, sigo aquí esperando»
   - ✅ «Después de 20 años sigo esperando»
@@ -207,11 +229,13 @@ respaldar_vm() {
 - Nota: esta práctica proviene de criterios editoriales periodísticos y se observa también en subtitulación profesional (las frases que inician con número se escriben con letra).
 
 ### Préstamos lingüísticos
+
 - **Usar cursivas** para términos técnicos sin traducción directa
 - **Ejemplo**: «Hacer *commit* de los cambios» (no «commitear»)
 - **Criterio**: si el término técnico es universalmente usado en inglés
 
 ### Nomenclatura de archivos
+
 - **Regla general:** los nombres de archivos, carpetas y scripts deberán estar en inglés internacional, incluso si el contenido del documento o script está redactado en español mexicano.
 - **Regla específica para Markdown:** los archivos Markdown deben usar `NOMBRES_EN_MAYUSCULAS.md` (nombre en mayúsculas, extensión en minúsculas).
 - **Ejemplos válidos:** `README.md`, `PHILOSOPHY.md`, `LINGUISTICS.md`, `COMMITTING.md`
@@ -223,12 +247,14 @@ respaldar_vm() {
 ## 🎯 Justificación
 
 ### Demográfica y cultural
+
 - **México:** la mayor población hispanohablante nativa del mundo (130+ millones de habitantes)
 - **España:** país pequeño con menor relevancia cultural mundial (47 millones)
 - **Productos culturales**: doblaje de películas, series y videojuegos, entre otros, usan español mexicano
 - **Distribución internacional**: Netflix, Disney y otros estudios usan español mexicano como estándar
 
 ### Analogía con el inglés
+
 - El **inglés estadounidense:** es el referente mundial (no el británico)
 - **Razón:** Estados Unidos domina culturalmente (Hollywood, tecnología, medios)
 - El **español mexicano:** debe ser el referente por las mismas razones
@@ -252,14 +278,18 @@ Los siguientes términos generan **rechazo particular** y deben evitarse a toda 
 ---
 
 ## 🔍 Criterio de evaluación
+
 **¿La palabra o expresión sonaría natural para un mexicano sin conocimiento de inglés?**
+
 - Si SÍ → ✅ Usar
 - Si NO → ❌ Buscar alternativa mexicana
 
 ---
 
 ## 📝 Aplicación
+
 Esta regla se aplica en:
+
 - ✅ Documentación técnica
 - ✅ Comentarios en código
 - ✅ Scripts y herramientas

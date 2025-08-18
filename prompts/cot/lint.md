@@ -1,4 +1,3 @@
-<!-- markdownlint-disable MD041 -->
 ---
 domain: workflow
 task: corregir errores de lint Markdown (markdownlint-cli2) en este repositorio
@@ -6,6 +5,7 @@ dificultad: media
 longitud_objetivo: media
 validacion: errores reducidos significativamente tras aplicar correcciones y re-ejecutar linter
 ---
+<!-- markdownlint-disable MD041 -->
 
 Razonamiento:
 - Priorizar correcciones mecánicas de alto impacto (espacios alrededor de encabezados/listas: MD022/MD032; cercas y lenguajes: MD031/MD040; prefijos de listas ordenadas: MD029).
