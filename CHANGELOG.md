@@ -30,6 +30,7 @@
 - prompts/cot/committing_personal.md: ejecución del flujo CoT de commit/push (fecha CST, commit no interactivo y push simple)
 - README.md: añadir nota para desactivar MD041 tras el bloque `---` de front matter en CoT, asegurando renderizado correcto
 - prompts/cot/*: auditoría de MD041 en CoT; confirmada colocación correcta de la etiqueta inmediatamente después del cierre del front matter
+- style(md): corrección de espacios finales (MD009) en múltiples archivos (docs/*, prompts/cot/*, VAULT.md, LINGUISTICS.md, LICENSING.md)
 
 ### feat
 - scripts/git-init-context.sh: asistente interactivo para configurar identidad y SSH (por repo) y remoto SSH opcional
