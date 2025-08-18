@@ -119,7 +119,9 @@ unzstd -c archivo_2025-08-18T12-00-00.tar.zst | tar -xvf - -C /ruta/destino
 
 ## Verificación e integridad (checksums)
 
-- Generar un archivo .sha256 por respaldo y almacenarlo junto al respaldo.
+- Política: generar .sha256 solo para respaldos grandes (tamaño >= 100 MB) para optimizar costo/tiempo.
+  - Umbral configurable: `BACKUP_SHA_THRESHOLD_BYTES` (por defecto 104857600 = 100 MB).
+- Los archivos con .sha256 deben verificarse siempre; los menores al umbral pueden verificarse bajo demanda.
 - Verificación masiva:
 ```bash
 find backups -type f -name "*.sha256" -exec sha256sum -c {} \;

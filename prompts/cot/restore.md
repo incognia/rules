@@ -17,8 +17,8 @@ Pasos:
    Resultado: rutas definidas, p. ej. BKP=backups/daily/2025-08-18/mi_carpeta_2025-08-18T12-00-00.tar.zst.
 2) Acción: verificación previa.
    Resultado:
-   - Si hay .sha256: `sha256sum -c "$BKP.sha256"`
-   - Si no hay: calcular manualmente y documentar: `sha256sum "$BKP"`
+   - Si hay .sha256 (se genera para respaldos >= 100 MB): `sha256sum -c "$BKP.sha256"`
+   - Si no hay: opcional calcular manualmente y documentar: `sha256sum "$BKP"` (recomendado si se sospecha corrupción)
 3) Acción: restaurar.
    Resultado:
    - Archivo .bkp: `cp "$BKP" ./archivo_restaurado.ext` (renombrar según corresponda)

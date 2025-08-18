@@ -23,7 +23,7 @@ Pasos:
    Resultado:
    - Directorio: `bash ~/rules/scripts/backup_file.sh "$SRC" "$DEST/$DATE_CST"`
    - Archivo: `bash ~/rules/scripts/backup_file.sh ./archivo.txt "$DEST/$DATE_CST"`
-4) Acción: verificar checksum.
+4) Acción: verificar checksum (solo si existe .sha256; se genera para respaldos >= 100 MB).
    Resultado: `find "$DEST/$DATE_CST" -maxdepth 1 -name "*.sha256" -exec sha256sum -c {} \;`
 5) (Opcional) Acción: snapshot incremental de un árbol con rsync.
    Resultado: `bash ~/rules/scripts/backup_rsync_snapshot.sh "/ruta/datos" "backups/daily"`
