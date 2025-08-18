@@ -44,6 +44,7 @@ tags: tag-1, tag-2, tag-3, tag-opcional
 ⚠️ **ADVERTENCIA CRÍTICA:** Para generar timestamps CST correctos, NO es suficiente añadir "CST" a una fecha UTC. Debes restar 6 horas a UTC para obtener la fecha CST correcta. Por ejemplo, si UTC es 22:21, CST debe ser 16:21 (22:21 - 6 horas = 16:21). Usar `TZ="America/Mexico_City" date` garantiza la conversión automática.
 
 **Ejemplos de generación de timestamp (CST, 24 horas):**
+
 ```bash
 # Formato corto (ISO-like): 2025-07-31 11:59 CST
 TZ=America/Mexico_City date '+%F %H:%M %Z'

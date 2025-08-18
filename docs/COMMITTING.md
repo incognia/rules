@@ -10,7 +10,7 @@ Utilizar la especificación de [Commits Convencionales](https://www.conventional
 
 ### 2.1. Estructura general
 
-```
+```text
 <tipo>[ámbito opcional]: <descripción>
 
 [cuerpo opcional]
@@ -43,7 +43,7 @@ Utilizar la especificación de [Commits Convencionales](https://www.conventional
 
 #### Bueno
 
-```
+```text
 feat(auth): add password reset functionality
 
 Implement the password reset feature using a token-based system.
@@ -54,11 +54,11 @@ Fixes: #42
 
 #### Malo
 
-```
+```text
 fix
 ```
 
-```
+```text
 Updated files
 ```
 
@@ -70,9 +70,9 @@ Updated files
 
 **PROCESO OBLIGATORIO:**
 1. **PRIMERO:** Actualizar `CHANGELOG.md` con los cambios realizados
-2. **SEGUNDO:** Hacer `git add` de todos los archivos (incluyendo CHANGELOG.md)
-3. **TERCERO:** Hacer `git commit`
-4. **CUARTO:** Hacer `git push`
+1. **SEGUNDO:** Hacer `git add` de todos los archivos (incluyendo CHANGELOG.md)
+1. **TERCERO:** Hacer `git commit`
+1. **CUARTO:** Hacer `git push`
 
 **⚠️ ADVERTENCIA:** Nunca hacer commit sin haber actualizado primero el CHANGELOG.md. Esta es una regla fundamental del flujo de trabajo.
 
@@ -84,6 +84,7 @@ Updated files
 ⚠️ **ADVERTENCIA CRÍTICA:** Para obtener la fecha CST correcta, NO es suficiente añadir "CST" a una fecha UTC. Debes convertir la fecha restando 6 horas a UTC o usar `TZ="America/Mexico_City" date +"%Y-%m-%d"` para la conversión automática.
 
 **Comandos recomendados (siempre correctos):**
+
 ```bash
 # Fecha en CST (Ciudad de México), independiente de la TZ del sistema
 DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")
@@ -96,6 +97,7 @@ echo "$DATE_CST"
   - Breve descripción del cambio
 
 **Ejemplo del flujo correcto:**
+
 ```bash
 # 1. PRIMERO: Actualizar CHANGELOG.md con fecha CST
 DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")
@@ -135,6 +137,7 @@ git push
 Para la primera configuración (elegir entre credenciales personales o laborales) consulta [GIT.md](./GIT.md#configuración-inicial-y-ssh-por-contexto).
 
 **Nota:** Puedes verificar rápidamente la identidad activa del repositorio:
+
 ```bash
 git config --list | grep ^user\.
 ```

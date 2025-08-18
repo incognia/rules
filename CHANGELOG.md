@@ -2,7 +2,7 @@
 
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
-<!-- markdownlint-disable MD013 MD024 -->
+<!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
 ## [2025-08-18]
 
@@ -26,6 +26,7 @@
 - prompts/cot/quick_backup.md: nuevo CoT para respaldo rápido same-dir
 - Reorganización: mover documentos temáticos a ./docs/ manteniendo PHILOSOPHY.md en la raíz
 - Enlaces: corregir referencias cruzadas a documentos movidos en README.md, PHILOSOPHY.md, PROMPTS.md y prompts/* (cot, guides, actions)
+- CHANGELOG.md: registrar actualización diaria sin cambios funcionales
 
 ### feat
 - scripts/git-init-context.sh: asistente interactivo para configurar identidad y SSH (por repo) y remoto SSH opcional

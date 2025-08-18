@@ -5,6 +5,7 @@
 [![Spanish](https://img.shields.io/badge/Language-Spanish%20(MX)-green.svg)](https://es.wikipedia.org/wiki/Espa%C3%B1ol_mexicano)
 
 Definiciones rápidas
+
 - Prompt: instrucción o contexto que le das al modelo para indicarle qué hacer, con qué tono y bajo qué restricciones.
 - CoT (Chain-of-Thought): cadena de razonamiento paso a paso que hace explícito cómo se llega a una respuesta, útil para tareas complejas.
 
@@ -13,13 +14,15 @@ Este repositorio contiene las reglas, estándares y filosofía que guían el tra
 ## Filosofía principal
 
 Un manifiesto contra tres males endémicos en tecnología latinoamericana:
+
 - **Mercenazgo:** trabajos mediocres sin compromiso real
 - **Egoísmo técnico:** acaparar conocimiento para crear dependencia
 - **Falta de identidad:** complejos culturales que degradan la calidad
 
 ### Contexto académico relacionado
+
 - La idea de usar este repositorio como contexto instruccional para LLM se alinea con la línea de investigación «chain-of-thought prompting», que muestra que proporcionar cadenas de razonamiento mejora el desempeño en tareas complejas.
-- Referencia: Jason Wei et al., «Chain-of-Thought Prompting Elicits Reasoning in Large Language Models», arXiv:2201.11903. DOI: https://doi.org/10.48550/arXiv.2201.11903 (resumen: https://arxiv.org/abs/2201.11903).
+- Referencia: Jason Wei et al., «Chain-of-Thought Prompting Elicits Reasoning in Large Language Models», arXiv:2201.11903. DOI: [10.48550/arXiv.2201.11903](https://doi.org/10.48550/arXiv.2201.11903) (resumen: [arXiv:2201.11903](https://arxiv.org/abs/2201.11903)).
 
 ## Documentos incluidos
 
@@ -62,7 +65,7 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 |---------|------------------------|---------------------------|
 | **Licenciamiento** | GPLv3 (copyleft) | MIT (permisiva) |
 | **Autoría** | Rodrigo Álvarez (@incognia) | Rodrigo Álvarez (@incogniadev) |
-| **Email** | incognia@gmail.com | ralvarez@promad.com.mx |
+| **Email** | [incognia@gmail.com](mailto:incognia@gmail.com) | [ralvarez@promad.com.mx](mailto:ralvarez@promad.com.mx) |
 | **SSH Key** | ~/.ssh/id_ed25519 | ~/.ssh/promad_ed25519 |
 | **Estilo de documentos** | No definido aún | [STYLING.md](./docs/STYLING.md) aplicable |
 | **Idioma documentación** | Español mexicano | Español mexicano |
@@ -126,6 +129,7 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 Más detalles: ver [LINGUISTICS.md – Fechas y horas (CST Ciudad de México)](./docs/LINGUISTICS.md#fechas-y-horas-cst-ciudad-de-méxico).
 
 Ejemplos de comandos
+
 ```bash
 # Fecha (CST) para CHANGELOG.md
 TZ=America/Mexico_City date +"%Y-%m-%d"
@@ -136,6 +140,7 @@ LC_TIME=es_MX.UTF-8 TZ=America/Mexico_City date '+%d de %B de %Y, %H:%M (%Z)'
 ```
 
 Activar hook pre-commit (opcional)
+
 ```bash
 git config core.hooksPath .githooks
 ```

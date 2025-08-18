@@ -5,12 +5,14 @@ Este documento describe la configuración inicial necesaria al clonar o iniciali
 ## 1. Identificación del contexto del proyecto
 
 Antes de configurar, determina si el proyecto es:
+
 - 💼 **Laboral:** Promad Business Solutions
 - 📺 **Personal:** Proyectos independientes o experimentales
 
 ## 2. Configuración local del repositorio
 
 ### Proyectos personales
+
 ```bash
 # Configurar usuario para este repositorio
 git config user.name "Rodrigo Álvarez"
@@ -26,6 +28,7 @@ git config --list | grep ^user\.
 - **SSH Key:** `~/.ssh/id_ed25519`
 
 ### Proyectos laborales (Promad)
+
 ```bash
 # Configurar usuario para este repositorio
 git config user.name "Rodrigo Álvarez"
@@ -36,6 +39,7 @@ git config --list | grep ^user\.
 ```
 
 **Credenciales de plataforma:**
+
 - **GitHub:** incogniadev
 - **GitLab:** incogniadev
 - **SSH Key:** `~/.ssh/promad_ed25519`
@@ -55,6 +59,7 @@ bash scripts/git-init-context.sh
 ```
 
 El asistente te preguntará si el repositorio es Personal o Laboral y hará lo siguiente por ti en el repositorio actual:
+
 - Configurará `user.name` y `user.email`.
 - Configurará `core.sshCommand` para usar la clave adecuada con `ssh -i` (SSH, no HTTPS).
 - Opcionalmente configurará `origin` con una URL SSH (`git@github.com:ORG/REPO.git` o `git@gitlab.com:ORG/REPO.git`).
@@ -97,6 +102,7 @@ ssh -T git@gitlab.com || true
 ## 4. Clonar o inicializar repositorios
 
 ### Clonar repositorio existente (SSH siempre)
+
 ```bash
 git clone git@github.com:incognia/repo-name.git              # Personal GitHub
 git clone git@github.com:incogniadev/repo-name.git           # Laboral GitHub
@@ -106,6 +112,7 @@ git clone git@gitlab.com:incogniadev/repo-name.git           # Laboral GitLab
 ```
 
 ### Inicializar nuevo repositorio
+
 ```bash
 # Inicializar repositorio local y ejecutar el asistente
 git init
