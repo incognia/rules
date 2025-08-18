@@ -15,6 +15,7 @@
 - GIT.md: añadir asistente interactivo post `git init` (configura identidad, `core.sshCommand` y remoto SSH opcional)
 - prompts/cot/committing*.md: alinear a push simple y limpiar artefactos
 - prompts/cot/git_init.md: nuevo CoT para inicializar repos con SSH siguiendo GIT.md
+- prompts/: crear estructura de subdirectorios (templates/, guides/, actions/, snippets/) con ejemplos y README por carpeta
 
 ### feat
 - scripts/git-init-context.sh: asistente interactivo para configurar identidad y SSH (por repo) y remoto SSH opcional
