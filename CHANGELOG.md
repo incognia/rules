@@ -2,6 +2,11 @@
 
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
+## [2025-08-18]
+
+### docs
+- LINGUISTICS.md: corregir mayúsculas en «Estados Unidos» y añadir nota de nombres propios geopolíticos («Estado de México», «Estados Unidos»)
+
 ## [2025-08-17]
 
 ### docs
