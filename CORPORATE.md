@@ -1,10 +1,10 @@
-# Perfil profesional de Rodrigo Álvarez - Ingeniero DevOps
+# Perfil profesional de Rodrigo Álvarez – ingeniero DevOps
 
 ## Resumen profesional
 
 Ingeniero DevOps especializado en plataformas Kubernetes nativas, GitOps y observabilidad avanzada. Con experiencia en la construcción y operación de *stacks* completos sobre infraestructura *bare-metal*, enfocado en automatización, confiabilidad y mallas de servicios.
 
-Trabajo desde la base: desde levantar clústeres en *bare-metal* hasta instrumentar servicios con trazabilidad y métricas distribuidas. Mi enfoque va más allá del "despliegue en la nube", manteniendo control total sobre la infraestructura y aplicando principios de ingeniería de confiabilidad.
+Trabajo desde la base: desde levantar clústeres en *bare-metal* hasta instrumentar servicios con trazabilidad y métricas distribuidas. Mi enfoque va más allá del «despliegue en la nube», manteniendo control total sobre la infraestructura y aplicando principios de ingeniería de confiabilidad.
 
 ## Filosofía profesional
 
@@ -48,7 +48,7 @@ Mi enfoque de trabajo se rige por tres principios clave:
 ## Especializaciones avanzadas
 
 - Instrumentación con OpenTelemetry y trazas distribuidas
-- Desarrollo y mantenimiento de charts Helm y manifiestos YAML versionados
+- Desarrollo y mantenimiento de *charts* de Helm y manifiestos YAML versionados
 - Implementación de seguridad en mallas de servicios (mTLS, RBAC, políticas de red)
 - Filosofía de mejora continua y documentación clara
 - Automatización de procesos de infraestructura y despliegue
@@ -58,7 +58,7 @@ Mi enfoque de trabajo se rige por tres principios clave:
 ## Contexto laboral actual
 
 - Proyectos técnicos de alto impacto en producción
-- Operación de *stacks* modernos con infraestructura propia (no cloud público)
+- Operación de *stacks* modernos con infraestructura propia (no nube pública)
 - Autonomía técnica para proponer e implementar mejoras
 - Ambiente de colaboración, documentación y aprendizaje constante
 - Modalidad presencial en **Promad Business Solutions**
