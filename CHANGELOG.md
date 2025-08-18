@@ -7,6 +7,7 @@
 ## [2025-08-18]
 
 ### docs
+- README.md: actualizar título a «Reglas técnicas: prompts y CoT para acelerar el contexto de los LLM» y añadir definiciones breves de «prompt» y «CoT» al inicio
 - LINGUISTICS.md: corregir mayúsculas en «Estados Unidos» y añadir nota de nombres propios geopolíticos («Estado de México», «Estados Unidos»)
 - LINGUISTICS.md: añadir «Sutilezas de redacción» (no iniciar oración con cifras; evitar terminar párrafos con símbolos/abreviaturas como % o «etc.»; usar «por ciento» y «etcétera»)
 - PHILOSOPHY.md: reemplazar comillas rectas por comillas angulares («Agüelo», «Hagrid») según LINGUISTICS.md
@@ -19,7 +20,7 @@
 - prompts/cot/git_init.md: nuevo CoT para inicializar repos con SSH siguiendo GIT.md
 - prompts/: crear estructura de subdirectorios (templates/, guides/, actions/, snippets/) con ejemplos y README por carpeta
 - PROMPTS.md: añadir índice catalogado de prompts por subdirectorio
-- BACKUPS.md: ampliar con restauración, verificación, zstd, rsync incrementales, cifrado/offsite, systemd y seguridad/permisos; política de checksums solo para archivos >= 100 MB
+- BACKUPS.md: ampliar con restauración, verificación, zstd, rsync incrementales, cifrado/offsite, systemd y seguridad/permisos; política de checksums solo para archivos > 100 MB
 - prompts/cot/backup.md y prompts/cot/restore.md: nuevos CoT para ejecutar respaldos y restauraciones
 - BACKUPS.md: documentar respaldo rápido en el mismo directorio y su uso
 - prompts/cot/quick_backup.md: nuevo CoT para respaldo rápido same-dir

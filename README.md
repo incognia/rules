@@ -1,8 +1,12 @@
-# Reglas y filosofía profesional y académica de un tecnólogo
+# Reglas técnicas: prompts y CoT para acelerar el contexto de los LLM
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)
 [![Spanish](https://img.shields.io/badge/Language-Spanish%20(MX)-green.svg)](https://es.wikipedia.org/wiki/Espa%C3%B1ol_mexicano)
+
+Definiciones rápidas
+- Prompt: instrucción o contexto que le das al modelo para indicarle qué hacer, con qué tono y bajo qué restricciones.
+- CoT (Chain-of-Thought): cadena de razonamiento paso a paso que hace explícito cómo se llega a una respuesta, útil para tareas complejas.
 
 Este repositorio contiene las reglas, estándares y filosofía que guían el trabajo técnico y la colaboración en los proyectos de Rodrigo Álvarez.
 
