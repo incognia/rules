@@ -197,6 +197,15 @@ respaldar_vm() {
 }
 ```
 
+### Sutilezas de redacción
+- **No iniciar oraciones con cifras.** Preferir redactar con palabras o reordenar la frase.
+  - ❌ «20 años después, sigo aquí esperando»
+  - ✅ «Después de 20 años sigo esperando»
+- **Evitar terminar párrafos con símbolos o abreviaturas.** Sustituir por la palabra completa o reestructurar.
+  - ❌ «Hay un déficit de 20%» → ✅ «Hay un déficit de 20 por ciento»
+  - ❌ «Trajeron higos, mangos, etc.» → ✅ «Trajeron higos, mangos, etcétera» (y, si es posible, especificar el listado completo)
+- Nota: esta práctica proviene de criterios editoriales periodísticos y se observa también en subtitulación profesional (las frases que inician con número se escriben con letra).
+
 ### Préstamos lingüísticos
 - **Usar cursivas** para términos técnicos sin traducción directa
 - **Ejemplo**: «Hacer *commit* de los cambios» (no «commitear»)
