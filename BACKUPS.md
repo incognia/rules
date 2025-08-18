@@ -77,64 +77,185 @@ Toda acción de borrado deberá ser registrada con:
 
 ```
 backups/
-├── daily/          # Respaldos diarios automáticos
-├── manual/         # Respaldos manuales por demanda
+├── daily/          # Respaldos diarios automáticos (subcarpetas por fecha YYYY-MM-DD)
+├── manual/         # Respaldos manuales por demanda (subcarpetas por fecha)
 ├── pre-deploy/     # Respaldos antes de despliegues
 ├── pre-delete/     # Respaldos antes de operaciones destructivas
 └── archive/        # Respaldos antiguos comprimidos
+```
+
+Ejemplo con fecha del día (CST):
+```
+DATE_CST=$(TZ="America/Mexico_City" date +"%Y-%m-%d")
+mkdir -p "backups/daily/${DATE_CST}"
+```
+
+## Restauración
+
+- Localiza el respaldo a restaurar y su archivo de checksum (.sha256 si existe).
+- Verifica integridad antes de restaurar.
+- Restaura preservando permisos cuando aplique y valida el resultado.
+
+Ejemplo (archivo suelto):
+```bash
+# Verificación previa (si hay checksum)
+sha256sum -c backups/daily/2025-08-18/archivo_2025-08-18T12-00-00.txt.bkp.sha256
+
+# Restauración
+cp backups/daily/2025-08-18/archivo_2025-08-18T12-00-00.txt.bkp ./archivo.txt
+
+# Validación posterior (opcional)
+sha256sum ./archivo.txt
+```
+
+Ejemplo (tar.zst):
+```bash
+# Verificar e inspeccionar
+zstd -t archivo_2025-08-18T12-00-00.tar.zst
+unzstd -c archivo_2025-08-18T12-00-00.tar.zst | tar -tvf -
+# Restaurar en ruta destino
+unzstd -c archivo_2025-08-18T12-00-00.tar.zst | tar -xvf - -C /ruta/destino
+```
+
+## Verificación e integridad (checksums)
+
+- Generar un archivo .sha256 por respaldo y almacenarlo junto al respaldo.
+- Verificación masiva:
+```bash
+find backups -type f -name "*.sha256" -exec sha256sum -c {} \;
+```
+
+## Compresión recomendada (zstd)
+
+- Mejor relación/velocidad que gzip en muchos casos.
+- Ejemplo para empaquetar y comprimir un archivo/directorio:
+```bash
+TS=$(TZ=America/Mexico_City date +"%Y-%m-%dT%H-%M-%S")
+TARGET="mi_carpeta"
+tar --mtime="$(date -d "$TS" +%Y-%m-%d)" --owner=0 --group=0 --numeric-owner -cf - "$TARGET" | zstd -T0 -19 -o "${TARGET}_${TS}.tar.zst"
+```
+
+## Incrementales eficientes con rsync (--link-dest)
+
+- Permite snapshots diarios con hardlinks a archivos no cambiados.
+- Esquema:
+```bash
+BASE="/datos"
+DEST="backups/daily"
+DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")
+SNAP="$DEST/$DATE_CST"
+LAST=$(ls -1 "$DEST" | sort | tail -n1)
+mkdir -p "$SNAP"
+if [ -n "$LAST" ] && [ "$LAST" != "$DATE_CST" ]; then
+  rsync -a --delete --link-dest="$DEST/$LAST" "$BASE/" "$SNAP/"
+else
+  rsync -a --delete "$BASE/" "$SNAP/"
+fi
+```
+
+## Cifrado y offsite
+
+- Cifrado con age (recomendado) o gpg antes de enviar offsite.
+- Ejemplo age:
+```bash
+age -r <RECIPIENT> -o backup.tar.zst.age backup.tar.zst
+```
+- Subida offsite con rclone (S3/Backblaze/SSH):
+```bash
+rclone copy backups remote:bucket/path
+```
+- Política 3-2-1: 3 copias, 2 medios, 1 offsite.
+
+## Programación (Fedora, systemd)
+
+Ejemplo de unidades (ver carpeta systemd/backups/):
+- backup@.service
+- backup@daily.timer
+
+Variables recomendadas en el servicio:
+- Environment=TZ=America/Mexico_City
+- Logs a ruta fija en CST.
+
+## Registro y auditoría
+
+Formato sugerido de línea de log:
+```
+YYYY-MM-DD HH:MM:SS | acción | archivo | resultado | checksum
+```
+
+- Rotar backup.log y deletion.log periódicamente.
+
+## Seguridad y permisos
+
+- Propietario/grupo: root:root para respaldos sensibles; permisos 0640.
+- Añade backups/ al .gitignore del repositorio.
+- SELinux: al restaurar en sistemas con SELinux, reetiquetar contextos: `restorecon -R /ruta/restaurada`.
+
+## Bases de datos (ejemplos)
+
+PostgreSQL (dump/restore):
+```bash
+# Dump
+pg_dump --format=custom --no-owner --no-privileges "${PGDATABASE}" > "backups/daily/${DATE_CST}/db_${DATE_CST}.dump"
+# Restore
+pg_restore --clean --no-owner --no-privileges -d "${PGDATABASE}" "db_${DATE_CST}.dump"
+```
+
+MySQL/MariaDB (dump/restore):
+```bash
+# Dump
+mysqldump --single-transaction --routines --events "$MYSQL_DATABASE" > "backups/daily/${DATE_CST}/db_${DATE_CST}.sql"
+# Restore
+mysql "$MYSQL_DATABASE" < "db_${DATE_CST}.sql"
 ```
 
 ## Ejemplos de implementación
 
 ### Script de respaldo básico
 ```bash
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
-# Función para crear respaldo con timestamp
-# IMPORTANTE: TZ="America/Mexico_City" convierte automáticamente UTC a CST (UTC-6)
+log() {
+  printf "%s | %s\n" "$(TZ=America/Mexico_City date '+%Y-%m-%d %H:%M:%S')" "$*" | tee -a "${BACKUP_LOG_FILE:-backups/backup.log}"
+}
+
+# Función para crear respaldo con timestamp y checksum
 create_backup() {
-    local source_file="$1"
-    local backup_dir="${2:-backups}"
-    # Este comando resta automáticamente 6 horas a UTC para obtener CST
-    local timestamp=$(TZ="America/Mexico_City" date +"%Y-%m-%dT%H-%M-%S")
-    local filename=$(basename "$source_file")
-    local name_without_ext="${filename%.*}"
-    local extension="${filename##*.}"
-    
-    # Si el archivo no tiene extensión, usar solo el nombre
-    if [[ "$filename" == "$extension" ]]; then
-        local backup_name="${filename}_${timestamp}.bkp"
-    else
-        local backup_name="${name_without_ext}_${timestamp}.${extension}.bkp"
-    fi
-    
-    mkdir -p "$backup_dir"
-    cp "$source_file" "$backup_dir/$backup_name"
-    echo "Respaldo creado: $backup_dir/$backup_name"
+  local source_file="$1"
+  local backup_dir="${2:-backups}"
+  local timestamp=$(TZ="America/Mexico_City" date +"%Y-%m-%dT%H-%M-%S")
+  local filename=$(basename "$source_file")
+  local name_without_ext="${filename%.*}"
+  local extension="${filename##*.}"
+
+  if [[ "$filename" == "$extension" ]]; then
+    local backup_name="${filename}_${timestamp}.bkp"
+  else
+    local backup_name="${name_without_ext}_${timestamp}.${extension}.bkp"
+  fi
+
+  mkdir -p "$backup_dir"
+  cp -a "$source_file" "$backup_dir/$backup_name"
+  (cd "$backup_dir" && sha256sum "$backup_name" > "$backup_name.sha256")
+  log "backup | $backup_dir/$backup_name | ok | $(awk '{print $1}' "$backup_dir/$backup_name.sha256")"
 }
 
 # Función para operaciones destructivas con confirmación
 safe_delete() {
-    local target="$1"
-    
-    echo "ADVERTENCIA: Se eliminará permanentemente: $target"
-    read -p "¿Desea crear un respaldo antes de continuar? (s/n): " -n 1 -r
-    echo
-    
-    if [[ $REPLY =~ ^[SsYy]$ ]]; then
-        create_backup "$target" "backups/pre-delete"
-    else
-        read -p "¿Está seguro de continuar sin respaldo? (escriba 'CONFIRMAR'): " confirm
-        if [[ $confirm != "CONFIRMAR" ]]; then
-            echo "Operación cancelada"
-            return 1
-        fi
+  local target="$1"
+  echo "ADVERTENCIA: Se eliminará permanentemente: $target"
+  read -p "¿Desea crear un respaldo antes de continuar? (s/n): " -n 1 -r; echo
+  if [[ $REPLY =~ ^[SsYy]$ ]]; then
+    create_backup "$target" "backups/pre-delete"
+  else
+    read -p "¿Está seguro de continuar sin respaldo? (escriba 'CONFIRMAR'): " confirm
+    if [[ ${confirm:-} != "CONFIRMAR" ]]; then
+      echo "Operación cancelada"; return 1
     fi
-    
-    # Proceder con la eliminación
-    rm -f "$target"
-    # TZ="America/Mexico_City" garantiza fecha CST correcta (UTC-6)
-    echo "$(TZ="America/Mexico_City" date '+%Y-%m-%d %H:%M:%S') - Eliminado: $target" >> backups/deletion.log
+  fi
+  rm -f "$target"
+  echo "$(TZ="America/Mexico_City" date '+%Y-%m-%d %H:%M:%S') - Eliminado: $target" >> backups/deletion.log
 }
 ```
 
