@@ -66,13 +66,12 @@ Todo documento laboral debe concluir con el siguiente pie de página:
 
 ## Contacto
 
-[//]: # (CSS Contacto) 
+[//]: # (CSS Contacto)
 
 <style>
   .avatar {
     border-radius: 50%;
   }
-  
   .markdown-body i {
     color: var(--promad);
   }
@@ -110,7 +109,7 @@ Todo documento laboral debe concluir con el siguiente pie de página:
   </tr>
 </table>
 
-[//]: # (CSS Corporativo) 
+[//]: # (CSS Corporativo)
 
 <style>
   :root {
@@ -119,11 +118,9 @@ Todo documento laboral debe concluir con el siguiente pie de página:
     --electric: #116dff;
     --lavender: #a5b7ea;
   }
-  
   a {
     color: var(--midnight);
   }
-  
   .night a {
     color: var(--promad);
   }
@@ -132,7 +129,6 @@ Todo documento laboral debe concluir con el siguiente pie de página:
     color: var(--promad);
     text-decoration: none;
   }
-  
   .night a:hover {
     color: var(--lavender);
     text-decoration: none;
@@ -141,15 +137,12 @@ Todo documento laboral debe concluir con el siguiente pie de página:
   body {
     color: var(--midnight);
   }
-  
   .markdown-body h1 {
     border-bottom: 1px solid var(--promad);
   }
-  
   .markdown-body p {
     text-align: justify;
   }
-  
   .markdown-body hr {
     height: 1px;
     background-color: var(--promad);

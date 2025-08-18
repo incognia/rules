@@ -228,9 +228,8 @@ spec:
 apiVersion: v2
 name: observability-stack
 description: |
-  Stack completo de observabilidad con Prometheus, Grafana, 
+Stack completo de observabilidad con Prometheus, Grafana,
   OpenTelemetry y Jaeger para clústeres Kubernetes.
-  
   Este chart está bajo GPL-3.0: software libre para la comunidad.
 
 type: application

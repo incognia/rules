@@ -35,7 +35,7 @@ Pasos:
     Resultado: usar variable `REDIS_HOST=redis.infra.svc.cluster.local` o inyectar `DNS search` adecuado; verificar conectividad con un pod temporal: `kubectl -n payments run tmp --rm -it --image=busybox --restart=Never -- nslookup redis.infra.svc.cluster.local && nc -vz redis.infra.svc.cluster.local 6379`.
 
 Conclusión:
-- Microservicio afectado: «payments-api» (Deployment en namespace «payments»); pods con reinicios: `payments-api-xxxx` (y réplicas). 
+- Microservicio afectado: «payments-api» (Deployment en namespace «payments»); pods con reinicios: `payments-api-xxxx` (y réplicas).
 - Causa raíz: variable `REDIS_HOST` apunta a `redis` local del namespace «payments», pero el servicio Redis vive en «infra». Falla de resolución DNS/FQDN provoca `connection refused` y desencadena timeouts en «checkout».
 - Corrección: actualizar la config (ConfigMap/vars) a `REDIS_HOST=redis.infra.svc.cluster.local` o crear `Service` local que haga `ExternalName` al redis de «infra». Validar con pod temporal antes de desplegar.
 

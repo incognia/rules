@@ -33,6 +33,6 @@ Pasos:
    Resultado: markdownlint (encabezados/longitud de línea) y Vale (estilo/es_MX) pasan sin errores.
 
 Conclusión:
-- Entregar el documento con encabezado/pie correctos, timestamp válido en CST, contenido jerarquizado y estilo consistente. 
+- Entregar el documento con encabezado/pie correctos, timestamp válido en CST, contenido jerarquizado y estilo consistente.
 - Referencias: «~/rules/docs/STYLING.md» ([../../docs/STYLING.md](../../docs/STYLING.md)), «~/rules/docs/LINGUISTICS.md» ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)) y «~/rules/README.md» ([../../README.md](../../README.md)).
 

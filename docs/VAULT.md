@@ -102,7 +102,7 @@ chmod 644 ~/.ssh/id_rsa.pub
 
 # Extraer ambas claves en un solo comando
 vault kv get -format=json kv/incognia/ssh/mykey | \
-  jq -r '.data.data | 
+  jq -r '.data.data |
     "\(.private_key)" > "~/.ssh/id_rsa",
     "\(.public_key)" > "~/.ssh/id_rsa.pub"'
 ```
