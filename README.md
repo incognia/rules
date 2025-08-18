@@ -119,6 +119,18 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 - Buenas prácticas lingüísticas: [LINGUISTICS.md](./docs/LINGUISTICS.md)
 - Flujo de commits y CHANGELOG: [COMMITTING.md](./docs/COMMITTING.md)
 
+### Nota de renderizado para CoT
+
+Si tu CoT incluye front matter (bloque delimitado por `---` al inicio), para que se renderice bien con markdownlint agrega inmediatamente después del cierre del front matter esta línea para desactivar MD041 (H1 en la primera línea):
+
+```markdown
+---
+domain: ...
+...
+---
+<!-- markdownlint-disable MD041 -->
+```
+
 ## Convenciones de fechas/horas
 
 - Formato: 24 horas, zona «CST (Ciudad de México)».
