@@ -60,7 +60,7 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 | **Autoría** | Rodrigo Álvarez (@incognia) | Rodrigo Álvarez (@incogniadev) |
 | **Email** | incognia@gmail.com | ralvarez@promad.com.mx |
 | **SSH Key** | ~/.ssh/id_ed25519 | ~/.ssh/promad_ed25519 |
-| **Estilo de documentos** | No definido aún | [STYLING.md](./STYLING.md) aplicable |
+| **Estilo de documentos** | No definido aún | [STYLING.md](./docs/STYLING.md) aplicable |
 | **Idioma documentación** | Español mexicano | Español mexicano |
 | **Idioma código/commits** | Inglés internacional | Inglés internacional |
 
