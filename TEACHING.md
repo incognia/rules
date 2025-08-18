@@ -42,11 +42,11 @@ Mi enfoque pedagógico se fundamenta en principios claros y no negociables:
 | Categoría | Herramientas |
 |-----------|-------------|
 | **Contenedorización** | Docker, Docker Compose |
-| **Automatización** | Python scripts, Bash scripting |
+| **Automatización** | scripts de Python, scripts de Bash |
 | **Entorno de desarrollo** | JupyterLab, VS Code, Neovim |
 | **Infraestructura** | Linux (Debian/Ubuntu), SSH, volúmenes persistentes |
-|| **Monitoreo** | panel web (Node.js), htop, registros de contenedor |
-| **Distribución de contenido** | Git, symbolic links, automated deployment |
+| **Monitoreo** | panel web (Node.js), htop, registros de contenedor |
+| **Distribución de contenido** | Git, enlaces simbólicos, despliegue automatizado |
 
 ---
 
@@ -74,9 +74,9 @@ Mi enfoque pedagógico se fundamenta en principios claros y no negociables:
 
 **Principio pedagógico:** aunque mantengo una preferencia personal y profesional por Linux, mi enfoque educativo busca formar estudiantes competentes en las tres plataformas principales: Linux, Windows y macOS, priorizando en ese orden específico.
 
-**Analogía de las herramientas:** La competencia técnica trasciende las preferencias de marca. Si requiero un destornillador para hacer una tarea, sería absurdo negarme a trabajar hasta conseguir una marca específica. Un profesional competente puede usar cualquier herramienta de calidad para completar su trabajo. Personalmente prefiero los desarmadores de precisión de iFixit, pero esta preferencia no debe impedir desmontar un tornillo con una herramienta de marca distinta.
+**Analogía de las herramientas:** la competencia técnica trasciende las preferencias de marca. Si requiero un destornillador para hacer una tarea, sería absurdo negarme a trabajar hasta conseguir una marca específica. Un profesional competente puede usar cualquier herramienta de calidad para completar su trabajo. Personalmente prefiero los desarmadores de precisión de iFixit, pero esta preferencia no debe impedir desmontar un tornillo con una herramienta de marca distinta.
 
-**Aplicación a sistemas operativos:** El mismo principio aplica a las computadoras. Si realmente dominas la informática, el sistema operativo no debe ser impedimento para hacer tu trabajo. La verdadera competencia técnica se demuestra en la capacidad de adaptarse y ser productivo independientemente de la plataforma disponible.
+**Aplicación a sistemas operativos:** el mismo principio aplica a las computadoras. Si realmente dominas la informática, el sistema operativo no debe ser impedimento para hacer tu trabajo. La verdadera competencia técnica se demuestra en la capacidad de adaptarse y ser productivo independientemente de la plataforma disponible.
 
 **Enfoque pedagógico por plataformas:**
 
@@ -168,7 +168,7 @@ Tu experiencia diversa en educación Montessori, secundarias activas y programas
 - **Entornos desplegados:** 100+ contenedores Docker administrados
 - **Estudiantes impactados:** 60+ estudiantes a lo largo de 8 años
 - **Proyectos desarrollados:** 20+ laboratorios automatizados
-- **Tiempo de setup reducido:** de 2 horas a 5 minutos por estudiante
+- **Tiempo de preparación reducido:** de 2 horas a 5 minutos por estudiante
 
 ---
 
