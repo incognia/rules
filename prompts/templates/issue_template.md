@@ -4,6 +4,7 @@ task: abrir issue
 prioridad: media
 impacto: describe brevemente
 ---
+<!-- markdownlint-disable MD041 -->
 
 Contexto
 - Qué problema/objetivo se busca atender.

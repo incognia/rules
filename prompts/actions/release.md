@@ -1,10 +1,10 @@
-<!-- markdownlint-disable MD041 -->
 ---
 domain: release
 task: preparar y publicar una versión
 impacto: alto
 validacion: tag creado, changelog actualizado, push realizado
 ---
+<!-- markdownlint-disable MD041 -->
 
 Checklist
 1) Revisar CHANGELOG y completar entradas pendientes (fecha CST, ver ~/rules/docs/COMMITTING.md).
