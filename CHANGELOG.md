@@ -31,6 +31,7 @@
 - README.md: añadir nota para desactivar MD041 tras el bloque `---` de front matter en CoT, asegurando renderizado correcto
 - prompts/cot/*: auditoría de MD041 en CoT; confirmada colocación correcta de la etiqueta inmediatamente después del cierre del front matter
 - style(md): corrección de espacios finales (MD009) en múltiples archivos (docs/*, prompts/cot/*, VAULT.md, LINGUISTICS.md, LICENSING.md)
+- style(md): correcciones MD012 (eliminar líneas en blanco consecutivas) en TEACHING.md, BACKUPS.md y prompts/cot/lint.md
 
 ### feat
 - scripts/git-init-context.sh: asistente interactivo para configurar identidad y SSH (por repo) y remoto SSH opcional
