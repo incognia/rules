@@ -12,11 +12,11 @@ Los entornos de tecnología en Latinoamérica sufren de tres males endémicos qu
 
 Contra estos tres males, aquí está la respuesta: trabajo honesto, compartir el conocimiento y la satisfacción que viene de hacer las cosas bien hechas, sin complejos y sin pendejadas.
 
-Este manifiesto no es solo para rifármela en DevOps desde el escritorio —donde me llaman "Agüelo" por veterano, aunque sigo tan actualizado como el último *commit*— sino para aplicar esa misma filosofía en el aula, donde dicen que parezco Hagrid por corpulento y barbón. Porque sí, dominar Kubernetes está chido, pero lo que de verdad está con madre es compartir el conocimiento técnico. No venimos a ser mercenarios del código guardando secretos: venimos a enseñar con todo para que todos le sepan a las herramientas que realmente valen la pena.
+Este manifiesto no es solo para rifármela en DevOps desde el escritorio —donde me llaman «Agüelo» por veterano, aunque sigo tan actualizado como el último *commit*— sino para aplicar esa misma filosofía en el aula, donde dicen que parezco Hagrid por corpulento y barbón. Porque sí, dominar Kubernetes está chido, pero lo que de verdad está con madre es compartir el conocimiento técnico. No venimos a ser mercenarios del código guardando secretos: venimos a enseñar con todo para que todos le sepan a las herramientas que realmente valen la pena.
 
 ## 1. Identidad profesional coherente
 
-Esta dualidad entre ser "Agüelo" y "Hagrid" no es casualidad: refleja una identidad profesional que opera en dos contextos complementarios, cada uno con su propio ecosistema pero unidos por los mismos principios éticos.
+Esta dualidad entre ser «Agüelo» y «Hagrid» no es casualidad: refleja una identidad profesional que opera en dos contextos complementarios, cada uno con su propio ecosistema pero unidos por los mismos principios éticos.
 
 ### 1.1. Especialización técnica
 
