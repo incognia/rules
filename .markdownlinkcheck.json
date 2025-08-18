@@ -1,0 +1,21 @@
+{
+  "ignorePatterns": [
+    "node_modules/**",
+    ".git/**",
+    "prompts/snippets/**"
+  ],
+  "retryOn429": true,
+  "retryCount": 2,
+  "timeout": "10s",
+  "aliveStatusCodes": [200, 206, 429],
+  "replacementPatterns": [
+    { "pattern": "^~/rules/", "replacement": "" }
+  ],
+  "httpHeaders": [
+    {
+      "urls": ["https://img.shields.io/*"],
+      "headers": { "User-Agent": "markdown-link-check" }
+    }
+  ]
+}
+

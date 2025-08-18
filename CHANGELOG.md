@@ -31,6 +31,11 @@
 - scripts/verify_backups.sh: verificación masiva de checksums
 - scripts/quick_bkp.sh: respaldo rápido en el mismo directorio con fecha CST (YYYY-MM-DD)
 
+### chore
+- Añadir configuración de linter de Markdown (.markdownlint.yaml) alineada al estilo del repo
+- Añadir verificador de enlaces (.markdownlinkcheck.json) con ajustes de tiempo de espera y cabeceras para shields.io
+- Inicializar package.json con scripts: `lint:md`, `lint:md:fix`, `check:links`
+
 ## [2025-08-17]
 
 ### docs
