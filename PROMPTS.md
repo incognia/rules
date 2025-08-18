@@ -46,6 +46,34 @@ Reglas de estilo
   - Frontmatter YAML (domain, task, dificultad, etc.)
   - Secciones «Razonamiento», «Pasos», «Conclusión».
 
+## Índice de prompts
+
+- General: ver [prompts/README.md](prompts/README.md)
+
+### CoT (prompts/cot)
+- [arithmetic.md](prompts/cot/arithmetic.md)
+- [committing.md](prompts/cot/committing.md)
+- [committing_corporate.md](prompts/cot/committing_corporate.md)
+- [committing_personal.md](prompts/cot/committing_personal.md)
+- [devops.md](prompts/cot/devops.md)
+- [git_init.md](prompts/cot/git_init.md)
+- [kubernetes.md](prompts/cot/kubernetes.md)
+- [linguistics.md](prompts/cot/linguistics.md)
+- [repo_context.md](prompts/cot/repo_context.md)
+- [styling.md](prompts/cot/styling.md)
+
+### Templates (prompts/templates)
+- [issue_template.md](prompts/templates/issue_template.md)
+
+### Guides (prompts/guides)
+- [git_workflow_guide.md](prompts/guides/git_workflow_guide.md)
+
+### Actions (prompts/actions)
+- [release.md](prompts/actions/release.md)
+
+### Snippets (prompts/snippets)
+- [cst_date.sh](prompts/snippets/cst_date.sh)
+
 ## Rutas de referencia a este repositorio
 - Para que los prompts funcionen como referencia desde otros proyectos, usa rutas relativas al directorio HOME apuntando a este repo clonado en «~/rules».
 - Ejemplos de referencia directa en prompts:
