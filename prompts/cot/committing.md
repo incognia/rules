@@ -7,7 +7,7 @@ validacion: entrada en CHANGELOG con fecha CST y commit/push exitosos
 ---
 
 Razonamiento:
-- Cumplir el flujo obligatorio: primero CHANGELOG, luego add/commit/push (ver «~/rules/COMMITTING.md» ([../../COMMITTING.md](../../COMMITTING.md))).
+- Cumplir el flujo obligatorio: primero CHANGELOG, luego add/commit/push (ver «~/rules/docs/COMMITTING.md» ([../../docs/COMMITTING.md](../../docs/COMMITTING.md))).
 - Usar fecha en CST (Ciudad de México) calculada con TZ; no rotular CST a horas UTC.
 - Mensaje de commit en inglés con Conventional Commits; documentación en español mexicano.
 - El push debe ser simple (`git push`) siempre que el repo haya sido configurado inicialmente (ver «~/rules/GIT.md» sección de configuración inicial).
@@ -26,5 +26,5 @@ Pasos:
 
 Conclusión:
 - Verifica que el commit aparece en `git log` y que el CHANGELOG contiene la fecha en CST y el resumen del cambio.
-- Referencias: «~/rules/COMMITTING.md» ([../../COMMITTING.md](../../COMMITTING.md)), «~/rules/GIT.md» ([../../GIT.md](../../GIT.md)), «~/rules/README.md» ([../../README.md](../../README.md)) y «~/rules/LINGUISTICS.md» ([../../LINGUISTICS.md](../../LINGUISTICS.md)).
+- Referencias: «~/rules/docs/COMMITTING.md» ([../../docs/COMMITTING.md](../../docs/COMMITTING.md)), «~/rules/docs/GIT.md» ([../../docs/GIT.md](../../docs/GIT.md)), «~/rules/README.md» ([../../README.md](../../README.md)) y «~/rules/docs/LINGUISTICS.md» ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)).
 

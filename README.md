@@ -21,18 +21,18 @@ Un manifiesto contra tres males endémicos en tecnología latinoamericana:
 
 - **[PHILOSOPHY.md](./PHILOSOPHY.md)** - filosofía principal y manifiesto de desarrollo
 - **[PROMPTS.md](./PROMPTS.md)** - guía de Chain-of-Thought (CoT) en es_MX
-- **[ROADMAP.md](./ROADMAP.md)** - ruta de 90 días para CoT y automatizaciones
-- **[TODO.md](./TODO.md)** - tareas tácticas inmediatas (CoT y mejoras)
-- **[CORPORATE.md](./CORPORATE.md)** - perfil profesional corporativo
-- **[TEACHING.md](./TEACHING.md)** - perfil educativo y de divulgación científica
-- **[ATTRIBUTION.md](./ATTRIBUTION.md)** - reglas de atribución personal
-- **[COMMITTING.md](./COMMITTING.md)** - reglas para mensajes de *commit* y gestión de cambios
-- **[GIT.md](./GIT.md)** - configuración inicial de cuentas GitHub y GitLab
-- **[LICENSING.md](./LICENSING.md)** - reglas de licenciamiento para proyectos
-- **[LINGUISTICS.md](./LINGUISTICS.md)** - reglas lingüísticas de español mexicano como referente
-- **[STYLING.md](./STYLING.md)** - reglas de estilo para documentos Markdown (proyectos laborales)
-- **[BACKUPS.md](./BACKUPS.md)** - políticas de respaldos y operaciones destructivas
-- **[GLOSSARY.md](./GLOSSARY.md)** - glosario técnico de términos empleados
+- **[ROADMAP.md](./docs/ROADMAP.md)** - ruta de 90 días para CoT y automatizaciones
+- **[TODO.md](./docs/TODO.md)** - tareas tácticas inmediatas (CoT y mejoras)
+- **[CORPORATE.md](./docs/CORPORATE.md)** - perfil profesional corporativo
+- **[TEACHING.md](./docs/TEACHING.md)** - perfil educativo y de divulgación científica
+- **[ATTRIBUTION.md](./docs/ATTRIBUTION.md)** - reglas de atribución personal
+- **[COMMITTING.md](./docs/COMMITTING.md)** - reglas para mensajes de *commit* y gestión de cambios
+- **[GIT.md](./docs/GIT.md)** - configuración inicial de cuentas GitHub y GitLab
+- **[LICENSING.md](./docs/LICENSING.md)** - reglas de licenciamiento para proyectos
+- **[LINGUISTICS.md](./docs/LINGUISTICS.md)** - reglas lingüísticas de español mexicano como referente
+- **[STYLING.md](./docs/STYLING.md)** - reglas de estilo para documentos Markdown (proyectos laborales)
+- **[BACKUPS.md](./docs/BACKUPS.md)** - políticas de respaldos y operaciones destructivas
+- **[GLOSSARY.md](./docs/GLOSSARY.md)** - glosario técnico de términos empleados
 - **[CHANGELOG.md](./CHANGELOG.md)** - historial de cambios del proyecto
 
 ## Especialización técnica
@@ -109,8 +109,8 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 
 - Guía: lee [PROMPTS.md](./PROMPTS.md)
 - Ejemplos: carpeta [prompts/cot/](./prompts/cot/)
-- Buenas prácticas lingüísticas: [LINGUISTICS.md](./LINGUISTICS.md)
-- Flujo de commits y CHANGELOG: [COMMITTING.md](./COMMITTING.md)
+- Buenas prácticas lingüísticas: [LINGUISTICS.md](./docs/LINGUISTICS.md)
+- Flujo de commits y CHANGELOG: [COMMITTING.md](./docs/COMMITTING.md)
 
 ## Convenciones de fechas/horas
 
@@ -119,7 +119,7 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 - Zona a usar en scripts: TZ=America/Mexico_City.
 - CHANGELOG.md: solo fecha (YYYY-MM-DD), sin hora.
 
-Más detalles: ver [LINGUISTICS.md – Fechas y horas (CST Ciudad de México)](./LINGUISTICS.md#fechas-y-horas-cst-ciudad-de-méxico).
+Más detalles: ver [LINGUISTICS.md – Fechas y horas (CST Ciudad de México)](./docs/LINGUISTICS.md#fechas-y-horas-cst-ciudad-de-méxico).
 
 Ejemplos de comandos
 ```bash

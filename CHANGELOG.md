@@ -21,6 +21,8 @@
 - prompts/cot/backup.md y prompts/cot/restore.md: nuevos CoT para ejecutar respaldos y restauraciones
 - BACKUPS.md: documentar respaldo rápido en el mismo directorio y su uso
 - prompts/cot/quick_backup.md: nuevo CoT para respaldo rápido same-dir
+- Reorganización: mover documentos temáticos a ./docs/ manteniendo PHILOSOPHY.md en la raíz
+- Enlaces: corregir referencias cruzadas a documentos movidos en README.md, PHILOSOPHY.md, PROMPTS.md y prompts/* (cot, guides, actions)
 
 ### feat
 - scripts/git-init-context.sh: asistente interactivo para configurar identidad y SSH (por repo) y remoto SSH opcional

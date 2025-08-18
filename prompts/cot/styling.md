@@ -7,7 +7,7 @@ validacion: encabezado/pie correctos, timestamp CST válido, estructura y estilo
 ---
 
 Razonamiento:
-- Usar español mexicano y formato CoT del repo (ver «~/rules/LINGUISTICS.md» ([../../LINGUISTICS.md](../../LINGUISTICS.md)), «~/rules/STYLING.md» ([../../STYLING.md](../../STYLING.md)) y «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md))).
+- Usar español mexicano y formato CoT del repo (ver «~/rules/docs/LINGUISTICS.md» ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)), «~/rules/docs/STYLING.md» ([../../docs/STYLING.md](../../docs/STYLING.md)) y «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md))).
 - Recorrer de arriba a abajo: encabezado estándar → contenido → pie de página → CSS → validaciones (timestamps, enlaces, accesibilidad).
 - Asegurar consistencia con CST (Ciudad de México) y mermaid donde aplique.
 
@@ -33,5 +33,5 @@ Pasos:
 
 Conclusión:
 - Entregar el documento con encabezado/pie correctos, timestamp válido en CST, contenido jerarquizado y estilo consistente. 
-- Referencias: «~/rules/STYLING.md» ([../../STYLING.md](../../STYLING.md)), «~/rules/LINGUISTICS.md» ([../../LINGUISTICS.md](../../LINGUISTICS.md)) y «~/rules/README.md» ([../../README.md](../../README.md)).
+- Referencias: «~/rules/docs/STYLING.md» ([../../docs/STYLING.md](../../docs/STYLING.md)), «~/rules/docs/LINGUISTICS.md» ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)) y «~/rules/README.md» ([../../README.md](../../README.md)).
 

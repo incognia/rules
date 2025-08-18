@@ -1,8 +1,8 @@
 Guía rápida: flujo Git (SSH, no HTTPS)
 
 Resumen
-- Configura el repo con SSH por contexto (ver ~/rules/GIT.md, sección configuración inicial y asistente).
-- Usa COMMITTING.md para el flujo diario: actualizar CHANGELOG (fecha CST), commit y push simple.
+- Configura el repo con SSH por contexto (ver ~/rules/docs/GIT.md, sección configuración inicial y asistente).
+- Usa ~/rules/docs/COMMITTING.md para el flujo diario: actualizar CHANGELOG (fecha CST), commit y push simple.
 
 Pasos clave
 1) Inicialización: `git init` y `bash scripts/git-init-context.sh`.

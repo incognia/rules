@@ -8,7 +8,7 @@ validacion: lista de hallazgos + correcciones propuestas alineadas a es_MX y reg
 ---
 
 Razonamiento:
-- Regla principal: todo en español mexicano, sin calcos del inglés ni regionalismos ajenos (ver «~/rules/LINGUISTICS.md» ([../../LINGUISTICS.md](../../LINGUISTICS.md)) y «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md))).
+- Regla principal: todo en español mexicano, sin calcos del inglés ni regionalismos ajenos (ver «~/rules/docs/LINGUISTICS.md» ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)) y «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md))).
 - Recorrer de lo general a lo específico: dialecto/es_MX → evitar calcos → terminología → verbos → préstamos en cursiva → tipografía (títulos y mayúscula tras dos puntos) → comillas (texto vs código) → sutilezas de redacción → siglas → tiempos verbales → fechas/horas (CST) → nomenclatura de archivos → odios especiales → expresiones idiomáticas (uso/moderación).
 - Producir hallazgos concretos y una versión corregida mínima (diff mental) cuando aplique.
 

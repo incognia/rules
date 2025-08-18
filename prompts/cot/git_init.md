@@ -10,7 +10,7 @@ Razonamiento:
 - Evitar HTTPS y alias SSH; usar SSH con clave adecuada por repo (core.sshCommand).
 - Configurar identidad (user.name, user.email) según contexto Personal/Laboral.
 - Dejar la rama por defecto como main y remoto origin en formato SSH.
-- Referencia principal: «~/rules/GIT.md» (sección “Configuración inicial y SSH por contexto”).
+- Referencia principal: «~/rules/docs/GIT.md» (sección “Configuración inicial y SSH por contexto”).
 
 Pasos (Opción recomendada: asistente interactivo):
 1) Acción: inicializar el repositorio.
@@ -53,5 +53,5 @@ Pasos (Alternativa manual, si no usas el asistente):
 
 Conclusión:
 - Tras la configuración inicial, el flujo diario usa push simple: `git push`.
-- Referencias: «~/rules/GIT.md» ([../../GIT.md](../../GIT.md)) y «~/rules/COMMITTING.md» ([../../COMMITTING.md](../../COMMITTING.md)).
+- Referencias: «~/rules/docs/GIT.md» ([../../docs/GIT.md](../../docs/GIT.md)) y «~/rules/docs/COMMITTING.md» ([../../docs/COMMITTING.md](../../docs/COMMITTING.md)).
 

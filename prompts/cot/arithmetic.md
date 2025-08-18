@@ -7,7 +7,7 @@ validacion: resultado coincide con cálculo verificado a mano
 ---
 
 Razonamiento:
-- Seguir formato CoT del repo y mantener español mexicano (ver «~/rules/LINGUISTICS.md» ([../../LINGUISTICS.md](../../LINGUISTICS.md)) y «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md))).
+- Seguir formato CoT del repo y mantener español mexicano (ver «~/rules/docs/LINGUISTICS.md» ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)) y «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md))).
 - Descomponer el problema en pasos simples y verificar unidades.
 
 Pasos:

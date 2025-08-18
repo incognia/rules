@@ -7,7 +7,7 @@ validacion: commit/push exitosos y CHANGELOG actualizado
 ---
 
 Razonamiento:
-- Este flujo es para proyectos laborales (Promad). Seguir «~/rules/COMMITTING.md» ([../../COMMITTING.md](../../COMMITTING.md)).
+- Este flujo es para proyectos laborales (Promad). Seguir «~/rules/docs/COMMITTING.md» ([../../docs/COMMITTING.md](../../docs/COMMITTING.md)).
 - Asegurar fecha en CST para CHANGELOG y mensaje convencional en inglés.
 - El push debe ser simple (`git push`) si el repo fue configurado inicialmente según «~/rules/GIT.md».
 
@@ -23,5 +23,5 @@ Pasos:
 
 Conclusión:
 - Confirmar en `git log` y revisar que el CHANGELOG tenga la entrada del día en CST.
-- Referencias: «~/rules/COMMITTING.md» ([../../COMMITTING.md](../../COMMITTING.md)), «~/rules/GIT.md» ([../../GIT.md](../../GIT.md)) y «~/rules/README.md» ([../../README.md](../../README.md)).
+- Referencias: «~/rules/docs/COMMITTING.md» ([../../docs/COMMITTING.md](../../docs/COMMITTING.md)), «~/rules/docs/GIT.md» ([../../docs/GIT.md](../../docs/GIT.md)) y «~/rules/README.md» ([../../README.md](../../README.md)).
 

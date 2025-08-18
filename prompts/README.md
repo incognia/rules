@@ -10,7 +10,7 @@ Subdirectorios
 - snippets/: fragmentos (comandos/mini-bloques) reutilizables.
 
 Convenciones
-- Usar español mexicano (ver LINGUISTICS.md).
-- Fechas en CST CDMX cuando aplique (ver COMMITTING.md y STYLING.md).
-- Mantener archivos breves y accionables; enlazar a ~/rules/*.md cuando aplique.
+- Usar español mexicano (ver ../../docs/LINGUISTICS.md).
+- Fechas en CST CDMX cuando aplique (ver ../../docs/COMMITTING.md y ../../docs/STYLING.md).
+- Mantener archivos breves y accionables; enlazar a ~/rules/docs/*.md cuando aplique.
 

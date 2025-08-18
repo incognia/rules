@@ -77,10 +77,10 @@ Reglas de estilo
 ## Rutas de referencia a este repositorio
 - Para que los prompts funcionen como referencia desde otros proyectos, usa rutas relativas al directorio HOME apuntando a este repo clonado en «~/rules».
 - Ejemplos de referencia directa en prompts:
-  - «~/rules/LINGUISTICS.md»
-  - «~/rules/PHILOSOPHY.md»
-  - «~/rules/README.md»
-  - «~/rules/COMMITTING.md»
+- «~/rules/docs/LINGUISTICS.md»
+- «~/rules/PHILOSOPHY.md»
+- «~/rules/README.md»
+- «~/rules/docs/COMMITTING.md»
 - Esta convención funciona en Linux y macOS. En Windows se recomienda WSL; en ese caso «~» también expande a «$HOME» dentro de WSL.
 
 ## Auto-consistencia (resumen)
@@ -92,6 +92,6 @@ Reglas de estilo
 
 ## Referencias
 - Wei et al. (2022/2023): Chain-of-Thought Prompting Elicits Reasoning in Large Language Models — https://arxiv.org/abs/2201.11903
-- LINGUISTICS.md — reglas lingüísticas del repo
+- LINGUISTICS.md — reglas lingüísticas del repo (ver ./docs/LINGUISTICS.md)
 - README.md — convenciones de fechas/horas y navegación
 

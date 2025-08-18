@@ -8,7 +8,7 @@ validacion: identificar servicio/despliegue y lista de pods afectados con ventan
 
 Razonamiento:
 - Usar un recorrido de afuera hacia adentro: eventos recientes → pods inestables → patrones de error → dueño (Deployment/StatefulSet) → Service/Ingress/VirtualService.
-- Mantener español mexicano y formato CoT del repo (ver «~/rules/LINGUISTICS.md» ([../../LINGUISTICS.md](../../LINGUISTICS.md)) y «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md))).
+- Mantener español mexicano y formato CoT del repo (ver «~/rules/docs/LINGUISTICS.md» ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)) y «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md))).
 - Registrar comandos no interactivos y usar selectores por etiquetas para abarcar réplicas.
 
 Pasos:

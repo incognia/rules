@@ -10,7 +10,7 @@ Razonamiento:
 - Verificar integridad antes de restaurar (sha256sum -c) cuando exista .sha256.
 - Restaurar conservando permisos cuando aplique; validar resultado.
 - Registrar acciones con timestamps en CST.
-- Referencia: «~/rules/BACKUPS.md» (sección Restauración y Verificación).
+- Referencia: «~/rules/docs/BACKUPS.md» (sección Restauración y Verificación).
 
 Pasos:
 1) Acción: localizar respaldo (.bkp, .tar.zst) y su .sha256 (si existe).

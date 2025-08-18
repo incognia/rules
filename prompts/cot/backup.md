@@ -10,7 +10,7 @@ Razonamiento:
 - Usar siempre CST CDMX para timestamps (TZ=America/Mexico_City) y registrar acciones.
 - Generar checksum (.sha256) para integridad.
 - Para directorios, empaquetar y comprimir con zstd para eficiencia.
-- Referencia: «~/rules/BACKUPS.md» (restauración, verificación, compresión, rsync incrementales).
+- Referencia: «~/rules/docs/BACKUPS.md» (restauración, verificación, compresión, rsync incrementales).
 
 Pasos:
 1) Acción: decidir qué respaldar (archivo o directorio) y destino.
