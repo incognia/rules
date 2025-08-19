@@ -17,6 +17,7 @@
 - COMMITTING.md: simplificar flujo a push simple (`git push`) y enlazar a configuración inicial en GIT.md
 - GIT.md: añadir asistente interactivo post `git init` (configura identidad, `core.sshCommand` y remoto SSH opcional)
 - prompts/cot/committing*.md: alinear a push simple y limpiar artefactos
+- prompts/cot/committing_{personal,corporate}.md: consolidar en prompts/cot/committing.md y actualizar referencias
 - prompts/cot/git_init.md: nuevo CoT para inicializar repos con SSH siguiendo GIT.md
 - prompts/: crear estructura de subdirectorios (templates/, guides/, actions/, snippets/) con ejemplos y README por carpeta
 - PROMPTS.md: añadir índice catalogado de prompts por subdirectorio
@@ -27,7 +28,7 @@
 - Reorganización: mover documentos temáticos a ./docs/ manteniendo PHILOSOPHY.md en la raíz
 - Enlaces: corregir referencias cruzadas a documentos movidos en README.md, PHILOSOPHY.md, PROMPTS.md y prompts/* (cot, guides, actions)
 - CHANGELOG.md: registrar actualización diaria sin cambios funcionales
-- prompts/cot/committing_personal.md: ejecución del flujo CoT de commit/push (fecha CST, commit no interactivo y push simple)
+- prompts/cot/committing_personal.md y prompts/cot/committing_corporate.md: marcados como DEPRECATED; usar prompts/cot/committing.md
 - README.md: añadir nota para desactivar MD041 tras el bloque `---` de front matter en CoT, asegurando renderizado correcto
 - prompts/cot/*: auditoría de MD041 en CoT; confirmada colocación correcta de la etiqueta inmediatamente después del cierre del front matter
 - style(md): corrección de espacios finales (MD009) en múltiples archivos (docs/*, prompts/cot/*, VAULT.md, LINGUISTICS.md, LICENSING.md)

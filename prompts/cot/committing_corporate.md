@@ -1,28 +1,20 @@
 ---
 domain: workflow
-task: commit/push en contexto laboral (@incogniadev) con push simple
+task: DEPRECATED — usar prompts/cot/committing.md (general)
 dificultad: baja
-longitud_objetivo: corta
-validacion: commit/push exitosos y CHANGELOG actualizado
+longitud_objetivo: mínima
+validacion: se usa el prompt general sin divergencias
 ---
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
-- Este flujo es para proyectos laborales (Promad). Seguir «~/rules/docs/COMMITTING.md» ([../../docs/COMMITTING.md](../../docs/COMMITTING.md)).
-- Asegurar fecha en CST para CHANGELOG y mensaje convencional en inglés.
-- El push debe ser simple (`git push`) si el repo fue configurado inicialmente según «~/rules/GIT.md».
+- Este archivo quedó obsoleto. El flujo de commit/push es único y aplica igual en contextos personal y laboral.
+- Para evitar duplicidad y drift, centraliza el uso en «prompts/cot/committing.md».
 
 Pasos:
-1) Acción: calcular fecha CST.
-   Resultado: `DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")`.
-2) Acción: actualizar «CHANGELOG.md» bajo `## [${DATE_CST}]`.
-   Resultado: línea de `- docs: ...` (o el tipo que aplique).
-3) Acción: preparar commit.
-   Resultado: `git add -A && git commit -m "docs: ..."`.
-4) Acción: push simple.
-   Resultado: `git push`.
+1) Acción: abrir «prompts/cot/committing.md».
+   Resultado: seguir el flujo general (fecha CST en CHANGELOG, commit convencional en inglés, push simple).
 
 Conclusión:
-- Confirmar en `git log` y revisar que el CHANGELOG tenga la entrada del día en CST.
-- Referencias: «~/rules/docs/COMMITTING.md» ([../../docs/COMMITTING.md](../../docs/COMMITTING.md)), «~/rules/docs/GIT.md» ([../../docs/GIT.md](../../docs/GIT.md)) y «~/rules/README.md» ([../../README.md](../../README.md)).
-
+- Referencia única: «~/rules/prompts/cot/committing.md».
+- Guías base: «~/rules/docs/COMMITTING.md» y «~/rules/docs/GIT.md».

@@ -60,8 +60,6 @@ Reglas de estilo
 
 - [arithmetic.md](prompts/cot/arithmetic.md)
 - [committing.md](prompts/cot/committing.md)
-- [committing_corporate.md](prompts/cot/committing_corporate.md)
-- [committing_personal.md](prompts/cot/committing_personal.md)
 - [devops.md](prompts/cot/devops.md)
 - [git_init.md](prompts/cot/git_init.md)
 - [kubernetes.md](prompts/cot/kubernetes.md)
