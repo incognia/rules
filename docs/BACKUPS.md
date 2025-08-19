@@ -42,6 +42,7 @@ Evita sobrescribir respaldos previos. La convención de fecha y hora permite con
 ## Política de respaldos antes de operaciones destructivas
 
 ### Definición
+
 Esta política aplica a cualquier script o comando que realice operaciones de eliminación permanente de archivos, registros, configuraciones o cualquier otro tipo de datos.
 
 ### Ejecución manual

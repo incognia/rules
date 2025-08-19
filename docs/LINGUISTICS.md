@@ -165,6 +165,7 @@
 **Ejemplos de mayúsculas después de dos puntos:**
 - ✅ **Regla:** los nombres de archivos deben estar en inglés
 - ❌ **Regla:** Los nombres de archivos deben estar en inglés
+
 ### Tiempos verbales en documentos
 
 - ✅ Reportes y postmortems: usar tiempo pasado y primera persona («yo» o «nosotros» si es trabajo colectivo).

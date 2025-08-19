@@ -170,16 +170,19 @@ Todo documento laboral debe concluir con el siguiente pie de página:
 ### Reglas de formato
 
 #### Encabezados
+
 - Los encabezados H1 tienen borde inferior en color PROMAD
 - Usar jerarquía clara: H1 → H2 → H3 → H4
 - Evitar saltar niveles de encabezado
 
 #### Texto
+
 - Los párrafos están justificados por defecto
 - Enlaces cambian de color al hacer hover
 - Soporte automático para modo claro y oscuro
 
 #### Separadores
+
 - Las líneas horizontales (`---`) usan el color PROMAD
 - Altura fija de 1px para consistencia visual
 
