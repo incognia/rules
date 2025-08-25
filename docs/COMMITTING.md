@@ -115,6 +115,9 @@ git commit -m "docs(changelog): update entry for $DATE_CST"
 
 # 4. CUARTO: Push (una vez configurado el repo, basta con un push simple)
 git push
+
+# 5. VERIFICACIÓN: Ver los últimos commits (no interactivo)
+git --no-pager log --oneline -5
 ```
 
 ### 3.2. Atomicidad de los *commits*
@@ -140,6 +143,38 @@ Para la primera configuración (elegir entre credenciales personales o laborales
 
 ```bash
 git config --list | grep ^user\.
+```
+
+### 3.5. Comandos git no interactivos
+
+**⚠️ IMPORTANTE:** Siempre usar comandos no interactivos para evitar paginadores y editores.
+
+**Comandos recomendados:**
+
+```bash
+# Ver historial de commits (no interactivo)
+git --no-pager log --oneline -10  # últimos 10 commits
+git --no-pager log --oneline -5   # últimos 5 commits
+git log -n 5                      # alternativa sin pager
+
+# Ver diferencias (no interactivo)
+git --no-pager diff
+git --no-pager diff --staged
+
+# Ver estado del repositorio
+git status  # ya es no interactivo por defecto
+
+# Otros comandos de consulta no interactivos
+git --no-pager show HEAD
+git --no-pager branch -v
+```
+
+**Configuración global opcional:**
+
+```bash
+# Deshabilitar pager para todos los comandos git (opcional)
+git config --global pager.log false
+git config --global pager.diff false
 ```
 
 ---

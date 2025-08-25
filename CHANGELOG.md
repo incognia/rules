@@ -4,6 +4,11 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
+## [2025-08-25]
+
+### docs
+- docs: corregir COMMITTING.md y prompts/cot/committing.md para eliminar uso de editores interactivos, especialmente con git log (usar --no-pager)
+
 ## [2025-08-18]
 
 ### docs
