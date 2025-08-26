@@ -115,6 +115,9 @@ git commit -m "docs(changelog): update entry for $DATE_CST"
 
 # 4. CUARTO: Push (una vez configurado el repo, basta con un push simple)
 git push
+
+# 5. VERIFICACIÓN: Ver los últimos commits (no interactivo)
+git --no-pager log --oneline -5
 ```
 
 ### 3.2. Atomicidad de los *commits*
@@ -141,6 +144,78 @@ Para la primera configuración (elegir entre credenciales personales o laborales
 ```bash
 git config --list | grep ^user\.
 ```
+
+### 3.5. Comandos git no interactivos
+
+**⚠️ IMPORTANTE:** Siempre usar comandos no interactivos para evitar paginadores y editores.
+
+**Comandos recomendados:**
+
+```bash
+# Ver historial de commits (no interactivo)
+git --no-pager log --oneline -10  # últimos 10 commits
+git --no-pager log --oneline -5   # últimos 5 commits
+git log -n 5                      # alternativa sin pager
+
+# Ver diferencias (no interactivo)
+git --no-pager diff
+git --no-pager diff --staged
+
+# Ver estado del repositorio
+git status  # ya es no interactivo por defecto
+
+# Otros comandos de consulta no interactivos
+git --no-pager show HEAD
+git --no-pager branch -v
+```
+
+**Configuración global opcional:**
+
+```bash
+# Deshabilitar pager para todos los comandos git (opcional)
+git config --global pager.log false
+git config --global pager.diff false
+```
+
+### 3.6. Solución de problemas comunes
+
+#### Problema: `quote>` en git commit
+
+**Síntoma:** Al ejecutar `git commit -m "mensaje"` aparece `quote>` y el comando no termina.
+
+**Causa:** Error de escape de comillas en el mensaje de commit.
+
+**Soluciones:**
+
+1. **Escapar comillas correctamente:**
+   ```bash
+   # MAL: comillas dobles dentro de comillas dobles sin escapar
+   git commit -m "fix: correct "user" validation"
+   
+   # BIEN: escapar comillas internas
+   git commit -m "fix: correct \"user\" validation"
+   
+   # MEJOR: usar comillas simples para el mensaje
+   git commit -m 'fix: correct "user" validation'
+   ```
+
+2. **Cancelar el prompt `quote>` si aparece:**
+   ```bash
+   # Presionar Ctrl+C para cancelar el comando incompleto
+   # Luego reescribir el mensaje correctamente
+   ```
+
+3. **Alternativa segura: usar archivo temporal:**
+   ```bash
+   echo "fix: correct user validation" > /tmp/commit_msg
+   git commit -F /tmp/commit_msg
+   rm /tmp/commit_msg
+   ```
+
+**Prevención:**
+- Evitar comillas dobles dentro de mensajes entre comillas dobles
+- Preferir comillas simples para mensajes que contengan comillas dobles
+- Verificar balance de comillas antes de ejecutar el comando
 
 ---
 
