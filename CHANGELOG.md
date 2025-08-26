@@ -10,6 +10,9 @@
 - docs: corregir COMMITTING.md y prompts/cot/committing.md para eliminar uso de editores interactivos, especialmente con git log (usar --no-pager)
 - docs: documentar problema común de `quote>` en git commit por escape incorrecto de comillas en mensajes
 
+### fix
+- configurar repositorio personal para usar identidad personal (incognia@gmail.com) y llave SSH personal (id_ed25519) en lugar de credenciales laborales
+
 ## [2025-08-18]
 
 ### docs
