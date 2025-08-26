@@ -29,5 +29,6 @@ Pasos:
 
 Conclusión:
 - Verifica que el commit aparece en `git --no-pager log --oneline -5` y que el CHANGELOG contiene la fecha en CST y el resumen del cambio.
+- Si aparece `quote>` durante el commit: presionar Ctrl+C y revisar escape de comillas en el mensaje.
 - Referencias: «~/rules/docs/COMMITTING.md» ([../../docs/COMMITTING.md](../../docs/COMMITTING.md)), «~/rules/docs/GIT.md" ([../../docs/GIT.md](../../docs/GIT.md)), «~/rules/README.md" ([../../README.md](../../README.md)) y «~/rules/docs/LINGUISTICS.md" ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)).
 

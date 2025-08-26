@@ -177,6 +177,46 @@ git config --global pager.log false
 git config --global pager.diff false
 ```
 
+### 3.6. Solución de problemas comunes
+
+#### Problema: `quote>` en git commit
+
+**Síntoma:** Al ejecutar `git commit -m "mensaje"` aparece `quote>` y el comando no termina.
+
+**Causa:** Error de escape de comillas en el mensaje de commit.
+
+**Soluciones:**
+
+1. **Escapar comillas correctamente:**
+   ```bash
+   # MAL: comillas dobles dentro de comillas dobles sin escapar
+   git commit -m "fix: correct "user" validation"
+   
+   # BIEN: escapar comillas internas
+   git commit -m "fix: correct \"user\" validation"
+   
+   # MEJOR: usar comillas simples para el mensaje
+   git commit -m 'fix: correct "user" validation'
+   ```
+
+2. **Cancelar el prompt `quote>` si aparece:**
+   ```bash
+   # Presionar Ctrl+C para cancelar el comando incompleto
+   # Luego reescribir el mensaje correctamente
+   ```
+
+3. **Alternativa segura: usar archivo temporal:**
+   ```bash
+   echo "fix: correct user validation" > /tmp/commit_msg
+   git commit -F /tmp/commit_msg
+   rm /tmp/commit_msg
+   ```
+
+**Prevención:**
+- Evitar comillas dobles dentro de mensajes entre comillas dobles
+- Preferir comillas simples para mensajes que contengan comillas dobles
+- Verificar balance de comillas antes de ejecutar el comando
+
 ---
 
 *Elaborado por Rodrigo Álvarez (@incognia)*
