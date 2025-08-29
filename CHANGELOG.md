@@ -1,9 +1,13 @@
+## [2025-08-29] - Corrección de inconsistencias de formato en CHANGELOG
+
+### docs
+- docs: corregir inconsistencias de formato en CHANGELOG.md (entrada duplicada, encabezados sin títulos descriptivos y estructura jerárquica)
+
 ## [2025-08-28] - Especificación formato título descriptivo CHANGELOG
 
 ### docs
 - docs: agregar regla de título descriptivo para encabezados CHANGELOG.md usando formato '[YYYY-MM-DD] - Título descriptivo del cambio principal'
-
-[2025-08-28] docs: actualizar COMMITTING.md para evitar emojis en CHANGELOG y mejorar prompt committing.md con análisis git status y commits múltiples
+- docs: actualizar COMMITTING.md para evitar emojis en CHANGELOG y mejorar prompt committing.md con análisis git status y commits múltiples
 
 # Historial de cambios
 
@@ -11,7 +15,7 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
-## [2025-08-25]
+## [2025-08-25] - Corrección de editores interactivos y configuración SSH personal
 
 ### docs
 - docs: corregir COMMITTING.md y prompts/cot/committing.md para eliminar uso de editores interactivos, especialmente con git log (usar --no-pager)
@@ -20,7 +24,7 @@
 ### fix
 - configurar repositorio personal para usar identidad personal (incognia@gmail.com) y llave SSH personal (id_ed25519) en lugar de credenciales laborales
 
-## [2025-08-18]
+## [2025-08-18] - Reorganización de prompts, CoT y mejoras de documentación
 
 ### docs
 - README.md: actualizar título a «Reglas técnicas: prompts y CoT para acelerar el contexto de los LLM» y añadir definiciones breves de «prompt» y «CoT» al inicio
@@ -71,7 +75,7 @@
 - Corrección rápida: ajustar enlace en README.md a `./docs/STYLING.md` para evitar 404
 - Pendientes propuestos: relajar MD013 a 120, desactivar MD041 en `prompts/**`, permitir MD024 en CHANGELOG, añadir lenguaje a bloques de código y líneas en blanco alrededor de encabezados/listas
 
-## [2025-08-17]
+## [2025-08-17] - Implementación de CoT genérico y roadmap a 90 días
 
 ### docs
 - prompts/cot/repo_context.md: CoT genérico para obtener contexto completo de repos GitHub/GitLab (estructura, dependencias, CI/CD, despliegue, estilo, pruebas, licencias y contribución)
@@ -90,7 +94,7 @@
 ### feat
 - .githooks/pre-commit: hook opcional para bloquear ‘CST’ sin TZ=America/Mexico_City en líneas añadidas
 
-## [2025-08-01]
+## [2025-08-01] - Refinamiento de LINGUISTICS.md y desarrollo de TEACHING.md
 
 ### fix
 - corregir terminología en LICENSING.md: cambiar "desarrollado por" por "elaborado por"
@@ -195,7 +199,7 @@
 - añadir ejemplo práctico de conversión (22:21 UTC → 16:21 CST)
 - especificar uso de TZ="America/Mexico_City" date para conversión automática
 
-## [2025-07-31]
+## [2025-07-31] - Separación GIT/COMMITTING y políticas de respaldo con CST
 
 ### docs
 - agregar referencia a BACKUPS.md en README.md y PHILOSOPHY.md
@@ -249,7 +253,7 @@
 - mejorar documentación de colores CSS con nomenclatura más descriptiva
 - clarificar que información de licencia y timestamps deben ser dinámicos, no hardcodeados
 
-## [2025-01-30]
+## [2025-01-30] - Correcciones finales de mayúsculas y alineación con LINGUISTICS
 
 ### fix
 - corregir uso de mayúsculas después de dos puntos en ATTRIBUTION.md para cumplir con las reglas de LINGUISTICS.md
