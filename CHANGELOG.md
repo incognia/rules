@@ -1,3 +1,5 @@
+[2025-08-28] docs: actualizar COMMITTING.md para evitar emojis en CHANGELOG y mejorar prompt committing.md con análisis git status y commits múltiples
+
 # Historial de cambios
 
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
