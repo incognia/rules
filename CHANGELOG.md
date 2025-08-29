@@ -1,3 +1,8 @@
+## [2025-08-28] - Especificación formato título descriptivo CHANGELOG
+
+### docs
+- docs: agregar regla de título descriptivo para encabezados CHANGELOG.md usando formato '[YYYY-MM-DD] - Título descriptivo del cambio principal'
+
 [2025-08-28] docs: actualizar COMMITTING.md para evitar emojis en CHANGELOG y mejorar prompt committing.md con análisis git status y commits múltiples
 
 # Historial de cambios

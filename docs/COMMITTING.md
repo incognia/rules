@@ -80,6 +80,7 @@ Updated files
 - **Idioma:** el idioma oficial del proyecto (generalmente español mexicano)
 - **Zona horaria:** usar **CST de Ciudad de México (UTC-6)** para todas las fechas. Nunca usar UTC ni la zona horaria local del sistema
 - **Formato de fecha:** usar únicamente fecha sin hora en formato `[YYYY-MM-DD]` según CST Ciudad de México. La hora NO debe incluirse
+- **Título descriptivo:** usar el formato `## [YYYY-MM-DD] - Título descriptivo del cambio principal` para los encabezados de sección
 - **⚠️ IMPORTANTE: NO usar emojis en las entradas del CHANGELOG.md** - mantener el contenido limpio y profesional usando únicamente texto
 
 ⚠️ **ADVERTENCIA CRÍTICA:** Para obtener la fecha CST correcta, NO es suficiente añadir "CST" a una fecha UTC. Debes convertir la fecha restando 6 horas a UTC o usar `TZ="America/Mexico_City" date +"%Y-%m-%d"` para la conversión automática.
