@@ -37,7 +37,7 @@
 - Reorganización: mover documentos temáticos a ./docs/ manteniendo PHILOSOPHY.md en la raíz
 - Enlaces: corregir referencias cruzadas a documentos movidos en README.md, PHILOSOPHY.md, PROMPTS.md y prompts/* (cot, guides, actions)
 - CHANGELOG.md: registrar actualización diaria sin cambios funcionales
-- prompts/cot/committing_personal.md y prompts/cot/committing_corporate.md: marcados como DEPRECATED; usar prompts/cot/committing.md
+- prompts/cot/committing_personal.md y prompts/cot/committing_corporate.md: eliminados; usar prompts/cot/committing.md
 - README.md: añadir nota para desactivar MD041 tras el bloque `---` de front matter en CoT, asegurando renderizado correcto
 - prompts/cot/*: auditoría de MD041 en CoT; confirmada colocación correcta de la etiqueta inmediatamente después del cierre del front matter
 - style(md): corrección de espacios finales (MD009) en múltiples archivos (docs/*, prompts/cot/*, VAULT.md, LINGUISTICS.md, LICENSING.md)
