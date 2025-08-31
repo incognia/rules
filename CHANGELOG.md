@@ -1,25 +1,30 @@
-## [2025-08-29] - Corrección de inconsistencias de formato en CHANGELOG
-
-### docs
-- docs: corregir inconsistencias de formato en CHANGELOG.md (entrada duplicada, encabezados sin títulos descriptivos y estructura jerárquica)
-
-## [2025-08-28] - Especificación formato título descriptivo CHANGELOG
-
-### docs
-- docs: agregar regla de título descriptivo para encabezados CHANGELOG.md usando formato '[YYYY-MM-DD] - Título descriptivo del cambio principal'
-- docs: actualizar COMMITTING.md para evitar emojis en CHANGELOG y mejorar prompt committing.md con análisis git status y commits múltiples
-
 # Historial de cambios
 
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
+## [2025-08-31] - Reestructuración completa del CHANGELOG
+
+### docs
+- reestructurar CHANGELOG.md: corregir estructura invertida (encabezado al inicio), consolidar secciones duplicadas, eliminar redundancias, estandarizar formato y agrupar micro-cambios relacionados
+
+## [2025-08-29] - Corrección de inconsistencias de formato en CHANGELOG
+
+### docs
+- corregir inconsistencias de formato en CHANGELOG.md (entrada duplicada, encabezados sin títulos descriptivos y estructura jerárquica)
+
+## [2025-08-28] - Especificación formato título descriptivo CHANGELOG
+
+### docs
+- agregar regla de título descriptivo para encabezados CHANGELOG.md usando formato '[YYYY-MM-DD] - Título descriptivo del cambio principal'
+- actualizar COMMITTING.md para evitar emojis en CHANGELOG y mejorar prompt committing.md con análisis git status y commits múltiples
+
 ## [2025-08-25] - Corrección de editores interactivos y configuración SSH personal
 
 ### docs
-- docs: corregir COMMITTING.md y prompts/cot/committing.md para eliminar uso de editores interactivos, especialmente con git log (usar --no-pager)
-- docs: documentar problema común de `quote>` en git commit por escape incorrecto de comillas en mensajes
+- corregir COMMITTING.md y prompts/cot/committing.md para eliminar uso de editores interactivos, especialmente con git log (usar --no-pager)
+- documentar problema común de `quote>` en git commit por escape incorrecto de comillas en mensajes
 
 ### fix
 - configurar repositorio personal para usar identidad personal (incognia@gmail.com) y llave SSH personal (id_ed25519) en lugar de credenciales laborales
@@ -136,27 +141,13 @@
 - desarrollar TEACHING.md con perfil educativo detallado basado en proyecto Juno
 - incluir metodologías pedagógicas innovadoras usando herramientas DevOps
 - documentar proyecto Juno como caso de estudio principal en educación STEM
-- añadir proyecto Chicxulub como ejemplo de divulgación científica interdisciplinaria
-- añadir métricas cuantitativas de impacto educativo (6+ años, 50+ estudiantes, 100+ contenedores)
-- especificar herramientas técnicas utilizadas en el aula (Docker, JupyterLab, Python)
+- añadir proyecto Chicxulub como caso de estudio en divulgación científica interdisciplinaria: enfoque programación + geografía + ciencias de la Tierra, métricas de impacto divulgativo y metodología de contextualización histórica
+- añadir métricas cuantitativas de impacto educativo (6+ años, 50+ estudiantes, 100+ contenedores) y especificar herramientas técnicas (Docker, JupyterLab, Python)
 - incluir filosofía de divulgación científica y contribuciones a la comunidad educativa
-- añadir proyecto Chicxulub como segundo caso de estudio en divulgación científica
-- documentar enfoque interdisciplinario (programación + geografía + ciencias de la Tierra)
-- incluir métricas de impacto divulgativo y metodología de contextualización histórica
 - enfatizar actualización obligatoria del CHANGELOG.md en COMMITTING.md con proceso paso a paso
 - añadir advertencias y ejemplos de flujo correcto para evitar olvidos en futuras actualizaciones
 
-### fix
-- corregir TEACHING.md para cumplir con reglas de LINGUISTICS.md
-- poner cursivas en términos técnicos sin traducción directa (*hands-on*)
-- reemplazar anglicismos (troubleshooting → resolución de problemas, feedback → retroalimentación)
-- aplicar formato correcto para préstamos lingüísticos según estándares mexicanos
-
-### fix
-- corregir experiencia docente en TEACHING.md de 6+ años a 8 años
-- actualizar métricas de impacto educativo para reflejar experiencia real
-
-### docs
+### docs (continuación)
 - añadir filosofía de herramientas libres como parte fundamental de la metodología educativa
 - enfatizar uso exclusivo de software libre en entornos educativos
 - clarificar compromiso con licenciamiento GPL para todos los contenidos educativos
@@ -168,37 +159,15 @@
 - refinar redacción y estructura de filosofía multiplataforma con secciones claras
 - eliminar redundancias en principios fundamentales de competencia técnica
 
-### fix
-- corregir terminología en TEACHING.md para cumplir completamente con LINGUISTICS.md
-- cambiar "backup" por "respaldo" en mantenimiento automatizado
-- cambiar "debugging" por "depuración" en perfil de estudiantes destacados
-- cambiar "implementación" por "aplicación" en fórmulas matemáticas
-- cambiar "realizar una tarea/trabajo" por "hacer una tarea/trabajo" en analogía de herramientas
-- cambiar "Soporte" por "Compatibilidad" en adaptación tecnológica
-- reorganizar estructura lógica del documento para mejor flujo narrativo
-- mover filosofía multiplataforma a sección de competencias educativas
-- establecer orden coherente: filosofía → especialización → competencias → proyectos → contexto → divulgación
-- ampliar experiencia docente con enfoques Montessori y secundarias activas
-- añadir participación en programas sociales para poblaciones vulnerables
-- incluir sección de integración de experiencia y filosofía educativa
-- conectar experiencia diversa con principios de democratización del conocimiento
-- especificar enseñanza de C++ con Arduino en programas sociales para comunidades vulnerables
-- añadir sección de intersección profesional-educativa en PHILOSOPHY.md
-- conectar especialización DevOps con aplicación pedagógica de infraestructura como código
-- integrar filosofía de democratización técnica en ambos contextos profesional y educativo
-
-### fix
+### fix (continuación)
+- corregir TEACHING.md para cumplir con reglas de LINGUISTICS.md: cursivas en términos técnicos (*hands-on*), anglicismos (troubleshooting → resolución de problemas, feedback → retroalimentación), formato de préstamos lingüísticos
+- corregir experiencia docente en TEACHING.md de 6+ años a 8 años y actualizar métricas de impacto educativo
+- corregir terminología en TEACHING.md: "backup" → "respaldo", "debugging" → "depuración", "implementación" → "aplicación", "realizar" → "hacer", "Soporte" → "Compatibilidad"
+- reorganizar estructura lógica de TEACHING.md: filosofía → especialización → competencias → proyectos → contexto → divulgación
+- ampliar experiencia docente con enfoques Montessori, secundarias activas y programas sociales para poblaciones vulnerables
+- añadir sección de intersección profesional-educativa en PHILOSOPHY.md conectando DevOps con pedagogía
 - corregir typo en PHILOSOPHY.md: "intersacción" → "intersección"
-- corregir especificaciones de zona horaria en BACKUPS.md para calcular correctamente CST (UTC-6)
-- añadir advertencia crítica sobre NO usar solo sufijo CST sin convertir fecha UTC
-- especificar que se debe restar 6 horas a UTC o usar TZ="America/Mexico_City" para conversión automática
-- agregar comentarios explicativos en código de ejemplo sobre conversión automática de zona horaria
-- corregir especificaciones de zona horaria en COMMITTING.md para CHANGELOG.md
-- añadir advertencia sobre conversión correcta CST (no solo cambiar sufijo)
-- especificar formato correcto: UTC-6, NO UTC con sufijo CST
-- corregir especificaciones de zona horaria en STYLING.md para timestamps dinámicos
-- añadir ejemplo práctico de conversión (22:21 UTC → 16:21 CST)
-- especificar uso de TZ="America/Mexico_City" date para conversión automática
+- corregir especificaciones de zona horaria CST en múltiples documentos (BACKUPS.md, COMMITTING.md, STYLING.md): advertencia sobre conversión correcta UTC-6, uso de TZ="America/Mexico_City", ejemplo práctico 22:21 UTC → 16:21 CST
 
 ## [2025-07-31] - Separación GIT/COMMITTING y políticas de respaldo con CST
 
@@ -228,30 +197,19 @@
 
 ### fix
 - corregir uso de mayúsculas después de dos puntos en README.md para cumplir con LINGUISTICS.md
-
-### feat
-- crear BACKUPS.md con políticas de respaldos y operaciones destructivas
-- especificar zona horaria CST obligatoria para todos los timestamps
-- actualizar scripts de respaldo para usar TZ="America/Mexico_City"
-
-### feat
-- añadir badges informativos al README.md (licencia GPLv3, Markdown, español mexicano)
-- crear sección de flujo de decisión en README.md para explicar aplicación de reglas duales (personal/laboral)
-
-### style
-- cambiar color de iconos en sección de contacto a --promad para mejor consistencia visual
-- crear STYLING.md con reglas de estilo para documentos Markdown laborales
-- definir paleta de colores corporativa con nombres descriptivos (midnight, electric, lavender)
-- establecer estructura estándar para encabezados y pies de página corporativos
-- incluir timestamp dinámico con formato legible en español mexicano
-
-### fix
 - renombrar COMMITING.md a COMMITTING.md para corregir error ortográfico
 
-### docs
-- actualizar PHILOSOPHY.md para reflejar el cambio de nombre de COMMITTING.md
-- añadir referencia a STYLING.md en PHILOSOPHY.md con aclaración de alcance laboral
-- mejorar documentación de colores CSS con nomenclatura más descriptiva
+### feat
+- crear BACKUPS.md con políticas de respaldos y operaciones destructivas, zona horaria CST obligatoria y scripts actualizados con TZ="America/Mexico_City"
+- añadir badges informativos al README.md (licencia GPLv3, Markdown, español mexicano) y sección de flujo de decisión para reglas duales
+
+### style
+- crear STYLING.md con reglas de estilo para documentos Markdown laborales: paleta corporativa (midnight, electric, lavender), estructura estándar para encabezados/pies, timestamp dinámico en español mexicano
+- cambiar color de iconos en sección de contacto a --promad para consistencia visual
+
+### docs (continuación)
+- actualizar PHILOSOPHY.md para reflejar cambio de nombre de COMMITTING.md y añadir referencia a STYLING.md con alcance laboral
+- mejorar documentación de colores CSS con nomenclatura descriptiva
 - clarificar que información de licencia y timestamps deben ser dinámicos, no hardcodeados
 
 ## [2025-01-30] - Correcciones finales de mayúsculas y alineación con LINGUISTICS
