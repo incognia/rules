@@ -12,7 +12,7 @@ Razonamiento:
 - CRÍTICO: usar `git status` para analizar los cambios antes de proceder y determinar si requieren commits separados.
 - Evaluar si los cambios son de tipos mixtos (ej. feat + fix, docs + refactor) que requieran commits atómicos separados.
 - Usar fecha en CST (Ciudad de México) calculada con TZ; no rotular CST a horas UTC.
-- Mensaje de commit en inglés con Conventional Commits; documentación en español mexicano.
+- CRÍTICO: Mensaje de commit SIEMPRE en inglés internacional con Conventional Commits; documentación en español mexicano.
 - El push debe ser simple (`git push`) siempre que el repo haya sido configurado inicialmente (ver «~/rules/GIT.md» sección de configuración inicial).
 
 Pasos:

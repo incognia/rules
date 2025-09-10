@@ -4,6 +4,15 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
+## [2025-09-10] - Corrección crítica de regla de idioma en commits
+
+### fix
+- corregir inconsistencia en regla de idioma de commits: TODOS los mensajes de commit deben estar en inglés internacional
+- actualizar prompts/cot/committing.md línea 15: enfatizar "CRÍTICO" para mensajes de commit en inglés
+- actualizar referencia en CRITICAL_COMMIT_LANGUAGE.md para mantener consistencia con el texto corregido
+- resolver conflicto entre reglas donde algunos documentos sugerían commits en español vs inglés
+- clarificar distribución de idiomas: commits en inglés, documentación en español mexicano
+
 ## [2025-08-31] - Reestructuración completa del CHANGELOG
 
 ### docs

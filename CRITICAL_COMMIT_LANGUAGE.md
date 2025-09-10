@@ -21,7 +21,7 @@ git commit -m "docs: actualizar guía de instalación"
 ## Referencia
 
 - **Fuente:** ~/cot/committing.md línea 15
-- **Texto exacto:** "Mensaje de commit en inglés con Conventional Commits; documentación en español mexicano."
+- **Texto exacto:** "CRÍTICO: Mensaje de commit SIEMPRE en inglés internacional con Conventional Commits; documentación en español mexicano."
 
 ## Checkpoint obligatorio
 
