@@ -24,7 +24,10 @@ Pasos:
 5) Acción: préstamos técnicos (cursiva).
    Resultado: cursiva en *commit*, *pull request*, *pipeline*, *container*, *render*, *stack*, *bare-metal*.
 6) Acción: tipografía de títulos y encabezados.
+   COMANDO OBLIGATORIO: `grep -n "^#" archivo.md` para listar TODOS los títulos H1-H6
+   Validación: Revisar cada línea encontrada individualmente y corregir Title Case
    Resultado: estilo oración (primera palabra y nombres propios con mayúscula), sin punto final; después de dos puntos, minúscula salvo nombre propio.
+   CRÍTICO: No marcar este paso como completo sin documentar cada título encontrado y su corrección aplicada.
 7) Acción: comillas (texto vs código).
    Resultado: «» en texto; "" solo en comentarios de scripts/código. Verificar que ejemplos de código mantengan comillas dobles.
 8) Acción: sutilezas de redacción.
@@ -41,6 +44,13 @@ Pasos:
     Resultado: rechazar «librería» (por «biblioteca»), «IT», peninsularismos, verbos con -ear, Título Con Cada Palabra En Mayúscula, mayúscula tras dos puntos, pluralizar siglas, tercera persona impersonal.
 14) Acción: expresiones idiomáticas mexicanas.
     Resultado: permitir en contextos informales internos; moderar en documentación oficial/corporativa; mantener es_MX.
+
+VERIFICACIÓN OBLIGATORIA (antes de completar):
+- Ejecutar: `grep -n "^#" archivo.md` y documentar cada título encontrado
+- Confirmar: ninguno usa "Título Con Cada Palabra En Mayúscula"
+- Listar: todos los cambios de capitalización aplicados
+- Validar: uso correcto de cursivas en préstamos técnicos (*stack*, *commit*, etc.)
+- Verificar: corrección de todos los calcos del inglés identificados
 
 Conclusión:
 - Entregar: (a) lista de hallazgos y reemplazos propuestos; (b) fragmentos corregidos con comillas y mayúsculas adecuadas; (c) si hay timestamps, ejemplo correcto con TZ; (d) nota si se usaron o moderaron expresiones idiomáticas.
