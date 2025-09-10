@@ -4,11 +4,18 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
-## [2025-09-10] - Corrección crítica de regla de idioma en commits
+## [2025-09-10] - Mejoras al CoT linguistics y corrección crítica de regla de idioma en commits
+
+### improve
+- mejorar cot/linguistics.md con validación programática obligatoria para evitar aplicación superficial
+- agregar comando obligatorio `grep -n "^#" archivo.md` en paso 6 para validación sistemática de títulos
+- requerir documentación explícita de cada título encontrado y su corrección aplicada
+- añadir sección de verificación obligatoria antes de completar el CoT
+- prevenir omisión de corrección de Title Case mediante verificación programática forzada
 
 ### fix
 - corregir inconsistencia en regla de idioma de commits: TODOS los mensajes de commit deben estar en inglés internacional
-- actualizar prompts/cot/committing.md línea 15: enfatizar "CRÍTICO" para mensajes de commit en inglés
+- actualizar prompts/cot/committing.md línea 15: enfatizar «CRÍTICO» para mensajes de commit en inglés
 - actualizar referencia en CRITICAL_COMMIT_LANGUAGE.md para mantener consistencia con el texto corregido
 - resolver conflicto entre reglas donde algunos documentos sugerían commits en español vs inglés
 - clarificar distribución de idiomas: commits en inglés, documentación en español mexicano
