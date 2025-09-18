@@ -10,6 +10,18 @@
 - extender prompts/cot/context.md para buscar archivos WARP.md y .warp.md en el análisis de documentación del proyecto
 - incluir ambas variantes (WARP.md estándar y .warp.md como *dotfile*) en verificación de existencia y lectura automática
 - agregar referencias específicas para configuración y reglas de proyecto en sección de Referencias del CoT
+- crear WARP.md con guía completa para instancias futuras de WARP terminal en este repositorio
+- incluir descripción del propósito del repositorio (reglas técnicas, filosofía y CoT para LLM)
+- documentar filosofía central: combatir mercenazgo, egoísmo técnico y pérdida de identidad cultural
+- especificar comandos de desarrollo común: lint markdown (npm run lint:md), verificación de enlaces, scripts de respaldo
+- detallar flujo de commits crítico: actualizar CHANGELOG.md primero, luego add/commit/push
+- documentar arquitectura de directorios: docs/ (reglas), prompts/ (CoT y plantillas), scripts/ (herramientas)
+- incluir contextos duales: personal (@incognia, GPLv3) vs corporativo (@incogniadev, MIT)
+- especificar sistema Chain-of-Thought con formato estructurado (Razonamiento, Pasos, Conclusión)
+- documentar manejo crítico de zona horaria CST (UTC - 6 horas, nunca solo agregar sufijo)
+- incluir especialización técnica: Kubernetes, GitOps, mallas de servicios, observabilidad
+- definir 7 reglas clave incluyendo lectura completa de CoT y flujo obligatorio de CHANGELOG
+- establecer integración con otros repositorios mediante rutas ~/rules/
 
 ## [2025-09-17] - Mejoras críticas para cálculo preciso de zona horaria CST y reorganización estructural
 
