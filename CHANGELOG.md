@@ -4,6 +4,14 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
+## [2025-09-17] - Mejoras críticas para cálculo preciso de zona horaria CST
+
+### docs
+- reforzar instrucciones de timezone en prompts/cot/committing.md para evitar error común de rotular CST a horas UTC
+- añadir verificación obligatoria con `TZ=America/Mexico_City date` para obtener tiempo CST real
+- incluir ejemplos prácticos de conversión: UTC 14:30 → CST 08:30, UTC 03:15 → CST 21:15 (día anterior)
+- enfatizar cálculo matemático preciso: CST = UTC - 6 horas con manejo correcto de cambio de día
+
 ## [2025-09-10] - Mejoras al CoT linguistics y corrección crítica de regla de idioma en commits
 
 ### improve
