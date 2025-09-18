@@ -17,32 +17,38 @@ Razonamiento:
 - El push debe ser simple (`git push`) siempre que el repo haya sido configurado inicialmente (ver «~/rules/GIT.md» sección de configuración inicial).
 
 Pasos:
-0) Acción: analizar el estado actual del repositorio para identificar tipos de cambios.
+0) Acción: validar que el repositorio esté configurado correctamente antes de proceder.
+   COMANDO OBLIGATORIO: `git config --list | grep -E "^(user\.(name|email)|core\.sshCommand|remote\.origin)"`
+   Validación: confirmar que existen user.name, user.email, core.sshCommand y remote.origin
+   Si falta configuración: aplicar «~/rules/prompts/cot/git_init.md» ([./git_init.md](./git_init.md)) antes de continuar
+   Resultado: repositorio validado y listo para commits, o redirigir a inicialización.
+
+1) Acción: analizar el estado actual del repositorio para identificar tipos de cambios.
    Resultado: `git status` - examinar archivos modificados/añadidos/eliminados y sus propósitos.
    Evaluación: determinar si los cambios son de un solo tipo (ej. solo docs) o mixtos (ej. feat + fix).
    Decisión: si son mixtos, planificar commits atómicos separados usando `git add` selectivo por archivo/directorio.
 
-1) Acción: calcular la fecha CST correcta para el CHANGELOG (sin hora).
+2) Acción: calcular la fecha CST correcta para el CHANGELOG (sin hora).
    OBLIGATORIO: ejecutar `TZ=America/Mexico_City date` para obtener fecha/hora CST real.
    Resultado: `DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")`.
    Verificación: comparar con `date -u` (UTC) para confirmar que el cálculo es correcto (CST = UTC - 6h).
 
-2) Acción: editar CHANGELOG.md y agregar entrada(s) bajo `## [${DATE_CST}]` según tipos de cambios identificados.
+3) Acción: editar CHANGELOG.md y agregar entrada(s) bajo `## [${DATE_CST}]` según tipos de cambios identificados.
    Referencia: aplicar «~/rules/prompts/cot/changelog.md» ([./changelog.md](./changelog.md)) para mantenimiento correcto del *changelog*
    Resultado: nueva(s) línea(s) tipo `- docs: descripción breve del cambio` en español mexicano (solo fecha, sin hora).
    Nota: si hay múltiples tipos, agregar una línea por cada tipo de cambio.
 
-3) Acción: realizar commits atómicos según análisis del paso 0.
+4) Acción: realizar commits atómicos según análisis del paso 1.
    - Si cambios homogéneos (un tipo): `git add -A && git commit -m "tipo: descripción"`
    - Si cambios mixtos: commits separados usando `git add archivo(s)` selectivo por cada tipo:
      * `git add archivo1 archivo2 && git commit -m "feat: descripción funcionalidad"`
      * `git add archivo3 && git commit -m "fix: descripción corrección"`
      * etc.
 
-4) Acción: push simple de todos los commits.
+5) Acción: push simple de todos los commits.
    Resultado: `git push`.
 
-5) Acción: verificación no interactiva de los commits realizados.
+6) Acción: verificación no interactiva de los commits realizados.
    Resultado: `git --no-pager log --oneline -5` (ver últimos commits sin paginador).
 
 Conclusión:
@@ -51,5 +57,5 @@ Conclusión:
 - Si fueron commits múltiples, asegurar que cada uno es atómico y tiene mensaje convencional apropiado (feat, fix, docs, etc.).
 - Si aparece `quote>` durante el commit: presionar Ctrl+C y revisar escape de comillas en el mensaje.
 - La atomicidad de commits facilita el mantenimiento: cada commit debe representar un cambio lógico único y funcional.
-- Referencias: «~/rules/docs/COMMITTING.md» ([../../docs/COMMITTING.md](../../docs/COMMITTING.md)), «~/rules/prompts/cot/changelog.md» ([./changelog.md](./changelog.md)), «~/rules/docs/GIT.md» ([../../docs/GIT.md](../../docs/GIT.md)), «~/rules/README.md» ([../../README.md](../../README.md)) y «~/rules/docs/LINGUISTICS.md» ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)).
+- Referencias: «~/rules/docs/COMMITTING.md» ([../../docs/COMMITTING.md](../../docs/COMMITTING.md)), «~/rules/prompts/cot/changelog.md» ([./changelog.md](./changelog.md)), «~/rules/prompts/cot/git_init.md» ([./git_init.md](./git_init.md)), «~/rules/docs/GIT.md» ([../../docs/GIT.md](../../docs/GIT.md)), «~/rules/README.md» ([../../README.md](../../README.md)) y «~/rules/docs/LINGUISTICS.md» ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)).
 
