@@ -21,7 +21,7 @@ Pasos:
 
 2) Acción: corregir MD022/MD032 (líneas en blanco) en archivos prioritarios.
    Resultado:
-   - Objetivo: docs/LINGUISTICS.md, docs/GIT.md, docs/TEACHING.md, PROMPTS.md, docs/ROADMAP.md, README.md.
+   - Objetivo: docs/LINGUISTICS.md, docs/GIT.md, docs/TEACHING.md, PROMPTS.md, ROADMAP.md, README.md.
    - Regla práctica: añadir una línea en blanco después de cada encabezado y antes/después de listas.
 
 3) Acción: corregir MD031/MD040 (cercas de código y lenguaje).

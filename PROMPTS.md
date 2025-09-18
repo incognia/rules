@@ -1,3 +1,4 @@
+
 # PROMPTS — Guía de cadena de razonamiento (Chain-of-Thought) en español mexicano
 
 Creado: 17 de agosto de 2025, 02:18 CST (Ciudad de México)
@@ -107,4 +108,3 @@ Reglas de estilo
 - Wei et al. (2022/2023): Chain-of-Thought Prompting Elicits Reasoning in Large Language Models — [arXiv:2201.11903](https://arxiv.org/abs/2201.11903)
 - LINGUISTICS.md — reglas lingüísticas del repo (ver ./docs/LINGUISTICS.md)
 - README.md — convenciones de fechas/horas y navegación
-

@@ -128,24 +128,28 @@ Los proyectos personales bajo GPLv3 contribuyen al *commons* del software libre,
 Los detalles específicos de implementación de esta filosofía se encuentran organizados en los siguientes documentos (para una visión rápida, ver README.md):
 
 ### Reglas universales (ambos contextos)
+
 - **[LINGUISTICS.md](./docs/LINGUISTICS.md)** - reglas lingüísticas de español mexicano como referente
 - **[COMMITTING.md](./docs/COMMITTING.md)** - reglas para mensajes de *commit* y gestión de cambios
 - **[BACKUPS.md](./docs/BACKUPS.md)** - políticas de respaldos y operaciones destructivas
 - **[GIT.md](./docs/GIT.md)** - configuración inicial de repositorios
 - **[GLOSSARY.md](./docs/GLOSSARY.md)** - glosario técnico de términos empleados
 - **[CHANGELOG.md](./CHANGELOG.md)** - historial de cambios del proyecto
-- **[ROADMAP.md](./docs/ROADMAP.md)** - ruta de implementación a 90 días (CoT y automatizaciones)
+- **[ROADMAP.md](./ROADMAP.md)** - ruta de implementación a 90 días (CoT y automatizaciones)
 - **[TODO.md](./docs/TODO.md)** - lista de tareas tácticas (siguientes pasos)
 
 ### Reglas de uso dual (aplicación diferenciada por contexto)
+
 - **[LICENSING.md](./docs/LICENSING.md)** - reglas de licenciamiento para proyectos
 - **[CORPORATE.md](./docs/CORPORATE.md)** - perfil profesional corporativo
 - **[TEACHING.md](./docs/TEACHING.md)** - perfil educativo y de divulgación científica
 
 ### Reglas de uso exclusivamente personal
+
 - **[ATTRIBUTION.md](./docs/ATTRIBUTION.md)** - reglas de atribución personal
 
 ### Reglas de uso exclusivamente laboral
+
 - **[STYLING.md](./docs/STYLING.md)** - reglas de estilo para documentos Markdown corporativos
 
 ---

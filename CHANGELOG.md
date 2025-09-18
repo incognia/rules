@@ -6,6 +6,14 @@
 
 ## [2025-09-17] - Mejoras críticas para cálculo preciso de zona horaria CST y reorganización estructural
 
+### docs
+- consolidar ROADMAP.md en raíz combinando infraestructura CoT con análisis de cobertura específica
+- corregir systemáticamente errores de lint Markdown en archivos principales (README, ROADMAP, CHANGELOG, PROMPTS, PHILOSOPHY)
+- añadir espacios en blanco alrededor de encabezados y listas según MD022/MD032
+- corregir enlaces huérfanos tras movimiento de docs/ROADMAP.md a raíz
+- especificar lenguajes en bloques de código y corregir prefijos de listas ordenadas
+- instalar y configurar npm/nodejs para verificación de enlaces y lint automático
+
 ### refactor
 - mover CRITICAL_COT_READING.md de raíz a docs/ para mejor organización
 - consolidar CRITICAL_COMMIT_LANGUAGE.md y COMMIT_LANGUAGE_PROTOCOL.md en docs/COMMIT_LANGUAGE_PROTOCOL.md unificado
@@ -61,7 +69,7 @@
 - documentar problema común de `quote>` en git commit por escape incorrecto de comillas en mensajes
 
 ### fix
-- configurar repositorio personal para usar identidad personal (incognia@gmail.com) y llave SSH personal (id_ed25519) en lugar de credenciales laborales
+- configurar repositorio personal para usar identidad personal `incognia@gmail.com` y llave SSH personal (id_ed25519) en lugar de credenciales laborales
 
 ## [2025-08-18] - Reorganización de prompts, CoT y mejoras de documentación
 
@@ -260,4 +268,5 @@
 
 ---
 
+<!-- markdownlint-disable MD036 -->
 *Elaborado por Rodrigo Álvarez (@incognia)*

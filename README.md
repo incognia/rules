@@ -28,7 +28,7 @@ Un manifiesto contra tres males endémicos en tecnología latinoamericana:
 
 - **[PHILOSOPHY.md](./PHILOSOPHY.md)** - filosofía principal y manifiesto de desarrollo
 - **[PROMPTS.md](./PROMPTS.md)** - guía de Chain-of-Thought (CoT) en es_MX
-- **[ROADMAP.md](./docs/ROADMAP.md)** - ruta de 90 días para CoT y automatizaciones
+- **[ROADMAP.md](./ROADMAP.md)** - ruta de 90 días para CoT y automatizaciones
 - **[TODO.md](./docs/TODO.md)** - tareas tácticas inmediatas (CoT y mejoras)
 - **[CORPORATE.md](./docs/CORPORATE.md)** - perfil profesional corporativo
 - **[TEACHING.md](./docs/TEACHING.md)** - perfil educativo y de divulgación científica
@@ -156,13 +156,14 @@ echo "UTC: $(date -u '+%H:%M')" && echo "CST: $(TZ=America/Mexico_City date '+%H
 ```
 
 Ejemplos de conversión UTC → CST:
+
 - UTC 14:30 → CST 08:30 (14 - 6 = 8)
 - UTC 03:15 → CST 21:15 (día anterior, 03 - 6 = -3, entonces 24 - 3 = 21)
-
 
 ## Uso
 
 Estos documentos sirven como referencia para mantener consistencia en:
+
 - metodologías de trabajo técnico
 - estándares de infraestructura y documentación
 - políticas de licenciamiento
