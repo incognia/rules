@@ -4,7 +4,7 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
-## [2025-09-18] - Mejoras al CoT de contexto para proyectos colaborativos e infraestructura Kubernetes/Talos
+## [2025-09-18] - Mejoras integrales a CoT de contexto y committing para infraestructura y cuentas múltiples
 
 ### docs
 - afinar prompts/cot/context.md v2.1: agregar búsqueda de READMEs en subdirectorios de segundo y tercer nivel para proyectos colaborativos con múltiples equipos
@@ -18,14 +18,6 @@
 - expandir documentación de hallazgos para incluir orquestación, configuración de clusters y READMEs adicionales
 - agregar lectura automática de READMEs encontrados en subdirectorios con primeras 20 líneas
 - incluir detección de GitLab CI (.gitlab-ci.yml) además de GitHub Actions
-- afinar prompts/cot/committing.md v1.1: agregar validación visual de identidad activa para usuarios con múltiples cuentas y llaves SSH
-- incluir display obligatorio de email, nombre, llave SSH y remoto antes de proceder con commits
-- agregar verificación crítica para confirmar que la identidad mostrada coincide con la esperada para el repositorio
-- incorporar pistas específicas para usuarios con cuentas múltiples en sección de conclusiones
-
-## [2025-09-18] - Extensión del CoT de contexto para detectar archivos WARP
-
-### docs
 - extender prompts/cot/context.md para buscar archivos WARP.md y .warp.md en el análisis de documentación del proyecto
 - incluir ambas variantes (WARP.md estándar y .warp.md como *dotfile*) en verificación de existencia y lectura automática
 - agregar referencias específicas para configuración y reglas de proyecto en sección de Referencias del CoT
@@ -41,6 +33,12 @@
 - incluir especialización técnica: Kubernetes, GitOps, mallas de servicios, observabilidad
 - definir 7 reglas clave incluyendo lectura completa de CoT y flujo obligatorio de CHANGELOG
 - establecer integración con otros repositorios mediante rutas ~/rules/
+
+### improve
+- afinar prompts/cot/committing.md v1.1: agregar validación visual de identidad activa para usuarios con múltiples cuentas y llaves SSH
+- incluir display obligatorio de email, nombre, llave SSH y remoto antes de proceder con commits
+- agregar verificación crítica para confirmar que la identidad mostrada coincide con la esperada para el repositorio
+- incorporar pistas específicas para usuarios con cuentas múltiples en sección de conclusiones
 
 ## [2025-09-17] - Mejoras críticas para cálculo preciso de zona horaria CST y reorganización estructural
 
