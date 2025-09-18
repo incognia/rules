@@ -18,10 +18,15 @@ Razonamiento:
 
 Pasos:
 0) Acción: validar que el repositorio esté configurado correctamente antes de proceder.
-   COMANDO OBLIGATORIO: `git config --list | grep -E "^(user\.(name|email)|core\.sshCommand|remote\.origin)"`
-   Validación: confirmar que existen user.name, user.email, core.sshCommand y remote.origin
-   Si falta configuración: aplicar «~/rules/prompts/cot/git_init.md» ([./git_init.md](./git_init.md)) antes de continuar
-   Resultado: repositorio validado y listo para commits, o redirigir a inicialización.
+   COMANDOS OBLIGATORIOS: 
+   - `git config --list | grep -E "^(user\.(name|email)|core\.sshCommand|remote\.origin)"`
+   - `git remote -v` para verificar URLs de remotos
+   Validaciones críticas:
+   - Confirmar que existen: user.name, user.email, core.sshCommand y remote.origin
+   - **CRÍTICO**: verificar que remote.origin usa SSH (git@github.com o git@gitlab.com), NO HTTPS
+   - Si usa HTTPS: indica configuración incorrecta, redirigir a git_init
+   Si falta cualquier configuración: aplicar «~/rules/prompts/cot/git_init.md» ([./git_init.md](./git_init.md)) antes de continuar
+   Resultado: repositorio validado con SSH y listo para commits, o redirigir a inicialización.
 
 1) Acción: analizar el estado actual del repositorio para identificar tipos de cambios.
    Resultado: `git status` - examinar archivos modificados/añadidos/eliminados y sus propósitos.
@@ -56,6 +61,7 @@ Conclusión:
 - EJEMPLO de verificación de timezone: si UTC es 14:30, CST debe ser 08:30 (14 - 6 = 8); si UTC es 03:15, CST debe ser 21:15 del día anterior.
 - Si fueron commits múltiples, asegurar que cada uno es atómico y tiene mensaje convencional apropiado (feat, fix, docs, etc.).
 - Si aparece `quote>` durante el commit: presionar Ctrl+C y revisar escape de comillas en el mensaje.
+- **PISTA IMPORTANTE**: si `git remote -v` muestra URLs con https:// en lugar de git@, indica configuración incorrecta y debe aplicarse git_init.
 - La atomicidad de commits facilita el mantenimiento: cada commit debe representar un cambio lógico único y funcional.
 - Referencias: «~/rules/docs/COMMITTING.md» ([../../docs/COMMITTING.md](../../docs/COMMITTING.md)), «~/rules/prompts/cot/changelog.md» ([./changelog.md](./changelog.md)), «~/rules/prompts/cot/git_init.md» ([./git_init.md](./git_init.md)), «~/rules/docs/GIT.md» ([../../docs/GIT.md](../../docs/GIT.md)), «~/rules/README.md» ([../../README.md](../../README.md)) y «~/rules/docs/LINGUISTICS.md» ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)).
 
