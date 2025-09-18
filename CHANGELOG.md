@@ -13,6 +13,7 @@
 - corregir enlaces huérfanos tras movimiento de docs/ROADMAP.md a raíz
 - especificar lenguajes en bloques de código y corregir prefijos de listas ordenadas
 - instalar y configurar npm/nodejs para verificación de enlaces y lint automático
+- crear CoT para mantenimiento de *changelog* con corrección de errores comunes: orden cronológico inverso, cálculo preciso de CST, detección de duplicados y consistencia lingüística en español mexicano
 
 ### refactor
 - mover CRITICAL_COT_READING.md de raíz a docs/ para mejor organización
