@@ -14,6 +14,7 @@
 - especificar lenguajes en bloques de código y corregir prefijos de listas ordenadas
 - instalar y configurar npm/nodejs para verificación de enlaces y lint automático
 - crear CoT para mantenimiento de *changelog* en prompts/cot/changelog.md con corrección de errores comunes: orden cronológico inverso, cálculo preciso de CST, detección de duplicados y consistencia lingüística en español mexicano
+- agregar referencia lógica en prompts/cot/committing.md hacia CoT de *changelog* para flujo coherente de actualización
 
 ### fix
 - corregir enlaces relativos rotos en prompts/cot/changelog.md tras movimiento de ubicación inicial

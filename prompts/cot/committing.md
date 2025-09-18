@@ -28,6 +28,7 @@ Pasos:
    Verificación: comparar con `date -u` (UTC) para confirmar que el cálculo es correcto (CST = UTC - 6h).
 
 2) Acción: editar CHANGELOG.md y agregar entrada(s) bajo `## [${DATE_CST}]` según tipos de cambios identificados.
+   Referencia: aplicar «~/rules/prompts/cot/changelog.md» ([./changelog.md](./changelog.md)) para mantenimiento correcto del *changelog*
    Resultado: nueva(s) línea(s) tipo `- docs: descripción breve del cambio` en español mexicano (solo fecha, sin hora).
    Nota: si hay múltiples tipos, agregar una línea por cada tipo de cambio.
 
@@ -50,5 +51,5 @@ Conclusión:
 - Si fueron commits múltiples, asegurar que cada uno es atómico y tiene mensaje convencional apropiado (feat, fix, docs, etc.).
 - Si aparece `quote>` durante el commit: presionar Ctrl+C y revisar escape de comillas en el mensaje.
 - La atomicidad de commits facilita el mantenimiento: cada commit debe representar un cambio lógico único y funcional.
-- Referencias: «~/rules/docs/COMMITTING.md» ([../../docs/COMMITTING.md](../../docs/COMMITTING.md)), «~/rules/docs/GIT.md" ([../../docs/GIT.md](../../docs/GIT.md)), «~/rules/README.md" ([../../README.md](../../README.md)) y «~/rules/docs/LINGUISTICS.md" ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)).
+- Referencias: «~/rules/docs/COMMITTING.md» ([../../docs/COMMITTING.md](../../docs/COMMITTING.md)), «~/rules/prompts/cot/changelog.md» ([./changelog.md](./changelog.md)), «~/rules/docs/GIT.md» ([../../docs/GIT.md](../../docs/GIT.md)), «~/rules/README.md» ([../../README.md](../../README.md)) y «~/rules/docs/LINGUISTICS.md» ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)).
 
