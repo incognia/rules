@@ -8,7 +8,7 @@ validacion: CHANGELOG.md ordenado inversamente, fechas CST correctas, sin duplic
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
-- Regla principal: CHANGELOG.md debe seguir orden cronológico inverso (más reciente arriba) con fechas en CST Ciudad de México calculadas correctamente (ver «~/rules/CHANGELOG.md», «~/rules/docs/LINGUISTICS.md» y «~/rules/prompts/cot/committing.md»).
+- Regla principal: CHANGELOG.md debe seguir orden cronológico inverso (más reciente arriba) con fechas en CST Ciudad de México calculadas correctamente (ver «~/rules/CHANGELOG.md» ([../../CHANGELOG.md](../../CHANGELOG.md)), «~/rules/docs/LINGUISTICS.md» ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)) y «~/rules/prompts/cot/committing.md» ([./committing.md](./committing.md))).
 - Errores comunes críticos: (1) orden cronológico incorrecto, (2) cálculo erróneo de CST (etiquetar UTC como CST), (3) duplicar entradas idénticas, (4) mezclar inglés con español mexicano.
 - Flujo: verificar zona horaria actual → revisar orden cronológico → detectar duplicados → aplicar reglas lingüísticas → validar estructura.
 
@@ -71,4 +71,4 @@ VERIFICACIÓN CRÍTICA (antes de completar):
 Conclusión:
 - Entregar: CHANGELOG.md actualizado con nueva entrada en posición cronológica correcta, fecha CST precisa, idioma consistente español mexicano, sin duplicados, categorías organizadas semánticamente.
 - Evitar: mezclar idiomas, etiquetar UTC como CST, orden cronológico incorrecto, duplicar entradas, micro-cambios sin agrupar.
-- Referencias: «~/rules/CHANGELOG.md», «~/rules/docs/LINGUISTICS.md», «~/rules/prompts/cot/committing.md» para flujo completo.
+- Referencias: «~/rules/CHANGELOG.md» ([../../CHANGELOG.md](../../CHANGELOG.md)), «~/rules/docs/LINGUISTICS.md» ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)), «~/rules/prompts/cot/committing.md» ([./committing.md](./committing.md)) para flujo completo.
