@@ -118,6 +118,7 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 - Ejemplos: carpeta [prompts/cot/](./prompts/cot/)
 - Buenas prácticas lingüísticas: [LINGUISTICS.md](./docs/LINGUISTICS.md)
 - Flujo de commits y CHANGELOG: [COMMITTING.md](./docs/COMMITTING.md)
+- **Nuevo**: CoT genérico para obtener contexto de proyectos: [prompts/cot/context.md](./prompts/cot/context.md)
 - **Nuevo**: CoT para mantenimiento de CHANGELOG: [prompts/cot/changelog.md](./prompts/cot/changelog.md)
 - **Mejorado**: CoT de commits con validación SSH: [prompts/cot/committing.md](./prompts/cot/committing.md)
 

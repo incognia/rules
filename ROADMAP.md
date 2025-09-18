@@ -1,6 +1,6 @@
 # ROADMAP — Desarrollo CoT y automatización de reglas técnicas
 
-**Última actualización**: 2025-09-17 23:21 CST (Ciudad de México)
+**Última actualización**: 2025-09-17 23:46 CST (Ciudad de México)
 
 ## Visión
 
@@ -23,10 +23,10 @@ Total documentos técnicos (docs/): 14 documentos
 ├── Sin CoT: 8 documentos (57%)
 └── Cobertura objetivo: 100%
 
-Total CoTs existentes: 14 archivos
-├── Vinculados a docs/: 6 (43%)
-├── Independientes: 8 (57%)
-└── Nuevos CoTs: changelog.md (creado 2025-09-17)
+Total CoTs existentes: 15 archivos
+├── Vinculados a docs/: 6 (40%)
+├── Independientes: 9 (60%)
+└── Nuevos CoTs: context.md v2.0 (2025-09-18), changelog.md (2025-09-17)
 ```
 
 ### Infraestructura completada ✓
@@ -37,6 +37,7 @@ Total CoTs existentes: 14 archivos
 - ✅ Estructura organizada (docs/, prompts/cot/, scripts/)
 - ✅ Template base CoT (_template.md)
 - ✓ Validation programática en CoTs críticos
+- ✅ **NUEVO**: CoT genérico context.md v2.0 (detección automática tecnologías, multiplataforma, portable)
 - ✅ **NUEVO**: CoT changelog.md con corrección de errores comunes
 - ✅ **MEJORADO**: CoT committing.md con validación de configuración SSH/HTTPS
 
@@ -56,7 +57,9 @@ Crear CoTs para **todos** los documentos técnicos restantes, priorizando por im
 
 ### 🔥 ***Sprint* 1** (próxima semana) - CoTs críticos
 
-**Objetivo**: Cobertura 40% → 60%
+**Objetivo**: Cobertura 43% → 60%
+
+**Progreso actual**: +1 CoT genérico (context.md v2.0) completado
 
 #### Prioridad crítica - flujo de trabajo diario
 

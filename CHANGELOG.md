@@ -6,7 +6,13 @@
 
 ## [2025-09-17] - Mejoras críticas para cálculo preciso de zona horaria CST y reorganización estructural
 
+### feat
+- crear prompts/cot/context.md v2.0: CoT genérico portable para cualquier proyecto con detección automática de tecnologías (Node.js, Python, Go, Rust, Java, Docker), análisis de estructura con *tree*, instalación multiplataforma (*dnf*, *apt*, *apk*, *pacman*, *brew*) y identificación de archivos de documentación estándar
+
 ### docs
+- actualizar README.md: añadir referencia a CoT genérico context.md en sección de uso rápido
+- actualizar ROADMAP.md: incrementar estadísticas de CoT (14→15 archivos, 57%→60% independientes), documentar progreso *Sprint* 1 con CoT completado y actualizar infraestructura completada con características del nuevo CoT
+- consolidar ROADMAP.md en raíz combinando infraestructura CoT con análisis de cobertura específica
 - consolidar ROADMAP.md en raíz combinando infraestructura CoT con análisis de cobertura específica
 - corregir systemáticamente errores de lint Markdown en archivos principales (README, ROADMAP, CHANGELOG, PROMPTS, PHILOSOPHY)
 - añadir espacios en blanco alrededor de encabezados y listas según MD022/MD032
