@@ -6,7 +6,7 @@ difficulty: básico
 priority: crítico
 estimated_time: 10-15 minutos
 last_updated: 2025-09-18
-version: "2.0"
+version: "2.1"
 ---
 <!-- markdownlint-disable MD041 -->
 
@@ -17,9 +17,10 @@ version: "2.0"
 Obtener contexto completo del proyecto en el directorio actual mediante:
 
 - Identificación de ubicación y estructura del proyecto
-- Análisis de archivos de documentación principales
+- Análisis de archivos de documentación principales y en subdirectorios
 - Comprensión de propósito, estado actual y planificación
 - Detección de herramientas, tecnologías y convenciones
+- Identificación de infraestructura Kubernetes y Talos
 
 ## Casos de uso
 
@@ -71,13 +72,17 @@ brew install tree
 ### 2. Identificar archivos de documentación
 
 ```bash
-# Buscar archivos de documentación principales
+# Buscar archivos de documentación principales en directorio raíz
 ls -la | grep -i -E '(readme|changelog|roadmap|contributing|license|warp)'
 
-# Verificar existencia de archivos específicos
+# Verificar existencia de archivos específicos en raíz
 for file in README.md CHANGELOG.md ROADMAP.md CONTRIBUTING.md LICENSE.md LICENSE.txt LICENSE WARP.md .warp.md; do
     [ -f "$file" ] && echo "✅ $file existe" || echo "❌ $file no encontrado"
 done
+
+# Buscar READMEs de segundo y tercer nivel (proyectos colaborativos)
+echo "\n=== READMEs en subdirectorios ==="
+find . -maxdepth 3 -name "README.md" -not -path "./README.md" 2>/dev/null | head -10
 ```
 
 **Documentar archivos encontrados**:
@@ -98,6 +103,13 @@ if [ -f CHANGELOG.md ]; then echo "\n=== CHANGELOG.md (últimas 20 líneas) ==="
 if [ -f ROADMAP.md ]; then echo "\n=== ROADMAP.md ==="; head -30 ROADMAP.md; fi
 if [ -f WARP.md ]; then echo "\n=== WARP.md ==="; head -30 WARP.md; fi
 if [ -f .warp.md ]; then echo "\n=== .warp.md ==="; head -30 .warp.md; fi
+
+# Leer READMEs de subdirectorios (proyectos colaborativos)
+echo "\n=== READMEs de subdirectorios ==="
+find . -maxdepth 3 -name "README.md" -not -path "./README.md" 2>/dev/null | while read readme; do
+    echo "\n--- $readme ---"
+    head -20 "$readme"
+done
 ```
 
 **Extraer información clave**:
@@ -112,6 +124,8 @@ if [ -f .warp.md ]; then echo "\n=== .warp.md ==="; head -30 .warp.md; fi
 ```bash
 # Detectar tipo de proyecto y tecnologías
 echo "=== Detección de tecnologías ==="
+
+# Lenguajes y frameworks
 [ -f package.json ] && echo "✅ Node.js (package.json)" || echo "❌ No es proyecto Node.js"
 [ -f requirements.txt ] && echo "✅ Python (requirements.txt)" || echo "❌ No es proyecto Python (requirements.txt)"
 [ -f Pipfile ] && echo "✅ Python (Pipfile)" || echo "❌ No es proyecto Python (Pipfile)"
@@ -119,18 +133,41 @@ echo "=== Detección de tecnologías ==="
 [ -f Cargo.toml ] && echo "✅ Rust (Cargo.toml)" || echo "❌ No es proyecto Rust"
 [ -f pom.xml ] && echo "✅ Java Maven (pom.xml)" || echo "❌ No es proyecto Java Maven"
 [ -f build.gradle ] && echo "✅ Java Gradle (build.gradle)" || echo "❌ No es proyecto Java Gradle"
+
+# Contenedores y orquestación
 [ -f docker-compose.yml ] && echo "✅ Docker Compose" || echo "❌ No usa Docker Compose"
+[ -f docker-compose.yaml ] && echo "✅ Docker Compose (.yaml)" || echo "❌ No usa Docker Compose (.yaml)"
 [ -f Dockerfile ] && echo "✅ Docker" || echo "❌ No usa Docker"
-[ -f .github/workflows ] && echo "✅ GitHub Actions" || echo "❌ No usa GitHub Actions"
+
+# Kubernetes
+[ -d k8s ] && echo "✅ Kubernetes (directorio k8s/)" || echo "❌ No tiene directorio k8s/"
+[ -d kubernetes ] && echo "✅ Kubernetes (directorio kubernetes/)" || echo "❌ No tiene directorio kubernetes/"
+[ -d manifests ] && echo "✅ Kubernetes (directorio manifests/)" || echo "❌ No tiene directorio manifests/"
+find . -maxdepth 2 -name "*.yaml" -o -name "*.yml" | grep -E '(deployment|service|ingress|configmap|secret)' | head -3 | while read file; do echo "✅ Kubernetes manifest: $file"; done
+
+# Configuración de clusters (archivos locales para EXPORT)
+[ -f kubeconfig ] && echo "✅ Kubeconfig raíz encontrado" || echo "❌ No hay kubeconfig en raíz"
+[ -f talosconfig ] && echo "✅ Talosconfig raíz encontrado" || echo "❌ No hay talosconfig en raíz"
+echo "Buscando configuraciones Kubernetes..."
+find . -name "*kubeconfig*" -o -name "*kube.config*" -o -name "*.kubeconfig" 2>/dev/null | head -5 | while read config; do echo "✅ Config Kubernetes: $config"; done
+echo "Buscando configuraciones Talos..."
+find . -name "*talosconfig*" -o -name "*talos.config*" -o -name "*.talosconfig" 2>/dev/null | head -5 | while read config; do echo "✅ Config Talos: $config"; done
+
+# CI/CD
+[ -d .github/workflows ] && echo "✅ GitHub Actions" || echo "❌ No usa GitHub Actions"
+[ -f .gitlab-ci.yml ] && echo "✅ GitLab CI" || echo "❌ No usa GitLab CI"
 ```
 
 **Documentar hallazgos**:
 
-- ✅ **Tipo de proyecto**: [web, cli, biblioteca, etc.]
+- ✅ **Tipo de proyecto**: [web, cli, biblioteca, infraestructura, etc.]
 - ✅ **Tecnologías principales**: [lenguajes detectados]
 - ✅ **Herramientas de build**: [npm, pip, cargo, etc.]
-- ✅ **Containerización**: [Docker, docker-compose]
+- ✅ **Contenedorización**: [Docker, docker-compose]
+- ✅ **Orquestación**: [Kubernetes, manifests, directorios]
+- ✅ **Configuración de clusters**: [kubeconfig, talosconfig]
 - ✅ **CI/CD**: [GitHub Actions, GitLab CI, etc.]
+- ✅ **READMEs adicionales**: [subdirectorios con documentación]
 
 ### 5. Examinar configuración y scripts
 

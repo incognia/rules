@@ -4,6 +4,21 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
+## [2025-09-18] - Mejoras al CoT de contexto para proyectos colaborativos e infraestructura Kubernetes/Talos
+
+### docs
+- afinar prompts/cot/context.md v2.1: agregar búsqueda de READMEs en subdirectorios de segundo y tercer nivel para proyectos colaborativos con múltiples equipos
+- extender detección técnica para incluir archivos de configuración de Kubernetes en todo el repositorio (no solo raíz)
+- agregar búsqueda comprehensiva de archivos kubeconfig, kube.config y .kubeconfig en cualquier nivel del repositorio
+- incluir búsqueda completa de configuraciones Talos: talosconfig, talos.config y .talosconfig para uso con comandos EXPORT
+- ampliar detección de manifests YAML de Kubernetes: buscar deployment, service, ingress, configmap, secret en profundidad
+- incluir detección de directorios estándar de Kubernetes: k8s/, kubernetes/, manifests/
+- agregar soporte para docker-compose.yaml además de docker-compose.yml
+- reorganizar detección por categorías: lenguajes/frameworks, contenedores/orquestación, configuración de clusters, CI/CD
+- expandir documentación de hallazgos para incluir orquestación, configuración de clusters y READMEs adicionales
+- agregar lectura automática de READMEs encontrados en subdirectorios con primeras 20 líneas
+- incluir detección de GitLab CI (.gitlab-ci.yml) además de GitHub Actions
+
 ## [2025-09-18] - Extensión del CoT de contexto para detectar archivos WARP
 
 ### docs
