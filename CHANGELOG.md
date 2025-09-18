@@ -4,7 +4,13 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
-## [2025-09-17] - Mejoras críticas para cálculo preciso de zona horaria CST
+## [2025-09-17] - Mejoras críticas para cálculo preciso de zona horaria CST y reorganización estructural
+
+### refactor
+- mover CRITICAL_COT_READING.md de raíz a docs/ para mejor organización
+- consolidar CRITICAL_COMMIT_LANGUAGE.md y COMMIT_LANGUAGE_PROTOCOL.md en docs/COMMIT_LANGUAGE_PROTOCOL.md unificado
+- limpiar raíz del repositorio eliminando archivos duplicados y moviendo protocolos a docs/
+- actualizar referencia en CHANGELOG.md para reflejar nueva ubicación de archivos
 
 ### docs
 - reforzar instrucciones de timezone en prompts/cot/committing.md para evitar error común de rotular CST a horas UTC
@@ -26,7 +32,7 @@
 ### fix
 - corregir inconsistencia en regla de idioma de commits: TODOS los mensajes de commit deben estar en inglés internacional
 - actualizar prompts/cot/committing.md línea 15: enfatizar «CRÍTICO» para mensajes de commit en inglés
-- actualizar referencia en CRITICAL_COMMIT_LANGUAGE.md para mantener consistencia con el texto corregido
+- actualizar referencia en docs/COMMIT_LANGUAGE_PROTOCOL.md para mantener consistencia con el texto corregido
 - resolver conflicto entre reglas donde algunos documentos sugerían commits en español vs inglés
 - clarificar distribución de idiomas: commits en inglés, documentación en español mexicano
 
