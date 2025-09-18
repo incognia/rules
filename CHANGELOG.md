@@ -4,6 +4,13 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
+## [2025-09-18] - Extensión del CoT de contexto para detectar archivos WARP
+
+### docs
+- extender prompts/cot/context.md para buscar archivos WARP.md y .warp.md en el análisis de documentación del proyecto
+- incluir ambas variantes (WARP.md estándar y .warp.md como *dotfile*) en verificación de existencia y lectura automática
+- agregar referencias específicas para configuración y reglas de proyecto en sección de Referencias del CoT
+
 ## [2025-09-17] - Mejoras críticas para cálculo preciso de zona horaria CST y reorganización estructural
 
 ### feat

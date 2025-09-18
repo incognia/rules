@@ -72,10 +72,10 @@ brew install tree
 
 ```bash
 # Buscar archivos de documentación principales
-ls -la | grep -i -E '(readme|changelog|roadmap|contributing|license)'
+ls -la | grep -i -E '(readme|changelog|roadmap|contributing|license|warp)'
 
 # Verificar existencia de archivos específicos
-for file in README.md CHANGELOG.md ROADMAP.md CONTRIBUTING.md LICENSE.md LICENSE.txt LICENSE; do
+for file in README.md CHANGELOG.md ROADMAP.md CONTRIBUTING.md LICENSE.md LICENSE.txt LICENSE WARP.md .warp.md; do
     [ -f "$file" ] && echo "✅ $file existe" || echo "❌ $file no encontrado"
 done
 ```
@@ -87,6 +87,7 @@ done
 - ✅ **ROADMAP**: [existe/no existe]
 - ✅ **CONTRIBUTING**: [existe/no existe]
 - ✅ **LICENSE**: [existe/no existe]
+- ✅ **WARP**: [existe/no existe]
 
 ### 3. Leer documentación principal
 
@@ -95,6 +96,8 @@ done
 if [ -f README.md ]; then echo "=== README.md ==="; head -50 README.md; fi
 if [ -f CHANGELOG.md ]; then echo "\n=== CHANGELOG.md (últimas 20 líneas) ==="; tail -20 CHANGELOG.md; fi
 if [ -f ROADMAP.md ]; then echo "\n=== ROADMAP.md ==="; head -30 ROADMAP.md; fi
+if [ -f WARP.md ]; then echo "\n=== WARP.md ==="; head -30 WARP.md; fi
+if [ -f .warp.md ]; then echo "\n=== .warp.md ==="; head -30 .warp.md; fi
 ```
 
 **Extraer información clave**:
@@ -210,5 +213,7 @@ Un resumen estructurado que incluya:
 - **./CHANGELOG.md** — historial de cambios (si existe)
 - **./ROADMAP.md** — planificación futura (si existe)
 - **./CONTRIBUTING.md** — guías de contribución (si existe)
+- **./WARP.md** — configuración y reglas específicas del proyecto (si existe)
+- **./.warp.md** — configuración y reglas específicas del proyecto como dotfile (si existe)
 - **tree command** — visualización de estructura de directorios
 - **pwd command** — identificación de directorio actual
