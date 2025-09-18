@@ -19,6 +19,7 @@
 - mejorar validación para detectar remotos HTTPS vs SSH: si `git remote -v` muestra https:// indica configuración incorrecta
 - actualizar README.md y ROADMAP.md con menciones de CoT de *changelog* y mejoras a CoT de *committing* con validación SSH
 - aplicar reglas lingüísticas a ROADMAP.md: corregir títulos a estilo oración y agregar cursivas a préstamos técnicos (*Sprint*, *commits*, *timestamps*)
+- aplicar reglas lingüísticas a CHANGELOG.md: agregar cursivas a préstamos técnicos (*commit*, *git log*, *push*, *hook*, *prompt*, *git status*)
 
 ### fix
 - corregir enlaces relativos rotos en prompts/cot/changelog.md tras movimiento de ubicación inicial
@@ -27,9 +28,9 @@
 - mover CRITICAL_COT_READING.md de raíz a docs/ para mejor organización
 - consolidar CRITICAL_COMMIT_LANGUAGE.md y COMMIT_LANGUAGE_PROTOCOL.md en docs/COMMIT_LANGUAGE_PROTOCOL.md unificado
 - limpiar raíz del repositorio eliminando archivos duplicados y moviendo protocolos a docs/
-- remover directorio .githooks/ y hook pre-commit no funcional para simplificar estructura
+- remover directorio .githooks/ y *hook* pre-*commit* no funcional para simplificar estructura
 - actualizar referencia en CHANGELOG.md para reflejar nueva ubicación de archivos
-- eliminar sección de git hooks del README.md
+- eliminar sección de *git hooks* del README.md
 
 ### docs
 - reforzar instrucciones de timezone en prompts/cot/committing.md para evitar error común de rotular CST a horas UTC
@@ -39,7 +40,7 @@
 - actualizar README.md con sección mejorada de fechas/horas CST y ejemplos de verificación
 - añadir comando para comparar UTC vs CST y ejemplos matemáticos de conversión
 
-## [2025-09-10] - Mejoras al CoT linguistics y corrección crítica de regla de idioma en commits
+## [2025-09-10] - Mejoras al CoT *linguistics* y corrección crítica de regla de idioma en *commits*
 
 ### improve
 - mejorar cot/linguistics.md con validación programática obligatoria para evitar aplicación superficial
@@ -49,11 +50,11 @@
 - prevenir omisión de corrección de Title Case mediante verificación programática forzada
 
 ### fix
-- corregir inconsistencia en regla de idioma de commits: TODOS los mensajes de commit deben estar en inglés internacional
-- actualizar prompts/cot/committing.md línea 15: enfatizar «CRÍTICO» para mensajes de commit en inglés
+- corregir inconsistencia en regla de idioma de *commits*: TODOS los mensajes de *commit* deben estar en inglés internacional
+- actualizar prompts/cot/committing.md línea 15: enfatizar «CRÍTICO» para mensajes de *commit* en inglés
 - actualizar referencia en docs/COMMIT_LANGUAGE_PROTOCOL.md para mantener consistencia con el texto corregido
-- resolver conflicto entre reglas donde algunos documentos sugerían commits en español vs inglés
-- clarificar distribución de idiomas: commits en inglés, documentación en español mexicano
+- resolver conflicto entre reglas donde algunos documentos sugerían *commits* en español vs inglés
+- clarificar distribución de idiomas: *commits* en inglés, documentación en español mexicano
 
 ## [2025-08-31] - Reestructuración completa del CHANGELOG
 
@@ -69,13 +70,13 @@
 
 ### docs
 - agregar regla de título descriptivo para encabezados CHANGELOG.md usando formato '[YYYY-MM-DD] - Título descriptivo del cambio principal'
-- actualizar COMMITTING.md para evitar emojis en CHANGELOG y mejorar prompt committing.md con análisis git status y commits múltiples
+- actualizar COMMITTING.md para evitar emojis en CHANGELOG y mejorar *prompt* committing.md con análisis *git status* y *commits* múltiples
 
 ## [2025-08-25] - Corrección de editores interactivos y configuración SSH personal
 
 ### docs
-- corregir COMMITTING.md y prompts/cot/committing.md para eliminar uso de editores interactivos, especialmente con git log (usar --no-pager)
-- documentar problema común de `quote>` en git commit por escape incorrecto de comillas en mensajes
+- corregir COMMITTING.md y prompts/cot/committing.md para eliminar uso de editores interactivos, especialmente con *git log* (usar --no-pager)
+- documentar problema común de `quote>` en *git commit* por escape incorrecto de comillas en mensajes
 
 ### fix
 - configurar repositorio personal para usar identidad personal `incognia@gmail.com` y llave SSH personal (id_ed25519) en lugar de credenciales laborales
@@ -90,9 +91,9 @@
 - CORPORATE.md: alinear con LINGUISTICS.md (título en estilo oración y guion medio, comillas angulares, préstamos tipográficos, «nube pública» en lugar de «cloud público»)
 - TEACHING.md: alinear con LINGUISTICS.md (minúscula tras dos puntos, traducciones en tabla, «preparación» por «setup»)
 - prompts/cot/linguistics.md: ampliar checklist para cubrir todas las reglas de LINGUISTICS.md en orden lógico (calcos, terminología, verbos, préstamos, tipografía, comillas, sutilezas, siglas, tiempos, fechas CST, nomenclatura, odios, expresiones)
-- COMMITTING.md: simplificar flujo a push simple (`git push`) y enlazar a configuración inicial en GIT.md
+- COMMITTING.md: simplificar flujo a *push* simple (`git push`) y enlazar a configuración inicial en GIT.md
 - GIT.md: añadir asistente interactivo post `git init` (configura identidad, `core.sshCommand` y remoto SSH opcional)
-- prompts/cot/committing*.md: alinear a push simple y limpiar artefactos
+- prompts/cot/committing*.md: alinear a *push* simple y limpiar artefactos
 - prompts/cot/committing_{personal,corporate}.md: consolidar en prompts/cot/committing.md y actualizar referencias
 - prompts/cot/git_init.md: nuevo CoT para inicializar repos con SSH siguiendo GIT.md
 - prompts/: crear estructura de subdirectorios (templates/, guides/, actions/, snippets/) con ejemplos y README por carpeta
@@ -149,7 +150,7 @@
 - TEACHING.md: restablecer énfasis ético en el uso exclusivo de software libre en K-12 y en divulgación; mejoras de redacción y principios transversales (bilingüismo, reproducibilidad, accesibilidad, CST)
 
 ### feat
-- .githooks/pre-commit: hook opcional para bloquear ‘CST’ sin TZ=America/Mexico_City en líneas añadidas
+- .githooks/pre-commit: *hook* opcional para bloquear 'CST' sin TZ=America/Mexico_City en líneas añadidas
 
 ## [2025-08-01] - Refinamiento de LINGUISTICS.md y desarrollo de TEACHING.md
 
@@ -233,7 +234,7 @@
 - separar responsabilidades entre GIT.md (setup inicial) y COMMITTING.md (flujo diario)
 - eliminar redundancias entre ambos documentos
 - enfocar GIT.md en configuración de repositorios nuevos
-- enfocar COMMITTING.md en flujo de trabajo de commits y push
+- enfocar COMMITTING.md en flujo de trabajo de *commits* y *push*
 - diferenciar claramente entre AUTHORING.md y LICENSING.md por sus propósitos específicos
 - refactorizar ATTRIBUTION.md para atribución personal en documentos/scripts individuales (solo proyectos personales)
 - refactorizar LICENSING.md para generación de LICENSE en proyectos completos (personal y laboral)
