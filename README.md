@@ -134,7 +134,8 @@ domain: ...
 ## Convenciones de fechas/horas
 
 - Formato: 24 horas, zona «CST (Ciudad de México)».
-- No rotular «CST» a horas calculadas en UTC; convertir explícitamente a la zona local.
+- **CRÍTICO**: No rotular «CST» a horas UTC sin cálculo; CST = UTC - 6 horas.
+- **Verificación obligatoria**: usar `TZ=America/Mexico_City date` para obtener tiempo real.
 - Zona a usar en scripts: TZ=America/Mexico_City.
 - CHANGELOG.md: solo fecha (YYYY-MM-DD), sin hora.
 
@@ -149,7 +150,14 @@ TZ=America/Mexico_City date +"%Y-%m-%d"
 # Fecha y hora (CST) legible
 TZ=America/Mexico_City date '+%F %H:%M %Z'
 LC_TIME=es_MX.UTF-8 TZ=America/Mexico_City date '+%d de %B de %Y, %H:%M (%Z)'
+
+# Verificar cálculo correcto comparando UTC vs CST
+echo "UTC: $(date -u '+%H:%M')" && echo "CST: $(TZ=America/Mexico_City date '+%H:%M')"
 ```
+
+Ejemplos de conversión UTC → CST:
+- UTC 14:30 → CST 08:30 (14 - 6 = 8)
+- UTC 03:15 → CST 21:15 (día anterior, 03 - 6 = -3, entonces 24 - 3 = 21)
 
 Activar hook pre-commit (opcional)
 

@@ -11,6 +11,8 @@
 - añadir verificación obligatoria con `TZ=America/Mexico_City date` para obtener tiempo CST real
 - incluir ejemplos prácticos de conversión: UTC 14:30 → CST 08:30, UTC 03:15 → CST 21:15 (día anterior)
 - enfatizar cálculo matemático preciso: CST = UTC - 6 horas con manejo correcto de cambio de día
+- actualizar README.md con sección mejorada de fechas/horas CST y ejemplos de verificación
+- añadir comando para comparar UTC vs CST y ejemplos matemáticos de conversión
 
 ## [2025-09-10] - Mejoras al CoT linguistics y corrección crítica de regla de idioma en commits
 
