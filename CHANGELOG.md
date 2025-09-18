@@ -17,6 +17,7 @@
 - agregar referencia lógica en prompts/cot/committing.md hacia CoT de *changelog* para flujo coherente de actualización
 - agregar validación de configuración de repositorio en CoT de *committing* con referencia a CoT de git_init para repos no configurados
 - mejorar validación para detectar remotos HTTPS vs SSH: si `git remote -v` muestra https:// indica configuración incorrecta
+- actualizar README.md y ROADMAP.md con menciones de CoT de *changelog* y mejoras a CoT de *committing* con validación SSH
 
 ### fix
 - corregir enlaces relativos rotos en prompts/cot/changelog.md tras movimiento de ubicación inicial

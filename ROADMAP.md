@@ -1,6 +1,6 @@
 # ROADMAP — Desarrollo CoT y automatización de reglas técnicas
 
-**Última actualización**: 2025-09-17 22:37 CST (Ciudad de México)
+**Última actualización**: 2025-09-17 23:21 CST (Ciudad de México)
 
 ## Visión
 
@@ -18,14 +18,15 @@ Consolidar este repositorio como **contexto instruccional completo** para LLM qu
 ### Estadísticas de cobertura CoT
 
 ```text
-Total documentos técnicos (docs/): 15
-├── Con CoT: 6 documentos (40%)
-├── Sin CoT: 9 documentos (60%)
+Total documentos técnicos (docs/): 14 documentos
+├── Con CoT: 6 documentos (43%)
+├── Sin CoT: 8 documentos (57%)
 └── Cobertura objetivo: 100%
 
-Total CoTs existentes: 12 archivos
-├── Vinculados a docs/: 6 (50%)
-└── Independientes: 6 (50%)
+Total CoTs existentes: 14 archivos
+├── Vinculados a docs/: 6 (43%)
+├── Independientes: 8 (57%)
+└── Nuevos CoTs: changelog.md (creado 2025-09-17)
 ```
 
 ### Infraestructura completada ✓
@@ -36,6 +37,8 @@ Total CoTs existentes: 12 archivos
 - ✅ Estructura organizada (docs/, prompts/cot/, scripts/)
 - ✅ Template base CoT (_template.md)
 - ✓ Validation programática en CoTs críticos
+- ✅ **NUEVO**: CoT changelog.md con corrección de errores comunes
+- ✅ **MEJORADO**: CoT committing.md con validación de configuración SSH/HTTPS
 
 ## Objetivos (horizonte 90 días)
 
