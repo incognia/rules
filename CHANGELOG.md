@@ -18,6 +18,10 @@
 - expandir documentación de hallazgos para incluir orquestación, configuración de clusters y READMEs adicionales
 - agregar lectura automática de READMEs encontrados en subdirectorios con primeras 20 líneas
 - incluir detección de GitLab CI (.gitlab-ci.yml) además de GitHub Actions
+- afinar prompts/cot/committing.md v1.1: agregar validación visual de identidad activa para usuarios con múltiples cuentas y llaves SSH
+- incluir display obligatorio de email, nombre, llave SSH y remoto antes de proceder con commits
+- agregar verificación crítica para confirmar que la identidad mostrada coincide con la esperada para el repositorio
+- incorporar pistas específicas para usuarios con cuentas múltiples en sección de conclusiones
 
 ## [2025-09-18] - Extensión del CoT de contexto para detectar archivos WARP
 

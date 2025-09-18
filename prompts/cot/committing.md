@@ -3,7 +3,9 @@ domain: workflow
 task: seguir COMMITTING.md (actualizar CHANGELOG, commit convencional y push simple)
 dificultad: baja
 longitud_objetivo: corta
-validacion: entrada en CHANGELOG con fecha CST y commit/push exitosos
+validacion: entrada en CHANGELOG con fecha CST, identidad visual confirmada y commit/push exitosos
+version: "1.1"
+last_updated: 2025-09-18
 ---
 <!-- markdownlint-disable MD041 -->
 
@@ -17,16 +19,27 @@ Razonamiento:
 - El push debe ser simple (`git push`) siempre que el repo haya sido configurado inicialmente (ver «~/rules/GIT.md» sección de configuración inicial).
 
 Pasos:
-0) Acción: validar que el repositorio esté configurado correctamente antes de proceder.
+0) Acción: validar que el repositorio esté configurado correctamente y mostrar identidad activa antes de proceder.
    COMANDOS OBLIGATORIOS: 
    - `git config --list | grep -E "^(user\.(name|email)|core\.sshCommand|remote\.origin)"`
    - `git remote -v` para verificar URLs de remotos
+   - **NUEVO**: mostrar identidad activa en pantalla:
+     ```bash
+     echo "=== IDENTIDAD ACTIVA PARA ESTE COMMIT ==="
+     echo "Email: $(git config user.email)"
+     echo "Nombre: $(git config user.name)"
+     echo "Llave SSH: $(git config core.sshCommand | grep -o '/[^"]*' || echo 'default ~/.ssh/id_rsa')"
+     echo "Remoto: $(git remote get-url origin)"
+     echo "============================================"
+     ```
    Validaciones críticas:
    - Confirmar que existen: user.name, user.email, core.sshCommand y remote.origin
    - **CRÍTICO**: verificar que remote.origin usa SSH (git@github.com o git@gitlab.com), NO HTTPS
+   - **CRÍTICO**: confirmar visualmente que la identidad mostrada es la correcta para este repositorio
    - Si usa HTTPS: indica configuración incorrecta, redirigir a git_init
+   - Si la identidad no es la esperada: pausar y revisar configuración
    Si falta cualquier configuración: aplicar «~/rules/prompts/cot/git_init.md» ([./git_init.md](./git_init.md)) antes de continuar
-   Resultado: repositorio validado con SSH y listo para commits, o redirigir a inicialización.
+   Resultado: repositorio validado con SSH, identidad confirmada visualmente, y listo para commits.
 
 1) Acción: analizar el estado actual del repositorio para identificar tipos de cambios.
    Resultado: `git status` - examinar archivos modificados/añadidos/eliminados y sus propósitos.
@@ -58,10 +71,12 @@ Pasos:
 
 Conclusión:
 - Verifica que el/los commit(s) aparecen en `git --no-pager log --oneline -5` y que el CHANGELOG contiene la fecha en CST calculada correctamente.
+- **CRÍTICO**: confirma que la identidad mostrada en el paso 0 coincide con la esperada para este repositorio (email y llave SSH correctas).
 - EJEMPLO de verificación de timezone: si UTC es 14:30, CST debe ser 08:30 (14 - 6 = 8); si UTC es 03:15, CST debe ser 21:15 del día anterior.
 - Si fueron commits múltiples, asegurar que cada uno es atómico y tiene mensaje convencional apropiado (feat, fix, docs, etc.).
 - Si aparece `quote>` durante el commit: presionar Ctrl+C y revisar escape de comillas en el mensaje.
 - **PISTA IMPORTANTE**: si `git remote -v` muestra URLs con https:// en lugar de git@, indica configuración incorrecta y debe aplicarse git_init.
+- **PISTA CUENTAS MÚTIPLES**: si el email/llave no coincide con lo esperado, revisar configuración del repositorio antes de proceder.
 - La atomicidad de commits facilita el mantenimiento: cada commit debe representar un cambio lógico único y funcional.
 - Referencias: «~/rules/docs/COMMITTING.md» ([../../docs/COMMITTING.md](../../docs/COMMITTING.md)), «~/rules/prompts/cot/changelog.md» ([./changelog.md](./changelog.md)), «~/rules/prompts/cot/git_init.md» ([./git_init.md](./git_init.md)), «~/rules/docs/GIT.md» ([../../docs/GIT.md](../../docs/GIT.md)), «~/rules/README.md» ([../../README.md](../../README.md)) y «~/rules/docs/LINGUISTICS.md» ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)).
 
