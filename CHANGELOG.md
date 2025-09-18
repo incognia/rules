@@ -10,7 +10,9 @@
 - mover CRITICAL_COT_READING.md de raíz a docs/ para mejor organización
 - consolidar CRITICAL_COMMIT_LANGUAGE.md y COMMIT_LANGUAGE_PROTOCOL.md en docs/COMMIT_LANGUAGE_PROTOCOL.md unificado
 - limpiar raíz del repositorio eliminando archivos duplicados y moviendo protocolos a docs/
+- remover directorio .githooks/ y hook pre-commit no funcional para simplificar estructura
 - actualizar referencia en CHANGELOG.md para reflejar nueva ubicación de archivos
+- eliminar sección de git hooks del README.md
 
 ### docs
 - reforzar instrucciones de timezone en prompts/cot/committing.md para evitar error común de rotular CST a horas UTC

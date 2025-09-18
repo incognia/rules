@@ -159,11 +159,6 @@ Ejemplos de conversión UTC → CST:
 - UTC 14:30 → CST 08:30 (14 - 6 = 8)
 - UTC 03:15 → CST 21:15 (día anterior, 03 - 6 = -3, entonces 24 - 3 = 21)
 
-Activar hook pre-commit (opcional)
-
-```bash
-git config core.hooksPath .githooks
-```
 
 ## Uso
 
