@@ -42,7 +42,7 @@ Total CoTs existentes: 14 archivos
 
 ## Objetivos (horizonte 90 días)
 
-### Meta principal: Cobertura CoT 100%
+### Meta principal: cobertura CoT 100%
 
 Crear CoTs para **todos** los documentos técnicos restantes, priorizando por impacto operativo.
 
@@ -52,13 +52,13 @@ Crear CoTs para **todos** los documentos técnicos restantes, priorizando por im
 - Establecer evaluación con auto-consistencia
 - Medir impacto en reducción de errores técnicos
 
-## Roadmap por sprints
+## *Roadmap* por *sprints*
 
-### 🔥 **Sprint 1** (Próxima semana) - CoTs críticos
+### 🔥 ***Sprint* 1** (próxima semana) - CoTs críticos
 
 **Objetivo**: Cobertura 40% → 60%
 
-#### Prioridad CRÍTICA - Flujo de trabajo diario
+#### Prioridad crítica - flujo de trabajo diario
 
 1. **CRITICAL_COT_READING.md** → `prompts/cot/cot_reading_protocol.md`
    - Protocolo obligatorio lectura completa CoTs
@@ -66,8 +66,8 @@ Crear CoTs para **todos** los documentos técnicos restantes, priorizando por im
    - **Estimación**: 2-3 horas
 
 1. **COMMIT_LANGUAGE_PROTOCOL.md** → `prompts/cot/commit_language_check.md`
-   - Checkpoint automático idioma commits (inglés)
-   - Evita error recurrente commits en español
+   - Checkpoint automático idioma *commits* (inglés)
+   - Evita error recurrente *commits* en español
    - **Estimación**: 2-3 horas
 
 1. **LICENSING.md** → `prompts/cot/licensing_decision.md`
@@ -75,17 +75,17 @@ Crear CoTs para **todos** los documentos técnicos restantes, priorizando por im
    - Automatiza selección de licencias
    - **Estimación**: 3-4 horas
 
-**Entregables Sprint 1**:
+**Entregables *Sprint* 1**:
 
 - 3 CoTs nuevos (críticos)
 - Documentación en CHANGELOG.md
 - Prueba de funcionamiento de cada CoT
 
-### 📈 **Sprint 2** (Semana 2) - CoTs de procesos regulares
+### 📈 ***Sprint* 2** (semana 2) - CoTs de procesos regulares
 
 **Objetivo**: Cobertura 60% → 87%
 
-#### Prioridad MEDIA - Procesos importantes
+#### Prioridad media - procesos importantes
 
 1. **ATTRIBUTION.md** → `prompts/cot/attribution.md`
    - Atribución personal correcta en documentos/scripts
@@ -99,17 +99,17 @@ Crear CoTs para **todos** los documentos técnicos restantes, priorizando por im
    - Perfil educativo y divulgación
    - **Estimación**: 4-5 horas
 
-**Entregables Sprint 2**:
+**Entregables *Sprint* 2**:
 
 - 3 CoTs nuevos (procesos regulares)
 - Actualización de referencias cruzadas
 - Revisión de CoTs existentes
 
-### 📝 **Sprint 3** (Semana 3-4) - Completar cobertura
+### 📝 ***Sprint* 3** (semana 3-4) - completar cobertura
 
 **Objetivo**: Cobertura 87% → 100%
 
-#### Prioridad BAJA - Documentos de referencia
+#### Prioridad baja - documentos de referencia
 
 1. **GLOSSARY.md** → `prompts/cot/glossary_update.md`
    - Actualizar y mantener glosario técnico
@@ -125,7 +125,7 @@ Crear CoTs para **todos** los documentos técnicos restantes, priorizando por im
    - Si relevante: crear CoT correspondiente
    - Si obsoleto: eliminar y actualizar referencias
 
-**Entregables Sprint 3**:
+**Entregables *Sprint* 3**:
 
 - CoTs restantes completados
 - Cobertura 100% documentada
@@ -155,13 +155,13 @@ Crear CoTs para **todos** los documentos técnicos restantes, priorizando por im
 
 ### Cobertura CoT
 
-- **Sprint 1**: 60% cobertura (documentos críticos)
-- **Sprint 2**: 87% cobertura (procesos regulares)  
-- **Sprint 3**: 100% cobertura (completa)
+- ***Sprint* 1**: 60% cobertura (documentos críticos)
+- ***Sprint* 2**: 87% cobertura (procesos regulares)  
+- ***Sprint* 3**: 100% cobertura (completa)
 
 ### Calidad operativa
 
-- **Reducción errores**: commits en español, timestamps UTC mal rotulados
+- **Reducción errores**: *commits* en español, *timestamps* UTC mal rotulados
 - **Consistencia**: atribución, licenciamiento, styling
 - **Automatización**: validaciones programáticas funcionando
 
@@ -191,21 +191,21 @@ Crear CoTs para **todos** los documentos técnicos restantes, priorizando por im
 ## Cronograma detallado
 
 ```text
-Semana 1 (Sprint 1): CoTs críticos
+Semana 1 (*Sprint* 1): CoTs críticos
 ├── Días 1-2: CRITICAL_COT_READING + COMMIT_LANGUAGE_PROTOCOL  
 ├── Días 3-4: LICENSING
 └── Día 5: Testing y documentación
 
-Semana 2 (Sprint 2): CoTs regulares  
+Semana 2 (*Sprint* 2): CoTs regulares  
 ├── Día 1: ATTRIBUTION
 ├── Días 2-3: CORPORATE  
 ├── Días 4-5: TEACHING
 
-Semana 3-4 (Sprint 3): Completar + infraestructura
+Semana 3-4 (*Sprint* 3): Completar + infraestructura
 ├── Días 1-2: GLOSSARY + TODO
 ├── Día 3: Evaluación VAULT
 ├── Días 4-5: Mejoras infraestructura
-└── Sprint final: Documentación completa
+└── *Sprint* final: Documentación completa
 ```
 
 ## Enlaces y referencias
@@ -218,6 +218,6 @@ Semana 3-4 (Sprint 3): Completar + infraestructura
 
 ---
 
-**Estado**: Sprint 0 completado (infraestructura)  
-**Siguiente**: Sprint 1 (CoTs críticos)  
+**Estado**: *Sprint* 0 completado (infraestructura)  
+**Siguiente**: *Sprint* 1 (CoTs críticos)
 **Responsable**: Rodrigo Álvarez (@incognia)
