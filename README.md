@@ -3,13 +3,14 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)
 [![Spanish](https://img.shields.io/badge/Language-Spanish%20(MX)-green.svg)](https://es.wikipedia.org/wiki/Espa%C3%B1ol_mexicano)
+[![CoT Coverage](https://img.shields.io/badge/CoT_Coverage-43%25-orange.svg)](./ROADMAP.md)
 
 Definiciones rápidas
 
 - Prompt: instrucción o contexto que le das al modelo para indicarle qué hacer, con qué tono y bajo qué restricciones.
 - CoT (Chain-of-Thought): cadena de razonamiento paso a paso que hace explícito cómo se llega a una respuesta, útil para tareas complejas.
 
-Este repositorio contiene las reglas, estándares y filosofía que guían el trabajo técnico y la colaboración en los proyectos de Rodrigo Álvarez.
+Este repositorio contiene las reglas, estándares y filosofía que guían el trabajo técnico y la colaboración en los proyectos de Rodrigo Álvarez. En la práctica diaria se prioriza el uso de los CoT: los documentos describen la lógica de las reglas, pero las herramientas de trabajo cotidianas son los CoT en sí.
 
 ## Filosofía principal
 
@@ -23,6 +24,44 @@ Un manifiesto contra tres males endémicos en tecnología latinoamericana:
 
 - La idea de usar este repositorio como contexto instruccional para LLM se alinea con la línea de investigación «chain-of-thought prompting», que muestra que proporcionar cadenas de razonamiento mejora el desempeño en tareas complejas.
 - Referencia: Jason Wei et al., «Chain-of-Thought Prompting Elicits Reasoning in Large Language Models», arXiv:2201.11903. DOI: [10.48550/arXiv.2201.11903](https://doi.org/10.48550/arXiv.2201.11903) (resumen: [arXiv:2201.11903](https://arxiv.org/abs/2201.11903)).
+
+## Flujo de trabajo diario con CoT (recomendado)
+
+Principio operativo: los documentos de `docs/` contienen la lógica y las reglas; sin embargo, las herramientas de trabajo del día a día son los CoT ubicados en `prompts/cot/`.
+
+### Configuración inicial (una sola vez)
+
+- Clona este repositorio en tu HOME para rutas cortas:
+
+```bash
+# Linux y macOS
+git clone git@github.com:incognia/rules.git ~/rules
+```
+
+- Crea un enlace simbólico para invocar CoT rápidamente desde `~/cot`:
+
+```bash
+# Linux y macOS
+ln -s ~/rules/prompts/cot ~/cot
+```
+
+Notas:
+- Este flujo funciona muy bien en macOS y Linux.
+- Si el enlace ya existe, puedes recrearlo:
+
+```bash
+rm -f ~/cot && ln -s ~/rules/prompts/cot ~/cot
+```
+
+### Uso diario
+
+Con el enlace simbólico, puedes invocar CoT con rutas cortas en tus prompts. Ejemplos:
+
+- Aplica `~/cot/committing.md`
+- Aplica `~/cot/context.md`
+- Aplica `~/cot/changelog.md`
+
+Sugerencia: prioriza siempre los CoT para ejecución; usa los documentos de `docs/` como referencia conceptual.
 
 ## Documentos incluidos
 
@@ -121,6 +160,7 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 - **Nuevo**: CoT genérico para obtener contexto de proyectos: [prompts/cot/context.md](./prompts/cot/context.md)
 - **Nuevo**: CoT para mantenimiento de CHANGELOG: [prompts/cot/changelog.md](./prompts/cot/changelog.md)
 - **Mejorado**: CoT de commits con validación SSH: [prompts/cot/committing.md](./prompts/cot/committing.md)
+
 
 ### Nota de renderizado para CoT
 

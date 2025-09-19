@@ -4,6 +4,18 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
+## [2025-09-19] - Priorización del flujo de trabajo diario con CoT y badge de cobertura
+
+### docs
+- actualizar README.md: priorizar flujo de trabajo diario con CoT moviendo sección a posición prominente después del overview académico
+- documentar configuración inicial completa: clonado en ~/rules y creación de enlace simbólico ~/cot para acceso rápido
+- especificar compatibilidad con macOS y Linux para el flujo de enlace simbólico
+- agregar ejemplos de uso diario con rutas cortas (~/cot/committing.md, ~/cot/context.md, ~/cot/changelog.md)
+- enfatizar principio operativo: documentos docs/ para lógica vs CoT prompts/cot/ para herramientas de trabajo diarias
+- incluir comandos para recrear enlace simbólico y notas de troubleshooting
+- agregar badge CoT Coverage (43%) con enlace al ROADMAP para seguimiento visual del progreso
+- reorganizar README para mostrar flujo de trabajo como información prioritaria inmediatamente después del contexto académico
+
 ## [2025-09-18] - Mejoras integrales a CoT de contexto y committing para infraestructura y cuentas múltiples
 
 ### docs
