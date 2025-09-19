@@ -15,6 +15,11 @@
 - incluir comandos para recrear enlace simbólico y notas de troubleshooting
 - agregar badge CoT Coverage (43%) con enlace al ROADMAP para seguimiento visual del progreso
 - reorganizar README para mostrar flujo de trabajo como información prioritaria inmediatamente después del contexto académico
+- agregar diagramas mermaid para ilustrar visualmente el flujo de configuración inicial y el flujo de uso diario de CoT
+- crear diagrama de configuración (flowchart TD) mostrando proceso desde sistema limpio hasta configuración completa
+- incluir diagrama de uso diario (flowchart LR) con opciones de CoT más comunes y convergencia hacia ejecución en LLM
+- aplicar colores diferenciados: rosa para inicio, verde para éxito, azul para referencias conceptuales
+- integrar diagramas orgánicamente con comandos paso a paso y ejemplos de invocación para mejor *onboarding*
 
 ## [2025-09-18] - Mejoras integrales a CoT de contexto y committing para infraestructura y cuentas múltiples
 

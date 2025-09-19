@@ -31,22 +31,29 @@ Principio operativo: los documentos de `docs/` contienen la lógica y las reglas
 
 ### Configuración inicial (una sola vez)
 
-- Clona este repositorio en tu HOME para rutas cortas:
+```mermaid
+flowchart TD
+    A["Inicio: Sistema limpio"] --> B["Clonar repositorio<br/>git clone git@github.com:incognia/rules.git ~/rules"]
+    B --> C["Crear enlace simbólico<br/>ln -s ~/rules/prompts/cot ~/cot"]
+    C --> D{"¿Enlace creado correctamente?"}
+    D -->|Sí| E["✅ Configuración completa<br/>Listo para uso diario"]
+    D -->|No, ya existe| F["Recrear enlace<br/>rm -f ~/cot && ln -s ~/rules/prompts/cot ~/cot"]
+    F --> E
+    
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style E fill:#9f9,stroke:#333,stroke-width:2px
+```
+
+**Comandos paso a paso**:
 
 ```bash
 # Linux y macOS
 git clone git@github.com:incognia/rules.git ~/rules
-```
-
-- Crea un enlace simbólico para invocar CoT rápidamente desde `~/cot`:
-
-```bash
-# Linux y macOS
 ln -s ~/rules/prompts/cot ~/cot
 ```
 
-Notas:
-- Este flujo funciona muy bien en macOS y Linux.
+**Notas**:
+- Este flujo funciona muy bien en macOS y Linux
 - Si el enlace ya existe, puedes recrearlo:
 
 ```bash
@@ -55,13 +62,39 @@ rm -f ~/cot && ln -s ~/rules/prompts/cot ~/cot
 
 ### Uso diario
 
-Con el enlace simbólico, puedes invocar CoT con rutas cortas en tus prompts. Ejemplos:
+```mermaid
+flowchart LR
+    A["Usuario con tarea"] --> B{"¿Qué necesito hacer?"}
+    B -->|Commits| C["~/cot/committing.md"]
+    B -->|Obtener contexto| D["~/cot/context.md"]
+    B -->|Actualizar CHANGELOG| E["~/cot/changelog.md"]
+    B -->|Configurar Git| F["~/cot/git_init.md"]
+    B -->|Aplicar reglas lingüísticas| G["~/cot/linguistics.md"]
+    B -->|Hacer respaldos| H["~/cot/backup.md"]
+    
+    C --> I["Ejecución de CoT<br/>en herramienta LLM"]
+    D --> I
+    E --> I
+    F --> I
+    G --> I
+    H --> I
+    
+    I --> J["Tarea completada<br/>según protocolo"]
+    
+    K["📚 Referencia conceptual<br/>~/rules/docs/*.md"] -.-> B
+    
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style J fill:#9f9,stroke:#333,stroke-width:2px
+    style K fill:#bbf,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
+```
 
-- Aplica `~/cot/committing.md`
-- Aplica `~/cot/context.md`
-- Aplica `~/cot/changelog.md`
+**Ejemplos de invocación**:
 
-Sugerencia: prioriza siempre los CoT para ejecución; usa los documentos de `docs/` como referencia conceptual.
+- `Aplica ~/cot/committing.md`
+- `Aplica ~/cot/context.md`
+- `Aplica ~/cot/changelog.md`
+
+**Principio clave**: prioriza siempre los CoT para ejecución; usa los documentos de `docs/` como referencia conceptual.
 
 ## Documentos incluidos
 
