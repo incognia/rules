@@ -24,6 +24,9 @@
 ### fix
 - corregir comando de enlace simbólico en configuración inicial: usar `ln -s ~/rules/prompts/cot cot` (sin ~ en destino) para correcta creación de enlace local
 - actualizar comando de recreación de enlace para mantener consistencia con la sintaxis corregida
+- aplicar reglas lingüísticas de LINGUISTICS.md al README.md: corregir calco del inglés "desarrollado" por "elaborado" en footer del proyecto
+- verificar todos los títulos y encabezados (25 líneas encontradas): confirmar uso correcto de estilo oración sin "Título Con Cada Palabra En Mayúscula"
+- validar uso correcto de préstamos técnicos en cursiva (*commit*, *bare-metal*, *CoT*, *pipeline*, etc.) y terminología en español mexicano estándar
 
 ## [2025-09-18] - Mejoras integrales a CoT de contexto y committing para infraestructura y cuentas múltiples
 
