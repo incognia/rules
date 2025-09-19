@@ -21,6 +21,10 @@
 - aplicar colores diferenciados: rosa para inicio, verde para éxito, azul para referencias conceptuales
 - integrar diagramas orgánicamente con comandos paso a paso y ejemplos de invocación para mejor *onboarding*
 
+### fix
+- corregir comando de enlace simbólico en configuración inicial: usar `ln -s ~/rules/prompts/cot cot` (sin ~ en destino) para correcta creación de enlace local
+- actualizar comando de recreación de enlace para mantener consistencia con la sintaxis corregida
+
 ## [2025-09-18] - Mejoras integrales a CoT de contexto y committing para infraestructura y cuentas múltiples
 
 ### docs

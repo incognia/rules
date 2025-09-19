@@ -31,25 +31,12 @@ Principio operativo: los documentos de `docs/` contienen la lógica y las reglas
 
 ### Configuración inicial (una sola vez)
 
-```mermaid
-flowchart TD
-    A["Inicio: Sistema limpio"] --> B["Clonar repositorio<br/>git clone git@github.com:incognia/rules.git ~/rules"]
-    B --> C["Crear enlace simbólico<br/>ln -s ~/rules/prompts/cot ~/cot"]
-    C --> D{"¿Enlace creado correctamente?"}
-    D -->|Sí| E["✅ Configuración completa<br/>Listo para uso diario"]
-    D -->|No, ya existe| F["Recrear enlace<br/>rm -f ~/cot && ln -s ~/rules/prompts/cot ~/cot"]
-    F --> E
-    
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style E fill:#9f9,stroke:#333,stroke-width:2px
-```
-
 **Comandos paso a paso**:
 
 ```bash
 # Linux y macOS
 git clone git@github.com:incognia/rules.git ~/rules
-ln -s ~/rules/prompts/cot ~/cot
+ln -s ~/rules/prompts/cot cot
 ```
 
 **Notas**:
@@ -57,7 +44,7 @@ ln -s ~/rules/prompts/cot ~/cot
 - Si el enlace ya existe, puedes recrearlo:
 
 ```bash
-rm -f ~/cot && ln -s ~/rules/prompts/cot ~/cot
+rm -f ~/cot && ln -s ~/rules/prompts/cot cot
 ```
 
 ### Uso diario
