@@ -4,6 +4,16 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
+## [2025-09-22] - Automatización de licenciamiento basado en análisis de proyecto
+
+### docs
+- crear prompts/cot/licensing.md: CoT automatizado que aplica licenciamiento apropiado (MIT para proyectos laborales, GPLv3 para personales) analizando indicadores en README.md
+- implementar detección automática de naturaleza del proyecto: buscar menciones de "Promad", correo corporativo vs "@incognia", correo personal
+- aplicar plantillas completas de licenciamiento según reglas establecidas en ../../docs/LICENSING.md
+- generar archivo LICENSE con texto completo de licencia apropiada (MIT License o descargar GPL v3)
+- agregar footer de licenciamiento correcto al README.md con información de copyright y distribución
+- incluir validación programática para verificar creación correcta de archivos y aplicación de cambios
+
 ## [2025-09-19] - Priorización del flujo de trabajo diario con CoT y badge de cobertura
 
 ### docs
