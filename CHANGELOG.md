@@ -4,6 +4,12 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
+
+## [2025-10-11] - CoT para configuración de metadatos de GitHub sin editores
+
+### feat
+- crear prompts/cot/github_metadata.md: CoT funcional para configuración de repositorios GitHub evitando editores interactivos
+
 ## [2025-09-22] - Automatización de licenciamiento basado en análisis de proyecto
 
 ### docs
