@@ -31,6 +31,8 @@ Utilizar la especificación de [Commits Convencionales](https://www.conventional
 - **ci:** cambios en los archivos y scripts de configuración de CI.
 - **chore:** otros cambios que no modifican el código fuente ni las pruebas (ej. actualización de dependencias).
 
+**⚠️ IMPORTANTE:** Los archivos CoT (Chain of Thought) como `cot/committing.md` son documentos funcionales que definen workflows automatizados. Se clasifican como **`feat:`** (no `docs:`), ya que representan nueva funcionalidad y automatización del proyecto, no simple documentación.
+
 ### 2.3. Reglas del mensaje
 
 - **Idioma:** redactar siempre en **inglés internacional**.

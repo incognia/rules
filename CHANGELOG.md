@@ -4,6 +4,11 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
+## [2025-10-15]
+
+### docs
+- clarificar COMMITTING.md: los archivos CoT se clasifican como `feat:` (funcionalidad automatizada) no `docs:` (documentación)
+
 
 ## [2025-10-11] - CoT para configuración de metadatos de GitHub sin editores
 
