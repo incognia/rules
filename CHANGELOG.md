@@ -4,6 +4,11 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
+## [2025-12-29]
+
+### docs
+- crear REFACTOR.md: checklist detallado para refactorización de estructura de directorios (9 fases, 60+ pasos, comandos ejecutables)
+
 ## [2025-10-15]
 
 ### docs
