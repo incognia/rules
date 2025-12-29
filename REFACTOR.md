@@ -38,9 +38,9 @@ rules/
   echo "Referencias a prompts/: $(grep -r 'prompts/' ~/rules --include='*.md' --exclude-dir=node_modules | wc -l)"
   ```
 
-## Fase 1: Movimientos de archivos
+## Fase 1: movimientos de archivos
 
-### 1.1 Renombrar docs/ → rulesets/
+### 1.1 Renombrar `docs/` → `rulesets/`
 
 - [ ] Renombrar directorio
   ```bash
@@ -52,7 +52,7 @@ rules/
   ls -la rulesets/
   ```
 
-### 1.2 Crear cot/ en raíz y mover contenido
+### 1.2 Crear `cot/` en raíz y mover contenido
 
 - [ ] Crear directorio cot/ en raíz
   ```bash
@@ -74,7 +74,7 @@ rules/
   git mv prompts/guides/git_workflow_guide.md cot/git_workflow.md
   ```
 
-### 1.3 Consolidar templates/
+### 1.3 Consolidar `templates/`
 
 - [ ] Crear templates/ en raíz
   ```bash
@@ -86,7 +86,7 @@ rules/
   git mv prompts/templates/issue_template.md templates/
   ```
 
-### 1.4 Mover snippet a scripts/
+### 1.4 Mover *snippet* a `scripts/`
 
 - [ ] Mover cst_date.sh
   ```bash
@@ -98,7 +98,7 @@ rules/
   chmod +x scripts/cst_date.sh
   ```
 
-### 1.5 Eliminar estructura prompts/ vacía
+### 1.5 Eliminar estructura `prompts/` vacía
 
 - [ ] Eliminar subdirectorios vacíos
   ```bash
@@ -115,9 +115,9 @@ rules/
   rmdir prompts 2>/dev/null || echo "prompts/ no está vacío, revisar contenido"
   ```
 
-## Fase 2: Actualizar referencias internas
+## Fase 2: actualizar referencias internas
 
-### 2.1 Referencias docs/ → rulesets/
+### 2.1 Referencias `docs/` → `rulesets/`
 
 - [ ] Actualizar en archivos raíz
   ```bash
@@ -139,7 +139,7 @@ rules/
   find scripts/ -name "*.sh" -exec sed -i 's|docs/|rulesets/|g' {} +
   ```
 
-### 2.2 Actualizar rutas relativas docs/ en CoTs
+### 2.2 Actualizar rutas relativas `docs/` en CoTs
 
 - [ ] Actualizar enlaces Markdown (../../docs/ → ../rulesets/)
   ```bash
@@ -151,7 +151,7 @@ rules/
   grep -r "\.\./\.\./docs/" cot/ || echo "✅ No quedan referencias ../../docs/"
   ```
 
-### 2.3 Referencias prompts/cot/ → cot/
+### 2.3 Referencias `prompts/cot/` → `cot/`
 
 - [ ] Actualizar en archivos raíz
   ```bash
@@ -182,23 +182,23 @@ rules/
   find cot/ -name "*.md" -exec sed -i 's|\.\./prompts/|./|g' {} +
   ```
 
-### 2.5 Actualizar referencias a templates/
+### 2.5 Actualizar referencias a `templates/`
 
 - [ ] Actualizar prompts/templates/ → templates/
   ```bash
   find . -name "*.md" -exec sed -i 's|prompts/templates/|templates/|g' {} +
   ```
 
-### 2.6 Actualizar referencias a scripts/
+### 2.6 Actualizar referencias a `scripts/`
 
 - [ ] Actualizar prompts/snippets/cst_date.sh → scripts/cst_date.sh
   ```bash
   find . -name "*.md" -exec sed -i 's|prompts/snippets/cst_date\.sh|scripts/cst_date.sh|g' {} +
   ```
 
-## Fase 3: Actualizar documentación estructural
+## Fase 3: actualizar documentación estructural
 
-### 3.1 Actualizar README.md
+### 3.1 Actualizar `README.md`
 
 - [ ] Revisar sección «Documentos incluidos»
   - Cambiar referencias `docs/` por `rulesets/`
@@ -211,7 +211,7 @@ rules/
   - Cambiar `~/cot/` referencias (el symlink sigue funcionando)
   - Cambiar referencias a `~/rules/docs/` por `~/rules/rulesets/`
 
-### 3.2 Actualizar WARP.md
+### 3.2 Actualizar `WARP.md`
 
 - [ ] Actualizar sección «Directory Organization»
   ```markdown
@@ -227,7 +227,7 @@ rules/
 - [ ] Actualizar sección «Integration with Other Repositories»
   - Path convention: `~/rules/rulesets/LINGUISTICS.md`
 
-### 3.3 Actualizar ROADMAP.md
+### 3.3 Actualizar `ROADMAP.md`
 
 - [ ] Actualizar referencias docs/ → rulesets/
 
@@ -235,20 +235,20 @@ rules/
   - Mencionar nueva estructura simplificada
   - Actualizar conteo si agregaste archivos de actions/guides
 
-### 3.4 Actualizar PROMPTS.md
+### 3.4 Actualizar `PROMPTS.md`
 
 - [ ] Actualizar estructura de directorios
 
 - [ ] Eliminar referencias a actions/, guides/, snippets/
 
-### 3.5 Actualizar PHILOSOPHY.md
+### 3.5 Actualizar `PHILOSOPHY.md`
 
 - [ ] Verificar referencias a docs/
   ```bash
   grep "docs/" PHILOSOPHY.md && echo "⚠️  Actualizar" || echo "✅ Sin referencias"
   ```
 
-## Fase 4: Actualizar symlink ~/cot
+## Fase 4: actualizar *symlink* `~/cot`
 
 - [ ] Verificar symlink actual
   ```bash
@@ -266,20 +266,20 @@ rules/
   ls ~/cot/committing.md && echo "✅ Symlink funcional"
   ```
 
-## Fase 5: Validación y testing
+## Fase 5: validación y pruebas
 
 ### 5.1 Validación de enlaces rotos
 
-- [ ] Ejecutar markdown-link-check
+- [ ] Ejecutar *markdown-link-check*
   ```bash
   npm run check:links
   ```
 
 - [ ] Corregir enlaces rotos reportados
 
-### 5.2 Validación de linting
+### 5.2 Validación de análisis estático
 
-- [ ] Ejecutar markdownlint
+- [ ] Ejecutar *markdownlint*
   ```bash
   npm run lint:md
   ```
@@ -317,7 +317,7 @@ rules/
   [ ! -d prompts ] && echo "✅ prompts/ eliminado" || echo "⚠️  prompts/ aún existe"
   ```
 
-## Fase 6: Actualizar CHANGELOG.md
+## Fase 6: actualizar `CHANGELOG.md`
 
 - [ ] Agregar entrada en CHANGELOG.md
   ```markdown
@@ -336,7 +336,7 @@ rules/
     - Razón: 95% del uso es CoTs, subdirectorios de prompts/ subutilizados (1 archivo c/u)
   ```
 
-## Fase 7: Commit y validación final
+## Fase 7: *commit* y validación final
 
 - [ ] Revisar estado de Git
   ```bash
@@ -364,7 +364,7 @@ rules/
   git --no-pager show --stat
   ```
 
-## Fase 8: Testing post-refactor
+## Fase 8: pruebas posteriores a refactorización
 
 - [ ] Probar CoT crítico
   ```bash
@@ -384,7 +384,7 @@ rules/
   tree -L 2 -I 'node_modules' ~/rules
   ```
 
-## Fase 9: Push y cierre
+## Fase 9: *push* y cierre
 
 - [ ] Push de la rama
   ```bash
@@ -417,7 +417,7 @@ rules/
 
 ## Resumen de cambios
 
-### Estructura ANTES
+### Estructura antes
 
 ```
 rules/
@@ -431,7 +431,7 @@ rules/
 └── scripts/ (5 archivos)
 ```
 
-### Estructura DESPUÉS
+### Estructura después
 
 ```
 rules/

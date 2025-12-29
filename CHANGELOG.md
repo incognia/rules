@@ -9,6 +9,9 @@
 ### docs
 - crear REFACTOR.md: checklist detallado para refactorización de estructura de directorios (9 fases, 60+ pasos, comandos ejecutables)
 
+### style
+- aplicar LINGUISTICS.md a REFACTOR.md: corregir 22 títulos de Title Case a estilo oración, agregar cursivas a préstamos técnicos (*symlink*, *snippet*, *commit*, *push*, *markdown-link-check*, *markdownlint*), corregir calcos del inglés («testing» → «pruebas», «linting» → «análisis estático»)
+
 ## [2025-10-15]
 
 ### docs
