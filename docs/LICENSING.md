@@ -40,7 +40,7 @@ A continuación, se muestran ejemplos de cómo incluir la información de licenc
 
 *Este proyecto fue elaborado por Rodrigo Álvarez para Promad Business Solutions y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
 
-*Copyright © 2025, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
+*Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
 
 #### Proyecto personal
 
@@ -48,7 +48,7 @@ A continuación, se muestran ejemplos de cómo incluir la información de licenc
 
 *Este proyecto fue elaborado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.*
 
-*Copyright © 2025, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*
+*Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*
 
 ### 3.2. Encabezado en script de Bash (.sh)
 
@@ -60,10 +60,10 @@ A continuación, se muestran ejemplos de cómo incluir la información de licenc
 # Script:         k8s-cluster-bootstrap.sh
 # Descripción:    Automatiza el aprovisionamiento de clústeres Kubernetes en Proxmox VE.
 # Autor:          Rodrigo Álvarez <ralvarez@promad.com.mx>
-# Fecha:          2025-07-30
+# Fecha:          2026-01-23
 # Licencia:       MIT License
 #
-# Copyright (c) 2025, Promad Business Solutions
+# Copyright (c) 2026, Promad Business Solutions
 #
 # Se concede permiso, de forma gratuita, a cualquier persona que obtenga una copia
 # de este software y de los archivos de documentación asociados (el "Software"), para tratar
@@ -86,10 +86,10 @@ A continuación, se muestran ejemplos de cómo incluir la información de licenc
 # Script:         istio-observability-stack.sh
 # Descripción:    Despliega stack de observabilidad con Prometheus, Grafana y Jaeger en Istio.
 # Autor:          Rodrigo Álvarez (incognia) <incognia@gmail.com>
-# Fecha:          2025-07-30
+# Fecha:          2026-01-23
 # Licencia:       GNU General Public License v3.0 (GPLv3)
 #
-# Copyright (c) 2025 Rodrigo Ernesto Álvarez Aguilera
+# Copyright (c) 2026 Rodrigo Ernesto Álvarez Aguilera
 #
 # Este programa es software libre: usted puede redistribuirlo y/o modificarlo
 # bajo los términos de la Licencia Pública General de GNU publicada por
@@ -118,10 +118,10 @@ A continuación, se muestran ejemplos de cómo incluir la información de licenc
 # File:         database_backup.py
 # Description:  Automated database backup tool for production environments.
 # Author:       Rodrigo Álvarez <ralvarez@promad.com.mx>
-# Date:         2025-07-30
+# Date:         2026-01-23
 # License:      MIT License
 #
-# Copyright (c) 2025, Promad Business Solutions
+# Copyright (c) 2026, Promad Business Solutions
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -150,10 +150,10 @@ PostgreSQL and MySQL databases with configurable retention policies.
 #
 # autor:    Rodrigo Álvarez (incognia)
 # correo:   incognia@gmail.com
-# fecha:    2025-07-30
+# fecha:    2026-01-23
 # licencia: GNU General Public License v3.0 (GPLv3)
 #
-# Copyright (c) 2025 Rodrigo Ernesto Álvarez Aguilera
+# Copyright (c) 2026 Rodrigo Ernesto Álvarez Aguilera
 #
 # Este programa es software libre: usted puede redistribuirlo y/o modificarlo
 # bajo los términos de la Licencia Pública General de GNU publicada por
@@ -187,7 +187,7 @@ Módulo de ejemplo para demostrar la inclusión de la licencia GPLv3.
 # License: MIT
 # Company: Promad Business Solutions
 #
-# Copyright (c) 2025, Promad Business Solutions
+# Copyright (c) 2026, Promad Business Solutions
 
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -223,7 +223,7 @@ spec:
 # Licencia: GPL-3.0-or-later
 # Repositorio: https://github.com/incognia/observability-stack
 #
-# Copyright (C) 2025 Rodrigo Ernesto Álvarez Aguilera
+# Copyright (C) 2026 Rodrigo Ernesto Álvarez Aguilera
 
 apiVersion: v2
 name: observability-stack

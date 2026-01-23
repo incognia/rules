@@ -62,7 +62,7 @@ if [[ "$LICENSE_TYPE" == "MIT" ]]; then
     cat > LICENSE << 'EOF'
 MIT License
 
-Copyright (c) 2025 Promad Business Solutions
+Copyright (c) 2026 Promad Business Solutions
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -102,7 +102,7 @@ if [[ "$PROJECT_TYPE" == "laboral" ]]; then
 
 *Este proyecto fue elaborado por Rodrigo Álvarez para Promad Business Solutions y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
 
-*Copyright © 2025, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
+*Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
 EOF
 
 elif [[ "$PROJECT_TYPE" == "personal" ]]; then
@@ -112,7 +112,7 @@ elif [[ "$PROJECT_TYPE" == "personal" ]]; then
 
 *Este proyecto fue elaborado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.*
 
-*Copyright © 2025, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*
+*Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*
 EOF
 fi
 ```
@@ -130,7 +130,7 @@ else
 fi
 
 # Verificar footer en README.md
-if grep -q "Copyright.*2025.*Rodrigo" README.md; then
+if grep -q "Copyright.*2026.*Rodrigo" README.md; then
     echo "✓ Footer de licenciamiento agregado al README.md"
 else
     echo "✗ Error: Footer no fue agregado correctamente"

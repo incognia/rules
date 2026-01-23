@@ -4,6 +4,13 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
+## [2026-01-23]
+
+### docs
+- actualizar fechas de copyright de 2025 a 2026 en README.md, PHILOSOPHY.md, docs/VAULT.md, docs/LICENSING.md y prompts/cot/licensing.md
+- actualizar fechas de ejemplo en docs/LICENSING.md de 2025-07-30 a 2026-01-23 en plantillas de encabezados para scripts Bash, Python y manifiestos YAML
+- actualizar validación de fecha en prompts/cot/licensing.md de 2025 a 2026 para verificación de footer en README.md
+
 ## [2025-12-29]
 
 ### docs

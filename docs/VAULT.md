@@ -295,4 +295,4 @@ vault kv get kv/incognia/test 2>&1 | grep -q "permission denied" && \
 
 *Este documento fue desarrollado por Rodrigo Álvarez para la gestión segura de secretos en infraestructura DevOps y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
 
-*Copyright © 2025, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
+*Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
