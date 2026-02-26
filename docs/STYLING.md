@@ -87,12 +87,12 @@ Todo documento laboral debe concluir con el siguiente pie de página:
     </td>
   </tr>
   <tr>
-    <td>Ingeniero DevOps</td>
+    <td>Líder DevOps</td>
   </tr>
   <tr>
     <td>
       <i class="fa fa-envelope"></i>
-      <a href="mailto:ralvarez@promad.com.mx">ralvarez@promad.com.mx</a>
+      <a href="mailto:ralvarez@kabatone">ralvarez@kabatone.com</a>
     </td>
   </tr>
   <tr>

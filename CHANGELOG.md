@@ -4,6 +4,11 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
+## [2026-02-26]
+
+### docs
+- actualizar STYLING.md: cambiar título profesional de «Ingeniero DevOps» a «Líder DevOps» y correo corporativo de promad.com.mx a kabatone.com en plantilla de firma
+
 ## [2026-01-23]
 
 ### docs
