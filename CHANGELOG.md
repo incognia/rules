@@ -4,6 +4,13 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
+## [2026-03-23] - Documentación y CoT para generación de documentos LaTeX corporativos
+
+### feat
+- crear docs/LATEX.md: referencia completa de reglas para generar documentos LaTeX con XeLaTeX en Fedora (fuentes, tablas con `tabularx`+`booktabs`, bloques de código con `tcolorbox`, paleta PROMAD, encabezado/pie estándar, instalación de paquetes con `dnf`)
+- crear prompts/cot/latex.md: CoT de 8 pasos para generar documentos LaTeX desde cero usando el Markdown como referencia de contenido
+- documentar razón crítica para NO usar pandoc directo: tablas inconsistentes, bloques de código con fondo roto y encabezado/pie incontrolables
+
 ## [2026-03-23] - Regla de separadores en CoT de *styling*
 
 ### docs
