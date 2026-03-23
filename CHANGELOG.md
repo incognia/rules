@@ -4,6 +4,11 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
+## [2026-03-23] - Regla de separadores en CoT de *styling*
+
+### docs
+- agregar regla crítica en prompts/cot/styling.md (paso 5): eliminar todos los `---` del cuerpo del documento; el único permitido es el que precede inmediatamente a `## Contacto`
+
 ## [2026-02-26]
 
 ### docs

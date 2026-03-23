@@ -21,16 +21,19 @@ Pasos:
    Resultado: jerarquía clara; títulos en estilo oración y sin punto final.
 4) Acción: aplicar reglas de LINGUISTICS a términos y comillas.
    Resultado: «IA», «TI», «computadora», comillas «», préstamos en cursiva.
-5) Acción: insertar pie de página estándar con separadores, sección de contacto y CSS corporativo.
+5) Acción: eliminar separadores `---` innecesarios del cuerpo del documento.
+   REGLA CRÍTICA: el único `---` permitido en el documento es el que precede inmediatamente a `## Contacto`. Ninguna sección de contenido (H2, tablas, bloques de código, párrafos) debe estar separada con `---`. Eliminar todos los demás antes de continuar.
+   Resultado: cero `---` en el cuerpo; uno solo justo antes del pie de página.
+6) Acción: insertar pie de página estándar con separador único, sección de contacto y CSS corporativo.
    Resultado: pie con información de contacto, avatar, colores corporativos y estilos coherentes.
-6) Acción: validar enlaces e imágenes.
+7) Acción: validar enlaces e imágenes.
    Resultado: URLs funcionan; agregar texto alternativo a imágenes.
-7) Acción: revisar accesibilidad y responsive.
+8) Acción: revisar accesibilidad y responsive.
    Resultado: estilos legibles, contraste suficiente, tablas correctas.
-8) Acción: verificar mermaid cuando se requieran diagramas.
+9) Acción: verificar mermaid cuando se requieran diagramas.
    Resultado: bloques ```mermaid conformes; sin ASCII.
-9) Acción: validar consistencia con linters.
-   Resultado: markdownlint (encabezados/longitud de línea) y Vale (estilo/es_MX) pasan sin errores.
+10) Acción: validar consistencia con linters.
+    Resultado: markdownlint (encabezados/longitud de línea) y Vale (estilo/es_MX) pasan sin errores.
 
 Conclusión:
 - Entregar el documento con encabezado/pie correctos, timestamp válido en CST, contenido jerarquizado y estilo consistente.
