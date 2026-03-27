@@ -3,7 +3,7 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)
 [![Spanish](https://img.shields.io/badge/Language-Spanish%20(MX)-green.svg)](https://es.wikipedia.org/wiki/Espa%C3%B1ol_mexicano)
-[![CoT Coverage](https://img.shields.io/badge/CoT_Coverage-43%25-orange.svg)](./ROADMAP.md)
+[![CoT Coverage](https://img.shields.io/badge/CoT_Coverage-43%25-orange.svg)](./cot/)
 
 Definiciones rápidas
 
@@ -27,7 +27,7 @@ Un manifiesto contra tres males endémicos en tecnología latinoamericana:
 
 ## Flujo de trabajo diario con CoT (recomendado)
 
-Principio operativo: los documentos de `docs/` contienen la lógica y las reglas; sin embargo, las herramientas de trabajo del día a día son los CoT ubicados en `prompts/cot/`.
+Principio operativo: los documentos de `rulesets/` contienen la lógica y las reglas; sin embargo, las herramientas de trabajo del día a día son los CoT ubicados en `cot/`.
 
 ### Configuración inicial (una sola vez)
 
@@ -36,7 +36,7 @@ Principio operativo: los documentos de `docs/` contienen la lógica y las reglas
 ```bash
 # Linux y macOS
 git clone git@github.com:incognia/rules.git ~/rules
-ln -s ~/rules/prompts/cot cot
+ln -s ~/rules/cot ~/cot
 ```
 
 **Notas**:
@@ -44,7 +44,7 @@ ln -s ~/rules/prompts/cot cot
 - Si el enlace ya existe, puedes recrearlo:
 
 ```bash
-rm -f ~/cot && ln -s ~/rules/prompts/cot cot
+rm -f ~/cot && ln -s ~/rules/cot ~/cot
 ```
 
 ### Uso diario
@@ -68,7 +68,7 @@ flowchart LR
     
     I --> J["Tarea completada<br/>según protocolo"]
     
-    K["📚 Referencia conceptual<br/>~/rules/docs/*.md"] -.-> B
+    K["📚 Referencia conceptual<br/>~/rules/rulesets/*.md"] -.-> B
     
     style A fill:#f9f,stroke:#333,stroke-width:2px
     style J fill:#9f9,stroke:#333,stroke-width:2px
@@ -81,24 +81,22 @@ flowchart LR
 - `Aplica ~/cot/context.md`
 - `Aplica ~/cot/changelog.md`
 
-**Principio clave**: prioriza siempre los CoT para ejecución; usa los documentos de `docs/` como referencia conceptual.
+**Principio clave**: prioriza siempre los CoT para ejecución; usa los documentos de `rulesets/` como referencia conceptual.
 
 ## Documentos incluidos
 
 - **[PHILOSOPHY.md](./PHILOSOPHY.md)** - filosofía principal y manifiesto de desarrollo
-- **[PROMPTS.md](./PROMPTS.md)** - guía de Chain-of-Thought (CoT) en es_MX
-- **[ROADMAP.md](./ROADMAP.md)** - ruta de 90 días para CoT y automatizaciones
-- **[TODO.md](./docs/TODO.md)** - tareas tácticas inmediatas (CoT y mejoras)
-- **[CORPORATE.md](./docs/CORPORATE.md)** - perfil profesional corporativo
-- **[TEACHING.md](./docs/TEACHING.md)** - perfil educativo y de divulgación científica
-- **[ATTRIBUTION.md](./docs/ATTRIBUTION.md)** - reglas de atribución personal
-- **[COMMITTING.md](./docs/COMMITTING.md)** - reglas para mensajes de *commit* y gestión de cambios
-- **[GIT.md](./docs/GIT.md)** - configuración inicial de cuentas GitHub y GitLab
-- **[LICENSING.md](./docs/LICENSING.md)** - reglas de licenciamiento para proyectos
-- **[LINGUISTICS.md](./docs/LINGUISTICS.md)** - reglas lingüísticas de español mexicano como referente
-- **[STYLING.md](./docs/STYLING.md)** - reglas de estilo para documentos Markdown (proyectos laborales)
-- **[BACKUPS.md](./docs/BACKUPS.md)** - políticas de respaldos y operaciones destructivas
-- **[GLOSSARY.md](./docs/GLOSSARY.md)** - glosario técnico de términos empleados
+- **[AGENTS.md](./AGENTS.md)** - guía para agentes IA que trabajan con este repositorio
+- **[CORPORATE.md](./rulesets/CORPORATE.md)** - perfil profesional corporativo
+- **[TEACHING.md](./rulesets/TEACHING.md)** - perfil educativo y de divulgación científica
+- **[ATTRIBUTION.md](./rulesets/ATTRIBUTION.md)** - reglas de atribución personal
+- **[COMMITTING.md](./rulesets/COMMITTING.md)** - reglas para mensajes de *commit* y gestión de cambios
+- **[GIT.md](./rulesets/GIT.md)** - configuración inicial de cuentas GitHub y GitLab
+- **[LICENSING.md](./rulesets/LICENSING.md)** - reglas de licenciamiento para proyectos
+- **[LINGUISTICS.md](./rulesets/LINGUISTICS.md)** - reglas lingüísticas de español mexicano como referente
+- **[STYLING.md](./rulesets/STYLING.md)** - reglas de estilo para documentos Markdown (proyectos laborales)
+- **[BACKUPS.md](./rulesets/BACKUPS.md)** - políticas de respaldos y operaciones destructivas
+- **[GLOSSARY.md](./rulesets/GLOSSARY.md)** - glosario técnico de términos empleados
 - **[CHANGELOG.md](./CHANGELOG.md)** - historial de cambios del proyecto
 
 ## Especialización técnica
@@ -126,7 +124,7 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 | **Autoría** | Rodrigo Álvarez (@incognia) | Rodrigo Álvarez (@incogniadev) |
 | **Email** | [incognia@gmail.com](mailto:incognia@gmail.com) | [ralvarez@promad.com.mx](mailto:ralvarez@promad.com.mx) |
 | **SSH Key** | ~/.ssh/id_ed25519 | ~/.ssh/promad_ed25519 |
-| **Estilo de documentos** | No definido aún | [STYLING.md](./docs/STYLING.md) aplicable |
+| **Estilo de documentos** | No definido aún | [STYLING.md](./rulesets/STYLING.md) aplicable |
 | **Idioma documentación** | Español mexicano | Español mexicano |
 | **Idioma código/commits** | Inglés internacional | Inglés internacional |
 
@@ -153,15 +151,14 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 
 - **STYLING.md**: reglas de estilo para documentos Markdown corporativos
 
-## Prompts (Chain-of-Thought) y estructura
+## Estructura del repositorio
 
-- Índice general: ver [PROMPTS.md](./PROMPTS.md)
-- Estructura: [prompts/README.md](./prompts/README.md)
-  - CoT: [prompts/cot](./prompts/cot)
-  - Templates: [prompts/templates](./prompts/templates)
-  - Guides: [prompts/guides](./prompts/guides)
-  - Actions: [prompts/actions](./prompts/actions)
-  - Snippets: [prompts/snippets](./prompts/snippets)
+- **rulesets/** — reglas y documentación de referencia (LINGUISTICS.md, COMMITTING.md, etc.)
+- **cot/** — cadenas de razonamiento (CoT) para ejecución diaria
+- **templates/** — plantillas reutilizables
+- **scripts/** — scripts de automatización y respaldos
+- **.agents/skills/** — *skills* descubribles por agentes IA (commit, changelog, linguistics, context, backup, licensing)
+- **.warp/workflows/** — comandos parametrizados YAML (backup, lint, commit, cst_date)
 
 ## Herramientas y scripts
 
@@ -173,13 +170,12 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 
 ## Cómo usar CoT rápidamente
 
-- Guía: lee [PROMPTS.md](./PROMPTS.md)
-- Ejemplos: carpeta [prompts/cot/](./prompts/cot/)
-- Buenas prácticas lingüísticas: [LINGUISTICS.md](./docs/LINGUISTICS.md)
-- Flujo de commits y CHANGELOG: [COMMITTING.md](./docs/COMMITTING.md)
-- **Nuevo**: CoT genérico para obtener contexto de proyectos: [prompts/cot/context.md](./prompts/cot/context.md)
-- **Nuevo**: CoT para mantenimiento de CHANGELOG: [prompts/cot/changelog.md](./prompts/cot/changelog.md)
-- **Mejorado**: CoT de commits con validación SSH: [prompts/cot/committing.md](./prompts/cot/committing.md)
+- Ejemplos: carpeta [cot/](./cot/)
+- Buenas prácticas lingüísticas: [LINGUISTICS.md](./rulesets/LINGUISTICS.md)
+- Flujo de commits y CHANGELOG: [COMMITTING.md](./rulesets/COMMITTING.md)
+- **Nuevo**: CoT genérico para obtener contexto de proyectos: [cot/context.md](./cot/context.md)
+- **Nuevo**: CoT para mantenimiento de CHANGELOG: [cot/changelog.md](./cot/changelog.md)
+- **Mejorado**: CoT de commits con validación SSH: [cot/committing.md](./cot/committing.md)
 
 
 ### Nota de renderizado para CoT
@@ -202,7 +198,7 @@ domain: ...
 - Zona a usar en scripts: TZ=America/Mexico_City.
 - CHANGELOG.md: solo fecha (YYYY-MM-DD), sin hora.
 
-Más detalles: ver [LINGUISTICS.md – Fechas y horas (CST Ciudad de México)](./docs/LINGUISTICS.md#fechas-y-horas-cst-ciudad-de-méxico).
+Más detalles: ver [LINGUISTICS.md – Fechas y horas (CST Ciudad de México)](./rulesets/LINGUISTICS.md#fechas-y-horas-cst-ciudad-de-méxico).
 
 Ejemplos de comandos
 

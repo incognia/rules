@@ -34,6 +34,11 @@
   - **commit_flow**: flujo completo de *commit* con tipo y descripción
   - **cst_date**: obtener fecha/hora en CST (Ciudad de México)
 
+### docs
+- actualizar README.md: nueva estructura de directorios, sección de *skills* y *workflows*, corregir comandos de *symlink*
+- actualizar PHILOSOPHY.md: reemplazar referencias a ROADMAP.md y TODO.md por AGENTS.md
+- actualizar AGENTS.md: rutas a nueva estructura (`rulesets/`, `cot/`)
+
 ## [2026-03-23]
 
 ### feat
