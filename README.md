@@ -52,12 +52,12 @@ rm -f ~/cot && ln -s ~/rules/cot ~/cot
 ```mermaid
 flowchart LR
     A["Usuario con tarea"] --> B{"¿Qué necesito hacer?"}
-    B -->|Commits| C["~/cot/committing.md"]
-    B -->|Obtener contexto| D["~/cot/context.md"]
-    B -->|Actualizar CHANGELOG| E["~/cot/changelog.md"]
-    B -->|Configurar Git| F["~/cot/git_init.md"]
-    B -->|Aplicar reglas lingüísticas| G["~/cot/linguistics.md"]
-    B -->|Hacer respaldos| H["~/cot/backup.md"]
+    B -->|Commits| C["~/rules/cot/committing.md"]
+    B -->|Obtener contexto| D["~/rules/cot/context.md"]
+    B -->|Actualizar CHANGELOG| E["~/rules/cot/changelog.md"]
+    B -->|Configurar Git| F["~/rules/cot/git_init.md"]
+    B -->|Aplicar reglas lingüísticas| G["~/rules/cot/linguistics.md"]
+    B -->|Hacer respaldos| H["~/rules/cot/backup.md"]
     
     C --> I["Ejecución de CoT<br/>en herramienta LLM"]
     D --> I
@@ -77,9 +77,9 @@ flowchart LR
 
 **Ejemplos de invocación**:
 
-- `Aplica ~/cot/committing.md`
-- `Aplica ~/cot/context.md`
-- `Aplica ~/cot/changelog.md`
+- `Aplica ~/rules/cot/committing.md`
+- `Aplica ~/rules/cot/context.md`
+- `Aplica ~/rules/cot/changelog.md`
 
 **Principio clave**: prioriza siempre los CoT para ejecución; usa los documentos de `rulesets/` como referencia conceptual.
 

@@ -39,6 +39,9 @@
 - actualizar PHILOSOPHY.md: reemplazar referencias a ROADMAP.md y TODO.md por AGENTS.md
 - actualizar AGENTS.md: rutas a nueva estructura (`rulesets/`, `cot/`)
 
+### fix
+- corregir rutas de invocación en README.md: usar `~/rules/cot/` (ruta canónica) en lugar de `~/cot/` (dependiente de *symlink*) en ejemplos y diagrama Mermaid
+
 ## [2026-03-23]
 
 ### feat
