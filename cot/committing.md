@@ -10,7 +10,7 @@ last_updated: 2025-09-18
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
-- Cumplir el flujo obligatorio: primero CHANGELOG, luego add/commit/push (ver «~/rules/docs/COMMITTING.md» ([../../docs/COMMITTING.md](../../docs/COMMITTING.md))).
+- Cumplir el flujo obligatorio: primero CHANGELOG, luego add/commit/push (ver «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md))).
 - CRÍTICO: usar `git status` para analizar los cambios antes de proceder y determinar si requieren commits separados.
 - Evaluar si los cambios son de tipos mixtos (ej. feat + fix, docs + refactor) que requieran commits atómicos separados.
 - CRÍTICO: usar fecha en CST (Ciudad de México) calculada con TZ=America/Mexico_City; NUNCA rotular CST a horas UTC sin cálculo.
@@ -38,7 +38,7 @@ Pasos:
    - **CRÍTICO**: confirmar visualmente que la identidad mostrada es la correcta para este repositorio
    - Si usa HTTPS: indica configuración incorrecta, redirigir a git_init
    - Si la identidad no es la esperada: pausar y revisar configuración
-   Si falta cualquier configuración: aplicar «~/rules/prompts/cot/git_init.md» ([./git_init.md](./git_init.md)) antes de continuar
+   Si falta cualquier configuración: aplicar «~/rules/cot/git_init.md» ([./git_init.md](./git_init.md)) antes de continuar
    Resultado: repositorio validado con SSH, identidad confirmada visualmente, y listo para commits.
 
 1) Acción: analizar el estado actual del repositorio para identificar tipos de cambios.
@@ -52,7 +52,7 @@ Pasos:
    Verificación: comparar con `date -u` (UTC) para confirmar que el cálculo es correcto (CST = UTC - 6h).
 
 3) Acción: editar CHANGELOG.md y agregar entrada(s) bajo `## [${DATE_CST}]` según tipos de cambios identificados.
-   Referencia: aplicar «~/rules/prompts/cot/changelog.md» ([./changelog.md](./changelog.md)) para mantenimiento correcto del *changelog*
+   Referencia: aplicar «~/rules/cot/changelog.md» ([./changelog.md](./changelog.md)) para mantenimiento correcto del *changelog*
    Resultado: nueva(s) línea(s) tipo `- docs: descripción breve del cambio` en español mexicano (solo fecha, sin hora).
    Nota: si hay múltiples tipos, agregar una línea por cada tipo de cambio.
 
@@ -78,5 +78,5 @@ Conclusión:
 - **PISTA IMPORTANTE**: si `git remote -v` muestra URLs con https:// en lugar de git@, indica configuración incorrecta y debe aplicarse git_init.
 - **PISTA CUENTAS MÚTIPLES**: si el email/llave no coincide con lo esperado, revisar configuración del repositorio antes de proceder.
 - La atomicidad de commits facilita el mantenimiento: cada commit debe representar un cambio lógico único y funcional.
-- Referencias: «~/rules/docs/COMMITTING.md» ([../../docs/COMMITTING.md](../../docs/COMMITTING.md)), «~/rules/prompts/cot/changelog.md» ([./changelog.md](./changelog.md)), «~/rules/prompts/cot/git_init.md» ([./git_init.md](./git_init.md)), «~/rules/docs/GIT.md» ([../../docs/GIT.md](../../docs/GIT.md)), «~/rules/README.md» ([../../README.md](../../README.md)) y «~/rules/docs/LINGUISTICS.md» ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)).
+- Referencias: «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)), «~/rules/cot/changelog.md» ([./changelog.md](./changelog.md)), «~/rules/cot/git_init.md» ([./git_init.md](./git_init.md)), «~/rules/rulesets/GIT.md» ([../rulesets/GIT.md](../rulesets/GIT.md)), «~/rules/README.md» ([../../README.md](../../README.md)) y «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)).
 

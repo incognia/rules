@@ -4,17 +4,33 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
+## [2026-03-27] - Refactorización de estructura y AGENTS.md agnóstico
+
+### refactor
+- simplificar estructura de directorios del repositorio
+  - renombrar `docs/` → `rulesets/` (más descriptivo del contenido)
+  - mover `prompts/cot/` → `cot/` (raíz, eliminar anidamiento)
+  - consolidar `prompts/actions/release.md` y `prompts/guides/git_workflow_guide.md` en `cot/`
+  - mover `prompts/snippets/cst_date.sh` → `scripts/`
+  - mover `prompts/templates/` → `templates/` (raíz)
+  - eliminar estructura vacía `prompts/` y subdirectorios
+  - actualizar 80+ referencias internas en documentación y CoTs
+- renombrar `WARP.md` → `AGENTS.md`: archivo de reglas de proyecto agnóstico (reconocido por Warp, Claude, Cursor, Copilot, Gemini, etc.)
+  - eliminar bloque `<citations>` (artefacto de Warp que no pertenece al archivo versionado)
+  - reescribir contenido sin referencias específicas a Warp como producto
+- eliminar archivos obsoletos: PROMPTS.md (redundante con README y CoTs), ROADMAP.md (6 meses sin actualizar), REFACTOR.md (reemplazado por este cambio)
+
 ## [2026-03-23] - Documentación y CoT para generación de documentos LaTeX corporativos
 
 ### feat
-- crear docs/LATEX.md: referencia completa de reglas para generar documentos LaTeX con XeLaTeX en Fedora (fuentes, tablas con `tabularx`+`booktabs`, bloques de código con `tcolorbox`, paleta PROMAD, encabezado/pie estándar, instalación de paquetes con `dnf`)
-- crear prompts/cot/latex.md: CoT de 8 pasos para generar documentos LaTeX desde cero usando el Markdown como referencia de contenido
+- crear rulesets/LATEX.md: referencia completa de reglas para generar documentos LaTeX con XeLaTeX en Fedora (fuentes, tablas con `tabularx`+`booktabs`, bloques de código con `tcolorbox`, paleta PROMAD, encabezado/pie estándar, instalación de paquetes con `dnf`)
+- crear cot/latex.md: CoT de 8 pasos para generar documentos LaTeX desde cero usando el Markdown como referencia de contenido
 - documentar razón crítica para NO usar pandoc directo: tablas inconsistentes, bloques de código con fondo roto y encabezado/pie incontrolables
 
 ## [2026-03-23] - Regla de separadores en CoT de *styling*
 
 ### docs
-- agregar regla crítica en prompts/cot/styling.md (paso 5): eliminar todos los `---` del cuerpo del documento; el único permitido es el que precede inmediatamente a `## Contacto`
+- agregar regla crítica en cot/styling.md (paso 5): eliminar todos los `---` del cuerpo del documento; el único permitido es el que precede inmediatamente a `## Contacto`
 
 ## [2026-02-26]
 
@@ -24,9 +40,9 @@
 ## [2026-01-23]
 
 ### docs
-- actualizar fechas de copyright de 2025 a 2026 en README.md, PHILOSOPHY.md, docs/VAULT.md, docs/LICENSING.md y prompts/cot/licensing.md
-- actualizar fechas de ejemplo en docs/LICENSING.md de 2025-07-30 a 2026-01-23 en plantillas de encabezados para scripts Bash, Python y manifiestos YAML
-- actualizar validación de fecha en prompts/cot/licensing.md de 2025 a 2026 para verificación de footer en README.md
+- actualizar fechas de copyright de 2025 a 2026 en README.md, PHILOSOPHY.md, rulesets/VAULT.md, rulesets/LICENSING.md y cot/licensing.md
+- actualizar fechas de ejemplo en rulesets/LICENSING.md de 2025-07-30 a 2026-01-23 en plantillas de encabezados para scripts Bash, Python y manifiestos YAML
+- actualizar validación de fecha en cot/licensing.md de 2025 a 2026 para verificación de footer en README.md
 
 ## [2025-12-29]
 
@@ -45,14 +61,14 @@
 ## [2025-10-11] - CoT para configuración de metadatos de GitHub sin editores
 
 ### feat
-- crear prompts/cot/github_metadata.md: CoT funcional para configuración de repositorios GitHub evitando editores interactivos
+- crear cot/github_metadata.md: CoT funcional para configuración de repositorios GitHub evitando editores interactivos
 
 ## [2025-09-22] - Automatización de licenciamiento basado en análisis de proyecto
 
 ### docs
-- crear prompts/cot/licensing.md: CoT automatizado que aplica licenciamiento apropiado (MIT para proyectos laborales, GPLv3 para personales) analizando indicadores en README.md
+- crear cot/licensing.md: CoT automatizado que aplica licenciamiento apropiado (MIT para proyectos laborales, GPLv3 para personales) analizando indicadores en README.md
 - implementar detección automática de naturaleza del proyecto: buscar menciones de "Promad", correo corporativo vs "@incognia", correo personal
-- aplicar plantillas completas de licenciamiento según reglas establecidas en ../../docs/LICENSING.md
+- aplicar plantillas completas de licenciamiento según reglas establecidas en ../../rulesets/LICENSING.md
 - generar archivo LICENSE con texto completo de licencia apropiada (MIT License o descargar GPL v3)
 - agregar footer de licenciamiento correcto al README.md con información de copyright y distribución
 - incluir validación programática para verificar creación correcta de archivos y aplicación de cambios
@@ -64,7 +80,7 @@
 - documentar configuración inicial completa: clonado en ~/rules y creación de enlace simbólico ~/cot para acceso rápido
 - especificar compatibilidad con macOS y Linux para el flujo de enlace simbólico
 - agregar ejemplos de uso diario con rutas cortas (~/cot/committing.md, ~/cot/context.md, ~/cot/changelog.md)
-- enfatizar principio operativo: documentos docs/ para lógica vs CoT prompts/cot/ para herramientas de trabajo diarias
+- enfatizar principio operativo: documentos rulesets/ para lógica vs CoT cot/ para herramientas de trabajo diarias
 - incluir comandos para recrear enlace simbólico y notas de troubleshooting
 - agregar badge CoT Coverage (43%) con enlace al ROADMAP para seguimiento visual del progreso
 - reorganizar README para mostrar flujo de trabajo como información prioritaria inmediatamente después del contexto académico
@@ -84,7 +100,7 @@
 ## [2025-09-18] - Mejoras integrales a CoT de contexto y committing para infraestructura y cuentas múltiples
 
 ### docs
-- afinar prompts/cot/context.md v2.1: agregar búsqueda de READMEs en subdirectorios de segundo y tercer nivel para proyectos colaborativos con múltiples equipos
+- afinar cot/context.md v2.1: agregar búsqueda de READMEs en subdirectorios de segundo y tercer nivel para proyectos colaborativos con múltiples equipos
 - extender detección técnica para incluir archivos de configuración de Kubernetes en todo el repositorio (no solo raíz)
 - agregar búsqueda comprehensiva de archivos kubeconfig, kube.config y .kubeconfig en cualquier nivel del repositorio
 - incluir búsqueda completa de configuraciones Talos: talosconfig, talos.config y .talosconfig para uso con comandos EXPORT
@@ -95,15 +111,15 @@
 - expandir documentación de hallazgos para incluir orquestación, configuración de clusters y READMEs adicionales
 - agregar lectura automática de READMEs encontrados en subdirectorios con primeras 20 líneas
 - incluir detección de GitLab CI (.gitlab-ci.yml) además de GitHub Actions
-- extender prompts/cot/context.md para buscar archivos WARP.md y .warp.md en el análisis de documentación del proyecto
-- incluir ambas variantes (WARP.md estándar y .warp.md como *dotfile*) en verificación de existencia y lectura automática
+- extender cot/context.md para buscar archivos AGENTS.md y .warp.md en el análisis de documentación del proyecto
+- incluir ambas variantes (AGENTS.md estándar y .warp.md como *dotfile*) en verificación de existencia y lectura automática
 - agregar referencias específicas para configuración y reglas de proyecto en sección de Referencias del CoT
-- crear WARP.md con guía completa para instancias futuras de WARP terminal en este repositorio
+- crear AGENTS.md con guía completa para instancias futuras de WARP terminal en este repositorio
 - incluir descripción del propósito del repositorio (reglas técnicas, filosofía y CoT para LLM)
 - documentar filosofía central: combatir mercenazgo, egoísmo técnico y pérdida de identidad cultural
 - especificar comandos de desarrollo común: lint markdown (npm run lint:md), verificación de enlaces, scripts de respaldo
 - detallar flujo de commits crítico: actualizar CHANGELOG.md primero, luego add/commit/push
-- documentar arquitectura de directorios: docs/ (reglas), prompts/ (CoT y plantillas), scripts/ (herramientas)
+- documentar arquitectura de directorios: rulesets/ (reglas), prompts/ (CoT y plantillas), scripts/ (herramientas)
 - incluir contextos duales: personal (@incognia, GPLv3) vs corporativo (@incogniadev, MIT)
 - especificar sistema Chain-of-Thought con formato estructurado (Razonamiento, Pasos, Conclusión)
 - documentar manejo crítico de zona horaria CST (UTC - 6 horas, nunca solo agregar sufijo)
@@ -112,7 +128,7 @@
 - establecer integración con otros repositorios mediante rutas ~/rules/
 
 ### improve
-- afinar prompts/cot/committing.md v1.1: agregar validación visual de identidad activa para usuarios con múltiples cuentas y llaves SSH
+- afinar cot/committing.md v1.1: agregar validación visual de identidad activa para usuarios con múltiples cuentas y llaves SSH
 - incluir display obligatorio de email, nombre, llave SSH y remoto antes de proceder con commits
 - agregar verificación crítica para confirmar que la identidad mostrada coincide con la esperada para el repositorio
 - incorporar pistas específicas para usuarios con cuentas múltiples en sección de conclusiones
@@ -120,7 +136,7 @@
 ## [2025-09-17] - Mejoras críticas para cálculo preciso de zona horaria CST y reorganización estructural
 
 ### feat
-- crear prompts/cot/context.md v2.0: CoT genérico portable para cualquier proyecto con detección automática de tecnologías (Node.js, Python, Go, Rust, Java, Docker), análisis de estructura con *tree*, instalación multiplataforma (*dnf*, *apt*, *apk*, *pacman*, *brew*) y identificación de archivos de documentación estándar
+- crear cot/context.md v2.0: CoT genérico portable para cualquier proyecto con detección automática de tecnologías (Node.js, Python, Go, Rust, Java, Docker), análisis de estructura con *tree*, instalación multiplataforma (*dnf*, *apt*, *apk*, *pacman*, *brew*) y identificación de archivos de documentación estándar
 
 ### docs
 - actualizar README.md: añadir referencia a CoT genérico context.md en sección de uso rápido
@@ -129,11 +145,11 @@
 - consolidar ROADMAP.md en raíz combinando infraestructura CoT con análisis de cobertura específica
 - corregir systemáticamente errores de lint Markdown en archivos principales (README, ROADMAP, CHANGELOG, PROMPTS, PHILOSOPHY)
 - añadir espacios en blanco alrededor de encabezados y listas según MD022/MD032
-- corregir enlaces huérfanos tras movimiento de docs/ROADMAP.md a raíz
+- corregir enlaces huérfanos tras movimiento de rulesets/ROADMAP.md a raíz
 - especificar lenguajes en bloques de código y corregir prefijos de listas ordenadas
 - instalar y configurar npm/nodejs para verificación de enlaces y lint automático
-- crear CoT para mantenimiento de *changelog* en prompts/cot/changelog.md con corrección de errores comunes: orden cronológico inverso, cálculo preciso de CST, detección de duplicados y consistencia lingüística en español mexicano
-- agregar referencia lógica en prompts/cot/committing.md hacia CoT de *changelog* para flujo coherente de actualización
+- crear CoT para mantenimiento de *changelog* en cot/changelog.md con corrección de errores comunes: orden cronológico inverso, cálculo preciso de CST, detección de duplicados y consistencia lingüística en español mexicano
+- agregar referencia lógica en cot/committing.md hacia CoT de *changelog* para flujo coherente de actualización
 - agregar validación de configuración de repositorio en CoT de *committing* con referencia a CoT de git_init para repos no configurados
 - mejorar validación para detectar remotos HTTPS vs SSH: si `git remote -v` muestra https:// indica configuración incorrecta
 - actualizar README.md y ROADMAP.md con menciones de CoT de *changelog* y mejoras a CoT de *committing* con validación SSH
@@ -141,18 +157,18 @@
 - aplicar reglas lingüísticas a CHANGELOG.md: agregar cursivas a préstamos técnicos (*commit*, *git log*, *push*, *hook*, *prompt*, *git status*)
 
 ### fix
-- corregir enlaces relativos rotos en prompts/cot/changelog.md tras movimiento de ubicación inicial
+- corregir enlaces relativos rotos en cot/changelog.md tras movimiento de ubicación inicial
 
 ### refactor
-- mover CRITICAL_COT_READING.md de raíz a docs/ para mejor organización
-- consolidar CRITICAL_COMMIT_LANGUAGE.md y COMMIT_LANGUAGE_PROTOCOL.md en docs/COMMIT_LANGUAGE_PROTOCOL.md unificado
-- limpiar raíz del repositorio eliminando archivos duplicados y moviendo protocolos a docs/
+- mover CRITICAL_COT_READING.md de raíz a rulesets/ para mejor organización
+- consolidar CRITICAL_COMMIT_LANGUAGE.md y COMMIT_LANGUAGE_PROTOCOL.md en rulesets/COMMIT_LANGUAGE_PROTOCOL.md unificado
+- limpiar raíz del repositorio eliminando archivos duplicados y moviendo protocolos a rulesets/
 - remover directorio .githooks/ y *hook* pre-*commit* no funcional para simplificar estructura
 - actualizar referencia en CHANGELOG.md para reflejar nueva ubicación de archivos
 - eliminar sección de *git hooks* del README.md
 
 ### docs
-- reforzar instrucciones de timezone en prompts/cot/committing.md para evitar error común de rotular CST a horas UTC
+- reforzar instrucciones de timezone en cot/committing.md para evitar error común de rotular CST a horas UTC
 - añadir verificación obligatoria con `TZ=America/Mexico_City date` para obtener tiempo CST real
 - incluir ejemplos prácticos de conversión: UTC 14:30 → CST 08:30, UTC 03:15 → CST 21:15 (día anterior)
 - enfatizar cálculo matemático preciso: CST = UTC - 6 horas con manejo correcto de cambio de día
@@ -170,8 +186,8 @@
 
 ### fix
 - corregir inconsistencia en regla de idioma de *commits*: TODOS los mensajes de *commit* deben estar en inglés internacional
-- actualizar prompts/cot/committing.md línea 15: enfatizar «CRÍTICO» para mensajes de *commit* en inglés
-- actualizar referencia en docs/COMMIT_LANGUAGE_PROTOCOL.md para mantener consistencia con el texto corregido
+- actualizar cot/committing.md línea 15: enfatizar «CRÍTICO» para mensajes de *commit* en inglés
+- actualizar referencia en rulesets/COMMIT_LANGUAGE_PROTOCOL.md para mantener consistencia con el texto corregido
 - resolver conflicto entre reglas donde algunos documentos sugerían *commits* en español vs inglés
 - clarificar distribución de idiomas: *commits* en inglés, documentación en español mexicano
 
@@ -194,7 +210,7 @@
 ## [2025-08-25] - Corrección de editores interactivos y configuración SSH personal
 
 ### docs
-- corregir COMMITTING.md y prompts/cot/committing.md para eliminar uso de editores interactivos, especialmente con *git log* (usar --no-pager)
+- corregir COMMITTING.md y cot/committing.md para eliminar uso de editores interactivos, especialmente con *git log* (usar --no-pager)
 - documentar problema común de `quote>` en *git commit* por escape incorrecto de comillas en mensajes
 
 ### fix
@@ -209,26 +225,26 @@
 - PHILOSOPHY.md: reemplazar comillas rectas por comillas angulares («Agüelo», «Hagrid») según LINGUISTICS.md
 - CORPORATE.md: alinear con LINGUISTICS.md (título en estilo oración y guion medio, comillas angulares, préstamos tipográficos, «nube pública» en lugar de «cloud público»)
 - TEACHING.md: alinear con LINGUISTICS.md (minúscula tras dos puntos, traducciones en tabla, «preparación» por «setup»)
-- prompts/cot/linguistics.md: ampliar checklist para cubrir todas las reglas de LINGUISTICS.md en orden lógico (calcos, terminología, verbos, préstamos, tipografía, comillas, sutilezas, siglas, tiempos, fechas CST, nomenclatura, odios, expresiones)
+- cot/linguistics.md: ampliar checklist para cubrir todas las reglas de LINGUISTICS.md en orden lógico (calcos, terminología, verbos, préstamos, tipografía, comillas, sutilezas, siglas, tiempos, fechas CST, nomenclatura, odios, expresiones)
 - COMMITTING.md: simplificar flujo a *push* simple (`git push`) y enlazar a configuración inicial en GIT.md
 - GIT.md: añadir asistente interactivo post `git init` (configura identidad, `core.sshCommand` y remoto SSH opcional)
-- prompts/cot/committing*.md: alinear a *push* simple y limpiar artefactos
-- prompts/cot/committing_{personal,corporate}.md: consolidar en prompts/cot/committing.md y actualizar referencias
-- prompts/cot/git_init.md: nuevo CoT para inicializar repos con SSH siguiendo GIT.md
+- cot/committing*.md: alinear a *push* simple y limpiar artefactos
+- cot/committing_{personal,corporate}.md: consolidar en cot/committing.md y actualizar referencias
+- cot/git_init.md: nuevo CoT para inicializar repos con SSH siguiendo GIT.md
 - prompts/: crear estructura de subdirectorios (templates/, guides/, actions/, snippets/) con ejemplos y README por carpeta
 - PROMPTS.md: añadir índice catalogado de prompts por subdirectorio
 - BACKUPS.md: ampliar con restauración, verificación, zstd, rsync incrementales, cifrado/offsite, systemd y seguridad/permisos; política de checksums solo para archivos > 100 MB
-- prompts/cot/backup.md y prompts/cot/restore.md: nuevos CoT para ejecutar respaldos y restauraciones
+- cot/backup.md y cot/restore.md: nuevos CoT para ejecutar respaldos y restauraciones
 - BACKUPS.md: documentar respaldo rápido en el mismo directorio y su uso
-- prompts/cot/quick_backup.md: nuevo CoT para respaldo rápido same-dir
-- Reorganización: mover documentos temáticos a ./docs/ manteniendo PHILOSOPHY.md en la raíz
+- cot/quick_backup.md: nuevo CoT para respaldo rápido same-dir
+- Reorganización: mover documentos temáticos a ./rulesets/ manteniendo PHILOSOPHY.md en la raíz
 - Enlaces: corregir referencias cruzadas a documentos movidos en README.md, PHILOSOPHY.md, PROMPTS.md y prompts/* (cot, guides, actions)
 - CHANGELOG.md: registrar actualización diaria sin cambios funcionales
-- prompts/cot/committing_personal.md y prompts/cot/committing_corporate.md: eliminados; usar prompts/cot/committing.md
+- cot/committing_personal.md y cot/committing_corporate.md: eliminados; usar cot/committing.md
 - README.md: añadir nota para desactivar MD041 tras el bloque `---` de front matter en CoT, asegurando renderizado correcto
-- prompts/cot/*: auditoría de MD041 en CoT; confirmada colocación correcta de la etiqueta inmediatamente después del cierre del front matter
-- style(md): corrección de espacios finales (MD009) en múltiples archivos (docs/*, prompts/cot/*, VAULT.md, LINGUISTICS.md, LICENSING.md)
-- style(md): correcciones MD012 (eliminar líneas en blanco consecutivas) en TEACHING.md, BACKUPS.md y prompts/cot/lint.md
+- cot/*: auditoría de MD041 en CoT; confirmada colocación correcta de la etiqueta inmediatamente después del cierre del front matter
+- style(md): corrección de espacios finales (MD009) en múltiples archivos (rulesets/*, cot/*, VAULT.md, LINGUISTICS.md, LICENSING.md)
+- style(md): correcciones MD012 (eliminar líneas en blanco consecutivas) en TEACHING.md, BACKUPS.md y cot/lint.md
 - style(md): correcciones MD022 (líneas en blanco alrededor de encabezados) en múltiples documentos (ATTRIBUTION.md, BACKUPS.md, STYLING.md, TEACHING.md, LINGUISTICS.md, LICENSING.md, PHILOSOPHY.md)
 
 ### feat
@@ -249,15 +265,15 @@
 - Actualizar scripts npm: `lint:md` usa markdownlint-cli2 sin globs (se invoca con npx "**/*.md" "#node_modules")
 - Ejecutar linter de Markdown: `npx markdownlint-cli2 "**/*.md" "#node_modules"` → 938 errores en 40 archivos
   - Principales reglas: MD013 (line-length), MD022/MD032 (líneas en blanco alrededor de encabezados/listas), MD040/MD031 (bloques de código sin lenguaje y sin líneas en blanco), MD041 (H1 en primera línea en prompts), MD024 (encabezados duplicados en CHANGELOG)
-- Corrección rápida: ajustar enlace en README.md a `./docs/STYLING.md` para evitar 404
+- Corrección rápida: ajustar enlace en README.md a `./rulesets/STYLING.md` para evitar 404
 - Pendientes propuestos: relajar MD013 a 120, desactivar MD041 en `prompts/**`, permitir MD024 en CHANGELOG, añadir lenguaje a bloques de código y líneas en blanco alrededor de encabezados/listas
 
 ## [2025-08-17] - Implementación de CoT genérico y roadmap a 90 días
 
 ### docs
-- prompts/cot/repo_context.md: CoT genérico para obtener contexto completo de repos GitHub/GitLab (estructura, dependencias, CI/CD, despliegue, estilo, pruebas, licencias y contribución)
+- cot/repo_context.md: CoT genérico para obtener contexto completo de repos GitHub/GitLab (estructura, dependencias, CI/CD, despliegue, estilo, pruebas, licencias y contribución)
 - PROMPTS.md: guía inicial de CoT (formato, estilo, referencias) en es_MX; añadir sección de rutas de referencia «~/rules..."
-- prompts/cot/_template.md: añadir uso de rutas «~/rules...». Ejemplos iniciales: arithmetic (renombrado desde aritmetica), devops, kubernetes, linguistics, styling y committing (personal/corporate) con referencias cruzadas añadidos
+- cot/_template.md: añadir uso de rutas «~/rules...». Ejemplos iniciales: arithmetic (renombrado desde aritmetica), devops, kubernetes, linguistics, styling y committing (personal/corporate) con referencias cruzadas añadidos
 - GLOSSARY.md: añadir término «Cadena de razonamiento (Chain-of-Thought, CoT)» con referencias a PROMPTS.md y arXiv
 - LINGUISTICS.md: corregir comillas; clarificar tiempos verbales; añadir sección de fechas/horas en CST
 - COMMITTING.md: comandos explícitos con TZ=America/Mexico_City; flujo no interactivo para CHANGELOG

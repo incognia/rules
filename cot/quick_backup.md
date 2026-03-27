@@ -10,7 +10,7 @@ validacion: archivo_YYYY-MM-DD.ext.bkp generado junto al original
 Razonamiento:
 - Para archivos pequeños de texto, basta un respaldo local inmediato sin compresión ni checksum.
 - Mantener la convención de fecha en CST (YYYY-MM-DD) y el sufijo .bkp.
-- Referencia: «~/rules/docs/BACKUPS.md» (sección de respaldo rápido) y script «~/rules/scripts/quick_bkp.sh».
+- Referencia: «~/rules/rulesets/BACKUPS.md» (sección de respaldo rápido) y script «~/rules/scripts/quick_bkp.sh».
 
 Pasos:
 1) Acción: identificar los archivos a respaldar (en el directorio actual).

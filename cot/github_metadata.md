@@ -127,4 +127,4 @@ Conclusión:
 - Siempre validar cambios con consultas GET a la API.
 - Mantener tokens seguros usando $(gh auth token) en lugar de variables expuestas.
 - Para repos con configuración compleja, usar scripts que combinen múltiples llamadas API.
-- Referencias: [GitHub REST API](https://docs.github.com/en/rest), [GitHub CLI Manual](https://cli.github.com/manual/), «~/rules/docs/GIT.md» ([../../docs/GIT.md](../../docs/GIT.md)).
+- Referencias: [GitHub REST API](https://docs.github.com/en/rest), [GitHub CLI Manual](https://cli.github.com/manual/), «~/rules/rulesets/GIT.md» ([../rulesets/GIT.md](../rulesets/GIT.md)).

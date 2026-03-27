@@ -18,7 +18,7 @@ Pasos:
 2) Acción: revisar licenciamiento y atribución.
    Resultado: LICENSE/LICENCE/COPYING/NOTICE; si falta, buscar encabezados de licencia en fuentes.
 3) Acción: mapear estructura del repo.
-   Resultado: carpetas clave (src/, cmd/, pkg/, apps/, services/, docs/, scripts/, tools/, infra/, deployments/, charts/); Makefile/Taskfile.
+   Resultado: carpetas clave (src/, cmd/, pkg/, apps/, services/, rulesets/, scripts/, tools/, infra/, deployments/, charts/); Makefile/Taskfile.
 4) Acción: detectar lenguaje y dependencias.
    Resultado: package.json/yarn.lock/pnpm-lock.yaml; go.mod; pyproject.toml/requirements*.txt; Cargo.toml; pom.xml/gradle.*; composer.json; Gemfile.
 5) Acción: revisar CI/CD.

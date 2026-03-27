@@ -39,5 +39,4 @@ MD048: true
 ignores:
   - node_modules/
   - .git/
-  - prompts/snippets/*.sh
 

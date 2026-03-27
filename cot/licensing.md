@@ -1,7 +1,7 @@
 # CoT: Aplicación automática de licenciamiento
 
 ## Contexto
-Este Chain of Thought aplica automáticamente el licenciamiento apropiado a un proyecto basándose en las reglas definidas en `../../docs/LICENSING.md`. Determina si el proyecto es personal (GPL) o laboral (MIT) analizando el contenido del README.md.
+Este Chain of Thought aplica automáticamente el licenciamiento apropiado a un proyecto basándose en las reglas definidas en `../rulesets/LICENSING.md`. Determina si el proyecto es personal (GPL) o laboral (MIT) analizando el contenido del README.md.
 
 ## Razonamiento
 

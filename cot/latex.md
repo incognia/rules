@@ -11,7 +11,7 @@ Razonamiento:
 - Usar XeLaTeX como motor (Unicode nativo, fontspec, emoji); nunca pdflatex para documentos corporativos.
 - CRÍTICO: NO usar pandoc para conversión directa Markdown→PDF. El resultado es mediocre: tablas sin ancho consistente, bloques de código con fondo roto, encabezado/pie imposibles de controlar limpiamente. Usar el Markdown únicamente como referencia de contenido y escribir el .tex desde cero.
 - El flujo es: leer el Markdown → descargar imágenes → escribir .tex → compilar → corregir paquetes faltantes → compilar de nuevo.
-- Referencia completa de reglas: «~/rules/docs/LATEX.md» y «~/rules/docs/STYLING.md».
+- Referencia completa de reglas: «~/rules/rulesets/LATEX.md» y «~/rules/rulesets/STYLING.md».
 - Aplicar LINGUISTICS.md al contenido en español mexicano.
 
 Pasos:
@@ -60,4 +60,4 @@ Conclusión:
 - Entregar: archivo .tex limpio + PDF generado + imágenes locales descargadas.
 - Verificar: tablas de ancho completo, bloques de código con fondo sólido, timestamp alineado a la derecha, sin «Figura 1» en el logo.
 - Si se detecta un paquete faltante durante la compilación, instalarlo con `dnf` y recompilar — nunca intentar omitir el paquete.
-- Referencias: «~/rules/docs/LATEX.md» ([../../docs/LATEX.md](../../docs/LATEX.md)), «~/rules/docs/STYLING.md» ([../../docs/STYLING.md](../../docs/STYLING.md)) y «~/rules/docs/LINGUISTICS.md» ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)).
+- Referencias: «~/rules/rulesets/LATEX.md» ([../rulesets/LATEX.md](../rulesets/LATEX.md)), «~/rules/rulesets/STYLING.md» ([../rulesets/STYLING.md](../rulesets/STYLING.md)) y «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)).

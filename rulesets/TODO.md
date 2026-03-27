@@ -14,7 +14,7 @@ Tareas
   - Ejemplos mínimos y reglas de seguridad (no secretos, no datos sensibles).
   - Enlaces cruzados a PHILOSOPHY.md y LINGUISTICS.md.
 - [x] Crear directorio prompts/cot con ejemplos few-shot
-  - prompts/cot/{aritmetica.md, sentido_comun.md, simbolico.md, devops.md, coding.md}
+  - cot/{aritmetica.md, sentido_comun.md, simbolico.md, devops.md, coding.md}
   - 3–8 ejemplos por archivo en es_MX, pasos numerados, «Razonamiento» y «Conclusión».
 - [ ] Definir convención de formato CoT
   - Encabezados y numeración Paso 1..n.
@@ -23,13 +23,13 @@ Tareas
   - Muestrear N cadenas (p. ej., 5 o 10) y seleccionar por mayoría/agrupación.
   - Recomendaciones para diversidad (semillas y reformulaciones).
 - [ ] Linter de prosa (Vale) para CoT
-  - Regla: exigir «Razonamiento» y «Conclusión» en prompts de prompts/cot/.
+  - Regla: exigir «Razonamiento» y «Conclusión» en prompts de cot/.
   - Prohibir ‘CST’ sin TZ=America/Mexico_City, detectar verbos “-ear” spanglish, impedir pluralización de siglas.
   - Incluir .vale.ini y estilos; preparar reglas para encabezados y longitud de línea.
 - [ ] markdownlint
   - Configurar reglas básicas (MD013 longitud de línea, encabezados, listas) y exclusiones según estilo del repo.
 - [ ] Hook pre-commit para ejemplos CoT
-  - Validar que cada ejemplo en prompts/cot/ tenga ≥3 pasos numerados y «Conclusión».
+  - Validar que cada ejemplo en cot/ tenga ≥3 pasos numerados y «Conclusión».
   - Integrar a .githooks y documentar activación (core.hooksPath).
 - [ ] EVAL.md (plantilla de evaluación)
   - Criterios: exactitud, coherencia paso a paso, cobertura, ausencia de alucinaciones, terminología es_MX.
@@ -41,22 +41,22 @@ Tareas
   - Fallos comunes: atajos sin justificar, sumarización prematura, confundir unidades, razonamiento circular.
   - Tácticas: descomposición, verificación de unidades, back-of-the-envelope, recordatorios.
 - [ ] Añadir sección CoT al README
-  - “Cómo usar este repo con CoT”: enlaces a PROMPTS.md, prompts/cot/, SELF_CONSISTENCY.md y EVAL.md.
+  - “Cómo usar este repo con CoT”: enlaces a PROMPTS.md, cot/, SELF_CONSISTENCY.md y EVAL.md.
   - Recordatorios de es_MX y timestamps CST.
 - [ ] Afinar CORPORATE.md
   - Añadir nota de derivación a PHILOSOPHY.md y retorno a README.md
   - Aclarar «Kro» (usar «Kustomize» si aplica) y revisar terminología
 - [ ] Metadatos por ejemplo CoT
   - Frontmatter YAML: domain, task, dificultad, longitud esperada, tiempo estimado, fuentes, validación.
-  - Plantilla: prompts/cot/_template.md.
+  - Plantilla: cot/_template.md.
 
 Prioridad sugerida (iteraciones cortas)
 1) PROMPTS.md + convención de formato ✅
-2) prompts/cot/ con 2 archivos iniciales (arithmetic y devops) ✅; agregar kubernetes, linguistics, styling, committing ✅
+2) cot/ con 2 archivos iniciales (arithmetic y devops) ✅; agregar kubernetes, linguistics, styling, committing ✅
 3) Hook pre-commit (validación mínima) + linter Vale básico
 4) EVAL.md + SELF_CONSISTENCY.md
 5) ERROR_BANK.md + política bilingüe
-6) Ampliar prompts/cot/ y añadir metadatos
+6) Ampliar cot/ y añadir metadatos
 
 Notas
 - Seguir LINGUISTICS.md: comillas «», tiempos verbales adecuados, es_MX.

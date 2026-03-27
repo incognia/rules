@@ -8,7 +8,7 @@ validacion: pipeline exitoso tras inyectar secreto
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
-- Aplicar formato CoT y español mexicano (ver «~/rules/docs/LINGUISTICS.md» ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)), «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md)) y flujo en «~/rules/docs/COMMITTING.md» ([../../docs/COMMITTING.md](../../docs/COMMITTING.md))).
+- Aplicar formato CoT y español mexicano (ver «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md)) y flujo en «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md))).
 - Verificar prerequisitos de CI/CD y secretos de acceso al registry.
 
 Pasos:

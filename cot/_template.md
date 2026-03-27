@@ -10,7 +10,7 @@ validacion: salida de comando coincide con estado esperado
 Razonamiento:
 - Identificar el punto de falla en el pipeline de despliegue.
 - Verificar prerequisitos y dependencias en orden lógico.
-- Referencias de estilo y flujo: «~/rules/docs/LINGUISTICS.md» ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)), «~/rules/docs/COMMITTING.md» ([../../docs/COMMITTING.md](../../docs/COMMITTING.md)) y «~/rules/README.md» ([../../README.md](../../README.md)).
+- Referencias de estilo y flujo: «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)) y «~/rules/README.md» ([../../README.md](../../README.md)).
 
 Pasos:
 1) Acción: revisar logs de CI en último job fallido.

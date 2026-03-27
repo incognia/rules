@@ -8,7 +8,7 @@ validacion: CHANGELOG.md ordenado inversamente, fechas CST correctas, sin duplic
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
-- Regla principal: CHANGELOG.md debe seguir orden cronológico inverso (más reciente arriba) con fechas en CST Ciudad de México calculadas correctamente (ver «~/rules/CHANGELOG.md» ([../../CHANGELOG.md](../../CHANGELOG.md)), «~/rules/docs/LINGUISTICS.md» ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)) y «~/rules/prompts/cot/committing.md» ([./committing.md](./committing.md))).
+- Regla principal: CHANGELOG.md debe seguir orden cronológico inverso (más reciente arriba) con fechas en CST Ciudad de México calculadas correctamente (ver «~/rules/CHANGELOG.md» ([../../CHANGELOG.md](../../CHANGELOG.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) y «~/rules/cot/committing.md» ([./committing.md](./committing.md))).
 - Errores comunes críticos: (1) orden cronológico incorrecto, (2) cálculo erróneo de CST (etiquetar UTC como CST), (3) duplicar entradas idénticas, (4) mezclar inglés con español mexicano.
 - Flujo: verificar zona horaria actual → revisar orden cronológico → detectar duplicados → aplicar reglas lingüísticas → validar estructura.
 
@@ -29,7 +29,7 @@ Pasos:
    Resultado: marcar duplicados para consolidación o eliminación.
 
 4) Acción: validar consistencia de idioma en la nueva entrada.
-   Validación: aplicar reglas de ~/rules/docs/LINGUISTICS.md
+   Validación: aplicar reglas de ~/rules/rulesets/LINGUISTICS.md
    Resultado: español mexicano sin calcos del inglés, comillas angulares «», terminología técnica correcta.
 
 5) Acción: verificar formato de encabezado.
@@ -57,7 +57,7 @@ Pasos:
    Resultado: CHANGELOG.md ordenado correctamente con nueva entrada en posición adecuada.
 
 10) Acción: confirmar cálculo de zona horaria en commits relacionados.
-    Referencia: aplicar ~/rules/prompts/cot/committing.md para commits de actualización
+    Referencia: aplicar ~/rules/cot/committing.md para commits de actualización
     Validación: mensaje de commit en inglés con fecha CST calculada correctamente
     Resultado: consistencia entre CHANGELOG.md y mensajes de commit.
 
@@ -71,4 +71,4 @@ VERIFICACIÓN CRÍTICA (antes de completar):
 Conclusión:
 - Entregar: CHANGELOG.md actualizado con nueva entrada en posición cronológica correcta, fecha CST precisa, idioma consistente español mexicano, sin duplicados, categorías organizadas semánticamente.
 - Evitar: mezclar idiomas, etiquetar UTC como CST, orden cronológico incorrecto, duplicar entradas, micro-cambios sin agrupar.
-- Referencias: «~/rules/CHANGELOG.md» ([../../CHANGELOG.md](../../CHANGELOG.md)), «~/rules/docs/LINGUISTICS.md» ([../../docs/LINGUISTICS.md](../../docs/LINGUISTICS.md)), «~/rules/prompts/cot/committing.md» ([./committing.md](./committing.md)) para flujo completo.
+- Referencias: «~/rules/CHANGELOG.md» ([../../CHANGELOG.md](../../CHANGELOG.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/cot/committing.md» ([./committing.md](./committing.md)) para flujo completo.
