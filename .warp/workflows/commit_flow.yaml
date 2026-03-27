@@ -1,0 +1,13 @@
+name: Commit flow
+command: git add . && git commit -m "{{type}}: {{description}}"
+description: "Complete commit flow: stage all files and commit with conventional format (CHANGELOG must be updated first)"
+tags:
+  - git
+  - commit
+  - workflow
+arguments:
+  - name: type
+    description: "Conventional commit type"
+    default_value: feat
+  - name: description
+    description: "Commit message description (in English)"

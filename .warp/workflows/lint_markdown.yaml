@@ -1,0 +1,7 @@
+name: Lint Markdown files
+command: npm run lint:md
+description: Run markdownlint on all Markdown files in the repository
+tags:
+  - lint
+  - markdown
+  - quality

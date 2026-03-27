@@ -1,0 +1,9 @@
+name: Backup file or directory
+command: ./scripts/backup_file.sh {{source_path}}
+description: Backup a file or directory with standard naming (CST timestamp) and optional checksum
+tags:
+  - backup
+  - files
+arguments:
+  - name: source_path
+    description: Path to the file or directory to backup

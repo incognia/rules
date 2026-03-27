@@ -1,0 +1,11 @@
+name: CST date/time
+command: TZ=America/Mexico_City date +"{{format}}"
+description: "Get current date/time in CST (Ciudad de México, UTC-6)"
+tags:
+  - date
+  - timezone
+  - cst
+arguments:
+  - name: format
+    description: "Date format string"
+    default_value: "%Y-%m-%d %H:%M %Z"

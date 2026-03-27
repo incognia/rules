@@ -20,7 +20,21 @@
   - reescribir contenido sin referencias específicas a Warp como producto
 - eliminar archivos obsoletos: PROMPTS.md (redundante con README y CoTs), ROADMAP.md (6 meses sin actualizar), REFACTOR.md (reemplazado por este cambio)
 
-## [2026-03-23] - Documentación y CoT para generación de documentos LaTeX corporativos
+### feat
+- crear 6 *skills* descubribles por agentes IA en `.agents/skills/`
+  - **commit**: flujo completo de *commit* con CHANGELOG obligatorio
+  - **changelog**: mantenimiento de CHANGELOG.md con fechas CST
+  - **linguistics**: aplicar reglas lingüísticas de español mexicano
+  - **context**: detección rápida de contexto de proyecto
+  - **backup**: respaldo de archivos/directorios con nomenclatura estándar
+  - **licensing**: licenciamiento automático según contexto (GPLv3 vs MIT)
+- crear 4 *workflows* YAML parametrizados en `.warp/workflows/`
+  - **backup_file**: respaldar archivo/directorio individual
+  - **lint_markdown**: ejecutar *markdownlint* en todos los archivos
+  - **commit_flow**: flujo completo de *commit* con tipo y descripción
+  - **cst_date**: obtener fecha/hora en CST (Ciudad de México)
+
+## [2026-03-23]
 
 ### feat
 - crear rulesets/LATEX.md: referencia completa de reglas para generar documentos LaTeX con XeLaTeX en Fedora (fuentes, tablas con `tabularx`+`booktabs`, bloques de código con `tcolorbox`, paleta PROMAD, encabezado/pie estándar, instalación de paquetes con `dnf`)
