@@ -167,9 +167,11 @@ Usar las plantillas en `templates/` como punto de partida:
 
 Documentos Markdown para GitLab (README.md con licencia, otros documentos sin licencia).
 
-**Encabezado:** Con frontmatter YAML (`title` + `description`) + H1 + timestamp en Markdown puro.
+**Encabezado README.md:** Con frontmatter YAML (`title` + `description`) + H1 + timestamp en Markdown puro.
 
 GitHub renderiza el frontmatter como tabla horizontal. GitLab lo renderiza como bloque de código formateado. Ambos lo muestran al inicio del documento.
+
+**Encabezado otros documentos:** Sin frontmatter. Solo H1 + timestamp en Markdown puro.
 
 ```markdown
 ---

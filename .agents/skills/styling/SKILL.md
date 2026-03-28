@@ -35,13 +35,14 @@ Use as starting point:
 2. **Parse arguments**: first arg is platform, last arg is the file. If 3 args are given, middle arg is license (`mit`|`gpl`). If only 2 args, there is no license. If any required argument is missing, ask the user before proceeding.
 3. **Insert standard header** (varies by platform):
    - **HedgeDoc only**: YAML frontmatter with descriptive `tags` + Kabat One logo: `![Kabat One logo](https://hedgedoc.promad.com.mx:31418/uploads/aaa5198c-248f-4642-8c67-00f6edde677a.png)`
-   - **GitLab/GitHub**: YAML frontmatter with `title` and `description` (rendered as table on GitHub, code block on GitLab):
+   - **GitLab/GitHub README.md only**: YAML frontmatter with `title` and `description` (rendered as table on GitHub, code block on GitLab):
      ```yaml
      ---
      title: Nombre del proyecto
      description: Breve descripción del proyecto
      ---
      ```
+   - **GitLab/GitHub other docs**: no frontmatter
    - H1 title
    - Timestamp: `LC_TIME=es_MX.UTF-8 TZ=America/Mexico_City date '+%d de %B de %Y, %H:%M (%Z)'`
    - **HedgeDoc**: `<div style="text-align: right;"><em>Última modificación: [timestamp] (CST)</em></div><br>`

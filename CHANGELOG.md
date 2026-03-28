@@ -104,6 +104,8 @@
 - corregir formato de timestamp en `README.md` y `PHILOSOPHY.md`: sustituir `<div style>` por cursiva Markdown puro (`*Última modificación: ...*`) — GitLab y GitHub eliminan atributos `style`
 - agregar frontmatter YAML (`title:`, `description:`) a plantillas y reglas de GitLab/GitHub: GitHub renderiza como tabla horizontal, GitLab como bloque de código; actualizar tabla de compatibilidad en `rulesets/STYLING.md`
 - rastrear imágenes del logo Kabat One en `templates/mail/assets/`: variantes de 100, 160, 200 y 600 px
+- restringir frontmatter YAML (`title:`, `description:`) a README.md exclusivamente en GitLab/GitHub (criterio similar a licencia); otros documentos solo llevan H1 y timestamp
+- agregar frontmatter YAML a `README.md`; actualizar timestamps en `README.md` y `PHILOSOPHY.md`
 
 ## [2026-03-23]
 
