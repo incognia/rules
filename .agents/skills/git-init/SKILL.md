@@ -14,7 +14,7 @@ description: "Initialize a git repo with SSH, identity and remote configured. Us
 
 ## Instructions
 
-1. **Read the full CoT**: Load and follow `cot/git_init.md` from line 1 to end
+1. **Read the full CoT**: Load and follow `~/rules/cot/git_init.md` from line 1 to end
 2. **Initialize repo**: `git init`
 3. **Configure identity** based on context ($0):
    - If `personal`:
@@ -59,5 +59,5 @@ If no arguments are provided at all, ask the user for context and remote URL.
 
 ## References
 
-- Detailed CoT: `cot/git_init.md`
-- Rules: `rulesets/GIT.md`
+- Detailed CoT: `~/rules/cot/git_init.md`
+- Rules: `~/rules/rulesets/GIT.md`

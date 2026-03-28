@@ -9,7 +9,8 @@ validacion: identificar servicio/despliegue y lista de pods afectados con ventan
 
 Razonamiento:
 - Usar un recorrido de afuera hacia adentro: eventos recientes → pods inestables → patrones de error → dueño (Deployment/StatefulSet) → Service/Ingress/VirtualService.
-- Mantener español mexicano y formato CoT del repo (ver «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) y ).
+- Mantener español mexicano y formato CoT del repo (ver «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md))).
+- Referencia principal: «~/rules/rulesets/KUBETBS.md» ([../rulesets/KUBETBS.md](../rulesets/KUBETBS.md)).
 - Registrar comandos no interactivos y usar selectores por etiquetas para abarcar réplicas.
 
 Pasos:

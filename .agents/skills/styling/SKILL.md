@@ -25,9 +25,9 @@ To detect arguments: `mit` and `gpl` are the only valid license values — if th
 ## Templates
 
 Use as starting point:
-- `templates/hedgedoc.md` — generic HedgeDoc document
-- `templates/gitlab-readme.md` — GitLab README.md with license and badges
-- `templates/github-readme.md` — GitHub README.md with license and badges
+- `~/rules/templates/hedgedoc.md` — generic HedgeDoc document
+- `~/rules/templates/gitlab-readme.md` — GitLab README.md with license and badges
+- `~/rules/templates/github-readme.md` — GitHub README.md with license and badges
 
 ## Instructions
 

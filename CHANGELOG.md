@@ -15,7 +15,13 @@
 ### docs
 - agregar diagrama de secuencia Mermaid en README.md: flujo *skill* (interfaz) → CoT (*middleware*) → *ruleset* (*backend*)
 
+### feat
+- crear *skill* kubetbs para *troubleshooting* de microservicios en Kubernetes: `/kubetbs <llave> <usuario> <ip> <namespace> [servicio]`
+- crear `rulesets/KUBETBS.md`: metodología de afuera hacia adentro, comandos de diagnóstico, errores comunes (CrashLoopBackOff, ImagePullBackOff, *cross-namespace*)
+- renombrar `cot/kubernetes.md` → `cot/kubetbs.md` y agregar referencia a nuevo *ruleset*
+
 ### fix
+- corregir rutas relativas a canónicas (`~/rules/cot/`, `~/rules/rulesets/`, `~/rules/templates/`) en todos los *skills* (kube, kubetbs, mail, git-init)
 - corregir conteo de CoTs en README.md: 20 → 22 (faltaban `mail.md` y `kube.md`)
 - agregar descripción faltante al encabezado de *workflows* en sección de estructura
 

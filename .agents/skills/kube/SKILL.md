@@ -14,8 +14,8 @@ description: "Analyze Kubernetes cluster state via SSH. Usage: /kube <key> <user
 
 ## Instructions
 
-1. **Read the full CoT**: Load and follow `cot/kube.md` from line 1 to end
-2. **Read the rules**: Load `rulesets/KUBE.md` for conventions and commands
+1. **Read the full CoT**: Load and follow `~/rules/cot/kube.md` from line 1 to end
+2. **Read the rules**: Load `~/rules/rulesets/KUBE.md` for conventions and commands
 3. **Connect via SSH**: `ssh -i ~/.ssh/$0 $1@$2` — check `~/.ssh/config` for custom port
 4. **Cluster health**:
    - `kubectl get nodes -o wide`
@@ -51,5 +51,5 @@ description: "Analyze Kubernetes cluster state via SSH. Usage: /kube <key> <user
 
 ## References
 
-- Detailed CoT: `cot/kube.md`
-- Rules: `rulesets/KUBE.md`
+- Detailed CoT: `~/rules/cot/kube.md`
+- Rules: `~/rules/rulesets/KUBE.md`

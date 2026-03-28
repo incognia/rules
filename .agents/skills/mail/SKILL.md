@@ -12,11 +12,11 @@ description: "Compose an OWA-compatible HTML email from templates. Usage: /mail 
 
 ## Instructions
 
-1. **Read the full CoT**: Load and follow `cot/mail.md` from line 1 to end
-2. **Read the rules**: Load `rulesets/MAIL.md` for HTML constraints and color palette
+1. **Read the full CoT**: Load and follow `~/rules/cot/mail.md` from line 1 to end
+2. **Read the rules**: Load `~/rules/rulesets/MAIL.md` for HTML constraints and color palette
 3. **Select template** based on $0:
-   - `delivery` → read and use `templates/mail/delivery_template.html`
-   - `generic` → read and use `templates/mail/generic_template.html`
+   - `delivery` → read and use `~/rules/templates/mail/delivery_template.html`
+   - `generic` → read and use `~/rules/templates/mail/generic_template.html`
 4. **Generate filename**: `YYYY-MM-DD-{subject-as-slug}.html` (date in CST)
 5. **Ask the user** for the missing data:
    - For delivery: service name, prefix, version, recipient, base branch, description
@@ -32,7 +32,7 @@ description: "Compose an OWA-compatible HTML email from templates. Usage: /mail 
    <hr style="margin:30px 0; border:none; border-top:2px solid #ecf0f1;">
    <img src="assets/ralvarez_firma.png" alt="Rodrigo Álvarez" style="max-width:100%; display:block;">
    ```
-   Copy `templates/mail/assets/ralvarez_firma.png` next to the generated HTML (in an `assets/` subdirectory) so the image renders.
+   Copy `~/rules/templates/mail/assets/ralvarez_firma.png` next to the generated HTML (in an `assets/` subdirectory) so the image renders.
 9. **Validate OWA rules**:
    - Every colored `<td>` has BOTH `bgcolor` attribute AND `background-color` in style
    - No `<style>` blocks, no CSS classes
@@ -58,6 +58,6 @@ description: "Compose an OWA-compatible HTML email from templates. Usage: /mail 
 
 ## References
 
-- Detailed CoT: `cot/mail.md`
-- Rules: `rulesets/MAIL.md`
-- Templates: `templates/mail/delivery_template.html` and `templates/mail/generic_template.html`
+- Detailed CoT: `~/rules/cot/mail.md`
+- Rules: `~/rules/rulesets/MAIL.md`
+- Templates: `~/rules/templates/mail/delivery_template.html` and `~/rules/templates/mail/generic_template.html`
