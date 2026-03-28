@@ -27,12 +27,21 @@ description: "Compose an OWA-compatible HTML email from templates. Usage: /mail 
    - Fix/change → `#e67e22` (orange)
    - Critical alert → `#e74c3c` (red)
    - Technical decision → `#0066cc` (dark blue)
-8. **Validate OWA rules**:
+8. **Include signature image** at the bottom, before closing `</td>`:
+   ```html
+   <hr style="margin:30px 0; border:none; border-top:2px solid #ecf0f1;">
+   <img src="assets/ralvarez_firma.png" alt="Rodrigo Álvarez" style="max-width:100%; display:block;">
+   ```
+   Copy `templates/mail/assets/ralvarez_firma.png` next to the generated HTML (in an `assets/` subdirectory) so the image renders.
+9. **Validate OWA rules**:
    - Every colored `<td>` has BOTH `bgcolor` attribute AND `background-color` in style
    - No `<style>` blocks, no CSS classes
    - Code blocks use `<td white-space:pre-wrap>`, not `<pre>`
    - Table row striping uses inline style, not `nth-child`
-9. **Save** the file in the current project's working directory
+9. **Save** the file:
+   - If the user specified a path, use that path
+   - If a `mail/` directory exists in the project root (e.g. `./mail/`), save there
+   - Otherwise, save in `~/mail/`
 
 ## Critical rules
 

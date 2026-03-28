@@ -67,6 +67,8 @@
 - crear `rulesets/MAIL.md`: reglas de composición de correos HTML (restricciones de OWA, `bgcolor` en `<td>`, paleta de colores, *placeholders*)
 - crear `cot/mail.md`: CoT de 9 pasos para elaborar correos desde plantillas
 - migrar plantillas de correo del repo stab a `templates/mail/` (`delivery_template.html`, `generic_template.html`)
+- migrar imagen de firma (`ralvarez_firma.png`) a `templates/mail/assets/` y corregir rutas en plantillas
+- agregar paso obligatorio de firma con imagen en *skill* mail
 
 - crear *skill* ssh-import parametrizado para importar llaves SSH a servidores remotos vía GitHub: `/ssh-import <faraday|cad> <user@server>`
   - `faraday` → servidores personales (GitHub: @incognia)
