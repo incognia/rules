@@ -38,10 +38,11 @@ Use as starting point:
    - **GitLab/GitHub README.md only**: YAML frontmatter with `title` and `description` (rendered as table on GitHub, code block on GitLab):
      ```yaml
      ---
-     title: Nombre del proyecto
-     description: Breve descripción del proyecto
+     title: "Nombre del proyecto"
+     description: "Breve descripción del proyecto"
      ---
      ```
+     > ⚠️ Always quote values with double quotes — values containing `:` cause YAML parse errors if unquoted.
    - **GitLab/GitHub other docs**: no frontmatter
    - H1 title
    - Timestamp: `LC_TIME=es_MX.UTF-8 TZ=America/Mexico_City date '+%d de %B de %Y, %H:%M (%Z)'`

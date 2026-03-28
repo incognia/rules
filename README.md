@@ -1,11 +1,11 @@
 ---
-title: Reglas técnicas: prompts y CoT para acelerar el contexto de los LLM
-description: Estándares, filosofía y cadenas de razonamiento (CoT) que guían el trabajo técnico de Rodrigo Álvarez (@incognia). Incluye reglas lingüísticas, de licenciamiento, estilo y flujos DevOps.
+title: "Reglas técnicas: prompts y CoT para acelerar el contexto de los LLM"
+description: "Estándares, filosofía y cadenas de razonamiento (CoT) que guían el trabajo técnico de Rodrigo Álvarez (@incognia). Incluye reglas lingüísticas, de licenciamiento, estilo y flujos DevOps."
 ---
 
 # Reglas técnicas: prompts y CoT para acelerar el contexto de los LLM
 
-*Última modificación: 27 de marzo de 2026, 23:20 (CST)*
+*Última modificación: 27 de marzo de 2026, 23:26 (CST)*
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)

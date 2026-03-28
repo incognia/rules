@@ -175,8 +175,8 @@ GitHub renderiza el frontmatter como tabla horizontal. GitLab lo renderiza como 
 
 ```markdown
 ---
-title: Nombre del proyecto
-description: Breve descripción del proyecto
+title: "Nombre del proyecto"
+description: "Breve descripción del proyecto"
 ---
 
 # Nombre del proyecto

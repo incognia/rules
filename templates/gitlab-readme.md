@@ -1,6 +1,6 @@
 ---
-title: Nombre del proyecto
-description: Breve descripción del proyecto
+title: "Nombre del proyecto"
+description: "Breve descripción del proyecto"
 ---
 
 # Nombre del proyecto
