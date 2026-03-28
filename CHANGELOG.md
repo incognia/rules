@@ -62,6 +62,9 @@
 ### feat
 - crear *skill* git-init parametrizado con 4 argumentos: contexto (personal/laboral), nombre de llave SSH (se busca en `~/.ssh/`), URL remota y rama
 
+### docs
+- actualizar llave SSH personal de `id_ed25519` a `incognia` en todos los archivos: GIT.md, AGENTS.md, ATTRIBUTION.md, README.md, CoTs y *skills*
+
 ### style
 - aplicar LINGUISTICS.md a README.md:
 - aplicar LINGUISTICS.md a README.md: convertir texto suelto en encabezados (`Definiciones rápidas`, `Ejemplos de comandos`), cursivas en préstamos (*Prompt*, *Chain-of-Thought*), corregir calco «ciclar» → «navegar»

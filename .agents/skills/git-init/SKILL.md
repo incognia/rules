@@ -8,7 +8,7 @@ description: "Initialize a git repo with SSH, identity and remote configured. Us
 ## Arguments
 
 - **Context**: $0 (personal or laboral)
-- **Key name**: $1 (name of the SSH key in ~/.ssh/, e.g. id_ed25519, promad_ed25519, kone)
+- **Key name**: $1 (name of the SSH key in ~/.ssh/, e.g. incognia, promad_ed25519, kone)
 - **Remote URL**: $2 (SSH URL, e.g. git@github.com:incognia/repo.git)
 - **Branch**: $3 (default branch name, e.g. main)
 
@@ -46,14 +46,14 @@ description: "Initialize a git repo with SSH, identity and remote configured. Us
 
 If arguments are missing, use these defaults based on context:
 
-- **personal**: key=`id_ed25519`, branch=`main`
+- **personal**: key=`incognia`, branch=`main`
 - **laboral**: key=`promad_ed25519`, branch=`main`
 
 If no arguments are provided at all, ask the user for context and remote URL.
 
 ## Examples
 
-- `/git-init personal id_ed25519 git@github.com:incognia/myproject.git main`
+- `/git-init personal incognia git@github.com:incognia/myproject.git main`
 - `/git-init laboral promad_ed25519 git@gitlab.com:incogniadev/project.git main`
 - `/git-init laboral kone git@gitlab.com:incogniadev/project.git main`
 - `/git-init personal` — uses defaults, asks for remote URL

@@ -25,7 +25,7 @@ git config --list | grep ^user\.
 **Credenciales de plataforma:**
 - **GitHub:** incognia
 - **GitLab:** incognia
-- **SSH Key:** `~/.ssh/id_ed25519`
+- **SSH Key:** `~/.ssh/incognia`
 
 ### Proyectos laborales (Promad)
 
@@ -74,7 +74,7 @@ Al finalizar, podrás usar `git push` directamente.
 # Personal
 git config user.name  "Rodrigo Álvarez"
 git config user.email "incognia@gmail.com"
-git config core.sshCommand "ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes"
+git config core.sshCommand "ssh -i ~/.ssh/incognia -o IdentitiesOnly=yes"
 
 # Laboral (Promad)
 # git config user.name  "Rodrigo Álvarez"

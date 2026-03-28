@@ -26,7 +26,7 @@ When creating a new project or when a project needs its LICENSE file and README 
 
 ## Context indicators
 
-- **Personal (@incognia)**: GPLv3, incognia@gmail.com, ~/.ssh/id_ed25519
+- **Personal (@incognia)**: GPLv3, incognia@gmail.com, ~/.ssh/incognia
 - **Corporate (@incogniadev)**: MIT, ralvarez@promad.com.mx, ~/.ssh/promad_ed25519
 
 ## References

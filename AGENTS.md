@@ -99,7 +99,7 @@ The repository supports dual contexts with different rules:
 
 - License: GPLv3 (copyleft)
 - Email: incognia@gmail.com
-- SSH key: ~/.ssh/id_ed25519
+- SSH key: ~/.ssh/incognia
 - Documentation: Spanish Mexican
 
 **Corporate Projects (`@incogniadev` for Promad Business Solutions)**:

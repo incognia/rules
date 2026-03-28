@@ -145,7 +145,7 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 | **Licenciamiento** | GPLv3 (copyleft) | MIT (permisiva) |
 | **Autoría** | Rodrigo Álvarez (@incognia) | Rodrigo Álvarez (@incogniadev) |
 | **Email** | [incognia@gmail.com](mailto:incognia@gmail.com) | [ralvarez@promad.com.mx](mailto:ralvarez@promad.com.mx) |
-| **SSH Key** | ~/.ssh/id_ed25519 | ~/.ssh/promad_ed25519 |
+| **SSH Key** | ~/.ssh/incognia | ~/.ssh/promad_ed25519 |
 | **Estilo de documentos** | No definido aún | [STYLING.md](./rulesets/STYLING.md) aplicable |
 | **Idioma documentación** | Español mexicano | Español mexicano |
 | **Idioma código/commits** | Inglés internacional | Inglés internacional |

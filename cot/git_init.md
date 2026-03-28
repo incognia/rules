@@ -43,7 +43,7 @@ Pasos (Alternativa manual, si no usas el asistente):
    - Personal:
      - `git config user.name  "Rodrigo Álvarez"`
      - `git config user.email "incognia@gmail.com"`
-     - `git config core.sshCommand "ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes"`
+     - `git config core.sshCommand "ssh -i ~/.ssh/incognia -o IdentitiesOnly=yes"`
    - Laboral (Promad):
      - `git config user.name  "Rodrigo Álvarez"`
      - `git config user.email "ralvarez@promad.com.mx"`
