@@ -99,7 +99,8 @@
 - actualizar `rulesets/STYLING.md`: nuevo branding Kabat One, estructura por plataforma, tabla de diferencias de sintaxis, reglas de badges y plantillas
 - actualizar `cot/styling.md`: reforzar regla de eliminación de `---` con paso programático
 - actualizar `cot/changelog.md`: agregar validación obligatoria de entrada existente antes de crear encabezado nuevo para la misma fecha
-- aplicar *styling* GitHub (GPLv3) a `README.md`: timestamp CST, corregir jerarquía `###` → `##` en «Definiciones rápidas», actualizar badge *Skills* (9 → 10), agregar `/styling` a lista de *skills*
+- aplicar *styling* GitHub (GPLv3) a `README.md`: timestamp CST, corregir jerarquía `###` → `##` en «Definiciones rápidas», actualizar badge *Skills* (9 →10), agregar `/styling` a lista de *skills*
+- aplicar *styling* GitHub a `PHILOSOPHY.md`: timestamp CST, eliminar 2 separadores `---` espurios (antes de `## Referencias` y antes del *copyright*)
 
 ## [2026-03-23]
 

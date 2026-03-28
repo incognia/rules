@@ -1,6 +1,8 @@
 # Filosofía de un pinche prieto que a veces *codea* pero siempre se rifa
 
-> «El desarrollo tecnológico y los descubrimientos científicos no pueden considerarse progreso si no están al alcance de todos.»
+<div style="text-align: right;"><em>Última modificación: 27 de marzo de 2026, 23:10 (CST)</em></div><br>
+
+> «El desarrollo tecnológico
 >
 > —Rodrigo Álvarez
 
@@ -121,8 +123,6 @@ La filosofía incorpora lecciones aprendidas y mejores prácticas emergentes, ma
 
 Los proyectos personales bajo GPLv3 contribuyen al *commons* del software libre, mientras que los proyectos laborales bajo MIT facilitan la adopción amplia.
 
----
-
 ## Referencias
 
 Los detalles específicos de implementación de esta filosofía se encuentran organizados en los siguientes documentos (para una visión rápida, ver README.md):
@@ -148,11 +148,9 @@ Los detalles específicos de implementación de esta filosofía se encuentran or
 - **[ATTRIBUTION.md](./rulesets/ATTRIBUTION.md)** - reglas de atribución personal
 
 ### Reglas de uso exclusivamente laboral
-
 - **[STYLING.md](./rulesets/STYLING.md)** - reglas de estilo para documentos Markdown corporativos
 
----
-
+*Este documento fue elaborado
 *Este documento fue elaborado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.*
 
 *Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*
