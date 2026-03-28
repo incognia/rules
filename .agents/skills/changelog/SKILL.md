@@ -11,7 +11,7 @@ When adding or updating entries in CHANGELOG.md for any project following rules 
 
 ## Instructions
 
-1. **Read the full CoT**: Load and follow `cot/changelog.md` from line 1 to end
+1. **Read the full CoT**: Load and follow `~/rules/cot/changelog.md` from line 1 to end
 2. **Get CST date**: `DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")` — NEVER use UTC with "CST" suffix
 3. **Check existing entries**: Verify the date doesn't already have an entry to avoid duplicates
 4. **Add entry at the top** (reverse chronological order) using format:
@@ -34,5 +34,5 @@ When adding or updating entries in CHANGELOG.md for any project following rules 
 
 ## References
 
-- Detailed CoT: `cot/changelog.md`
-- Rules: `rulesets/COMMITTING.md`
+- Detailed CoT: `~/rules/cot/changelog.md`
+- Rules: `~/rules/rulesets/COMMITTING.md`

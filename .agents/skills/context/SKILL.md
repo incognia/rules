@@ -11,7 +11,7 @@ When starting work on a new or unfamiliar repository to quickly understand its s
 
 ## Instructions
 
-1. **Read the full CoT**: Load and follow `cot/context.md` from line 1 to end
+1. **Read the full CoT**: Load and follow `~/rules/cot/context.md` from line 1 to end
 2. **Check documentation**: Look for README.md, AGENTS.md, AGENTS.md, CONTRIBUTING.md
 3. **Detect technologies**: Check for package.json, go.mod, Cargo.toml, requirements.txt, pom.xml, Gemfile
 4. **Check containers**: Look for Dockerfile, compose.yaml, docker-compose.yaml
@@ -24,4 +24,4 @@ When starting work on a new or unfamiliar repository to quickly understand its s
 
 ## References
 
-- Detailed CoT: `cot/context.md`
+- Detailed CoT: `~/rules/cot/context.md`

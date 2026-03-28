@@ -13,7 +13,7 @@ If no file was specified, ask the user which file to review.
 
 ## Instructions
 
-1. **Read the full CoT**: Load and follow `cot/linguistics.md` from line 1 to end
+1. **Read the full CoT**: Load and follow `~/rules/cot/linguistics.md` from line 1 to end
 2. **Scan all headings**: Run `grep -n "^#" $0` and verify each one
 3. **Fix titles**: Sentence case only — capitalize first word and proper nouns, nothing else
 4. **After colons**: Lowercase after `:` unless it's a proper noun
@@ -32,5 +32,5 @@ If no file was specified, ask the user which file to review.
 
 ## References
 
-- Detailed CoT: `cot/linguistics.md`
-- Rules: `rulesets/LINGUISTICS.md`
+- Detailed CoT: `~/rules/cot/linguistics.md`
+- Rules: `~/rules/rulesets/LINGUISTICS.md`

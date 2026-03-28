@@ -11,7 +11,7 @@ When creating a new project or when a project needs its LICENSE file and README 
 
 ## Instructions
 
-1. **Read the full CoT**: Load and follow `cot/licensing.md` from line 1 to end
+1. **Read the full CoT**: Load and follow `~/rules/cot/licensing.md` from line 1 to end
 2. **Detect context** by analyzing the project:
    - Look for "Promad", "promad.com.mx", "@incogniadev" → **Corporate (MIT)**
    - Look for "@incognia", "incognia@gmail.com" → **Personal (GPLv3)**
@@ -31,5 +31,5 @@ When creating a new project or when a project needs its LICENSE file and README 
 
 ## References
 
-- Detailed CoT: `cot/licensing.md`
-- Rules: `rulesets/LICENSING.md`
+- Detailed CoT: `~/rules/cot/licensing.md`
+- Rules: `~/rules/rulesets/LICENSING.md`

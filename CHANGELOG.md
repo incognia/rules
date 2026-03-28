@@ -107,6 +107,7 @@
 - restringir frontmatter YAML (`title:`, `description:`) a README.md exclusivamente en GitLab/GitHub (criterio similar a licencia); otros documentos solo llevan H1 y timestamp
 - agregar frontmatter YAML a `README.md`; actualizar timestamps en `README.md` y `PHILOSOPHY.md`
 - corregir error YAML en `README.md`: entrecomillar valores con comillas dobles; valores con `:` sin comillas causan «mapping values are not allowed» en GitHub; actualizar plantillas y *skill* con la misma regla
+- corregir rutas relativas en todos los *skills*: sustituir referencias como `cot/X.md` y `rulesets/X.md` por rutas absolutas `~/rules/cot/X.md` y `~/rules/rulesets/X.md` para evitar que el agente las busque en `~/.agents/skills/` en lugar de `~/rules/`
 
 ## [2026-03-23]
 

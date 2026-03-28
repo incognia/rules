@@ -11,7 +11,7 @@ Before any destructive operation, or when explicitly asked to create a backup.
 
 ## Instructions
 
-1. **Read the full CoT**: Load and follow `cot/backup.md` from line 1 to end
+1. **Read the full CoT**: Load and follow `~/rules/cot/backup.md` from line 1 to end
 2. **Generate timestamp**: `TS=$(TZ=America/Mexico_City date +"%Y-%m-%dT%H-%M-%S")`
 3. **Name the backup**: `[name_without_ext]_[timestamp].[original_ext].bkp`
 4. **For files**: `cp source.txt backups/source_${TS}.txt.bkp`
@@ -33,6 +33,6 @@ Before any destructive operation, or when explicitly asked to create a backup.
 
 ## References
 
-- Detailed CoT: `cot/backup.md`
-- Rules: `rulesets/BACKUPS.md`
-- Script: `scripts/backup_file.sh`
+- Detailed CoT: `~/rules/cot/backup.md`
+- Rules: `~/rules/rulesets/BACKUPS.md`
+- Script: `~/rules/scripts/backup_file.sh`

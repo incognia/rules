@@ -31,7 +31,7 @@ Use as starting point:
 
 ## Instructions
 
-1. **Read the full CoT**: Load and follow `cot/styling.md` from line 1 to end
+1. **Read the full CoT**: Load and follow `~/rules/cot/styling.md` from line 1 to end
 2. **Parse arguments**: first arg is platform, last arg is the file. If 3 args are given, middle arg is license (`mit`|`gpl`). If only 2 args, there is no license. If any required argument is missing, ask the user before proceeding.
 3. **Insert standard header** (varies by platform):
    - **HedgeDoc only**: YAML frontmatter with descriptive `tags` + Kabat One logo: `![Kabat One logo](https://hedgedoc.promad.com.mx:31418/uploads/aaa5198c-248f-4642-8c67-00f6edde677a.png)`
@@ -140,6 +140,6 @@ Sin footer. No se agrega nada.
 
 ## References
 
-- Detailed CoT: `cot/styling.md`
-- Rules: `rulesets/STYLING.md`
-- Linguistics: `rulesets/LINGUISTICS.md`
+- Detailed CoT: `~/rules/cot/styling.md`
+- Rules: `~/rules/rulesets/STYLING.md`
+- Linguistics: `~/rules/rulesets/LINGUISTICS.md`
