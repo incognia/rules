@@ -56,6 +56,9 @@
 - documentar acceso a *workflows* YAML vía *Workflow Search* (`Ctrl+Shift+R`) en macOS, Linux y Windows
 - marcar como pendiente de validar las rutas de *workflows* en Linux y Windows
 
+### improve
+- parametrizar *skill* linguistics con argumento `$0` para archivo objetivo: `/linguistics README.md`
+
 ## [2026-03-23]
 
 ### feat
