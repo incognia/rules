@@ -103,6 +103,7 @@
 - aplicar *styling* GitHub a `PHILOSOPHY.md`: timestamp CST, eliminar 2 separadores `---` espurios (antes de `## Referencias` y antes del *copyright*)
 - corregir formato de timestamp en `README.md` y `PHILOSOPHY.md`: sustituir `<div style>` por cursiva Markdown puro (`*Última modificación: ...*`) — GitLab y GitHub eliminan atributos `style`
 - agregar frontmatter YAML (`title:`, `description:`) a plantillas y reglas de GitLab/GitHub: GitHub renderiza como tabla horizontal, GitLab como bloque de código; actualizar tabla de compatibilidad en `rulesets/STYLING.md`
+- rastrear imágenes del logo Kabat One en `templates/mail/assets/`: variantes de 100, 160, 200 y 600 px
 
 ## [2026-03-23]
 
