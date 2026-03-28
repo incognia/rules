@@ -79,9 +79,14 @@
 - actualizar llaves SSH en todos los archivos: `id_ed25519` → `incognia` (personal), `promad_ed25519` → `kone` (laboral/repos)
 - documentar convención de 4 llaves: `incognia` (repos personales), `kone` (repos laborales + infra), `faraday` (servidores personales), `cad` (servidores de clientes)
 
+### docs
+- actualizar README.md: lista completa de 9 *skills* con sintaxis, 4 *workflows*, 4 llaves SSH (repos + servers), MAIL.md en documentos, sync_global.sh en herramientas
+
 ### style
-- aplicar LINGUISTICS.md a README.md:
 - aplicar LINGUISTICS.md a README.md: convertir texto suelto en encabezados (`Definiciones rápidas`, `Ejemplos de comandos`), cursivas en préstamos (*Prompt*, *Chain-of-Thought*), corregir calco «ciclar» → «navegar»
+
+
+
 - aplicar LINGUISTICS.md a PHILOSOPHY.md: cursiva en préstamo (`Helm *charts*`), corregir calco «desarrollado» → «elaborado» en footer
 - aplicar LINGUISTICS.md a CHANGELOG.md: cursiva en *overview* y *lint*, corregir calco «comprehensiva» → «exhaustiva», corregir errata «systemáticamente» → «sistemáticamente»
 

@@ -119,6 +119,7 @@ flowchart LR
 - **[STYLING.md](./rulesets/STYLING.md)** - reglas de estilo para documentos Markdown (proyectos laborales)
 - **[BACKUPS.md](./rulesets/BACKUPS.md)** - políticas de respaldos y operaciones destructivas
 - **[GLOSSARY.md](./rulesets/GLOSSARY.md)** - glosario técnico de términos empleados
+- **[MAIL.md](./rulesets/MAIL.md)** - reglas de composición de correos HTML para OWA
 - **[CHANGELOG.md](./CHANGELOG.md)** - historial de cambios del proyecto
 
 ## Especialización técnica
@@ -145,7 +146,8 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 | **Licenciamiento** | GPLv3 (copyleft) | MIT (permisiva) |
 | **Autoría** | Rodrigo Álvarez (@incognia) | Rodrigo Álvarez (@incogniadev) |
 | **Email** | [incognia@gmail.com](mailto:incognia@gmail.com) | [ralvarez@promad.com.mx](mailto:ralvarez@promad.com.mx) |
-| **SSH Key** | ~/.ssh/incognia | ~/.ssh/kone |
+| **SSH Key (repos)** | ~/.ssh/incognia | ~/.ssh/kone |
+| **SSH Key (servers)** | ~/.ssh/faraday | ~/.ssh/cad |
 | **Estilo de documentos** | No definido aún | [STYLING.md](./rulesets/STYLING.md) aplicable |
 | **Idioma documentación** | Español mexicano | Español mexicano |
 | **Idioma código/commits** | Inglés internacional | Inglés internacional |
@@ -179,50 +181,40 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 - **cot/** — cadenas de razonamiento (CoT) para ejecución diaria
 - **templates/** — plantillas reutilizables
 - **scripts/** — scripts de automatización y respaldos
-- **.agents/skills/** — *skills* descubribles por agentes IA (commit, changelog, linguistics, context, backup, licensing)
-- **.warp/workflows/** — comandos parametrizados YAML (backup, lint, commit, cst_date)
+- **.agents/skills/** — *skills* descubribles por agentes IA:
+  - `/commit` — flujo completo de *commit* con CHANGELOG obligatorio
+  - `/changelog` — mantenimiento de CHANGELOG.md con fechas CST
+  - `/linguistics <archivo>` — aplicar reglas de español mexicano
+  - `/context` — detección rápida de contexto de proyecto
+  - `/backup` — respaldo con nomenclatura estándar
+  - `/licensing` — licenciamiento automático (GPLv3 vs MIT)
+  - `/git-init <personal|laboral> <llave> <url> <rama>` — inicializar repo con SSH
+  - `/ssh-import <faraday|cad>` — importar llave SSH desde GitHub a un servidor
+  - `/mail <delivery|generic> <asunto>` — componer correo HTML compatible con OWA
+- **.warp/workflows/** — comandos parametrizados YAML (`Ctrl+Shift+R` en Warp):
+  - `backup_file` — respaldar archivo/directorio
+  - `lint_markdown` — ejecutar *markdownlint*
+  - `commit_flow` — `git add` + `git commit` con tipo y descripción
+  - `cst_date` — obtener fecha/hora en CST
 
-### Acceso a *workflows* en Warp
-
-Los *workflows* YAML se acceden desde **Workflow Search**, no desde el *Command Palette*:
-
-- **macOS**: `Ctrl+Shift+R`
-- **Linux**: `Ctrl+Shift+R`
-- **Windows**: `Ctrl+Shift+R`
-
-Escribe el nombre del *workflow* (ej. `cst`, `backup`, `commit`) y selecciona con `Enter`. Usa `Shift+Tab` para navegar entre los argumentos.
-
-**Nota**: las rutas de *workflows* en Linux y Windows están pendientes de validar en esas plataformas.
 
 ## Herramientas y scripts
 
+- Sincronización: scripts/sync_global.sh (instala *skills* y *workflows* globales, multiplataforma)
 - Git (post init): scripts/git-init-context.sh
-- Backups:
-  - scripts/backup_file.sh (archivos/directorios, .tar.zst, checksum >=100 MB, log CST)
+- Respaldos:
+  - scripts/backup_file.sh (archivos/directorios, .tar.zst, *checksum* >=100 MB, log CST)
   - scripts/backup_rsync_snapshot.sh (incrementales diarios con rsync --link-dest)
   - scripts/verify_backups.sh (verificación masiva de .sha256)
 
 ## Cómo usar CoT rápidamente
 
-- Ejemplos: carpeta [cot/](./cot/)
-- Buenas prácticas lingüísticas: [LINGUISTICS.md](./rulesets/LINGUISTICS.md)
-- Flujo de commits y CHANGELOG: [COMMITTING.md](./rulesets/COMMITTING.md)
-- **Nuevo**: CoT genérico para obtener contexto de proyectos: [cot/context.md](./cot/context.md)
-- **Nuevo**: CoT para mantenimiento de CHANGELOG: [cot/changelog.md](./cot/changelog.md)
-- **Mejorado**: CoT de commits con validación SSH: [cot/committing.md](./cot/committing.md)
-
-
-### Nota de renderizado para CoT
-
-Si tu CoT incluye front matter (bloque delimitado por `---` al inicio), para que se renderice bien con markdownlint agrega inmediatamente después del cierre del front matter esta línea para desactivar MD041 (H1 en la primera línea):
-
-```markdown
----
-domain: ...
-...
----
-<!-- markdownlint-disable MD041 -->
-```
+- Todos los CoT: carpeta [cot/](./cot/) (20 archivos)
+- Lingüística: [cot/linguistics.md](./cot/linguistics.md) + [LINGUISTICS.md](./rulesets/LINGUISTICS.md)
+- *Commits*: [cot/committing.md](./cot/committing.md) + [COMMITTING.md](./rulesets/COMMITTING.md)
+- Contexto de proyecto: [cot/context.md](./cot/context.md)
+- CHANGELOG: [cot/changelog.md](./cot/changelog.md)
+- Correos HTML: [cot/mail.md](./cot/mail.md) + [MAIL.md](./rulesets/MAIL.md)
 
 ## Convenciones de fechas/horas
 
