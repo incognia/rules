@@ -63,12 +63,14 @@
 - crear *skill* git-init parametrizado con 4 argumentos: contexto (personal/laboral), nombre de llave SSH (se busca en `~/.ssh/`), URL remota y rama
 
 ### feat
-- crear *skill* cad-access para gestionar acceso SSH a servidores de clientes vía importación de llave desde GitHub (`ssh-import-id gh:incogniadev` o `curl https://github.com/incogniadev.keys`)
-  - soporta 3 opciones: servidor con auto-importación Ubuntu, importación manual a servidor existente y provisionamiento con *cloud-init*
+- crear *skill* ssh-import parametrizado para importar llaves SSH a servidores remotos vía GitHub: `/ssh-import <faraday|cad> <user@server>`
+  - `faraday` → servidores personales (GitHub: @incognia)
+  - `cad` → servidores de clientes (GitHub: @incogniadev)
+  - soporta 3 opciones: auto-importación Ubuntu, `ssh-import-id`/`curl` manual y *cloud-init*
 
 ### docs
 - actualizar llaves SSH en todos los archivos: `id_ed25519` → `incognia` (personal), `promad_ed25519` → `kone` (laboral/repos)
-- documentar convención de llaves: `incognia` para repos personales, `kone` para repos laborales e infra, `cad` para servidores de clientes
+- documentar convención de 4 llaves: `incognia` (repos personales), `kone` (repos laborales + infra), `faraday` (servidores personales), `cad` (servidores de clientes)
 
 ### style
 - aplicar LINGUISTICS.md a README.md:
