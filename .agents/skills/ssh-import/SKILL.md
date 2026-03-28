@@ -21,7 +21,15 @@ description: "Import SSH public key from GitHub into the current server. Run fro
 - If `$0` = `faraday` → `GITHUB_USER=incognia`
 - If `$0` = `cad` → `GITHUB_USER=incogniadev`
 
-### 2. Import the key
+### 2. Detect current user and home
+
+```bash
+SHELL_USER=$(whoami)
+SHELL_HOME=$(eval echo ~$SHELL_USER)
+echo "Importing key for user: $SHELL_USER ($SHELL_HOME)"
+```
+
+### 3. Import the key
 
 **Option A: ssh-import-id (Ubuntu/Debian)**
 
@@ -32,16 +40,17 @@ ssh-import-id gh:GITHUB_USER
 **Option B: curl (any Linux, including Fedora/RHEL)**
 
 ```bash
-mkdir -p ~/.ssh && chmod 700 ~/.ssh
-curl -s https://github.com/GITHUB_USER.keys >> ~/.ssh/authorized_keys
-sort -u -o ~/.ssh/authorized_keys ~/.ssh/authorized_keys
-chmod 600 ~/.ssh/authorized_keys
+mkdir -p "$SHELL_HOME/.ssh" && chmod 700 "$SHELL_HOME/.ssh"
+curl -s "https://github.com/GITHUB_USER.keys" >> "$SHELL_HOME/.ssh/authorized_keys"
+sort -u -o "$SHELL_HOME/.ssh/authorized_keys" "$SHELL_HOME/.ssh/authorized_keys"
+chmod 600 "$SHELL_HOME/.ssh/authorized_keys"
 ```
 
-### 3. Verify the key was added
+### 4. Verify the key was added
 
 ```bash
-grep -c "ssh-ed25519" ~/.ssh/authorized_keys
+echo "User: $SHELL_USER"
+echo "Keys in authorized_keys: $(grep -c 'ssh-ed25519' "$SHELL_HOME/.ssh/authorized_keys")"
 ```
 
 ## For cloud-init provisioning (before install)
