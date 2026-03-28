@@ -182,6 +182,18 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 - **.agents/skills/** — *skills* descubribles por agentes IA (commit, changelog, linguistics, context, backup, licensing)
 - **.warp/workflows/** — comandos parametrizados YAML (backup, lint, commit, cst_date)
 
+### Acceso a *workflows* en Warp
+
+Los *workflows* YAML se acceden desde **Workflow Search**, no desde el *Command Palette*:
+
+- **macOS**: `Ctrl+Shift+R`
+- **Linux**: `Ctrl+Shift+R`
+- **Windows**: `Ctrl+Shift+R`
+
+Escribe el nombre del *workflow* (ej. `cst`, `backup`, `commit`) y selecciona con `Enter`. Usa `Shift+Tab` para ciclar entre los argumentos.
+
+**Nota**: las rutas de *workflows* en Linux y Windows están pendientes de validar en esas plataformas.
+
 ## Herramientas y scripts
 
 - Git (post init): scripts/git-init-context.sh

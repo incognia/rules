@@ -53,6 +53,8 @@
 - eliminar enlace simbólico `~/cot`: no funciona bien en Warp con WSL; usar solo rutas canónicas
 - agregar opción de ejecución remota sin clonar previamente
 - documentar rutas por plataforma en notas del setup
+- documentar acceso a *workflows* YAML vía *Workflow Search* (`Ctrl+Shift+R`) en macOS, Linux y Windows
+- marcar como pendiente de validar las rutas de *workflows* en Linux y Windows
 
 ## [2026-03-23]
 
