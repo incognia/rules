@@ -31,57 +31,42 @@ Principio operativo: los documentos de `rulesets/` contienen la lógica y las re
 
 ### Configuración inicial (una sola vez)
 
-#### macOS
+#### macOS y Linux
 
 ```bash
 # 1. Clonar el repositorio
 git clone git@github.com:incognia/rules.git ~/rules
 
-# 2. Skills globales (disponibles en cualquier proyecto)
-mkdir -p ~/.agents/skills
-cp -r ~/rules/.agents/skills/* ~/.agents/skills/
-
-# 3. Workflows globales (Warp)
-mkdir -p ~/.warp/workflows
-cp ~/rules/.warp/workflows/*.yaml ~/.warp/workflows/
+# 2. Instalar skills y workflows globales (detecta plataforma automáticamente)
+~/rules/scripts/sync_global.sh
 ```
 
-#### Linux
+#### Windows (WSL)
 
 ```bash
-# 1. Clonar el repositorio
-git clone git@github.com:incognia/rules.git ~/rules
-
-# 2. Skills globales
-mkdir -p ~/.agents/skills
-cp -r ~/rules/.agents/skills/* ~/.agents/skills/
-
-# 3. Workflows globales (Warp)
-mkdir -p "${XDG_DATA_HOME:-$HOME/.local/share}/warp-terminal/workflows"
-cp ~/rules/.warp/workflows/*.yaml "${XDG_DATA_HOME:-$HOME/.local/share}/warp-terminal/workflows/"
-```
-
-#### Windows (PowerShell + WSL)
-
-```powershell
 # 1. Clonar el repositorio (dentro de WSL)
-wsl git clone git@github.com:incognia/rules.git ~/rules
+git clone git@github.com:incognia/rules.git ~/rules
 
-# 2. Skills globales
-New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.agents\skills"
-Copy-Item -Recurse -Force "\\wsl$\Ubuntu\home\incognia\rules\.agents\skills\*" "$env:USERPROFILE\.agents\skills\"
+# 2. Instalar skills y workflows globales
+~/rules/scripts/sync_global.sh
+```
 
-# 3. Workflows globales (Warp)
-New-Item -ItemType Directory -Force -Path "$env:APPDATA\warp\Warp\data\workflows"
-Copy-Item -Force "\\wsl$\Ubuntu\home\incognia\rules\.warp\workflows\*.yaml" "$env:APPDATA\warp\Warp\data\workflows\"
+#### Sin clonar (ejecución remota)
+
+```bash
+# Instalar o actualizar desde el repo público directamente
+git clone git@github.com:incognia/rules.git ~/rules 2>/dev/null || git -C ~/rules pull
+~/rules/scripts/sync_global.sh
 ```
 
 **Notas**:
 
-- Ajusta el usuario WSL en la ruta `\\wsl$\Ubuntu\home\incognia\` según tu configuración
-- Los *skills* en `~/.agents/skills/` son reconocidos globalmente por Warp, Claude, Cursor, Copilot, Gemini y otros agentes IA
-- Los *workflows* están disponibles desde el *Command Palette* de Warp
-- Para actualizar *skills*/*workflows* después de un `git pull`, vuelve a ejecutar los pasos 2 y 3
+- `sync_global.sh` detecta la plataforma (macOS, Linux, Windows/WSL) y copia a las rutas correctas:
+  - *Skills*: `~/.agents/skills/` (reconocidos por Warp, Claude, Cursor, Copilot, Gemini y otros)
+  - *Workflows* macOS: `~/.warp/workflows/`
+  - *Workflows* Linux: `$XDG_DATA_HOME/warp-terminal/workflows/`
+  - *Workflows* Windows: `$APPDATA\warp\Warp\data\workflows\`
+- Para actualizar después de un `git pull`, solo ejecuta: `~/rules/scripts/sync_global.sh`
 - No se usan enlaces simbólicos; todas las rutas son canónicas (`~/rules/cot/`, `~/rules/rulesets/`)
 
 ### Uso diario

@@ -42,11 +42,17 @@
 ### fix
 - corregir rutas de invocación en README.md: usar `~/rules/cot/` (ruta canónica) en lugar de `~/cot/` (dependiente de *symlink*) en ejemplos y diagrama Mermaid
 
+### feat
+- crear `scripts/sync_global.sh`: script multiplataforma para sincronizar *skills* y *workflows* globales
+  - detecta automáticamente macOS, Linux y Windows/WSL
+  - copia *skills* a `~/.agents/skills/` y *workflows* a la ruta correcta por plataforma
+  - se puede ejecutar desde la copia local o directo desde el repo público
+
 ### docs
-- reescribir sección de configuración inicial en README.md con instrucciones multiplataforma (macOS, Linux, Windows+WSL)
+- reescribir sección de configuración inicial en README.md: simplificar a `git clone` + `sync_global.sh`
 - eliminar enlace simbólico `~/cot`: no funciona bien en Warp con WSL; usar solo rutas canónicas
-- agregar pasos para copiar *skills* y *workflows* de forma global en las tres plataformas
-- documentar rutas de *workflows* por plataforma: `~/.warp/workflows/` (macOS), `$XDG_DATA_HOME/warp-terminal/workflows/` (Linux), `$env:APPDATA\warp\Warp\data\workflows\` (Windows)
+- agregar opción de ejecución remota sin clonar previamente
+- documentar rutas por plataforma en notas del setup
 
 ## [2026-03-23]
 
