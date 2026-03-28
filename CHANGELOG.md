@@ -59,7 +59,11 @@
 ### improve
 - parametrizar *skill* linguistics con argumento `$0` para archivo objetivo: `/linguistics README.md`
 
+### feat
+- crear *skill* git-init parametrizado con 4 argumentos: contexto (personal/laboral), nombre de llave SSH (se busca en `~/.ssh/`), URL remota y rama
+
 ### style
+- aplicar LINGUISTICS.md a README.md:
 - aplicar LINGUISTICS.md a README.md: convertir texto suelto en encabezados (`Definiciones rápidas`, `Ejemplos de comandos`), cursivas en préstamos (*Prompt*, *Chain-of-Thought*), corregir calco «ciclar» → «navegar»
 - aplicar LINGUISTICS.md a PHILOSOPHY.md: cursiva en préstamo (`Helm *charts*`), corregir calco «desarrollado» → «elaborado» en footer
 - aplicar LINGUISTICS.md a CHANGELOG.md: cursiva en *overview* y *lint*, corregir calco «comprehensiva» → «exhaustiva», corregir errata «systemáticamente» → «sistemáticamente»
@@ -434,6 +438,9 @@
 - crear BACKUPS.md con políticas de respaldos y operaciones destructivas, zona horaria CST obligatoria y scripts actualizados con TZ="America/Mexico_City"
 - añadir badges informativos al README.md (licencia GPLv3, Markdown, español mexicano) y sección de flujo de decisión para reglas duales
 
+### feat
+- crear *skill* git-init parametrizado con 4 argumentos: contexto (personal/laboral), llave SSH, URL remota y rama
+
 ### style
 - crear STYLING.md con reglas de estilo para documentos Markdown laborales: paleta corporativa (midnight, electric, lavender), estructura estándar para encabezados/pies, timestamp dinámico en español mexicano
 - cambiar color de iconos en sección de contacto a --promad para consistencia visual
@@ -450,6 +457,9 @@
 - corregir uso de mayúsculas después de dos puntos en GLOSSARY.md para cumplir con las reglas de LINGUISTICS.md
 - corregir casos restantes de mayúsculas después de dos puntos en ATTRIBUTION.md (sección de especialización profesional)
 - corregir capitalización del título en README.md ("Ingeniero" → "ingeniero")
+
+### feat
+- crear *skill* git-init parametrizado con 4 argumentos: contexto (personal/laboral), llave SSH, URL remota y rama
 
 ### style
 - ajustar README.md para mejor alineación con LINGUISTICS.md (uso de minúsculas en listas y corrección de "acomplejos")
