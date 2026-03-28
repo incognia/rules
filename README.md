@@ -3,7 +3,9 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)
 [![Spanish](https://img.shields.io/badge/Language-Spanish%20(MX)-green.svg)](https://es.wikipedia.org/wiki/Espa%C3%B1ol_mexicano)
-[![CoT Coverage](https://img.shields.io/badge/CoT_Coverage-43%25-orange.svg)](./cot/)
+[![CoTs](https://img.shields.io/badge/CoTs-21-blue.svg)](./cot/)
+[![Skills](https://img.shields.io/badge/Skills-9-green.svg)](./.agents/skills/)
+[![Rulesets](https://img.shields.io/badge/Rulesets-16-orange.svg)](./rulesets/)
 
 ### Definiciones rápidas
 
