@@ -63,6 +63,11 @@
 - crear *skill* git-init parametrizado con 4 argumentos: contexto (personal/laboral), nombre de llave SSH (se busca en `~/.ssh/`), URL remota y rama
 
 ### feat
+- crear *skill* mail parametrizado para componer correos HTML compatibles con OWA: `/mail <delivery|generic> <asunto>`
+- crear `rulesets/MAIL.md`: reglas de composición de correos HTML (restricciones de OWA, `bgcolor` en `<td>`, paleta de colores, *placeholders*)
+- crear `cot/mail.md`: CoT de 9 pasos para elaborar correos desde plantillas
+- migrar plantillas de correo del repo stab a `templates/mail/` (`delivery_template.html`, `generic_template.html`)
+
 - crear *skill* ssh-import parametrizado para importar llaves SSH a servidores remotos vía GitHub: `/ssh-import <faraday|cad> <user@server>`
   - `faraday` → servidores personales (GitHub: @incognia)
   - `cad` → servidores de clientes (GitHub: @incogniadev)
