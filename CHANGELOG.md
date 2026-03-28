@@ -4,6 +4,14 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
+## [2026-03-28] - *Skill* kube para análisis de clústeres Kubernetes
+
+### feat
+- crear *skill* kube parametrizado para análisis de clústeres Kubernetes vía SSH: `/kube <llave> <usuario> <ip> <namespace>`
+- crear `rulesets/KUBE.md`: reglas de análisis de clústeres (acceso SSH, estructura de manifiestos, comandos de diagnóstico, puertos de observabilidad, convenciones de nombres)
+- crear `cot/kube.md`: CoT de 10 pasos para análisis completo (nodos, pods, servicios, VirtualServices, Istio, ArgoCD, manifiestos, *health checks*, observabilidad)
+- documentar puertos reales de observabilidad: Kiali 20001 (LoadBalancer), Prometheus 9090 (NodePort), Grafana 3000 (LoadBalancer)
+
 ## [2026-03-27] - Refactorización de estructura y AGENTS.md agnóstico
 
 ### refactor
