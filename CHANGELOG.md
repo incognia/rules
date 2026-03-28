@@ -15,6 +15,10 @@
 ### docs
 - agregar diagrama de secuencia Mermaid en README.md: flujo *skill* (interfaz) → CoT (*middleware*) → *ruleset* (*backend*)
 
+### fix
+- corregir conteo de CoTs en README.md: 20 → 22 (faltaban `mail.md` y `kube.md`)
+- agregar descripción faltante al encabezado de *workflows* en sección de estructura
+
 ## [2026-03-27]
 
 ### refactor

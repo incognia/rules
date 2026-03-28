@@ -228,7 +228,7 @@ sequenceDiagram
   - `/ssh-import <faraday|cad>` — importar llave SSH desde GitHub a un servidor
   - `/mail <delivery|generic> <asunto>` — componer correo HTML compatible con OWA
   - `/styling <hedgedoc|gitlab|github> [mit|gpl] <archivo>` — aplicar estilo Kabat One a un documento Markdown
-- **.warp/workflows/**
+- **.warp/workflows/** — comandos parametrizados YAML (`Ctrl+Shift+R` en Warp):
   - `backup_file` — respaldar archivo/directorio
   - `lint_markdown` — ejecutar *markdownlint*
   - `commit_flow` — `git add` + `git commit` con tipo y descripción
@@ -246,7 +246,7 @@ sequenceDiagram
 
 ## Cómo usar CoT rápidamente
 
-- Todos los CoT: carpeta [cot/](./cot/) (20 archivos)
+- Todos los CoT: carpeta [cot/](./cot/) (22 archivos)
 - Lingüística: [cot/linguistics.md](./cot/linguistics.md) + [LINGUISTICS.md](./rulesets/LINGUISTICS.md)
 - *Commits*: [cot/committing.md](./cot/committing.md) + [COMMITTING.md](./rulesets/COMMITTING.md)
 - Contexto de proyecto: [cot/context.md](./cot/context.md)
