@@ -1,6 +1,11 @@
+---
+title: Nombre del proyecto
+description: Breve descripción del proyecto
+---
+
 # Nombre del proyecto
 
-<div style="text-align: right;"><em>Última modificación: DD de mes de AAAA, HH:MM (CST)</em></div><br>
+*Última modificación: DD de mes de AAAA, HH:MM (CST)*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![CI](https://github.com/<owner>/<repo>/actions/workflows/<workflow>.yml/badge.svg)](https://github.com/<owner>/<repo>/actions)

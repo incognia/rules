@@ -35,6 +35,7 @@ tags: tag-1, tag-2, tag-3, tag-opcional
 **Notas importantes:**
 - Los tags deben ser descriptivos y relevantes al contenido
 - El logo de Kabat One es obligatorio en documentos corporativos
+- El bloque `<div style="text-align: right;">` funciona **solo en HedgeDoc**; GitLab y GitHub eliminan los atributos `style`
 - El primer encabezado debe ser claro y conciso
 - La fecha de "Última modificación" debe actualizarse con la fecha y hora real al momento de editar el documento (formato: DD de mes de AAAA, HH:MM (CST))
 - **Zona horaria obligatoria:** siempre usar CST de Ciudad de México (UTC-6), nunca UTC ni otra zona horaria
@@ -150,7 +151,7 @@ HedgeDoc admite extensiones que **no funcionan** en GitLab ni GitHub:
 | CSS inline (`<style>`) | ✅ | ❌ (ignorado) | ❌ (ignorado) |
 | HTML arbitrario | ✅ | parcial | parcial |
 | Badges (`shields.io`) | ✅ | ✅ | ✅ |
-| Frontmatter YAML (`---`) | ✅ (tags) | ❌ (ignorado) | ❌ (ignorado) |
+| Frontmatter YAML (`---`) | ✅ (`tags:`) | ✅ (`title:`, `description:`) | ✅ (tabla horizontal) |
 
 **Regla crítica:** Al aplicar styling en GitLab o GitHub, eliminar o adaptar cualquier sintaxis exclusiva de HedgeDoc.
 
@@ -166,7 +167,23 @@ Usar las plantillas en `templates/` como punto de partida:
 
 Documentos Markdown para GitLab (README.md con licencia, otros documentos sin licencia).
 
-**Encabezado:** Sin logo ni frontmatter YAML. Solo H1, timestamp y badges.
+**Encabezado:** Con frontmatter YAML (`title` + `description`) + H1 + timestamp en Markdown puro.
+
+GitHub renderiza el frontmatter como tabla horizontal. GitLab lo renderiza como bloque de código formateado. Ambos lo muestran al inicio del documento.
+
+```markdown
+---
+title: Nombre del proyecto
+description: Breve descripción del proyecto
+---
+
+# Nombre del proyecto
+
+*Última modificación: DD de mes de AAAA, HH:MM (CST)*
+```
+
+> ⚠️ No usar `<div style="...">` — GitLab y GitHub eliminan atributos `style`.
+> Los campos `title` y `description` son los estándar para ambas plataformas; no usar `tags` (exclusivo de HedgeDoc).
 
 **Pie de página para README.md:**
 
@@ -229,7 +246,7 @@ GitHub:
 
 Documentos Markdown para GitHub (README.md con licencia, otros documentos sin licencia).
 
-**Encabezado:** Sin logo ni frontmatter YAML. Solo H1, timestamp y badges.
+**Encabezado:** Idéntico a GitLab: H1 + timestamp en Markdown puro (`*Última modificación: ...*`). Sin `<div style>`, sin logo, sin frontmatter YAML.
 
 **Pie de página:** Idéntico a GitLab (copyright solo en README.md, sin firma ni CSS).
 

@@ -1,6 +1,6 @@
 # Reglas técnicas: prompts y CoT para acelerar el contexto de los LLM
 
-<div style="text-align: right;"><em>Última modificación: 27 de marzo de 2026, 23:01 (CST)</em></div><br>
+*Última modificación: 27 de marzo de 2026, 23:01 (CST)*
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)

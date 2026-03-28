@@ -35,10 +35,17 @@ Use as starting point:
 2. **Parse arguments**: first arg is platform, last arg is the file. If 3 args are given, middle arg is license (`mit`|`gpl`). If only 2 args, there is no license. If any required argument is missing, ask the user before proceeding.
 3. **Insert standard header** (varies by platform):
    - **HedgeDoc only**: YAML frontmatter with descriptive `tags` + Kabat One logo: `![Kabat One logo](https://hedgedoc.promad.com.mx:31418/uploads/aaa5198c-248f-4642-8c67-00f6edde677a.png)`
-   - **GitLab/GitHub**: No logo, no frontmatter YAML
+   - **GitLab/GitHub**: YAML frontmatter with `title` and `description` (rendered as table on GitHub, code block on GitLab):
+     ```yaml
+     ---
+     title: Nombre del proyecto
+     description: Breve descripción del proyecto
+     ---
+     ```
    - H1 title
    - Timestamp: `LC_TIME=es_MX.UTF-8 TZ=America/Mexico_City date '+%d de %B de %Y, %H:%M (%Z)'`
-   - `<div style="text-align: right;"><em>Última modificación: [timestamp] (CST)</em></div><br>`
+   - **HedgeDoc**: `<div style="text-align: right;"><em>Última modificación: [timestamp] (CST)</em></div><br>`
+   - **GitLab/GitHub**: `*Última modificación: [timestamp] (CST)*` — plain Markdown italic, no HTML (GL/GH strip inline styles)
 4. **Apply content rules**: hierarchy H1→H2→H3→H4, no skipped levels, sentence case titles
    - **GitLab/GitHub only**: strip or adapt HedgeDoc-exclusive syntax:
      - Remove `[TOC]`, `[name=...]`, `[time=...]`, `[color=...]`

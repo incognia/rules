@@ -1,6 +1,11 @@
+---
+title: Nombre del proyecto
+description: Breve descripción del proyecto
+---
+
 # Nombre del proyecto
 
-<div style="text-align: right;"><em>Última modificación: DD de mes de AAAA, HH:MM (CST)</em></div><br>
+*Última modificación: DD de mes de AAAA, HH:MM (CST)*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![pipeline status](https://gitlab.com/<namespace>/<repo>/badges/<branch>/pipeline.svg)](https://gitlab.com/<namespace>/<repo>/-/pipelines)

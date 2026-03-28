@@ -1,6 +1,6 @@
 # Filosofía de un pinche prieto que a veces *codea* pero siempre se rifa
 
-<div style="text-align: right;"><em>Última modificación: 27 de marzo de 2026, 23:10 (CST)</em></div><br>
+*Última modificación: 27 de marzo de 2026, 23:10 (CST)*
 
 > «El desarrollo tecnológico
 >

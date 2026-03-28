@@ -101,6 +101,8 @@
 - actualizar `cot/changelog.md`: agregar validación obligatoria de entrada existente antes de crear encabezado nuevo para la misma fecha
 - aplicar *styling* GitHub (GPLv3) a `README.md`: timestamp CST, corregir jerarquía `###` → `##` en «Definiciones rápidas», actualizar badge *Skills* (9 →10), agregar `/styling` a lista de *skills*
 - aplicar *styling* GitHub a `PHILOSOPHY.md`: timestamp CST, eliminar 2 separadores `---` espurios (antes de `## Referencias` y antes del *copyright*)
+- corregir formato de timestamp en `README.md` y `PHILOSOPHY.md`: sustituir `<div style>` por cursiva Markdown puro (`*Última modificación: ...*`) — GitLab y GitHub eliminan atributos `style`
+- agregar frontmatter YAML (`title:`, `description:`) a plantillas y reglas de GitLab/GitHub: GitHub renderiza como tabla horizontal, GitLab como bloque de código; actualizar tabla de compatibilidad en `rulesets/STYLING.md`
 
 ## [2026-03-23]
 
