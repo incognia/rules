@@ -5,10 +5,10 @@
 [![Spanish](https://img.shields.io/badge/Language-Spanish%20(MX)-green.svg)](https://es.wikipedia.org/wiki/Espa%C3%B1ol_mexicano)
 [![CoT Coverage](https://img.shields.io/badge/CoT_Coverage-43%25-orange.svg)](./cot/)
 
-Definiciones rápidas
+### Definiciones rápidas
 
-- Prompt: instrucción o contexto que le das al modelo para indicarle qué hacer, con qué tono y bajo qué restricciones.
-- CoT (Chain-of-Thought): cadena de razonamiento paso a paso que hace explícito cómo se llega a una respuesta, útil para tareas complejas.
+- *Prompt*: instrucción o contexto que le das al modelo para indicarle qué hacer, con qué tono y bajo qué restricciones.
+- CoT (*Chain-of-Thought*): cadena de razonamiento paso a paso que hace explícito cómo se llega a una respuesta, útil para tareas complejas.
 
 Este repositorio contiene las reglas, estándares y filosofía que guían el trabajo técnico y la colaboración en los proyectos de Rodrigo Álvarez. En la práctica diaria se prioriza el uso de los CoT: los documentos describen la lógica de las reglas, pero las herramientas de trabajo cotidianas son los CoT en sí.
 
@@ -63,9 +63,9 @@ git clone git@github.com:incognia/rules.git ~/rules 2>/dev/null || git -C ~/rule
 
 - `sync_global.sh` detecta la plataforma (macOS, Linux, Windows/WSL) y copia a las rutas correctas:
   - *Skills*: `~/.agents/skills/` (reconocidos por Warp, Claude, Cursor, Copilot, Gemini y otros)
-  - *Workflows* macOS: `~/.warp/workflows/`
-  - *Workflows* Linux: `$XDG_DATA_HOME/warp-terminal/workflows/`
-  - *Workflows* Windows: `$APPDATA\warp\Warp\data\workflows\`
+  - *Workflows* en macOS: `~/.warp/workflows/`
+  - *Workflows* en Linux: `$XDG_DATA_HOME/warp-terminal/workflows/`
+  - *Workflows* en Windows: `$APPDATA\warp\Warp\data\workflows\`
 - Para actualizar después de un `git pull`, solo ejecuta: `~/rules/scripts/sync_global.sh`
 - No se usan enlaces simbólicos; todas las rutas son canónicas (`~/rules/cot/`, `~/rules/rulesets/`)
 
@@ -190,7 +190,7 @@ Los *workflows* YAML se acceden desde **Workflow Search**, no desde el *Command 
 - **Linux**: `Ctrl+Shift+R`
 - **Windows**: `Ctrl+Shift+R`
 
-Escribe el nombre del *workflow* (ej. `cst`, `backup`, `commit`) y selecciona con `Enter`. Usa `Shift+Tab` para ciclar entre los argumentos.
+Escribe el nombre del *workflow* (ej. `cst`, `backup`, `commit`) y selecciona con `Enter`. Usa `Shift+Tab` para navegar entre los argumentos.
 
 **Nota**: las rutas de *workflows* en Linux y Windows están pendientes de validar en esas plataformas.
 
@@ -234,7 +234,7 @@ domain: ...
 
 Más detalles: ver [LINGUISTICS.md – Fechas y horas (CST Ciudad de México)](./rulesets/LINGUISTICS.md#fechas-y-horas-cst-ciudad-de-méxico).
 
-Ejemplos de comandos
+### Ejemplos de comandos
 
 ```bash
 # Fecha (CST) para CHANGELOG.md

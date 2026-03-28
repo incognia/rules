@@ -23,7 +23,7 @@ Esta dualidad entre ser «Agüelo» y «Hagrid» no es casualidad: refleja una i
 Mi trabajo se centra en **ingeniería DevOps**, con enfoque en plataformas Kubernetes nativas y observabilidad avanzada:
 
 - **Kubernetes sobre Proxmox *bare-metal*:** aprovisionamiento con kubeadm, containerd y cloud-init
-- **GitOps y automatización:** flujos con Argo CD, Helm charts y manifiestos versionados
+- **GitOps y automatización:** flujos con Argo CD, Helm *charts* y manifiestos versionados
 - **Malla de servicios y networking:** Istio, Envoy, Cilium, MetalLB, configuración de bridges/VLAN
 - **Observabilidad y trazabilidad:** Prometheus, Grafana, OpenTelemetry, trazas distribuidas
 - **CI/CD empresarial:** Jenkins, GitLab CI con integración GitOps
@@ -153,6 +153,6 @@ Los detalles específicos de implementación de esta filosofía se encuentran or
 
 ---
 
-*Este documento fue desarrollado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.*
+*Este documento fue elaborado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.*
 
 *Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*

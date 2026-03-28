@@ -59,6 +59,11 @@
 ### improve
 - parametrizar *skill* linguistics con argumento `$0` para archivo objetivo: `/linguistics README.md`
 
+### style
+- aplicar LINGUISTICS.md a README.md: convertir texto suelto en encabezados (`Definiciones rápidas`, `Ejemplos de comandos`), cursivas en préstamos (*Prompt*, *Chain-of-Thought*), corregir calco «ciclar» → «navegar»
+- aplicar LINGUISTICS.md a PHILOSOPHY.md: cursiva en préstamo (`Helm *charts*`), corregir calco «desarrollado» → «elaborado» en footer
+- aplicar LINGUISTICS.md a CHANGELOG.md: cursiva en *overview* y *lint*, corregir calco «comprehensiva» → «exhaustiva», corregir errata «systemáticamente» → «sistemáticamente»
+
 ## [2026-03-23]
 
 ### feat
@@ -115,7 +120,7 @@
 ## [2025-09-19] - Priorización del flujo de trabajo diario con CoT y badge de cobertura
 
 ### docs
-- actualizar README.md: priorizar flujo de trabajo diario con CoT moviendo sección a posición prominente después del overview académico
+- actualizar README.md: priorizar flujo de trabajo diario con CoT moviendo sección a posición prominente después del *overview* académico
 - documentar configuración inicial completa: clonado en ~/rules y creación de enlace simbólico ~/cot para acceso rápido
 - especificar compatibilidad con macOS y Linux para el flujo de enlace simbólico
 - agregar ejemplos de uso diario con rutas cortas (~/cot/committing.md, ~/cot/context.md, ~/cot/changelog.md)
@@ -141,7 +146,7 @@
 ### docs
 - afinar cot/context.md v2.1: agregar búsqueda de READMEs en subdirectorios de segundo y tercer nivel para proyectos colaborativos con múltiples equipos
 - extender detección técnica para incluir archivos de configuración de Kubernetes en todo el repositorio (no solo raíz)
-- agregar búsqueda comprehensiva de archivos kubeconfig, kube.config y .kubeconfig en cualquier nivel del repositorio
+- agregar búsqueda exhaustiva de archivos kubeconfig, kube.config y .kubeconfig en cualquier nivel del repositorio
 - incluir búsqueda completa de configuraciones Talos: talosconfig, talos.config y .talosconfig para uso con comandos EXPORT
 - ampliar detección de manifests YAML de Kubernetes: buscar deployment, service, ingress, configmap, secret en profundidad
 - incluir detección de directorios estándar de Kubernetes: k8s/, kubernetes/, manifests/
@@ -182,7 +187,7 @@
 - actualizar ROADMAP.md: incrementar estadísticas de CoT (14→15 archivos, 57%→60% independientes), documentar progreso *Sprint* 1 con CoT completado y actualizar infraestructura completada con características del nuevo CoT
 - consolidar ROADMAP.md en raíz combinando infraestructura CoT con análisis de cobertura específica
 - consolidar ROADMAP.md en raíz combinando infraestructura CoT con análisis de cobertura específica
-- corregir systemáticamente errores de lint Markdown en archivos principales (README, ROADMAP, CHANGELOG, PROMPTS, PHILOSOPHY)
+- corregir sistemáticamente errores de *lint* Markdown en archivos principales (README, ROADMAP, CHANGELOG, PROMPTS, PHILOSOPHY)
 - añadir espacios en blanco alrededor de encabezados y listas según MD022/MD032
 - corregir enlaces huérfanos tras movimiento de rulesets/ROADMAP.md a raíz
 - especificar lenguajes en bloques de código y corregir prefijos de listas ordenadas
