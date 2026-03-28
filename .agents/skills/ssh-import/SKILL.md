@@ -1,76 +1,57 @@
 ---
 name: ssh-import
-description: "Import SSH public key to a remote server from GitHub. Usage: /ssh-import <faraday|cad> <user@server>"
+description: "Import SSH public key from GitHub into the current server. Run from within the server. Usage: /ssh-import <faraday|cad>"
 ---
 
-# SSH key import to remote servers
+# SSH key import (run from within the server)
 
-## Arguments
+## Argument
 
 - **Key name**: $0 (faraday for personal servers, cad for client servers)
-- **Target**: $1 (user@server, e.g. incognia@192.168.1.100)
 
 ## Key mapping
 
-- **faraday** → `~/.ssh/faraday` — personal servers and infra (GitHub user: `incognia`)
-- **cad** → `~/.ssh/cad` — client servers (GitHub user: `incogniadev`)
-
-Both keys are published on GitHub and can be imported with `ssh-import-id` or `curl`.
+- **faraday** → GitHub user `incognia` (personal servers and infra)
+- **cad** → GitHub user `incogniadev` (client servers)
 
 ## Instructions
 
 ### 1. Determine GitHub user from key name
 
-- If `$0` = `faraday` → GitHub user = `incognia`
-- If `$0` = `cad` → GitHub user = `incogniadev`
+- If `$0` = `faraday` → `GITHUB_USER=incognia`
+- If `$0` = `cad` → `GITHUB_USER=incogniadev`
 
-### 2. Import key to the server
+### 2. Import the key
 
-**Option A: server already has the key (Ubuntu auto-import during install)**
-
-If the server was provisioned with the correct GitHub username, just connect:
+**Option A: ssh-import-id (Ubuntu/Debian)**
 
 ```bash
-ssh -i ~/.ssh/$0 $1
+ssh-import-id gh:GITHUB_USER
 ```
 
-**Option B: import to an existing server (requires temporary access)**
+**Option B: curl (any Linux, including Fedora/RHEL)**
 
 ```bash
-# From the server — if ssh-import-id is available (Ubuntu/Debian)
-ssh-import-id gh:GITHUB_USER
-
-# Alternative — curl (any Linux)
+mkdir -p ~/.ssh && chmod 700 ~/.ssh
 curl -s https://github.com/GITHUB_USER.keys >> ~/.ssh/authorized_keys
 sort -u -o ~/.ssh/authorized_keys ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys
 ```
 
-**Option C: provision via cloud-init**
+### 3. Verify the key was added
+
+```bash
+grep -c "ssh-ed25519" ~/.ssh/authorized_keys
+```
+
+## For cloud-init provisioning (before install)
 
 ```yaml
 ssh_import_id:
   - gh:GITHUB_USER
 ```
 
-### 3. Verify connection
-
-```bash
-ssh -i ~/.ssh/$0 -o IdentitiesOnly=yes $1 "echo 'OK: $(hostname)'"
-```
-
-## SSH config shortcut (optional)
-
-```
-Host server-alias
-    HostName server-ip-or-hostname
-    User username
-    IdentityFile ~/.ssh/$0
-    IdentitiesOnly yes
-```
-
 ## Examples
 
-- `/ssh-import faraday incognia@proxmox.local` — personal server
-- `/ssh-import cad ralvarez@client-server.com` — client server
-- `/ssh-import faraday` — shows instructions without connecting
+- `/ssh-import faraday` — import personal key (from gh:incognia)
+- `/ssh-import cad` — import work key (from gh:incogniadev)
