@@ -184,6 +184,28 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 
 - **STYLING.md**: reglas de estilo para documentos Markdown corporativos
 
+## Arquitectura: *skills*, CoTs y *rulesets*
+
+```mermaid
+flowchart TD
+    U["Usuario invoca /skill"] --> S["Skill (.agents/skills/*/SKILL.md)"]
+    S -->|"lee y ejecuta"| C["CoT (cot/*.md)"]
+    S -->|"consulta reglas"| R["Ruleset (rulesets/*.md)"]
+    C -->|"referencia"| R
+    C --> E["Ejecución paso a paso"]
+    E --> V["Validación y resultado"]
+
+    style U fill:#f9f,stroke:#333,stroke-width:2px
+    style S fill:#ffd700,stroke:#333,stroke-width:2px
+    style C fill:#87ceeb,stroke:#333,stroke-width:2px
+    style R fill:#98fb98,stroke:#333,stroke-width:2px
+    style V fill:#9f9,stroke:#333,stroke-width:2px
+```
+
+- **Skill** (interfaz) — el punto de entrada; define *qué hacer*, recibe argumentos y es descubierto automáticamente por el agente
+- **CoT** (*middleware*) — la cadena de razonamiento paso a paso; define *cómo razonar* para completar la tarea
+- **Ruleset** (*backend*) — las reglas y restricciones de referencia; define *qué está permitido y qué no*
+
 ## Estructura del repositorio
 
 - **rulesets/** — reglas y documentación de referencia (LINGUISTICS.md, COMMITTING.md, etc.)

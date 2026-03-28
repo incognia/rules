@@ -12,7 +12,10 @@
 - crear `cot/kube.md`: CoT de 10 pasos para análisis completo (nodos, pods, servicios, VirtualServices, Istio, ArgoCD, manifiestos, *health checks*, observabilidad)
 - documentar puertos reales de observabilidad: Kiali 20001 (LoadBalancer), Prometheus 9090 (NodePort), Grafana 3000 (LoadBalancer)
 
-## [2026-03-27] - Refactorización de estructura y AGENTS.md agnóstico
+### docs
+- agregar diagrama Mermaid de arquitectura en README.md: *skill* (interfaz) → CoT (*middleware*) → *ruleset* (*backend*)
+
+## [2026-03-27]
 
 ### refactor
 - simplificar estructura de directorios del repositorio
