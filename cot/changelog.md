@@ -23,10 +23,12 @@ Pasos:
    Validación: confirmar que fechas están ordenadas de más reciente a más antigua
    Resultado: detectar entradas fuera de orden cronológico inverso.
 
-3) Acción: detectar entradas duplicadas.
-   COMANDO OBLIGATORIO: `grep "^## \[" CHANGELOG.md | sort | uniq -c | awk '$1 > 1'`
-   Validación: identificar encabezados de fecha repetidos exactamente
-   Resultado: marcar duplicados para consolidación o eliminación.
+3) Acción: verificar si ya existe una entrada para la fecha CST actual.
+   COMANDO OBLIGATORIO: `grep -n "^## \[${DATE_CST}\]" CHANGELOG.md`
+   Decisión crítica:
+   - Si YA EXISTE entrada para esa fecha: agregar las nuevas subsecciones (`### feat`, `### fix`, etc.) DENTRO de la entrada existente. NO crear encabezado nuevo.
+   - Si NO existe: crear nuevo encabezado `## [YYYY-MM-DD] - Título descriptivo` en la posición correcta (arriba de todas las entradas).
+   Resultado: nunca dos encabezados con la misma fecha en el CHANGELOG.
 
 4) Acción: validar consistencia de idioma en la nueva entrada.
    Validación: aplicar reglas de ~/rules/rulesets/LINGUISTICS.md

@@ -1,13 +1,15 @@
 # Reglas técnicas: prompts y CoT para acelerar el contexto de los LLM
 
+<div style="text-align: right;"><em>Última modificación: 27 de marzo de 2026, 23:01 (CST)</em></div><br>
+
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)
 [![Spanish](https://img.shields.io/badge/Language-Spanish%20(MX)-green.svg)](https://es.wikipedia.org/wiki/Espa%C3%B1ol_mexicano)
 [![CoTs](https://img.shields.io/badge/CoTs-21-blue.svg)](./cot/)
-[![Skills](https://img.shields.io/badge/Skills-9-green.svg)](./.agents/skills/)
+[![Skills](https://img.shields.io/badge/Skills-10-green.svg)](./.agents/skills/)
 [![Rulesets](https://img.shields.io/badge/Rulesets-16-orange.svg)](./rulesets/)
 
-### Definiciones rápidas
+## Definiciones rápidas
 
 - *Prompt*: instrucción o contexto que le das al modelo para indicarle qué hacer, con qué tono y bajo qué restricciones.
 - CoT (*Chain-of-Thought*): cadena de razonamiento paso a paso que hace explícito cómo se llega a una respuesta, útil para tareas complejas.
@@ -193,7 +195,8 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
   - `/git-init <personal|laboral> <llave> <url> <rama>` — inicializar repo con SSH
   - `/ssh-import <faraday|cad>` — importar llave SSH desde GitHub a un servidor
   - `/mail <delivery|generic> <asunto>` — componer correo HTML compatible con OWA
-- **.warp/workflows/** — comandos parametrizados YAML (`Ctrl+Shift+R` en Warp):
+  - `/styling <hedgedoc|gitlab|github> [mit|gpl] <archivo>` — aplicar estilo Kabat One a un documento Markdown
+- **.warp/workflows/**
   - `backup_file` — respaldar archivo/directorio
   - `lint_markdown` — ejecutar *markdownlint*
   - `commit_flow` — `git add` + `git commit` con tipo y descripción

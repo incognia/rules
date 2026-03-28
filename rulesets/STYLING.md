@@ -11,22 +11,20 @@ Este documento define las convenciones de estilo para documentos Markdown en dif
 3. **Pie de página** - Información de licencia y contacto
 4. **Estilos CSS** - Definiciones de apariencia (si aplica)
 
-## Personal
+## Hedgedoc
 
-*Por definir...*
-
-## Laboral
+Documentos Markdown para HedgeDoc (sin licencia, solo firma corporativa).
 
 ### Encabezado estándar
 
-Todo documento laboral debe incluir el siguiente encabezado:
+Todo documento HedgeDoc debe incluir el siguiente encabezado:
 
 ```markdown
 ---
 tags: tag-1, tag-2, tag-3, tag-opcional
 ---
 
-![PROMAD logo](https://hedgedoc.promad.com.mx:31418/uploads/eac9bca0-66f5-463e-9ccb-8813341a549c.png)
+![Kabat One logo](https://hedgedoc.promad.com.mx:31418/uploads/aaa5198c-248f-4642-8c67-00f6edde677a.png)
 
 # Primer encabezado nivel 1
 
@@ -36,7 +34,7 @@ tags: tag-1, tag-2, tag-3, tag-opcional
 
 **Notas importantes:**
 - Los tags deben ser descriptivos y relevantes al contenido
-- El logo de PROMAD es obligatorio en documentos corporativos
+- El logo de Kabat One es obligatorio en documentos corporativos
 - El primer encabezado debe ser claro y conciso
 - La fecha de "Última modificación" debe actualizarse con la fecha y hora real al momento de editar el documento (formato: DD de mes de AAAA, HH:MM (CST))
 - **Zona horaria obligatoria:** siempre usar CST de Ciudad de México (UTC-6), nunca UTC ni otra zona horaria
@@ -55,59 +53,12 @@ LC_TIME=es_MX.UTF-8 TZ=America/Mexico_City date '+%d de %B de %Y, %H:%M (%Z)'
 
 ### Pie de página estándar
 
-Todo documento laboral debe concluir con el siguiente pie de página:
+Todo documento HedgeDoc debe concluir con el siguiente pie de página (sin licencia):
 
 ```markdown
 ---
 
-[Información de licencia generada automáticamente desde LICENSING.md]
-
----
-
-## Contacto
-
-[//]: # (CSS Contacto)
-
-<style>
-  .avatar {
-    border-radius: 50%;
-  }
-  .markdown-body i {
-    color: var(--promad);
-  }
-</style>
-
-<table>
-  <tr>
-    <td rowspan='5' colspan='1'>
-      <img src="https://1.gravatar.com/avatar/e51a2b0e2b142d574963de682099716c?s=160" class="avatar">
-    </td>
-    <td>
-      <b>Rodrigo Ernesto Álvarez Aguilera</b>
-    </td>
-  </tr>
-  <tr>
-    <td>Líder DevOps</td>
-  </tr>
-  <tr>
-    <td>
-      <i class="fa fa-envelope"></i>
-      <a href="mailto:ralvarez@kabatone">ralvarez@kabatone.com</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <i class="fa fa-briefcase"></i>
-      Ejército Nacional 57, Miguel Hidalgo
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <i class="fa fa-phone"></i>
-      +52 (55) 7980-9502
-    </td>
-  </tr>
-</table>
+![FIRMA](https://hedgedoc.promad.com.mx:31418/uploads/f8e2dc04-bbf8-41b7-9443-17b483f19beb.png)
 
 [//]: # (CSS Corporativo)
 
@@ -152,17 +103,15 @@ Todo documento laboral debe concluir con el siguiente pie de página:
 
 **Componentes del pie de página:**
 
-1. **Separador de licencia** - Línea horizontal con información de licencia (debe reemplazarse con el contenido real del archivo LICENSING.md del proyecto)
-2. **Sección de contacto** - Información personal y profesional
-3. **Avatar circular** - Imagen de perfil con bordes redondeados
-4. **Datos de contacto** - Email, dirección y teléfono con iconos
-5. **CSS corporativo** - Definición de colores y estilos de marca
+1. **Separador** - Línea horizontal
+2. **Firma corporativa** - Imagen de firma oficial
+3. **CSS corporativo** - Definición de colores y estilos de marca
 
 ### Paleta de colores corporativa
 
 | Variable | Color | Hexadecimal | Uso |
-|----------|--------|-------------|-----|
-| `--promad` | Azul Promad | `#00B2E0` | Color principal de marca |
+|----------|-------|-------------|-----|
+| `--promad` | Azul Kabat One | `#00B2E0` | Color principal de marca |
 | `--midnight` | Medianoche | `#0E1821` | Texto principal (modo claro) |
 | `--electric` | Azul eléctrico | `#116dff` | Acentos y elementos secundarios |
 | `--lavender` | Lavanda | `#a5b7ea` | Hover en modo oscuro |
@@ -185,6 +134,104 @@ Todo documento laboral debe concluir con el siguiente pie de página:
 
 - Las líneas horizontales (`---`) usan el color PROMAD
 - Altura fija de 1px para consistencia visual
+
+## Diferencias de sintaxis por plataforma
+
+HedgeDoc admite extensiones que **no funcionan** en GitLab ni GitHub:
+
+| Característica | HedgeDoc | GitLab | GitHub |
+|---|---|---|---|
+| `[TOC]` tabla de contenidos | ✅ | ❌ | ❌ |
+| `:::` bloques admonition (`:::info`, `:::warning`, etc.) | ✅ | ❌ | ❌ |
+| `[name=Autor]` metadato de autor | ✅ | ❌ | ❌ |
+| `[time=fecha]` metadato de fecha | ✅ | ❌ | ❌ |
+| `[color=#hex]` color de texto | ✅ | ❌ | ❌ |
+| Bloques `mermaid` nativos | ✅ | ✅ | ✅ |
+| CSS inline (`<style>`) | ✅ | ❌ (ignorado) | ❌ (ignorado) |
+| HTML arbitrario | ✅ | parcial | parcial |
+| Badges (`shields.io`) | ✅ | ✅ | ✅ |
+| Frontmatter YAML (`---`) | ✅ (tags) | ❌ (ignorado) | ❌ (ignorado) |
+
+**Regla crítica:** Al aplicar styling en GitLab o GitHub, eliminar o adaptar cualquier sintaxis exclusiva de HedgeDoc.
+
+## Plantillas
+
+Usar las plantillas en `templates/` como punto de partida:
+
+- `templates/hedgedoc.md` — Documento genérico para HedgeDoc
+- `templates/gitlab-readme.md` — README.md para GitLab (con licencia y badges)
+- `templates/github-readme.md` — README.md para GitHub (con licencia y badges)
+
+## GitLab
+
+Documentos Markdown para GitLab (README.md con licencia, otros documentos sin licencia).
+
+**Encabezado:** Sin logo ni frontmatter YAML. Solo H1, timestamp y badges.
+
+**Pie de página para README.md:**
+
+Solo copyright. Sin firma, sin CSS:
+
+```markdown
+---
+
+*Este proyecto fue elaborado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.*
+
+*Copyright © AAAA, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*
+```
+
+Para MIT:
+
+```markdown
+---
+
+*Este proyecto fue elaborado por Rodrigo Álvarez para Promad Business Solutions y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
+
+*Copyright © AAAA, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
+```
+
+**Pie de página para otros documentos:** Sin footer.
+
+### Badges en README.md
+
+Cuando el README.md incluye licencia, debe incluir badges al inicio del contenido (después del timestamp y antes del primer párrafo). Si ya existen badges, verificar que sean correctos y estén actualizados.
+
+**Badge de licencia MIT:**
+```markdown
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+```
+
+**Badge de licencia GPLv3:**
+```markdown
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+```
+
+**Badges adicionales recomendados según plataforma:**
+
+GitLab:
+```markdown
+[![pipeline status](https://gitlab.com/<namespace>/<repo>/badges/<branch>/pipeline.svg)](https://gitlab.com/<namespace>/<repo>/-/pipelines)
+[![coverage](https://gitlab.com/<namespace>/<repo>/badges/<branch>/coverage.svg)](https://gitlab.com/<namespace>/<repo>/-/commits/<branch>)
+```
+
+GitHub:
+```markdown
+[![CI](https://github.com/<owner>/<repo>/actions/workflows/<workflow>.yml/badge.svg)](https://github.com/<owner>/<repo>/actions)
+```
+
+**Reglas de badges:**
+- El badge de licencia es obligatorio cuando se especifica `mit` o `gpl`
+- Los badges van después del timestamp y antes del primer párrafo de contenido
+- Si el README ya tiene badges, revisar que coincidan con la licencia y el estado actual del proyecto
+- Solo incluir badges de CI/cobertura si el proyecto los tiene configurados
+
+## GitHub
+
+Documentos Markdown para GitHub (README.md con licencia, otros documentos sin licencia).
+
+**Encabezado:** Sin logo ni frontmatter YAML. Solo H1, timestamp y badges.
+
+**Pie de página:** Idéntico a GitLab (copyright solo en README.md, sin firma ni CSS).
 
 ## Mejores prácticas
 
@@ -211,12 +258,14 @@ Todo documento laboral debe concluir con el siguiente pie de página:
 
 Antes de publicar un documento, verificar:
 
-- [ ] Encabezado con logo y tags apropiados
+- [ ] Encabezado con logo Kabat One y tags apropiados
 - [ ] Estructura jerárquica correcta de encabezados
-- [ ] Pie de página con información de contacto actualizada
-- [ ] CSS corporativo incluido y funcional
+- [ ] Pie de página con firma corporativa
+- [ ] CSS corporativo incluido y funcional (si aplica)
 - [ ] Enlaces e imágenes funcionando correctamente
 - [ ] Formato consistente con otros documentos del proyecto
+- [ ] Licencia solo en README.md (MIT o GPLv3)
+- [ ] Plataforma correcta (HedgeDoc/GitLab/GitHub)
 
 ---
 

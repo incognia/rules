@@ -85,10 +85,21 @@
 ### style
 - aplicar LINGUISTICS.md a README.md: convertir texto suelto en encabezados (`Definiciones rápidas`, `Ejemplos de comandos`), cursivas en préstamos (*Prompt*, *Chain-of-Thought*), corregir calco «ciclar» → «navegar»
 
-
-
 - aplicar LINGUISTICS.md a PHILOSOPHY.md: cursiva en préstamo (`Helm *charts*`), corregir calco «desarrollado» → «elaborado» en footer
 - aplicar LINGUISTICS.md a CHANGELOG.md: cursiva en *overview* y *lint*, corregir calco «comprehensiva» → «exhaustiva», corregir errata «systemáticamente» → «sistemáticamente»
+
+### feat
+- crear *skill* `styling` parametrizado para aplicar estilo Kabat One a documentos Markdown por plataforma: `/styling <hedgedoc|gitlab|github> [mit|gpl] <archivo>`
+  - encabezado con logo Kabat One, timestamp CST y tags YAML (exclusivo HedgeDoc)
+  - pie de página con firma corporativa (exclusivo HedgeDoc); *copyright* GPLv3/MIT (solo README.md en GitLab/GitHub)
+  - eliminación obligatoria de separadores `---` espurios; badges de licencia obligatorios
+- crear plantillas por plataforma en `templates/`: `hedgedoc.md`, `gitlab-readme.md`, `github-readme.md`
+
+### docs
+- actualizar `rulesets/STYLING.md`: nuevo branding Kabat One, estructura por plataforma, tabla de diferencias de sintaxis, reglas de badges y plantillas
+- actualizar `cot/styling.md`: reforzar regla de eliminación de `---` con paso programático
+- actualizar `cot/changelog.md`: agregar validación obligatoria de entrada existente antes de crear encabezado nuevo para la misma fecha
+- aplicar *styling* GitHub (GPLv3) a `README.md`: timestamp CST, corregir jerarquía `###` → `##` en «Definiciones rápidas», actualizar badge *Skills* (9 → 10), agregar `/styling` a lista de *skills*
 
 ## [2026-03-23]
 
