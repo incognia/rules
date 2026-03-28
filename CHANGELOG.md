@@ -13,7 +13,7 @@
 - documentar puertos reales de observabilidad: Kiali 20001 (LoadBalancer), Prometheus 9090 (NodePort), Grafana 3000 (LoadBalancer)
 
 ### docs
-- agregar diagrama Mermaid de arquitectura en README.md: *skill* (interfaz) → CoT (*middleware*) → *ruleset* (*backend*)
+- agregar diagrama de secuencia Mermaid en README.md: flujo *skill* (interfaz) → CoT (*middleware*) → *ruleset* (*backend*)
 
 ## [2026-03-27]
 

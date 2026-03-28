@@ -187,24 +187,29 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 ## Arquitectura: *skills*, CoTs y *rulesets*
 
 ```mermaid
-flowchart TD
-    U["Usuario invoca /skill"] --> S["Skill (.agents/skills/*/SKILL.md)"]
-    S -->|"lee y ejecuta"| C["CoT (cot/*.md)"]
-    S -->|"consulta reglas"| R["Ruleset (rulesets/*.md)"]
-    C -->|"referencia"| R
-    C --> E["Ejecución paso a paso"]
-    E --> V["Validación y resultado"]
+sequenceDiagram
+    actor U as Usuario
+    participant S as Skill<br/>(.agents/skills/)
+    participant C as CoT<br/>(cot/)
+    participant R as Ruleset<br/>(rulesets/)
 
-    style U fill:#f9f,stroke:#333,stroke-width:2px
-    style S fill:#ffd700,stroke:#333,stroke-width:2px
-    style C fill:#87ceeb,stroke:#333,stroke-width:2px
-    style R fill:#98fb98,stroke:#333,stroke-width:2px
-    style V fill:#9f9,stroke:#333,stroke-width:2px
+    U->>S: /skill argumento1 argumento2
+    activate S
+    S->>C: lee CoT completo (paso 1 a N)
+    activate C
+    C->>R: consulta reglas y restricciones
+    activate R
+    R-->>C: reglas aplicables
+    deactivate R
+    C-->>S: razonamiento paso a paso
+    deactivate C
+    S->>U: ejecuta acciones y reporta resultado
+    deactivate S
 ```
 
-- **Skill** (interfaz) — el punto de entrada; define *qué hacer*, recibe argumentos y es descubierto automáticamente por el agente
-- **CoT** (*middleware*) — la cadena de razonamiento paso a paso; define *cómo razonar* para completar la tarea
-- **Ruleset** (*backend*) — las reglas y restricciones de referencia; define *qué está permitido y qué no*
+- **Skill** (interfaz) — punto de entrada descubierto automáticamente; define *qué hacer* y recibe argumentos
+- **CoT** (*middleware*) — cadena de razonamiento paso a paso; define *cómo razonar* para completar la tarea
+- **Ruleset** (*backend*) — reglas y restricciones de referencia; define *qué está permitido y qué no*
 
 ## Estructura del repositorio
 
