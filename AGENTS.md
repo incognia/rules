@@ -106,7 +106,7 @@ The repository supports dual contexts with different rules:
 
 - License: MIT (permissive)
 - Email: ralvarez@promad.com.mx
-- SSH key: ~/.ssh/promad_ed25519
+- SSH key: ~/.ssh/kone
 - Documentation: Spanish Mexican with STYLING.md rules
 
 ### Chain-of-Thought (CoT) system

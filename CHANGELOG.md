@@ -62,8 +62,13 @@
 ### feat
 - crear *skill* git-init parametrizado con 4 argumentos: contexto (personal/laboral), nombre de llave SSH (se busca en `~/.ssh/`), URL remota y rama
 
+### feat
+- crear *skill* cad-access para gestionar acceso SSH a servidores de clientes vía importación de llave desde GitHub (`ssh-import-id gh:incogniadev` o `curl https://github.com/incogniadev.keys`)
+  - soporta 3 opciones: servidor con auto-importación Ubuntu, importación manual a servidor existente y provisionamiento con *cloud-init*
+
 ### docs
-- actualizar llave SSH personal de `id_ed25519` a `incognia` en todos los archivos: GIT.md, AGENTS.md, ATTRIBUTION.md, README.md, CoTs y *skills*
+- actualizar llaves SSH en todos los archivos: `id_ed25519` → `incognia` (personal), `promad_ed25519` → `kone` (laboral/repos)
+- documentar convención de llaves: `incognia` para repos personales, `kone` para repos laborales e infra, `cad` para servidores de clientes
 
 ### style
 - aplicar LINGUISTICS.md a README.md:

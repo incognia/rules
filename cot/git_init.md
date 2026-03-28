@@ -47,7 +47,7 @@ Pasos (Alternativa manual, si no usas el asistente):
    - Laboral (Promad):
      - `git config user.name  "Rodrigo Álvarez"`
      - `git config user.email "ralvarez@promad.com.mx"`
-     - `git config core.sshCommand "ssh -i ~/.ssh/promad_ed25519 -o IdentitiesOnly=yes"`
+     - `git config core.sshCommand "ssh -i ~/.ssh/kone -o IdentitiesOnly=yes"`
 3) Configurar remoto en SSH (ver ejemplos arriba) y verificar con `git remote -v`.
 4) Definir rama por defecto: `git branch -M main`.
 5) Commit y primer push como en los pasos 5-6 de la opción recomendada.

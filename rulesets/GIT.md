@@ -42,7 +42,7 @@ git config --list | grep ^user\.
 
 - **GitHub:** incogniadev
 - **GitLab:** incogniadev
-- **SSH Key:** `~/.ssh/promad_ed25519`
+- **SSH Key:** `~/.ssh/kone`
 
 ## 3. Configuración inicial y SSH por contexto
 
@@ -79,7 +79,7 @@ git config core.sshCommand "ssh -i ~/.ssh/incognia -o IdentitiesOnly=yes"
 # Laboral (Promad)
 # git config user.name  "Rodrigo Álvarez"
 # git config user.email "ralvarez@promad.com.mx"
-# git config core.sshCommand "ssh -i ~/.ssh/promad_ed25519 -o IdentitiesOnly=yes"
+# git config core.sshCommand "ssh -i ~/.ssh/kone -o IdentitiesOnly=yes"
 
 # Configurar remoto SSH (ejemplos)
 # GitHub personal:  git@github.com:incognia/REPO.git
