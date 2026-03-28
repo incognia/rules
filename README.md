@@ -31,21 +31,58 @@ Principio operativo: los documentos de `rulesets/` contienen la lógica y las re
 
 ### Configuración inicial (una sola vez)
 
-**Comandos paso a paso**:
+#### macOS
 
 ```bash
-# Linux y macOS
+# 1. Clonar el repositorio
 git clone git@github.com:incognia/rules.git ~/rules
-ln -s ~/rules/cot ~/cot
+
+# 2. Skills globales (disponibles en cualquier proyecto)
+mkdir -p ~/.agents/skills
+cp -r ~/rules/.agents/skills/* ~/.agents/skills/
+
+# 3. Workflows globales (Warp)
+mkdir -p ~/.warp/workflows
+cp ~/rules/.warp/workflows/*.yaml ~/.warp/workflows/
+```
+
+#### Linux
+
+```bash
+# 1. Clonar el repositorio
+git clone git@github.com:incognia/rules.git ~/rules
+
+# 2. Skills globales
+mkdir -p ~/.agents/skills
+cp -r ~/rules/.agents/skills/* ~/.agents/skills/
+
+# 3. Workflows globales (Warp)
+mkdir -p "${XDG_DATA_HOME:-$HOME/.local/share}/warp-terminal/workflows"
+cp ~/rules/.warp/workflows/*.yaml "${XDG_DATA_HOME:-$HOME/.local/share}/warp-terminal/workflows/"
+```
+
+#### Windows (PowerShell + WSL)
+
+```powershell
+# 1. Clonar el repositorio (dentro de WSL)
+wsl git clone git@github.com:incognia/rules.git ~/rules
+
+# 2. Skills globales
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.agents\skills"
+Copy-Item -Recurse -Force "\\wsl$\Ubuntu\home\incognia\rules\.agents\skills\*" "$env:USERPROFILE\.agents\skills\"
+
+# 3. Workflows globales (Warp)
+New-Item -ItemType Directory -Force -Path "$env:APPDATA\warp\Warp\data\workflows"
+Copy-Item -Force "\\wsl$\Ubuntu\home\incognia\rules\.warp\workflows\*.yaml" "$env:APPDATA\warp\Warp\data\workflows\"
 ```
 
 **Notas**:
-- Este flujo funciona muy bien en macOS y Linux
-- Si el enlace ya existe, puedes recrearlo:
 
-```bash
-rm -f ~/cot && ln -s ~/rules/cot ~/cot
-```
+- Ajusta el usuario WSL en la ruta `\\wsl$\Ubuntu\home\incognia\` según tu configuración
+- Los *skills* en `~/.agents/skills/` son reconocidos globalmente por Warp, Claude, Cursor, Copilot, Gemini y otros agentes IA
+- Los *workflows* están disponibles desde el *Command Palette* de Warp
+- Para actualizar *skills*/*workflows* después de un `git pull`, vuelve a ejecutar los pasos 2 y 3
+- No se usan enlaces simbólicos; todas las rutas son canónicas (`~/rules/cot/`, `~/rules/rulesets/`)
 
 ### Uso diario
 

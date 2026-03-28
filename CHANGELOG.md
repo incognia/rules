@@ -42,6 +42,12 @@
 ### fix
 - corregir rutas de invocación en README.md: usar `~/rules/cot/` (ruta canónica) en lugar de `~/cot/` (dependiente de *symlink*) en ejemplos y diagrama Mermaid
 
+### docs
+- reescribir sección de configuración inicial en README.md con instrucciones multiplataforma (macOS, Linux, Windows+WSL)
+- eliminar enlace simbólico `~/cot`: no funciona bien en Warp con WSL; usar solo rutas canónicas
+- agregar pasos para copiar *skills* y *workflows* de forma global en las tres plataformas
+- documentar rutas de *workflows* por plataforma: `~/.warp/workflows/` (macOS), `$XDG_DATA_HOME/warp-terminal/workflows/` (Linux), `$env:APPDATA\warp\Warp\data\workflows\` (Windows)
+
 ## [2026-03-23]
 
 ### feat
