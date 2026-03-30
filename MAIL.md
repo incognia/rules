@@ -24,7 +24,7 @@ Documenta los tres flujos disponibles para componer y enviar correos HTML desde 
 - Cuenta de Microsoft 365 con buzón activo (por ejemplo, `ralvarez@kabatone.com`)
 - Aplicación registrada en Microsoft Entra (ver pasos abajo)
 - Python 3 y `curl` instalados
-- Imagen de firma en `~/rules/templates/mail/assets/ralvarez_firma.png`
+- Imagen de firma en `~/rules/templates/mail/assets/ralvarez_firma_740.png`
 - Credenciales en `~/.secrets.yaml` bajo la clave `GRAPH_API`
 
 ---
@@ -66,13 +66,23 @@ end tell
 
 ## Modo `graph` — envío directo vía Microsoft Graph API
 
+### Dimensiones del contenedor
+
+- Tabla exterior: `width="800"` con `max-width:800px`
+- *Padding* del `<td>` interior: 30px por lado
+- Área útil de contenido: **740px** (800 − 30 − 30)
+- La firma debe medir 740px de ancho para llenar el área útil sin desbordar
+
 ### Firma
 
 Microsoft Graph no inyecta la firma configurada en Outlook. Debes incluir la imagen de firma como adjunto *inline* con `contentId` y referenciarla en el HTML con `cid:`:
 
+- **Archivo**: `~/rules/templates/mail/assets/ralvarez_firma_740.png` (740px de ancho)
+- **Variantes disponibles**: `ralvarez_firma.png` (original), `_740.png`, `_800.png`, `_1024.png`
+
 ```html
 <hr style="margin:30px 0; border:none; border-top:2px solid #ecf0f1;">
-<img src="cid:firma_ralvarez" alt="Rodrigo Álvarez" width="800"
+<img src="cid:firma_ralvarez" alt="Rodrigo Álvarez" width="740"
      style="max-width:100%; display:block;">
 ```
 
@@ -172,7 +182,7 @@ curl -s -X POST "https://graph.microsoft.com/v1.0/me/sendMail" \
 En el HTML del correo, referencia la firma como imagen *inline*:
 
 ```html
-<img src="cid:firma_ralvarez" alt="Rodrigo Álvarez" width="800"
+<img src="cid:firma_ralvarez" alt="Rodrigo Álvarez" width="740"
      style="max-width:100%; display:block;">
 ```
 
@@ -184,13 +194,53 @@ Los valores de `CLIENT_ID`, `TENANT_ID` y demás parámetros de la aplicación e
 
 ---
 
+## Ciclo de vida del *token*
+
+El script `scripts/graph_auth.py` gestiona la autenticación con caché en `~/.graph_tokens.json`.
+
+```mermaid
+flowchart TD
+    A["/mail graph ..."] --> B{"~/.graph_tokens.json\nexiste?"}
+    B -- No --> C["Indicar al usuario:\n/mail token"]
+    B -- Sí --> D{"access_token\nválido?"}
+    D -- Sí --> G["Enviar correo\nvía Graph API"]
+    D -- No --> E{"refresh_token\nválido?"}
+    E -- Sí --> F["Renovar access_token\nsilenciosamente"]
+    F --> G
+    E -- No --> C
+    C --> H["/mail token"]
+    H --> I["Device code flow\n(navegador)"]
+    I --> J["Guardar tokens\nen ~/.graph_tokens.json"]
+    J --> G
+
+    style A fill:#3498db,color:#fff
+    style G fill:#28a745,color:#fff
+    style C fill:#e67e22,color:#fff
+    style H fill:#e67e22,color:#fff
+    style I fill:#ffc107,color:#333
+```
+
+### Periodicidad
+
+- **`access_token`**: expira en ~1 hora. Se renueva automáticamente con el `refresh_token`.
+- **`refresh_token`**: expira en ~90 días. Cuando expira, debes ejecutar `/mail token` de nuevo.
+- **Uso diario**: nunca te pide autenticación. El `refresh_token` se renueva cada vez que se usa.
+- **Primer uso o después de 90 días sin uso**: ejecuta `/mail token` para reautenticar.
+
+### Archivos involucrados
+
+- **`scripts/graph_auth.py`** — lógica de autenticación (caché → *refresh* → *device code*)
+- **`~/.graph_tokens.json`** — caché de tokens (permisos 600, no se versiona)
+- **`~/.secrets.yaml`** — `CLIENT_ID` y `TENANT_ID` bajo la clave `GRAPH_API`
+
+---
+
 ## Notas técnicas
 
-- **Expiración del *token***: el `access_token` de Graph API expira en aproximadamente una hora. Usa el `refresh_token` para obtener uno nuevo sin reautenticar.
 - **SMTP AUTH**: deprecado por Microsoft a partir del 1 de marzo de 2026, con deshabilitación completa el 30 de abril de 2026. El modo `graph` es el reemplazo oficial.
 - **Firma en cada modo**: `owa` y `mac` delegan la firma a Outlook; `graph` la incluye como adjunto *inline* CID.
 - **Plantillas HTML**: las reglas de composición (estilos *inline*, `bgcolor` en `<td>`, sin CSS externo) están en `rulesets/MAIL.md`.
-- **Invocación**: usa el *skill* `/mail <owa|mac|graph> <delivery|generic> <asunto>`.
+- **Invocación**: usa el *skill* `/mail <token|owa|mac|graph> <delivery|generic> <asunto>`.
 
 ---
 

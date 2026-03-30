@@ -18,6 +18,15 @@
 - actualizar `cot/mail.md`: agregar pasos 9 y 10 con guardado de archivo y entrega según modo; actualizar razonamiento y conclusión
 - actualizar `rulesets/MAIL.md`: flujo de trabajo con tres modos, nueva sección de referencia a Graph API
 
+### feat
+- crear `scripts/graph_auth.py`: autenticación Graph API con caché de tokens en `~/.graph_tokens.json` (caché → *refresh* silencioso → *device code flow*)
+- agregar modo `token` al *skill* mail: `/mail token` para autenticar y cachear el *token* una sola vez (~90 días)
+- cambiar firma del modo `graph` a `ralvarez_firma_740.png` (740px = área útil del contenedor de 800px con 30px de *padding*)
+
+### docs
+- actualizar `MAIL.md`: documentar dimensiones del contenedor (800 − 60 = 740px), ciclo de vida del *token* con diagrama Mermaid, periodicidad y archivos involucrados
+- agregar variantes de firma a `templates/mail/assets/`: `_740.png`, `_1024.png`
+
 ## [2026-03-28] - *Skill* kube para análisis de clústeres Kubernetes
 
 ### feat
