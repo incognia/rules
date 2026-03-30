@@ -34,7 +34,13 @@ fi
 OS="$(uname -s)"
 case "$OS" in
     Darwin)  PLATFORM="macos" ;;
-    Linux)   PLATFORM="linux" ;;
+    Linux)
+        if grep -qi microsoft /proc/version 2>/dev/null || [ -n "${WSL_DISTRO_NAME:-}" ]; then
+            PLATFORM="wsl"
+        else
+            PLATFORM="linux"
+        fi
+        ;;
     MINGW*|MSYS*|CYGWIN*)  PLATFORM="windows" ;;
     *)       PLATFORM="unknown" ;;
 esac
@@ -43,9 +49,16 @@ echo "Plataforma detectada: $PLATFORM"
 echo "Repo: $REPO_ROOT"
 echo ""
 
-# --- Skills (igual en todas las plataformas) ---
+# --- Skills ---
 SKILLS_SRC="$REPO_ROOT/.agents/skills"
-SKILLS_DST="$HOME/.agents/skills"
+
+# En WSL los skills deben ir al home de Windows (donde los lee Warp)
+if [ "$PLATFORM" = "wsl" ]; then
+    WIN_HOME="$(wslpath "$(cmd.exe /C "echo %USERPROFILE%" 2>/dev/null | tr -d '\r')")"
+    SKILLS_DST="$WIN_HOME/.agents/skills"
+else
+    SKILLS_DST="$HOME/.agents/skills"
+fi
 
 echo "=== Skills ==="
 mkdir -p "$SKILLS_DST"

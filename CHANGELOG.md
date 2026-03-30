@@ -6,6 +6,9 @@
 
 ## [2026-03-30] - Crear carpeta `docs/` y separar responsabilidades
 
+### fix
+- detectar WSL en `sync_global.sh` usando `/proc/version` y `$WSL_DISTRO_NAME`; copiar *skills* al home de Windows (`%USERPROFILE%/.agents/skills/`) en lugar del home de Linux, que Warp no puede leer al correr sobre Windows
+
 ### refactor
 - mover `MAIL.md` → `docs/MAIL.md`: separar documentación de proceso (Graph API, Entra, OAuth2) de reglas y CoT
 - invertir dirección de referencias: `cot/mail.md` y `rulesets/MAIL.md` ya no apuntan a docs; `docs/MAIL.md` referencia al CoT, *ruleset*, *skill* y script
