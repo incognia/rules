@@ -1,18 +1,20 @@
 ---
 domain: workflow
-task: componer correo HTML compatible con OWA usando plantillas del repo stab
+task: componer y enviar correo HTML compatible con OWA usando plantillas y tres modos de entrega
 dificultad: media
 longitud_objetivo: media
-validacion: archivo HTML generado con estilos inline, bgcolor en td, sin CSS externo ni clases
+validacion: archivo HTML generado con estilos inline, bgcolor en td, sin CSS externo ni clases; entregado según el modo elegido
 ---
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
-- Los correos se componen como HTML y se copian al portapapeles desde el navegador para pegar en OWA.
-- OWA elimina bloques `<style>`, clases CSS, `background-color` en `<table>`, `border-radius`, flexbox, grid y media queries.
-- Todo el estilo debe ser inline en los elementos que contienen el texto (`<td>`), duplicando `bgcolor` como atributo HTML.
+- Los correos se componen como HTML usando plantillas OWA con estilos *inline*.
+- OWA elimina bloques `<style>`, clases CSS, `background-color` en `<table>`, `border-radius`, flexbox, grid y *media queries*.
+- Todo el estilo debe ser *inline* en los `<td>`, duplicando `bgcolor` como atributo HTML.
 - Las plantillas están en `~/rules/templates/mail/` (`delivery_template.html` y `generic_template.html`).
-- Referencia principal: «~/rules/rulesets/MAIL.md» ([../rulesets/MAIL.md](../rulesets/MAIL.md)).
+- Hay tres modos de entrega: `owa` (copiar/pegar), `mac` (AppleScript + Outlook) y `graph` (Microsoft Graph API).
+- Referencia de composición: «~/rules/rulesets/MAIL.md» ([../rulesets/MAIL.md](../rulesets/MAIL.md)).
+- Referencia de envío: «~/rules/MAIL.md» ([../MAIL.md](../MAIL.md)).
 
 Pasos:
 1) Acción: determinar el tipo de correo.
@@ -57,10 +59,19 @@ Pasos:
    - [ ] Todos los estilos son inline
    Resultado: HTML validado.
 
-9) Acción: guardar el archivo y dar instrucciones de envío.
-   Resultado: «Abrir en navegador → Ctrl+A → Ctrl+C → pegar en OWA».
+9) Acción: guardar el archivo HTML.
+   - Nombre: `YYYY-MM-DD-{nombre-corto}.html` (fecha CST).
+   - Ubicación: ruta indicada por el usuario, carpeta `mail/` del proyecto, o `~/mail/`.
+   Resultado: archivo guardado.
+
+10) Acción: entregar según el modo elegido.
+   - **`owa`**: indica al usuario «abrir en navegador → Ctrl+A → Ctrl+C → pegar en OWA». No incluir firma (OWA la agrega).
+   - **`mac`**: abre un borrador en Outlook vía AppleScript (`open newMsg`, nunca `send`). No incluir firma (Outlook la inyecta). Indicar al usuario enviar con ⌘+Enter.
+   - **`graph`**: incluir firma como imagen CID *inline*. Autenticar vía *device code flow* con credenciales de `~/.secrets.yaml` (`GRAPH_API`). Enviar con `POST /me/sendMail`. Guardar también el HTML como respaldo.
+   Resultado: correo entregado o borrador abierto.
 
 Conclusión:
-- El archivo HTML resultante debe poder copiarse directamente del navegador a OWA sin perder formato.
-- Verificar que cada `<td>` con color tenga tanto `bgcolor` como `background-color` en el `style`.
-- Referencias: «~/rules/rulesets/MAIL.md» ([../rulesets/MAIL.md](../rulesets/MAIL.md)).
+- El HTML resultante debe cumplir las reglas OWA (`bgcolor` en `<td>`, estilos *inline*, sin CSS externo).
+- La firma solo va en el HTML cuando el modo es `graph` (como imagen CID *inline*).
+- En `owa` y `mac`, Outlook agrega la firma automáticamente.
+- Referencias: «~/rules/rulesets/MAIL.md» ([../rulesets/MAIL.md](../rulesets/MAIL.md)) y «~/rules/MAIL.md» ([../MAIL.md](../MAIL.md)).

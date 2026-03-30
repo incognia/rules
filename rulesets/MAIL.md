@@ -14,10 +14,13 @@ Las plantillas viven en `templates/mail/` de este repositorio:
 ## Flujo de trabajo
 
 1. Copiar la plantilla con nombre `YYYY-MM-DD-{nombre-corto}.html`
-2. Reemplazar los *placeholders* (`Ctrl+H`)
-3. Abrir en navegador
-4. `Ctrl+A` → `Ctrl+C` → pegar en OWA
-5. Outlook añade la firma automáticamente al enviar
+2. Reemplazar los *placeholders*
+3. Entregar según el modo elegido:
+   - **`owa`**: abrir en navegador → `Ctrl+A` → `Ctrl+C` → pegar en OWA. Outlook agrega la firma al enviar.
+   - **`mac`**: abrir borrador en Outlook vía AppleScript. Outlook inyecta la firma «Kabat One». Enviar con ⌘+Enter.
+   - **`graph`**: enviar vía Microsoft Graph API con firma como imagen CID *inline*. Ver `~/rules/MAIL.md` para la configuración.
+
+> Invocación con *skill*: `/mail <owa|mac|graph> <delivery|generic> <asunto>`
 
 ## Reglas HTML críticas
 
@@ -109,6 +112,16 @@ Filas alternas: agregar `style="background-color:#f9f9f9;"` manualmente en cada 
 - Docker: cambiar a *multi-stage* Node 22 + Nginx
 - Quitar fila de Swagger UI en tabla de acceso
 - Tiempo estimado: 5-8 min *build* + 3 min ArgoCD
+
+## Envío vía Microsoft Graph API
+
+Para el modo `graph`, consulta la documentación completa en `~/rules/MAIL.md`. Incluye:
+
+- Registro de la aplicación en Microsoft Entra
+- Permisos de API (delegados: `Mail.Send`, `email`, `User.Read`)
+- Autenticación por *device code flow*
+- Envío con firma *inline* (adjunto CID)
+- Credenciales en `~/.secrets.yaml` (clave `GRAPH_API`)
 
 ---
 

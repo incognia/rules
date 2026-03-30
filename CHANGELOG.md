@@ -4,6 +4,20 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
+## [2026-03-29] - Envío de correo desde CLI con tres modos de entrega
+
+### feat
+- parametrizar *skill* mail con tres modos de entrega: `/mail <owa|mac|graph> <delivery|generic> <asunto>`
+  - `owa`: guardar HTML para copiar y pegar en Outlook Web (Linux)
+  - `mac`: abrir borrador en Outlook vía AppleScript con firma nativa (macOS)
+  - `graph`: enviar directo vía Microsoft Graph API con firma *inline* CID (cualquier OS)
+- crear `MAIL.md`: documentación completa del proceso de registro de aplicación en Microsoft Entra, permisos delegados, *device code flow* y envío vía Graph API
+- integrar firma como adjunto *inline* CID en modo `graph` usando `~/rules/templates/mail/assets/ralvarez_firma.png`
+
+### docs
+- actualizar `cot/mail.md`: agregar pasos 9 y 10 con guardado de archivo y entrega según modo; actualizar razonamiento y conclusión
+- actualizar `rulesets/MAIL.md`: flujo de trabajo con tres modos, nueva sección de referencia a Graph API
+
 ## [2026-03-28] - *Skill* kube para análisis de clústeres Kubernetes
 
 ### feat
