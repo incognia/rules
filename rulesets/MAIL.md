@@ -18,7 +18,7 @@ Las plantillas viven en `templates/mail/` de este repositorio:
 3. Entregar según el modo elegido:
    - **`owa`**: abrir en navegador → `Ctrl+A` → `Ctrl+C` → pegar en OWA. Outlook agrega la firma al enviar.
    - **`mac`**: abrir borrador en Outlook vía AppleScript. Outlook inyecta la firma «Kabat One». Enviar con ⌘+Enter.
-   - **`graph`**: enviar vía Microsoft Graph API con firma como imagen CID *inline*. Ver `~/rules/MAIL.md` para la configuración.
+   - **`graph`**: enviar vía Microsoft Graph API con firma como imagen CID *inline*. Autenticar con `~/rules/scripts/graph_auth.py`.
 
 > Invocación con *skill*: `/mail <owa|mac|graph> <delivery|generic> <asunto>`
 
@@ -115,13 +115,10 @@ Filas alternas: agregar `style="background-color:#f9f9f9;"` manualmente en cada 
 
 ## Envío vía Microsoft Graph API
 
-Para el modo `graph`, consulta la documentación completa en `~/rules/MAIL.md`. Incluye:
-
-- Registro de la aplicación en Microsoft Entra
-- Permisos de API (delegados: `Mail.Send`, `email`, `User.Read`)
-- Autenticación por *device code flow*
-- Envío con firma *inline* (adjunto CID)
-- Credenciales en `~/.secrets.yaml` (clave `GRAPH_API`)
+- Autenticación: `~/rules/scripts/graph_auth.py` (caché → *refresh* → *device code flow*)
+- Credenciales: `~/.secrets.yaml` (clave `GRAPH_API`)
+- Firma *inline*: `~/rules/templates/mail/assets/ralvarez_firma_740.png` como adjunto CID
+- Documentación detallada del registro en Entra y flujo OAuth2: `~/rules/docs/MAIL.md`
 
 ---
 

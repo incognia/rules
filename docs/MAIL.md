@@ -244,4 +244,14 @@ flowchart TD
 
 ---
 
+## Referencias
+
+- Reglas de composición HTML: `~/rules/rulesets/MAIL.md`
+- CoT de composición y entrega: `~/rules/cot/mail.md`
+- *Skill*: `~/rules/.agents/skills/mail/SKILL.md`
+- Script de autenticación: `~/rules/scripts/graph_auth.py`
+- Plantillas: `~/rules/templates/mail/`
+
+---
+
 *Elaborado por Rodrigo Álvarez (@incognia)*

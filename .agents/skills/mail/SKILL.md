@@ -106,7 +106,7 @@ description: "Compose and send OWA-compatible HTML email. Usage: /mail <owa|mac|
 
 - Detailed CoT: `~/rules/cot/mail.md`
 - HTML rules: `~/rules/rulesets/MAIL.md`
-- Graph API docs: `~/rules/MAIL.md`
+- Graph API docs: `~/rules/docs/MAIL.md`
 - API credentials: `~/.secrets.yaml` (key `GRAPH_API`)
 - Templates: `~/rules/templates/mail/delivery_template.html` and `~/rules/templates/mail/generic_template.html`
 - Signature image: `~/rules/templates/mail/assets/ralvarez_firma_740.png` (for `graph` mode)

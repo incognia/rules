@@ -4,6 +4,14 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
+## [2026-03-30] - Crear carpeta `docs/` y separar responsabilidades
+
+### refactor
+- mover `MAIL.md` → `docs/MAIL.md`: separar documentación de proceso (Graph API, Entra, OAuth2) de reglas y CoT
+- invertir dirección de referencias: `cot/mail.md` y `rulesets/MAIL.md` ya no apuntan a docs; `docs/MAIL.md` referencia al CoT, *ruleset*, *skill* y script
+- aclarar en README.md qué copia `sync_global.sh` (*skills* y *workflows*) y qué no (`scripts/`, `templates/`, `rulesets/`, `cot/`)
+- agregar `docs/MAIL.md` a la lista de documentos en README.md
+
 ## [2026-03-29] - Envío de correo desde CLI con tres modos de entrega
 
 ### feat

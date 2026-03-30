@@ -71,10 +71,14 @@ git clone git@github.com:incognia/rules.git ~/rules 2>/dev/null || git -C ~/rule
 **Notas**:
 
 - `sync_global.sh` detecta la plataforma (macOS, Linux, Windows/WSL) y copia a las rutas correctas:
-  - *Skills*: `~/.agents/skills/` (reconocidos por Warp, Claude, Cursor, Copilot, Gemini y otros)
-  - *Workflows* en macOS: `~/.warp/workflows/`
+  - *Skills* (`SKILL.md`): `~/.agents/skills/` (reconocidos por Warp, Claude, Cursor, Copilot, Gemini y otros)
+  - *Workflows* (`*.yaml`) en macOS: `~/.warp/workflows/`
   - *Workflows* en Linux: `$XDG_DATA_HOME/warp-terminal/workflows/`
   - *Workflows* en Windows: `$APPDATA\warp\Warp\data\workflows\`
+- **No copia** (se accede directo desde `~/rules/`):
+  - `scripts/` — `graph_auth.py` y otros scripts
+  - `templates/` — plantillas HTML e imágenes de firma
+  - `rulesets/`, `cot/` — reglas y cadenas de razonamiento
 - Para actualizar después de un `git pull`, solo ejecuta: `~/rules/scripts/sync_global.sh`
 - No se usan enlaces simbólicos; todas las rutas son canónicas (`~/rules/cot/`, `~/rules/rulesets/`)
 
@@ -129,6 +133,7 @@ flowchart LR
 - **[BACKUPS.md](./rulesets/BACKUPS.md)** - políticas de respaldos y operaciones destructivas
 - **[GLOSSARY.md](./rulesets/GLOSSARY.md)** - glosario técnico de términos empleados
 - **[MAIL.md](./rulesets/MAIL.md)** - reglas de composición de correos HTML para OWA
+- **[docs/MAIL.md](./docs/MAIL.md)** - envío de correo desde CLI (modos owa/mac/graph, configuración de Graph API, ciclo de vida del *token*)
 - **[CHANGELOG.md](./CHANGELOG.md)** - historial de cambios del proyecto
 
 ## Especialización técnica

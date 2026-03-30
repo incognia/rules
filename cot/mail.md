@@ -14,7 +14,7 @@ Razonamiento:
 - Las plantillas están en `~/rules/templates/mail/` (`delivery_template.html` y `generic_template.html`).
 - Hay tres modos de entrega: `owa` (copiar/pegar), `mac` (AppleScript + Outlook) y `graph` (Microsoft Graph API).
 - Referencia de composición: «~/rules/rulesets/MAIL.md» ([../rulesets/MAIL.md](../rulesets/MAIL.md)).
-- Referencia de envío: «~/rules/MAIL.md» ([../MAIL.md](../MAIL.md)).
+- Credenciales de Graph API: `~/.secrets.yaml` (clave `GRAPH_API`).
 
 Pasos:
 1) Acción: determinar el tipo de correo.
@@ -74,4 +74,4 @@ Conclusión:
 - El HTML resultante debe cumplir las reglas OWA (`bgcolor` en `<td>`, estilos *inline*, sin CSS externo).
 - La firma solo va en el HTML cuando el modo es `graph` (como imagen CID *inline*).
 - En `owa` y `mac`, Outlook agrega la firma automáticamente.
-- Referencias: «~/rules/rulesets/MAIL.md» ([../rulesets/MAIL.md](../rulesets/MAIL.md)) y «~/rules/MAIL.md» ([../MAIL.md](../MAIL.md)).
+- Referencias: «~/rules/rulesets/MAIL.md» ([../rulesets/MAIL.md](../rulesets/MAIL.md)).
