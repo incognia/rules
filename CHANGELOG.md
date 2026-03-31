@@ -18,6 +18,7 @@
 - actualizar paleta de colores en `rulesets/MAIL.md` con nombres de la nueva paleta
 
 ### fix
+- eliminar `color` explícito de `.markdown-body` en CSS de HedgeDoc; delegar manejo de color de texto claro/oscuro al tema nativo de HedgeDoc
 - detectar WSL en `sync_global.sh` usando `/proc/version` y `$WSL_DISTRO_NAME`; copiar *skills* al home de Windows (`%USERPROFILE%/.agents/skills/`) en lugar del home de Linux, que Warp no puede leer al correr sobre Windows
 
 ### docs

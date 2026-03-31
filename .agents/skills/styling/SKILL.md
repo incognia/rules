@@ -89,9 +89,8 @@ Use as starting point:
   a { color: var(--midday); }
   a:visited { color: var(--video); }
   a:hover { color: var(--connect); text-decoration: none; }
-  .markdown-body { font-family: 'Space Grotesk', sans-serif; color: #000; }
+  .markdown-body { font-family: 'Space Grotesk', sans-serif; }
   .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4 { font-family: 'Montserrat', sans-serif; }
-  .night body { color: #fff; }
   .markdown-body h1 { border-bottom: 1px solid var(--midday); }
   .markdown-body p { text-align: justify; }
   .markdown-body hr { height: 1px; background-color: var(--midday); }

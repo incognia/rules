@@ -49,16 +49,12 @@ Contenido.
   }
   .markdown-body {
     font-family: 'Space Grotesk', sans-serif;
-    color: #000;
   }
   .markdown-body h1,
   .markdown-body h2,
   .markdown-body h3,
   .markdown-body h4 {
     font-family: 'Montserrat', sans-serif;
-  }
-  .night body {
-    color: #fff;
   }
   .markdown-body h1 {
     border-bottom: 1px solid var(--midday);
