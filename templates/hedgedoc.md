@@ -27,6 +27,7 @@ Contenido.
 [//]: # (CSS Corporativo)
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
   :root {
     --midday: #00A1FF;
     --midnight: #24326A;
@@ -46,8 +47,15 @@ Contenido.
     color: var(--connect);
     text-decoration: none;
   }
-  body {
+  .markdown-body {
+    font-family: 'Space Grotesk', sans-serif;
     color: #000;
+  }
+  .markdown-body h1,
+  .markdown-body h2,
+  .markdown-body h3,
+  .markdown-body h4 {
+    font-family: 'Montserrat', sans-serif;
   }
   .night body {
     color: #fff;

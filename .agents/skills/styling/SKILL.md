@@ -85,10 +85,12 @@ Use as starting point:
     --deep: #060E40;
     --video: #7252D8;
   }
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
   a { color: var(--midday); }
   a:visited { color: var(--video); }
   a:hover { color: var(--connect); text-decoration: none; }
-  body { color: #000; }
+  .markdown-body { font-family: 'Space Grotesk', sans-serif; color: #000; }
+  .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4 { font-family: 'Montserrat', sans-serif; }
   .night body { color: #fff; }
   .markdown-body h1 { border-bottom: 1px solid var(--midday); }
   .markdown-body p { text-align: justify; }

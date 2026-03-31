@@ -13,6 +13,7 @@
 - implementar logo dual light/dark con clases `.logo-light`/`.logo-dark` y reglas CSS de visibilidad por modo
 - actualizar imagen de firma corporativa en pie de página
 - agregar imagen de firma con dimensiones para HedgeDoc (`ralvarez_firma_728.png`)
+- agregar tipografías corporativas vía Google Fonts: Space Grotesk (primaria, texto general) y Montserrat (secundaria, encabezados)
 
 ### fix
 - detectar WSL en `sync_global.sh` usando `/proc/version` y `$WSL_DISTRO_NAME`; copiar *skills* al home de Windows (`%USERPROFILE%/.agents/skills/`) en lugar del home de Linux, que Warp no puede leer al correr sobre Windows
