@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <title>Entrega {NOMBRE_SERVICIO} - Clúster Stab</title>
     <!--
     ============================================================
@@ -29,7 +30,7 @@
     ============================================================
     -->
 </head>
-<body style="font-family:Arial,sans-serif; line-height:1.6; color:#333; margin:0; padding:0;">
+<body style="font-family:'Space Grotesk',Arial,sans-serif; line-height:1.6; color:#000; margin:0; padding:0;">
 
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr>
@@ -39,15 +40,15 @@
           <td bgcolor="#ffffff" style="background-color:#ffffff; padding:30px;">
 
             <!-- H1 ─────────────────────────────────────────── -->
-            <h1 style="color:#2c3e50; border-bottom:3px solid #3498db; padding-bottom:10px; font-family:Arial,sans-serif; margin-top:0;">
+            <h1 style="color:#24326A; border-bottom:3px solid #00A1FF; padding-bottom:10px; font-family:'Montserrat',Arial,sans-serif; margin-top:0;">
               🚀 Entrega microservicio: {NOMBRE_SERVICIO}
             </h1>
 
             <!-- CAJA ESTADO ─────────────────────────────────── -->
             <!-- CAMBIAR: VERSION, conteo de pods y endpoints   -->
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0; border-left:4px solid #28a745;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0; border-left:4px solid #8DCB3E;">
               <tr>
-                <td bgcolor="#d4edda" style="background-color:#d4edda; padding:15px; font-family:Arial,sans-serif;">
+                <td bgcolor="#E8F5D6" style="background-color:#E8F5D6; padding:15px; font-family:'Space Grotesk',Arial,sans-serif;">
                   <strong>Estado:</strong> el microservicio <strong>{NOMBRE_SERVICIO}</strong> ha sido integrado exitosamente al clúster Kubernetes Stab con <em>pipeline</em> CI/CD completo y despliegue automático vía ArgoCD.<br>
                   <strong>Versión activa:</strong> <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">{VERSION}</code>
                   &nbsp;|&nbsp;
@@ -60,7 +61,7 @@
 
             <!-- METADATA ────────────────────────────────────── -->
             <!-- CAMBIAR: DESTINATARIO, FECHA                   -->
-            <p style="font-family:Arial,sans-serif; margin:0 0 20px 0;">
+            <p style="font-family:'Space Grotesk',Arial,sans-serif; margin:0 0 20px 0;">
               <strong>Destinatario:</strong> {DESTINATARIO}<br>
               <strong>Fecha:</strong> {FECHA}<br>
               <strong>Equipo:</strong> DevSecOps
@@ -70,15 +71,15 @@
             <!-- ═══════════════════════════════════════════════
                  INFORMACIÓN GENERAL
                  ═══════════════════════════════════════════════ -->
-            <h2 style="color:#34495e; margin-top:25px; font-family:Arial,sans-serif;">📋 Información general</h2>
+            <h2 style="color:#24326A; margin-top:25px; font-family:'Montserrat',Arial,sans-serif;">📋 Información general</h2>
             <!-- CAMBIAR: DESCRIPCION, RAMA_BASE               -->
-            <p style="font-family:Arial,sans-serif;">
+            <p style="font-family:'Space Grotesk',Arial,sans-serif;">
               {DESCRIPCION} El servicio se encuentra desplegado y funcionando en el clúster Stab. Se trabajó sobre la rama <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">stab</code>, creada a partir de <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">{RAMA_BASE}</code>.
             </p>
 
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0; border-left:4px solid #3498db;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0; border-left:4px solid #00A1FF;">
               <tr>
-                <td bgcolor="#ecf0f1" style="background-color:#ecf0f1; padding:15px; font-family:Arial,sans-serif;">
+                <td bgcolor="#C3D8F3" style="background-color:#C3D8F3; padding:15px; font-family:'Space Grotesk',Arial,sans-serif;">
                   <strong>⚠️ Importante:</strong> la rama desplegada es
                   <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;"><strong>stab</strong></code>,
                   NO <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">{RAMA_BASE}</code>.
@@ -91,13 +92,13 @@
             <!-- ═══════════════════════════════════════════════
                  MODIFICACIONES REALIZADAS
                  ═══════════════════════════════════════════════ -->
-            <h2 style="color:#34495e; margin-top:25px; font-family:Arial,sans-serif;">🔧 Modificaciones realizadas</h2>
+            <h2 style="color:#24326A; margin-top:25px; font-family:'Montserrat',Arial,sans-serif;">🔧 Modificaciones realizadas</h2>
 
             <!-- 1. Docker ──────────────────────────────────── -->
             <!-- Angular: cambiar "single-stage JRE" por       -->
             <!-- "multi-stage Node 22 + Nginx"                 -->
-            <h3 style="color:#2c3e50; font-family:Arial,sans-serif;">1. Docker y <em>build</em></h3>
-            <ul style="margin-left:20px; font-family:Arial,sans-serif;">
+            <h3 style="color:#24326A; font-family:'Montserrat',Arial,sans-serif;">1. Docker y <em>build</em></h3>
+            <ul style="margin-left:20px; font-family:'Space Grotesk',Arial,sans-serif;">
               <li>✅ Dockerfile <em>single-stage</em> (<em>eclipse-temurin</em> 21 JRE Alpine) — Jenkins compila el JAR, Docker solo lo empaqueta</li>
               <li>✅ Usuario no-root (<code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">appuser</code> UID/GID 1001) sin <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">RUN chown</code></li>
               <li>✅ <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">.dockerignore</code> creado — excluye código fuente y Gradle</li>
@@ -106,8 +107,8 @@
 
             <!-- 2. SonarQube ────────────────────────────────── -->
             <!-- Angular: eliminar esta subsección              -->
-            <h3 style="color:#2c3e50; font-family:Arial,sans-serif;">2. Análisis de código (SonarQube)</h3>
-            <p style="font-family:Arial,sans-serif;"><em>Plugin</em> agregado en <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">build.gradle</code>:</p>
+            <h3 style="color:#24326A; font-family:'Montserrat',Arial,sans-serif;">2. Análisis de código (SonarQube)</h3>
+            <p style="font-family:'Space Grotesk',Arial,sans-serif;"><em>Plugin</em> agregado en <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">build.gradle</code>:</p>
             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:10px 0;">
               <tr>
                 <td bgcolor="#f4f4f4" style="background-color:#f4f4f4; padding:12px; font-family:'Courier New',monospace; font-size:0.9em; white-space:pre-wrap;">id 'org.sonarqube' version '6.0.1.5171'</td>
@@ -116,9 +117,9 @@
 
             <!-- 3. Pipeline ─────────────────────────────────── -->
             <!-- Angular: 5 stages (sin Compilar ni SonarQube) -->
-            <h3 style="color:#2c3e50; font-family:Arial,sans-serif;">3. <em>Pipeline</em> CI/CD</h3>
-            <p style="font-family:Arial,sans-serif;">Se creó <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">Jenkinsfile</code> con 7 <em>stages</em>:</p>
-            <ol style="margin-left:20px; font-family:Arial,sans-serif;">
+            <h3 style="color:#24326A; font-family:'Montserrat',Arial,sans-serif;">3. <em>Pipeline</em> CI/CD</h3>
+            <p style="font-family:'Space Grotesk',Arial,sans-serif;">Se creó <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">Jenkinsfile</code> con 7 <em>stages</em>:</p>
+            <ol style="margin-left:20px; font-family:'Space Grotesk',Arial,sans-serif;">
               <li>Clonar código</li>
               <li>Compilar con Gradle</li>
               <li>Análisis de código (SonarQube)</li>
@@ -129,9 +130,9 @@
             </ol>
 
             <!-- 4. Manifiestos ──────────────────────────────── -->
-            <h3 style="color:#2c3e50; font-family:Arial,sans-serif;">4. Manifiestos de Kubernetes</h3>
-            <p style="font-family:Arial,sans-serif;">Archivos creados en <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">manifests/jenkins-pipelines/{NOMBRE_SERVICIO}/</code>:</p>
-            <ul style="margin-left:20px; font-family:Arial,sans-serif;">
+            <h3 style="color:#24326A; font-family:'Montserrat',Arial,sans-serif;">4. Manifiestos de Kubernetes</h3>
+            <p style="font-family:'Space Grotesk',Arial,sans-serif;">Archivos creados en <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">manifests/jenkins-pipelines/{NOMBRE_SERVICIO}/</code>:</p>
+            <ul style="margin-left:20px; font-family:'Space Grotesk',Arial,sans-serif;">
               <li><code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">deployment.yaml</code> — 1 réplica con verificaciones de salud</li>
               <li><code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">service.yaml</code> — ClusterIP puerto 8080</li>
               <li><code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">virtualservice.yaml</code> — Istio routing con prefijo <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">/{PREFIJO}</code></li>
@@ -143,32 +144,32 @@
                  ACCESO
                  ═══════════════════════════════════════════════ -->
             <!-- CAMBIAR: PREFIJO en todas las URLs            -->
-            <h2 style="color:#34495e; margin-top:25px; font-family:Arial,sans-serif;">🌐 Acceso a la aplicación</h2>
+            <h2 style="color:#24326A; margin-top:25px; font-family:'Montserrat',Arial,sans-serif;">🌐 Acceso a la aplicación</h2>
 
             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:15px 0; border-collapse:collapse;">
               <tr>
-                <th style="background-color:#3498db; color:white; padding:10px; text-align:left; font-family:Arial,sans-serif;">Recurso</th>
-                <th style="background-color:#3498db; color:white; padding:10px; text-align:left; font-family:Arial,sans-serif;">URL</th>
+                <th style="background-color:#00A1FF; color:white; padding:10px; text-align:left; font-family:'Space Grotesk',Arial,sans-serif;">Recurso</th>
+                <th style="background-color:#00A1FF; color:white; padding:10px; text-align:left; font-family:'Space Grotesk',Arial,sans-serif;">URL</th>
               </tr>
               <tr>
-                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:Arial,sans-serif;">API (Gateway Istio)</td>
-                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:Arial,sans-serif;"><code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">http://30.30.40.26/{PREFIJO}</code></td>
+                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:'Space Grotesk',Arial,sans-serif;">API (Gateway Istio)</td>
+                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:'Space Grotesk',Arial,sans-serif;"><code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">http://30.30.40.26/{PREFIJO}</code></td>
               </tr>
               <tr style="background-color:#f9f9f9;">
-                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:Arial,sans-serif;">Swagger UI</td>
-                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:Arial,sans-serif;"><code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">http://30.30.40.26/{PREFIJO}/swagger-ui/index.html</code></td>
+                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:'Space Grotesk',Arial,sans-serif;">Swagger UI</td>
+                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:'Space Grotesk',Arial,sans-serif;"><code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">http://30.30.40.26/{PREFIJO}/swagger-ui/index.html</code></td>
               </tr>
               <tr>
-                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:Arial,sans-serif;">Verificación de salud</td>
-                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:Arial,sans-serif;"><code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">http://30.30.40.26/{PREFIJO}/actuator/health</code></td>
+                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:'Space Grotesk',Arial,sans-serif;">Verificación de salud</td>
+                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:'Space Grotesk',Arial,sans-serif;"><code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">http://30.30.40.26/{PREFIJO}/actuator/health</code></td>
               </tr>
               <tr style="background-color:#f9f9f9;">
-                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:Arial,sans-serif;">Interno (ClusterIP)</td>
-                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:Arial,sans-serif;"><code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">http://{NOMBRE_SERVICIO}.stab.svc.cluster.local:8080</code></td>
+                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:'Space Grotesk',Arial,sans-serif;">Interno (ClusterIP)</td>
+                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:'Space Grotesk',Arial,sans-serif;"><code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">http://{NOMBRE_SERVICIO}.stab.svc.cluster.local:8080</code></td>
               </tr>
             </table>
 
-            <p style="font-family:Arial,sans-serif;">
+            <p style="font-family:'Space Grotesk',Arial,sans-serif;">
               <strong>IP del Gateway Istio:</strong> <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">30.30.40.26</code> &nbsp;|&nbsp;
               <strong>Puerto del servicio:</strong> <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">8080</code>
             </p>
@@ -177,26 +178,26 @@
             <!-- ═══════════════════════════════════════════════
                  DISPARAR BUILD
                  ═══════════════════════════════════════════════ -->
-            <h2 style="color:#34495e; margin-top:25px; font-family:Arial,sans-serif;">🔨 Disparar <em>build</em> en Jenkins</h2>
+            <h2 style="color:#24326A; margin-top:25px; font-family:'Montserrat',Arial,sans-serif;">🔨 Disparar <em>build</em> en Jenkins</h2>
 
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0; border-left:4px solid #3498db;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0; border-left:4px solid #00A1FF;">
               <tr>
-                <td bgcolor="#ecf0f1" style="background-color:#ecf0f1; padding:15px; font-family:Arial,sans-serif;">
+                <td bgcolor="#C3D8F3" style="background-color:#C3D8F3; padding:15px; font-family:'Space Grotesk',Arial,sans-serif;">
                   <strong>Job de Jenkins:</strong> <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">Stabilisation/{NOMBRE_SERVICIO}</code><br>
                   <strong>URL:</strong> <a href="http://192.168.10.33:8080/jenkins/job/Stabilisation/job/{NOMBRE_SERVICIO}/"
-                     style="color:#3498db; text-decoration:none;">http://192.168.10.33:8080/jenkins/job/Stabilisation/job/{NOMBRE_SERVICIO}/</a>
+                     style="color:#00A1FF; text-decoration:none;">http://192.168.10.33:8080/jenkins/job/Stabilisation/job/{NOMBRE_SERVICIO}/</a>
                 </td>
               </tr>
             </table>
 
-            <ol style="margin-left:20px; font-family:Arial,sans-serif;">
+            <ol style="margin-left:20px; font-family:'Space Grotesk',Arial,sans-serif;">
               <li>Hacer <em>push</em> de los cambios a la rama <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">stab</code> en GitLab</li>
-              <li>Acceder a <a href="http://192.168.10.33:8080/jenkins" style="color:#3498db; text-decoration:none;">Jenkins</a> → <strong>Stabilisation</strong> → <strong>{NOMBRE_SERVICIO}</strong></li>
+              <li>Acceder a <a href="http://192.168.10.33:8080/jenkins" style="color:#00A1FF; text-decoration:none;">Jenkins</a> → <strong>Stabilisation</strong> → <strong>{NOMBRE_SERVICIO}</strong></li>
               <li>Hacer clic en <strong>«Build Now»</strong></li>
               <li>Monitorear los 7 <em>stages</em>; una vez exitoso, ArgoCD sincronizará en ~3 minutos</li>
             </ol>
 
-            <p style="font-family:Arial,sans-serif;">
+            <p style="font-family:'Space Grotesk',Arial,sans-serif;">
               <strong>⏱️ Tiempo estimado:</strong> 2-3 minutos de <em>build</em> + 3 minutos de sincronización ArgoCD = ~5-6 minutos en total.
             </p>
 
@@ -205,12 +206,12 @@
                  ACCIÓN REQUERIDA
                  ═══════════════════════════════════════════════ -->
             <!-- CAMBIAR: RAMA_BASE, archivos clave si difieren -->
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0; border-left:4px solid #ffc107;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0; border-left:4px solid #FFDA00;">
               <tr>
-                <td bgcolor="#fff3cd" style="background-color:#fff3cd; padding:15px; font-family:Arial,sans-serif;">
-                  <h2 style="color:#34495e; margin:0 0 10px 0; font-family:Arial,sans-serif;">⚠️ Acción requerida</h2>
-                  <p style="margin:0 0 8px 0; font-family:Arial,sans-serif;">Para aplicar estos cambios en la rama <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">{RAMA_BASE}</code>:</p>
-                  <ol style="margin-left:20px; font-family:Arial,sans-serif;">
+                <td bgcolor="#FFF8D6" style="background-color:#FFF8D6; padding:15px; font-family:'Space Grotesk',Arial,sans-serif;">
+                  <h2 style="color:#24326A; margin:0 0 10px 0; font-family:'Montserrat',Arial,sans-serif;">⚠️ Acción requerida</h2>
+                  <p style="margin:0 0 8px 0; font-family:'Space Grotesk',Arial,sans-serif;">Para aplicar estos cambios en la rama <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">{RAMA_BASE}</code>:</p>
+                  <ol style="margin-left:20px; font-family:'Space Grotesk',Arial,sans-serif;">
                     <li>Revisar el diff: <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">git diff {RAMA_BASE}..stab</code></li>
                     <li>Archivos clave a revisar:
                       <ul style="margin-top:5px;">
@@ -230,7 +231,7 @@
             <!-- ═══════════════════════════════════════════════
                  ARQUITECTURA GITOPS
                  ═══════════════════════════════════════════════ -->
-            <h2 style="color:#34495e; margin-top:25px; font-family:Arial,sans-serif;">🏗️ Arquitectura GitOps</h2>
+            <h2 style="color:#24326A; margin-top:25px; font-family:'Montserrat',Arial,sans-serif;">🏗️ Arquitectura GitOps</h2>
 
             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:15px 0;">
               <tr>
@@ -258,8 +259,8 @@
                  PRÓXIMOS PASOS
                  ═══════════════════════════════════════════════ -->
             <!-- CAMBIAR: ajustar o agregar pasos específicos  -->
-            <h2 style="color:#34495e; margin-top:25px; font-family:Arial,sans-serif;">📝 Próximos pasos sugeridos</h2>
-            <ol style="margin-left:20px; font-family:Arial,sans-serif;">
+            <h2 style="color:#24326A; margin-top:25px; font-family:'Montserrat',Arial,sans-serif;">📝 Próximos pasos sugeridos</h2>
+            <ol style="margin-left:20px; font-family:'Space Grotesk',Arial,sans-serif;">
               <li>Fusionar cambios de <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">stab</code> a <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">{RAMA_BASE}</code> (Dockerfile, build.gradle, application.yml)</li>
               <li>Aumentar cobertura de <em>tests</em> unitarios</li>
               <li>Configurar métricas con Prometheus/Grafana</li>
@@ -271,15 +272,15 @@
                  ESTADO FINAL
                  ═══════════════════════════════════════════════ -->
             <!-- CAMBIAR: VERSION, rutas validadas             -->
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0; border-left:4px solid #28a745;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0; border-left:4px solid #8DCB3E;">
               <tr>
-                <td bgcolor="#d4edda" style="background-color:#d4edda; padding:15px; font-family:Arial,sans-serif;">
-                  <h2 style="color:#34495e; margin:0 0 10px 0; font-family:Arial,sans-serif;">✅ Estado del despliegue</h2>
-                  <p style="margin:0 0 5px 0; font-family:Arial,sans-serif;"><strong>El microservicio está operativo y funcionando correctamente en el clúster Stab.</strong></p>
-                  <p style="margin:0 0 5px 0; font-family:Arial,sans-serif;">Versión desplegada: <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">{VERSION}</code></p>
-                  <p style="margin:0 0 5px 0; font-family:Arial,sans-serif;">Namespace: <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">stab</code> &nbsp;|&nbsp; ArgoCD: <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">Synced</code> y <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">Healthy</code></p>
-                  <p style="margin:0 0 5px 0; font-family:Arial,sans-serif;"><strong>Rutas funcionando:</strong></p>
-                  <ul style="margin:5px 0 0 20px; font-family:Arial,sans-serif;">
+                <td bgcolor="#E8F5D6" style="background-color:#E8F5D6; padding:15px; font-family:'Space Grotesk',Arial,sans-serif;">
+                  <h2 style="color:#24326A; margin:0 0 10px 0; font-family:'Montserrat',Arial,sans-serif;">✅ Estado del despliegue</h2>
+                  <p style="margin:0 0 5px 0; font-family:'Space Grotesk',Arial,sans-serif;"><strong>El microservicio está operativo y funcionando correctamente en el clúster Stab.</strong></p>
+                  <p style="margin:0 0 5px 0; font-family:'Space Grotesk',Arial,sans-serif;">Versión desplegada: <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">{VERSION}</code></p>
+                  <p style="margin:0 0 5px 0; font-family:'Space Grotesk',Arial,sans-serif;">Namespace: <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">stab</code> &nbsp;|&nbsp; ArgoCD: <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">Synced</code> y <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">Healthy</code></p>
+                  <p style="margin:0 0 5px 0; font-family:'Space Grotesk',Arial,sans-serif;"><strong>Rutas funcionando:</strong></p>
+                  <ul style="margin:5px 0 0 20px; font-family:'Space Grotesk',Arial,sans-serif;">
                     <li><code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">/{PREFIJO}/actuator/health</code> → ✅ UP</li>
                     <li><code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">/{PREFIJO}/swagger-ui/index.html</code> → ✅ 200 OK</li>
                     <li>Sin conflictos con otros microservicios → ✅ Prefijo único</li>
@@ -290,7 +291,7 @@
 
 
             <!-- PIE ─────────────────────────────────────────── -->
-            <hr style="margin:30px 0; border:none; border-top:2px solid #ecf0f1;">
+            <hr style="margin:30px 0; border:none; border-top:2px solid #C3D8F3;">
             <img src="assets/ralvarez_firma.png" alt="Rodrigo Álvarez" style="max-width:100%; display:block;">
 
           </td>

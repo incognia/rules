@@ -12,14 +12,15 @@
       4. Abrir en navegador → Ctrl+A → Ctrl+C → pegar en OWA.
 
     COLORES DE ACENTO (border-bottom del H1):
-      Cambio / actualización  → #3498db  azul
-      Corrección / problema   → #e67e22  naranja
-      Alerta crítica          → #e74c3c  rojo
-      Decisión técnica        → #0066cc  azul oscuro
+      Cambio / actualización  → #00A1FF  Midday
+      Corrección / problema   → #7252D8  Video
+      Alerta crítica          → #E10613  Dispatch
+      Decisión técnica        → #007EB5  Code
     ============================================================
     -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body style="font-family:Arial,sans-serif; line-height:1.6; color:#333; margin:0; padding:0;">
+<body style="font-family:'Space Grotesk',Arial,sans-serif; line-height:1.6; color:#000; margin:0; padding:0;">
 
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr>
@@ -33,7 +34,7 @@
                  COMPONENTE: TÍTULO (obligatorio)
                  Cambiar emoji, texto y color del borde.
                  ─────────────────────────────────────────── -->
-            <h1 style="color:#2c3e50; border-bottom:3px solid #3498db; padding-bottom:10px; font-family:Arial,sans-serif; margin-top:0;">
+            <h1 style="color:#24326A; border-bottom:3px solid #00A1FF; padding-bottom:10px; font-family:'Montserrat',Arial,sans-serif; margin-top:0;">
               🔄 {TITULO}
             </h1>
 
@@ -41,15 +42,15 @@
             <!-- ───────────────────────────────────────────
                  COMPONENTE: CAJA DE RESUMEN (opcional)
                  Elegir color según tipo:
-                   Verde  → #28a745 / #d4edda  (ok, completado)
-                   Azul   → #3498db / #ecf0f1  (informativo)
-                   Ambar  → #ffc107 / #fff3cd  (atención)
-                   Rojo   → #dc3545 / #f8d7da  (problema)
-                   Azul+  → #0066cc / #e8f4f8  (decisión)
+                   Verde  → #8DCB3E / #E8F5D6  (ok, completado)
+                   Azul   → #00A1FF / #C3D8F3  (informativo)
+                   Ambar  → #FFDA00 / #FFF8D6  (atención)
+                   Rojo   → #E10613 / #FCE4E5  (problema)
+                   Azul+  → #007EB5 / #E0F0F5  (decisión)
                  ─────────────────────────────────────────── -->
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0; border-left:4px solid #28a745;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0; border-left:4px solid #8DCB3E;">
               <tr>
-                <td bgcolor="#d4edda" style="background-color:#d4edda; padding:15px; font-family:Arial,sans-serif;">
+                <td bgcolor="#E8F5D6" style="background-color:#E8F5D6; padding:15px; font-family:'Space Grotesk',Arial,sans-serif;">
                   <strong>{RESUMEN_DEL_CORREO}</strong>
                 </td>
               </tr>
@@ -59,7 +60,7 @@
             <!-- ───────────────────────────────────────────
                  COMPONENTE: METADATA (obligatorio)
                  ─────────────────────────────────────────── -->
-            <p style="font-family:Arial,sans-serif; margin:0 0 20px 0;">
+            <p style="font-family:'Space Grotesk',Arial,sans-serif; margin:0 0 20px 0;">
               <strong>Destinatario:</strong> {DESTINATARIO}<br>
               <strong>Fecha:</strong> {FECHA}<br>
               <strong>Equipo:</strong> DevSecOps
@@ -70,9 +71,9 @@
                  COMPONENTE: SECCIÓN DE TEXTO
                  Duplicar cuantas veces sea necesario.
                  ─────────────────────────────────────────── -->
-            <h2 style="color:#34495e; margin-top:25px; font-family:Arial,sans-serif;">📋 {TITULO_SECCION}</h2>
-            <p style="font-family:Arial,sans-serif;">{CONTENIDO}</p>
-            <ul style="margin-left:20px; font-family:Arial,sans-serif;">
+            <h2 style="color:#24326A; margin-top:25px; font-family:'Montserrat',Arial,sans-serif;">📋 {TITULO_SECCION}</h2>
+            <p style="font-family:'Space Grotesk',Arial,sans-serif;">{CONTENIDO}</p>
+            <ul style="margin-left:20px; font-family:'Space Grotesk',Arial,sans-serif;">
               <li>Punto 1</li>
               <li>Punto 2</li>
               <li>Punto 3</li>
@@ -83,9 +84,9 @@
                  COMPONENTE: CAJA INFORMATIVA (azul)
                  Para notas, contexto y aclaraciones.
                  ─────────────────────────────────────────── -->
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0; border-left:4px solid #3498db;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0; border-left:4px solid #00A1FF;">
               <tr>
-                <td bgcolor="#ecf0f1" style="background-color:#ecf0f1; padding:15px; font-family:Arial,sans-serif;">
+                <td bgcolor="#C3D8F3" style="background-color:#C3D8F3; padding:15px; font-family:'Space Grotesk',Arial,sans-serif;">
                   <strong>Nota:</strong> {TEXTO_INFORMATIVO}
                 </td>
               </tr>
@@ -96,9 +97,9 @@
                  COMPONENTE: CAJA DE ATENCIÓN (amarillo)
                  Para advertencias y acciones requeridas.
                  ─────────────────────────────────────────── -->
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0; border-left:4px solid #ffc107;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0; border-left:4px solid #FFDA00;">
               <tr>
-                <td bgcolor="#fff3cd" style="background-color:#fff3cd; padding:15px; font-family:Arial,sans-serif;">
+                <td bgcolor="#FFF8D6" style="background-color:#FFF8D6; padding:15px; font-family:'Space Grotesk',Arial,sans-serif;">
                   <strong>⚠️ Atención:</strong> {TEXTO_ADVERTENCIA}
                 </td>
               </tr>
@@ -109,9 +110,9 @@
                  COMPONENTE: CAJA DE PROBLEMA (rojo)
                  Para errores, fallos o situaciones críticas.
                  ─────────────────────────────────────────── -->
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0; border-left:4px solid #dc3545;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0; border-left:4px solid #E10613;">
               <tr>
-                <td bgcolor="#f8d7da" style="background-color:#f8d7da; padding:15px; font-family:Arial,sans-serif;">
+                <td bgcolor="#FCE4E5" style="background-color:#FCE4E5; padding:15px; font-family:'Space Grotesk',Arial,sans-serif;">
                   <strong>❌ Problema detectado:</strong> {TEXTO_PROBLEMA}
                 </td>
               </tr>
@@ -125,16 +126,16 @@
                  ─────────────────────────────────────────── -->
             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:15px 0; border-collapse:collapse;">
               <tr>
-                <th style="background-color:#3498db; color:white; padding:10px; text-align:left; font-family:Arial,sans-serif;">Columna A</th>
-                <th style="background-color:#3498db; color:white; padding:10px; text-align:left; font-family:Arial,sans-serif;">Columna B</th>
+                <th style="background-color:#00A1FF; color:white; padding:10px; text-align:left; font-family:'Space Grotesk',Arial,sans-serif;">Columna A</th>
+                <th style="background-color:#00A1FF; color:white; padding:10px; text-align:left; font-family:'Space Grotesk',Arial,sans-serif;">Columna B</th>
               </tr>
               <tr>
-                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:Arial,sans-serif;">Valor 1</td>
-                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:Arial,sans-serif;">Valor 2</td>
+                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:'Space Grotesk',Arial,sans-serif;">Valor 1</td>
+                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:'Space Grotesk',Arial,sans-serif;">Valor 2</td>
               </tr>
               <tr style="background-color:#f9f9f9;">
-                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:Arial,sans-serif;">Valor 3</td>
-                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:Arial,sans-serif;">Valor 4</td>
+                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:'Space Grotesk',Arial,sans-serif;">Valor 3</td>
+                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:'Space Grotesk',Arial,sans-serif;">Valor 4</td>
               </tr>
             </table>
 
@@ -151,7 +152,7 @@
 
 
             <!-- PIE (obligatorio) ──────────────────────── -->
-            <hr style="margin:30px 0; border:none; border-top:2px solid #ecf0f1;">
+            <hr style="margin:30px 0; border:none; border-top:2px solid #C3D8F3;">
             <img src="assets/ralvarez_firma.png" alt="Rodrigo Álvarez" style="max-width:100%; display:block;">
 
           </td>

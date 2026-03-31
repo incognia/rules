@@ -14,6 +14,8 @@
 - actualizar imagen de firma corporativa en pie de página
 - agregar imagen de firma con dimensiones para HedgeDoc (`ralvarez_firma_728.png`)
 - agregar tipografías corporativas vía Google Fonts: Space Grotesk (primaria, texto general) y Montserrat (secundaria, encabezados)
+- aplicar nueva paleta y tipografías a plantillas de correo HTML (`delivery_template.html`, `generic_template.html`): reemplazar colores genéricos por paleta Kabat One (Midday, Midnight, Safety, Traffic, Dispatch, Video, Code, Ice), agregar Space Grotesk/Montserrat con *fallback* Arial
+- actualizar paleta de colores en `rulesets/MAIL.md` con nombres de la nueva paleta
 
 ### fix
 - detectar WSL en `sync_global.sh` usando `/proc/version` y `$WSL_DISTRO_NAME`; copiar *skills* al home de Windows (`%USERPROFILE%/.agents/skills/`) en lugar del home de Linux, que Warp no puede leer al correr sobre Windows

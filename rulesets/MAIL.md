@@ -76,23 +76,23 @@ Filas alternas: agregar `style="background-color:#f9f9f9;"` manualmente en cada 
 
 ### Colores de acento (borde inferior del H1)
 
-- Entrega / estado OK → `#3498db` azul
-- Corrección / cambio → `#e67e22` naranja
-- Alerta crítica → `#e74c3c` rojo
-- Decisión técnica → `#0066cc` azul oscuro
+- Entrega / estado OK → `#00A1FF` Midday
+- Corrección / cambio → `#7252D8` Video
+- Alerta crítica → `#E10613` Dispatch
+- Decisión técnica → `#007EB5` Code
 
 ### Cajas
 
-- *Success* (verde): borde `#28a745`, fondo `#d4edda`
-- *Info* (azul): borde `#3498db`, fondo `#ecf0f1`
-- *Warning* (amarillo): borde `#ffc107`, fondo `#fff3cd`
-- *Danger* (rojo): borde `#dc3545`, fondo `#f8d7da`
-- Decisión (azul oscuro): borde `#0066cc`, fondo `#e8f4f8`
+- *Success* (verde): borde `#8DCB3E` Safety, fondo `#E8F5D6`
+- *Info* (azul): borde `#00A1FF` Midday, fondo `#C3D8F3` Ice
+- *Warning* (amarillo): borde `#FFDA00` Traffic, fondo `#FFF8D6`
+- *Danger* (rojo): borde `#E10613` Dispatch, fondo `#FCE4E5`
+- Decisión (azul oscuro): borde `#007EB5` Code, fondo `#E0F0F5`
 
 ### Otros
 
 - Código: fondo `#f4f4f4`
-- Encabezado tabla: fondo `#3498db`, texto blanco
+- Encabezado tabla: fondo `#00A1FF` Midday, texto blanco
 - Fila par tabla: `#f9f9f9`
 
 ## *Placeholders* de la plantilla de entrega
