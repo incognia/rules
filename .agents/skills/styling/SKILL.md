@@ -34,7 +34,12 @@ Use as starting point:
 1. **Read the full CoT**: Load and follow `~/rules/cot/styling.md` from line 1 to end
 2. **Parse arguments**: first arg is platform, last arg is the file. If 3 args are given, middle arg is license (`mit`|`gpl`). If only 2 args, there is no license. If any required argument is missing, ask the user before proceeding.
 3. **Insert standard header** (varies by platform):
-   - **HedgeDoc only**: YAML frontmatter with descriptive `tags` + Kabat One logo: `![Kabat One logo](https://hedgedoc.promad.com.mx:31418/uploads/aaa5198c-248f-4642-8c67-00f6edde677a.png)`
+   - **HedgeDoc only**: YAML frontmatter with descriptive `tags` + dual Kabat One logos for light/dark mode:
+     ```html
+     <img src="https://hedgedoc.promad.com.mx:31418/uploads/9217e5d8-2a84-4e41-9634-ea3b5a6bd45a.png" class="logo-light" alt="Kabat One logo">
+
+     <img src="https://hedgedoc.promad.com.mx:31418/uploads/e0f5ef2b-4519-48ee-bd2d-16013c7f44c4.png" class="logo-dark" alt="Kabat One logo">
+     ```
    - **GitLab/GitHub README.md only**: YAML frontmatter with `title` and `description` (rendered as table on GitHub, code block on GitLab):
      ```yaml
      ---
@@ -66,25 +71,31 @@ Use as starting point:
 ```markdown
 ---
 
-![FIRMA](https://hedgedoc.promad.com.mx:31418/uploads/f8e2dc04-bbf8-41b7-9443-17b483f19beb.png)
+![FIRMA](https://hedgedoc.promad.com.mx:31418/uploads/010e09ff-5e2d-4ba8-828b-850a1424eafa.png)
 
 [//]: # (CSS Corporativo)
 
 <style>
   :root {
-    --promad: #00B2E0;
-    --midnight: #0E1821;
-    --electric: #116dff;
-    --lavender: #a5b7ea;
+    --midday: #00A1FF;
+    --midnight: #24326A;
+    --ice: #C3D8F3;
+    --connect: #31D8FF;
+    --code: #007EB5;
+    --deep: #060E40;
+    --video: #7252D8;
   }
-  a { color: var(--midnight); }
-  .night a { color: var(--promad); }
-  a:hover { color: var(--promad); text-decoration: none; }
-  .night a:hover { color: var(--lavender); text-decoration: none; }
-  body { color: var(--midnight); }
-  .markdown-body h1 { border-bottom: 1px solid var(--promad); }
+  a { color: var(--midday); }
+  a:visited { color: var(--video); }
+  a:hover { color: var(--connect); text-decoration: none; }
+  body { color: #000; }
+  .night body { color: #fff; }
+  .markdown-body h1 { border-bottom: 1px solid var(--midday); }
   .markdown-body p { text-align: justify; }
-  .markdown-body hr { height: 1px; background-color: var(--promad); }
+  .markdown-body hr { height: 1px; background-color: var(--midday); }
+  .logo-dark { display: none; }
+  .night .logo-light { display: none; }
+  .night .logo-dark { display: block; }
 </style>
 ```
 

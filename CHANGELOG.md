@@ -6,6 +6,14 @@
 
 ## [2026-03-30] - Crear carpeta `docs/` y separar responsabilidades
 
+### style
+- actualizar paleta de colores corporativa: reemplazar variables CSS antiguas (`--promad`, `--electric`, `--lavender`) por nueva paleta Kabat One (`--midday`, `--midnight`, `--ice`, `--connect`, `--code`, `--deep`, `--video`)
+- cambiar texto del `body` de variable de color a negro/blanco según modo claro/oscuro
+- agregar `a:visited` con color `--video` (#7252D8) y `a:hover` con `--connect` (#31D8FF)
+- implementar logo dual light/dark con clases `.logo-light`/`.logo-dark` y reglas CSS de visibilidad por modo
+- actualizar imagen de firma corporativa en pie de página
+- agregar imagen de firma con dimensiones para HedgeDoc (`ralvarez_firma_728.png`)
+
 ### fix
 - detectar WSL en `sync_global.sh` usando `/proc/version` y `$WSL_DISTRO_NAME`; copiar *skills* al home de Windows (`%USERPROFILE%/.agents/skills/`) en lugar del home de Linux, que Warp no puede leer al correr sobre Windows
 
