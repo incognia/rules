@@ -25,7 +25,7 @@ description: "Initialize a git repo with SSH, identity and remote configured. Us
    - If `laboral`:
      ```bash
      git config user.name "Rodrigo Álvarez"
-     git config user.email "ralvarez@promad.com.mx"
+     git config user.email "ralvarez@kabatone.com"
      ```
 4. **Configure SSH key**: `git config core.sshCommand "ssh -i ~/.ssh/$1 -o IdentitiesOnly=yes"`
    - Verify the key exists: `ls ~/.ssh/$1` — if not found, list available keys with `ls ~/.ssh/` and ask the user

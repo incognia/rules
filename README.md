@@ -159,7 +159,7 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 |---------|------------------------|---------------------------|
 | **Licenciamiento** | GPLv3 (copyleft) | MIT (permisiva) |
 | **Autoría** | Rodrigo Álvarez (@incognia) | Rodrigo Álvarez (@incogniadev) |
-| **Email** | [incognia@gmail.com](mailto:incognia@gmail.com) | [ralvarez@promad.com.mx](mailto:ralvarez@promad.com.mx) |
+| **Email** | [incognia@gmail.com](mailto:incognia@gmail.com) | [ralvarez@kabatone.com](mailto:ralvarez@kabatone.com) |
 | **SSH Key (repos)** | ~/.ssh/incognia | ~/.ssh/kone |
 | **SSH Key (servers)** | ~/.ssh/faraday | ~/.ssh/cad |
 | **Estilo de documentos** | No definido aún | [STYLING.md](./rulesets/STYLING.md) aplicable |

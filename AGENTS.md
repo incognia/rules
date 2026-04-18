@@ -105,7 +105,7 @@ The repository supports dual contexts with different rules:
 **Corporate Projects (`@incogniadev` for Promad Business Solutions)**:
 
 - License: MIT (permissive)
-- Email: ralvarez@promad.com.mx
+- Email: ralvarez@kabatone.com
 - SSH key: ~/.ssh/kone
 - Documentation: Spanish Mexican with STYLING.md rules
 

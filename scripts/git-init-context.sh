@@ -26,7 +26,7 @@ case "$REPO_TYPE" in
     ;;
   l|L)
     NAME="Rodrigo Álvarez"
-    EMAIL="ralvarez@promad.com.mx"
+    EMAIL="ralvarez@kabatone.com"
     KEY="${HOME}/.ssh/promad_ed25519"
     ORG_GH="incogniadev"
     ORG_GL="incogniadev"

@@ -41,7 +41,7 @@ Sus competencias técnicas principales incluyen:
 ### 4.2. Laborales (Promad Business Solutions)
 - **GitHub:** `incogniadev`
 - **GitLab:** `incogniadev`
-- **Correo electrónico:** `ralvarez@promad.com.mx`
+- **Correo electrónico:** `ralvarez@kabatone.com`
 
 ## 5. Atribución y menciones
 
@@ -59,7 +59,7 @@ Sus competencias técnicas principales incluyen:
 - **Para proyectos laborales (Promad):**
   ```bash
   git config user.name "Rodrigo Álvarez"
-  git config user.email "ralvarez@promad.com.mx"
+  git config user.email "ralvarez@kabatone.com"
   ```
 
 ## 6. Licenciamiento y firma de contribuciones

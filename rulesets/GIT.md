@@ -32,7 +32,7 @@ git config --list | grep ^user\.
 ```bash
 # Configurar usuario para este repositorio
 git config user.name "Rodrigo Álvarez"
-git config user.email "ralvarez@promad.com.mx"
+git config user.email "ralvarez@kabatone.com"
 
 # Verificar configuración
 git config --list | grep ^user\.
@@ -78,7 +78,7 @@ git config core.sshCommand "ssh -i ~/.ssh/incognia -o IdentitiesOnly=yes"
 
 # Laboral (Promad)
 # git config user.name  "Rodrigo Álvarez"
-# git config user.email "ralvarez@promad.com.mx"
+# git config user.email "ralvarez@kabatone.com"
 # git config core.sshCommand "ssh -i ~/.ssh/kone -o IdentitiesOnly=yes"
 
 # Configurar remoto SSH (ejemplos)

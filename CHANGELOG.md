@@ -4,6 +4,20 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
+## [2026-04-18] - Actualización del correo laboral a dominio kabatone.com
+
+### docs
+- actualizar correo laboral en todas las reglas, CoT, *skills* y plantillas: `ralvarez@promad.com.mx` → `ralvarez@kabatone.com` para proyectos laborales (`@incogniadev`) en GitHub y GitLab
+- actualizar `rulesets/GIT.md`: bloques de configuración `git config user.email` para proyectos laborales (sección recomendada y pasos manuales)
+- actualizar `rulesets/ATTRIBUTION.md`: correo en sección de identificadores digitales laborales y en ejemplo de firma de *commits*
+- actualizar `rulesets/LICENSING.md`: plantillas de encabezados en scripts Bash, Python y manifiestos YAML de Argo CD
+- actualizar `scripts/git-init-context.sh`: variable `EMAIL` para contexto laboral
+- actualizar `cot/git_init.md`: correo en pasos manuales para contexto laboral (Promad)
+- actualizar `.agents/skills/git-init/SKILL.md`: bloque de configuración de identidad para contexto `laboral`
+- actualizar `.agents/skills/licensing/SKILL.md`: indicadores de contexto corporativo
+- actualizar `AGENTS.md`: correo en sección de proyectos corporativos
+- actualizar `README.md`: correo en tabla de reglas por contexto
+
 ## [2026-03-30] - Crear carpeta `docs/` y separar responsabilidades
 
 ### style

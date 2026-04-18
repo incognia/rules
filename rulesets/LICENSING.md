@@ -59,7 +59,7 @@ A continuación, se muestran ejemplos de cómo incluir la información de licenc
 #
 # Script:         k8s-cluster-bootstrap.sh
 # Descripción:    Automatiza el aprovisionamiento de clústeres Kubernetes en Proxmox VE.
-# Autor:          Rodrigo Álvarez <ralvarez@promad.com.mx>
+# Autor:          Rodrigo Álvarez <ralvarez@kabatone.com>
 # Fecha:          2026-01-23
 # Licencia:       MIT License
 #
@@ -117,7 +117,7 @@ A continuación, se muestran ejemplos de cómo incluir la información de licenc
 #
 # File:         database_backup.py
 # Description:  Automated database backup tool for production environments.
-# Author:       Rodrigo Álvarez <ralvarez@promad.com.mx>
+# Author:       Rodrigo Álvarez <ralvarez@kabatone.com>
 # Date:         2026-01-23
 # License:      MIT License
 #
@@ -183,7 +183,7 @@ Módulo de ejemplo para demostrar la inclusión de la licencia GPLv3.
 # production-app.yaml
 # Argo CD Application para desplegar la aplicación 'webapp-backend' en producción
 #
-# Author: Rodrigo Álvarez <ralvarez@promad.com.mx>
+# Author: Rodrigo Álvarez <ralvarez@kabatone.com>
 # License: MIT
 # Company: Promad Business Solutions
 #
