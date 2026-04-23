@@ -4,6 +4,12 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
+## [2026-04-23] - Optimizar flujo de *commit*: validación de identidad solo primera vez por sesión
+
+### improve
+- optimizar `cot/committing.md`: agregar condición de sesión al paso 0 para omitir la validación de identidad en invocaciones subsecuentes dentro de la misma sesión de conversación
+- optimizar `.agents/skills/commit/SKILL.md` (repo y global): fusionar pasos de validación (identidad + SSH) en un solo paso condicional; saltar directamente al paso de fecha CST si ya se validó en la sesión
+
 ## [2026-04-18] - Actualización del correo laboral a dominio kabatone.com
 
 ### docs

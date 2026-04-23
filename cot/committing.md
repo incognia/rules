@@ -20,6 +20,7 @@ Razonamiento:
 
 Pasos:
 0) Acción: validar que el repositorio esté configurado correctamente y mostrar identidad activa antes de proceder.
+   CONDICIÓN DE SESIÓN: Si ya ejecutaste este paso exitosamente en esta misma sesión de conversación, OMITIR este paso y continuar directamente en el paso 1. No repetir la validación dentro de la misma sesión.
    COMANDOS OBLIGATORIOS: 
    - `git config --list | grep -E "^(user\.(name|email)|core\.sshCommand|remote\.origin)"`
    - `git remote -v` para verificar URLs de remotos
