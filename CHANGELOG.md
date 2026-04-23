@@ -4,13 +4,14 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
-## [2026-04-23] - Optimizar flujo de *commit*: validación de identidad solo primera vez por sesión
+## [2026-04-23] - Optimizar flujo de *commit* y mejorar *skill* mail
 
 ### improve
 - optimizar `cot/committing.md`: agregar condición de sesión al paso 0 para omitir la validación de identidad en invocaciones subsecuentes dentro de la misma sesión de conversación
 - optimizar `.agents/skills/commit/SKILL.md` (repo y global): fusionar pasos de validación (identidad + SSH) en un solo paso condicional; saltar directamente al paso de fecha CST si ya se validó en la sesión
+- agregar guard de paso 0 en `.agents/skills/mail/SKILL.md` (repo y global): mostrar ayuda con uso, modos, tipos, asunto y ejemplos cuando se invoca sin parámetros; detener ejecución sin cargar CoT ni reglas
 
-## [2026-04-18] - Actualización del correo laboral a dominio kabatone.com
+## [2026-04-18]
 
 ### docs
 - actualizar correo laboral en todas las reglas, CoT, *skills* y plantillas: `ralvarez@promad.com.mx` → `ralvarez@kabatone.com` para proyectos laborales (`@incogniadev`) en GitHub y GitLab

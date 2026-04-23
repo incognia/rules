@@ -17,6 +17,31 @@ description: "Compose and send OWA-compatible HTML email. Usage: /mail <owa|mac|
 
 ## Instructions
 
+0. **No arguments guard**: If $0 is empty or not provided, display the following help and **stop — do NOT proceed with any other step**:
+
+   ```
+   Uso: /mail <modo> <tipo> <asunto>
+
+   Modos ($0):
+     token    Autenticar y cachear token de Graph API (ejecutar una vez, dura ~90 días)
+     owa      Guardar HTML para copiar y pegar en Outlook Web (Linux)
+     mac      Abrir borrador en Outlook vía AppleScript con firma nativa (macOS)
+     graph    Enviar directamente vía Microsoft Graph API con firma inline (cualquier OS)
+
+   Tipos ($1) — no requerido para modo token:
+     delivery   Correo de entrega de servicio/versión
+     generic    Correo genérico con secciones configurables
+
+   Asunto ($ARGUMENTS) — todo lo que sigue al tipo; no requerido para modo token
+
+   Ejemplos:
+     /mail token
+     /mail owa delivery kabat-authorization-service
+     /mail mac generic cambio de configuración Kafka
+     /mail graph generic decisión técnica WebSocket
+     /mail graph delivery kabat-notification-service
+   ```
+
 1. **Read the full CoT**: Load and follow `~/rules/cot/mail.md` from line 1 to end
 2. **Read the rules**: Load `~/rules/rulesets/MAIL.md` for HTML constraints and color palette
 3. **Select template** based on $1:
