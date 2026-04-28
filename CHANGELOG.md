@@ -4,6 +4,11 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
+## [2026-04-28] - Regla de edición de CHANGELOG.md
+
+### feat
+- actualizar `cot/changelog.md`: agregar paso 6b con regla de oro para `edit_files` (ancla única, sin truncar líneas en `replace`), orden cronológico inverso de bullets dentro de `### tipo` y técnica de inserción al tope sin afectar líneas adyacentes
+
 ## [2026-04-23] - Optimizar flujo de *commit* y mejorar *skill* mail
 
 ### improve

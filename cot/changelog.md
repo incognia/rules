@@ -44,6 +44,15 @@ Pasos:
    Validación: agrupar cambios relacionados, no micro-entradas por commit individual
    Resultado: secciones organizadas con cambios agrupados lógicamente.
 
+6b) Acción: insertar bullets en orden cronológico inverso dentro de cada sección.
+   REGLA CRÍTICA: dentro de cada `### tipo`, los bullets van de más reciente a más antiguo (el nuevo bullet va PRIMERO, justo después del encabezado `### tipo`).
+   TÉCNICA DE EDICIÓN OBLIGATORIA para `edit_files`:
+   - REGLA DE ORO: el `search` termina en la ÚLTIMA LÍNEA que se desea como ancla. El `replace` reproduce esa línea intacta y AÑADE el nuevo contenido ANTES o DESPUÉS de ella. NUNCA incluir en el `search` una línea que luego se reproduzca truncada o modificada en el `replace`.
+   - Para insertar bullet al tope de `### tipo`: el `search` es SOLO `### tipo` (una línea). El `replace` es `### tipo\n- nuevo bullet`. La línea que sigue (el bullet anterior) queda intocada fuera del `search`.
+   - Para insertar nueva entrada `## [FECHA]` al inicio del archivo: el `search` es SOLO la línea ancla inmediatamente anterior (p. ej. el comentario `<!-- markdownlint-disable -->` o la línea en blanco que lo sigue). El `replace` reproduce esa línea ancla exacta y añade la nueva entrada después. NUNCA incluir la primera `## [FECHA]` existente en el `search` a menos que se reproduzca COMPLETA e INTACTA en el `replace`.
+   - Si el `search` falla, leer el archivo con `read_files` para obtener el contenido exacto antes de reintentar.
+   Resultado: bullets ordenados cronológicamente dentro de cada sección, nuevo bullet al tope.
+
 7) Acción: revisar texto de las entradas existentes.
    COMANDO OBLIGATORIO: `grep -A 20 "^## \[" CHANGELOG.md | head -50` para revisar entradas recientes
    Validación: detectar mezcla español-inglés, calcos, regionalismos no mexicanos
