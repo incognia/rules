@@ -4,6 +4,11 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
+## [2026-04-30] - Regla de edición directa en *skill* commit
+
+### feat
+- actualizar `.agents/skills/commit/SKILL.md`: incrustar reglas críticas de CHANGELOG directamente en el *skill* para evitar dependencia de referencias anidadas — verificación de entrada existente, técnica obligatoria de `edit_files` (ancla única sin duplicar contenido), orden cronológico inverso e idioma
+
 ## [2026-04-28] - Regla de edición de CHANGELOG.md
 
 ### feat

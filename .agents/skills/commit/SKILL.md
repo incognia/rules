@@ -14,7 +14,30 @@ Before making any git commit in projects that follow the rules repository conven
 1. **Read the full CoT**: Load and follow `~/rules/cot/committing.md` from line 1 to end
 2. **Validate identity (first time in session only)**: If you already validated identity in this conversation session, skip to step 3. Otherwise: run `git config --list | grep ^user\.` and `git remote -v`, verify email/name match expected context and remote uses SSH (not HTTPS).
 3. **Get CST date**: `DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")`
-4. **Update CHANGELOG.md FIRST**: Add entry with CST date in Spanish Mexican, following `~/rules/rulesets/COMMITTING.md` format
+4. **Update CHANGELOG.md FIRST** — seguir este procedimiento exacto:
+
+   a. Verificar si ya existe entrada para la fecha de hoy:
+      ```bash
+      grep -n "^## \[${DATE_CST}\]" CHANGELOG.md
+      ```
+      - **Si YA existe**: agregar nuevos bullets DENTRO de esa entrada. NO crear encabezado nuevo.
+      - **Si NO existe**: crear `## [YYYY-MM-DD] - Título descriptivo` al tope del archivo.
+
+   b. **Técnica de edición con `edit_files` (OBLIGATORIA)** — Regla de oro:
+      - El `search` es SOLO la línea ancla (el encabezado `## [FECHA]` o la última línea conocida).
+      - El `replace` reproduce esa línea ancla INTACTA y añade el contenido nuevo.
+      - NUNCA incluir en `search` una línea que luego se reproduzca en `replace` — eso duplica contenido.
+      - Para insertar bullets al tope de una entrada existente:
+        ```
+        search:  "## [2026-04-30] - Título actual"
+        replace: "## [2026-04-30] - Título actualizado\n\n- nuevo bullet"
+        ```
+        Las líneas que siguen quedan fuera del `search` y permanecen intactas.
+
+   c. Orden cronológico inverso: entradas más recientes siempre arriba.
+
+   d. Idioma: español mexicano en el CHANGELOG, inglés internacional en el mensaje de commit.
+
 5. **Stage files**: `git add .`
 6. **Commit**: `git commit -m "type: description"` — message MUST be in English international, following Conventional Commits
 7. **Push**: `git push`
