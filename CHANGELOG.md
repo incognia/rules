@@ -7,6 +7,7 @@
 ## [2026-05-02] - Estandarizar commit detallado con archivo temporal
 
 ### feat
+- hacer explícito el formato de `/tmp/commit-msg.txt` en *skill*, CoT y reglas: bullets en columna 1, truncado manual de líneas largas y continuación alineada con dos espacios
 - actualizar `.agents/skills/commit/SKILL.md`: formalizar flujo base para construir `/tmp/commit-msg.txt` con plantilla detallada y ejecutar `git commit -F /tmp/commit-msg.txt`
 - actualizar `cot/committing.md`: mover el armado del mensaje detallado a un paso explícito previo al commit y usar `-F` como método principal para commits atómicos
 - actualizar `rulesets/COMMITTING.md` y `rulesets/COMMIT_LANGUAGE_PROTOCOL.md`: documentar plantilla detallada, verificación de idioma sobre archivo temporal y ejecución consistente con `git commit -F`

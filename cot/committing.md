@@ -61,9 +61,10 @@ Pasos:
    Resultado: crear `/tmp/commit-msg.txt` con esta plantilla:
    ```text
    <tipo>[scope opcional]: <resumen en inglés>
-
+   
    - detalle 1 en inglés
-   - detalle 2 en inglés
+   - detalle 2 en inglés con posible continuación
+     alineada con el texto del bullet
    - detalle 3 en inglés
 
    Co-Authored-By: Oz <oz-agent@warp.dev>
@@ -71,6 +72,8 @@ Pasos:
    Validaciones críticas:
    - Primera línea en inglés internacional usando Conventional Commits.
    - Cuerpo en viñetas con cambios concretos.
+   - El bullet `-` inicia en columna 1 (sin espacios o tabs previos).
+   - Si una viñeta es larga, partirla manualmente y alinear continuidad con dos espacios.
    - Una línea en blanco entre encabezado/cuerpo y cuerpo/pie.
 
 5) Acción: realizar commits atómicos según análisis del paso 1 usando el archivo temporal del paso 4.

@@ -69,7 +69,8 @@ Archivo temporal planeado (`/tmp/commit-msg.txt`):
 feat: integrate Loki and Promtail for centralized logging
 
 - Add Helm values and manifests required for centralized logging
-- Update runtime configuration to route logs through Promtail
+- Update runtime configuration to route logs through
+  Promtail
 - Document deployment and rollback procedure in project docs
 
 Co-Authored-By: Oz <oz-agent@warp.dev>
@@ -77,6 +78,12 @@ Co-Authored-By: Oz <oz-agent@warp.dev>
 ✅ Mensaje en inglés validado - procediendo con:
 git commit -F /tmp/commit-msg.txt
 ```
+
+Formato obligatorio del cuerpo antes de validar idioma:
+
+- El bullet `-` debe iniciar en columna 1 (sin espacios previos).
+- Si una línea es larga, partir y continuar en la siguiente línea.
+- La continuación debe ir con dos espacios para alinear el texto del bullet.
 
 ## Falla del protocolo
 

@@ -73,12 +73,20 @@ Cuando necesites un mensaje de *commit* más claro y reutilizable, usa un archiv
 docs: add frontend/backend GitLab cross-references
 
 - Document zabbix-k1 as the FrontEnd and vpn-relay as the BackEnd using canonical GitLab URLs
-- Replace relative backend references with repository links and backend-local startup commands
+- Replace relative backend references with repository links and
+  backend-local startup commands
 - Add SSH key alignment and relay host-key stability notes in README and docs/SERVERS.md
 - Update CHANGELOG.md with the 2026-05-01 (CST) entry before commit
 
 Co-Authored-By: Oz <oz-agent@warp.dev>
 ```
+
+Reglas de formato obligatorias para esta plantilla:
+
+- El marcador de viñeta `-` va alineado a la izquierda (columna 1), sin espacios ni tabuladores al inicio.
+- Si una viñeta es larga, debes truncar manualmente la línea y continuar abajo.
+- La línea de continuación debe llevar dos espacios de sangría para alinear el texto con el contenido del bullet.
+- Mantener una línea en blanco entre asunto y cuerpo, y otra entre cuerpo y pie.
 
 Después ejecuta el commit con:
 
@@ -246,7 +254,8 @@ git config --global pager.diff false
    fix: correct user validation
 
    - Validate user payload before persistence
-   - Keep login flow compatible with existing clients
+   - Keep login flow compatible with existing clients and
+     preserve backward compatibility for existing callers
    - Add explicit error handling for invalid identifiers
 
    Co-Authored-By: Oz <oz-agent@warp.dev>

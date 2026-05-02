@@ -42,13 +42,19 @@ Before making any git commit in projects that follow the rules repository conven
 6. **Build commit message in temporary file**: create `/tmp/commit-msg.txt` using this detailed structure (English international):
    ```text
    type(scope): short summary in english
-
+   
    - Detail 1 in english
-   - Detail 2 in english
+   - Detail 2 in english that wraps to another line
+     aligned with the bullet text (continuation line)
    - Detail 3 in english
 
    Co-Authored-By: Oz <oz-agent@warp.dev>
    ```
+   **Mandatory formatting rules for bullets and long lines:**
+   - Bullet marker `-` MUST start at column 1 (no leading spaces or tabs before `-`).
+   - If a bullet is too long, split it manually into a new line.
+   - Continuation lines MUST be indented with two spaces so text stays aligned with the bullet content.
+   - Keep exactly one blank line between subject/body and body/footer.
    Reuse and adjust `/tmp/commit-msg.txt` until the wording is final.
 7. **Commit from file**: `git commit -F /tmp/commit-msg.txt` — message MUST be in English international, following Conventional Commits
 8. **Push**: `git push`
@@ -60,6 +66,7 @@ Before making any git commit in projects that follow the rules repository conven
 - Commit messages are ALWAYS in English international
 - Use non-interactive commands only (no pagers, no editors)
 - Prefer `git commit -F /tmp/commit-msg.txt` over `git commit -m` to keep detailed, reusable commit messages
+- In `/tmp/commit-msg.txt`, keep bullets left-aligned and wrap long lines with aligned continuation indentation
 - CoT files classify as `feat:` not `docs:`
 
 ## References
