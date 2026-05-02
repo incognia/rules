@@ -40,6 +40,7 @@ Utilizar la especificación de [Commits Convencionales](https://www.conventional
 - **Descripción:** debe ser concisa, en imperativo y en minúsculas (ej. `fix: correct user login flow`).
 - **Cuerpo:** opcional, para explicar el *qué* y el *porqué* del cambio.
 - **Pie:** opcional, para referencias a *issues* (`Refs: #123`) o para marcar cambios incompatibles (`BREAKING CHANGE:`).
+- **Formato recomendado:** para mensajes detallados, construir primero `/tmp/commit-msg.txt` y usar `git commit -F /tmp/commit-msg.txt`.
 
 ### 2.4. Ejemplos
 
@@ -62,6 +63,27 @@ fix
 
 ```text
 Updated files
+```
+
+### 2.5. Plantilla detallada recomendada (archivo temporal)
+
+Cuando necesites un mensaje de *commit* más claro y reutilizable, usa un archivo temporal con la misma estructura de Commits Convencionales:
+
+```text
+docs: add frontend/backend GitLab cross-references
+
+- Document zabbix-k1 as the FrontEnd and vpn-relay as the BackEnd using canonical GitLab URLs
+- Replace relative backend references with repository links and backend-local startup commands
+- Add SSH key alignment and relay host-key stability notes in README and docs/SERVERS.md
+- Update CHANGELOG.md with the 2026-05-01 (CST) entry before commit
+
+Co-Authored-By: Oz <oz-agent@warp.dev>
+```
+
+Después ejecuta el commit con:
+
+```bash
+git commit -F /tmp/commit-msg.txt
 ```
 
 ## 3. Flujo de trabajo y gestión de cambios
@@ -114,8 +136,17 @@ printf "[%s] docs: describe el cambio\n" "$DATE_CST" | cat - CHANGELOG.md > CHAN
 # 2. SEGUNDO: Añadir archivos
 git add .
 
-# 3. TERCERO: Commit (no interactivo)
-git commit -m "docs(changelog): update entry for $DATE_CST"
+# 3. TERCERO: Preparar mensaje detallado y hacer commit (no interactivo)
+cat > /tmp/commit-msg.txt <<EOF
+docs(changelog): update entry for $DATE_CST
+
+- Add changelog entry for $DATE_CST in CST
+- Keep conventional commit structure in English
+- Preserve chronological order and project commit workflow
+
+Co-Authored-By: Oz <oz-agent@warp.dev>
+EOF
+git commit -F /tmp/commit-msg.txt
 
 # 4. CUARTO: Push (una vez configurado el repo, basta con un push simple)
 git push
@@ -209,11 +240,18 @@ git config --global pager.diff false
    # Luego reescribir el mensaje correctamente
    ```
 
-3. **Alternativa segura: usar archivo temporal:**
+3. **Método preferido: usar archivo temporal detallado**
    ```bash
-   echo "fix: correct user validation" > /tmp/commit_msg
-   git commit -F /tmp/commit_msg
-   rm /tmp/commit_msg
+   cat > /tmp/commit-msg.txt <<EOF
+   fix: correct user validation
+
+   - Validate user payload before persistence
+   - Keep login flow compatible with existing clients
+   - Add explicit error handling for invalid identifiers
+
+   Co-Authored-By: Oz <oz-agent@warp.dev>
+   EOF
+   git commit -F /tmp/commit-msg.txt
    ```
 
 **Prevención:**

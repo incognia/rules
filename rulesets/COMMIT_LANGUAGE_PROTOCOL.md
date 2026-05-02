@@ -20,7 +20,7 @@ git commit -m "docs: actualizar guía de instalación"
 
 ## Referencia
 
-- **Fuente**: `~/cot/committing.md` línea 15
+- **Fuente**: `~/rules/cot/committing.md` línea 15
 - **Texto exacto**: «CRÍTICO: Mensaje de commit SIEMPRE en inglés internacional con Conventional Commits; documentación en español mexicano.»
 
 ## Distribución de idiomas
@@ -35,13 +35,13 @@ git commit -m "docs: actualizar guía de instalación"
 
 ## Protocolo obligatorio para asistente
 
-**Cada vez que se ejecute `~/cot/committing.md`, el asistente DEBE:**
+**Cada vez que se ejecute `~/rules/cot/committing.md`, el asistente DEBE:**
 
 ### Paso 0: Checkpoint de idioma (ANTES de cualquier commit)
 
 ```
 🔍 CHECKPOINT: Verificando idioma de commits...
-📋 REGLA: Mensajes de commit en INGLÉS (~/cot/committing.md línea 15)
+📋 REGLA: Mensajes de commit en INGLÉS (~/rules/cot/committing.md línea 15)
 ⚠️  CRÍTICO: NO proceder hasta confirmar idioma correcto
 ```
 
@@ -49,15 +49,15 @@ git commit -m "docs: actualizar guía de instalación"
 
 **El asistente debe declarar explícitamente:**
 
-> «⚠️ LANGUAGE CHECK: All commit messages must be in English per ~/cot/committing.md line 15»
+> «⚠️ LANGUAGE CHECK: All commit messages must be in English per ~/rules/cot/committing.md line 15»
 
 ### Verificación previa al commit
 
-**Antes de cada `git commit -m "mensaje"`:**
+**Antes de cada `git commit -F /tmp/commit-msg.txt`:**
 
-1. ✅ **Mostrar el mensaje planeado**
-2. ✅ **Confirmar que está en inglés**  
-3. ✅ **Proceder con el commit**
+1. ✅ **Construir o actualizar `/tmp/commit-msg.txt`**
+2. ✅ **Mostrar el mensaje planeado y confirmar que está en inglés**  
+3. ✅ **Proceder con el commit usando `-F`**
 
 ### Ejemplo de aplicación correcta
 
@@ -65,11 +65,17 @@ git commit -m "docs: actualizar guía de instalación"
 🔍 CHECKPOINT: Verificando idioma de commits...
 📋 REGLA: Mensajes de commit en INGLÉS
 
-Commits planeados:
-1. feat: integrate Loki and Promtail for centralized logging
-2. docs: update README files with Loki integration details
+Archivo temporal planeado (`/tmp/commit-msg.txt`):
+feat: integrate Loki and Promtail for centralized logging
 
-✅ Ambos mensajes están en inglés - procediendo...
+- Add Helm values and manifests required for centralized logging
+- Update runtime configuration to route logs through Promtail
+- Document deployment and rollback procedure in project docs
+
+Co-Authored-By: Oz <oz-agent@warp.dev>
+
+✅ Mensaje en inglés validado - procediendo con:
+git commit -F /tmp/commit-msg.txt
 ```
 
 ## Falla del protocolo

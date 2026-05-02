@@ -39,15 +39,27 @@ Before making any git commit in projects that follow the rules repository conven
    d. Idioma: español mexicano en el CHANGELOG, inglés internacional en el mensaje de commit.
 
 5. **Stage files**: `git add .`
-6. **Commit**: `git commit -m "type: description"` — message MUST be in English international, following Conventional Commits
-7. **Push**: `git push`
-8. **Verify**: `git --no-pager log --oneline -1`
+6. **Build commit message in temporary file**: create `/tmp/commit-msg.txt` using this detailed structure (English international):
+   ```text
+   type(scope): short summary in english
+
+   - Detail 1 in english
+   - Detail 2 in english
+   - Detail 3 in english
+
+   Co-Authored-By: Oz <oz-agent@warp.dev>
+   ```
+   Reuse and adjust `/tmp/commit-msg.txt` until the wording is final.
+7. **Commit from file**: `git commit -F /tmp/commit-msg.txt` — message MUST be in English international, following Conventional Commits
+8. **Push**: `git push`
+9. **Verify**: `git --no-pager log --oneline -1`
 
 ## Rules
 
 - CHANGELOG.md is ALWAYS updated BEFORE the commit — never after
 - Commit messages are ALWAYS in English international
 - Use non-interactive commands only (no pagers, no editors)
+- Prefer `git commit -F /tmp/commit-msg.txt` over `git commit -m` to keep detailed, reusable commit messages
 - CoT files classify as `feat:` not `docs:`
 
 ## References

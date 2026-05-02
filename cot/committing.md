@@ -4,8 +4,8 @@ task: seguir COMMITTING.md (actualizar CHANGELOG, commit convencional y push sim
 dificultad: baja
 longitud_objetivo: corta
 validacion: entrada en CHANGELOG con fecha CST, identidad visual confirmada y commit/push exitosos
-version: "1.1"
-last_updated: 2025-09-18
+version: "1.2"
+last_updated: 2026-05-02
 ---
 <!-- markdownlint-disable MD041 -->
 
@@ -57,17 +57,33 @@ Pasos:
    Resultado: nueva(s) línea(s) tipo `- docs: descripción breve del cambio` en español mexicano (solo fecha, sin hora).
    Nota: si hay múltiples tipos, agregar una línea por cada tipo de cambio.
 
-4) Acción: realizar commits atómicos según análisis del paso 1.
-   - Si cambios homogéneos (un tipo): `git add -A && git commit -m "tipo: descripción"`
-   - Si cambios mixtos: commits separados usando `git add archivo(s)` selectivo por cada tipo:
-     * `git add archivo1 archivo2 && git commit -m "feat: descripción funcionalidad"`
-     * `git add archivo3 && git commit -m "fix: descripción corrección"`
+4) Acción: construir mensaje detallado de commit en archivo temporal reutilizable.
+   Resultado: crear `/tmp/commit-msg.txt` con esta plantilla:
+   ```text
+   <tipo>[scope opcional]: <resumen en inglés>
+
+   - detalle 1 en inglés
+   - detalle 2 en inglés
+   - detalle 3 en inglés
+
+   Co-Authored-By: Oz <oz-agent@warp.dev>
+   ```
+   Validaciones críticas:
+   - Primera línea en inglés internacional usando Conventional Commits.
+   - Cuerpo en viñetas con cambios concretos.
+   - Una línea en blanco entre encabezado/cuerpo y cuerpo/pie.
+
+5) Acción: realizar commits atómicos según análisis del paso 1 usando el archivo temporal del paso 4.
+   - Si cambios homogéneos (un tipo): `git add -A && git commit -F /tmp/commit-msg.txt`
+   - Si cambios mixtos: commits separados usando `git add archivo(s)` selectivo por cada tipo, reescribiendo `/tmp/commit-msg.txt` antes de cada commit:
+     * `git add archivo1 archivo2 && git commit -F /tmp/commit-msg.txt`
+     * `git add archivo3 && git commit -F /tmp/commit-msg.txt`
      * etc.
 
-5) Acción: push simple de todos los commits.
+6) Acción: push simple de todos los commits.
    Resultado: `git push`.
 
-6) Acción: verificación no interactiva de los commits realizados.
+7) Acción: verificación no interactiva de los commits realizados.
    Resultado: `git --no-pager log --oneline -5` (ver últimos commits sin paginador).
 
 Conclusión:
@@ -75,7 +91,7 @@ Conclusión:
 - **CRÍTICO**: confirma que la identidad mostrada en el paso 0 coincide con la esperada para este repositorio (email y llave SSH correctas).
 - EJEMPLO de verificación de timezone: si UTC es 14:30, CST debe ser 08:30 (14 - 6 = 8); si UTC es 03:15, CST debe ser 21:15 del día anterior.
 - Si fueron commits múltiples, asegurar que cada uno es atómico y tiene mensaje convencional apropiado (feat, fix, docs, etc.).
-- Si aparece `quote>` durante el commit: presionar Ctrl+C y revisar escape de comillas en el mensaje.
+- Para evitar `quote>` y errores de escape, preferir siempre `git commit -F /tmp/commit-msg.txt`.
 - **PISTA IMPORTANTE**: si `git remote -v` muestra URLs con https:// en lugar de git@, indica configuración incorrecta y debe aplicarse git_init.
 - **PISTA CUENTAS MÚTIPLES**: si el email/llave no coincide con lo esperado, revisar configuración del repositorio antes de proceder.
 - La atomicidad de commits facilita el mantenimiento: cada commit debe representar un cambio lógico único y funcional.

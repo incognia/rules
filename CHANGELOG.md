@@ -4,6 +4,13 @@
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 
+## [2026-05-02] - Estandarizar commit detallado con archivo temporal
+
+### feat
+- actualizar `.agents/skills/commit/SKILL.md`: formalizar flujo base para construir `/tmp/commit-msg.txt` con plantilla detallada y ejecutar `git commit -F /tmp/commit-msg.txt`
+- actualizar `cot/committing.md`: mover el armado del mensaje detallado a un paso explícito previo al commit y usar `-F` como método principal para commits atómicos
+- actualizar `rulesets/COMMITTING.md` y `rulesets/COMMIT_LANGUAGE_PROTOCOL.md`: documentar plantilla detallada, verificación de idioma sobre archivo temporal y ejecución consistente con `git commit -F`
+
 ## [2026-04-30] - Regla de edición directa en *skill* commit
 
 ### feat
