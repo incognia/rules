@@ -54,7 +54,7 @@ Pasos:
 
 3) Acción: editar CHANGELOG.md y agregar entrada(s) bajo `## [${DATE_CST}]` según tipos de cambios identificados.
    Referencia: aplicar «~/rules/cot/changelog.md» ([./changelog.md](./changelog.md)) para mantenimiento correcto del *changelog*
-   Resultado: nueva(s) línea(s) tipo `- docs: descripción breve del cambio` en español mexicano (solo fecha, sin hora).
+   Resultado: nueva(s) línea(s) tipo `- docs: descripción breve del cambio` en español mexicano (solo fecha, sin hora, sin subencabezados `### tipo`).
    Nota: si hay múltiples tipos, agregar una línea por cada tipo de cambio.
 
 4) Acción: construir mensaje detallado de commit en archivo temporal reutilizable.

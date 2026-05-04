@@ -26,7 +26,7 @@ Pasos:
 3) Acción: verificar si ya existe una entrada para la fecha CST actual.
    COMANDO OBLIGATORIO: `grep -n "^## \[${DATE_CST}\]" CHANGELOG.md`
    Decisión crítica:
-   - Si YA EXISTE entrada para esa fecha: agregar las nuevas subsecciones (`### feat`, `### fix`, etc.) DENTRO de la entrada existente. NO crear encabezado nuevo.
+   - Si YA EXISTE entrada para esa fecha: agregar nuevos bullets tipados (`- feat: ...`, `- docs: ...`) DENTRO de la entrada existente. NO crear encabezado nuevo.
    - Si NO existe: crear nuevo encabezado `## [YYYY-MM-DD] - Título descriptivo` en la posición correcta (arriba de todas las entradas).
    Resultado: nunca dos encabezados con la misma fecha en el CHANGELOG.
 
@@ -35,23 +35,22 @@ Pasos:
    Resultado: español mexicano sin calcos del inglés, comillas angulares «», terminología técnica correcta.
 
 5) Acción: verificar formato de encabezado.
-   Formato requerido: `## [YYYY-MM-DD] - Título descriptivo del cambio principal`
+   Formato requerido: `## [YYYY-MM-DD] - Título descriptivo`
    Validación: solo fecha sin hora, título en estilo oración (primera mayúscula + nombres propios)
    Resultado: encabezado conforme al formato establecido.
+6) Acción: organizar cambios en bullets tipados dentro de la fecha.
+   Formato de cada bullet: `- tipo: descripción` (ej. `- feat: ...`, `- fix: ...`, `- docs: ...`)
+   Validación: no usar subencabezados `### tipo`; usar bullets directos con prefijo de tipo
+   Resultado: entrada compacta y consistente con formato de repos de operaciones-ti.
 
-6) Acción: organizar cambios por categorías semánticas.
-   Categorías: `### docs`, `### feat`, `### fix`, `### refactor`, `### chore`, `### ci`
-   Validación: agrupar cambios relacionados, no micro-entradas por commit individual
-   Resultado: secciones organizadas con cambios agrupados lógicamente.
-
-6b) Acción: insertar bullets en orden cronológico inverso dentro de cada sección.
-   REGLA CRÍTICA: dentro de cada `### tipo`, los bullets van de más reciente a más antiguo (el nuevo bullet va PRIMERO, justo después del encabezado `### tipo`).
+6b) Acción: insertar bullets en orden cronológico inverso dentro de la entrada de fecha.
+   REGLA CRÍTICA: el nuevo bullet va PRIMERO dentro del bloque de la fecha.
    TÉCNICA DE EDICIÓN OBLIGATORIA para `edit_files`:
    - REGLA DE ORO: el `search` termina en la ÚLTIMA LÍNEA que se desea como ancla. El `replace` reproduce esa línea intacta y AÑADE el nuevo contenido ANTES o DESPUÉS de ella. NUNCA incluir en el `search` una línea que luego se reproduzca truncada o modificada en el `replace`.
-   - Para insertar bullet al tope de `### tipo`: el `search` es SOLO `### tipo` (una línea). El `replace` es `### tipo\n- nuevo bullet`. La línea que sigue (el bullet anterior) queda intocada fuera del `search`.
+   - Para insertar bullet al tope de una fecha existente: el `search` es SOLO el encabezado `## [FECHA] - ...`. El `replace` reproduce el encabezado y agrega el nuevo bullet justo debajo.
    - Para insertar nueva entrada `## [FECHA]` al inicio del archivo: el `search` es SOLO la línea ancla inmediatamente anterior (p. ej. el comentario `<!-- markdownlint-disable -->` o la línea en blanco que lo sigue). El `replace` reproduce esa línea ancla exacta y añade la nueva entrada después. NUNCA incluir la primera `## [FECHA]` existente en el `search` a menos que se reproduzca COMPLETA e INTACTA en el `replace`.
    - Si el `search` falla, leer el archivo con `read_files` para obtener el contenido exacto antes de reintentar.
-   Resultado: bullets ordenados cronológicamente dentro de cada sección, nuevo bullet al tope.
+   Resultado: bullets tipados ordenados cronológicamente dentro de cada fecha, con nuevo bullet al tope.
 
 7) Acción: revisar texto de las entradas existentes.
    COMANDO OBLIGATORIO: `grep -A 20 "^## \[" CHANGELOG.md | head -50` para revisar entradas recientes
@@ -78,8 +77,9 @@ VERIFICACIÓN CRÍTICA (antes de completar):
 - Verificar: sin duplicados con conteo de encabezados idénticos
 - Revisar: idioma 100% español mexicano según LINGUISTICS.md
 - Comprobar: formato de encabezado `[YYYY-MM-DD] - Título descriptivo`
+- Comprobar: bullets con prefijo `tipo:` y ausencia de subencabezados `### tipo`
 
 Conclusión:
-- Entregar: CHANGELOG.md actualizado con nueva entrada en posición cronológica correcta, fecha CST precisa, idioma consistente español mexicano, sin duplicados, categorías organizadas semánticamente.
+- Entregar: CHANGELOG.md actualizado con nueva entrada en posición cronológica correcta, fecha CST precisa, idioma consistente español mexicano, sin duplicados y bullets tipados organizados semánticamente.
 - Evitar: mezclar idiomas, etiquetar UTC como CST, orden cronológico incorrecto, duplicar entradas, micro-cambios sin agrupar.
 - Referencias: «~/rules/CHANGELOG.md» ([../../CHANGELOG.md](../../CHANGELOG.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/cot/committing.md» ([./committing.md](./committing.md)) para flujo completo.

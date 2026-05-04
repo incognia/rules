@@ -16,13 +16,13 @@ When adding or updating entries in CHANGELOG.md for any project following rules 
 3. **Check existing entries**: Verify the date doesn't already have an entry to avoid duplicates
 4. **Add entry at the top** (reverse chronological order) using format:
    ```markdown
-   ## [YYYY-MM-DD] - Título descriptivo del cambio principal
+   ## [YYYY-MM-DD] - Título descriptivo breve
 
-   ### type
-   - descripción del cambio en español mexicano
+   - feat: descripción del cambio en español mexicano
+   - docs: descripción adicional si aplica
    ```
 5. **Language**: All entries in Spanish Mexican, no emojis
-6. **Type**: Must match the commit prefix (feat, fix, docs, style, refactor, chore)
+6. **Type in bullets**: Each bullet MUST start with `tipo:` and match valid commit types (`feat`, `fix`, `docs`, `style`, `refactor`, `chore`, `ci`, `perf`, `test`, `build`)
 7. **Verify**: Check that the new entry is above all previous entries
 
 ## Critical rules
@@ -31,6 +31,7 @@ When adding or updating entries in CHANGELOG.md for any project following rules 
 - CST = UTC - 6 hours (verify with `TZ=America/Mexico_City date`)
 - No emojis in CHANGELOG entries
 - Descriptive title after the date: `## [YYYY-MM-DD] - Título descriptivo`
+- Do NOT use subheadings like `### feat`/`### fix` inside a date entry
 
 ## References
 

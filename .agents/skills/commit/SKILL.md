@@ -21,7 +21,7 @@ Before making any git commit in projects that follow the rules repository conven
       grep -n "^## \[${DATE_CST}\]" CHANGELOG.md
       ```
       - **Si YA existe**: agregar nuevos bullets DENTRO de esa entrada. NO crear encabezado nuevo.
-      - **Si NO existe**: crear `## [YYYY-MM-DD] - Título descriptivo` al tope del archivo.
+      - **Si NO existe**: crear `## [YYYY-MM-DD] - Título descriptivo` al tope del archivo y agregar bullets tipados (`- feat: ...`, `- docs: ...`).
 
    b. **Técnica de edición con `edit_files` (OBLIGATORIA)** — Regla de oro:
       - El `search` es SOLO la línea ancla (el encabezado `## [FECHA]` o la última línea conocida).
@@ -30,13 +30,15 @@ Before making any git commit in projects that follow the rules repository conven
       - Para insertar bullets al tope de una entrada existente:
         ```
         search:  "## [2026-04-30] - Título actual"
-        replace: "## [2026-04-30] - Título actualizado\n\n- nuevo bullet"
+        replace: "## [2026-04-30] - Título actualizado\n\n- docs: nuevo cambio"
         ```
         Las líneas que siguen quedan fuera del `search` y permanecen intactas.
 
    c. Orden cronológico inverso: entradas más recientes siempre arriba.
 
    d. Idioma: español mexicano en el CHANGELOG, inglés internacional en el mensaje de commit.
+
+   e. Formato de cuerpo del CHANGELOG: usar bullets directos con prefijo de tipo (`- feat: ...`, `- fix: ...`) y **no** usar subencabezados `### feat`/`### fix`.
 
 5. **Stage files**: `git add .`
 6. **Build commit message in temporary file**: create `/tmp/commit-msg.txt` using this detailed structure (English international):
@@ -67,6 +69,7 @@ Before making any git commit in projects that follow the rules repository conven
 - Use non-interactive commands only (no pagers, no editors)
 - Prefer `git commit -F /tmp/commit-msg.txt` over `git commit -m` to keep detailed, reusable commit messages
 - In `/tmp/commit-msg.txt`, keep bullets left-aligned and wrap long lines with aligned continuation indentation
+- In `CHANGELOG.md`, use dated headings plus direct typed bullets (no `### type` subsections)
 - CoT files classify as `feat:` not `docs:`
 
 ## References

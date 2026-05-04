@@ -113,6 +113,8 @@ git commit -F /tmp/commit-msg.txt
 - **Zona horaria:** usar **CST de Ciudad de México (UTC-6)** para todas las fechas. Nunca usar UTC ni la zona horaria local del sistema
 - **Formato de fecha:** usar únicamente fecha sin hora en formato `[YYYY-MM-DD]` según CST Ciudad de México. La hora NO debe incluirse
 - **Título descriptivo:** usar el formato `## [YYYY-MM-DD] - Título descriptivo del cambio principal` para los encabezados de sección
+- **Formato de cuerpo:** usar bullets directos con prefijo de tipo (`- feat: ...`, `- fix: ...`, `- docs: ...`) dentro de cada fecha
+- **No usar subencabezados por tipo:** dentro de cada fecha NO usar `### feat`, `### fix`, etc.
 - **⚠️ IMPORTANTE: NO usar emojis en las entradas del CHANGELOG.md** - mantener el contenido limpio y profesional usando únicamente texto
 
 ⚠️ **ADVERTENCIA CRÍTICA:** Para obtener la fecha CST correcta, NO es suficiente añadir "CST" a una fecha UTC. Debes convertir la fecha restando 6 horas a UTC o usar `TZ="America/Mexico_City" date +"%Y-%m-%d"` para la conversión automática.
@@ -126,9 +128,9 @@ echo "$DATE_CST"
 ```
 
 - **Contenido mínimo:**
-  - Fecha del cambio en formato `[YYYY-MM-DD]` según CST Ciudad de México (UTC-6, NO UTC con sufijo CST)
-  - Tipo de cambio (coincidente con el prefijo del *commit*)
-  - Breve descripción del cambio
+  - Encabezado de fecha en formato `## [YYYY-MM-DD] - Título descriptivo`
+  - Al menos un bullet con prefijo de tipo (`- docs: ...`, `- feat: ...`, etc.)
+  - Descripción breve del cambio en español mexicano
 
 **Ejemplo del flujo correcto:**
 
@@ -137,9 +139,13 @@ echo "$DATE_CST"
 DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")
 # Opción A (manual): abrir editor
 vim CHANGELOG.md
-# Opción B (no interactiva): anteponer una línea de ejemplo (ajusta el tipo y descripción)
-# Nota: reemplaza "docs" y la descripción según corresponda
-printf "[%s] docs: describe el cambio\n" "$DATE_CST" | cat - CHANGELOG.md > CHANGELOG.tmp && mv CHANGELOG.tmp CHANGELOG.md
+# Opción B (no interactiva): anteponer bloque con formato oficial (ajusta tipo y descripción)
+cat > /tmp/changelog-entry.txt <<EOF
+## [$DATE_CST] - Título descriptivo
+
+- docs: describe el cambio
+EOF
+cat /tmp/changelog-entry.txt CHANGELOG.md > CHANGELOG.tmp && mv CHANGELOG.tmp CHANGELOG.md
 
 # 2. SEGUNDO: Añadir archivos
 git add .
