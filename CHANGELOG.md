@@ -5,6 +5,9 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-05-04] - Homologar formato de CHANGELOG con estándar operaciones-ti
 
+- feat: crear `.agents/skills/release/SKILL.md` para publicar versiones semánticas no interactivas con validación histórica y cierre de flujo en `dev`
+- feat: crear `rulesets/RELEASING.md` con reglas canónicas de tageo `vX.Y.Z`, convención de nombre/notas y verificaciones obligatorias post-publicación
+- feat: actualizar `cot/release.md` con CoT de publicación no interactiva: validación de baseline, derivación automática de descriptor/notas y secuencia `dev -> main -> tag -> release -> dev`
 - feat: migrar `CHANGELOG.md` al formato de encabezado por fecha con bullets tipados directos (`- tipo: ...`) y eliminar subencabezados `### tipo`
 - docs: actualizar `.agents/skills/changelog/SKILL.md` y `.agents/skills/commit/SKILL.md` para exigir el nuevo formato de entradas
 - docs: actualizar `cot/changelog.md`, `cot/committing.md` y `rulesets/COMMITTING.md` para documentar y validar el formato homologado
