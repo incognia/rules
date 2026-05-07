@@ -57,6 +57,17 @@ Pasos:
    Resultado: nueva(s) línea(s) tipo `- docs: descripción breve del cambio` en español mexicano (solo fecha, sin hora, sin subencabezados `### tipo`).
    Nota: si hay múltiples tipos, agregar una línea por cada tipo de cambio.
 
+3b) Acción: ejecutar checkpoint anti-errores de CHANGELOG antes de staging.
+   COMANDO OBLIGATORIO: `git --no-pager diff -- CHANGELOG.md`
+   Criterio de aceptación:
+   - Solo adiciones mínimas en el bloque de fecha objetivo.
+   - Sin borrados no solicitados fuera del bullet nuevo.
+   Gestión de fallos:
+   - Primer fallo: releer bloque exacto y corregir una sola vez con edición mínima.
+   - Segundo fallo: detener flujo y pedir confirmación del usuario antes de continuar.
+   - Prohibido encadenar 3+ intentos sobre CHANGELOG sin validación intermedia exitosa.
+   Resultado: CHANGELOG validado como requisito de entrada para commit.
+
 4) Acción: construir mensaje detallado de commit en archivo temporal reutilizable.
    Resultado: crear `/tmp/commit-msg.txt` con esta plantilla:
    ```text
@@ -75,6 +86,14 @@ Pasos:
    - El bullet `-` inicia en columna 1 (sin espacios o tabs previos).
    - Si una viñeta es larga, partirla manualmente y alinear continuidad con dos espacios.
    - Una línea en blanco entre encabezado/cuerpo y cuerpo/pie.
+
+4b) Acción: checkpoint obligatorio de idioma antes de `git commit -F`.
+   Declaración obligatoria:
+   - `⚠️ LANGUAGE CHECK: All commit messages must be in English per ~/rules/cot/committing.md line 15`
+   Validación:
+   - Mostrar/revisar el contenido de `/tmp/commit-msg.txt` y confirmar inglés en subject/body.
+   - Confirmar presencia de `Co-Authored-By: Oz <oz-agent@warp.dev>`.
+   Resultado: mensaje validado en inglés internacional y listo para commit no interactivo.
 
 5) Acción: realizar commits atómicos según análisis del paso 1 usando el archivo temporal del paso 4.
    - Si cambios homogéneos (un tipo): `git add -A && git commit -F /tmp/commit-msg.txt`
@@ -98,5 +117,10 @@ Conclusión:
 - **PISTA IMPORTANTE**: si `git remote -v` muestra URLs con https:// en lugar de git@, indica configuración incorrecta y debe aplicarse git_init.
 - **PISTA CUENTAS MÚTIPLES**: si el email/llave no coincide con lo esperado, revisar configuración del repositorio antes de proceder.
 - La atomicidad de commits facilita el mantenimiento: cada commit debe representar un cambio lógico único y funcional.
+- Anti-patrones prohibidos (detener y pedir confirmación si aparece cualquiera):
+  - Continuar a `git add`/`git commit` sin validar `git --no-pager diff -- CHANGELOG.md`.
+  - Encadenar reintentos de edición de CHANGELOG sin releer bloque exacto y sin validación exitosa intermedia.
+  - Hacer commit con mensaje en español o sin checkpoint explícito de idioma.
+  - Usar flujo interactivo (editor/pager) en lugar de `git commit -F /tmp/commit-msg.txt`.
 - Referencias: «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)), «~/rules/cot/changelog.md» ([./changelog.md](./changelog.md)), «~/rules/cot/git_init.md» ([./git_init.md](./git_init.md)), «~/rules/rulesets/GIT.md» ([../rulesets/GIT.md](../rulesets/GIT.md)), «~/rules/README.md» ([../../README.md](../../README.md)) y «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)).
 

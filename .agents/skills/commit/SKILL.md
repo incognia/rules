@@ -40,6 +40,12 @@ Before making any git commit in projects that follow the rules repository conven
 
    e. Formato de cuerpo del CHANGELOG: usar bullets directos con prefijo de tipo (`- feat: ...`, `- fix: ...`) y **no** usar subencabezados `### feat`/`### fix`.
 
+   f. Validación obligatoria de cambios mínimos en CHANGELOG:
+      - Ejecutar `git --no-pager diff -- CHANGELOG.md` inmediatamente después de editar.
+      - Criterio de aceptación: solo líneas añadidas dentro del bloque de fecha objetivo; sin borrados no solicitados.
+      - Si falla: releer bloque exacto y corregir una sola vez con edición mínima.
+      - Si vuelve a fallar: detener y pedir confirmación del usuario antes de reintentar.
+
 5. **Stage files**: `git add .`
 6. **Build commit message in temporary file**: create `/tmp/commit-msg.txt` using this detailed structure (English international):
    ```text
@@ -61,6 +67,21 @@ Before making any git commit in projects that follow the rules repository conven
 7. **Commit from file**: `git commit -F /tmp/commit-msg.txt` — message MUST be in English international, following Conventional Commits
 8. **Push**: `git push`
 9. **Verify**: `git --no-pager log --oneline -1`
+
+## Anti-error and anti-pattern protocol for /commit (MANDATORY)
+
+1. Do not proceed to `git add`/`git commit` if CHANGELOG validation criterion is not satisfied.
+2. Before committing, enforce language checkpoint declaration:
+   - `⚠️ LANGUAGE CHECK: All commit messages must be in English per ~/rules/cot/committing.md line 15`
+3. Build or update `/tmp/commit-msg.txt`, then verify content is English before `git commit -F`.
+4. Never use interactive editors/pagers in commit flow.
+5. Stop immediately if any forbidden anti-pattern appears and request user confirmation before continuing.
+
+Forbidden anti-patterns:
+- Commit/push while `CHANGELOG.md` still has non-minimal or invalid diff.
+- Repeating chained CHANGELOG retries without intermediate successful validation.
+- Falling back to ad-hoc commit messages that skip `/tmp/commit-msg.txt`.
+- Using Spanish in commit message subject/body.
 
 ## Rules
 

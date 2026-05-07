@@ -58,6 +58,20 @@ git commit -m "docs: actualizar guía de instalación"
 1. ✅ **Construir o actualizar `/tmp/commit-msg.txt`**
 2. ✅ **Mostrar el mensaje planeado y confirmar que está en inglés**  
 3. ✅ **Proceder con el commit usando `-F`**
+4. ✅ **Confirmar que `CHANGELOG.md` ya pasó validación mínima con `git --no-pager diff -- CHANGELOG.md`**
+
+### Puerta obligatoria de ejecución (changelog + idioma)
+
+No se permite continuar a `git add`/`git commit` si falla cualquiera de estas dos condiciones:
+
+1. **CHANGELOG gate**: el diff de `CHANGELOG.md` no cumple criterio de cambio mínimo (solo adiciones en fecha objetivo).
+2. **LANGUAGE gate**: subject y body del commit no están completamente en inglés internacional.
+
+Si cualquiera falla:
+
+- 🛑 detener flujo,
+- 🔍 releer/corregir una sola vez,
+- 🙋 pedir confirmación del usuario antes de un segundo reintento.
 
 ### Ejemplo de aplicación correcta
 
@@ -93,6 +107,13 @@ Formato obligatorio del cuerpo antes de validar idioma:
 2. 🔄 **CORREGIR** con reset/amend si es necesario  
 3. 📝 **DOCUMENTAR** el error para evitar recurrencia
 4. ✅ **REPETIR** proceso con idioma correcto
+
+## Anti-patrones prohibidos (detener inmediatamente)
+
+- Commitear o pushear con `CHANGELOG.md` no validado.
+- Encadenar reintentos sobre `CHANGELOG.md` sin validación exitosa intermedia.
+- Hacer commit en español por omitir checkpoint de idioma.
+- Saltarse `/tmp/commit-msg.txt` y degradar a mensajes ad-hoc sin revisión.
 
 ## Error recurrente identificado
 

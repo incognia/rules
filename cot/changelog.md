@@ -52,6 +52,17 @@ Pasos:
    - Si el `search` falla, leer el archivo con `read_files` para obtener el contenido exacto antes de reintentar.
    Resultado: bullets tipados ordenados cronológicamente dentro de cada fecha, con nuevo bullet al tope.
 
+6c) Acción: validar diff mínimo inmediatamente después de cada edición.
+   COMANDO OBLIGATORIO: `git --no-pager diff -- CHANGELOG.md`
+   Criterio de aceptación obligatorio:
+   - Solo líneas añadidas en el bloque de la fecha objetivo.
+   - Cero borrados no solicitados fuera del bullet nuevo.
+   Gestión de fallos:
+   - Si falla la validación: releer bloque exacto y corregir una sola vez con edición mínima.
+   - Si vuelve a fallar: detenerse y pedir confirmación del usuario antes de cualquier nuevo intento.
+   - Prohibido encadenar 3 o más intentos seguidos sobre `CHANGELOG.md` sin validación intermedia exitosa.
+   Resultado: cambios mínimos, trazables y sin efectos colaterales.
+
 7) Acción: revisar texto de las entradas existentes.
    COMANDO OBLIGATORIO: `grep -A 20 "^## \[" CHANGELOG.md | head -50` para revisar entradas recientes
    Validación: detectar mezcla español-inglés, calcos, regionalismos no mexicanos
@@ -78,6 +89,16 @@ VERIFICACIÓN CRÍTICA (antes de completar):
 - Revisar: idioma 100% español mexicano según LINGUISTICS.md
 - Comprobar: formato de encabezado `[YYYY-MM-DD] - Título descriptivo`
 - Comprobar: bullets con prefijo `tipo:` y ausencia de subencabezados `### tipo`
+- Validar: `git --no-pager diff -- CHANGELOG.md` cumple criterio de aceptación (solo adiciones mínimas en fecha objetivo)
+
+ANTI-PATRONES PROHIBIDOS (detener y pedir confirmación si ocurre cualquiera):
+1. Reintentar el mismo parche sobre el encabezado sin cambiar la ancla real del bloque.
+2. Escalar a reescritura total de `CHANGELOG.md` para insertar un bullet puntual.
+3. Hacer más de un reintento sin releer antes el bloque exacto.
+4. Encadenar intentos fallidos sin validar diff en cada intento.
+5. Alterar líneas existentes fuera del bullet nuevo sin instrucción explícita del usuario.
+6. Continuar con `/commit` cuando el `CHANGELOG.md` no cumple el criterio de aceptación.
+7. Improvisar flujos alternos fuera de `/changelog` y `/commit` para forzar edición.
 
 Conclusión:
 - Entregar: CHANGELOG.md actualizado con nueva entrada en posición cronológica correcta, fecha CST precisa, idioma consistente español mexicano, sin duplicados y bullets tipados organizados semánticamente.

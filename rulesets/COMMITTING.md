@@ -117,6 +117,34 @@ git commit -F /tmp/commit-msg.txt
 - **No usar subencabezados por tipo:** dentro de cada fecha NO usar `### feat`, `### fix`, etc.
 - **⚠️ IMPORTANTE: NO usar emojis en las entradas del CHANGELOG.md** - mantener el contenido limpio y profesional usando únicamente texto
 
+#### 3.1.1. Protocolo anti-errores y anti-patrones (OBLIGATORIO, SIN EXCEPCIÓN)
+
+Antes de continuar a `git add`/`git commit`, se debe cumplir este protocolo:
+
+1. Verificar fecha CST real y encabezado existente:
+   - `DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")`
+   - `grep -n "^## \[${DATE_CST}\]" CHANGELOG.md`
+2. Leer el bloque exacto de la fecha objetivo antes de editar.
+3. Editar con cambio mínimo anclado al encabezado de fecha, preservando líneas existentes.
+4. Validar inmediatamente:
+   - `git --no-pager diff -- CHANGELOG.md`
+5. Criterio de aceptación:
+   - Solo adiciones en el bloque de fecha objetivo.
+   - Cero borrados no solicitados fuera del bullet nuevo.
+6. Si falla validación:
+   - Corregir una sola vez con edición mínima tras releer bloque exacto.
+7. Si vuelve a fallar:
+   - Detener ejecución y pedir confirmación del usuario.
+8. Prohibido encadenar 3+ intentos sobre `CHANGELOG.md` sin validación intermedia exitosa.
+
+Anti-patrones prohibidos:
+
+- Reintentar el mismo parche sin ajustar ancla al contenido real del bloque.
+- Reescribir `CHANGELOG.md` completo para insertar o ajustar bullets puntuales.
+- Usar scripts ad-hoc para `CHANGELOG.md` cuando edición mínima anclada es suficiente.
+- Alterar líneas existentes fuera del cambio solicitado sin instrucción explícita.
+- Continuar con commit/push cuando `CHANGELOG.md` no cumple el criterio de aceptación.
+
 ⚠️ **ADVERTENCIA CRÍTICA:** Para obtener la fecha CST correcta, NO es suficiente añadir "CST" a una fecha UTC. Debes convertir la fecha restando 6 horas a UTC o usar `TZ="America/Mexico_City" date +"%Y-%m-%d"` para la conversión automática.
 
 **Comandos recomendados (siempre correctos):**

@@ -3,6 +3,11 @@
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-05-07] - Reforzar protocolo anti-errores en changelog y commit
+
+- feat: hacer explícitos checkpoints anti-errores y anti-patrones en los flujos `/changelog` y `/commit` dentro de los *skills* y CoT (`.agents/skills/changelog/SKILL.md`, `.agents/skills/commit/SKILL.md`, `cot/changelog.md`, `cot/committing.md`)
+- feat: formalizar en `rulesets/COMMITTING.md` y `rulesets/COMMIT_LANGUAGE_PROTOCOL.md` puertas obligatorias de validación mínima de `CHANGELOG.md` y checkpoint de idioma antes de commitear
+
 ## [2026-05-04] - Homologar formato de CHANGELOG con estándar operaciones-ti
 
 - feat: crear `.agents/skills/release/SKILL.md` para publicar versiones semánticas no interactivas con validación histórica y cierre de flujo en `dev`
