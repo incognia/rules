@@ -40,6 +40,7 @@ tags: tag-1, tag-2, tag-3, tag-opcional
 - El bloque `<div style="text-align: right;">` funciona **solo en HedgeDoc**; GitLab y GitHub eliminan los atributos `style`
 - El primer encabezado debe ser claro y conciso
 - La fecha de "Última modificación" debe actualizarse con la fecha y hora real al momento de editar el documento (formato: DD de mes de AAAA, HH:MM (CST))
+- **Regla de fecha única:** antes de insertar/actualizar "Última modificación", eliminar cualquier campo de fecha ya reportado (`Fecha:`, `Fecha de reporte:`, `[time=...]` u otro "Última modificación") para dejar solo uno.
 - **Zona horaria obligatoria:** siempre usar CST de Ciudad de México (UTC-6), nunca UTC ni otra zona horaria
 
 ⚠️ **ADVERTENCIA CRÍTICA:** Para generar timestamps CST correctos, NO es suficiente añadir "CST" a una fecha UTC. Debes restar 6 horas a UTC para obtener la fecha CST correcta. Por ejemplo, si UTC es 22:21, CST debe ser 16:21 (22:21 - 6 horas = 16:21). Usar `TZ="America/Mexico_City" date` garantiza la conversión automática.
@@ -204,6 +205,7 @@ description: "Breve descripción del proyecto"
 
 > ⚠️ No usar `<div style="...">` — GitLab y GitHub eliminan atributos `style`.
 > Los campos `title` y `description` son los estándar para ambas plataformas; no usar `tags` (exclusivo de HedgeDoc).
+> Regla de fecha única: mantener un solo `*Última modificación: ...*`; eliminar cualquier fecha previa redundante.
 
 **Pie de página para README.md:**
 
@@ -267,6 +269,7 @@ GitHub:
 Documentos Markdown para GitHub (README.md con licencia, otros documentos sin licencia).
 
 **Encabezado:** Idéntico a GitLab: H1 + timestamp en Markdown puro (`*Última modificación: ...*`). Sin `<div style>`, sin logo, sin frontmatter YAML.
+Aplicar la misma regla de fecha única: eliminar fechas reportadas existentes antes de insertar el timestamp final.
 
 **Pie de página:** Idéntico a GitLab (copyright solo en README.md, sin firma ni CSS).
 
@@ -301,6 +304,7 @@ Antes de publicar un documento, verificar:
 - [ ] CSS corporativo incluido y funcional (si aplica)
 - [ ] Enlaces e imágenes funcionando correctamente
 - [ ] Formato consistente con otros documentos del proyecto
+- [ ] Existe un solo campo de fecha visible (`Última modificación`), sin fechas redundantes
 - [ ] Licencia solo en README.md (MIT o GPLv3)
 - [ ] Plataforma correcta (HedgeDoc/GitLab/GitHub)
 

@@ -50,6 +50,7 @@ Use as starting point:
      > ⚠️ Always quote values with double quotes — values containing `:` cause YAML parse errors if unquoted.
    - **GitLab/GitHub other docs**: no frontmatter
    - H1 title
+   - **Single-date cleanup (MANDATORY)**: before inserting/updating the timestamp, detect and remove any existing reported date field (for example `Última modificación:`, `Fecha:`, `Fecha de reporte:`, `[time=...]`) so only one date remains.
    - Timestamp: `LC_TIME=es_MX.UTF-8 TZ=America/Mexico_City date '+%d de %B de %Y, %H:%M (%Z)'`
    - **HedgeDoc**: `<div style="text-align: right;"><em>Última modificación: [timestamp] (CST)</em></div><br>`
    - **GitLab/GitHub**: `*Última modificación: [timestamp] (CST)*` — plain Markdown italic, no HTML (GL/GH strip inline styles)
@@ -149,6 +150,7 @@ No footer. Do not add anything.
 - **HedgeDoc**: signature image + CSS in footer. Never license.
 - **GitLab/GitHub README.md** (with `mit`/`gpl`): copyright text only. No signature. No CSS.
 - **GitLab/GitHub other docs**: no footer at all.
+- Single-date policy: final document must keep exactly one visible reported date field (`Última modificación`), with all previous/duplicate date fields removed.
 
 ## References
 

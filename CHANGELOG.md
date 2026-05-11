@@ -3,6 +3,10 @@
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-05-11] - Reforzar styling con política de fecha única
+
+- docs: precisar `/styling`, `cot/styling.md` y `rulesets/STYLING.md` para eliminar fechas reportadas redundantes y conservar un único campo de «Última modificación»
+
 ## [2026-05-10] - Fortalecer flujo de changelog y consistencia de skills
 
 - docs: definir hard stop absoluto en `/changelogger` y `cot/changelog.md`: si no se ejecuta la lectura precisa de `CHANGELOG.md` (1-200), el flujo se detiene y reinicia desde el paso 0

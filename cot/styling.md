@@ -15,7 +15,10 @@ Razonamiento:
 Pasos:
 1) Acción: insertar encabezado estándar según «~/rules/STYLING.md» (tags + logo + H1 + timestamp alineado a la derecha).
    Resultado: bloque YAML con tags y bloque de encabezado con logo Kabat One y título H1.
-2) Acción: generar y validar timestamp de «Última modificación» en CST (24 h).
+2) Acción: detectar y eliminar campos de fecha reportados existentes antes de insertar el timestamp nuevo.
+   Validación: localizar y limpiar patrones como `Última modificación:`, `Fecha:`, `Fecha de reporte:` y `[time=...]` para evitar duplicidad.
+   Resultado: el documento conserva un solo campo de fecha visible.
+2b) Acción: generar y validar timestamp de «Última modificación» en CST (24 h).
    Resultado: `TZ=America/Mexico_City date '+%d de %B de %Y, %H:%M (CST)'` produce, p. ej., «31 de julio de 2025, 11:59 (CST)».
 3) Acción: revisar estructura de contenido (H2→H3→H4) y evitar saltos de nivel.
    Resultado: jerarquía clara; títulos en estilo oración y sin punto final.
@@ -41,5 +44,6 @@ Pasos:
 
 Conclusión:
 - Entregar el documento con encabezado/pie correctos, timestamp válido en CST, contenido jerarquizado y estilo consistente.
+- Confirmar política de fecha única: ninguna fecha redundante permanece después del styling.
 - Referencias: «~/rules/rulesets/STYLING.md» ([../rulesets/STYLING.md](../rulesets/STYLING.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) y «~/rules/README.md» ([../../README.md](../../README.md)).
 
