@@ -16,8 +16,14 @@ Razonamiento:
 Pasos:
 0) Acción: leer primero las líneas 1-200 de `CHANGELOG.md` antes de cualquier búsqueda o edición.
    HERRAMIENTA OBLIGATORIA: `read_files` sobre `CHANGELOG.md` con rango `1-200`
+   HARD STOP ABSOLUTO: si esta lectura exacta no se ejecutó en la corrida actual, detener el proceso y reiniciar desde 0).
+   Restricción: no se permite ejecutar `grep`, búsquedas, cálculo de fecha, cálculo de anclas, `diff` ni parches antes de completar y validar este paso.
    Validación: confirmar encabezado del día en turno, separación entre bloques de fecha y primer bullet del bloque objetivo.
    Resultado: contexto base exacto cargado antes de ejecutar `grep`, calcular anclas o intentar parches.
+0b) Acción: validar precondición transversal del paso 0 antes de cualquier otra sección.
+   Validación: exigir evidencia explícita en la corrida actual de la lectura precisa `CHANGELOG.md` (1-200).
+   Regla de detención: si no hay evidencia, HARD STOP inmediato y reinicio desde 0); prohibido continuar o «corregir en caliente».
+   Resultado: ninguna sección posterior puede ejecutarse sin paso 0 validado.
 1) Acción: calcular fecha y hora CST correcta.
    COMANDO OBLIGATORIO: `TZ=America/Mexico_City date +"%Y-%m-%d %H:%M:%S"`
    Validación: confirmar cálculo matemático CST = UTC - 6 horas
@@ -53,6 +59,7 @@ Pasos:
    TÉCNICA DE EDICIÓN OBLIGATORIA para `edit_files`:
    - REGLA DE ORO: el `search` termina en la ÚLTIMA LÍNEA que se desea como ancla. El `replace` reproduce esa línea intacta y AÑADE el nuevo contenido ANTES o DESPUÉS de ella. NUNCA incluir en el `search` una línea que luego se reproduzca truncada o modificada en el `replace`.
    - REGLA OPERATIVA MANDATORIA para fecha existente: edición directa y simple en hunk único; una vez identificado el bloque objetivo, no repetir búsquedas exploratorias.
+   - HARD STOP TRANSVERSAL: si en cualquier sección se detecta ausencia de evidencia del paso 0 en la corrida actual, detener de inmediato y reiniciar desde 0); no existen excepciones.
    - PRIMER INTENTO OBLIGATORIO para fecha existente: usar micro-bloque exacto en un solo hunk con `search` = `## [FECHA] - ...` + línea en blanco inmediata + primer bullet existente.
    - En ese mismo hunk, el `replace` reproduce encabezado y línea en blanco intactos, inserta el bullet nuevo al tope y conserva el bullet previo debajo.
    - Prohibido usar anclas parciales para fecha existente (por ejemplo, `search` con solo encabezado).
@@ -112,6 +119,7 @@ VERIFICACIÓN CRÍTICA (antes de completar):
 - Comprobar: formato de encabezado `[YYYY-MM-DD] - Título descriptivo`
 - Comprobar: bullets con prefijo `tipo:` y ausencia de subencabezados `### tipo`
 - Validar: `git --no-pager diff -- CHANGELOG.md` cumple criterio de aceptación (solo adiciones mínimas en fecha objetivo)
+- Confirmar: existe evidencia explícita del paso 0 (lectura precisa 1-200) en la corrida actual; si no existe, hard stop y reinicio
 - Confirmar: existe diff de `CHANGELOG.md` para pasar gate de `/commit`; si no existe, no continuar a `/commit`
 
 ANTI-PATRONES PROHIBIDOS (detener y pedir confirmación si ocurre cualquiera):
@@ -126,11 +134,13 @@ ANTI-PATRONES PROHIBIDOS (detener y pedir confirmación si ocurre cualquiera):
 9. Insertar una línea en blanco entre bullets del mismo bloque de fecha.
 10. Repetir búsquedas exploratorias cuando el bloque objetivo ya está identificado.
 11. Usar anclas parciales para fecha existente (como `search` de solo encabezado) en lugar del micro-bloque exacto del primer intento.
-12. Empezar con `grep`, búsquedas exploratorias o intentos de parche sin haber leído `CHANGELOG.md` líneas `1-200` en esa ejecución.
+12. Empezar con `grep`, búsquedas exploratorias o intentos de parche sin haber leído `CHANGELOG.md` líneas `1-200` en esa ejecución; si ocurre, aplicar hard stop inmediato y reiniciar desde 0), nunca continuar desde pasos intermedios.
 13. Usar `search = encabezado + primer bullet` sin incluir la línea en blanco intermedia obligatoria en fecha existente.
 14. Anclar inserciones de fecha existente desde `# Registro de cambios` o reescribir el bloque superior del archivo.
 15. Aceptar un parche de “solo inserción” que muestre líneas eliminadas (`-`) en encabezados o separadores en blanco.
 16. Borrar cualquier línea existente de `CHANGELOG.md` durante inserciones incrementales sin instrucción explícita del usuario.
+17. Continuar cualquier sección del flujo sin evidencia explícita de lectura precisa de `CHANGELOG.md` (1-200) en la corrida actual.
+18. Intentar reanudar el flujo después de omitir el paso 0 en vez de reiniciar desde 0).
 
 Conclusión:
 - Entregar: CHANGELOG.md actualizado con nueva entrada en posición cronológica correcta, fecha CST precisa, idioma consistente español mexicano, sin duplicados y bullets tipados organizados semánticamente.

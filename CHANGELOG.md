@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-05-10] - Fortalecer flujo de changelog y consistencia de skills
 
+- docs: definir hard stop absoluto en `/changelogger` y `cot/changelog.md`: si no se ejecuta la lectura precisa de `CHANGELOG.md` (1-200), el flujo se detiene y reinicia desde el paso 0
 - docs: reforzar `/changelogger` y `cot/changelog.md` con modo incremental de solo adiciones y aborto obligatorio si el diff muestra líneas eliminadas (`-`) sin instrucción explícita
 - docs: reforzar `/changelogger` y `cot/changelog.md` con prohibición de anclar desde `# Registro de cambios` y rechazo de parches de inserción que eliminen separadores
 - docs: prohibir el patrón `search = encabezado + primer bullet` sin línea en blanco y exigir lectura inicial de `CHANGELOG.md` (1-200) en `/changelogger`
