@@ -3,6 +3,14 @@
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-05-10] - Fortalecer flujo de changelog y consistencia de skills
+
+- docs: prohibir el patrón `search = encabezado + primer bullet` sin línea en blanco y exigir lectura inicial de `CHANGELOG.md` (1-200) en `/changelogger`
+- feat: renombrar el *skill* `/changelog` a `/changelogger` y actualizar referencias operativas en documentación y reglas del repositorio
+- feat: reforzar el gate de `/commit` para validar cambios en `CHANGELOG.md` y delegar su edición exclusivamente al flujo `/changelogger`
+- fix: endurecer `scripts/sync_global.sh` para limpiar *skills* obsoletos gestionados durante la sincronización global
+- docs: actualizar `cot/changelog.md` y el *skill* `changelogger` con reglas explícitas para no editar entradas fuera del día en turno y exigir línea en blanco entre bloques de fecha
+
 ## [2026-05-07] - Reforzar protocolo anti-errores en changelog y commit
 
 - feat: hacer explícitos checkpoints anti-errores y anti-patrones en los flujos `/changelog` y `/commit` dentro de los *skills* y CoT (`.agents/skills/changelog/SKILL.md`, `.agents/skills/commit/SKILL.md`, `cot/changelog.md`, `cot/committing.md`)

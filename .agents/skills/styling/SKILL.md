@@ -62,7 +62,7 @@ Use as starting point:
 5. **Remove ALL stray `---` separators** (CRITICAL — AI-generated documents tend to abuse these):
    - Run: `grep -n "^---$" <last_argument>` to locate every occurrence
    - The YAML frontmatter `---` (lines 1 and 3) are allowed
-   - The ONE `---` immediately before the footer firma is allowed
+   - The ONE `---` immediately before the footer signature is allowed
    - **Delete every other `---` without exception** — sections, tables, code blocks, and paragraphs must NOT be separated with `---`
 6. **Insert standard footer** based on platform:
 
@@ -100,9 +100,9 @@ Use as starting point:
 </style>
 ```
 
-### Badges en README.md (cuando se especifica `mit` o `gpl`)
+### Badges in README.md (when `mit` or `gpl` is specified)
 
-Insertar después del timestamp y antes del primer párrafo. Si ya existen badges, verificar que sean correctos.
+Insert after the timestamp and before the first paragraph. If badges already exist, verify they are correct.
 
 MIT:
 ```markdown
@@ -114,7 +114,7 @@ GPLv3:
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ```
 
-Badges adicionales (solo si el proyecto los tiene configurados):
+Additional badges (only if the project has them configured):
 - **GitLab**: pipeline status, coverage
 - **GitHub**: Actions CI workflow
 
@@ -128,7 +128,7 @@ Badges adicionales (solo si el proyecto los tiene configurados):
 *Copyright © AAAA, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*
 ```
 
-Para MIT:
+For MIT:
 ```markdown
 ---
 
@@ -137,17 +137,17 @@ Para MIT:
 *Copyright © AAAA, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
 ```
 
-**Sin firma. Sin CSS.**
+**No signature. No CSS.**
 
-### GitLab / GitHub footer — otros documentos (sin tercer parámetro)
+### GitLab / GitHub footer — other documents (without third parameter)
 
-Sin footer. No se agrega nada.
+No footer. Do not add anything.
 
 ## Rules
 
 - Timestamps ALWAYS in CST (Ciudad de México, UTC-6) — never UTC
-- **HedgeDoc**: firma image + CSS in footer. Never license.
-- **GitLab/GitHub README.md** (with `mit`/`gpl`): copyright text only. No firma. No CSS.
+- **HedgeDoc**: signature image + CSS in footer. Never license.
+- **GitLab/GitHub README.md** (with `mit`/`gpl`): copyright text only. No signature. No CSS.
 - **GitLab/GitHub other docs**: no footer at all.
 
 ## References

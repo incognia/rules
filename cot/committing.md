@@ -1,27 +1,26 @@
 ---
 domain: workflow
-task: seguir COMMITTING.md (actualizar CHANGELOG, commit convencional y push simple)
+task: seguir COMMITTING.md (validar CHANGELOG preactualizado, commit convencional y push simple)
 dificultad: baja
 longitud_objetivo: corta
-validacion: entrada en CHANGELOG con fecha CST, identidad visual confirmada y commit/push exitosos
-version: "1.2"
-last_updated: 2026-05-02
+validacion: CHANGELOG detectado como modificado, identidad visual confirmada y commit/push exitosos
+version: "1.3"
+last_updated: 2026-05-10
 ---
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
-- Cumplir el flujo obligatorio: primero CHANGELOG, luego add/commit/push (ver «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md))).
+- Cumplir el flujo obligatorio: `CHANGELOG.md` debe llegar previamente actualizado; `/commit` SOLO valida ese prerequisito y luego ejecuta add/commit/push (ver «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md))).
+- Si `CHANGELOG.md` no tiene cambios respecto al repositorio, se debe abortar y delegar la actualización a `/changelogger`.
 - CRÍTICO: usar `git status` para analizar los cambios antes de proceder y determinar si requieren commits separados.
 - Evaluar si los cambios son de tipos mixtos (ej. feat + fix, docs + refactor) que requieran commits atómicos separados.
-- CRÍTICO: usar fecha en CST (Ciudad de México) calculada con TZ=America/Mexico_City; NUNCA rotular CST a horas UTC sin cálculo.
-- OBLIGATORIO: usar `date` con timezone específica para obtener tiempo correcto; CST = UTC - 6 horas.
-- CRÍTICO: Mensaje de commit SIEMPRE en inglés internacional con Conventional Commits; documentación en español mexicano.
+- CRÍTICO: mensaje de commit SIEMPRE en inglés internacional con Conventional Commits; documentación en español mexicano.
 - El push debe ser simple (`git push`) siempre que el repo haya sido configurado inicialmente (ver «~/rules/GIT.md» sección de configuración inicial).
 
 Pasos:
 0) Acción: validar que el repositorio esté configurado correctamente y mostrar identidad activa antes de proceder.
    CONDICIÓN DE SESIÓN: Si ya ejecutaste este paso exitosamente en esta misma sesión de conversación, OMITIR este paso y continuar directamente en el paso 1. No repetir la validación dentro de la misma sesión.
-   COMANDOS OBLIGATORIOS: 
+   COMANDOS OBLIGATORIOS:
    - `git config --list | grep -E "^(user\.(name|email)|core\.sshCommand|remote\.origin)"`
    - `git remote -v` para verificar URLs de remotos
    - **NUEVO**: mostrar identidad activa en pantalla:
@@ -47,28 +46,22 @@ Pasos:
    Evaluación: determinar si los cambios son de un solo tipo (ej. solo docs) o mixtos (ej. feat + fix).
    Decisión: si son mixtos, planificar commits atómicos separados usando `git add` selectivo por archivo/directorio.
 
-2) Acción: calcular la fecha CST correcta para el CHANGELOG (sin hora).
-   OBLIGATORIO: ejecutar `TZ=America/Mexico_City date` para obtener fecha/hora CST real.
-   Resultado: `DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")`.
-   Verificación: comparar con `date -u` (UTC) para confirmar que el cálculo es correcto (CST = UTC - 6h).
+2) Acción: validar gate de `CHANGELOG.md` antes de staging/commit.
+   COMANDOS OBLIGATORIOS:
+   - `git --no-pager diff --quiet -- CHANGELOG.md`
+   - `git --no-pager diff --cached --quiet -- CHANGELOG.md`
+   Decisión crítica:
+   - Si **ambos comandos retornan 0**: no hay cambios en `CHANGELOG.md` (ni staged ni unstaged) → **ABORTAR** flujo y sugerir `/changelogger`.
+   - Si **alguno retorna 1**: `CHANGELOG.md` sí tiene cambios → continuar.
+   Resultado: prerequisito de changelog confirmado para seguir con `/commit`.
 
-3) Acción: editar CHANGELOG.md y agregar entrada(s) bajo `## [${DATE_CST}]` según tipos de cambios identificados.
-   Referencia: aplicar «~/rules/cot/changelog.md» ([./changelog.md](./changelog.md)) para mantenimiento correcto del *changelog*
-   Resultado: nueva(s) línea(s) tipo `- docs: descripción breve del cambio` en español mexicano (solo fecha, sin hora, sin subencabezados `### tipo`).
-   Nota: si hay múltiples tipos, agregar una línea por cada tipo de cambio.
+2b) Acción: inspeccionar diff de `CHANGELOG.md` (opcional recomendado para trazabilidad).
+   COMANDOS:
+   - `git --no-pager diff -- CHANGELOG.md`
+   - `git --no-pager diff --cached -- CHANGELOG.md`
+   Resultado: visibilidad explícita del cambio de changelog antes del commit.
 
-3b) Acción: ejecutar checkpoint anti-errores de CHANGELOG antes de staging.
-   COMANDO OBLIGATORIO: `git --no-pager diff -- CHANGELOG.md`
-   Criterio de aceptación:
-   - Solo adiciones mínimas en el bloque de fecha objetivo.
-   - Sin borrados no solicitados fuera del bullet nuevo.
-   Gestión de fallos:
-   - Primer fallo: releer bloque exacto y corregir una sola vez con edición mínima.
-   - Segundo fallo: detener flujo y pedir confirmación del usuario antes de continuar.
-   - Prohibido encadenar 3+ intentos sobre CHANGELOG sin validación intermedia exitosa.
-   Resultado: CHANGELOG validado como requisito de entrada para commit.
-
-4) Acción: construir mensaje detallado de commit en archivo temporal reutilizable.
+3) Acción: construir mensaje detallado de commit en archivo temporal reutilizable.
    Resultado: crear `/tmp/commit-msg.txt` con esta plantilla:
    ```text
    <tipo>[scope opcional]: <resumen en inglés>
@@ -87,7 +80,7 @@ Pasos:
    - Si una viñeta es larga, partirla manualmente y alinear continuidad con dos espacios.
    - Una línea en blanco entre encabezado/cuerpo y cuerpo/pie.
 
-4b) Acción: checkpoint obligatorio de idioma antes de `git commit -F`.
+3b) Acción: checkpoint obligatorio de idioma antes de `git commit -F`.
    Declaración obligatoria:
    - `⚠️ LANGUAGE CHECK: All commit messages must be in English per ~/rules/cot/committing.md line 15`
    Validación:
@@ -95,31 +88,30 @@ Pasos:
    - Confirmar presencia de `Co-Authored-By: Oz <oz-agent@warp.dev>`.
    Resultado: mensaje validado en inglés internacional y listo para commit no interactivo.
 
-5) Acción: realizar commits atómicos según análisis del paso 1 usando el archivo temporal del paso 4.
+4) Acción: realizar commits atómicos según análisis del paso 1 usando el archivo temporal del paso 3.
    - Si cambios homogéneos (un tipo): `git add -A && git commit -F /tmp/commit-msg.txt`
    - Si cambios mixtos: commits separados usando `git add archivo(s)` selectivo por cada tipo, reescribiendo `/tmp/commit-msg.txt` antes de cada commit:
      * `git add archivo1 archivo2 && git commit -F /tmp/commit-msg.txt`
      * `git add archivo3 && git commit -F /tmp/commit-msg.txt`
      * etc.
 
-6) Acción: push simple de todos los commits.
+5) Acción: push simple de todos los commits.
    Resultado: `git push`.
 
-7) Acción: verificación no interactiva de los commits realizados.
+6) Acción: verificación no interactiva de los commits realizados.
    Resultado: `git --no-pager log --oneline -5` (ver últimos commits sin paginador).
 
 Conclusión:
-- Verifica que el/los commit(s) aparecen en `git --no-pager log --oneline -5` y que el CHANGELOG contiene la fecha en CST calculada correctamente.
+- Verifica que el/los commit(s) aparecen en `git --no-pager log --oneline -5`.
 - **CRÍTICO**: confirma que la identidad mostrada en el paso 0 coincide con la esperada para este repositorio (email y llave SSH correctas).
-- EJEMPLO de verificación de timezone: si UTC es 14:30, CST debe ser 08:30 (14 - 6 = 8); si UTC es 03:15, CST debe ser 21:15 del día anterior.
 - Si fueron commits múltiples, asegurar que cada uno es atómico y tiene mensaje convencional apropiado (feat, fix, docs, etc.).
 - Para evitar `quote>` y errores de escape, preferir siempre `git commit -F /tmp/commit-msg.txt`.
 - **PISTA IMPORTANTE**: si `git remote -v` muestra URLs con https:// en lugar de git@, indica configuración incorrecta y debe aplicarse git_init.
 - **PISTA CUENTAS MÚTIPLES**: si el email/llave no coincide con lo esperado, revisar configuración del repositorio antes de proceder.
 - La atomicidad de commits facilita el mantenimiento: cada commit debe representar un cambio lógico único y funcional.
 - Anti-patrones prohibidos (detener y pedir confirmación si aparece cualquiera):
-  - Continuar a `git add`/`git commit` sin validar `git --no-pager diff -- CHANGELOG.md`.
-  - Encadenar reintentos de edición de CHANGELOG sin releer bloque exacto y sin validación exitosa intermedia.
+  - Continuar a `git add`/`git commit` sin pasar el gate de cambios de `CHANGELOG.md`.
+  - Intentar editar `CHANGELOG.md` desde `/commit` en vez de ejecutar `/changelogger`.
   - Hacer commit con mensaje en español o sin checkpoint explícito de idioma.
   - Usar flujo interactivo (editor/pager) en lugar de `git commit -F /tmp/commit-msg.txt`.
 - Referencias: «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)), «~/rules/cot/changelog.md» ([./changelog.md](./changelog.md)), «~/rules/cot/git_init.md» ([./git_init.md](./git_init.md)), «~/rules/rulesets/GIT.md» ([../rulesets/GIT.md](../rulesets/GIT.md)), «~/rules/README.md» ([../../README.md](../../README.md)) y «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)).

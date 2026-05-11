@@ -62,14 +62,36 @@ fi
 
 echo "=== Skills ==="
 mkdir -p "$SKILLS_DST"
+MANAGED_SKILLS_FILE="$SKILLS_DST/.rules-managed-skills"
+
+# Compatibilidad: limpiar skill legado renombrado
+if [ -e "$SKILLS_DST/changelog" ] && [ ! -d "$SKILLS_SRC/changelog" ]; then
+    rm -rf "$SKILLS_DST/changelog"
+    echo "  - eliminado skill legado: changelog"
+fi
+
+# Limpiar skills obsoletos previamente gestionados por este script
+if [ -f "$MANAGED_SKILLS_FILE" ]; then
+    while IFS= read -r managed_skill; do
+        [ -z "$managed_skill" ] && continue
+        if [ ! -d "$SKILLS_SRC/$managed_skill" ] && [ -e "$SKILLS_DST/$managed_skill" ]; then
+            rm -rf "$SKILLS_DST/$managed_skill"
+            echo "  - eliminado skill obsoleto: $managed_skill"
+        fi
+    done < "$MANAGED_SKILLS_FILE"
+fi
+
+TMP_MANAGED_SKILLS_FILE="$(mktemp)"
 SKILL_COUNT=0
 for skill_dir in "$SKILLS_SRC"/*/; do
     skill_name="$(basename "$skill_dir")"
+    printf '%s\n' "$skill_name" >> "$TMP_MANAGED_SKILLS_FILE"
     mkdir -p "$SKILLS_DST/$skill_name"
     cp -r "$skill_dir"* "$SKILLS_DST/$skill_name/"
     SKILL_COUNT=$((SKILL_COUNT + 1))
     echo "  ✓ $skill_name"
 done
+mv "$TMP_MANAGED_SKILLS_FILE" "$MANAGED_SKILLS_FILE"
 echo "  $SKILL_COUNT skills sincronizados → $SKILLS_DST"
 echo ""
 

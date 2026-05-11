@@ -148,7 +148,7 @@ Skills are lightweight, agent-discoverable instruction sets in `.agents/skills/`
 Available skills:
 
 - **commit** — Full commit workflow with mandatory CHANGELOG update
-- **changelog** — CHANGELOG.md maintenance with CST dates
+- **changelogger** — CHANGELOG.md maintenance with CST dates
 - **linguistics** — Apply Spanish Mexican linguistic rules
 - **context** — Quick project context detection
 - **backup** — File/directory backup with standard naming

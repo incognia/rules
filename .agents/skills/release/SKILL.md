@@ -19,7 +19,7 @@ Cuando se va a publicar una nueva versión del repositorio, por ejemplo: `/relea
 2. **Validar argumento**: confirmar que el parámetro cumple `^v[0-9]+\\.[0-9]+\\.[0-9]+$`.
 3. **Validar baseline histórico**: revisar tags y releases previas para detectar inconsistencias antes de publicar.
 4. **Derivar nombre y notas**:
-   - Inferir descriptor corto desde el tema dominante de commits/changelog desde el último tag.
+   - Inferir descriptor corto desde el tema dominante de commits y changelog desde el último tag.
    - Construir nombre final: `vX.Y.Z — Descriptor`.
    - Construir notas en español con introducción + `## Funcionalidades incluidas` + bullets relevantes.
 5. **Publicar en flujo oficial**:

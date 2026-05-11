@@ -20,21 +20,21 @@ description: "Compose and send OWA-compatible HTML email. Usage: /mail <owa|mac|
 0. **No arguments guard**: If $0 is empty or not provided, display the following help and **stop — do NOT proceed with any other step**:
 
    ```
-   Uso: /mail <modo> <tipo> <asunto>
+   Usage: /mail <mode> <type> <subject>
 
-   Modos ($0):
-     token    Autenticar y cachear token de Graph API (ejecutar una vez, dura ~90 días)
-     owa      Guardar HTML para copiar y pegar en Outlook Web (Linux)
-     mac      Abrir borrador en Outlook vía AppleScript con firma nativa (macOS)
-     graph    Enviar directamente vía Microsoft Graph API con firma inline (cualquier OS)
+   Modes ($0):
+     token    Authenticate and cache Graph API token (run once, lasts ~90 days)
+     owa      Save HTML for copy-paste into Outlook Web (Linux)
+     mac      Open draft in Outlook via AppleScript with native signature (macOS)
+     graph    Send directly via Microsoft Graph API with inline signature (any OS)
 
-   Tipos ($1) — no requerido para modo token:
-     delivery   Correo de entrega de servicio/versión
-     generic    Correo genérico con secciones configurables
+   Types ($1) — not required for token mode:
+     delivery   Service/version delivery email
+     generic    Generic email with configurable sections
 
-   Asunto ($ARGUMENTS) — todo lo que sigue al tipo; no requerido para modo token
+   Subject ($ARGUMENTS) — everything after type; not required for token mode
 
-   Ejemplos:
+   Examples:
      /mail token
      /mail owa delivery kabat-authorization-service
      /mail mac generic cambio de configuración Kafka

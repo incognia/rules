@@ -224,7 +224,7 @@ sequenceDiagram
 - **scripts/** — scripts de automatización y respaldos
 - **.agents/skills/** — *skills* descubribles por agentes IA:
   - `/commit` — flujo completo de *commit* con CHANGELOG obligatorio
-  - `/changelog` — mantenimiento de CHANGELOG.md con fechas CST
+  - `/changelogger` — mantenimiento de CHANGELOG.md con fechas CST
   - `/linguistics <archivo>` — aplicar reglas de español mexicano
   - `/context` — detección rápida de contexto de proyecto
   - `/backup` — respaldo con nomenclatura estándar

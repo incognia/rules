@@ -96,105 +96,70 @@ git commit -F /tmp/commit-msg.txt
 
 ## 3. Flujo de trabajo y gestión de cambios
 
-### 3.1. Actualización del `CHANGELOG.md` (CRÍTICO)
+### 3.1. Validación de `CHANGELOG.md` antes del *commit* (CRÍTICO)
 
-🔥 **REGLA CRÍTICA: SIEMPRE actualizar el archivo `CHANGELOG.md` ANTES de cada *commit*.**
+🔥 **REGLA CRÍTICA: el flujo `/commit` NO modifica `CHANGELOG.md`; solo valida que ya fue actualizado.**
 
 **PROCESO OBLIGATORIO:**
-1. **PRIMERO:** Actualizar `CHANGELOG.md` con los cambios realizados
-1. **SEGUNDO:** Hacer `git add` de todos los archivos (incluyendo CHANGELOG.md)
-1. **TERCERO:** Hacer `git commit`
-1. **CUARTO:** Hacer `git push`
+1. **PRIMERO:** Actualizar `CHANGELOG.md` usando `/changelogger` (o flujo dedicado equivalente).
+1. **SEGUNDO:** Validar que `CHANGELOG.md` tiene cambios respecto al repositorio.
+1. **TERCERO:** Hacer `git add` de los archivos necesarios (incluyendo `CHANGELOG.md`).
+1. **CUARTO:** Hacer `git commit`.
+1. **QUINTO:** Hacer `git push`.
 
-**⚠️ ADVERTENCIA:** Nunca hacer commit sin haber actualizado primero el CHANGELOG.md. Esta es una regla fundamental del flujo de trabajo.
-
-**Especificaciones del CHANGELOG.md:**
-- **Idioma:** el idioma oficial del proyecto (generalmente español mexicano)
-- **Zona horaria:** usar **CST de Ciudad de México (UTC-6)** para todas las fechas. Nunca usar UTC ni la zona horaria local del sistema
-- **Formato de fecha:** usar únicamente fecha sin hora en formato `[YYYY-MM-DD]` según CST Ciudad de México. La hora NO debe incluirse
-- **Título descriptivo:** usar el formato `## [YYYY-MM-DD] - Título descriptivo del cambio principal` para los encabezados de sección
-- **Formato de cuerpo:** usar bullets directos con prefijo de tipo (`- feat: ...`, `- fix: ...`, `- docs: ...`) dentro de cada fecha
-- **No usar subencabezados por tipo:** dentro de cada fecha NO usar `### feat`, `### fix`, etc.
-- **⚠️ IMPORTANTE: NO usar emojis en las entradas del CHANGELOG.md** - mantener el contenido limpio y profesional usando únicamente texto
+**⚠️ ADVERTENCIA:** Si `CHANGELOG.md` no tiene cambios, el flujo debe abortar y sugerir `/changelogger`.
 
 #### 3.1.1. Protocolo anti-errores y anti-patrones (OBLIGATORIO, SIN EXCEPCIÓN)
 
 Antes de continuar a `git add`/`git commit`, se debe cumplir este protocolo:
 
-1. Verificar fecha CST real y encabezado existente:
-   - `DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")`
-   - `grep -n "^## \[${DATE_CST}\]" CHANGELOG.md`
-2. Leer el bloque exacto de la fecha objetivo antes de editar.
-3. Editar con cambio mínimo anclado al encabezado de fecha, preservando líneas existentes.
-4. Validar inmediatamente:
-   - `git --no-pager diff -- CHANGELOG.md`
-5. Criterio de aceptación:
-   - Solo adiciones en el bloque de fecha objetivo.
-   - Cero borrados no solicitados fuera del bullet nuevo.
-6. Si falla validación:
-   - Corregir una sola vez con edición mínima tras releer bloque exacto.
-7. Si vuelve a fallar:
-   - Detener ejecución y pedir confirmación del usuario.
-8. Prohibido encadenar 3+ intentos sobre `CHANGELOG.md` sin validación intermedia exitosa.
+1. Ejecutar gate de cambios en `CHANGELOG.md`:
+   ```bash
+   if git --no-pager diff --quiet -- CHANGELOG.md && git --no-pager diff --cached --quiet -- CHANGELOG.md; then
+       echo "ERROR: CHANGELOG.md sin cambios. Ejecuta /changelogger y vuelve a intentar /commit."
+       exit 1
+   fi
+   ```
+2. Si el gate falla (sin cambios), detener ejecución inmediatamente.
+3. Si el gate pasa (hay cambios staged o unstaged), continuar con `git add`/`git commit`.
+4. El mantenimiento de formato/idioma del changelog se delega a `/changelogger` + `~/rules/cot/changelog.md`.
 
 Anti-patrones prohibidos:
 
-- Reintentar el mismo parche sin ajustar ancla al contenido real del bloque.
-- Reescribir `CHANGELOG.md` completo para insertar o ajustar bullets puntuales.
-- Usar scripts ad-hoc para `CHANGELOG.md` cuando edición mínima anclada es suficiente.
-- Alterar líneas existentes fuera del cambio solicitado sin instrucción explícita.
-- Continuar con commit/push cuando `CHANGELOG.md` no cumple el criterio de aceptación.
-
-⚠️ **ADVERTENCIA CRÍTICA:** Para obtener la fecha CST correcta, NO es suficiente añadir "CST" a una fecha UTC. Debes convertir la fecha restando 6 horas a UTC o usar `TZ="America/Mexico_City" date +"%Y-%m-%d"` para la conversión automática.
-
-**Comandos recomendados (siempre correctos):**
-
-```bash
-# Fecha en CST (Ciudad de México), independiente de la TZ del sistema
-DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")
-echo "$DATE_CST"
-```
-
-- **Contenido mínimo:**
-  - Encabezado de fecha en formato `## [YYYY-MM-DD] - Título descriptivo`
-  - Al menos un bullet con prefijo de tipo (`- docs: ...`, `- feat: ...`, etc.)
-  - Descripción breve del cambio en español mexicano
+- Continuar con commit/push cuando `CHANGELOG.md` no tiene cambios.
+- Intentar editar `CHANGELOG.md` desde `/commit` en lugar de usar `/changelogger`.
+- Omitir el gate de changelog y depender solo de `git status` general.
+- Continuar commit/push cuando el gate de changelog falla.
 
 **Ejemplo del flujo correcto:**
 
 ```bash
-# 1. PRIMERO: Actualizar CHANGELOG.md con fecha CST
-DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")
-# Opción A (manual): abrir editor
-vim CHANGELOG.md
-# Opción B (no interactiva): anteponer bloque con formato oficial (ajusta tipo y descripción)
-cat > /tmp/changelog-entry.txt <<EOF
-## [$DATE_CST] - Título descriptivo
+# 1. PRIMERO: actualizar changelog fuera de /commit
+/changelogger
 
-- docs: describe el cambio
-EOF
-cat /tmp/changelog-entry.txt CHANGELOG.md > CHANGELOG.tmp && mv CHANGELOG.tmp CHANGELOG.md
+# 2. SEGUNDO: validar gate de changelog
+if git --no-pager diff --quiet -- CHANGELOG.md && git --no-pager diff --cached --quiet -- CHANGELOG.md; then
+    echo "ERROR: CHANGELOG.md sin cambios. Ejecuta /changelogger y vuelve a intentar /commit."
+    exit 1
+fi
 
-# 2. SEGUNDO: Añadir archivos
+# 3. TERCERO: Añadir archivos
 git add .
 
-# 3. TERCERO: Preparar mensaje detallado y hacer commit (no interactivo)
+# 4. CUARTO: Preparar mensaje detallado y hacer commit (no interactivo)
 cat > /tmp/commit-msg.txt <<EOF
-docs(changelog): update entry for $DATE_CST
+docs: validate changelog gate before commit
 
-- Add changelog entry for $DATE_CST in CST
-- Keep conventional commit structure in English
-- Preserve chronological order and project commit workflow
+- Enforce changelog diff gate before staging and commit
+- Abort commit flow when changelog has no repo diff
+- Keep commit message workflow in English using temporary file
 
 Co-Authored-By: Oz <oz-agent@warp.dev>
 EOF
 git commit -F /tmp/commit-msg.txt
 
-# 4. CUARTO: Push (una vez configurado el repo, basta con un push simple)
+# 5. QUINTO: Push
 git push
-
-# 5. VERIFICACIÓN: Ver los últimos commits (no interactivo)
-git --no-pager log --oneline -5
 ```
 
 ### 3.2. Atomicidad de los *commits*

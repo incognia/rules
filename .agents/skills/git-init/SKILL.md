@@ -33,11 +33,11 @@ description: "Initialize a git repo with SSH, identity and remote configured. Us
 6. **Set default branch**: `git branch -M $3`
 7. **Verify configuration**:
    ```bash
-   echo "=== CONFIGURACIÓN ==="
+   echo "=== CONFIGURATION ==="
    echo "Email: $(git config user.email)"
    echo "SSH: $(git config core.sshCommand)"
-   echo "Remoto: $(git remote get-url origin)"
-   echo "Rama: $3"
+   echo "Remote: $(git remote get-url origin)"
+   echo "Branch: $3"
    echo "====================="
    ```
 8. **Confirm**: Verify remote uses SSH (git@), not HTTPS
