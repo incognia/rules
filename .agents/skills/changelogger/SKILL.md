@@ -43,6 +43,7 @@ When adding or updating entries in CHANGELOG.md for any project following rules 
 - Do NOT use subheadings like `### feat`/`### fix` inside a date entry
 - Keep exactly one blank line between consecutive date blocks (`## [YYYY-MM-DD]`)
 - Keep bullets contiguous within the same date block (no blank lines between bullets)
+- Incremental mode is insert-only by default: only `+` additions are allowed; deleting existing `CHANGELOG.md` lines requires explicit user instruction
 - NEVER edit entries from dates different than `DATE_CST` (current day) unless explicitly instructed by the user
 
 ## Anti-error and anti-pattern protocol (MANDATORY)
@@ -52,7 +53,7 @@ When adding or updating entries in CHANGELOG.md for any project following rules 
 3. Read the exact target date block before inserting bullets.
 4. If `DATE_CST` heading exists, first attempt MUST be one single-hunk micro-block replacement (`heading + blank line + first bullet`) and insertion of the new bullet at top of the block (no blank line between bullets).
 5. Validate immediately with `git --no-pager diff -- CHANGELOG.md`.
-6. Acceptance criterion: only added lines inside the target date block; no unexpected deletions.
+6. Acceptance criterion: insertion-only diff inside the target date block (only `+` lines); any deleted line (`-`) invalidates the attempt unless the user explicitly requested deletion.
 7. If validation fails: do one minimal correction after re-reading the exact block.
 8. If creating a new date block and blank separator line is missing, apply mandatory two-hunk fallback:
    - Hunk 1: insert the new date block above the next date heading.
@@ -60,6 +61,8 @@ When adding or updating entries in CHANGELOG.md for any project following rules 
 9. If validation shows changes outside the target date block: stop and ask user confirmation; do NOT auto-correct historical entries.
 10. If it fails again: stop and ask user confirmation before any further attempt.
 11. Never chain 3+ consecutive attempts on CHANGELOG without an intermediate successful diff validation.
+12. For existing-date insertion, NEVER anchor the edit from `# Registro de cambios` or any file-top replacement; anchor only on `heading + blank line + first bullet`.
+13. If an insertion-only attempt shows any deleted line (`-`) anywhere in `CHANGELOG.md`, abort that patch and rebuild the anchor before retrying; deletions are allowed only with explicit user instruction.
 
 Forbidden anti-patterns:
 - Starting with `grep`, search loops, or patch attempts before reading `CHANGELOG.md` lines `1-200`.
@@ -74,6 +77,9 @@ Forbidden anti-patterns:
 - Repeating discovery/search loops after the target date block is already identified.
 - Editing entries outside the current day block (`DATE_CST`) without explicit user instruction.
 - Continuing to commit flow when CHANGELOG diff acceptance criterion is not met.
+- Anchoring an existing-date insertion from `# Registro de cambios` or replacing the file-top section instead of the micro-block anchor.
+- Accepting a patch that deletes separator blank lines when the goal is only to prepend bullets in the current-day block.
+- Deleting any existing `CHANGELOG.md` line during incremental insertion without explicit user instruction.
 
 ## References
 

@@ -57,6 +57,9 @@ Pasos:
    - En ese mismo hunk, el `replace` reproduce encabezado y línea en blanco intactos, inserta el bullet nuevo al tope y conserva el bullet previo debajo.
    - Prohibido usar anclas parciales para fecha existente (por ejemplo, `search` con solo encabezado).
    - Prohibido insertar línea en blanco entre bullets del mismo bloque de fecha.
+   - Prohibido para fecha existente anclar `search` en `# Registro de cambios` o incluir ese encabezado en el hunk de inserción.
+   - Prohibido reemplazar el bloque superior del archivo para insertar bullets en una fecha existente.
+   - MODO INSERCIÓN INCREMENTAL (OBLIGATORIO): por defecto solo se permiten adiciones (`+`). Si aparece cualquier línea eliminada (`-`) en `CHANGELOG.md`, abortar el parche y reconstruir ancla; solo se permiten borrados con instrucción explícita del usuario.
    - Para insertar nueva entrada `## [FECHA]` al inicio del archivo: el `search` es SOLO la línea ancla inmediatamente anterior (p. ej. el comentario `<!-- markdownlint-disable -->` o la línea en blanco que lo sigue). El `replace` reproduce esa línea ancla exacta y añade la nueva entrada después. NUNCA incluir la primera `## [FECHA]` existente en el `search` a menos que se reproduzca COMPLETA e INTACTA en el `replace`.
    - FALLBACK OBLIGATORIO (dos hunks) para nueva fecha si falta la línea en blanco antes del siguiente encabezado:
      - Hunk 1: insertar el bloque `## [FECHA]` con sus bullets arriba del siguiente `## [FECHA_ANTERIOR]`.
@@ -68,11 +71,12 @@ Pasos:
 6c) Acción: validar diff mínimo inmediatamente después de cada edición.
    COMANDO OBLIGATORIO: `git --no-pager diff -- CHANGELOG.md`
    Criterio de aceptación obligatorio:
-   - Solo líneas añadidas en el bloque de la fecha objetivo.
-   - Cero borrados no solicitados fuera del bullet nuevo.
+   - En modo inserción incremental: solo líneas añadidas (`+`) en el bloque de la fecha objetivo.
+   - Cero líneas eliminadas (`-`) en todo `CHANGELOG.md`, salvo instrucción explícita del usuario para borrar.
    - NUNCA editar líneas fuera de `DATE_CST` (día en turno) salvo instrucción explícita del usuario.
    Gestión de fallos:
    - Si falla la validación: releer bloque exacto y corregir una sola vez con edición mínima.
+   - Si en una inserción incremental aparece cualquier `-` en el diff: abortar ese intento y reconstruir ancla antes de reintentar.
    - Si `DATE_CST` ya existe y solo se agrega bullet: mantener hunk único con micro-bloque exacto (`encabezado + línea en blanco + primer bullet`); no usar fallback de dos hunks.
    - Si se está creando nueva fecha y la previsualización muestra que falta la línea en blanco antes del siguiente `## [FECHA]`: aplicar de inmediato el fallback de dos hunks; no repetir el mismo parche de inserción.
    - Si el diff muestra cambios históricos fuera de `DATE_CST`: detenerse y pedir confirmación; prohibido autocorregir entradas fuera del día en turno.
@@ -124,6 +128,9 @@ ANTI-PATRONES PROHIBIDOS (detener y pedir confirmación si ocurre cualquiera):
 11. Usar anclas parciales para fecha existente (como `search` de solo encabezado) en lugar del micro-bloque exacto del primer intento.
 12. Empezar con `grep`, búsquedas exploratorias o intentos de parche sin haber leído `CHANGELOG.md` líneas `1-200` en esa ejecución.
 13. Usar `search = encabezado + primer bullet` sin incluir la línea en blanco intermedia obligatoria en fecha existente.
+14. Anclar inserciones de fecha existente desde `# Registro de cambios` o reescribir el bloque superior del archivo.
+15. Aceptar un parche de “solo inserción” que muestre líneas eliminadas (`-`) en encabezados o separadores en blanco.
+16. Borrar cualquier línea existente de `CHANGELOG.md` durante inserciones incrementales sin instrucción explícita del usuario.
 
 Conclusión:
 - Entregar: CHANGELOG.md actualizado con nueva entrada en posición cronológica correcta, fecha CST precisa, idioma consistente español mexicano, sin duplicados y bullets tipados organizados semánticamente.
