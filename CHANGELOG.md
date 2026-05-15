@@ -3,6 +3,11 @@
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-05-14] - Ajustar flujos de changelogger y commit sin redundancias
+
+- feat: redefinir `/changelogger` y `cot/changelog.md` para ejecutar `git --no-pager status --short` como paso 0 obligatorio antes de la lectura precisa de `CHANGELOG.md` (1-200)
+- feat: actualizar `/commit` y `cot/committing.md` para mantener el gate de `CHANGELOG.md` y prohibir viñetas redundantes de edición de changelog en el body del commit
+
 ## [2026-05-11] - Reforzar styling con política de fecha única
 
 - docs: precisar `/styling`, `cot/styling.md` y `rulesets/STYLING.md` para eliminar fechas reportadas redundantes y conservar un único campo de «Última modificación»

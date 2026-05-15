@@ -75,7 +75,8 @@ Pasos:
    ```
    Validaciones críticas:
    - Primera línea en inglés internacional usando Conventional Commits.
-   - Cuerpo en viñetas con cambios concretos.
+   - Cuerpo en viñetas con cambios concretos y sustantivos del trabajo.
+   - NO incluir viñetas del tipo `update/edit CHANGELOG.md` (o equivalentes), porque `CHANGELOG.md` es precondición validada por el gate del paso 2.
    - El bullet `-` inicia en columna 1 (sin espacios o tabs previos).
    - Si una viñeta es larga, partirla manualmente y alinear continuidad con dos espacios.
    - Una línea en blanco entre encabezado/cuerpo y cuerpo/pie.
@@ -112,6 +113,7 @@ Conclusión:
 - Anti-patrones prohibidos (detener y pedir confirmación si aparece cualquiera):
   - Continuar a `git add`/`git commit` sin pasar el gate de cambios de `CHANGELOG.md`.
   - Intentar editar `CHANGELOG.md` desde `/commit` en vez de ejecutar `/changelogger`.
+  - Incluir en el body del commit una viñeta de edición/mantenimiento de `CHANGELOG.md` como detalle del cambio.
   - Hacer commit con mensaje en español o sin checkpoint explícito de idioma.
   - Usar flujo interactivo (editor/pager) en lugar de `git commit -F /tmp/commit-msg.txt`.
 - Referencias: «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)), «~/rules/cot/changelog.md» ([./changelog.md](./changelog.md)), «~/rules/cot/git_init.md» ([./git_init.md](./git_init.md)), «~/rules/rulesets/GIT.md» ([../rulesets/GIT.md](../rulesets/GIT.md)), «~/rules/README.md» ([../../README.md](../../README.md)) y «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)).

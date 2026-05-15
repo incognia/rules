@@ -45,6 +45,7 @@ Before making any git commit in projects that follow the rules repository conven
    - If a bullet is too long, split it manually into a new line.
    - Continuation lines MUST be indented with two spaces so text stays aligned with the bullet content.
    - Keep exactly one blank line between subject/body and body/footer.
+   - Redundancy rule: commit body details MUST NOT include `update/edit CHANGELOG.md` (or equivalent), because changelog maintenance is a precondition validated by `/commit`, not a detail to report in the body.
    Reuse and adjust `/tmp/commit-msg.txt` until the wording is final.
 7. **Commit from file**: `git commit -F /tmp/commit-msg.txt` — message MUST be in English international, following Conventional Commits
 8. **Push**: `git push`
@@ -63,6 +64,7 @@ Before making any git commit in projects that follow the rules repository conven
 Forbidden anti-patterns:
 - Commit/push while `CHANGELOG.md` has no diff versus repo.
 - Editing `CHANGELOG.md` from `/commit` instead of using `/changelogger`.
+- Including `update/edit CHANGELOG.md` (or equivalent) as a commit body detail.
 - Falling back to ad-hoc commit messages that skip `/tmp/commit-msg.txt`.
 - Using Spanish in commit message subject/body.
 
@@ -71,6 +73,7 @@ Forbidden anti-patterns:
 - CHANGELOG.md MUST already be updated BEFORE `/commit`; `/commit` only validates changes
 - If `CHANGELOG.md` has no diff, abort and invoke `/changelogger`
 - Commit messages are ALWAYS in English international
+- Commit body must describe substantive changes only; do not include changelog-edit tasks in body bullets
 - Use non-interactive commands only (no pagers, no editors)
 - Prefer `git commit -F /tmp/commit-msg.txt` over `git commit -m` to keep detailed, reusable commit messages
 - In `/tmp/commit-msg.txt`, keep bullets left-aligned and wrap long lines with aligned continuation indentation
