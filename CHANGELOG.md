@@ -3,6 +3,11 @@
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-05-25] - Actualizar plantilla genérica de correo y agregar logotipo
+
+- style: agregar logotipo Kabat One 192px como activo para plantillas de correo HTML
+- fix: quitar imagen de firma incrustada de `generic_template.html` y documentar en comentario que solo se incluye en modo `graph` vía CID; los modos `owa` y `mac` delegan la firma a Outlook
+
 ## [2026-05-14] - Ajustar flujos de changelogger y commit sin redundancias
 
 - feat: redefinir `/changelogger` y `cot/changelog.md` para ejecutar `git --no-pager status --short` como paso 0 obligatorio antes de la lectura precisa de `CHANGELOG.md` (1-200)
