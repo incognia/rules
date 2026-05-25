@@ -151,6 +151,7 @@ No footer. Do not add anything.
 - **GitLab/GitHub README.md** (with `mit`/`gpl`): copyright text only. No signature. No CSS.
 - **GitLab/GitHub other docs**: no footer at all.
 - Single-date policy: final document must keep exactly one visible reported date field (`Última modificación`), with all previous/duplicate date fields removed.
+- **`edit_files` anchors**: When using `search_start_line_number`, the `search` string MUST start at the very first character of that line. A mid-line anchor fails unconditionally, regardless of encoding or line number. Always include content from the start of the target line outward until the fragment is uniquely identified.
 
 ## References
 

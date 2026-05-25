@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-05-25] - Actualizar plantilla genérica de correo y agregar logotipo
 
+- docs: documentar regla de anclas en `edit_files`: el campo `search` debe comenzar en el primer carácter de la línea indicada por `search_start_line_number`; regla añadida en `rulesets/STYLING.md`, `cot/styling.md` y `.agents/skills/styling/SKILL.md`
 - style: agregar logotipo Kabat One 192px como activo para plantillas de correo HTML
 - fix: quitar imagen de firma incrustada de `generic_template.html` y documentar en comentario que solo se incluye en modo `graph` vía CID; los modos `owa` y `mac` delegan la firma a Outlook
 

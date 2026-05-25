@@ -41,6 +41,9 @@ Pasos:
    Resultado: bloques ```mermaid conformes; sin ASCII.
 10) Acción: validar consistencia con linters.
     Resultado: markdownlint (encabezados/longitud de línea) y Vale (estilo/es_MX) pasan sin errores.
+11) Acción: al editar el archivo con `edit_files`, anclar siempre desde el inicio de la línea.
+    Regla: cuando se especifica `search_start_line_number`, el campo `search` DEBE comenzar en el primer carácter de esa línea. Anclar a mitad de línea falla siempre, sin importar el número de línea ni la codificación del archivo.
+    Resultado: todas las ediciones aplican sin errores de búsqueda.
 
 Conclusión:
 - Entregar el documento con encabezado/pie correctos, timestamp válido en CST, contenido jerarquizado y estilo consistente.

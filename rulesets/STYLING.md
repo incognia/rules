@@ -308,6 +308,15 @@ Antes de publicar un documento, verificar:
 - [ ] Licencia solo en README.md (MIT o GPLv3)
 - [ ] Plataforma correcta (HedgeDoc/GitLab/GitHub)
 
+## Edición con `edit_files`
+
+**Regla crítica de anclas:** Cuando se use `search_start_line_number`, el campo `search` debe comenzar en el primer carácter de esa línea. Anclas que inician a mitad de línea fallan siempre, sin importar el número de línea ni la codificación del archivo.
+
+- **Correcto**: empezar el `search` desde el inicio de la línea target, incluyendo suficiente contenido único hasta abarcar el fragmento a reemplazar.
+- **Incorrecto**: usar como ancla un fragmento que aparece después del primer carácter de la línea.
+
+Cuando el fragmento a reemplazar está en medio de una línea, incluir en el `search` todo desde el inicio de esa línea, y en el `replace` reproducir la línea completa con la corrección aplicada.
+
 ---
 
 *Elaborado por Rodrigo Álvarez (@incognia)*
