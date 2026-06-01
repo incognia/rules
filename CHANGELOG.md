@@ -3,6 +3,13 @@
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-06-01] - Crear CoT y *skill* de normalización de assets para AWS S3
+
+- feat: crear `cot/aws_naming.md` estandarizado con formato de plantilla CoT (frontmatter, razonamiento, pasos, conclusión) para normalización de nombres de archivos en S3 y CloudFront
+- feat: agregar normalización de extensiones en CoT: `.jpeg` → `.jpg`, soporte para `.png`, `.svg` e `.ico`
+- feat: agregar generación de archivo `.tsv` de auditoría con relación nombre original → nombre normalizado
+- feat: crear `.agents/skills/aws-naming/SKILL.md` basado en el CoT con instrucciones operativas, ejemplos y regla anti-colisión de nombres
+
 ## [2026-05-25] - Actualizar plantilla genérica de correo y agregar logotipo
 
 - docs: documentar regla de anclas en `edit_files`: el campo `search` debe comenzar en el primer carácter de la línea indicada por `search_start_line_number`; regla añadida en `rulesets/STYLING.md`, `cot/styling.md` y `.agents/skills/styling/SKILL.md`
