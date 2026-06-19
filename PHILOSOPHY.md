@@ -2,7 +2,7 @@
 
 *Última modificación: 27 de marzo de 2026, 23:21 (CST)*
 
-> «El desarrollo tecnológico
+> «El desarrollo tecnológico y los descubrimientos científicos no pueden considerarse progreso si no están al alcance de todos.»
 >
 > —Rodrigo Álvarez
 
@@ -150,7 +150,6 @@ Los detalles específicos de implementación de esta filosofía se encuentran or
 ### Reglas de uso exclusivamente laboral
 - **[STYLING.md](./rulesets/STYLING.md)** - reglas de estilo para documentos Markdown corporativos
 
-*Este documento fue elaborado
 *Este documento fue elaborado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.*
 
 *Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*

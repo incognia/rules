@@ -3,6 +3,11 @@
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-06-19] - Actualizar cita central de filosofía y limpiar cierre del documento
+
+- docs: actualizar la cita principal en `PHILOSOPHY.md` para incluir una formulación completa sobre acceso universal al progreso tecnológico y científico
+- fix: eliminar línea cursiva residual duplicada al cierre de `PHILOSOPHY.md` para mantener consistencia editorial
+
 ## [2026-06-01] - Crear CoT y *skill* de normalización de assets para AWS S3
 
 - feat: crear `cot/aws_naming.md` estandarizado con formato de plantilla CoT (frontmatter, razonamiento, pasos, conclusión) para normalización de nombres de archivos en S3 y CloudFront
