@@ -5,15 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{SUBJECT}</title>
 </head>
-<body style="font-family:Arial,sans-serif; line-height:1.6; color:#1f2937; margin:0; padding:24px;">
-  <p style="margin:0 0 12px 0;">Subject: <strong>{SUBJECT}</strong></p>
-  <p style="margin:0 0 12px 0;">Dear {RECIPIENT_NAME},</p>
-  <p style="margin:0 0 12px 0;">Thank you for your message regarding {REFERENCE}.</p>
-  <p style="margin:0 0 12px 0;">We regret to inform you that {BAD_NEWS}.</p>
-  <p style="margin:0 0 12px 0;">Unfortunately, {CONSTRAINT_OR_CAUSE}.</p>
-  <p style="margin:0 0 12px 0;">As an alternative, we can {ALTERNATIVE_OPTION}.</p>
-  <p style="margin:0 0 12px 0;">Please let me know if this solution works for you.</p>
-  <p style="margin:0 0 12px 0;">Best regards,<br>{SENDER_NAME}<br>{SENDER_ROLE}</p>
+<body style="font-family:Arial,sans-serif; line-height:1.55; color:#1f2937; margin:0; padding:24px; background:#f8fafc;">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:760px; margin:0 auto; background:#ffffff;">
+    <tr>
+      <td style="padding:24px;">
+        <p style="margin:0 0 6px 0;"><strong>From:</strong> {SENDER_NAME} &lt;{SENDER_EMAIL}&gt;</p>
+        <p style="margin:0 0 6px 0;"><strong>To:</strong> {RECIPIENT_NAME} &lt;{RECIPIENT_EMAIL}&gt;</p>
+        <p style="margin:0 0 6px 0;"><strong>Date:</strong> {DATE}</p>
+        <p style="margin:0 0 18px 0;"><strong>Subject:</strong> {SUBJECT}</p>
+        <p style="margin:0 0 12px 0;">Dear {RECIPIENT_NAME},</p>
+        <p style="margin:0 0 12px 0;">Thank you for your message regarding {REFERENCE}.</p>
+        <p style="margin:0 0 12px 0;">We regret to inform you that {BAD_NEWS}.</p>
+        <p style="margin:0 0 12px 0;">Unfortunately, {CONSTRAINT_OR_CAUSE}.</p>
+        <p style="margin:0 0 12px 0;">As an alternative, we can {ALTERNATIVE_OPTION}.</p>
+        <p style="margin:0 0 12px 0;">{REQUEST_CONFIRMATION_OR_DECISION}</p>
+        <p style="margin:0 0 0 0;">Best regards,<br>{SENDER_NAME}<br>{SENDER_ROLE}</p>
+      </td>
+    </tr>
+  </table>
 
   <!-- Phrase bank (from business_email.pdf):
   - We regret to inform you that....

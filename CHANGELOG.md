@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-06-22] - Incorporar flujo bmail para correos empresariales en inglés
 
+- feat: estandarizar las siete plantillas de `templates/bmail/` con nueva estructura HTML, bloque de metadatos (from/to/date/subject) y campos opcionales por escenario
 - feat: crear el skill `bmail` con selección por tipo de correo, validación de campos y convención de guardado HTML
 - feat: agregar CoT `cot/bmail.md`, reglas `rulesets/BMAIL.md` y siete plantillas HTML en `templates/bmail/` para redacción de correo empresarial
 - fix: extender `scripts/sync_global.sh` para sincronizar también `cot/`, `rulesets/` y `templates/` al destino global `~/rules`
