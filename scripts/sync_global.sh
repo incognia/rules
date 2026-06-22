@@ -130,5 +130,21 @@ for wf in "$WORKFLOWS_SRC"/*.yaml; do
 done
 echo "  $WF_COUNT workflows sincronizados → $WORKFLOWS_DST"
 echo ""
+# --- Rules content (cot, rulesets, templates) ---
+echo "=== Reglas (cot, rulesets, templates) ==="
+RULES_GLOBAL_DST="$HOME/rules"
+
+if [ "$REPO_ROOT" = "$RULES_GLOBAL_DST" ]; then
+    echo "  Origen y destino son el mismo repo ($RULES_GLOBAL_DST), no se requiere copia."
+else
+    mkdir -p "$RULES_GLOBAL_DST/cot" "$RULES_GLOBAL_DST/rulesets" "$RULES_GLOBAL_DST/templates"
+    cp -R "$REPO_ROOT/cot/." "$RULES_GLOBAL_DST/cot/"
+    cp -R "$REPO_ROOT/rulesets/." "$RULES_GLOBAL_DST/rulesets/"
+    cp -R "$REPO_ROOT/templates/." "$RULES_GLOBAL_DST/templates/"
+    echo "  ✓ cot → $RULES_GLOBAL_DST/cot"
+    echo "  ✓ rulesets → $RULES_GLOBAL_DST/rulesets"
+    echo "  ✓ templates → $RULES_GLOBAL_DST/templates"
+fi
+echo ""
 
 echo "Sincronización completa."

@@ -3,6 +3,12 @@
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-06-22] - Incorporar flujo bmail para correos empresariales en inglés
+
+- feat: crear el skill `bmail` con selección por tipo de correo, validación de campos y convención de guardado HTML
+- feat: agregar CoT `cot/bmail.md`, reglas `rulesets/BMAIL.md` y siete plantillas HTML en `templates/bmail/` para redacción de correo empresarial
+- fix: extender `scripts/sync_global.sh` para sincronizar también `cot/`, `rulesets/` y `templates/` al destino global `~/rules`
+
 ## [2026-06-19] - Actualizar cita central de filosofía y limpiar cierre del documento
 
 - docs: actualizar la cita principal en `PHILOSOPHY.md` para incluir una formulación completa sobre acceso universal al progreso tecnológico y científico
