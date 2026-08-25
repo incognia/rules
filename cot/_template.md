@@ -8,11 +8,13 @@ validacion: salida de comando coincide con estado esperado
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
+
 - Identificar el punto de falla en el pipeline de despliegue.
 - Verificar prerequisitos y dependencias en orden lógico.
-- Referencias de estilo y flujo: «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)) y «~/rules/README.md» ([../../README.md](../../README.md)).
+- Referencias de estilo y flujo: «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)) y «~/rules/README.md» ([../README.md](../README.md)).
 
 Pasos:
+
 1) Acción: revisar logs de CI en último job fallido.
    Resultado: error de autenticación al acceder al registro de contenedores.
 2) Acción: verificar variable de entorno del token de acceso.
@@ -21,5 +23,5 @@ Pasos:
    Resultado: el secreto debe inyectarse a nivel de repositorio.
 
 Conclusión:
-- Solución: definir el token como secreto del repositorio y referenciarlo en el job; reintentar el pipeline.
 
+- Solución: definir el token como secreto del repositorio y referenciarlo en el job; reintentar el pipeline.

@@ -7,12 +7,14 @@ impacto: describe brevemente
 <!-- markdownlint-disable MD041 -->
 
 Contexto
+
 - Qué problema/objetivo se busca atender.
 
 Criterios de aceptación
+
 - [ ] Condición 1
 - [ ] Condición 2
 
 Entregables
-- Resultado esperado y/o referencias.
 
+- Resultado esperado y/o referencias.

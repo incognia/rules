@@ -27,7 +27,7 @@ Ejemplos de uso.
 
 ## Estructura del proyecto
 
-```
+```text
 proyecto/
 ├── src/
 └── README.md
@@ -35,6 +35,6 @@ proyecto/
 
 ---
 
-*Este proyecto fue elaborado por Rodrigo Álvarez para Promad Business Solutions y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
+*Este proyecto fue elaborado por Rodrigo Álvarez para [Nombre del cliente] y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
 
 *Copyright © AAAA, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*

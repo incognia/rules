@@ -8,10 +8,12 @@ validacion: pipeline exitoso tras inyectar secreto
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
-- Aplicar formato CoT y español mexicano (ver «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md)) y flujo en «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md))).
+
+- Aplicar formato CoT y español mexicano (ver «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) y flujo en «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md))).
 - Verificar prerequisitos de CI/CD y secretos de acceso al registry.
 
 Pasos:
+
 1) Acción: revisar el último job fallido en CI.
    Resultado: error 401 al hacer docker pull del registry corporativo.
 2) Acción: verificar variables/secretos del job.
@@ -22,5 +24,5 @@ Pasos:
    Resultado: docker pull exitoso y despliegue completado.
 
 Conclusión:
-- Solución: inyectar secreto del token de registry a nivel de repositorio y autenticar antes del pull.
 
+- Solución: inyectar secreto del token de registry a nivel de repositorio y autenticar antes del pull.

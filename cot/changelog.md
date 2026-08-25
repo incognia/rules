@@ -8,7 +8,8 @@ validacion: CHANGELOG.md ordenado inversamente, fechas CST correctas, sin duplic
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
-- Regla principal: CHANGELOG.md debe seguir orden cronológico inverso (más reciente arriba) con fechas en CST Ciudad de México calculadas correctamente (ver «~/rules/CHANGELOG.md» ([../../CHANGELOG.md](../../CHANGELOG.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) y «~/rules/cot/committing.md» ([./committing.md](./committing.md))).
+
+- Regla principal: CHANGELOG.md debe seguir orden cronológico inverso (más reciente arriba) con fechas en CST Ciudad de México calculadas correctamente (ver «~/rules/CHANGELOG.md» ([../CHANGELOG.md](../CHANGELOG.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) y «~/rules/cot/committing.md» ([./committing.md](./committing.md))).
 - Errores comunes críticos: (1) orden cronológico incorrecto, (2) cálculo erróneo de CST (etiquetar UTC como CST), (3) duplicar entradas idénticas, (4) mezclar inglés con español mexicano.
 - Flujo: verificar zona horaria actual → revisar orden cronológico → detectar duplicados → aplicar reglas lingüísticas → validar estructura.
 - Este CoT se ejecuta vía `/changelogger` antes de `/commit`; el flujo `/commit` no edita changelog y solo valida que exista diff en `CHANGELOG.md`.
@@ -30,6 +31,7 @@ Pasos:
    Validación: exigir evidencia explícita en la corrida actual de `git --no-pager status --short` y de la lectura precisa `CHANGELOG.md` (1-200).
    Regla de detención: si falta evidencia de cualquiera de los dos pasos, HARD STOP inmediato y reinicio desde 0; prohibido continuar o «corregir en caliente».
    Resultado: ninguna sección posterior puede ejecutarse sin pasos 0 y 0b validados.
+
 1) Acción: calcular fecha y hora CST correcta.
    COMANDO OBLIGATORIO: `TZ=America/Mexico_City date +"%Y-%m-%d %H:%M:%S"`
    Validación: confirmar cálculo matemático CST = UTC - 6 horas
@@ -63,16 +65,17 @@ Pasos:
 6b) Acción: insertar bullets en orden cronológico inverso dentro de la entrada de fecha.
    REGLA CRÍTICA: el nuevo bullet va PRIMERO dentro del bloque de la fecha.
    TÉCNICA DE EDICIÓN OBLIGATORIA para `edit_files`:
-   - REGLA DE ORO: el `search` termina en la ÚLTIMA LÍNEA que se desea como ancla. El `replace` reproduce esa línea intacta y AÑADE el nuevo contenido ANTES o DESPUÉS de ella. NUNCA incluir en el `search` una línea que luego se reproduzca truncada o modificada en el `replace`.
-   - REGLA OPERATIVA MANDATORIA para fecha existente: edición directa y simple en hunk único; una vez identificado el bloque objetivo, no repetir búsquedas exploratorias.
-   - HARD STOP TRANSVERSAL: si en cualquier sección se detecta ausencia de evidencia de los pasos 0 o 0b en la corrida actual, detener de inmediato y reiniciar desde 0; no existen excepciones.
-   - PRIMER INTENTO OBLIGATORIO para fecha existente: usar micro-bloque exacto en un solo hunk con `search` = `## [FECHA] - ...` + línea en blanco inmediata + primer bullet existente.
-   - En ese mismo hunk, el `replace` reproduce encabezado y línea en blanco intactos, inserta el bullet nuevo al tope y conserva el bullet previo debajo.
-   - Prohibido usar anclas parciales para fecha existente (por ejemplo, `search` con solo encabezado).
-   - Prohibido insertar línea en blanco entre bullets del mismo bloque de fecha.
-   - Prohibido para fecha existente anclar `search` en `# Registro de cambios` o incluir ese encabezado en el hunk de inserción.
-   - Prohibido reemplazar el bloque superior del archivo para insertar bullets en una fecha existente.
-   - MODO INSERCIÓN INCREMENTAL (OBLIGATORIO): por defecto solo se permiten adiciones (`+`). Si aparece cualquier línea eliminada (`-`) en `CHANGELOG.md`, abortar el parche y reconstruir ancla; solo se permiten borrados con instrucción explícita del usuario.
+
+- REGLA DE ORO: el `search` termina en la ÚLTIMA LÍNEA que se desea como ancla. El `replace` reproduce esa línea intacta y AÑADE el nuevo contenido ANTES o DESPUÉS de ella. NUNCA incluir en el `search` una línea que luego se reproduzca truncada o modificada en el `replace`.
+- REGLA OPERATIVA MANDATORIA para fecha existente: edición directa y simple en hunk único; una vez identificado el bloque objetivo, no repetir búsquedas exploratorias.
+- HARD STOP TRANSVERSAL: si en cualquier sección se detecta ausencia de evidencia de los pasos 0 o 0b en la corrida actual, detener de inmediato y reiniciar desde 0; no existen excepciones.
+- PRIMER INTENTO OBLIGATORIO para fecha existente: usar micro-bloque exacto en un solo hunk con `search` = `## [FECHA] - ...` + línea en blanco inmediata + primer bullet existente.
+- En ese mismo hunk, el `replace` reproduce encabezado y línea en blanco intactos, inserta el bullet nuevo al tope y conserva el bullet previo debajo.
+- Prohibido usar anclas parciales para fecha existente (por ejemplo, `search` con solo encabezado).
+- Prohibido insertar línea en blanco entre bullets del mismo bloque de fecha.
+- Prohibido para fecha existente anclar `search` en `# Registro de cambios` o incluir ese encabezado en el hunk de inserción.
+- Prohibido reemplazar el bloque superior del archivo para insertar bullets en una fecha existente.
+- MODO INSERCIÓN INCREMENTAL (OBLIGATORIO): por defecto solo se permiten adiciones (`+`). Si aparece cualquier línea eliminada (`-`) en `CHANGELOG.md`, abortar el parche y reconstruir ancla; solo se permiten borrados con instrucción explícita del usuario.
    - Para insertar nueva entrada `## [FECHA]` al inicio del archivo: el `search` es SOLO la línea ancla inmediatamente anterior (p. ej. el comentario `<!-- markdownlint-disable -->` o la línea en blanco que lo sigue). El `replace` reproduce esa línea ancla exacta y añade la nueva entrada después. NUNCA incluir la primera `## [FECHA]` existente en el `search` a menos que se reproduzca COMPLETA e INTACTA en el `replace`.
    - FALLBACK OBLIGATORIO (dos hunks) para nueva fecha si falta la línea en blanco antes del siguiente encabezado:
      - Hunk 1: insertar el bloque `## [FECHA]` con sus bullets arriba del siguiente `## [FECHA_ANTERIOR]`.
@@ -153,4 +156,4 @@ Conclusión:
 - Entregar: CHANGELOG.md actualizado con nueva entrada en posición cronológica correcta, fecha CST precisa, idioma consistente español mexicano, sin duplicados y bullets tipados organizados semánticamente.
 - Evitar: mezclar idiomas, etiquetar UTC como CST, orden cronológico incorrecto, duplicar entradas, micro-cambios sin agrupar.
 - Operación esperada: ejecutar este CoT desde `/changelogger` y después invocar `/commit` (que solo valida gate de changelog + idioma del commit).
-- Referencias: «~/rules/CHANGELOG.md» ([../../CHANGELOG.md](../../CHANGELOG.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/cot/committing.md» ([./committing.md](./committing.md)) para flujo completo.
+- Referencias: «~/rules/CHANGELOG.md» ([../CHANGELOG.md](../CHANGELOG.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/cot/committing.md» ([./committing.md](./committing.md)) para flujo completo.

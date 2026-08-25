@@ -6,6 +6,7 @@ description: "Compose structured business-email drafts in English from curated t
 # Compose business-email drafts from curated templates
 
 ## Arguments
+
 - **Template key**: $0
   - `opening` → opening and referencing email
   - `enquiry` → asking for information / quotation / availability
@@ -17,8 +18,10 @@ description: "Compose structured business-email drafts in English from curated t
 - **Subject**: $ARGUMENTS — everything after template key
 
 ## Instructions
+
 0. **No arguments guard**: If $0 is missing, print:
-   ```
+
+   ```text
    Usage: /bmail <template-key> <subject>
 
    Template keys:
@@ -35,6 +38,7 @@ description: "Compose structured business-email drafts in English from curated t
      /bmail informing-good Brochure Dispatch Confirmation
      /bmail apology-delay Delay in Delivery - Ref 64783
    ```
+
    Stop immediately.
 1. Read and follow `~/rules/cot/bmail.md`.
 2. Read `~/rules/rulesets/BMAIL.md`.
@@ -63,6 +67,7 @@ description: "Compose structured business-email drafts in English from curated t
    - 3-line summary of tone and intent
 
 ## References
+
 - CoT: `~/rules/cot/bmail.md`
 - Ruleset: `~/rules/rulesets/BMAIL.md`
 - Templates: `~/rules/templates/bmail/`

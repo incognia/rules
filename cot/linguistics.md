@@ -8,11 +8,13 @@ validacion: lista de hallazgos + correcciones propuestas alineadas a es_MX y reg
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
-- Regla principal: todo en español mexicano, sin calcos del inglés ni regionalismos ajenos (ver «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) y «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md))).
+
+- Regla principal: todo en español mexicano, sin calcos del inglés ni regionalismos ajenos (ver «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md))).
 - Recorrer de lo general a lo específico: dialecto/es_MX → evitar calcos → terminología → verbos → préstamos en cursiva → tipografía (títulos y mayúscula tras dos puntos) → comillas (texto vs código) → sutilezas de redacción → siglas → tiempos verbales → fechas/horas (CST) → nomenclatura de archivos → odios especiales → expresiones idiomáticas (uso/moderación).
 - Producir hallazgos concretos y una versión corregida mínima (diff mental) cuando aplique.
 
 Pasos:
+
 1) Acción: verificar dialecto y regionalismos.
    Resultado: marcar peninsularismos («ordenador», «fichero», «vale»), argentinismos («piola»), colombianismos («bacano»), otros («chévere») y reemplazar por es_MX («computadora», «archivo», «está bien», «excelente»...).
 2) Acción: evitar calcos del inglés frecuentes.
@@ -46,6 +48,7 @@ Pasos:
     Resultado: permitir en contextos informales internos; moderar en documentación oficial/corporativa; mantener es_MX.
 
 VERIFICACIÓN OBLIGATORIA (antes de completar):
+
 - Ejecutar: `grep -n "^#" archivo.md` y documentar cada título encontrado
 - Confirmar: ninguno usa "Título Con Cada Palabra En Mayúscula"
 - Listar: todos los cambios de capitalización aplicados
@@ -53,5 +56,6 @@ VERIFICACIÓN OBLIGATORIA (antes de completar):
 - Verificar: corrección de todos los calcos del inglés identificados
 
 Conclusión:
+
 - Entregar: (a) lista de hallazgos y reemplazos propuestos; (b) fragmentos corregidos con comillas y mayúsculas adecuadas; (c) si hay timestamps, ejemplo correcto con TZ; (d) nota si se usaron o moderaron expresiones idiomáticas.
-- Referencias: «~/rules/LINGUISTICS.md» ([../../LINGUISTICS.md](../../LINGUISTICS.md)), «~/rules/README.md» ([../../README.md](../../README.md)) y «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md)).
+- Referencias: «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) y «~/rules/README.md» ([../README.md](../README.md)).

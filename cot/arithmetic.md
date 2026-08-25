@@ -8,10 +8,12 @@ validacion: resultado coincide con cálculo verificado a mano
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
-- Seguir formato CoT del repo y mantener español mexicano (ver «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) y «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md))).
+
+- Seguir formato CoT del repo y mantener español mexicano (ver «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md))).
 - Descomponer el problema en pasos simples y verificar unidades.
 
 Pasos:
+
 1) Acción: identificar cantidades base.
    Resultado: Juan tiene 3 cajas con 4 manzanas cada una; María tiene 2 cajas con 5 manzanas cada una.
 2) Acción: calcular manzanas de Juan.
@@ -22,5 +24,5 @@ Pasos:
    Resultado: 12 + 10 = 22.
 
 Conclusión:
-- Respuesta final: 22 manzanas en total.
 
+- Respuesta final: 22 manzanas en total.

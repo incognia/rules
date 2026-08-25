@@ -73,7 +73,7 @@ DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")
 
 ### Directory organization
 
-```
+```text
 ├── rulesets/           # Core rules and documentation
 │   ├── LINGUISTICS.md      # Spanish Mexican language standards
 │   ├── COMMITTING.md       # Git workflow and CHANGELOG rules
@@ -98,14 +98,14 @@ The repository supports dual contexts with different rules:
 **Personal Projects (`@incognia`)**:
 
 - License: GPLv3 (copyleft)
-- Email: incognia@gmail.com
+- Email: <incognia@gmail.com>
 - SSH key: ~/.ssh/incognia
 - Documentation: Spanish Mexican
 
 **Corporate Projects (`@incogniadev` for Promad Business Solutions)**:
 
 - License: MIT (permissive)
-- Email: ralvarez@kabatone.com
+- Email: <ralvarez@kabatone.com>
 - SSH key: ~/.ssh/kone
 - Documentation: Spanish Mexican with STYLING.md rules
 

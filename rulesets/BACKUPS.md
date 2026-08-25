@@ -50,8 +50,8 @@ Esta política aplica a cualquier script o comando que realice operaciones de el
 Si la ejecución del script o comando es manual (iniciada por un usuario), el sistema deberá:
 
 1. Mostrar un mensaje de advertencia que indique que se realizará un borrado irreversible
-1. Preguntar explícitamente si se desea realizar un respaldo antes de continuar
-1. Permitir al usuario elegir entre las siguientes opciones:
+2. Preguntar explícitamente si se desea realizar un respaldo antes de continuar
+3. Permitir al usuario elegir entre las siguientes opciones:
    - Realizar respaldo automático siguiendo la política de respaldos establecida
    - Cancelar la ejecución
    - Continuar sin respaldo (solo si se confirma dos veces)
@@ -61,8 +61,8 @@ Si la ejecución del script o comando es manual (iniciada por un usuario), el si
 Si la ejecución es automatizada (por cron jobs, pipelines, bots u otros procesos no interactivos):
 
 1. El script deberá verificar si existe una política de respaldo activa
-1. Deberá realizar un respaldo completo conforme a dicha política antes de iniciar cualquier operación destructiva
-1. Si el respaldo falla, el script no deberá continuar con el borrado. Deberá registrar el error y salir de forma segura
+2. Deberá realizar un respaldo completo conforme a dicha política antes de iniciar cualquier operación destructiva
+3. Si el respaldo falla, el script no deberá continuar con el borrado. Deberá registrar el error y salir de forma segura
 
 ### Registro y auditoría
 
@@ -330,4 +330,3 @@ find backups/manual/ -name "*.bkp*" -mtime +90 -delete
 
 ---
 *Elaborado por Rodrigo Álvarez (@incognia)*
-

@@ -16,11 +16,11 @@ MD024:
   siblings_only: true
 MD025:
   level: 1
-  front_matter_title: ".*"
+  front_matter_title: ""
 MD026:
   punctuation: ".,;:!?"
 MD029:
-  style: one
+  style: ordered
 MD030:
   ul_single: 1
   ul_multi: 1
@@ -29,7 +29,7 @@ MD030:
 MD033:
   allowed_elements: ["br"]
 MD034: true
-MD036: true
+MD036: false
 MD038: true
 MD041: false
 MD046:

@@ -8,11 +8,13 @@ validacion: inventario de archivos clave, flujos, dependencias y políticas; fue
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
+
 - Empezar por documentos de entrada, luego pasar a estructura, dependencias, CI/CD, despliegue, estilo, pruebas, licencias y contribución.
 - Mantener español mexicano y formato CoT; no ejecutar acciones destructivas ni exponer secretos.
 - Si hay CLI (gh/glab), usarla solo para listar (no interactivo); de lo contrario, navegar archivos del repo.
 
 Pasos:
+
 1) Acción: identificar documentos base en la raíz.
    Resultado: README.md (propósito/uso), PHILOSOPHY.md o equivalente (marco), CONTRIBUTING.md, CODE_OF_CONDUCT.md.
 2) Acción: revisar licenciamiento y atribución.
@@ -41,5 +43,5 @@ Pasos:
     Resultado: reporte con: propósito, estructura, dependencias, CI/CD, despliegue, config/secrets, estilo, pruebas, versión y contribución. Citar rutas/archivos.
 
 Conclusión:
-- Entregar inventario y síntesis reproducibles con referencias a archivos/paths y, si aplica, comandos de lectura (no destructivos). Mantener comillas «» y siglas sin plural gráfico.
 
+- Entregar inventario y síntesis reproducibles con referencias a archivos/paths y, si aplica, comandos de lectura (no destructivos). Mantener comillas «» y siglas sin plural gráfico.

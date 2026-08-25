@@ -39,7 +39,7 @@ git commit -m "docs: actualizar guía de instalación"
 
 ### Paso 0: Checkpoint de idioma (ANTES de cualquier commit)
 
-```
+```text
 🔍 CHECKPOINT: Verificando idioma de commits...
 📋 REGLA: Mensajes de commit en INGLÉS (~/rules/cot/committing.md línea 15)
 ⚠️  CRÍTICO: NO proceder hasta confirmar idioma correcto
@@ -78,7 +78,7 @@ Si cualquiera falla:
 
 ### Ejemplo de aplicación correcta
 
-```
+```text
 🔍 CHECKPOINT: Verificando idioma de commits...
 📋 REGLA: Mensajes de commit en INGLÉS
 
@@ -90,7 +90,7 @@ feat: integrate Loki and Promtail for centralized logging
   Promtail
 - Document deployment and rollback procedure in project docs
 
-Co-Authored-By: Oz <oz-agent@warp.dev>
+Co-Authored-By: <agente en turno> <identificador>
 
 ✅ Mensaje en inglés validado - procediendo con:
 git commit -F /tmp/commit-msg.txt

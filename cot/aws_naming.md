@@ -8,13 +8,15 @@ validacion: nombres resultantes contienen solo caracteres seguros, extensiones n
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
+
 - Normalizar nombres de archivos para que sean 100% seguros como *Object Keys* en Amazon S3 y distribuibles vía Amazon CloudFront.
 - Aplicar reglas estrictas de AWS: *case sensitivity*, eliminación de espacios, filtrado de caracteres no seguros, validación de rutas y longitud.
 - Normalizar extensiones de imagen y recurso web (.jpeg → .jpg, .png, .svg, .ico) para consistencia en el *bucket*.
 - Generar un archivo de registro (.tsv) con la relación nombre original → nombre normalizado para trazabilidad.
-- Referencias de estilo y flujo: «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)) y «~/rules/README.md» ([../../README.md](../../README.md)).
+- Referencias de estilo y flujo: «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)) y «~/rules/README.md» ([../README.md](../README.md)).
 
 Pasos:
+
 1) Acción: convertir todo el nombre de archivo y extensión a minúsculas.
    Resultado: los *Object Keys* en S3 son sensibles a mayúsculas [1] y los patrones de caché de CloudFront también (`*.jpg` no aplica para `LOGO.JPG`) [2].
 
@@ -45,5 +47,6 @@ Pasos:
    Resultado: archivo de registro que permite auditoría y reversión de los renombramientos.
 
 Conclusión:
+
 - Los nombres resultantes solo contienen caracteres seguros para S3/CloudFront: minúsculas, dígitos, guiones medios, guiones bajos y un punto antes de la extensión normalizada.
 - El archivo `normalizacion_YYYYMMDD.tsv` documenta cada transformación para trazabilidad completa.

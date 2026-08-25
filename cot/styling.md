@@ -8,11 +8,13 @@ validacion: encabezado/pie correctos, timestamp CST válido, estructura y estilo
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
-- Usar español mexicano y formato CoT del repo (ver «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/rulesets/STYLING.md» ([../rulesets/STYLING.md](../rulesets/STYLING.md)) y «~/rules/PROMPTS.md» ([../../PROMPTS.md](../../PROMPTS.md))).
+
+- Usar español mexicano y formato CoT del repo (ver «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) y «~/rules/rulesets/STYLING.md» ([../rulesets/STYLING.md](../rulesets/STYLING.md))).
 - Recorrer de arriba a abajo: encabezado estándar → contenido → pie de página → CSS → validaciones (timestamps, enlaces, accesibilidad).
 - Asegurar consistencia con CST (Ciudad de México) y mermaid donde aplique.
 
 Pasos:
+
 1) Acción: insertar encabezado estándar según «~/rules/STYLING.md» (tags + logo + H1 + timestamp alineado a la derecha).
    Resultado: bloque YAML con tags y bloque de encabezado con logo Kabat One y título H1.
 2) Acción: detectar y eliminar campos de fecha reportados existentes antes de insertar el timestamp nuevo.
@@ -46,7 +48,7 @@ Pasos:
     Resultado: todas las ediciones aplican sin errores de búsqueda.
 
 Conclusión:
+
 - Entregar el documento con encabezado/pie correctos, timestamp válido en CST, contenido jerarquizado y estilo consistente.
 - Confirmar política de fecha única: ninguna fecha redundante permanece después del styling.
-- Referencias: «~/rules/rulesets/STYLING.md» ([../rulesets/STYLING.md](../rulesets/STYLING.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) y «~/rules/README.md» ([../../README.md](../../README.md)).
-
+- Referencias: «~/rules/rulesets/STYLING.md» ([../rulesets/STYLING.md](../rulesets/STYLING.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) y «~/rules/README.md» ([../README.md](../README.md)).

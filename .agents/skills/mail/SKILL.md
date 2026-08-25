@@ -19,7 +19,7 @@ description: "Compose and send OWA-compatible HTML email. Usage: /mail <owa|mac|
 
 0. **No arguments guard**: If $0 is empty or not provided, display the following help and **stop — do NOT proceed with any other step**:
 
-   ```
+   ```text
    Usage: /mail <mode> <type> <subject>
 
    Modes ($0):
@@ -61,10 +61,12 @@ description: "Compose and send OWA-compatible HTML email. Usage: /mail <owa|mac|
    - `owa` → do NOT include signature (Outlook adds it when sending from OWA)
    - `mac` → do NOT include signature (Outlook adds it when opening draft)
    - `graph` → include signature as inline CID image:
+
      ```html
      <hr style="margin:30px 0; border:none; border-top:2px solid #ecf0f1;">
      <img src="cid:firma_ralvarez" alt="Rodrigo Álvarez" width="740" style="max-width:100%; display:block;">
      ```
+
 9. **Validate OWA rules**:
    - Every colored `<td>` has BOTH `bgcolor` attribute AND `background-color` in style
    - No `<style>` blocks, no CSS classes
@@ -73,6 +75,7 @@ description: "Compose and send OWA-compatible HTML email. Usage: /mail <owa|mac|
 10. **Deliver** based on mode ($0):
 
 ### Mode: `token` (authenticate and cache)
+
 1. Run `~/rules/scripts/graph_auth.py` via `get_token()`
 2. If no cached token exists, prompts device code flow (browser auth)
 3. Saves tokens to `~/.graph_tokens.json` (permissions 600)
@@ -81,6 +84,7 @@ description: "Compose and send OWA-compatible HTML email. Usage: /mail <owa|mac|
 6. Only need to run `/mail token` again if refresh_token expires
 
 ### Mode: `owa` (Linux — manual copy-paste)
+
 1. Save the HTML file:
    - If the user specified a path, use that path
    - If a `mail/` directory exists in the project root, save there
@@ -89,8 +93,10 @@ description: "Compose and send OWA-compatible HTML email. Usage: /mail <owa|mac|
 3. Tell the user: open in browser → Ctrl+A → Ctrl+C → paste in OWA
 
 ### Mode: `mac` (macOS — AppleScript draft)
+
 1. Save the HTML file (same logic as `owa`)
 2. Open a draft in Outlook via AppleScript with subject, recipient and HTML body:
+
    ```applescript
    tell application "Microsoft Outlook"
        activate
@@ -99,10 +105,12 @@ description: "Compose and send OWA-compatible HTML email. Usage: /mail <owa|mac|
        open newMsg
    end tell
    ```
+
 3. Outlook injects the native "Kabat One" signature automatically
 4. Tell the user: review and send with ⌘+Enter
 
 ### Mode: `graph` (any OS — direct send via API)
+
 1. Call `get_token()` from `~/rules/scripts/graph_auth.py` (uses cached token; if no cache, tells user to run `/mail token` first)
 2. Read and base64-encode `~/rules/templates/mail/assets/ralvarez_firma_740.png`
 5. Send via `POST https://graph.microsoft.com/v1.0/me/sendMail` with:

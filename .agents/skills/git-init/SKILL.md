@@ -9,7 +9,7 @@ description: "Initialize a git repo with SSH, identity and remote configured. Us
 
 - **Context**: $0 (personal or laboral)
 - **Key name**: $1 (name of the SSH key in ~/.ssh/, e.g. incognia, kone)
-- **Remote URL**: $2 (SSH URL, e.g. git@github.com:incognia/repo.git)
+- **Remote URL**: $2 (SSH URL, e.g. <git@github.com>:incognia/repo.git)
 - **Branch**: $3 (default branch name, e.g. main)
 
 ## Instructions
@@ -18,20 +18,25 @@ description: "Initialize a git repo with SSH, identity and remote configured. Us
 2. **Initialize repo**: `git init`
 3. **Configure identity** based on context ($0):
    - If `personal`:
+
      ```bash
      git config user.name "Rodrigo Álvarez"
      git config user.email "incognia@gmail.com"
      ```
+
    - If `laboral`:
+
      ```bash
      git config user.name "Rodrigo Álvarez"
      git config user.email "ralvarez@kabatone.com"
      ```
+
 4. **Configure SSH key**: `git config core.sshCommand "ssh -i ~/.ssh/$1 -o IdentitiesOnly=yes"`
    - Verify the key exists: `ls ~/.ssh/$1` — if not found, list available keys with `ls ~/.ssh/` and ask the user
 5. **Add remote**: `git remote add origin $2`
 6. **Set default branch**: `git branch -M $3`
 7. **Verify configuration**:
+
    ```bash
    echo "=== CONFIGURATION ==="
    echo "Email: $(git config user.email)"
@@ -40,6 +45,7 @@ description: "Initialize a git repo with SSH, identity and remote configured. Us
    echo "Branch: $3"
    echo "====================="
    ```
+
 8. **Confirm**: Verify remote uses SSH (git@), not HTTPS
 
 ## Defaults

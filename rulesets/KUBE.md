@@ -16,7 +16,7 @@ Este documento define las convenciones para analizar el estado de clústeres Kub
 
 Los manifiestos se organizan por *namespace*/proyecto en el `$HOME` del usuario:
 
-```
+```text
 /home/<usuario>/kubernetes-<namespace>/
 ├── services/
 │   ├── base/                    # Recursos base (VirtualServices de Istio)

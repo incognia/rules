@@ -5,6 +5,11 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-08-24] - Exportar skills a Claude Code y symlink CLAUDE.md
 
+- feat: hacer agnóstico el `Co-Authored-By` del flujo `/commit` en `cot/committing.md`, `.agents/skills/commit/SKILL.md`, `rulesets/COMMITTING.md` y `rulesets/COMMIT_LANGUAGE_PROTOCOL.md`, con ejemplos ilustrativos por herramienta (Claude Code, OpenAI Codex, Google Antigravity, Warp) en vez del valor fijo `Oz <oz-agent@warp.dev>`
+- docs: actualizar *badges* de CoTs/Skills/Rulesets en README.md a los conteos reales (24/15/20)
+- fix: corregir enlaces relativos rotos en `cot/*.md` y `rulesets/TEACHING.md` (`../../` → `../`) y eliminar referencias muertas a `PROMPTS.md` en `cot/` y `rulesets/GLOSSARY.md`
+- fix: reemplazar «Promad Business Solutions» hardcodeado por `[Nombre del cliente]` en `templates/github-readme.md` y `templates/gitlab-readme.md`
+- fix: reparar el script `lint:md` de `package.json` (sin *glob*, nunca analizaba archivos) y agregar `.markdownlint.yaml` por directorio (`cot/`, `.agents/skills/`, `docs/`, `templates/`) para excepciones de numeración de listas y HTML inline vía *cascading*, dejando el repositorio en 0 errores de *lint*
 - feat: extender `scripts/sync_global.sh` con bloque «Claude Code» que enlaza cada `SKILL.md` ya copiado en `~/.agents/skills/<nombre>/` hacia `~/.claude/commands/<nombre>.md`, replicando el mecanismo validado en el fork rules-els para que Claude Code reconozca `/nombre`
 - feat: agregar `CLAUDE.md` como enlace simbólico a `AGENTS.md` para que Claude Code cargue el contexto del proyecto automáticamente
 - docs: documentar en `AGENTS.md` y `README.md` el mecanismo de exportación de *skills* a Claude Code y la excepción puntual a la política de rutas canónicas

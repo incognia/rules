@@ -8,6 +8,7 @@ validacion: archivo HTML generado con estilos inline, bgcolor en td, sin CSS ext
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
+
 - Los correos se componen como HTML usando plantillas OWA con estilos *inline*.
 - OWA elimina bloques `<style>`, clases CSS, `background-color` en `<table>`, `border-radius`, flexbox, grid y *media queries*.
 - Todo el estilo debe ser *inline* en los `<td>`, duplicando `bgcolor` como atributo HTML.
@@ -17,6 +18,7 @@ Razonamiento:
 - Credenciales de Graph API: `~/.secrets.yaml` (clave `GRAPH_API`).
 
 Pasos:
+
 1) Acción: determinar el tipo de correo.
    - Entrega de microservicio → usar `templates/mail/delivery_template.html`
    - Cualquier otro (cambio, decisión, reporte, corrección) → usar `templates/mail/generic_template.html`
@@ -65,12 +67,14 @@ Pasos:
    Resultado: archivo guardado.
 
 10) Acción: entregar según el modo elegido.
-   - **`owa`**: indica al usuario «abrir en navegador → Ctrl+A → Ctrl+C → pegar en OWA». No incluir firma (OWA la agrega).
-   - **`mac`**: abre un borrador en Outlook vía AppleScript (`open newMsg`, nunca `send`). No incluir firma (Outlook la inyecta). Indicar al usuario enviar con ⌘+Enter.
-   - **`graph`**: incluir firma como imagen CID *inline*. Autenticar vía *device code flow* con credenciales de `~/.secrets.yaml` (`GRAPH_API`). Enviar con `POST /me/sendMail`. Guardar también el HTML como respaldo.
+
+- **`owa`**: indica al usuario «abrir en navegador → Ctrl+A → Ctrl+C → pegar en OWA». No incluir firma (OWA la agrega).
+- **`mac`**: abre un borrador en Outlook vía AppleScript (`open newMsg`, nunca `send`). No incluir firma (Outlook la inyecta). Indicar al usuario enviar con ⌘+Enter.
+- **`graph`**: incluir firma como imagen CID *inline*. Autenticar vía *device code flow* con credenciales de `~/.secrets.yaml` (`GRAPH_API`). Enviar con `POST /me/sendMail`. Guardar también el HTML como respaldo.
    Resultado: correo entregado o borrador abierto.
 
 Conclusión:
+
 - El HTML resultante debe cumplir las reglas OWA (`bgcolor` en `<td>`, estilos *inline*, sin CSS externo).
 - La firma solo va en el HTML cuando el modo es `graph` (como imagen CID *inline*).
 - En `owa` y `mac`, Outlook agrega la firma automáticamente.

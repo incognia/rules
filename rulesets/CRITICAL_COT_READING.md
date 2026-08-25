@@ -23,13 +23,14 @@ Cuando el usuario invoque un CoT (Chain of Thought) mediante referencia a `~/cot
 
 ## ✅ FLUJO OBLIGATORIO
 
-```
+```text
 Usuario invoca CoT → Leer TODO el archivo → Analizar completamente → Confirmar entendimiento → Ejecutar paso a paso
 ```
 
 ## 🎯 PROPÓSITO
 
 Los CoTs contienen:
+
 - **Razonamiento crítico** que explica el "por qué"
 - **Pasos detallados** que no pueden omitirse
 - **Validaciones** específicas requeridas
@@ -40,6 +41,7 @@ Los CoTs contienen:
 ## 📋 VALIDACIÓN PERSONAL
 
 Antes de actuar, preguntarse:
+
 - ¿Leí TODO el CoT completo?
 - ¿Entiendo cada paso y su propósito?
 - ¿Hay contradicciones que necesito resolver?

@@ -95,7 +95,7 @@ Este glosario recoge términos clave utilizados en los documentos de reglas y fi
 : lenguaje de serialización de datos ampliamente usado para archivos de configuración, especialmente en DevOps y Kubernetes.
 
 **Cadena de razonamiento (Chain-of-Thought, CoT)**
-: técnica de prompting para modelos de lenguaje en la que se solicita que el modelo genere pasos intermedios de razonamiento antes de dar la respuesta final. Mejora el desempeño en tareas con múltiples pasos (aritmética, lógica, diagnóstico técnico) y facilita la verificación de unidades, supuestos y dependencias. Buenas prácticas en este repositorio: razonamiento en español mexicano; identificadores/código en inglés cuando corresponda; pasos numerados y conclusión verificable; no incluir secretos; usar rutas de referencia «~/rules/...». Véase [`~/rules/PROMPTS.md`](./PROMPTS.md) y Wei et al. (arXiv:2201.11903).
+: técnica de prompting para modelos de lenguaje en la que se solicita que el modelo genere pasos intermedios de razonamiento antes de dar la respuesta final. Mejora el desempeño en tareas con múltiples pasos (aritmética, lógica, diagnóstico técnico) y facilita la verificación de unidades, supuestos y dependencias. Buenas prácticas en este repositorio: razonamiento en español mexicano; identificadores/código en inglés cuando corresponda; pasos numerados y conclusión verificable; no incluir secretos; usar rutas de referencia «~/rules/...». Véase Wei et al. (arXiv:2201.11903).
 
 ---
 

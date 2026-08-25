@@ -1,6 +1,6 @@
 # Perfil educativo y de divulgación científica de Rodrigo Álvarez
 
-> Este perfil educativo se fundamenta en [PHILOSOPHY.md](./PHILOSOPHY.md). Para una visión general y navegación rápida del proyecto, consulta [README.md](./README.md).
+> Este perfil educativo se fundamenta en [PHILOSOPHY.md](../PHILOSOPHY.md). Para una visión general y navegación rápida del proyecto, consulta [README.md](../README.md).
 
 ## Resumen educativo
 
@@ -53,18 +53,21 @@ Mi enfoque pedagógico se fundamenta en principios claros y no negociables:
 ## Competencias educativas principales
 
 ### Diseño de currícula STEM
+
 - **Programación Python:** desde conceptos básicos hasta algoritmos intermedios
 - **Metodología *hands-on*:** 80% práctica, 20% teoría
 - **Progresión estructurada:** 21 lecciones organizadas por complejidad creciente
 - **Evaluación continua:** ejercicios interactivos en Jupyter Notebooks
 
 ### Gestión de laboratorios tecnológicos
+
 - **Administración multi-contenedor:** gestión simultánea de 20+ entornos estudiantiles
 - **Resolución de problemas en tiempo real:** solución de incidencias de conectividad, permisos y configuración
 - **Mantenimiento automatizado:** scripts en Bash/Python para limpieza, actualización y respaldo de entornos
 - **Monitoreo de recursos:** supervisión de CPU, memoria y almacenamiento
 
 ### Adaptación tecnológica
+
 - **Compatibilidad multi-distribución:** Ubuntu, Debian, Fedora, RHEL
 - **Instalación automatizada:** scripts que detectan y configuran dependencias por distribución
 - **Personalización cultural:** JupyterLab en español mexicano, comentarios de código bilingües
@@ -102,6 +105,7 @@ Mi enfoque pedagógico se fundamenta en principios claros y no negociables:
 **Descripción:** Entorno de aprendizaje STEM inmersivo para estudiantes de secundaria (12-15 años) utilizando JupyterLab desplegado mediante Docker Compose.
 
 **Características técnicas:**
+
 - **Orquestación automatizada:** script Python genera archivos `compose.yaml` personalizados según la lista de estudiantes
 - **Escalabilidad:** asignación automática de puertos SSH (1022, 1122, 1222...) y JupyterLab (1088, 1188, 1288...)
 - **Persistencia de datos:** volúmenes Docker para preservar configuraciones SSH y directorios home de estudiantes
@@ -109,6 +113,7 @@ Mi enfoque pedagógico se fundamenta en principios claros y no negociables:
 - **Panel web:** interfaz en Node.js para acceso simplificado y monitoreo de contenedores
 
 **Impacto educativo:**
+
 - Eliminó barreras técnicas de instalación y configuración
 - Permitió enfoque 100% en programación Python
 - Entornos idénticos para todos los estudiantes
@@ -121,6 +126,7 @@ Mi enfoque pedagógico se fundamenta en principios claros y no negociables:
 **Descripción:** Proyecto de divulgación científica que combina programación Python y geofísica para enseñar conceptos de cartografía y navegación usando el cráter de Chicxulub como caso de estudio.
 
 **Características educativas:**
+
 - **Interdisciplinariedad:** fusión de programación, matemáticas, geografía y ciencias de la Tierra
 - **Contextualización histórica:** uso del evento de extinción K-Pg como marco narrativo
 - **Aplicación práctica:** conversión de coordenadas geográficas y cálculos de distancia en la superficie terrestre
@@ -128,6 +134,7 @@ Mi enfoque pedagógico se fundamenta en principios claros y no negociables:
 - **Metodología *hands-on*:** ejercicios interactivos con datos reales del cráter
 
 **Impacto divulgativo:**
+
 - Democratiza conceptos de geodesia y cartografía mediante programación accesible
 - Conecta eventos históricos (extinción de dinosaurios) con herramientas técnicas modernas
 - Enseña trigonometría aplicada a través de casos de uso reales
@@ -140,6 +147,7 @@ Mi enfoque pedagógico se fundamenta en principios claros y no negociables:
 ## Contexto de enseñanza actual
 
 ### Experiencia docente
+
 - **Años de experiencia:** 8 años en educación STEM
 - **Nivel educativo:** secundaria y preparatoria (12-18 años)
 - **Modalidad:** presencial con laboratorios técnicos
@@ -147,10 +155,12 @@ Mi enfoque pedagógico se fundamenta en principios claros y no negociables:
 - **Idioma de instrucción:** español mexicano con terminología técnica en inglés
 
 ### Enfoques pedagógicos
+
 - **Educación Montessori:** Aplicación de principios de aprendizaje autodirigido, desarrollando la curiosidad innata y la auto-motivación en un entorno cuidadosamente preparado
 - **Secundarias activas:** Promoción de la participación activa de los estudiantes y la co-creación del conocimiento a través de proyectos colaborativos y aprendizaje práctico
 
 ### Participación social
+
 - **Programas educativos en comunidades vulnerables:** Diseño y ejecución de proyectos para ofrecer educación accesible a poblaciones de bajos ingresos utilizando tecnologías abiertas y metodologías inclusivas
 - **Enseñanza de C++ con Arduino:** Enfoque en programación de microcontroladores para proyectos prácticos de electrónica y robótica educativa
 
@@ -159,11 +169,13 @@ Mi enfoque pedagógico se fundamenta en principios claros y no negociables:
 Tu experiencia diversa en educación Montessori, secundarias activas y programas sociales te ha permitido entender y aplicar principios de democratización del conocimiento en contextos variados. Al usar herramientas libres en estos entornos, garantizas que todos los estudiantes, independientemente de su trasfondo socioeconómico, tengan acceso a una educación de calidad. Además, fomentas la autonomía y el aprendizaje autodirigido, alineándote con una filosofía educativa que empodera a los estudiantes a ser protagonistas de su propio proceso de aprendizaje.
 
 ### Estudiantes destacados
+
 - **Carlos (@cgzdev):** desarrollo de funcionalidades avanzadas en proyectos colaborativos
 - **Ian (@calmestprism226):** contribuciones significativas en automatización y scripting
 - **Fernando (@fer1495):** liderazgo en depuración y optimización de entornos
 
 ### Impacto cuantitativo
+
 - **Entornos desplegados:** 100+ contenedores Docker administrados
 - **Estudiantes impactados:** 60+ estudiantes a lo largo de 8 años
 - **Proyectos desarrollados:** 20+ laboratorios automatizados
@@ -174,6 +186,7 @@ Tu experiencia diversa en educación Montessori, secundarias activas y programas
 ## Divulgación científica y técnica
 
 ### Filosofía de divulgación
+
 - **Democratización del conocimiento:** herramientas profesionales accesibles para estudiantes
 - **Compromiso con la libertad de software:** uso exclusivo de herramientas libres (Linux, Docker, Python, JupyterLab) por principio ético y pedagógico
 - **Código abierto:** todos los proyectos educativos bajo licencia GPLv3 por principio ético
@@ -182,27 +195,31 @@ Tu experiencia diversa en educación Montessori, secundarias activas y programas
 - **Educación en libertad:** enseñar con herramientas que los estudiantes pueden usar, modificar y redistribuir libremente
 
 ### Contribuciones a la comunidad
+
 - **Proyecto Juno:** plataforma educativa de software libre para enseñanza de programación
 - **Metodologías DevOps en educación:** aplicación de principios de ingeniería a la pedagogía
 - **Adaptación cultural:** localización de herramientas técnicas para el contexto mexicano
 
 ### Impacto en la comunidad educativa
+
 - **Inspiración pedagógica:** metodología replicada por otros educadores
 - **Contribución al ecosistema:** proyecto disponible públicamente en GitHub
 - **Mentoría técnica:** formación de nuevos talentos en DevOps y programación
 
 ---
 ---
-**Documento principal:** [PHILOSOPHY.md](./PHILOSOPHY.md) · **Entrada rápida:** [README.md](./README.md)
+**Documento principal:** [PHILOSOPHY.md](../PHILOSOPHY.md) · **Entrada rápida:** [README.md](../README.md)
 
 ## Evolución y aprendizaje continuo
 
 ### Adaptación tecnológica constante
+
 - **Actualización de herramientas:** migración de versiones, adopción de nuevas tecnologías
 - **Retroalimentación estudiantil:** incorporación de sugerencias para mejora continua
 - **Mejores prácticas:** integración de nuevos enfoques pedagógicos y técnicos
 
 ### Desarrollo profesional
+
 - **Intersección DevOps-Educación:** especialización única en aplicar ingeniería de software a pedagogía
 - **Investigación educativa:** experimentación con nuevas metodologías de enseñanza técnica
 - **Colaboración académica:** trabajo conjunto con educadores y desarrolladores

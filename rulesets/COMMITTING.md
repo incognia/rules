@@ -78,7 +78,7 @@ docs: add frontend/backend GitLab cross-references
 - Add SSH key alignment and relay host-key stability notes in README and docs/SERVERS.md
 - Update CHANGELOG.md with the 2026-05-01 (CST) entry before commit
 
-Co-Authored-By: Oz <oz-agent@warp.dev>
+Co-Authored-By: <agente en turno> <identificador>
 ```
 
 Reglas de formato obligatorias para esta plantilla:
@@ -87,6 +87,11 @@ Reglas de formato obligatorias para esta plantilla:
 - Si una viñeta es larga, debes truncar manualmente la línea y continuar abajo.
 - La línea de continuación debe llevar dos espacios de sangría para alinear el texto con el contenido del bullet.
 - Mantener una línea en blanco entre asunto y cuerpo, y otra entre cuerpo y pie.
+- `Co-Authored-By` debe identificar al agente que realmente ejecuta el *commit*, nunca un valor copiado de un ejemplo de otra herramienta. Ejemplos ilustrativos de formato (ver detalle completo en «~/rules/cot/committing.md»):
+  - Claude Code: `Claude Sonnet 5 <noreply@anthropic.com>`
+  - OpenAI Codex: `Codex <noreply@openai.com>`
+  - Google Antigravity: `Antigravity <antigravity-agent@google.com>`
+  - Warp (Oz): `Oz <oz-agent@warp.dev>`
 
 Después ejecuta el commit con:
 
@@ -101,11 +106,12 @@ git commit -F /tmp/commit-msg.txt
 🔥 **REGLA CRÍTICA: el flujo `/commit` NO modifica `CHANGELOG.md`; solo valida que ya fue actualizado.**
 
 **PROCESO OBLIGATORIO:**
+
 1. **PRIMERO:** Actualizar `CHANGELOG.md` usando `/changelogger` (o flujo dedicado equivalente).
-1. **SEGUNDO:** Validar que `CHANGELOG.md` tiene cambios respecto al repositorio.
-1. **TERCERO:** Hacer `git add` de los archivos necesarios (incluyendo `CHANGELOG.md`).
-1. **CUARTO:** Hacer `git commit`.
-1. **QUINTO:** Hacer `git push`.
+2. **SEGUNDO:** Validar que `CHANGELOG.md` tiene cambios respecto al repositorio.
+3. **TERCERO:** Hacer `git add` de los archivos necesarios (incluyendo `CHANGELOG.md`).
+4. **CUARTO:** Hacer `git commit`.
+5. **QUINTO:** Hacer `git push`.
 
 **⚠️ ADVERTENCIA:** Si `CHANGELOG.md` no tiene cambios, el flujo debe abortar y sugerir `/changelogger`.
 
@@ -114,12 +120,14 @@ git commit -F /tmp/commit-msg.txt
 Antes de continuar a `git add`/`git commit`, se debe cumplir este protocolo:
 
 1. Ejecutar gate de cambios en `CHANGELOG.md`:
+
    ```bash
    if git --no-pager diff --quiet -- CHANGELOG.md && git --no-pager diff --cached --quiet -- CHANGELOG.md; then
        echo "ERROR: CHANGELOG.md sin cambios. Ejecuta /changelogger y vuelve a intentar /commit."
        exit 1
    fi
    ```
+
 2. Si el gate falla (sin cambios), detener ejecución inmediatamente.
 3. Si el gate pasa (hay cambios staged o unstaged), continuar con `git add`/`git commit`.
 4. El mantenimiento de formato/idioma del changelog se delega a `/changelogger` + `~/rules/cot/changelog.md`.
@@ -154,7 +162,7 @@ docs: validate changelog gate before commit
 - Abort commit flow when changelog has no repo diff
 - Keep commit message workflow in English using temporary file
 
-Co-Authored-By: Oz <oz-agent@warp.dev>
+Co-Authored-By: <agente en turno> <identificador>
 EOF
 git commit -F /tmp/commit-msg.txt
 
@@ -230,6 +238,7 @@ git config --global pager.diff false
 **Soluciones:**
 
 1. **Escapar comillas correctamente:**
+
    ```bash
    # MAL: comillas dobles dentro de comillas dobles sin escapar
    git commit -m "fix: correct "user" validation"
@@ -242,12 +251,14 @@ git config --global pager.diff false
    ```
 
 2. **Cancelar el prompt `quote>` si aparece:**
+
    ```bash
    # Presionar Ctrl+C para cancelar el comando incompleto
    # Luego reescribir el mensaje correctamente
    ```
 
 3. **Método preferido: usar archivo temporal detallado**
+
    ```bash
    cat > /tmp/commit-msg.txt <<EOF
    fix: correct user validation
@@ -257,12 +268,13 @@ git config --global pager.diff false
      preserve backward compatibility for existing callers
    - Add explicit error handling for invalid identifiers
 
-   Co-Authored-By: Oz <oz-agent@warp.dev>
+   Co-Authored-By: <agente en turno> <identificador>
    EOF
    git commit -F /tmp/commit-msg.txt
    ```
 
 **Prevención:**
+
 - Evitar comillas dobles dentro de mensajes entre comillas dobles
 - Preferir comillas simples para mensajes que contengan comillas dobles
 - Verificar balance de comillas antes de ejecutar el comando
@@ -270,4 +282,3 @@ git config --global pager.diff false
 ---
 
 *Elaborado por Rodrigo Álvarez (@incognia)*
-

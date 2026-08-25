@@ -135,7 +135,7 @@ flowchart LR
 
 Cada *skill* es un directorio con al menos un `SKILL.md`. El script copia el directorio completo, preservando cualquier archivo adicional (plantillas, scripts auxiliares):
 
-```
+```text
 .agents/skills/
 ├── commit/
 │   └── SKILL.md          ← copiado íntegro a $SKILLS_DST/commit/
@@ -148,7 +148,7 @@ Cada *skill* es un directorio con al menos un `SKILL.md`. El script copia el dir
 
 Los *workflows* son archivos YAML planos copiados directamente al directorio destino:
 
-```
+```text
 .warp/workflows/
 ├── backup_file.yaml       ← copiado a $WORKFLOWS_DST/
 ├── commit_flow.yaml

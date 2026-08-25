@@ -15,9 +15,11 @@ Before making any git commit in projects that follow the rules repository conven
 2. **Validate identity (first time in session only)**: If you already validated identity in this conversation session, skip to step 3. Otherwise: run `git config --list | grep ^user\.` and `git remote -v`, verify email/name match expected context and remote uses SSH (not HTTPS).
 3. **Validate CHANGELOG gate BEFORE staging (MANDATORY)**:
    a. Run change validation (staged or unstaged):
+
       ```bash
       git --no-pager diff --quiet -- CHANGELOG.md && git --no-pager diff --cached --quiet -- CHANGELOG.md
       ```
+
    b. Interpretation:
       - **Exit code 0**: `CHANGELOG.md` has NO changes versus repo → **abort** `/commit` flow.
       - **Exit code 1**: `CHANGELOG.md` has changes → continue.
@@ -30,6 +32,7 @@ Before making any git commit in projects that follow the rules repository conven
    - `git --no-pager diff --cached -- CHANGELOG.md`
 5. **Stage files**: `git add .`
 6. **Build commit message in temporary file**: create `/tmp/commit-msg.txt` using this detailed structure (English international):
+
    ```text
    type(scope): short summary in english
    
@@ -38,14 +41,21 @@ Before making any git commit in projects that follow the rules repository conven
      aligned with the bullet text (continuation line)
    - Detail 3 in english
 
-   Co-Authored-By: Oz <oz-agent@warp.dev>
+   Co-Authored-By: <agent in turn> <identifier>
    ```
+
    **Mandatory formatting rules for bullets and long lines:**
    - Bullet marker `-` MUST start at column 1 (no leading spaces or tabs before `-`).
    - If a bullet is too long, split it manually into a new line.
    - Continuation lines MUST be indented with two spaces so text stays aligned with the bullet content.
    - Keep exactly one blank line between subject/body and body/footer.
    - Redundancy rule: commit body details MUST NOT include `update/edit CHANGELOG.md` (or equivalent), because changelog maintenance is a precondition validated by `/commit`, not a detail to report in the body.
+   - `Co-Authored-By` MUST identify the agent actually running this commit, never a value copied verbatim from an example. Format examples by tool (illustrative — match whatever the active session really is):
+     - Claude Code: `Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>` (or the active model: Opus, Haiku, etc.)
+     - OpenAI Codex: `Co-Authored-By: Codex <noreply@openai.com>`
+     - Google Antigravity: `Co-Authored-By: Antigravity <antigravity-agent@google.com>`
+     - Warp (Oz): `Co-Authored-By: Oz <oz-agent@warp.dev>`
+     - Any other agent/IDE: use the name and contact it documents for commit attribution; if none is published, use `<Agent name> <noreply@tool-domain>`.
    Reuse and adjust `/tmp/commit-msg.txt` until the wording is final.
 7. **Commit from file**: `git commit -F /tmp/commit-msg.txt` — message MUST be in English international, following Conventional Commits
 8. **Push**: `git push`
@@ -62,6 +72,7 @@ Before making any git commit in projects that follow the rules repository conven
 6. Stop immediately if any forbidden anti-pattern appears and request user confirmation before continuing.
 
 Forbidden anti-patterns:
+
 - Commit/push while `CHANGELOG.md` has no diff versus repo.
 - Editing `CHANGELOG.md` from `/commit` instead of using `/changelogger`.
 - Including `update/edit CHANGELOG.md` (or equivalent) as a commit body detail.

@@ -10,9 +10,9 @@ description: "Estándares, filosofía y cadenas de razonamiento (CoT) que guían
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)
 [![Spanish](https://img.shields.io/badge/Language-Spanish%20(MX)-green.svg)](https://es.wikipedia.org/wiki/Espa%C3%B1ol_mexicano)
-[![CoTs](https://img.shields.io/badge/CoTs-21-blue.svg)](./cot/)
-[![Skills](https://img.shields.io/badge/Skills-10-green.svg)](./.agents/skills/)
-[![Rulesets](https://img.shields.io/badge/Rulesets-16-orange.svg)](./rulesets/)
+[![CoTs](https://img.shields.io/badge/CoTs-24-blue.svg)](./cot/)
+[![Skills](https://img.shields.io/badge/Skills-15-green.svg)](./.agents/skills/)
+[![Rulesets](https://img.shields.io/badge/Rulesets-20-orange.svg)](./rulesets/)
 
 ## Definiciones rápidas
 
@@ -240,7 +240,6 @@ sequenceDiagram
   - `commit_flow` — `git add` + `git commit` con tipo y descripción
   - `cst_date` — obtener fecha/hora en CST
 
-
 ## Herramientas y scripts
 
 - Sincronización: scripts/sync_global.sh (instala *skills* y *workflows* globales, multiplataforma)
@@ -252,7 +251,7 @@ sequenceDiagram
 
 ## Cómo usar CoT rápidamente
 
-- Todos los CoT: carpeta [cot/](./cot/) (22 archivos)
+- Todos los CoT: carpeta [cot/](./cot/) (24 archivos)
 - Lingüística: [cot/linguistics.md](./cot/linguistics.md) + [LINGUISTICS.md](./rulesets/LINGUISTICS.md)
 - *Commits*: [cot/committing.md](./cot/committing.md) + [COMMITTING.md](./rulesets/COMMITTING.md)
 - Contexto de proyecto: [cot/context.md](./cot/context.md)

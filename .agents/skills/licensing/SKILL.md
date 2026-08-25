@@ -14,10 +14,10 @@ When creating a new project or when a project needs its LICENSE file and README 
 1. **Read the full CoT**: Load and follow `~/rules/cot/licensing.md` from line 1 to end
 2. **Detect context** by analyzing the project:
    - Look for "Promad", "promad.com.mx", "@incogniadev" → **Corporate (MIT)**
-   - Look for "@incognia", "incognia@gmail.com" → **Personal (GPLv3)**
+   - Look for "@incognia", "<incognia@gmail.com>" → **Personal (GPLv3)**
 3. **Create LICENSE file**: Download the full license text
    - Corporate: MIT License with `Copyright (c) YYYY, Promad Business Solutions`
-   - Personal: GNU GPLv3 from https://www.gnu.org/licenses/gpl-3.0.txt
+   - Personal: GNU GPLv3 from <https://www.gnu.org/licenses/gpl-3.0.txt>
 4. **Add README footer**:
    - Corporate: `*Este proyecto fue elaborado por Rodrigo Álvarez para Promad Business Solutions y se distribuye bajo la licencia MIT.*`
    - Personal: `*Este proyecto fue elaborado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3.*`
@@ -26,8 +26,8 @@ When creating a new project or when a project needs its LICENSE file and README 
 
 ## Context indicators
 
-- **Personal (@incognia)**: GPLv3, incognia@gmail.com, ~/.ssh/incognia
-- **Corporate (@incogniadev)**: MIT, ralvarez@kabatone.com, ~/.ssh/kone
+- **Personal (@incognia)**: GPLv3, <incognia@gmail.com>, ~/.ssh/incognia
+- **Corporate (@incogniadev)**: MIT, <ralvarez@kabatone.com>, ~/.ssh/kone
 
 ## References
 

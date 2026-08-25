@@ -7,7 +7,7 @@ description: "Apply Kabat One Markdown styling to a file by platform. Usage: /st
 
 ## Usage
 
-```
+```text
 /styling <platform> [license] <file>
 ```
 
@@ -16,6 +16,7 @@ description: "Apply Kabat One Markdown styling to a file by platform. Usage: /st
 - **file** (required): path to the Markdown file to apply styling to. Always the last argument.
 
 Examples:
+
 - `/styling hedgedoc doc.md` — HedgeDoc, no license
 - `/styling gitlab mit README.md` — GitLab with MIT license
 - `/styling github gpl README.md` — GitHub with GPLv3
@@ -25,6 +26,7 @@ To detect arguments: `mit` and `gpl` are the only valid license values — if th
 ## Templates
 
 Use as starting point:
+
 - `~/rules/templates/hedgedoc.md` — generic HedgeDoc document
 - `~/rules/templates/gitlab-readme.md` — GitLab README.md with license and badges
 - `~/rules/templates/github-readme.md` — GitHub README.md with license and badges
@@ -35,18 +37,22 @@ Use as starting point:
 2. **Parse arguments**: first arg is platform, last arg is the file. If 3 args are given, middle arg is license (`mit`|`gpl`). If only 2 args, there is no license. If any required argument is missing, ask the user before proceeding.
 3. **Insert standard header** (varies by platform):
    - **HedgeDoc only**: YAML frontmatter with descriptive `tags` + dual Kabat One logos for light/dark mode:
+
      ```html
      <img src="https://hedgedoc.promad.com.mx:31418/uploads/9217e5d8-2a84-4e41-9634-ea3b5a6bd45a.png" class="logo-light" alt="Kabat One logo">
 
      <img src="https://hedgedoc.promad.com.mx:31418/uploads/e0f5ef2b-4519-48ee-bd2d-16013c7f44c4.png" class="logo-dark" alt="Kabat One logo">
      ```
+
    - **GitLab/GitHub README.md only**: YAML frontmatter with `title` and `description` (rendered as table on GitHub, code block on GitLab):
+
      ```yaml
      ---
      title: "Nombre del proyecto"
      description: "Breve descripción del proyecto"
      ---
      ```
+
      > ⚠️ Always quote values with double quotes — values containing `:` cause YAML parse errors if unquoted.
    - **GitLab/GitHub other docs**: no frontmatter
    - H1 title
@@ -106,16 +112,19 @@ Use as starting point:
 Insert after the timestamp and before the first paragraph. If badges already exist, verify they are correct.
 
 MIT:
+
 ```markdown
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ```
 
 GPLv3:
+
 ```markdown
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ```
 
 Additional badges (only if the project has them configured):
+
 - **GitLab**: pipeline status, coverage
 - **GitHub**: Actions CI workflow
 
@@ -130,6 +139,7 @@ Additional badges (only if the project has them configured):
 ```
 
 For MIT:
+
 ```markdown
 ---
 

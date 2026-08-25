@@ -1,20 +1,24 @@
 # CoT: Aplicación automática de licenciamiento
 
 ## Contexto
+
 Este Chain of Thought aplica automáticamente el licenciamiento apropiado a un proyecto basándose en las reglas definidas en `../rulesets/LICENSING.md`. Determina si el proyecto es personal (GPL) o laboral (MIT) analizando el contenido del README.md.
 
 ## Razonamiento
 
 ### 1. Análisis del README.md
+
 - **Objetivo:** Determinar la naturaleza del proyecto (personal vs laboral)
 - **Indicadores laborales:** Menciones de "Promad", "empresa", "trabajo", correo corporativo (@promad.com.mx)
 - **Indicadores personales:** Menciones de usuario personal (@incognia), correo personal (@gmail.com), proyectos de aprendizaje o experimentación
 
 ### 2. Selección de licencia
+
 - **Proyectos laborales:** MIT License (permisiva, facilita adopción comercial)
 - **Proyectos personales:** GNU GPLv3 (copyleft, mantiene el código libre)
 
 ### 3. Aplicación de licenciamiento
+
 - Crear archivo LICENSE con texto completo
 - Agregar footer apropiado al README.md
 - Validar consistencia con el contexto del proyecto
@@ -22,6 +26,7 @@ Este Chain of Thought aplica automáticamente el licenciamiento apropiado a un p
 ## Pasos
 
 ### Paso 1: Validar existencia del README.md
+
 ```bash
 if [[ -f "README.md" ]]; then
     echo "✓ README.md encontrado, analizando contenido..."
@@ -32,6 +37,7 @@ fi
 ```
 
 ### Paso 2: Analizar naturaleza del proyecto
+
 ```bash
 # Buscar indicadores laborales
 LABORAL_INDICATORS=$(grep -i "promad\|@promad\.com\.mx\|empresa\|corporat\|business" README.md | wc -l)
@@ -54,6 +60,7 @@ fi
 ```
 
 ### Paso 3: Generar archivo LICENSE
+
 ```bash
 CURRENT_YEAR=$(date +%Y)
 
@@ -90,6 +97,7 @@ fi
 ```
 
 ### Paso 4: Agregar footer al README.md
+
 ```bash
 # Remover footer existente si existe
 sed -i '/^---$/,$d' README.md
@@ -118,6 +126,7 @@ fi
 ```
 
 ### Paso 5: Validar aplicación
+
 ```bash
 echo "📋 Validando aplicación de licenciamiento..."
 

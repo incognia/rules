@@ -10,6 +10,7 @@ last_updated: 2025-10-12
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
+
 - **CRÍTICO**: evitar cualquier comando que abra editores interactivos (gh repo edit con ciertos flags, comandos sin especificar completamente).
 - Usar API REST de GitHub directamente con curl para operaciones complejas.
 - Comandos gh simples solo para operaciones que garantizan no ser interactivas.
@@ -17,8 +18,9 @@ Razonamiento:
 - Validar cambios sin abrir navegadores o editores.
 
 Pasos:
+
 1) Acción: verificar que gh esté instalado y autenticado correctamente.
-   Resultado: 
+   Resultado:
    - `gh --version` para confirmar instalación
    - `gh auth status` para verificar autenticación
    - `gh auth token` debe devolver token válido (sin mostrarlo en pantalla)
@@ -47,6 +49,7 @@ Pasos:
 
 6) Acción: configurar configuraciones adicionales del repositorio.
    Opciones disponibles via API:
+
    ```bash
    # Habilitar issues
    curl -s -H "Authorization: token $(gh auth token)" -H "Accept: application/vnd.github.v3+json" -X PATCH -d '{"has_issues":true}' https://api.github.com/repos/OWNER/REPO
@@ -66,6 +69,7 @@ Pasos:
 
 8) (Opcional) Acción: configurar protección de branch main.
    Resultado:
+
    ```bash
    curl -s -H "Authorization: token $(gh auth token)" \
         -H "Accept: application/vnd.github.v3+json" \
@@ -75,6 +79,7 @@ Pasos:
    ```
 
 Comandos a EVITAR (pueden abrir editores):
+
 - `gh repo edit` sin flags específicos
 - `gh repo edit --add-topic` (conocido por abrir editor)
 - `gh issue create` sin `-t` y `-b`
@@ -82,12 +87,14 @@ Comandos a EVITAR (pueden abrir editores):
 - Cualquier comando gh que no especifique completamente todos los parámetros
 
 Comandos SEGUROS (garantizados no interactivos):
+
 - `gh repo edit --description "texto"`
 - `gh repo view --json campo`
 - `curl` con API REST de GitHub
 - `gh auth token` (para usar en curl)
 
 Plantillas de topics comunes:
+
 ```bash
 # Proyecto de documentación
 ["documentation","markdown","readme","technical-writing"]
@@ -106,6 +113,7 @@ Plantillas de topics comunes:
 ```
 
 Ejemplos de uso completo:
+
 ```bash
 # Configurar repo de documentación técnica
 OWNER="incognia"
@@ -122,6 +130,7 @@ curl -s -H "Authorization: token $(gh auth token)" -H "Accept: application/vnd.g
 ```
 
 Conclusión:
+
 - Usar curl + API REST para máximo control y evitar editores.
 - Solo usar gh para comandos simples y completamente especificados.
 - Siempre validar cambios con consultas GET a la API.
