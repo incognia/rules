@@ -207,6 +207,12 @@ Primary focus areas reflected in the documentation:
 6. **Commits**: Non-interactive only, use conventional commits format
 7. **Files**: Markdown files use UPPERCASE.md format (README.md, PHILOSOPHY.md, etc.)
 
+## Claude Code specifics
+
+This file is symlinked as `CLAUDE.md` so Claude Code loads it automatically as project context.
+
+`scripts/sync_global.sh` symlinks each `SKILL.md` already copied into `~/.agents/skills/<name>/` to `~/.claude/commands/<name>.md`, so Claude Code recognises `/name`. This is the mechanism validated in practice — without it, Claude Code ignored these slash commands.
+
 ## Integration with other repositories
 
 When working in other projects, reference this repository:

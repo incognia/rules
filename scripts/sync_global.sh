@@ -95,6 +95,30 @@ mv "$TMP_MANAGED_SKILLS_FILE" "$MANAGED_SKILLS_FILE"
 echo "  $SKILL_COUNT skills sincronizados → $SKILLS_DST"
 echo ""
 
+# --- Claude Code ---
+# ~/.claude/commands/<nombre>.md → skills (Skill tool / /nombre)
+# Replica el mecanismo probado en el fork rules-els: sin este enlace, Claude Code
+# ignoraba los slash commands. Enlaza el SKILL.md ya copiado en SKILLS_DST (no el
+# directorio completo ni el archivo del repo directo) para mantener paridad exacta
+# con el comportamiento validado.
+echo "=== Claude Code ==="
+
+CLAUDE_COMMANDS_DIR="$HOME/.claude/commands"
+mkdir -p "$CLAUDE_COMMANDS_DIR"
+
+CLAUDE_SKILL_COUNT=0
+for skill_dir in "$SKILLS_DST"/*/; do
+    skill_name="$(basename "$skill_dir")"
+    skill_src="$SKILLS_DST/$skill_name/SKILL.md"
+    skill_link="$CLAUDE_COMMANDS_DIR/$skill_name.md"
+    [ -f "$skill_src" ] || continue
+    ln -sfn "$skill_src" "$skill_link"
+    CLAUDE_SKILL_COUNT=$((CLAUDE_SKILL_COUNT + 1))
+    echo "  ✓ $skill_name.md → $skill_src"
+done
+echo "  $CLAUDE_SKILL_COUNT skills enlazados → $CLAUDE_COMMANDS_DIR"
+echo ""
+
 # --- Workflows (ruta varía por plataforma) ---
 WORKFLOWS_SRC="$REPO_ROOT/.warp/workflows"
 

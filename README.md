@@ -71,7 +71,8 @@ git clone git@github.com:incognia/rules.git ~/rules 2>/dev/null || git -C ~/rule
 **Notas**:
 
 - `sync_global.sh` detecta la plataforma (macOS, Linux, Windows/WSL) y copia a las rutas correctas:
-  - *Skills* (`SKILL.md`): `~/.agents/skills/` (reconocidos por Warp, Claude, Cursor, Copilot, Gemini y otros)
+  - *Skills* (`SKILL.md`): `~/.agents/skills/` (copia; reconocidos por Warp, Cursor, Copilot, Gemini y otros)
+  - *Skills* para Claude Code: cada `SKILL.md` ya copiado en `~/.agents/skills/<nombre>/` se enlaza además a `~/.claude/commands/<nombre>.md`, para que Claude Code reconozca `/nombre` (sin este enlace, Claude Code ignora los slash commands)
   - *Workflows* (`*.yaml`) en macOS: `~/.warp/workflows/`
   - *Workflows* en Linux: `$XDG_DATA_HOME/warp-terminal/workflows/`
   - *Workflows* en Windows: `$APPDATA\warp\Warp\data\workflows\`
@@ -80,7 +81,7 @@ git clone git@github.com:incognia/rules.git ~/rules 2>/dev/null || git -C ~/rule
   - `templates/` — plantillas HTML e imágenes de firma
   - `rulesets/`, `cot/` — reglas y cadenas de razonamiento
 - Para actualizar después de un `git pull`, solo ejecuta: `~/rules/scripts/sync_global.sh`
-- No se usan enlaces simbólicos; todas las rutas son canónicas (`~/rules/cot/`, `~/rules/rulesets/`)
+- `cot/`, `rulesets/` y `templates/` se acceden por ruta canónica, sin enlace simbólico (`~/rules/cot/`, `~/rules/rulesets/`); la excepción es la exportación de *skills* a Claude Code arriba, que sí usa un enlace simbólico
 
 ### Uso diario
 

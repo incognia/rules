@@ -3,6 +3,12 @@
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-08-24] - Exportar skills a Claude Code y symlink CLAUDE.md
+
+- feat: extender `scripts/sync_global.sh` con bloque «Claude Code» que enlaza cada `SKILL.md` ya copiado en `~/.agents/skills/<nombre>/` hacia `~/.claude/commands/<nombre>.md`, replicando el mecanismo validado en el fork rules-els para que Claude Code reconozca `/nombre`
+- feat: agregar `CLAUDE.md` como enlace simbólico a `AGENTS.md` para que Claude Code cargue el contexto del proyecto automáticamente
+- docs: documentar en `AGENTS.md` y `README.md` el mecanismo de exportación de *skills* a Claude Code y la excepción puntual a la política de rutas canónicas
+
 ## [2026-06-22] - Incorporar flujo bmail para correos empresariales en inglés
 
 - feat: estandarizar las siete plantillas de `templates/bmail/` con nueva estructura HTML, bloque de metadatos (from/to/date/subject) y campos opcionales por escenario
