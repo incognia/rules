@@ -148,6 +148,7 @@ Los detalles específicos de implementación de esta filosofía se encuentran or
 - **[ATTRIBUTION.md](./rulesets/ATTRIBUTION.md)** - reglas de atribución personal
 
 ### Reglas de uso exclusivamente laboral
+
 - **[STYLING.md](./rulesets/STYLING.md)** - reglas de estilo para documentos Markdown corporativos
 
 *Este documento fue elaborado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.*

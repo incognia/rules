@@ -8,12 +8,14 @@ validacion: HTML generado con placeholders completos, tono profesional y acción
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
+
 - El objetivo de `bmail` es acelerar redacción de correos profesionales en inglés.
 - Se usarán plantillas temáticas y bancos de frases derivados de `docs/business_email.pdf`.
 - La salida debe ser reutilizable como borrador editable, con estructura consistente:
   asunto claro, apertura contextual, cuerpo accionable y cierre cortés.
 
 Pasos:
+
 1) Acción: identificar el tipo de correo solicitado.
    - opening, enquiry, informing-good, informing-bad, apology-delay, order-status, meeting-request.
    Resultado: plantilla objetivo seleccionada.
@@ -41,5 +43,6 @@ Pasos:
    Resultado: archivo persistido en ruta acordada.
 
 Conclusión:
+
 - `bmail` transforma ejemplos del libro en plantillas operables.
 - El enfoque es rapidez + consistencia + personalización contextual.

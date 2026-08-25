@@ -8,12 +8,14 @@ validacion: errores reducidos significativamente tras aplicar correcciones y re-
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
+
 - Priorizar correcciones mecánicas de alto impacto (espacios alrededor de encabezados/listas: MD022/MD032; cercas y lenguajes: MD031/MD040; prefijos de listas ordenadas: MD029).
 - Mantener consistencia con la configuración actual (.markdownlint.yaml con MD013 desactivado y excepciones en CHANGELOG).
 - Evitar cambios semánticos del contenido; limitarse a formato Markdown.
 - Usar ejecución no interactiva para medir avance entre iteraciones.
 
 Pasos:
+
 1) Acción: ejecutar el linter para establecer la línea base.
    Resultado:
    - `npx markdownlint-cli2 "**/*.md" "#node_modules"`
@@ -54,6 +56,7 @@ Pasos:
    - Revisar enlaces quebrados y actualizar referencias internas si fuera necesario.
 
 Conclusión:
+
 - El conjunto de correcciones mecánicas debe reducir sustancialmente los errores del linter y dejar pendientes mínimos.
 - Si persisten avisos específicos (p. ej., MD036 en pies de página), decidir si ajustar el contenido o documentar una excepción local por archivo.
 - Referencias: «~/rules/.markdownlint.yaml», «~/rules/CHANGELOG.md», «~/rules/README.md».

@@ -7,13 +7,16 @@ Este documento establece cómo darme crédito y atribución en documentos indivi
 ## 2. Identidad del autor
 
 ### 2.1. Nombre completo
+
 - **Nombre legal:** Rodrigo Ernesto Álvarez Aguilera
 
 ### 2.2. Nombres de uso común
+
 - **Nombre abreviado:** Rodrigo Álvarez
 - **Apellido principal para indexación:** Álvarez
 
 ### 2.3. Convención de nombres
+
 - **Contexto hispanohablante:** se utilizan dos apellidos, siendo el paterno «Álvarez» y el materno «Aguilera».
 - **Contexto técnico e internacional:** para garantizar una correcta atribución en sistemas que no manejan nombres compuestos, usar como apellido principal «Álvarez».
 - **Alternativa sin caracteres especiales:** en sistemas que no soporten la `á`, utilizar la versión «Alvarez».
@@ -34,11 +37,13 @@ Sus competencias técnicas principales incluyen:
 ## 4. Identificadores digitales
 
 ### 4.1. Personales
+
 - **GitHub:** `incognia`
 - **GitLab:** `incognia`
 - **Correo electrónico:** `incognia@gmail.com`
 
 ### 4.2. Laborales (Promad Business Solutions)
+
 - **GitHub:** `incogniadev`
 - **GitLab:** `incogniadev`
 - **Correo electrónico:** `ralvarez@kabatone.com`
@@ -46,17 +51,22 @@ Sus competencias técnicas principales incluyen:
 ## 5. Atribución y menciones
 
 ### 5.1. Formatos sugeridos
+
 - **Contribución personal:** «elaborado por Rodrigo Álvarez (@incognia)»
 - **Documentación técnica:** «documentado por Rodrigo Ernesto Álvarez Aguilera (GitHub: @incognia)»
 - **Contribución laboral:** «este trabajo fue realizado por Rodrigo Álvarez en su calidad de Ingeniero DevOps para Promad Business Solutions (@incogniadev)»
 
 ### 5.2. Firma en commits de Git
+
 - **Para proyectos personales:**
+
   ```bash
   git config user.name "Rodrigo Álvarez"
   git config user.email "incognia@gmail.com"
   ```
+
 - **Para proyectos laborales (Promad):**
+
   ```bash
   git config user.name "Rodrigo Álvarez"
   git config user.email "ralvarez@kabatone.com"
@@ -65,10 +75,12 @@ Sus competencias técnicas principales incluyen:
 ## 6. Licenciamiento y firma de contribuciones
 
 ### 6.1. Filosofía de licenciamiento
+
 - **Proyectos profesionales/laborales:** la licencia a utilizar es **MIT**, por su permisividad y compatibilidad.
 - **Proyectos personales:** el licenciamiento puede variar, pero la preferencia es por licencias de código abierto como MIT o Apache 2.0.
 
 ### 6.2. Firma de contribuciones (alias)
+
 - **Contribuciones personales:** firmar bajo el alias `incognia`.
 - **Contribuciones laborales o bajo contrato:** firmar bajo el alias `incogniadev`.
 - **Requerimientos legales:** en encabezados de licencia o documentos legales que lo requieran, utilizar el nombre completo: `Rodrigo Ernesto Álvarez Aguilera`.
@@ -76,17 +88,20 @@ Sus competencias técnicas principales incluyen:
 ## 7. Estándares de codificación y documentación
 
 ### 7.1. Idioma
+
 - **Mensajes de *commit* y código:** los mensajes de *commit* y los comentarios dentro del código deben estar en **inglés internacional**.
 - **Documentación (README, CHANGELOG, etc.):** el idioma será **español mexicano**, a menos que el contexto del proyecto exija explícitamente el inglés. Los títulos y encabezados en español seguirán la capitalización de frase (solo la primera palabra en mayúscula).
 - **Nombres de archivos y directorios:** siempre en **inglés internacional** para mantener la consistencia técnica.
 
 ### 7.2. Mensajes de *commit*
+
 - **Convención:** seguir la convención de *Conventional Commits*.
 - **Idioma:** redactar los mensajes en inglés.
 - **Formato:** estructurarlos con un prefijo (`feat`, `fix`, `docs`, `refactor`, etc.).
 - **Emojis:** no usar emojis.
 
 ### 7.3. Diagramas
+
 Para la creación de diagramas en archivos Markdown, usar exclusivamente **Mermaid**.
 
 ---

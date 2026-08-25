@@ -8,12 +8,14 @@ validacion: identificar servicio/despliegue y lista de pods afectados con ventan
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
+
 - Usar un recorrido de afuera hacia adentro: eventos recientes → pods inestables → patrones de error → dueño (Deployment/StatefulSet) → Service/Ingress/VirtualService.
 - Mantener español mexicano y formato CoT del repo (ver «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md))).
 - Referencia principal: «~/rules/rulesets/KUBETBS.md» ([../rulesets/KUBETBS.md](../rulesets/KUBETBS.md)).
 - Registrar comandos no interactivos y usar selectores por etiquetas para abarcar réplicas.
 
 Pasos:
+
 1) Acción: listar eventos recientes para detectar namespaces y recursos con fallas.
    Resultado: `kubectl get events --all-namespaces --sort-by=.lastTimestamp | tail -n 50` muestra errores en el namespace "payments" (ImagePullBackOff y CrashLoopBackOff intermitentes) y timeouts en "checkout".
 2) Acción: listar pods con restarts altos para priorizar.
@@ -36,7 +38,7 @@ Pasos:
     Resultado: usar variable `REDIS_HOST=redis.infra.svc.cluster.local` o inyectar `DNS search` adecuado; verificar conectividad con un pod temporal: `kubectl -n payments run tmp --rm -it --image=busybox --restart=Never -- nslookup redis.infra.svc.cluster.local && nc -vz redis.infra.svc.cluster.local 6379`.
 
 Conclusión:
+
 - Microservicio afectado: «payments-api» (Deployment en namespace «payments»); pods con reinicios: `payments-api-xxxx` (y réplicas).
 - Causa raíz: variable `REDIS_HOST` apunta a `redis` local del namespace «payments», pero el servicio Redis vive en «infra». Falla de resolución DNS/FQDN provoca `connection refused` y desencadena timeouts en «checkout».
 - Corrección: actualizar la config (ConfigMap/vars) a `REDIS_HOST=redis.infra.svc.cluster.local` o crear `Service` local que haga `ExternalName` al redis de «infra». Validar con pod temporal antes de desplegar.
-

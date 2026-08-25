@@ -24,10 +24,12 @@ Before uploading files to an S3 bucket, or when normalizing existing object keys
    f. Validate total path length ≤ 255 characters (CloudFront limit)
 4. **Rename files**: Apply `mv` for each file that changed
 5. **Generate audit log**:
+
    ```bash
    TSV="normalizacion_$(TZ=America/Mexico_City date +'%Y%m%d').tsv"
    printf 'original\tnormalizado\n' > "$TSV"
    ```
+
    Append one line per file processed (including unchanged files).
 6. **Report**: Show summary of renamed files and path to the `.tsv`
 

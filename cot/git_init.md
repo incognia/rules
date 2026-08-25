@@ -8,12 +8,14 @@ validacion: repo inicializado, identidad correcta, SSH forzado, remoto en SSH y 
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
+
 - Evitar HTTPS y alias SSH; usar SSH con clave adecuada por repo (core.sshCommand).
 - Configurar identidad (user.name, user.email) según contexto Personal/Laboral.
 - Dejar la rama por defecto como main y remoto origin en formato SSH.
 - Referencia principal: «~/rules/rulesets/GIT.md» (sección “Configuración inicial y SSH por contexto”).
 
 Pasos (Opción recomendada: asistente interactivo):
+
 1) Acción: inicializar el repositorio.
    Resultado: `git init`.
 2) Acción: ejecutar el asistente de contexto.
@@ -38,6 +40,7 @@ Pasos (Opción recomendada: asistente interactivo):
    Resultado: `git push -u origin main`.
 
 Pasos (Alternativa manual, si no usas el asistente):
+
 1) `git init`
 2) Elegir contexto y configurar identidad + SSH:
    - Personal:
@@ -53,6 +56,6 @@ Pasos (Alternativa manual, si no usas el asistente):
 5) Commit y primer push como en los pasos 5-6 de la opción recomendada.
 
 Conclusión:
+
 - Tras la configuración inicial, el flujo diario usa push simple: `git push`.
 - Referencias: «~/rules/rulesets/GIT.md» ([../rulesets/GIT.md](../rulesets/GIT.md)) y «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)).
-

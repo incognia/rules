@@ -8,6 +8,7 @@ validacion: PDF generado sin errores, tablas de ancho completo, bloques de códi
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
+
 - Usar XeLaTeX como motor (Unicode nativo, fontspec, emoji); nunca pdflatex para documentos corporativos.
 - CRÍTICO: NO usar pandoc para conversión directa Markdown→PDF. El resultado es mediocre: tablas sin ancho consistente, bloques de código con fondo roto, encabezado/pie imposibles de controlar limpiamente. Usar el Markdown únicamente como referencia de contenido y escribir el .tex desde cero.
 - El flujo es: leer el Markdown → descargar imágenes → escribir .tex → compilar → corregir paquetes faltantes → compilar de nuevo.
@@ -15,6 +16,7 @@ Razonamiento:
 - Aplicar LINGUISTICS.md al contenido en español mexicano.
 
 Pasos:
+
 1) Acción: descargar imágenes localmente antes de escribir el .tex.
    CRÍTICO: XeLaTeX no puede cargar URLs en `\includegraphics`. Siempre `curl -sL URL -o archivo.png` y verificar con `file archivo.png`.
    Resultado: imágenes disponibles en el mismo directorio que el .tex.
@@ -57,6 +59,7 @@ Pasos:
    Compilar dos veces si el documento tiene referencias internas o tabla de contenidos.
 
 Conclusión:
+
 - Entregar: archivo .tex limpio + PDF generado + imágenes locales descargadas.
 - Verificar: tablas de ancho completo, bloques de código con fondo sólido, timestamp alineado a la derecha, sin «Figura 1» en el logo.
 - Si se detecta un paquete faltante durante la compilación, instalarlo con `dnf` y recompilar — nunca intentar omitir el paquete.

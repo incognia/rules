@@ -156,6 +156,7 @@
 - 🔥 **IMPORTANTE:** En títulos de tercer nivel (###) NO corregir las mayúsculas si ya están bien aplicadas según las reglas anteriores
 
 **Ejemplos correctos de títulos de tercer nivel (###):**
+
 - ✅ `### Configuración de Proxmox VE` (ya está correcto, NO cambiar)
 - ✅ `### Instalación de Docker` (ya está correcto, NO cambiar)
 - ✅ `### Métricas de observabilidad` (ya está correcto, NO cambiar)
@@ -163,6 +164,7 @@
 - ❌ `### Configuración De Proxmox VE` (este SÍ necesita corrección)
 
 **Ejemplos de mayúsculas después de dos puntos:**
+
 - ✅ **Regla:** los nombres de archivos deben estar en inglés
 - ❌ **Regla:** Los nombres de archivos deben estar en inglés
 
@@ -174,18 +176,21 @@
 - ❌ Evitar construcciones impersonales en tercera persona («se configuró», «se debe…»).
 
 **Ejemplos correctos para reportes (pasado, primera persona):**
+
 - ✅ «Configuré Proxmox en el servidor»
 - ✅ «Instalé Docker y desplegué los contenedores»
 - ✅ «Apliqué las métricas de observabilidad»
 - ❌ «Se configuró Proxmox en el servidor» (tercera persona impersonal)
 
 **Ejemplos correctos para guías (segunda persona, presente/futuro):**
+
 - ✅ «Configura Proxmox en tu servidor»
 - ✅ «Instala Docker y despliega los contenedores»
 - ✅ «Debes aplicar las métricas de observabilidad»
 - ❌ «Se debe configurar Proxmox en el servidor» (tercera persona impersonal)
 
 **Comprobación rápida:**
+
 - ¿Lo hiciste ya? → describe en pasado y en primera persona.
 - ¿Lo hará la persona lectora? → instruye en segunda persona (presente/imperativo o futuro).
 
@@ -265,6 +270,7 @@ respaldar_vm() {
 ## 🔥 Odios especiales
 
 Los siguientes términos generan **rechazo particular** y deben evitarse a toda costa:
+
 - 🔥 **«Librería»** por «biblioteca» - INACEPTABLE
 - 🔥 **«IT»** por «TI» - usar siempre el español
 - 🔥 **Peninsularismos** («ordenador», «fichero») - RECHAZADOS

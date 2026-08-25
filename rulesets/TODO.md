@@ -3,11 +3,13 @@
 Creado: 17 de agosto de 2025, 01:52 CST (Ciudad de México)
 
 Contexto
+
 - Este repositorio se usa como “contexto instruccional” para LLM.
 - Alineado con «chain-of-thought prompting»: Jason Wei et al., “Chain-of-Thought Prompting Elicits Reasoning in Large Language Models”, arXiv:2201.11903. DOI: [10.48550/arXiv.2201.11903](https://doi.org/10.48550/arXiv.2201.11903)
 - Objetivo: mejorar la calidad y consistencia del razonamiento paso a paso en español mexicano, compatible con LINGUISTICS.md y PHILOSOPHY.md.
 
 Tareas
+
 - [x] Escribir PROMPTS.md (guía CoT en es_MX)
   - Principios: cuándo usar CoT, granularidad de pasos, longitud objetivo.
   - Marcadores estandarizados: «Razonamiento», «Pasos», «Acción», «Resultado», «Conclusión».
@@ -51,6 +53,7 @@ Tareas
   - Plantilla: cot/_template.md.
 
 Prioridad sugerida (iteraciones cortas)
+
 1) PROMPTS.md + convención de formato ✅
 2) cot/ con 2 archivos iniciales (arithmetic y devops) ✅; agregar kubernetes, linguistics, styling, committing ✅
 3) Hook pre-commit (validación mínima) + linter Vale básico
@@ -59,6 +62,6 @@ Prioridad sugerida (iteraciones cortas)
 6) Ampliar cot/ y añadir metadatos
 
 Notas
+
 - Seguir LINGUISTICS.md: comillas «», tiempos verbales adecuados, es_MX.
 - Timestamps: usar TZ=America/Mexico_City para cualquier fecha/hora generada.
-

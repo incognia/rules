@@ -8,12 +8,14 @@ validacion: archivo/directorio restaurado y checksum verificado, log actualizado
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
+
 - Verificar integridad antes de restaurar (sha256sum -c) cuando exista .sha256.
 - Restaurar conservando permisos cuando aplique; validar resultado.
 - Registrar acciones con timestamps en CST.
 - Referencia: «~/rules/rulesets/BACKUPS.md» (sección Restauración y Verificación).
 
 Pasos:
+
 1) Acción: localizar respaldo (.bkp, .tar.zst) y su .sha256 (si existe).
    Resultado: rutas definidas, p. ej. BKP=backups/daily/2025-08-18/mi_carpeta_2025-08-18T12-00-00.tar.zst.
 2) Acción: verificación previa.
@@ -32,6 +34,6 @@ Pasos:
    Resultado: `echo "$(TZ=America/Mexico_City date '+%Y-%m-%d %H:%M:%S') | restore | $BKP | ok" >> backups/backup.log`.
 
 Conclusión:
+
 - Restauración completada y validada; registro actualizado con fecha/hora CST.
 - Referencias: «~/rules/BACKUPS.md» y scripts «~/rules/scripts/*».
-

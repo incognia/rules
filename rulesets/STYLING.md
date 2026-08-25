@@ -35,6 +35,7 @@ tags: tag-1, tag-2, tag-3, tag-opcional
 ```
 
 **Notas importantes:**
+
 - Los tags deben ser descriptivos y relevantes al contenido
 - El logo de Kabat One es obligatorio en documentos corporativos
 - El bloque `<div style="text-align: right;">` funciona **solo en HedgeDoc**; GitLab y GitHub eliminan los atributos `style`
@@ -236,11 +237,13 @@ Para MIT:
 Cuando el README.md incluye licencia, debe incluir badges al inicio del contenido (después del timestamp y antes del primer párrafo). Si ya existen badges, verificar que sean correctos y estén actualizados.
 
 **Badge de licencia MIT:**
+
 ```markdown
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ```
 
 **Badge de licencia GPLv3:**
+
 ```markdown
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ```
@@ -248,17 +251,20 @@ Cuando el README.md incluye licencia, debe incluir badges al inicio del contenid
 **Badges adicionales recomendados según plataforma:**
 
 GitLab:
+
 ```markdown
 [![pipeline status](https://gitlab.com/<namespace>/<repo>/badges/<branch>/pipeline.svg)](https://gitlab.com/<namespace>/<repo>/-/pipelines)
 [![coverage](https://gitlab.com/<namespace>/<repo>/badges/<branch>/coverage.svg)](https://gitlab.com/<namespace>/<repo>/-/commits/<branch>)
 ```
 
 GitHub:
+
 ```markdown
 [![CI](https://github.com/<owner>/<repo>/actions/workflows/<workflow>.yml/badge.svg)](https://github.com/<owner>/<repo>/actions)
 ```
 
 **Reglas de badges:**
+
 - El badge de licencia es obligatorio cuando se especifica `mit` o `gpl`
 - Los badges van después del timestamp y antes del primer párrafo de contenido
 - Si el README ya tiene badges, revisar que coincidan con la licencia y el estado actual del proyecto

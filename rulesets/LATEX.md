@@ -5,12 +5,14 @@ Este documento define las convenciones para generar documentos LaTeX corporativo
 ## Pandoc vs. LaTeX desde cero
 
 **Pandoc puede convertir Markdown a PDF vía LaTeX, pero el resultado es mediocre e inconsistente:**
+
 - Las tablas no llenan el ancho de página y tienen anchos de columna incorrectos.
 - Los bloques de código (`listings`) dejan líneas blancas entre el fondo y el texto.
 - El encabezado/pie corporativo requiere parches externos (`--include-in-header`) que se acumulan y son frágiles.
 - Los errores de paquetes faltantes son difíciles de anticipar y bloquean la compilación.
 
 **Flujo correcto:**
+
 1. Usar el Markdown como **referencia de contenido** (texto, tablas, datos).
 2. Escribir el `.tex` desde cero siguiendo este documento.
 3. Compilar con `xelatex` directamente.
@@ -22,11 +24,14 @@ Pandoc solo es aceptable para borradores rápidos internos sin requisito de cali
 - **Motor obligatorio:** `xelatex` — soporta Unicode nativo, fontspec y emoji sin conversiones.
 - **Compilación:** `xelatex -interaction=nonstopmode archivo.tex`
 - **Verificación de errores:** usar comillas simples en `grep` para evitar problemas con `!` en zsh:
+
   ```bash
   xelatex -interaction=nonstopmode archivo.tex 2>&1 | grep -iE 'error|missing|not found'
   ```
+
 - **Nota:** `grep` retorna exit code 1 cuando no encuentra coincidencias (sin errores). No confundir con fallo real.
 - **Instalación de paquetes faltantes:**
+
   ```bash
   sudo dnf install -y 'tex(nombre.sty)'
   ```
@@ -37,6 +42,7 @@ Pandoc solo es aceptable para borradores rápidos internos sin requisito de cali
 - **Código:** `Liberation Mono`
 - **Emoji:** `Noto Emoji` (ya instalado en Fedora vía `google-noto-emoji-fonts`)
 - Configuración mínima:
+
   ```latex
   \usepackage{fontspec}
   \setmainfont{Liberation Sans}
@@ -66,6 +72,7 @@ Pandoc solo es aceptable para borradores rápidos internos sin requisito de cali
 ```
 
 **Reglas:**
+
 - El timestamp va **debajo del logo**, alineado a la derecha con `\makebox[\linewidth][r]{...}`
 - **No** usar `\hfill` al inicio de línea — no funciona en ese contexto
 - Título en `\LARGE\bfseries`; subtítulo en `\large` sin negrita
@@ -100,6 +107,7 @@ Usar el comando `\meta` para consistencia:
 ## Tablas
 
 **Paquetes obligatorios:**
+
 ```latex
 \usepackage{booktabs}
 \usepackage{tabularx}
@@ -110,11 +118,13 @@ Usar el comando `\meta` para consistencia:
 ```
 
 **Color de bordes:** definir una vez en el preámbulo:
+
 ```latex
 \arrayrulecolor{promad}   % bordes en azul PROMAD
 ```
 
 **Estructura estándar** (tabla que ocupa el ancho completo):
+
 ```latex
 \begin{tabularx}{\linewidth}{>{\bfseries}l X}
 \toprule
@@ -126,12 +136,14 @@ Valor A & Descripción larga que se adapta automáticamente \\
 ```
 
 **Especificadores de columna recomendados:**
+
 - `X` — columna flexible que absorbe el espacio restante
 - `l` — izquierda fijo
 - `c` — centrado fijo
 - `>{\bfseries}l` — izquierda en negrita (para columna de parámetro)
 
 **Reglas críticas:**
+
 - Usar siempre `\linewidth` como ancho de tabla, **nunca** `\textwidth` dentro de minipages
 - `\toprule`, `\midrule`, `\bottomrule` de `booktabs` — **no** `\hline`
 - `\rowcolor{rowhead}` en la fila de encabezado para fondo gris suave
@@ -164,6 +176,7 @@ Valor A & Descripción larga que se adapta automáticamente \\
 ```
 
 Uso:
+
 ```latex
 \begin{codebox}
 apt update && apt dist-upgrade
@@ -192,6 +205,7 @@ apt update && apt dist-upgrade
 ```
 
 **Reglas:**
+
 - Separador: línea delgada gris (`0.4pt`), **no** azul
 - **Sin avatar** — las imágenes de perfil no se manejan bien en LaTeX sin CSS
 - Contacto en una o dos líneas de texto plano
@@ -202,6 +216,7 @@ apt update && apt dist-upgrade
 - **No usar URLs** en `\includegraphics` con XeLaTeX
 - Verificar con `file imagen.png` que la descarga fue exitosa
 - Suprimir «Figura 1»:
+
   ```latex
   \usepackage{caption}
   \DeclareCaptionFormat{empty}{}

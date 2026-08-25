@@ -13,14 +13,17 @@ Documenta los tres flujos disponibles para componer y enviar correos HTML desde 
 ## Prerrequisitos
 
 **Todos los modos:**
+
 - Plantillas HTML en `~/rules/templates/mail/` (`delivery_template.html` y `generic_template.html`)
 - Reglas de composición en `~/rules/rulesets/MAIL.md`
 
 **Modo `mac` (adicional):**
+
 - macOS con Microsoft Outlook instalado y configurado
 - Firma «Kabat One» como firma predeterminada en Outlook
 
 **Modo `graph` (adicional):**
+
 - Cuenta de Microsoft 365 con buzón activo (por ejemplo, `ralvarez@kabatone.com`)
 - Aplicación registrada en Microsoft Entra (ver pasos abajo)
 - Python 3 y `curl` instalados

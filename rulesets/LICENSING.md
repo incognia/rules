@@ -7,24 +7,29 @@ Este documento establece las directrices para crear un archivo LICENSE formal en
 ## 2. Selección de Licencias por Tipo de Proyecto
 
 ### 2.1. Proyectos Laborales
+
 - **Licencia recomendada:** MIT
 - **Razón:** Natureza permisiva que facilita integración y adopción comercial.
 
 ### 2.2. Proyectos Personales (Software)
+
 - **Licencia recomendada:** GNU GPLv3
 - **Razón:** Asegura que el código y derivados permanezcan libres, promoviendo el *copyleft*.
 
 (Puede aplicarse tanto a proyectos personales como laborales, según las necesidades específicas del proyecto)
 
 ### 2.3. Proyectos de Diseño de Hardware
+
 - **Licencia estándar:** CERN OHL v2
 - **Razón:** Permite modificar y distribuir libremente en el ámbito de hardware libre.
 
 ### 2.4. Proyectos de Documentación
+
 - **Licencia:** GNU LGPLv3
 - **Alternativa:** Creative Commons para documentos generales no ligados a software.
 
 ### 2.5. Proyectos Creativos
+
 - **Licencia estándar:** CC BY 4.0
 - **Razón:** Facilita máxima difusión y uso, requiriendo solo atribución.
 

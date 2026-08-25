@@ -10,6 +10,7 @@ last_updated: 2026-05-05
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
+
 - La publicación debe seguir convención estricta de tags `vX.Y.Z` y flujo `dev -> main (ff-only) -> tag -> release -> volver a dev`.
 - Antes de crear una versión nueva, se valida consistencia histórica para evitar arrastrar errores de formato.
 - El nombre y las notas de release se deben derivar de cambios reales desde el último tag, no inventarse.
@@ -100,7 +101,7 @@ Pasos:
     Resultado: flujo cerrado y repo listo para continuar trabajo.
 
 Conclusión:
+
 - Una release se considera correcta sólo si pasa validación histórica, evita colisiones de versión, deriva descriptor/notas desde cambios reales y cumple el flujo no interactivo completo.
 - Si hay inconsistencias de formato previas, primero se corrigen y luego se publica la nueva versión.
 - Referencias: `~/rules/rulesets/RELEASING.md`, `~/rules/rulesets/COMMITTING.md`, `AGENTS.md` del repo objetivo.
-
