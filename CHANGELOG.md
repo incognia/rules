@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-06] - Alinear colores de acento de correo con la paleta Kabat One
 
+- feat: redefinir la regla de idioma de `/changelogger` y `cot/changelog.md` por idioma principal del repositorio (personal o laboral) en lugar de la excepción por repositorio colaborativo: conservar el idioma de las entradas existentes, si no, el de `README.md` y la documentación, inglés internacional (UK) cuando hay varios idiomas sin uno principal y español mexicano como valor predeterminado; agregar formato base y encabezado de archivo nuevo en ambos idiomas, y reglas de revisión y tipografía por idioma
 - feat: agregar a `/changelogger` y `cot/changelog.md` la excepción de idioma para repositorios colaborativos en inglés (personales o laborales): redactar entradas en inglés UK como idioma neutro de colaboración, con criterios de detección (entradas previas en inglés, o documentación en inglés y más de un colaborador), convenciones ortográficas UK y consulta al usuario ante señales ambiguas
 - docs: actualizar la fecha de «Última modificación» en `README.md`
 - style: aplicar la paleta Kabat One (Midday, Safety, Video, Traffic) a los nodos del diagrama Mermaid del ciclo de vida del *token* en `docs/MAIL.md`

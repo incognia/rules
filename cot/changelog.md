@@ -11,7 +11,7 @@ Razonamiento:
 
 - Regla principal: CHANGELOG.md debe seguir orden cronológico inverso (más reciente arriba) con fechas en CST Ciudad de México calculadas correctamente (ver «~/rules/CHANGELOG.md» ([../CHANGELOG.md](../CHANGELOG.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) y «~/rules/cot/committing.md» ([./committing.md](./committing.md))).
 - Errores comunes críticos: (1) orden cronológico incorrecto, (2) cálculo erróneo de CST (etiquetar UTC como CST), (3) duplicar entradas idénticas, (4) mezclar inglés con español mexicano.
-- Excepción de idioma: en repositorios colaborativos en inglés (personales o laborales) las entradas se redactan en inglés UK como idioma «neutro» de colaboración; en cualquier otro caso, español mexicano.
+- Idioma: las entradas se redactan en el idioma principal del repositorio, sea personal o laboral: español mexicano o inglés internacional (UK); si hay varios idiomas sin uno claramente principal, inglés internacional (UK); ver paso 4.
 - Flujo: verificar zona horaria actual → revisar orden cronológico → detectar duplicados → aplicar reglas lingüísticas → validar estructura.
 - Este CoT se ejecuta vía `/changelogger` antes de `/commit`; el flujo `/commit` no edita changelog y solo valida que exista diff en `CHANGELOG.md`.
 
@@ -50,14 +50,16 @@ Pasos:
    - Si NO existe: crear nuevo encabezado `## [YYYY-MM-DD] - Título descriptivo` en la posición correcta (arriba de todas las entradas).
    Resultado: nunca dos encabezados con la misma fecha en el CHANGELOG.
 
-4) Acción: determinar el idioma del repositorio y validar consistencia de idioma en la nueva entrada.
-   Detección de repositorio colaborativo en inglés (con la evidencia de los pasos 0 y 0b):
-   - Las entradas existentes de `CHANGELOG.md` están redactadas en inglés; o
-   - Sin entradas previas: `README.md`/documentación en inglés y `git --no-pager shortlog -sne HEAD` muestra más de un colaborador humano.
-   - Señales ambiguas (idiomas mezclados, repositorio individual con documentación en inglés): preguntar al usuario antes de redactar.
+4) Acción: determinar el idioma principal del repositorio (personal o laboral) y validar consistencia de idioma en la nueva entrada.
+   Detección, en este orden:
+   - Si `CHANGELOG.md` ya tiene entradas: conservar su idioma, para que el archivo nunca mezcle idiomas.
+   - Sin entradas previas: idioma principal de `README.md` y la documentación (`*.md` en la raíz y en `docs/`). Mayoritariamente en español → español mexicano; mayoritariamente en inglés → inglés internacional (UK).
+   - Varios idiomas sin uno claramente principal (README bilingüe, README en inglés con documentación en español, etc.) → inglés internacional (UK).
+   - Sin README ni documentación → español mexicano (valor predeterminado).
    Decisión:
-   - Repositorio colaborativo en inglés (personal o laboral): redactar título y bullets en inglés UK (`-ise`/`-isation`, *colour*, *behaviour*, *licence* como sustantivo, *catalogue*), títulos en estilo oración y comillas dobles `""` en lugar de «».
-   - Cualquier otro caso: aplicar reglas de ~/rules/rulesets/LINGUISTICS.md.
+   - Español mexicano: aplicar reglas de ~/rules/rulesets/LINGUISTICS.md.
+   - Inglés internacional (UK): `-ise`/`-isation`, *colour*, *behaviour*, *licence* como sustantivo, *catalogue*; títulos en estilo oración; comillas dobles `""` en lugar de «»; sin cursivas en términos técnicos.
+   - Archivo nuevo: encabezado en el idioma detectado (`# Historial de cambios` + nota CST en español, o `# Changelog` + `**Note:** All dates are in Mexico City CST (UTC-6).`).
    Invariantes: prefijos de tipo (`feat:`, `fix:`, etc.), formato `[YYYY-MM-DD]` y fecha CST no cambian con el idioma.
    Resultado: idioma único y consistente con el repositorio; en español mexicano, sin calcos del inglés, comillas angulares «» y terminología técnica correcta.
 
@@ -109,12 +111,13 @@ Pasos:
    Resultado: cambios mínimos, trazables y sin efectos colaterales.
 7) Acción: revisar texto del bloque de la fecha objetivo (`DATE_CST`).
    COMANDO OBLIGATORIO: `grep -A 20 '^## \[${DATE_CST}\]' CHANGELOG.md` para revisar la entrada en turno
-   Validación: detectar mezcla español-inglés, calcos y regionalismos no mexicanos SOLO en el bloque del día en turno
+   Validación (SOLO en el bloque del día en turno): en español mexicano, detectar mezcla español-inglés, calcos y regionalismos no mexicanos; en inglés internacional (UK), detectar ortografía estadounidense (`-ize`, *color*, *behavior*, *license* como sustantivo) y mezcla con español
    Resultado: ajustar únicamente los bullets nuevos de `DATE_CST`; reportar inconsistencias históricas sin editarlas.
 
-8) Acción: aplicar reglas tipográficas.
-   Validación: guion medio en títulos, comillas angulares en texto, cursivas en préstamos técnicos
-   Resultado: *commit*, *pipeline*, *stack* en cursiva; «código» entre comillas angulares.
+8) Acción: aplicar reglas tipográficas según el idioma detectado en el paso 4.
+   Validación en español mexicano: guion medio en títulos, comillas angulares en texto, cursivas en préstamos técnicos.
+   Validación en inglés internacional (UK): guion medio en títulos, comillas dobles `""`, sin cursivas en términos técnicos.
+   Resultado: en español, *commit*, *pipeline*, *stack* en cursiva y «código» entre comillas angulares; en inglés internacional (UK), texto sin cursivas y "code" entre comillas dobles.
 
 9) Acción: verificar estructura final.
    COMANDO OBLIGATORIO: `head -30 CHANGELOG.md` para revisar las primeras entradas
@@ -132,7 +135,7 @@ VERIFICACIÓN CRÍTICA (antes de completar):
 - Confirmar: `TZ=America/Mexico_City date` ejecutado para fecha CST real
 - Validar: orden cronológico inverso con `grep "^## \[" CHANGELOG.md`
 - Verificar: sin duplicados con conteo de encabezados idénticos
-- Revisar: idioma 100% español mexicano según LINGUISTICS.md, o 100% inglés UK si el repositorio es colaborativo en inglés (paso 4)
+- Revisar: idioma único según el idioma principal del repositorio (paso 4): 100% español mexicano según LINGUISTICS.md, o 100% inglés internacional (UK)
 - Comprobar: formato de encabezado `[YYYY-MM-DD] - Título descriptivo`
 - Comprobar: bullets con prefijo `tipo:` y ausencia de subencabezados `### tipo`
 - Validar: `git --no-pager diff -- CHANGELOG.md` cumple criterio de aceptación (solo adiciones mínimas en fecha objetivo)
@@ -161,7 +164,7 @@ ANTI-PATRONES PROHIBIDOS (detener y pedir confirmación si ocurre cualquiera):
 19. Intentar reanudar el flujo después de omitir el paso 0 o 0b en vez de reiniciar desde 0.
 
 Conclusión:
-- Entregar: CHANGELOG.md actualizado con nueva entrada en posición cronológica correcta, fecha CST precisa, idioma consistente (español mexicano, o inglés UK en repositorios colaborativos en inglés), sin duplicados y bullets tipados organizados semánticamente.
+- Entregar: CHANGELOG.md actualizado con nueva entrada en posición cronológica correcta, fecha CST precisa, idioma consistente con el idioma principal del repositorio, sea español mexicano o inglés internacional (UK), sin duplicados y bullets tipados organizados semánticamente.
 - Evitar: mezclar idiomas, etiquetar UTC como CST, orden cronológico incorrecto, duplicar entradas, micro-cambios sin agrupar.
 - Operación esperada: ejecutar este CoT desde `/changelogger` y después invocar `/commit` (que solo valida gate de changelog + idioma del commit).
 - Referencias: «~/rules/CHANGELOG.md» ([../CHANGELOG.md](../CHANGELOG.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/cot/committing.md» ([./committing.md](./committing.md)) para flujo completo.

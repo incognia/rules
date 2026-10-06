@@ -1,6 +1,6 @@
 ---
 name: changelogger
-description: "Maintain CHANGELOG.md with correct CST dates, reverse chronological order, and Spanish Mexican language (UK English in collaborative English-language repos). Use this skill when updating the changelog."
+description: "Maintain CHANGELOG.md with correct CST dates, reverse chronological order, and the repository's primary language: Spanish Mexican or international English (UK). Use this skill when updating the changelog."
 ---
 
 # CHANGELOG.md maintenance
@@ -26,7 +26,7 @@ When adding or updating entries in CHANGELOG.md for any project following rules 
    - **If the date does not exist**: create `## [YYYY-MM-DD] - Título descriptivo breve` at the top and add typed bullets.
    - **Spacing rule (MANDATORY)**: keep exactly one blank line between the last bullet of the target date block and the next `## [YYYY-MM-DD]` heading.
    - **Fallback rule (MANDATORY, new date only)**: if insertion preview still shows no blank separator line after creating a new date block, switch immediately to a two-hunk edit (first hunk inserts the new block, second hunk enforces `blank line + next heading`).
-   - Base format:
+   - Base format, Spanish Mexican:
 
      ```markdown
      ## [YYYY-MM-DD] - Título descriptivo breve
@@ -35,11 +35,28 @@ When adding or updating entries in CHANGELOG.md for any project following rules 
      - docs: descripción adicional si aplica
      ```
 
-7. **Language**: All entries in Spanish Mexican by default, no emojis.
-   - **Collaborative English repo exception (personal or corporate)**: if the repo is collaborative and English-language, write entries (title and bullets) in **UK English** as a neutral language for collaboration.
-   - **Detection (use the evidence already gathered in steps 2-3)**: existing `CHANGELOG.md` entries are written in English; or, with no prior entries, `README.md`/docs are in English and `git --no-pager shortlog -sne HEAD` shows more than one human contributor.
-   - **UK English conventions**: `-ise`/`-isation` (organise, standardisation), `colour`, `behaviour`, `licence` (noun), `catalogue`; sentence-case titles; straight double quotes `""` instead of `«»`.
-   - **Ambiguous signals** (mixed languages, solo repo with English docs): ask the user before writing.
+   - Base format, international English (UK):
+
+     ```markdown
+     ## [YYYY-MM-DD] - Short descriptive title
+
+     - feat: description of the change in international English (UK)
+     - docs: additional description if applicable
+     ```
+
+   - **New `CHANGELOG.md` file header** (only when the file does not exist yet), in the detected language:
+     - Spanish Mexican: `# Historial de cambios` + `**Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).`
+     - International English (UK): `# Changelog` + `**Note:** All dates are in Mexico City CST (UTC-6).`
+     - Then `<!-- markdownlint-disable MD013 MD024 MD022 MD032 -->` right before the first `## [YYYY-MM-DD]` heading.
+
+7. **Language**: write entries (title and bullets) in the repository's **primary language**, no emojis. Same rule for personal and corporate repos.
+   - **Detection, in this order**:
+     1. `CHANGELOG.md` already has entries → keep their language, so the file never mixes languages.
+     2. No prior entries → primary language of `README.md` and the docs (`*.md` at the root and in `docs/`): mostly Spanish → **Spanish Mexican**; mostly English → **international English (UK)**.
+     3. More than one language with no clear primary one (bilingual README, English README with Spanish docs, etc.) → **international English (UK)**.
+     4. No README or docs at all → **Spanish Mexican** (default).
+   - **Spanish Mexican**: apply `~/rules/rulesets/LINGUISTICS.md` (angular quotes «», italics for loanwords such as *commit* or *pipeline*, no anglicisms).
+   - **International English (UK)**: `-ise`/`-isation` (organise, standardisation), `colour`, `behaviour`, `licence` (noun), `catalogue`; sentence-case titles; straight double quotes `""` instead of `«»`; no italics for technical terms.
    - Typed prefixes (`feat:`, `fix:`, etc.), `[YYYY-MM-DD]` format and CST date rules stay the same in both languages.
 8. **Type in bullets**: Each bullet MUST start with `tipo:` and match valid commit types (`feat`, `fix`, `docs`, `style`, `refactor`, `chore`, `ci`, `perf`, `test`, `build`)
 9. **Verify**: Check that the new entry is above all previous entries
@@ -49,7 +66,7 @@ When adding or updating entries in CHANGELOG.md for any project following rules 
 - Date format: `[YYYY-MM-DD]` only — no time component
 - CST = UTC - 6 hours (verify with `TZ=America/Mexico_City date`)
 - No emojis in CHANGELOG entries
-- Language: Spanish Mexican by default; UK English only in collaborative English-language repos (personal or corporate), detected per instruction 7
+- Language: the repository's primary language, detected per instruction 7: Spanish Mexican or international English (UK), defaulting to international English (UK) when there are several with no clear primary one
 - Descriptive title after the date: `## [YYYY-MM-DD] - Título descriptivo`
 - Do NOT use subheadings like `### feat`/`### fix` inside a date entry
 - Keep exactly one blank line between consecutive date blocks (`## [YYYY-MM-DD]`)
