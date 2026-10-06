@@ -31,7 +31,7 @@ Before making any git commit in projects that follow the rules repository conven
    - `git --no-pager diff -- CHANGELOG.md`
    - `git --no-pager diff --cached -- CHANGELOG.md`
 5. **Stage files**: `git add .`
-6. **Build commit message in temporary file**: create `/tmp/commit-msg.txt` using this detailed structure (English international):
+6. **Build commit message in temporary file**: create `/tmp/commit-msg.txt` using this detailed structure (international English, UK):
 
    ```text
    type(scope): short summary in english
@@ -57,7 +57,7 @@ Before making any git commit in projects that follow the rules repository conven
      - Warp (Oz): `Co-Authored-By: Oz <oz-agent@warp.dev>`
      - Any other agent/IDE: use the name and contact it documents for commit attribution; if none is published, use `<Agent name> <noreply@tool-domain>`.
    Reuse and adjust `/tmp/commit-msg.txt` until the wording is final.
-7. **Commit from file**: `git commit -F /tmp/commit-msg.txt` — message MUST be in English international, following Conventional Commits
+7. **Commit from file**: `git commit -F /tmp/commit-msg.txt` — message MUST be in international English (UK), following Conventional Commits
 8. **Push**: `git push`
 9. **Verify**: `git --no-pager log --oneline -1`
 
@@ -83,7 +83,7 @@ Forbidden anti-patterns:
 
 - CHANGELOG.md MUST already be updated BEFORE `/commit`; `/commit` only validates changes
 - If `CHANGELOG.md` has no diff, abort and invoke `/changelogger`
-- Commit messages are ALWAYS in English international
+- Commit messages are ALWAYS in international English (UK)
 - Commit body must describe substantive changes only; do not include changelog-edit tasks in body bullets
 - Use non-interactive commands only (no pagers, no editors)
 - Prefer `git commit -F /tmp/commit-msg.txt` over `git commit -m` to keep detailed, reusable commit messages
