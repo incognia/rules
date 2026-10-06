@@ -1,6 +1,6 @@
 ---
 name: changelogger
-description: "Maintain CHANGELOG.md with correct CST dates, reverse chronological order, and Spanish Mexican language. Use this skill when updating the changelog."
+description: "Maintain CHANGELOG.md with correct CST dates, reverse chronological order, and Spanish Mexican language (UK English in collaborative English-language repos). Use this skill when updating the changelog."
 ---
 
 # CHANGELOG.md maintenance
@@ -35,7 +35,12 @@ When adding or updating entries in CHANGELOG.md for any project following rules 
      - docs: descripción adicional si aplica
      ```
 
-7. **Language**: All entries in Spanish Mexican, no emojis
+7. **Language**: All entries in Spanish Mexican by default, no emojis.
+   - **Collaborative English repo exception (personal or corporate)**: if the repo is collaborative and English-language, write entries (title and bullets) in **UK English** as a neutral language for collaboration.
+   - **Detection (use the evidence already gathered in steps 2-3)**: existing `CHANGELOG.md` entries are written in English; or, with no prior entries, `README.md`/docs are in English and `git --no-pager shortlog -sne HEAD` shows more than one human contributor.
+   - **UK English conventions**: `-ise`/`-isation` (organise, standardisation), `colour`, `behaviour`, `licence` (noun), `catalogue`; sentence-case titles; straight double quotes `""` instead of `«»`.
+   - **Ambiguous signals** (mixed languages, solo repo with English docs): ask the user before writing.
+   - Typed prefixes (`feat:`, `fix:`, etc.), `[YYYY-MM-DD]` format and CST date rules stay the same in both languages.
 8. **Type in bullets**: Each bullet MUST start with `tipo:` and match valid commit types (`feat`, `fix`, `docs`, `style`, `refactor`, `chore`, `ci`, `perf`, `test`, `build`)
 9. **Verify**: Check that the new entry is above all previous entries
 
@@ -44,6 +49,7 @@ When adding or updating entries in CHANGELOG.md for any project following rules 
 - Date format: `[YYYY-MM-DD]` only — no time component
 - CST = UTC - 6 hours (verify with `TZ=America/Mexico_City date`)
 - No emojis in CHANGELOG entries
+- Language: Spanish Mexican by default; UK English only in collaborative English-language repos (personal or corporate), detected per instruction 7
 - Descriptive title after the date: `## [YYYY-MM-DD] - Título descriptivo`
 - Do NOT use subheadings like `### feat`/`### fix` inside a date entry
 - Keep exactly one blank line between consecutive date blocks (`## [YYYY-MM-DD]`)

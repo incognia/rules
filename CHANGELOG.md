@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-06] - Alinear colores de acento de correo con la paleta Kabat One
 
+- feat: agregar a `/changelogger` y `cot/changelog.md` la excepción de idioma para repositorios colaborativos en inglés (personales o laborales): redactar entradas en inglés UK como idioma neutro de colaboración, con criterios de detección (entradas previas en inglés, o documentación en inglés y más de un colaborador), convenciones ortográficas UK y consulta al usuario ante señales ambiguas
 - docs: actualizar la fecha de «Última modificación» en `README.md`
 - style: aplicar la paleta Kabat One (Midday, Safety, Video, Traffic) a los nodos del diagrama Mermaid del ciclo de vida del *token* en `docs/MAIL.md`
 - fix: reemplazar en el paso 7 de `.agents/skills/mail/SKILL.md` los colores de acento genéricos por la paleta de marca Kabat One (Midday, Video, Dispatch, Code), en paridad con `cot/mail.md`
