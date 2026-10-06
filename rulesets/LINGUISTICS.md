@@ -260,10 +260,10 @@ respaldar_vm() {
 
 ### Analogía con el inglés
 
-- El **inglés estadounidense:** es el referente mundial (no el británico)
-- **Razón:** Estados Unidos domina culturalmente (Hollywood, tecnología, medios)
-- El **español mexicano:** debe ser el referente por las mismas razones
+- El **inglés estadounidense:** domina culturalmente (Hollywood, tecnología, medios)
+- El **español mexicano:** debe ser el referente del español por las mismas razones
 - **Coherencia:** usar el dialecto del país culturalmente dominante
+- **Excepción en estos repositorios:** todo lo que se redacta en inglés (mensajes de *commit*, código, `CHANGELOG.md` de repositorios en inglés) usa **inglés internacional (UK)**, con ortografía británica (`-ise`, *colour*, *behaviour*, *licence*) como registro neutro de colaboración
 
 ---
 
