@@ -66,7 +66,7 @@ Before making any git commit in projects that follow the rules repository conven
 1. Do not proceed to `git add`/`git commit` if CHANGELOG gate fails (no diff in `CHANGELOG.md`).
 2. If CHANGELOG gate fails, abort and suggest `/changelogger` before any further commit action.
 3. Before committing, enforce language checkpoint declaration:
-   - `⚠️ LANGUAGE CHECK: All commit messages must be in English per ~/rules/cot/committing.md line 15`
+   - `⚠️ LANGUAGE CHECK: All commit messages must be in international English (UK) per the CRÍTICO language rule in ~/rules/cot/committing.md`
 4. Build or update `/tmp/commit-msg.txt`, then verify content is English before `git commit -F`.
 5. Never use interactive editors/pagers in commit flow.
 6. Stop immediately if any forbidden anti-pattern appears and request user confirmation before continuing.

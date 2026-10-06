@@ -15,7 +15,7 @@ Razonamiento:
 - Si `CHANGELOG.md` no tiene cambios respecto al repositorio, se debe abortar y delegar la actualización a `/changelogger`.
 - CRÍTICO: usar `git status` para analizar los cambios antes de proceder y determinar si requieren commits separados.
 - Evaluar si los cambios son de tipos mixtos (ej. feat + fix, docs + refactor) que requieran commits atómicos separados.
-- CRÍTICO: mensaje de commit SIEMPRE en inglés internacional con Conventional Commits; documentación en español mexicano.
+- CRÍTICO: mensaje de commit SIEMPRE en inglés internacional (UK) con Conventional Commits; documentación en español mexicano.
 - El push debe ser simple (`git push`) siempre que el repo haya sido configurado inicialmente (ver «~/rules/GIT.md» sección de configuración inicial).
 
 Pasos:
@@ -82,7 +82,7 @@ Pasos:
    ```
 
    Validaciones críticas:
-   - Primera línea en inglés internacional usando Conventional Commits.
+   - Primera línea en inglés internacional (UK) usando Conventional Commits.
    - Cuerpo en viñetas con cambios concretos y sustantivos del trabajo.
    - NO incluir viñetas del tipo `update/edit CHANGELOG.md` (o equivalentes), porque `CHANGELOG.md` es precondición validada por el gate del paso 2.
    - El bullet `-` inicia en columna 1 (sin espacios o tabs previos).
@@ -98,11 +98,11 @@ Pasos:
 3b) Acción: checkpoint obligatorio de idioma antes de `git commit -F`.
    Declaración obligatoria:
 
-- `⚠️ LANGUAGE CHECK: All commit messages must be in English per ~/rules/cot/committing.md line 15`
+- `⚠️ LANGUAGE CHECK: All commit messages must be in international English (UK) per the CRÍTICO language rule in ~/rules/cot/committing.md`
    Validación:
 - Mostrar/revisar el contenido de `/tmp/commit-msg.txt` y confirmar inglés en subject/body.
 - Confirmar presencia de `Co-Authored-By: <agente en turno> <identificador>` con el nombre real del agente/herramienta que ejecuta el commit, no un ejemplo copiado de otra sesión.
-   Resultado: mensaje validado en inglés internacional y listo para commit no interactivo.
+   Resultado: mensaje validado en inglés internacional (UK) y listo para commit no interactivo.
 
 4) Acción: realizar commits atómicos según análisis del paso 1 usando el archivo temporal del paso 3.
    - Si cambios homogéneos (un tipo): `git add -A && git commit -F /tmp/commit-msg.txt`

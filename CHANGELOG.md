@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-06] - Alinear colores de acento de correo con la paleta Kabat One
 
+- feat: homologar inglés internacional (UK) como idioma de mensajes de *commit* en `cot/committing.md`, `rulesets/COMMITTING.md`, `rulesets/COMMIT_LANGUAGE_PROTOCOL.md` y `AGENTS.md`, y actualizar la declaración «LANGUAGE CHECK» de `/commit` para citar la regla CRÍTICO de idioma en lugar de un número de línea fijo
 - feat: precisar en `/commit` (`.agents/skills/commit/SKILL.md`) que los mensajes de *commit* se redactan en inglés internacional (UK), en paridad con `rulesets/LINGUISTICS.md`
 - docs: precisar en la sección «Analogía con el inglés» de `rulesets/LINGUISTICS.md` que todo lo redactado en inglés en estos repositorios (mensajes de *commit*, código y `CHANGELOG.md` de repositorios en inglés) usa inglés internacional (UK) con ortografía británica, conservando el argumento de dominio cultural que sustenta el español mexicano
 - feat: redefinir la regla de idioma de `/changelogger` y `cot/changelog.md` por idioma principal del repositorio (personal o laboral) en lugar de la excepción por repositorio colaborativo: conservar el idioma de las entradas existentes, si no, el de `README.md` y la documentación, inglés internacional (UK) cuando hay varios idiomas sin uno principal y español mexicano como valor predeterminado; agregar formato base y encabezado de archivo nuevo en ambos idiomas, y reglas de revisión y tipografía por idioma

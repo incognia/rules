@@ -21,7 +21,7 @@ git commit -m "docs: actualizar guía de instalación"
 ## Referencia
 
 - **Fuente**: `~/rules/cot/committing.md` línea 15
-- **Texto exacto**: «CRÍTICO: Mensaje de commit SIEMPRE en inglés internacional con Conventional Commits; documentación en español mexicano.»
+- **Texto exacto**: «CRÍTICO: Mensaje de commit SIEMPRE en inglés internacional (UK) con Conventional Commits; documentación en español mexicano.»
 
 ## Distribución de idiomas
 
@@ -49,7 +49,7 @@ git commit -m "docs: actualizar guía de instalación"
 
 **El asistente debe declarar explícitamente:**
 
-> «⚠️ LANGUAGE CHECK: All commit messages must be in English per ~/rules/cot/committing.md line 15»
+> «⚠️ LANGUAGE CHECK: All commit messages must be in international English (UK) per the CRÍTICO language rule in ~/rules/cot/committing.md»
 
 ### Verificación previa al commit
 
@@ -67,7 +67,7 @@ No se permite continuar a `git add`/`git commit` si falla cualquiera de estas do
 1. **CHANGELOG gate**: `CHANGELOG.md` debe tener cambios respecto al repo.
    - Validación: `git --no-pager diff --quiet -- CHANGELOG.md && git --no-pager diff --cached --quiet -- CHANGELOG.md`
    - Si ambos comandos retornan 0, no hay cambios: abortar y ejecutar `/changelogger`.
-2. **LANGUAGE gate**: subject y body del commit no están completamente en inglés internacional.
+2. **LANGUAGE gate**: subject y body del commit no están completamente en inglés internacional (UK).
 
 Si cualquiera falla:
 

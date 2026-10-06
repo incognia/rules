@@ -65,7 +65,7 @@ DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")
 
 **Commit message rules:**
 
-- Always use **English international** for commit messages
+- Always use **international English (UK)** for commit messages
 - Follow [Conventional Commits](https://www.conventionalcommits.org/) specification
 - Use non-interactive commands: `git --no-pager log --oneline -5`
 
@@ -202,7 +202,7 @@ Primary focus areas reflected in the documentation:
 1. **CRITICAL**: Always read complete CoT files from line 1 to end when referenced - never assume based on partial reading
 2. **CRITICAL**: Update CHANGELOG.md BEFORE every commit - this is mandatory workflow
 3. **CRITICAL**: Convert UTC to CST by subtracting 6 hours - never just append "CST" suffix
-4. **Language**: Spanish Mexican for documentation, English international for code/commits
+4. **Language**: Spanish Mexican for documentation, international English (UK) for code/commits
 5. **Markdown**: Use .yaml extension (never .yml), always use Mermaid for diagrams (never ASCII)
 6. **Commits**: Non-interactive only, use conventional commits format
 7. **Files**: Markdown files use UPPERCASE.md format (README.md, PHILOSOPHY.md, etc.)

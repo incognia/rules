@@ -35,7 +35,7 @@ Utilizar la especificación de [Commits Convencionales](https://www.conventional
 
 ### 2.3. Reglas del mensaje
 
-- **Idioma:** redactar siempre en **inglés internacional**.
+- **Idioma:** redactar siempre en **inglés internacional (UK)**.
 - **Emojis:** no usar emojis.
 - **Descripción:** debe ser concisa, en imperativo y en minúsculas (ej. `fix: correct user login flow`).
 - **Cuerpo:** opcional, para explicar el *qué* y el *porqué* del cambio.
