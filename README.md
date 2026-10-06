@@ -5,7 +5,7 @@ description: "Estándares, filosofía y cadenas de razonamiento (CoT) que guían
 
 # Reglas técnicas: prompts y CoT para acelerar el contexto de los LLM
 
-*Última modificación: 27 de marzo de 2026, 23:26 (CST)*
+*Última modificación: 6 de octubre de 2026, 14:20 (CST)*
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)

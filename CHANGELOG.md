@@ -5,6 +5,9 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-06] - Alinear colores de acento de correo con la paleta Kabat One
 
+- docs: actualizar la fecha de «Última modificación» en `README.md`
+- style: aplicar la paleta Kabat One (Midday, Safety, Video, Traffic) a los nodos del diagrama Mermaid del ciclo de vida del *token* en `docs/MAIL.md`
+- fix: reemplazar en el paso 7 de `.agents/skills/mail/SKILL.md` los colores de acento genéricos por la paleta de marca Kabat One (Midday, Video, Dispatch, Code), en paridad con `cot/mail.md`
 - fix: reemplazar en el paso 5 de `cot/mail.md` los colores de acento genéricos por la paleta de marca Kabat One (Midday `#00A1FF`, Video `#7252D8`, Dispatch `#E10613`, Code `#007EB5`) con referencia a `rulesets/MAIL.md`
 
 ## [2026-08-24] - Exportar skills a Claude Code y symlink CLAUDE.md

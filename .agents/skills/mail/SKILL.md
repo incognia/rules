@@ -52,11 +52,11 @@ description: "Compose and send OWA-compatible HTML email. Usage: /mail <owa|mac|
    - For delivery: service name, prefix, version, recipient email, base branch, description
    - For generic: title, recipient email, sections content, box types needed
 6. **Generate the HTML** replacing all placeholders with real data
-7. **Select accent color** for the H1 border based on email purpose:
-   - Delivery/OK → `#3498db` (blue)
-   - Fix/change → `#e67e22` (orange)
-   - Critical alert → `#e74c3c` (red)
-   - Technical decision → `#0066cc` (dark blue)
+7. **Select accent color** for the H1 border based on email purpose (Kabat One brand palette — see `~/rules/rulesets/MAIL.md`):
+   - Delivery/OK → `#00A1FF` (Midday)
+   - Fix/change → `#7252D8` (Video)
+   - Critical alert → `#E10613` (Dispatch)
+   - Technical decision → `#007EB5` (Code)
 8. **Handle signature** based on mode ($0):
    - `owa` → do NOT include signature (Outlook adds it when sending from OWA)
    - `mac` → do NOT include signature (Outlook adds it when opening draft)

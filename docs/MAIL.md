@@ -216,11 +216,11 @@ flowchart TD
     I --> J["Guardar tokens\nen ~/.graph_tokens.json"]
     J --> G
 
-    style A fill:#3498db,color:#fff
-    style G fill:#28a745,color:#fff
-    style C fill:#e67e22,color:#fff
-    style H fill:#e67e22,color:#fff
-    style I fill:#ffc107,color:#333
+    style A fill:#00A1FF,color:#fff
+    style G fill:#8DCB3E,color:#fff
+    style C fill:#7252D8,color:#fff
+    style H fill:#7252D8,color:#fff
+    style I fill:#FFDA00,color:#333
 ```
 
 ### Periodicidad
