@@ -3,6 +3,10 @@
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-10-06] - Alinear colores de acento de correo con la paleta Kabat One
+
+- fix: reemplazar en el paso 5 de `cot/mail.md` los colores de acento genéricos por la paleta de marca Kabat One (Midday `#00A1FF`, Video `#7252D8`, Dispatch `#E10613`, Code `#007EB5`) con referencia a `rulesets/MAIL.md`
+
 ## [2026-08-24] - Exportar skills a Claude Code y symlink CLAUDE.md
 
 - feat: hacer agnóstico el `Co-Authored-By` del flujo `/commit` en `cot/committing.md`, `.agents/skills/commit/SKILL.md`, `rulesets/COMMITTING.md` y `rulesets/COMMIT_LANGUAGE_PROTOCOL.md`, con ejemplos ilustrativos por herramienta (Claude Code, OpenAI Codex, Google Antigravity, Warp) en vez del valor fijo `Oz <oz-agent@warp.dev>`

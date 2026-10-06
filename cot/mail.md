@@ -35,11 +35,11 @@ Pasos:
 4) Acción: reemplazar los *placeholders* en el HTML.
    Resultado: HTML con datos reales.
 
-5) Acción: seleccionar el color de acento según el tipo de correo.
-   - Entrega/OK → `#3498db` (azul)
-   - Corrección/cambio → `#e67e22` (naranja)
-   - Alerta crítica → `#e74c3c` (rojo)
-   - Decisión técnica → `#0066cc` (azul oscuro)
+5) Acción: seleccionar el color de acento según el tipo de correo (paleta de marca Kabat One — ver «~/rules/rulesets/MAIL.md»).
+   - Entrega/OK → `#00A1FF` Midday
+   - Corrección/cambio → `#7252D8` Video
+   - Alerta crítica → `#E10613` Dispatch
+   - Decisión técnica → `#007EB5` Code
    Resultado: color del `border-bottom` del H1 ajustado.
 
 6) Acción: si es plantilla genérica, eliminar los componentes que no se usen.
