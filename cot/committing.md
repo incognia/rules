@@ -88,12 +88,12 @@ Pasos:
    - El bullet `-` inicia en columna 1 (sin espacios o tabs previos).
    - Si una viñeta es larga, partirla manualmente y alinear continuidad con dos espacios.
    - Una línea en blanco entre encabezado/cuerpo y cuerpo/pie.
-   - `Co-Authored-By` debe identificar al agente que REALMENTE está ejecutando este *commit*, nunca un valor copiado de un ejemplo. Ejemplos de formato por herramienta (ilustrativos, ajustar al identificador real de la sesión activa):
-     - Claude Code: `Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>` (o el modelo activo: Opus, Haiku, etc.)
-     - OpenAI Codex: `Co-Authored-By: Codex <noreply@openai.com>`
-     - Google Antigravity: `Co-Authored-By: Antigravity <antigravity-agent@google.com>`
-     - Warp (Oz): `Co-Authored-By: Oz <oz-agent@warp.dev>`
-     - Otro agente/IDE: usar el nombre y contacto que esa herramienta documente para atribución de *commits*; si no hay convención publicada, usar `<Nombre del agente> <noreply@dominio-de-la-herramienta>`.
+   - `Co-Authored-By` se resuelve dinámicamente al momento del *commit*, nunca está fijo en el texto:
+     1. Si la herramienta o el *harness* proporciona una línea de atribución para la sesión en curso (p. ej. la atribución de *commits* que inyecta Claude Code), usarla tal cual.
+     2. Si no, construirla con la identidad que reporta la propia sesión: `Co-Authored-By: <nombre del agente/modelo según la sesión> <correo de atribución documentado por la herramienta>`.
+     3. Si no es posible determinar la identidad activa, omitir el *trailer* y avisar al usuario; nunca adivinar.
+     - Prohibido copiar nombre, modelo o versión de estas reglas, de un *commit* anterior o de otra sesión.
+     - Correos de referencia por proveedor (el nombre siempre sale de la sesión): Anthropic `noreply@anthropic.com`, OpenAI `noreply@openai.com`, Google Antigravity `antigravity-agent@google.com`, Warp `oz-agent@warp.dev`; otra herramienta → su correo documentado, o `noreply@<dominio-de-la-herramienta>` si no publica uno.
 
 3b) Acción: checkpoint obligatorio de idioma antes de `git commit -F`.
    Declaración obligatoria:

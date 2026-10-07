@@ -87,11 +87,9 @@ Reglas de formato obligatorias para esta plantilla:
 - Si una viñeta es larga, debes truncar manualmente la línea y continuar abajo.
 - La línea de continuación debe llevar dos espacios de sangría para alinear el texto con el contenido del bullet.
 - Mantener una línea en blanco entre asunto y cuerpo, y otra entre cuerpo y pie.
-- `Co-Authored-By` debe identificar al agente que realmente ejecuta el *commit*, nunca un valor copiado de un ejemplo de otra herramienta. Ejemplos ilustrativos de formato (ver detalle completo en «~/rules/cot/committing.md»):
-  - Claude Code: `Claude Sonnet 5 <noreply@anthropic.com>`
-  - OpenAI Codex: `Codex <noreply@openai.com>`
-  - Google Antigravity: `Antigravity <antigravity-agent@google.com>`
-  - Warp (Oz): `Oz <oz-agent@warp.dev>`
+- `Co-Authored-By` se resuelve dinámicamente al momento del *commit*, nunca está fijo en el texto (ver detalle completo en «~/rules/cot/committing.md»):
+  - Usar la línea de atribución que proporcione la herramienta para la sesión en curso; si no hay, construirla con el nombre del agente o modelo que reporta la propia sesión y el correo de atribución documentado por la herramienta.
+  - Si no es posible determinar la identidad activa, omitir el *trailer* y avisar al usuario; nunca copiar nombre, modelo o versión de un ejemplo, de un *commit* anterior o de otra sesión.
 
 Después ejecuta el commit con:
 

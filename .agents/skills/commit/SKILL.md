@@ -50,12 +50,12 @@ Before making any git commit in projects that follow the rules repository conven
    - Continuation lines MUST be indented with two spaces so text stays aligned with the bullet content.
    - Keep exactly one blank line between subject/body and body/footer.
    - Redundancy rule: commit body details MUST NOT include `update/edit CHANGELOG.md` (or equivalent), because changelog maintenance is a precondition validated by `/commit`, not a detail to report in the body.
-   - `Co-Authored-By` MUST identify the agent actually running this commit, never a value copied verbatim from an example. Format examples by tool (illustrative — match whatever the active session really is):
-     - Claude Code: `Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>` (or the active model: Opus, Haiku, etc.)
-     - OpenAI Codex: `Co-Authored-By: Codex <noreply@openai.com>`
-     - Google Antigravity: `Co-Authored-By: Antigravity <antigravity-agent@google.com>`
-     - Warp (Oz): `Co-Authored-By: Oz <oz-agent@warp.dev>`
-     - Any other agent/IDE: use the name and contact it documents for commit attribution; if none is published, use `<Agent name> <noreply@tool-domain>`.
+   - `Co-Authored-By` is resolved dynamically at commit time, never hardcoded:
+     1. If the tool or harness supplies an attribution line for the current session (e.g. Claude Code's system-provided commit attribution), use it verbatim.
+     2. Otherwise build it from the identity the session itself reports: `Co-Authored-By: <agent/model name as reported by the session> <tool's documented commit email>`.
+     3. If the active identity cannot be determined, omit the trailer and tell the user; never guess.
+     - Never copy a name, model or version from these rules, an earlier commit or another session.
+     - Reference commit emails by vendor (the name always comes from the session): Anthropic `noreply@anthropic.com`, OpenAI `noreply@openai.com`, Google Antigravity `antigravity-agent@google.com`, Warp `oz-agent@warp.dev`; any other tool → its documented address, or `noreply@<tool-domain>` if none is published.
    Reuse and adjust `/tmp/commit-msg.txt` until the wording is final.
 7. **Commit from file**: `git commit -F /tmp/commit-msg.txt` — message MUST be in international English (UK), following Conventional Commits
 8. **Push**: `git push`
