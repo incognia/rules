@@ -5,7 +5,7 @@ description: "Estándares, filosofía y cadenas de razonamiento (CoT) que guían
 
 # Reglas técnicas: prompts y CoT para acelerar el contexto de los LLM
 
-*Última modificación: 6 de octubre de 2026, 14:20 (CST)*
+*Última modificación: 7 de octubre de 2026, 16:44 (CST)*
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)
@@ -76,10 +76,8 @@ git clone git@github.com:incognia/rules.git ~/rules 2>/dev/null || git -C ~/rule
   - *Workflows* (`*.yaml`) en macOS: `~/.warp/workflows/`
   - *Workflows* en Linux: `$XDG_DATA_HOME/warp-terminal/workflows/`
   - *Workflows* en Windows: `$APPDATA\warp\Warp\data\workflows\`
-- **No copia** (se accede directo desde `~/rules/`):
-  - `scripts/` — `graph_auth.py` y otros scripts
-  - `templates/` — plantillas HTML e imágenes de firma
-  - `rulesets/`, `cot/` — reglas y cadenas de razonamiento
+- `cot/`, `rulesets/` y `templates/` se copian a `~/rules/` solo si el repositorio está clonado en otra ruta; si el clon ya vive en `~/rules/`, no se copia nada
+- **No copia** `scripts/` (`graph_auth.py` y otros): se ejecutan directo desde el repositorio
 - Para actualizar después de un `git pull`, solo ejecuta: `~/rules/scripts/sync_global.sh`
 - `cot/`, `rulesets/` y `templates/` se acceden por ruta canónica, sin enlace simbólico (`~/rules/cot/`, `~/rules/rulesets/`); la excepción es la exportación de *skills* a Claude Code arriba, que sí usa un enlace simbólico
 
@@ -94,6 +92,7 @@ flowchart LR
     B -->|Configurar Git| F["~/rules/cot/git_init.md"]
     B -->|Aplicar reglas lingüísticas| G["~/rules/cot/linguistics.md"]
     B -->|Hacer respaldos| H["~/rules/cot/backup.md"]
+    B -->|Publicar versión| L["~/rules/cot/release.md"]
     
     C --> I["Ejecución de CoT<br/>en herramienta LLM"]
     D --> I
@@ -101,6 +100,7 @@ flowchart LR
     F --> I
     G --> I
     H --> I
+    L --> I
     
     I --> J["Tarea completada<br/>según protocolo"]
     
@@ -127,6 +127,9 @@ flowchart LR
 - **[TEACHING.md](./rulesets/TEACHING.md)** - perfil educativo y de divulgación científica
 - **[ATTRIBUTION.md](./rulesets/ATTRIBUTION.md)** - reglas de atribución personal
 - **[COMMITTING.md](./rulesets/COMMITTING.md)** - reglas para mensajes de *commit* y gestión de cambios
+- **[COMMIT_LANGUAGE_PROTOCOL.md](./rulesets/COMMIT_LANGUAGE_PROTOCOL.md)** - protocolo de idioma de *commits* en inglés internacional (UK)
+- **[RELEASING.md](./rulesets/RELEASING.md)** - reglas de tags semánticos y *releases* en GitHub o GitLab
+- **[CRITICAL_COT_READING.md](./rulesets/CRITICAL_COT_READING.md)** - regla de lectura completa de los CoT
 - **[GIT.md](./rulesets/GIT.md)** - configuración inicial de cuentas GitHub y GitLab
 - **[LICENSING.md](./rulesets/LICENSING.md)** - reglas de licenciamiento para proyectos
 - **[LINGUISTICS.md](./rulesets/LINGUISTICS.md)** - reglas lingüísticas de español mexicano como referente
@@ -134,7 +137,13 @@ flowchart LR
 - **[BACKUPS.md](./rulesets/BACKUPS.md)** - políticas de respaldos y operaciones destructivas
 - **[GLOSSARY.md](./rulesets/GLOSSARY.md)** - glosario técnico de términos empleados
 - **[MAIL.md](./rulesets/MAIL.md)** - reglas de composición de correos HTML para OWA
+- **[BMAIL.md](./rulesets/BMAIL.md)** - reglas de redacción de correo empresarial en inglés
+- **[KUBE.md](./rulesets/KUBE.md)** - reglas de análisis de clústeres Kubernetes
+- **[KUBETBS.md](./rulesets/KUBETBS.md)** - reglas de *troubleshooting* de microservicios en Kubernetes
+- **[LATEX.md](./rulesets/LATEX.md)** - reglas de generación de documentos LaTeX con XeLaTeX
+- **[VAULT.md](./rulesets/VAULT.md)** - reglas de operación con HashiCorp Vault CLI
 - **[docs/MAIL.md](./docs/MAIL.md)** - envío de correo desde CLI (modos owa/mac/graph, configuración de Graph API, ciclo de vida del *token*)
+- **[docs/SYNC.md](./docs/SYNC.md)** - mecanismo de sincronización global de `sync_global.sh`
 - **[CHANGELOG.md](./CHANGELOG.md)** - historial de cambios del proyecto
 
 ## Especialización técnica
@@ -165,12 +174,14 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 | **SSH Key (servers)** | ~/.ssh/faraday | ~/.ssh/cad |
 | **Estilo de documentos** | No definido aún | [STYLING.md](./rulesets/STYLING.md) aplicable |
 | **Idioma documentación** | Español mexicano | Español mexicano |
-| **Idioma código/commits** | Inglés internacional | Inglés internacional |
+| **Idioma código/commits** | Inglés internacional (UK) | Inglés internacional (UK) |
+| **Idioma CHANGELOG y *releases*** | Idioma principal del repositorio | Idioma principal del repositorio |
 
 ### 3. Reglas universales (aplican a ambos contextos)
 
 - **LINGUISTICS.md**: español mexicano como estándar cultural
-- **COMMITTING.md**: Conventional Commits en inglés
+- **COMMITTING.md**: Conventional Commits en inglés internacional (UK)
+- **RELEASING.md**: tags `vX.Y.Z` y *releases* no interactivas
 - **PHILOSOPHY.md**: principios generales de trabajo
 - **BACKUPS.md**: políticas de respaldos y operaciones destructivas
 - **GLOSSARY.md**: términos técnicos estandarizados
@@ -224,16 +235,21 @@ sequenceDiagram
 - **templates/** — plantillas reutilizables
 - **scripts/** — scripts de automatización y respaldos
 - **.agents/skills/** — *skills* descubribles por agentes IA:
-  - `/commit` — flujo completo de *commit* con CHANGELOG obligatorio
-  - `/changelogger` — mantenimiento de CHANGELOG.md con fechas CST
+  - `/commit` — flujo completo de *commit* con CHANGELOG obligatorio, mensaje en inglés internacional (UK) y atribución del agente resuelta en cada sesión
+  - `/changelogger` — mantenimiento de CHANGELOG.md con fechas CST, en el idioma principal del repositorio
+  - `/release vX.Y.Z` — publicar tag y *release* en GitHub o GitLab con notas derivadas del CHANGELOG
   - `/linguistics <archivo>` — aplicar reglas de español mexicano
   - `/context` — detección rápida de contexto de proyecto
   - `/backup` — respaldo con nomenclatura estándar
   - `/licensing` — licenciamiento automático (GPLv3 vs MIT)
   - `/git-init <personal|laboral> <llave> <url> <rama>` — inicializar repo con SSH
   - `/ssh-import <faraday|cad>` — importar llave SSH desde GitHub a un servidor
-  - `/mail <delivery|generic> <asunto>` — componer correo HTML compatible con OWA
+  - `/mail <owa|mac|graph> <delivery|generic> <asunto>` — componer y enviar correo HTML compatible con OWA
+  - `/bmail <plantilla> <asunto>` — redactar correo empresarial en inglés con plantillas
   - `/styling <hedgedoc|gitlab|github> [mit|gpl] <archivo>` — aplicar estilo Kabat One a un documento Markdown
+  - `/kube <llave> <usuario> <ip> <namespace>` — analizar el estado de un clúster Kubernetes vía SSH
+  - `/kubetbs <llave> <usuario> <ip> <namespace> <servicio>` — diagnosticar un microservicio en Kubernetes
+  - `/aws-naming <directorio|archivo>` — normalizar nombres de archivos para S3 y CloudFront
 - **.warp/workflows/** — comandos parametrizados YAML (`Ctrl+Shift+R` en Warp):
   - `backup_file` — respaldar archivo/directorio
   - `lint_markdown` — ejecutar *markdownlint*
@@ -244,7 +260,10 @@ sequenceDiagram
 
 - Sincronización: scripts/sync_global.sh (instala *skills* y *workflows* globales, multiplataforma)
 - Git (post init): scripts/git-init-context.sh
+- Fecha CST: scripts/cst_date.sh
+- Correo vía Graph API: scripts/graph_auth.py (autenticación y caché de *token*)
 - Respaldos:
+  - scripts/quick_bkp.sh (copia rápida en el mismo directorio: `archivo_YYYY-MM-DD.ext.bkp`)
   - scripts/backup_file.sh (archivos/directorios, .tar.zst, *checksum* >=100 MB, log CST)
   - scripts/backup_rsync_snapshot.sh (incrementales diarios con rsync --link-dest)
   - scripts/verify_backups.sh (verificación masiva de .sha256)
@@ -256,6 +275,7 @@ sequenceDiagram
 - *Commits*: [cot/committing.md](./cot/committing.md) + [COMMITTING.md](./rulesets/COMMITTING.md)
 - Contexto de proyecto: [cot/context.md](./cot/context.md)
 - CHANGELOG: [cot/changelog.md](./cot/changelog.md)
+- *Releases*: [cot/release.md](./cot/release.md) + [RELEASING.md](./rulesets/RELEASING.md)
 - Correos HTML: [cot/mail.md](./cot/mail.md) + [MAIL.md](./rulesets/MAIL.md)
 
 ## Convenciones de fechas/horas
