@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-07] - Generalizar `/release` y resolver dinámicamente la atribución de *commits*
 
+- fix: derivar en `/release`, `cot/release.md` y `rulesets/RELEASING.md` el proyecto (`dueño/repo`) de la URL de `origin` en lugar de `gh repo view` y pasar siempre `--repo` a `gh`, para que en un *fork* la release no se publique en el repositorio de origen; agregar verificación de que el repositorio de origen no recibió la versión nueva
 - feat: generalizar `/release`, `cot/release.md` y `rulesets/RELEASING.md` para cualquier repositorio en GitHub (`gh`) o GitLab (`glab`): detección de plataforma por `origin`, flujo con o sin rama `dev`, validación de árbol limpio y rama sincronizada, validación SemVer de la versión pedida contra los cambios, notas derivadas del CHANGELOG y de los *commits* en el idioma principal del repositorio, sección de cambios incompatibles y *baselines* por proyecto declarados en su `AGENTS.md` (con `zabbix-k1` como ejemplo)
 - feat: resolver dinámicamente el *trailer* `Co-Authored-By` en `/commit`, `cot/committing.md` y `rulesets/COMMITTING.md`: usar la línea de atribución que proporcione la herramienta para la sesión, o construirla con la identidad que reporta la propia sesión, y omitirla avisando al usuario si no se puede determinar; eliminar ejemplos con nombre y versión de modelo fijos y conservar solo los correos de atribución por proveedor
 

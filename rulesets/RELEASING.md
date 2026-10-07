@@ -62,6 +62,7 @@ Para una invocación como `/release v0.5.0`, el nombre y las notas se generan de
 - No usar editores interactivos para publicación/corrección de release.
 - Todo el flujo debe ser no interactivo (incluyendo notas de release).
 - Detectar la plataforma por la URL de `origin` y usar su CLI (`gh` para GitHub, `glab` para GitLab).
+- Derivar el proyecto de la URL de `origin` y pasarlo siempre con `--repo` a `gh`: en un fork, el repositorio por defecto de `gh` es el de origen, y una release sin `--repo` se publicaría ahí.
 - Antes de publicar una versión nueva, validar que no exista tag/release con esa versión.
 - Si hay inconsistencia de formato en tags/releases previas, corregir primero.
 - Si se publicó un tag incorrecto sin prefijo `v`, crear la versión correcta y eliminar duplicados incorrectos.
@@ -97,7 +98,7 @@ Después de publicar, validar siempre:
 Comandos de referencia:
 
 - `git ls-remote --tags origin vX.Y.Z vX.Y.Z^{}`
-- GitHub: `gh release view vX.Y.Z --json tagName,name,body`
+- GitHub: `gh release view vX.Y.Z --repo dueño/repo --json tagName,name,body`
 - GitLab: `glab release list` y `glab api projects/<grupo%2Fproyecto>/releases/vX.Y.Z`
 
 ---

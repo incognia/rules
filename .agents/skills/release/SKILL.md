@@ -19,6 +19,7 @@ Cuando se va a publicar una nueva versión del repositorio, por ejemplo: `/relea
 2. **Validar argumento**: confirmar que el parámetro cumple `^v[0-9]+\.[0-9]+\.[0-9]+$`.
 3. **Detectar contexto del repositorio**:
    - plataforma por la URL de `origin`: `github.com` → `gh`; GitLab (`gitlab.com` o instancia propia) → `glab`;
+   - proyecto (`dueño/repo`) derivado de la URL de `origin`, nunca de `gh repo view`: en un fork, `gh` resuelve por defecto al repositorio de origen;
    - flujo de ramas: si existe `dev` (local o en `origin`), flujo `dev → main`; si no, se publica directo desde `main`;
    - idioma de las notas: el idioma principal del repositorio, con la misma detección que `/changelogger` (español mexicano o inglés internacional UK).
 4. **Validar estado y baseline**:
@@ -35,7 +36,7 @@ Cuando se va a publicar una nueva versión del repositorio, por ejemplo: `/relea
 7. **Publicar**:
    - con `dev`: promover `dev` a `main` con fast-forward y publicar `main`;
    - crear tag anotado en `main` y publicarlo;
-   - crear o actualizar la release con `--notes-file` (`gh release create … --verify-tag` o `glab release create …`).
+   - crear o actualizar la release con `--notes-file` (`gh release create … --repo dueño/repo --verify-tag` o `glab release create …`); en GitHub, pasar siempre `--repo` explícito.
 8. **Verificar publicación**: tag remoto único, release existente, nombre y notas con la convención.
 9. **Cerrar flujo**: regresar a `dev` si existe; si no, quedarse en `main`.
 
@@ -45,6 +46,7 @@ Cuando se va a publicar una nueva versión del repositorio, por ejemplo: `/relea
 - No usar editores interactivos para release/tags; usar comandos no interactivos y archivo de notas.
 - Si existe inconsistencia (tag/release duplicada o mal formateada), corregir primero y luego publicar.
 - Las notas van en el idioma principal del repositorio; nunca mezclar idiomas con el CHANGELOG.
+- En GitHub, todo comando `gh` lleva `--repo` con el proyecto derivado de `origin`; sin él, en un fork la release se publicaría en el repositorio de otra persona.
 - No inventar cambios: cada bullet debe poder rastrearse a una entrada del CHANGELOG o a un commit del rango.
 - Publicar tags y releases es una acción pública: la invocación `/release vX.Y.Z` es la autorización; ante cualquier advertencia (versión dudosa, baseline inconsistente, rama desincronizada), detenerse y preguntar.
 

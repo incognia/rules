@@ -4,7 +4,7 @@ task: validar historial, derivar descriptor/notas y publicar release semántica 
 dificultad: media
 longitud_objetivo: media
 validacion: tag remoto único, release alineada y notas en formato oficial
-version: "2.0"
+version: "2.1"
 last_updated: 2026-10-07
 ---
 <!-- markdownlint-disable MD041 -->
@@ -26,7 +26,7 @@ Pasos:
    Referencias: `~/rules/rulesets/RELEASING.md`, `~/rules/rulesets/COMMITTING.md`, `~/rules/cot/changelog.md` (paso de idioma) y `AGENTS.md` del repositorio objetivo.
    Detección:
    - Plataforma: `git remote get-url origin`; si contiene `github.com` → `PLATFORM=github` (CLI `gh`); si es GitLab → `PLATFORM=gitlab` (CLI `glab`). Confirmar autenticación con `gh auth status` o `glab auth status`.
-   - Proyecto: `gh repo view --json nameWithOwner -q .nameWithOwner` o, en GitLab, la ruta del proyecto codificada (`grupo%2Fproyecto`) a partir de la URL.
+   - Proyecto: derivarlo siempre de la URL de `origin` (`git@github.com:dueño/repo.git` o `https://github.com/dueño/repo` → `PROJECT=dueño/repo`; en GitLab, la ruta codificada `grupo%2Fproyecto`). No usar `gh repo view` para esto: en un fork, `gh` resuelve el repositorio por defecto al de origen (upstream) y la release terminaría en el repositorio de otra persona.
    - Flujo de ramas: `git show-ref --verify -q refs/heads/dev || git ls-remote --exit-code --heads origin dev` → `HAS_DEV=true|false`. `SOURCE_BRANCH=dev` si existe; si no, `SOURCE_BRANCH=main`.
    - Idioma de las notas: igual que `/changelogger` (idioma del CHANGELOG si tiene entradas; si no, idioma principal del README y la documentación; si hay varios sin uno principal, inglés internacional UK; sin documentación, español mexicano).
    Resultado: `PLATFORM`, `PROJECT`, `HAS_DEV`, `SOURCE_BRANCH`, `NOTES_LANG`.
@@ -42,7 +42,7 @@ Pasos:
    Verificaciones genéricas:
    - todos los tags que empiezan con `v` cumplen `vX.Y.Z` (`git tag --list 'v*'`);
    - no hay tags de versión sin prefijo (`git tag --list '[0-9]*'` vacío) ni duplicados `X.Y.Z`/`vX.Y.Z`;
-   - cada release existente apunta a un tag `vX.Y.Z` (`gh release list` o `glab release list`).
+   - cada release existente apunta a un tag `vX.Y.Z` (`gh release list --repo "${PROJECT}"` o `glab release list`).
    Baseline específico: si el `AGENTS.md` del repositorio declara tags y nombres de release esperados (por ejemplo, el de `zabbix-k1` en `RELEASING.md`), validarlos también.
    Resultado: consistencia confirmada o lista de discrepancias a corregir antes de continuar.
 
@@ -50,7 +50,7 @@ Pasos:
    Comandos guía:
    - `git rev-parse -q --verify "refs/tags/${TARGET_VERSION}"`
    - `git ls-remote --tags origin "${TARGET_VERSION}" "${TARGET_VERSION}^{}"`
-   - GitHub: `gh release view "${TARGET_VERSION}"` debe fallar; GitLab: `glab api "projects/${PROJECT}/releases/${TARGET_VERSION}"` debe devolver 404.
+   - GitHub: `gh release view "${TARGET_VERSION}" --repo "${PROJECT}"` debe fallar; GitLab: `glab api "projects/${PROJECT}/releases/${TARGET_VERSION}"` debe devolver 404.
    Resultado: confirmación de que no hay colisión de tag/release para `TARGET_VERSION`.
 
 5) Acción: identificar el tag previo y el rango de cambios.
@@ -99,9 +99,9 @@ Pasos:
    Resultado: `main` publicado y tag anotado visible en remoto.
 
 10) Acción: crear o actualizar la release sin modo interactivo.
-    GitHub:
-    - si no existe: `gh release create "${TARGET_VERSION}" --verify-tag --title "${RELEASE_NAME}" --notes-file "/tmp/release-notes-${TARGET_VERSION}.md"`
-    - si existe: `gh release edit "${TARGET_VERSION}" --title "${RELEASE_NAME}" --notes-file "/tmp/release-notes-${TARGET_VERSION}.md"`
+    GitHub (siempre con `--repo "${PROJECT}"`, nunca con el repositorio por defecto de `gh`):
+    - si no existe: `gh release create "${TARGET_VERSION}" --repo "${PROJECT}" --verify-tag --title "${RELEASE_NAME}" --notes-file "/tmp/release-notes-${TARGET_VERSION}.md"`
+    - si existe: `gh release edit "${TARGET_VERSION}" --repo "${PROJECT}" --title "${RELEASE_NAME}" --notes-file "/tmp/release-notes-${TARGET_VERSION}.md"`
     GitLab:
     - si no existe: `glab release create "${TARGET_VERSION}" --name "${RELEASE_NAME}" --notes-file "/tmp/release-notes-${TARGET_VERSION}.md"`
     - si existe: `glab release update "${TARGET_VERSION}" --name "${RELEASE_NAME}" --notes-file "/tmp/release-notes-${TARGET_VERSION}.md"`
@@ -110,8 +110,9 @@ Pasos:
 11) Acción: verificar publicación final.
     Validaciones obligatorias:
     - `git ls-remote --tags origin "${TARGET_VERSION}" "${TARGET_VERSION}^{}"` devuelve sólo el tag esperado;
-    - GitHub: `gh release view "${TARGET_VERSION}" --json tagName,name,body`; GitLab: `glab api "projects/${PROJECT}/releases/${TARGET_VERSION}"`;
-    - nombre y notas cumplen la convención y el idioma.
+    - GitHub: `gh release view "${TARGET_VERSION}" --repo "${PROJECT}" --json tagName,name,body`; GitLab: `glab api "projects/${PROJECT}/releases/${TARGET_VERSION}"`;
+    - nombre y notas cumplen la convención y el idioma;
+    - en un fork, confirmar que el repositorio de origen no recibió nada (`gh release list --repo <upstream>` sin la versión nueva).
     Resultado: publicación validada.
 
 12) Acción: volver a la rama de desarrollo.
