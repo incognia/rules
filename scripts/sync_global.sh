@@ -168,6 +168,16 @@ else
     echo "  ✓ cot → $RULES_GLOBAL_DST/cot"
     echo "  ✓ rulesets → $RULES_GLOBAL_DST/rulesets"
     echo "  ✓ templates → $RULES_GLOBAL_DST/templates"
+    mkdir -p "$RULES_GLOBAL_DST/scripts/atlassian"
+    cp -R "$REPO_ROOT/scripts/atlassian/." "$RULES_GLOBAL_DST/scripts/atlassian/"
+    echo "  ✓ scripts/atlassian → $RULES_GLOBAL_DST/scripts/atlassian"
+    if [ -f "$REPO_ROOT/.env" ]; then
+        install -m 600 "$REPO_ROOT/.env" "$RULES_GLOBAL_DST/.env"
+        echo "  ✓ .env → $RULES_GLOBAL_DST/.env (600, no versionado)"
+    fi
+fi
+if [ ! -f "$RULES_GLOBAL_DST/.env" ]; then
+    echo "  ⚠ Sin $RULES_GLOBAL_DST/.env: copia .env.example a .env y llena las credenciales Atlassian"
 fi
 echo ""
 

@@ -29,3 +29,8 @@ build/
 *.swo
 
 __pycache__/
+
+# Credenciales locales (sincronizadas por sync_global.sh, nunca versionadas)
+.env
+.env.*
+!.env.example

@@ -5,14 +5,14 @@ description: "Estándares, filosofía y cadenas de razonamiento (CoT) que guían
 
 # Reglas técnicas: prompts y CoT para acelerar el contexto de los LLM
 
-*Última modificación: 7 de octubre de 2026, 16:44 (CST)*
+*Última modificación: 12 de octubre de 2026, 13:21 (CST)*
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)
 [![Spanish](https://img.shields.io/badge/Language-Spanish%20(MX)-green.svg)](https://es.wikipedia.org/wiki/Espa%C3%B1ol_mexicano)
-[![CoTs](https://img.shields.io/badge/CoTs-24-blue.svg)](./cot/)
-[![Skills](https://img.shields.io/badge/Skills-15-green.svg)](./.agents/skills/)
-[![Rulesets](https://img.shields.io/badge/Rulesets-20-orange.svg)](./rulesets/)
+[![CoTs](https://img.shields.io/badge/CoTs-25-blue.svg)](./cot/)
+[![Skills](https://img.shields.io/badge/Skills-16-green.svg)](./.agents/skills/)
+[![Rulesets](https://img.shields.io/badge/Rulesets-21-orange.svg)](./rulesets/)
 
 ## Definiciones rápidas
 
@@ -77,7 +77,8 @@ git clone git@github.com:incognia/rules.git ~/rules 2>/dev/null || git -C ~/rule
   - *Workflows* en Linux: `$XDG_DATA_HOME/warp-terminal/workflows/`
   - *Workflows* en Windows: `$APPDATA\warp\Warp\data\workflows\`
 - `cot/`, `rulesets/` y `templates/` se copian a `~/rules/` solo si el repositorio está clonado en otra ruta; si el clon ya vive en `~/rules/`, no se copia nada
-- **No copia** `scripts/` (`graph_auth.py` y otros): se ejecutan directo desde el repositorio
+- `scripts/atlassian/` y el `.env` local (credenciales Atlassian, permisos 600) también se copian a `~/rules/` en ese caso; el resto de `scripts/` no se copia y se ejecuta directo desde el repositorio
+- El `.env` nunca se versiona: se crea a partir de `.env.example`
 - Para actualizar después de un `git pull`, solo ejecuta: `~/rules/scripts/sync_global.sh`
 - `cot/`, `rulesets/` y `templates/` se acceden por ruta canónica, sin enlace simbólico (`~/rules/cot/`, `~/rules/rulesets/`); la excepción es la exportación de *skills* a Claude Code arriba, que sí usa un enlace simbólico
 
@@ -129,6 +130,7 @@ flowchart LR
 - **[COMMITTING.md](./rulesets/COMMITTING.md)** - reglas para mensajes de *commit* y gestión de cambios
 - **[COMMIT_LANGUAGE_PROTOCOL.md](./rulesets/COMMIT_LANGUAGE_PROTOCOL.md)** - protocolo de idioma de *commits* en inglés internacional (UK)
 - **[RELEASING.md](./rulesets/RELEASING.md)** - reglas de tags semánticos y *releases* en GitHub o GitLab
+- **[SDD_READINESS.md](./rulesets/SDD_READINESS.md)** - rúbrica de madurez de especificaciones para OpenSpec, con Platform Readiness
 - **[CRITICAL_COT_READING.md](./rulesets/CRITICAL_COT_READING.md)** - regla de lectura completa de los CoT
 - **[GIT.md](./rulesets/GIT.md)** - configuración inicial de cuentas GitHub y GitLab
 - **[LICENSING.md](./rulesets/LICENSING.md)** - reglas de licenciamiento para proyectos
@@ -250,6 +252,7 @@ sequenceDiagram
   - `/kube <llave> <usuario> <ip> <namespace>` — analizar el estado de un clúster Kubernetes vía SSH
   - `/kubetbs <llave> <usuario> <ip> <namespace> <servicio>` — diagnosticar un microservicio en Kubernetes
   - `/aws-naming <directorio|archivo>` — normalizar nombres de archivos para S3 y CloudFront
+  - `/sdd-readiness <enlace a Confluence>` — evaluar si una especificación está lista para ejecutarse con OpenSpec, incluida Platform Readiness
 - **.warp/workflows/** — comandos parametrizados YAML (`Ctrl+Shift+R` en Warp):
   - `backup_file` — respaldar archivo/directorio
   - `lint_markdown` — ejecutar *markdownlint*
@@ -262,6 +265,7 @@ sequenceDiagram
 - Git (post init): scripts/git-init-context.sh
 - Fecha CST: scripts/cst_date.sh
 - Correo vía Graph API: scripts/graph_auth.py (autenticación y caché de *token*)
+- Confluence: scripts/atlassian/ (`confluence-management.sh` para páginas, adjuntos y comentarios al pie en ADF; `adf_lib.py` para construir ADF; credenciales en `.env`)
 - Respaldos:
   - scripts/quick_bkp.sh (copia rápida en el mismo directorio: `archivo_YYYY-MM-DD.ext.bkp`)
   - scripts/backup_file.sh (archivos/directorios, .tar.zst, *checksum* >=100 MB, log CST)
@@ -270,12 +274,13 @@ sequenceDiagram
 
 ## Cómo usar CoT rápidamente
 
-- Todos los CoT: carpeta [cot/](./cot/) (24 archivos)
+- Todos los CoT: carpeta [cot/](./cot/) (25 archivos)
 - Lingüística: [cot/linguistics.md](./cot/linguistics.md) + [LINGUISTICS.md](./rulesets/LINGUISTICS.md)
 - *Commits*: [cot/committing.md](./cot/committing.md) + [COMMITTING.md](./rulesets/COMMITTING.md)
 - Contexto de proyecto: [cot/context.md](./cot/context.md)
 - CHANGELOG: [cot/changelog.md](./cot/changelog.md)
 - *Releases*: [cot/release.md](./cot/release.md) + [RELEASING.md](./rulesets/RELEASING.md)
+- Madurez de especificaciones (OpenSpec): [cot/sdd_readiness.md](./cot/sdd_readiness.md) + [SDD_READINESS.md](./rulesets/SDD_READINESS.md)
 - Correos HTML: [cot/mail.md](./cot/mail.md) + [MAIL.md](./rulesets/MAIL.md)
 
 ## Convenciones de fechas/horas

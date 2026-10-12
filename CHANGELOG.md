@@ -3,6 +3,15 @@
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-10-12] - Crear `/sdd-readiness` y *scripts* de Confluence en ADF
+
+- feat: crear el *skill* `/sdd-readiness <enlace a Confluence>`, su CoT `cot/sdd_readiness.md` y la rúbrica `rulesets/SDD_READINESS.md` para evaluar si una especificación está lista para ejecutarse con OpenSpec: nueve dimensiones ponderadas con evidencia obligatoria (incluida Platform Readiness con despliegue, *rollback*, monitoreo, *logs*, trazas, capacidad, recuperación ante desastres, secretos, configuración y CI/CD), siete bloqueadores, detección de inconsistencias, veredicto y vista previa del *change* de OpenSpec, publicados como comentario ADF en la página solo tras confirmar el borrador, con respuesta en el hilo en reevaluaciones
+- feat: incorporar `scripts/atlassian/` desde `ops/jira` (`adf_lib.py`, `confluence-lib.sh`, `confluence-management.sh` y el cargador `atlassian-env.sh`), con nuevos comandos para leer y publicar comentarios al pie en ADF vía API v2 (`get-comments`, `get-replies`, `comment-adf`, `reply-adf`) y nodos ADF adicionales (`status`, `decision_list`, `expand`, `rule`, `date_node`)
+- feat: extender `scripts/sync_global.sh` para copiar `scripts/atlassian/` y el `.env` local con permisos 600 a `~/rules/` cuando el repositorio vive en otra ruta, y avisar si falta el `.env`
+- chore: ignorar `.env` y `.env.*` en `.gitignore` y agregar la plantilla versionada `.env.example` con las credenciales Atlassian
+- docs: establecer en `rulesets/LINGUISTICS.md` que todo lo que se publica en Confluence (páginas y comentarios) va en inglés internacional (UK)
+- docs: actualizar `README.md` con `/sdd-readiness`, `SDD_READINESS.md`, `scripts/atlassian/`, la sincronización del `.env` y los *badges* (25 CoTs, 16 *skills*, 21 *rulesets*)
+
 ## [2026-10-07] - Generalizar `/release` y resolver dinámicamente la atribución de *commits*
 
 - docs: actualizar `README.md` al estado actual del repositorio: agregar los *skills* `/release`, `/bmail`, `/kube`, `/kubetbs` y `/aws-naming` y corregir la firma de `/mail`; listar los *rulesets* faltantes (COMMIT_LANGUAGE_PROTOCOL, RELEASING, CRITICAL_COT_READING, BMAIL, KUBE, KUBETBS, LATEX, VAULT) y `docs/SYNC.md`; reflejar inglés internacional (UK) para código y *commits* e idioma principal del repositorio para CHANGELOG y *releases*; agregar `/release` al diagrama de uso diario y a los CoT rápidos, los *scripts* `cst_date.sh`, `graph_auth.py` y `quick_bkp.sh`, y precisar cuándo `sync_global.sh` copia `cot/`, `rulesets/` y `templates/`

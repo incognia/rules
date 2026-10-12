@@ -264,6 +264,7 @@ respaldar_vm() {
 - El **español mexicano:** debe ser el referente del español por las mismas razones
 - **Coherencia:** usar el dialecto del país culturalmente dominante
 - **Excepción en estos repositorios:** todo lo que se redacta en inglés (mensajes de *commit*, código, `CHANGELOG.md` de repositorios en inglés) usa **inglés internacional (UK)**, con ortografía británica (`-ise`, *colour*, *behaviour*, *licence*) como registro neutro de colaboración
+- **Confluence:** todo lo que se publica en Confluence (páginas y comentarios) va en inglés internacional (UK)
 
 ---
 
