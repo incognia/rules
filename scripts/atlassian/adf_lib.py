@@ -236,3 +236,17 @@ def date_node(timestamp_ms):
 def heading(level, *content):
     """Heading with arbitrary inline content (h() only takes plain text)."""
     return {"type": "heading", "attrs": {"level": level}, "content": list(content)}
+
+
+def plain_text(node):
+    """Concatenated text of an ADF node and its children (text nodes plus mention labels).
+    Use it to search comment bodies: inline marks split a sentence across several text nodes."""
+    if isinstance(node, list):
+        return "".join(plain_text(n) for n in node)
+    if not isinstance(node, dict):
+        return ""
+    if node.get("type") == "text":
+        return node.get("text", "")
+    if node.get("type") == "mention":
+        return node.get("attrs", {}).get("text", "")
+    return "".join(plain_text(c) for c in node.get("content", []) or [])

@@ -60,6 +60,9 @@ case "$1" in
     reply-adf)
         confluence_add_footer_comment_adf reply "$2" "$3"
         ;;
+    find-marked)
+        confluence_find_marked_comment "$2" "$3"
+        ;;
     *)
         cat << 'EOF'
 Uso: confluence-management.sh <comando> [args]
@@ -78,6 +81,7 @@ Comandos:
   get-replies       '<comment_id>'                      # respuestas de un comentario al pie
   comment-adf       '<page_id>' '<archivo_adf.json>'    # comentario al pie nuevo en ADF
   reply-adf         '<comment_id>' '<archivo_adf.json>' # respuesta en el hilo de un comentario, en ADF
+  find-marked       '<page_id>' ['<marca>']             # hilo y último comentario cuyo texto plano contiene la marca (default: pie de /sdd-readiness)
 EOF
         exit 1
         ;;

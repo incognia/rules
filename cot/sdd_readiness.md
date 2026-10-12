@@ -42,8 +42,9 @@ Pasos:
 3) Acción: recolectar preguntas abiertas y la evaluación anterior.
    Herramientas: `getConfluencePageInlineComments` (MCP) y `bash ~/rules/scripts/atlassian/confluence-management.sh get-comments <PAGE_ID>` (comentarios al pie con body en ADF; respuestas con `get-replies <comment_id>`). Si falta `~/rules/.env`, usar `getConfluencePageFooterComments` del MCP.
    - Clasificar los comentarios sin resolver: los que cambian alcance o comportamiento cuentan para H3 y BL3; los de forma (redacción, ortografía) no.
-   - Excluir de esa clasificación los comentarios de `/sdd-readiness` (pie `Automated review with /sdd-readiness`); el más reciente es la evaluación anterior: guardar su ID, puntaje, veredicto y bloqueadores para comparar.
-   Resultado: preguntas abiertas con autor y fragmento citado, y `PREVIOUS_COMMENT_ID` si existe.
+   - Ubicar la evaluación anterior con `bash ~/rules/scripts/atlassian/confluence-management.sh find-marked <PAGE_ID>`: busca el pie `Automated review with /sdd-readiness` en el texto plano de cada comentario y de sus respuestas (nunca con `grep` sobre el JSON, porque el pie mezcla texto y `code`). `thread_id` es el comentario raíz al que se responde; `last_id` es la evaluación más reciente contra la que se compara (leer su puntaje, veredicto y bloqueadores).
+   - Excluir de la clasificación de preguntas abiertas los comentarios de `/sdd-readiness`.
+   Resultado: preguntas abiertas con autor y fragmento citado, y `PREVIOUS_COMMENT_ID` (= `thread_id`) y `PREVIOUS_EVALUATION_ID` (= `last_id`) si existen.
 
 4) Acción: clasificar el cambio.
    Determinar:
@@ -89,8 +90,9 @@ Pasos:
 10) Acción: armar el borrador del comentario.
     - Construir el documento ADF con la estructura de la sección «Comentario en Confluence» del *ruleset*, en inglés internacional (UK), con fecha de evaluación en CST (`TZ=America/Mexico_City date +"%Y-%m-%d %H:%M"`).
     - Escribir un *script* Python en el *scratchpad* que importe `~/rules/scripts/atlassian/adf_lib.py` y guarde el documento con `write_doc()` en un archivo temporal; nunca escribir el JSON a mano ni pegarlo como argumento.
-    - Si hay `PREVIOUS_COMMENT_ID`, abrir con la diferencia contra esa evaluación (puntaje, veredicto, bloqueadores cerrados o nuevos).
-    - Mostrar el borrador en la conversación de forma legible y explicar en español qué se publicará y dónde (comentario nuevo o respuesta en el hilo anterior).
+    - Agregar después del panel de veredicto un `cc` con un nodo `mention` por cada persona de `SDD_READINESS_MENTIONS` (`~/rules/.env`, formato `accountId|Nombre` separado por comas); si la variable no existe, omitirlo y avisar.
+    - Si hay `PREVIOUS_EVALUATION_ID`, abrir con la diferencia contra esa evaluación (puntaje, veredicto, bloqueadores cerrados o nuevos).
+    - Mostrar el borrador en la conversación de forma legible y explicar en español qué se publicará, dónde (comentario nuevo o respuesta en el hilo anterior) y a quién se notificará con las menciones.
     Resultado: borrador listo y pregunta explícita al usuario: publicar, ajustar o cancelar.
 
 11) Acción: publicar solo con confirmación.

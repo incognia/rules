@@ -265,6 +265,21 @@ PYEOF
     echo "$result"
 }
 
+# Ubica el hilo de comentarios al pie cuyo texto plano contiene una marca (por defecto, el pie de /sdd-readiness)
+# Uso: confluence_find_marked_comment '<page_id>' ['<marca>']
+# Imprime JSON: {"thread_id", "last_id", "last_created", "count"}
+confluence_find_marked_comment() {
+    local page_id="$1" marker="${2:-Automated review with /sdd-readiness}"
+    confluence_check_credentials || return 1
+    if [[ -z "$page_id" ]]; then
+        echo "❌ Uso: confluence_find_marked_comment '<page_id>' ['<marca>']" >&2
+        return 1
+    fi
+    CONFLUENCE_BASE="$CONFLUENCE_BASE" CONFLUENCE_USER_EMAIL="$CONFLUENCE_USER_EMAIL" \
+        CONFLUENCE_USER_TOKEN="$CONFLUENCE_USER_TOKEN" \
+        python3 "$CONFLUENCE_LIB_SCRIPT_DIR/find_marked_comment.py" "$page_id" "$marker"
+}
+
 # ==================== ADJUNTOS (IMÁGENES) ====================
 
 # Sube un archivo como adjunto de una página (o reemplaza uno existente del mismo nombre)
@@ -386,4 +401,4 @@ confluence_mermaid_to_page() {
 }
 
 echo "📚 Confluence Library cargada exitosamente" >&2
-echo "💡 Funciones: confluence_get_page_body, confluence_update_page_body, confluence_update_page_adf, confluence_create_page_adf, confluence_get_footer_comments, confluence_get_comment_children, confluence_add_footer_comment_adf, confluence_upload_attachment, confluence_panel, confluence_code_block, confluence_render_mermaid, confluence_mermaid_to_page" >&2
+echo "💡 Funciones: confluence_get_page_body, confluence_update_page_body, confluence_update_page_adf, confluence_create_page_adf, confluence_get_footer_comments, confluence_get_comment_children, confluence_add_footer_comment_adf, confluence_find_marked_comment, confluence_upload_attachment, confluence_panel, confluence_code_block, confluence_render_mermaid, confluence_mermaid_to_page" >&2

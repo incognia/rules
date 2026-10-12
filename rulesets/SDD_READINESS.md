@@ -170,7 +170,7 @@ Todo lo que se publica en Confluence va en **inglés internacional (UK)**, sin i
 3. Con la confirmación:
    - **primera evaluación de la página**: comentario al pie nuevo;
    - **reevaluación**: respuesta en el hilo del comentario anterior de `/sdd-readiness`, abriendo con la diferencia contra esa evaluación (puntaje, veredicto, bloqueadores cerrados o nuevos).
-4. El comentario anterior se identifica por su pie: `Automated review with /sdd-readiness`.
+4. El comentario anterior se identifica por su pie, `Automated review with /sdd-readiness`, buscado en el **texto plano** del comentario (todos sus nodos de texto unidos), nunca en el JSON del ADF: el pie mezcla texto normal y `code`, así que la frase completa no aparece seguida en el JSON. Las reevaluaciones siempre responden al comentario raíz del hilo, y la comparación se hace contra la evaluación más reciente, sea la raíz o una respuesta.
 
 ### Herramientas
 
@@ -179,8 +179,9 @@ El MCP de Atlassian sirve para leer la página, pero es limitado para escribir A
 | Operación | Herramienta |
 |-----------|-------------|
 | Leer página, páginas hijas y comentarios en línea | MCP: `getConfluencePage`, `getConfluencePageDescendants`, `getConfluencePageInlineComments` |
-| Leer comentarios al pie (ADF) y ubicar la evaluación anterior | `confluence-management.sh get-comments <page_id>` y `get-replies <comment_id>` |
-| Construir el comentario | Python con `adf_lib.py` (`panel`, `heading`, `status`, `decision_list`, `table`, `task_list`, `expand`, `rule`, `date_node`), escrito a un archivo temporal con `write_doc()` |
+| Ubicar la evaluación anterior | `confluence-management.sh find-marked <page_id>` (devuelve `thread_id`, `last_id`, `last_created` y `count`) |
+| Leer comentarios al pie (ADF) | `confluence-management.sh get-comments <page_id>` y `get-replies <comment_id>` |
+| Construir el comentario | Python con `adf_lib.py` (`panel`, `heading`, `status`, `decision_list`, `table`, `task_list`, `expand`, `rule`, `date_node`, `mention`), escrito a un archivo temporal con `write_doc()`; `plain_text()` para leer comentarios existentes |
 | Publicar | `confluence-management.sh comment-adf <page_id> <archivo>` o `reply-adf <comment_id> <archivo>` |
 
 Si falta `~/rules/.env`, la publicación cae al MCP (`createConfluenceFooterComment`, `contentFormat: "adf"`) y se avisa que algunos nodos pueden no aceptarse. El JSON del comentario nunca se pega como argumento literal: siempre va en archivo.
@@ -190,7 +191,8 @@ Si falta `~/rules/.env`, la publicación cae al MCP (`createConfluenceFooterComm
 | Orden | Bloque | Nodo ADF |
 |-------|--------|----------|
 | 1 | Veredicto: título, insignias de veredicto, puntaje, bloqueadores y Platform Readiness, y una frase de lectura | `panel` (`error` si «No lista», `warning` si «Lista con observaciones», `success` si «Lista») con `heading` y `status` |
-| 2 | Cambios contra la evaluación anterior (solo en reevaluaciones) | `paragraph` con `status` |
+| 2 | Menciones por defecto: `cc` a cada persona de `SDD_READINESS_MENTIONS` | `paragraph` con nodos `mention` |
+| 2b | Cambios contra la evaluación anterior (solo en reevaluaciones) | `paragraph` con `status` |
 | 3 | Bloqueadores | `decisionList` con `decisionItem` en `UNDECIDED` |
 | 4 | Puntaje por dimensión: dimensión, peso, puntaje y brecha principal | `table`; puntaje como `status` verde (≥ 80), amarillo (≥ 50) o rojo (< 50) |
 | 5 | Inconsistencias | `bulletList`, cada una con la sección en negritas |
@@ -203,6 +205,7 @@ Reglas del contenido:
 
 - Cada brecha y cada inconsistencia cita la sección de la página (`§ 4.2`).
 - Los `localId` de decisiones y tareas son cadenas nuevas y únicas por comentario (`sdd-d1`, `sdd-q1`); nunca se copian de otro contenido.
+- Las menciones por defecto salen de `SDD_READINESS_MENTIONS` en `~/rules/.env` (`accountId|Nombre`, separados por coma). Los `accountId` nunca se escriben en el repositorio, que es público. Si la variable no existe, el comentario va sin menciones y se avisa al usuario. El borrador siempre muestra a quién se va a notificar.
 - Si Confluence rechaza un nodo dentro del comentario (`expand`, `decisionList`), se reemplaza por un `heading` de nivel 4 seguido de lista o tabla y se reintenta una vez.
 
 ## Reglas operativas
