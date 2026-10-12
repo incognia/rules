@@ -239,7 +239,7 @@ def heading(level, *content):
 
 
 def plain_text(node):
-    """Concatenated text of an ADF node and its children (text nodes plus mention labels).
+    """Concatenated text of an ADF node and its children (text nodes plus mention and status labels).
     Use it to search comment bodies: inline marks split a sentence across several text nodes."""
     if isinstance(node, list):
         return "".join(plain_text(n) for n in node)
@@ -247,6 +247,6 @@ def plain_text(node):
         return ""
     if node.get("type") == "text":
         return node.get("text", "")
-    if node.get("type") == "mention":
+    if node.get("type") in ("mention", "status"):
         return node.get("attrs", {}).get("text", "")
     return "".join(plain_text(c) for c in node.get("content", []) or [])
