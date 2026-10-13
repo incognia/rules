@@ -13,7 +13,7 @@ if ! git rev-parse --git-dir >/dev/null 2>&1; then
   exit 1
 fi
 
-read -rp "¿Tipo de repositorio? [p] Personal / [l] Laboral (Promad): " REPO_TYPE
+read -rp "¿Tipo de repositorio? [p] Personal / [l] Laboral (Kabat One): " REPO_TYPE
 REPO_TYPE=${REPO_TYPE:-p}
 
 case "$REPO_TYPE" in
@@ -27,7 +27,7 @@ case "$REPO_TYPE" in
   l|L)
     NAME="Rodrigo Álvarez"
     EMAIL="ralvarez@kabatone.com"
-    KEY="${HOME}/.ssh/promad_ed25519"
+    KEY="${HOME}/.ssh/kone"
     ORG_GH="incogniadev"
     ORG_GL="incogniadev"
     ;;

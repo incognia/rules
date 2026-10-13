@@ -90,7 +90,7 @@ Usar el comando `\meta` para consistencia:
 
 ```latex
 \meta{Fecha}{2026-03-23}
-\meta{Elaborado por}{Rodrigo Álvarez — Líder DevOps, Promad}
+\meta{Elaborado por}{Rodrigo Álvarez — Líder DevOps, Kabat One}
 ```
 
 ## Títulos de sección

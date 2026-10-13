@@ -9,7 +9,7 @@ Este Chain of Thought aplica automáticamente el licenciamiento apropiado a un p
 ### 1. Análisis del README.md
 
 - **Objetivo:** Determinar la naturaleza del proyecto (personal vs laboral)
-- **Indicadores laborales:** Menciones de "Promad", "empresa", "trabajo", correo corporativo (@promad.com.mx)
+- **Indicadores laborales:** Menciones de "Kabat One", "empresa", "trabajo", correo corporativo (@kabatone.com) o, en repositorios antiguos, "Promad" (@promad.com.mx)
 - **Indicadores personales:** Menciones de usuario personal (@incognia), correo personal (@gmail.com), proyectos de aprendizaje o experimentación
 
 ### 2. Selección de licencia
@@ -40,7 +40,7 @@ fi
 
 ```bash
 # Buscar indicadores laborales
-LABORAL_INDICATORS=$(grep -i "promad\|@promad\.com\.mx\|empresa\|corporat\|business" README.md | wc -l)
+LABORAL_INDICATORS=$(grep -i "kabat\|@kabatone\.com\|promad\|@promad\.com\.mx\|empresa\|corporat\|business" README.md | wc -l)
 
 # Buscar indicadores personales  
 PERSONAL_INDICATORS=$(grep -i "@incognia\|@gmail\.com\|personal\|experimento\|aprendizaje\|github\.com/incognia" README.md | wc -l)
@@ -69,7 +69,7 @@ if [[ "$LICENSE_TYPE" == "MIT" ]]; then
     cat > LICENSE << 'EOF'
 MIT License
 
-Copyright (c) 2026 Promad Business Solutions
+Copyright (c) 2026 Kabat One
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -108,7 +108,7 @@ if [[ "$PROJECT_TYPE" == "laboral" ]]; then
 
 ---
 
-*Este proyecto fue elaborado por Rodrigo Álvarez para Promad Business Solutions y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
+*Este proyecto fue elaborado por Rodrigo Álvarez para Kabat One y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
 
 *Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
 EOF

@@ -43,7 +43,7 @@ A continuación, se muestran ejemplos de cómo incluir la información de licenc
 
 ---
 
-*Este proyecto fue elaborado por Rodrigo Álvarez para Promad Business Solutions y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
+*Este proyecto fue elaborado por Rodrigo Álvarez para Kabat One y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
 
 *Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
 
@@ -68,7 +68,7 @@ A continuación, se muestran ejemplos de cómo incluir la información de licenc
 # Fecha:          2026-01-23
 # Licencia:       MIT License
 #
-# Copyright (c) 2026, Promad Business Solutions
+# Copyright (c) 2026, Kabat One
 #
 # Se concede permiso, de forma gratuita, a cualquier persona que obtenga una copia
 # de este software y de los archivos de documentación asociados (el "Software"), para tratar
@@ -126,7 +126,7 @@ A continuación, se muestran ejemplos de cómo incluir la información de licenc
 # Date:         2026-01-23
 # License:      MIT License
 #
-# Copyright (c) 2026, Promad Business Solutions
+# Copyright (c) 2026, Kabat One
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -139,7 +139,7 @@ A continuación, se muestran ejemplos de cómo incluir la información de licenc
 # copies or substantial portions of the Software.
 
 """
-Automated database backup tool for Promad Business Solutions.
+Automated database backup tool for Kabat One.
 
 This module provides functionality to create automated backups of
 PostgreSQL and MySQL databases with configurable retention policies.
@@ -190,9 +190,9 @@ Módulo de ejemplo para demostrar la inclusión de la licencia GPLv3.
 #
 # Author: Rodrigo Álvarez <ralvarez@kabatone.com>
 # License: MIT
-# Company: Promad Business Solutions
+# Company: Kabat One
 #
-# Copyright (c) 2026, Promad Business Solutions
+# Copyright (c) 2026, Kabat One
 
 apiVersion: argoproj.io/v1alpha1
 kind: Application

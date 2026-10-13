@@ -42,7 +42,7 @@ Sus competencias técnicas principales incluyen:
 - **GitLab:** `incognia`
 - **Correo electrónico:** `incognia@gmail.com`
 
-### 4.2. Laborales (Promad Business Solutions)
+### 4.2. Laborales (Kabat One)
 
 - **GitHub:** `incogniadev`
 - **GitLab:** `incogniadev`
@@ -54,7 +54,7 @@ Sus competencias técnicas principales incluyen:
 
 - **Contribución personal:** «elaborado por Rodrigo Álvarez (@incognia)»
 - **Documentación técnica:** «documentado por Rodrigo Ernesto Álvarez Aguilera (GitHub: @incognia)»
-- **Contribución laboral:** «este trabajo fue realizado por Rodrigo Álvarez en su calidad de Ingeniero DevOps para Promad Business Solutions (@incogniadev)»
+- **Contribución laboral:** «este trabajo fue realizado por Rodrigo Álvarez en su calidad de Ingeniero DevOps para Kabat One (@incogniadev)»
 
 ### 5.2. Firma en commits de Git
 
@@ -65,7 +65,7 @@ Sus competencias técnicas principales incluyen:
   git config user.email "incognia@gmail.com"
   ```
 
-- **Para proyectos laborales (Promad):**
+- **Para proyectos laborales (Kabat One):**
 
   ```bash
   git config user.name "Rodrigo Álvarez"

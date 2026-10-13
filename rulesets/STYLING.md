@@ -141,7 +141,7 @@ Todo documento HedgeDoc debe concluir con el siguiente pie de página (sin licen
 
 #### Encabezados
 
-- Los encabezados H1 tienen borde inferior en color PROMAD
+- Los encabezados H1 tienen borde inferior en color Midday (`--midday`)
 - Usar jerarquía clara: H1 → H2 → H3 → H4
 - Evitar saltar niveles de encabezado
 
@@ -153,7 +153,7 @@ Todo documento HedgeDoc debe concluir con el siguiente pie de página (sin licen
 
 #### Separadores
 
-- Las líneas horizontales (`---`) usan el color PROMAD
+- Las líneas horizontales (`---`) usan el color Midday (`--midday`)
 - Altura fija de 1px para consistencia visual
 
 ## Diferencias de sintaxis por plataforma
@@ -225,7 +225,7 @@ Para MIT:
 ```markdown
 ---
 
-*Este proyecto fue elaborado por Rodrigo Álvarez para Promad Business Solutions y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
+*Este proyecto fue elaborado por Rodrigo Álvarez para Kabat One y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
 
 *Copyright © AAAA, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
 ```

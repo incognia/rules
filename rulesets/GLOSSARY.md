@@ -79,8 +79,8 @@ Este glosario recoge términos clave utilizados en los documentos de reglas y fi
 **Proxmox VE**
 : plataforma de virtualización de código abierto basada en KVM y LXC, usada para desplegar infraestructuras privadas y clústeres Kubernetes *bare-metal*.
 
-**Promad Business Solutions**
-: entidad laboral asociada a proyectos bajo licencia MIT y el alias profesional incogniadev.
+**Kabat One**
+: entidad laboral asociada a proyectos bajo licencia MIT y el alias profesional incogniadev (antes Promad Business Solutions).
 
 **RBAC (Control de Acceso Basado en Roles)**
 : mecanismo de seguridad que restringe el acceso a recursos en Kubernetes y aplicaciones según los roles asignados a usuarios/grupos.

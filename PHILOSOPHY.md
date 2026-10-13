@@ -35,7 +35,7 @@ Mi trabajo se centra en **ingeniería DevOps**, con enfoque en plataformas Kuber
 
 Esta especialización técnica se aplica en dos entornos:
 
-- **Corporativo (`incogniadev`):** proyectos para Promad Business Solutions con licenciamiento MIT
+- **Corporativo (`incogniadev`):** proyectos para Kabat One con licenciamiento MIT
 - **Personal y educativo (`incognia`):** proyectos bajo GPLv3 y metodologías pedagógicas que democratizan el acceso a herramientas profesionales
 
 En ambos casos, las metodologías DevOps sirven tanto para infraestructura de producción como para crear entornos de aprendizaje reproducibles mediante Docker Compose y automatización.

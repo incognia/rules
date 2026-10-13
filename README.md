@@ -5,7 +5,7 @@ description: "Estándares, filosofía y cadenas de razonamiento (CoT) que guían
 
 # Reglas técnicas: prompts y CoT para acelerar el contexto de los LLM
 
-*Última modificación: 12 de octubre de 2026, 13:21 (CST)*
+*Última modificación: 12 de octubre de 2026, 20:01 (CST)*
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)
@@ -94,6 +94,7 @@ flowchart LR
     B -->|Aplicar reglas lingüísticas| G["~/rules/cot/linguistics.md"]
     B -->|Hacer respaldos| H["~/rules/cot/backup.md"]
     B -->|Publicar versión| L["~/rules/cot/release.md"]
+    B -->|Evaluar spec para OpenSpec| M["~/rules/cot/sdd_readiness.md"]
     
     C --> I["Ejecución de CoT<br/>en herramienta LLM"]
     D --> I
@@ -102,6 +103,7 @@ flowchart LR
     G --> I
     H --> I
     L --> I
+    M --> I
     
     I --> J["Tarea completada<br/>según protocolo"]
     
@@ -162,7 +164,7 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 
 ### 1. Identificación del contexto del proyecto
 
-- 💼 **Contexto laboral**: proyectos desarrollados para o bajo contrato con **Promad Business Solutions**
+- 💼 **Contexto laboral**: proyectos desarrollados para o bajo contrato con **Kabat One**
 - 📺 **Contexto personal**: proyectos independientes, experimentales o de desarrollo personal
 
 ### 2. Aplicación de reglas por contexto
@@ -178,6 +180,7 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 | **Idioma documentación** | Español mexicano | Español mexicano |
 | **Idioma código/commits** | Inglés internacional (UK) | Inglés internacional (UK) |
 | **Idioma CHANGELOG y *releases*** | Idioma principal del repositorio | Idioma principal del repositorio |
+| **Idioma en Confluence** | Inglés internacional (UK) | Inglés internacional (UK) |
 
 ### 3. Reglas universales (aplican a ambos contextos)
 
@@ -265,7 +268,7 @@ sequenceDiagram
 - Git (post init): scripts/git-init-context.sh
 - Fecha CST: scripts/cst_date.sh
 - Correo vía Graph API: scripts/graph_auth.py (autenticación y caché de *token*)
-- Confluence: scripts/atlassian/ (`confluence-management.sh` para páginas, adjuntos y comentarios al pie en ADF; `adf_lib.py` para construir ADF; credenciales en `.env`)
+- Confluence: scripts/atlassian/ (`confluence-management.sh` para páginas, adjuntos, comentarios al pie y respuestas en ADF, y `find-marked` para ubicar un hilo marcado; `adf_lib.py` para construir y leer ADF; credenciales en `.env`)
 - Respaldos:
   - scripts/quick_bkp.sh (copia rápida en el mismo directorio: `archivo_YYYY-MM-DD.ext.bkp`)
   - scripts/backup_file.sh (archivos/directorios, .tar.zst, *checksum* >=100 MB, log CST)

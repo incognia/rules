@@ -6,7 +6,7 @@ Este documento describe la configuración inicial necesaria al clonar o iniciali
 
 Antes de configurar, determina si el proyecto es:
 
-- 💼 **Laboral:** Promad Business Solutions
+- 💼 **Laboral:** Kabat One
 - 📺 **Personal:** Proyectos independientes o experimentales
 
 ## 2. Configuración local del repositorio
@@ -28,7 +28,7 @@ git config --list | grep ^user\.
 - **GitLab:** incognia
 - **SSH Key:** `~/.ssh/incognia`
 
-### Proyectos laborales (Promad)
+### Proyectos laborales (Kabat One)
 
 ```bash
 # Configurar usuario para este repositorio
@@ -77,7 +77,7 @@ git config user.name  "Rodrigo Álvarez"
 git config user.email "incognia@gmail.com"
 git config core.sshCommand "ssh -i ~/.ssh/incognia -o IdentitiesOnly=yes"
 
-# Laboral (Promad)
+# Laboral (Kabat One)
 # git config user.name  "Rodrigo Álvarez"
 # git config user.email "ralvarez@kabatone.com"
 # git config core.sshCommand "ssh -i ~/.ssh/kone -o IdentitiesOnly=yes"

@@ -61,7 +61,7 @@ Mi enfoque de trabajo se rige por tres principios clave:
 - Operación de *stacks* modernos con infraestructura propia (no nube pública)
 - Autonomía técnica para proponer e implementar mejoras
 - Ambiente de colaboración, documentación y aprendizaje constante
-- Modalidad presencial en **Promad Business Solutions**
+- Modalidad presencial en **Kabat One**
 - Ubicación: Colonia Verónica Anzures, Miguel Hidalgo, CDMX
 
 ---

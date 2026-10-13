@@ -47,7 +47,7 @@ Pasos (Alternativa manual, si no usas el asistente):
      - `git config user.name  "Rodrigo Álvarez"`
      - `git config user.email "incognia@gmail.com"`
      - `git config core.sshCommand "ssh -i ~/.ssh/incognia -o IdentitiesOnly=yes"`
-   - Laboral (Promad):
+   - Laboral (Kabat One):
      - `git config user.name  "Rodrigo Álvarez"`
      - `git config user.email "ralvarez@kabatone.com"`
      - `git config core.sshCommand "ssh -i ~/.ssh/kone -o IdentitiesOnly=yes"`
