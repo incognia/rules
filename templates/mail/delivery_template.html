@@ -153,24 +153,24 @@
               </tr>
               <tr>
                 <td style="padding:10px; border-bottom:1px solid #ddd; font-family:'Space Grotesk',Arial,sans-serif;">API (Gateway Istio)</td>
-                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:'Space Grotesk',Arial,sans-serif;"><code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">http://30.30.40.26/{PREFIJO}</code></td>
+                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:'Space Grotesk',Arial,sans-serif;"><code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">http://{GATEWAY_IP}/{PREFIJO}</code></td>
               </tr>
               <tr style="background-color:#f9f9f9;">
                 <td style="padding:10px; border-bottom:1px solid #ddd; font-family:'Space Grotesk',Arial,sans-serif;">Swagger UI</td>
-                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:'Space Grotesk',Arial,sans-serif;"><code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">http://30.30.40.26/{PREFIJO}/swagger-ui/index.html</code></td>
+                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:'Space Grotesk',Arial,sans-serif;"><code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">http://{GATEWAY_IP}/{PREFIJO}/swagger-ui/index.html</code></td>
               </tr>
               <tr>
                 <td style="padding:10px; border-bottom:1px solid #ddd; font-family:'Space Grotesk',Arial,sans-serif;">Verificación de salud</td>
-                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:'Space Grotesk',Arial,sans-serif;"><code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">http://30.30.40.26/{PREFIJO}/actuator/health</code></td>
+                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:'Space Grotesk',Arial,sans-serif;"><code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">http://{GATEWAY_IP}/{PREFIJO}/actuator/health</code></td>
               </tr>
               <tr style="background-color:#f9f9f9;">
                 <td style="padding:10px; border-bottom:1px solid #ddd; font-family:'Space Grotesk',Arial,sans-serif;">Interno (ClusterIP)</td>
-                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:'Space Grotesk',Arial,sans-serif;"><code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">http://{NOMBRE_SERVICIO}.stab.svc.cluster.local:8080</code></td>
+                <td style="padding:10px; border-bottom:1px solid #ddd; font-family:'Space Grotesk',Arial,sans-serif;"><code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">http://{NOMBRE_SERVICIO}.{NAMESPACE}.svc.cluster.local:8080</code></td>
               </tr>
             </table>
 
             <p style="font-family:'Space Grotesk',Arial,sans-serif;">
-              <strong>IP del Gateway Istio:</strong> <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">30.30.40.26</code> &nbsp;|&nbsp;
+              <strong>IP del Gateway Istio:</strong> <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">{GATEWAY_IP}</code> &nbsp;|&nbsp;
               <strong>Puerto del servicio:</strong> <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">8080</code>
             </p>
 
@@ -183,16 +183,16 @@
             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0; border-left:4px solid #00A1FF;">
               <tr>
                 <td bgcolor="#C3D8F3" style="background-color:#C3D8F3; padding:15px; font-family:'Space Grotesk',Arial,sans-serif;">
-                  <strong>Job de Jenkins:</strong> <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">Stabilisation/{NOMBRE_SERVICIO}</code><br>
-                  <strong>URL:</strong> <a href="http://192.168.10.33:8080/jenkins/job/Stabilisation/job/{NOMBRE_SERVICIO}/"
-                     style="color:#00A1FF; text-decoration:none;">http://192.168.10.33:8080/jenkins/job/Stabilisation/job/{NOMBRE_SERVICIO}/</a>
+                  <strong>Job de Jenkins:</strong> <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">{JENKINS_FOLDER}/{NOMBRE_SERVICIO}</code><br>
+                  <strong>URL:</strong> <a href="{JENKINS_URL}/job/{JENKINS_FOLDER}/job/{NOMBRE_SERVICIO}/"
+                     style="color:#00A1FF; text-decoration:none;">{JENKINS_URL}/job/{JENKINS_FOLDER}/job/{NOMBRE_SERVICIO}/</a>
                 </td>
               </tr>
             </table>
 
             <ol style="margin-left:20px; font-family:'Space Grotesk',Arial,sans-serif;">
               <li>Hacer <em>push</em> de los cambios a la rama <code style="background-color:#f4f4f4; padding:2px 5px; font-family:'Courier New',monospace;">stab</code> en GitLab</li>
-              <li>Acceder a <a href="http://192.168.10.33:8080/jenkins" style="color:#00A1FF; text-decoration:none;">Jenkins</a> → <strong>Stabilisation</strong> → <strong>{NOMBRE_SERVICIO}</strong></li>
+              <li>Acceder a <a href="{JENKINS_URL}" style="color:#00A1FF; text-decoration:none;">Jenkins</a> → <strong>{JENKINS_FOLDER}</strong> → <strong>{NOMBRE_SERVICIO}</strong></li>
               <li>Hacer clic en <strong>«Build Now»</strong></li>
               <li>Monitorear los 7 <em>stages</em>; una vez exitoso, ArgoCD sincronizará en ~3 minutos</li>
             </ol>
@@ -245,12 +245,12 @@
 
 2. ArgoCD (automático, ~3 min):
    └─ Detecta cambio en argocd-apps/{NOMBRE_SERVICIO}/
-   └─ Aplica Deployment, Service, VirtualService en namespace stab
+   └─ Aplica Deployment, Service, VirtualService en namespace {NAMESPACE}
 
-3. Kubernetes (namespace: stab):
+3. Kubernetes (namespace: {NAMESPACE}):
    └─ Deployment: {NOMBRE_SERVICIO} (1 réplica)
    └─ Service: ClusterIP:8080
-   └─ VirtualService: prefijo /{PREFIJO} vía Istio Gateway (30.30.40.26)</td>
+   └─ VirtualService: prefijo /{PREFIJO} vía Istio Gateway ({GATEWAY_IP})</td>
               </tr>
             </table>
 

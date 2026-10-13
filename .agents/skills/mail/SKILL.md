@@ -45,7 +45,7 @@ description: "Compose and send OWA-compatible HTML email. Usage: /mail <owa|mac|
 1. **Read the full CoT**: Load and follow `~/rules/cot/mail.md` from line 1 to end
 2. **Read the rules**: Load `~/rules/rulesets/MAIL.md` for HTML constraints and color palette
 3. **Select template** based on $1:
-   - `delivery` → read and use `~/rules/templates/mail/delivery_template.html`
+   - `delivery` → read and use `~/rules/templates/mail/delivery_template.html`; fill the infrastructure placeholders (`{GATEWAY_IP}`, `{JENKINS_URL}`, `{JENKINS_FOLDER}`, `{NAMESPACE}`) from `MAIL_*` in `~/rules/.env` (see `rulesets/MAIL.md`), never print other `.env` values
    - `generic` → read and use `~/rules/templates/mail/generic_template.html`
 4. **Generate filename**: `YYYY-MM-DD-{subject-as-slug}.html` (date in CST)
 5. **Ask the user** for the missing data:

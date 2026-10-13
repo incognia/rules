@@ -45,9 +45,11 @@ description: "Analyze Kubernetes cluster state via SSH. Usage: /kube <key> <user
 
 ## Examples
 
-- `/kube kone ubuntu 192.168.10.70 stab` — infra server, stab namespace
-- `/kube kone ubuntu 30.30.40.90 sinaloa-qa` — client server via kone
-- `/kube cad admin 10.0.1.50 produccion` — client server via cad
+- `/kube kone ubuntu <infra_ip> <namespace>` — own infrastructure server
+- `/kube kone ubuntu <client_ip> <client>-qa` — client server via kone
+- `/kube cad admin <client_ip> <namespace>` — client server via cad
+
+Real hosts and namespaces are never written in this repository: keep them in your own notes or in the untracked `~/rules/.env`.
 
 ## References
 

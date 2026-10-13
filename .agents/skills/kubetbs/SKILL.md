@@ -34,9 +34,11 @@ description: "Troubleshoot a problematic microservice in Kubernetes by correlati
 
 ## Examples
 
-- `/kubetbs kone ubuntu 30.30.40.90 sinaloa-qa ms-macroevento` — troubleshoot specific service
-- `/kubetbs kone ubuntu 30.30.40.90 michoacan-qa` — auto-detect problematic service
-- `/kubetbs cad ubuntu 10.0.1.50 produccion payments-api` — client server
+- `/kubetbs kone ubuntu <client_ip> <client>-qa <service>` — troubleshoot a specific service
+- `/kubetbs kone ubuntu <client_ip> <client>-qa` — auto-detect the problematic service
+- `/kubetbs cad ubuntu <client_ip> <namespace> <service>` — client server via cad
+
+Real hosts and namespaces are never written in this repository: keep them in your own notes or in the untracked `~/rules/.env`.
 
 ## References
 

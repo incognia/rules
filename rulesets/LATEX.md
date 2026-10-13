@@ -201,8 +201,10 @@ apt update && apt dist-upgrade
 \vspace{4pt}
 
 \textbf{Rodrigo Ernesto Álvarez Aguilera} — Líder DevOps\\
-\href{mailto:ralvarez@kabatone.com}{ralvarez@kabatone.com} · Ejército Nacional 57, Miguel Hidalgo · +52 (55) 7980-9502
+\href{mailto:ralvarez@kabatone.com}{ralvarez@kabatone.com} · {DIRECCION} · {TELEFONO}
 ```
+
+`{DIRECCION}` y `{TELEFONO}` se llenan con `LATEX_CONTACT_ADDRESS` y `LATEX_CONTACT_PHONE` del `.env` no versionado (`~/rules/.env`); los datos de contacto reales nunca se escriben en el repositorio.
 
 **Reglas:**
 

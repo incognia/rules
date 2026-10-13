@@ -78,7 +78,7 @@ git clone git@github.com:incognia/rules.git ~/rules 2>/dev/null || git -C ~/rule
   - *Workflows* en Windows: `$APPDATA\warp\Warp\data\workflows\`
 - `cot/`, `rulesets/` y `templates/` se copian a `~/rules/` solo si el repositorio está clonado en otra ruta; si el clon ya vive en `~/rules/`, no se copia nada
 - `scripts/atlassian/` y el `.env` local (credenciales Atlassian, permisos 600) también se copian a `~/rules/` en ese caso; el resto de `scripts/` no se copia y se ejecuta directo desde el repositorio
-- El `.env` nunca se versiona: se crea a partir de `.env.example`
+- El `.env` nunca se versiona: se crea a partir de `.env.example` y guarda credenciales y datos sensibles (sitios de Atlassian, IP e infraestructura de los ambientes, datos de contacto). El repositorio es público, así que los archivos versionados solo llevan marcadores como `<client_ip>` o `{GATEWAY_IP}`
 - Para actualizar después de un `git pull`, solo ejecuta: `~/rules/scripts/sync_global.sh`
 - `cot/`, `rulesets/` y `templates/` se acceden por ruta canónica, sin enlace simbólico (`~/rules/cot/`, `~/rules/rulesets/`); la excepción es la exportación de *skills* a Claude Code arriba, que sí usa un enlace simbólico
 

@@ -20,7 +20,7 @@ Razonamiento:
 Pasos:
 
 1) Acción: determinar el tipo de correo.
-   - Entrega de microservicio → usar `templates/mail/delivery_template.html`
+   - Entrega de microservicio → usar `templates/mail/delivery_template.html`; los *placeholders* de infraestructura (`{GATEWAY_IP}`, `{JENKINS_URL}`, `{JENKINS_FOLDER}`, `{NAMESPACE}`) salen de las variables `MAIL_*` de `~/rules/.env`
    - Cualquier otro (cambio, decisión, reporte, corrección) → usar `templates/mail/generic_template.html`
    Resultado: plantilla seleccionada.
 

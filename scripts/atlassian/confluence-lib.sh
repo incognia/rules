@@ -21,11 +21,15 @@ fi
 
 CONFLUENCE_USER_EMAIL="${JIRA_USER_EMAIL:-${JIRA_EMAIL:-}}"
 CONFLUENCE_USER_TOKEN="${JIRA_USER_TOKEN:-${JIRA_TOKEN:-}}"
-CONFLUENCE_BASE="${CONFLUENCE_BASE:-https://avite.atlassian.net/wiki}"
+CONFLUENCE_BASE="${CONFLUENCE_BASE:-}"  # obligatorio: definirlo en .env (https://<sitio>.atlassian.net/wiki)
 
 confluence_check_credentials() {
     if [[ -z "$CONFLUENCE_USER_EMAIL" || -z "$CONFLUENCE_USER_TOKEN" ]]; then
         echo "❌ Credenciales faltantes. Define JIRA_USER_EMAIL y JIRA_USER_TOKEN en .env (mismas usadas para Jira)." >&2
+        return 1
+    fi
+    if [[ -z "$CONFLUENCE_BASE" ]]; then
+        echo "❌ Falta CONFLUENCE_BASE en .env (https://<sitio>.atlassian.net/wiki)." >&2
         return 1
     fi
     return 0
@@ -154,7 +158,7 @@ PYEOF
 
 # Crea una página nueva usando la representación ADF nativa (API v1, body.atlas_doc_format) —
 # la ruta correcta cuando el conector MCP (createConfluencePage) está bloqueado en la instancia
-# (403 "The app is not installed on this instance", ya confirmado en avite.atlassian.net).
+# (403 "The app is not installed on this instance", ya visto en instancias con la app restringida).
 # Uso: confluence_create_page_adf '<space_key>' '<parent_id>' '<title>' '<archivo_adf.json>'
 #   archivo_adf.json: el documento ADF completo, p.ej. escrito con adf_lib.write_doc() —
 #   NO envuelto en {"body": ...}.

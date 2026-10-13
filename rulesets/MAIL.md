@@ -105,6 +105,15 @@ Filas alternas: agregar `style="background-color:#f9f9f9;"` manualmente en cada 
 - `{RAMA_BASE}` — rama de origen (main, DEV-1.1, etc.)
 - `{DESCRIPCION}` — una oración sobre qué hace el servicio
 
+*Placeholders* de infraestructura: se llenan con las variables del `.env` no versionado (`~/rules/.env`, plantilla en `.env.example`); nunca se escriben IP, URL internas ni nombres de clientes en el repositorio:
+
+- `{GATEWAY_IP}` ← `MAIL_GATEWAY_IP` — IP del *gateway* Istio del ambiente
+- `{JENKINS_URL}` ← `MAIL_JENKINS_URL` — URL base de Jenkins, sin `/` final
+- `{JENKINS_FOLDER}` ← `MAIL_JENKINS_FOLDER` — carpeta de *jobs* del ambiente
+- `{NAMESPACE}` ← `MAIL_K8S_NAMESPACE` — *namespace* de Kubernetes del ambiente
+
+Si falta alguna variable, preguntar el valor al usuario; no inventarlo.
+
 ## Ajustes para Angular/Node.js
 
 - Eliminar sección «Análisis de código (SonarQube)»
