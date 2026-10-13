@@ -22,12 +22,12 @@ Pasos:
    Resultado: imágenes disponibles en el mismo directorio que el .tex.
 
 2) Acción: escribir el preámbulo completo con los paquetes obligatorios.
-   Resultado: incluir en orden — fontspec, geometry, parskip, microtype, xcolor (paleta PROMAD), booktabs, tabularx, colortbl, array, tcolorbox, graphicx, hyperref, xurl, newunicodechar, titlesec, caption.
-   Configurar: `\arrayrulecolor{promad}` una vez en el preámbulo para todos los bordes de tabla.
+   Resultado: incluir en orden — fontspec, geometry, parskip, microtype, xcolor (paleta Kabat One), booktabs, tabularx, colortbl, array, tcolorbox, graphicx, hyperref, xurl, newunicodechar, titlesec, caption.
+   Configurar: `\arrayrulecolor{midday}` una vez en el preámbulo para todos los bordes de tabla.
 
 3) Acción: escribir el encabezado estándar.
    Resultado:
-   - Logo con `\includegraphics[height=1.8cm]{promad-logo.png}\\`
+   - Logo con `\includegraphics[height=1.8cm]{Kabat-One-600.png}\\` (copiado antes desde `~/rules/templates/mail/assets/`)
    - Timestamp debajo, alineado a la derecha: `\makebox[\linewidth][r]{\footnotesize\textit{...}}`
    - NO usar `\hfill` al inicio de línea (no funciona).
    - Título en `\LARGE\bfseries`; subtítulo en `\large` con mayúscula inicial.

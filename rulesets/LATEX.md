@@ -62,7 +62,7 @@ Pandoc solo es aceptable para borradores rápidos internos sin requisito de cali
 ## Encabezado estándar
 
 ```latex
-\includegraphics[height=1.8cm]{promad-logo.png}\\
+\includegraphics[height=1.8cm]{Kabat-One-600.png}\\
 \makebox[\linewidth][r]{\footnotesize\textit{Última modificación: DD de mes de AAAA, HH:MM (CST)}}
 
 \vspace{10pt}
@@ -77,7 +77,7 @@ Pandoc solo es aceptable para borradores rápidos internos sin requisito de cali
 - **No** usar `\hfill` al inicio de línea — no funciona en ese contexto
 - Título en `\LARGE\bfseries`; subtítulo en `\large` sin negrita
 - Subtítulo con mayúscula inicial (estilo oración)
-- Logo siempre local (`promad-logo.png`); **nunca** usar URLs en `\includegraphics`
+- Logo siempre local: copiar `~/rules/templates/mail/assets/Kabat-One-600.png` junto al `.tex` (`cp ~/rules/templates/mail/assets/Kabat-One-600.png .`); **nunca** usar URLs en `\includegraphics`
 - Descargar imágenes con `curl -sL URL -o archivo.png` antes de compilar
 
 ## Metadatos del documento
@@ -120,7 +120,7 @@ Usar el comando `\meta` para consistencia:
 **Color de bordes:** definir una vez en el preámbulo:
 
 ```latex
-\arrayrulecolor{promad}   % bordes en azul PROMAD
+\arrayrulecolor{midday}   % bordes en azul Midday (Kabat One)
 ```
 
 **Estructura estándar** (tabla que ocupa el ancho completo):
@@ -189,7 +189,7 @@ apt update && apt dist-upgrade
 \usepackage{xcolor}
 \definecolor{codebg}{HTML}{2d2d2d}    % fondo bloques de código
 \definecolor{codefg}{HTML}{f8f8f2}    % texto bloques de código
-\definecolor{promad}{HTML}{00B2E0}    % azul PROMAD (bordes de tabla, acentos)
+\definecolor{midday}{HTML}{00A1FF}    % azul Midday de Kabat One (bordes de tabla, acentos)
 \definecolor{rowhead}{HTML}{e8e8e8}   % fondo encabezado de tabla
 ```
 
