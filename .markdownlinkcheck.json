@@ -1,21 +1,40 @@
 {
   "ignorePatterns": [
-    "node_modules/**",
-    ".git/**",
-    "prompts/snippets/**"
+    {
+      "pattern": "^mailto:"
+    },
+    {
+      "pattern": "^https?://localhost"
+    },
+    {
+      "pattern": "^https?://(10|172|192)\\."
+    },
+    {
+      "pattern": "(%3C|<)[A-Za-z_-]+(%3E|>)"
+    }
   ],
   "retryOn429": true,
   "retryCount": 2,
   "timeout": "10s",
-  "aliveStatusCodes": [200, 206, 429],
+  "aliveStatusCodes": [
+    200,
+    206,
+    429
+  ],
   "replacementPatterns": [
-    { "pattern": "^~/rules/", "replacement": "" }
+    {
+      "pattern": "^~/rules/",
+      "replacement": "{{BASEURL}}/"
+    }
   ],
   "httpHeaders": [
     {
-      "urls": ["https://img.shields.io/*"],
-      "headers": { "User-Agent": "markdown-link-check" }
+      "urls": [
+        "https://img.shields.io/*"
+      ],
+      "headers": {
+        "User-Agent": "markdown-link-check"
+      }
     }
   ]
 }
-
