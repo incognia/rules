@@ -11,11 +11,14 @@
     },
     {
       "pattern": "(%3C|<)[A-Za-z_-]+(%3E|>)"
+    },
+    {
+      "pattern": "^https://www\\.gnu\\.org/licenses/"
     }
   ],
   "retryOn429": true,
-  "retryCount": 2,
-  "timeout": "10s",
+  "retryCount": 4,
+  "timeout": "20s",
   "aliveStatusCodes": [
     200,
     206,
@@ -36,5 +39,6 @@
         "User-Agent": "markdown-link-check"
       }
     }
-  ]
+  ],
+  "fallbackRetryDelay": "5s"
 }

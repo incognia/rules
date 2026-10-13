@@ -245,7 +245,7 @@ Cuando el README.md incluye licencia, debe incluir badges al inicio del contenid
 **Badge de licencia GPLv3:**
 
 ```markdown
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 ```
 
 **Badges adicionales recomendados según plataforma:**

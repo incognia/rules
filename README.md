@@ -7,7 +7,7 @@ description: "Estándares, filosofía y cadenas de razonamiento (CoT) que guían
 
 *Última modificación: 12 de octubre de 2026, 20:01 (CST)*
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)
 [![Spanish](https://img.shields.io/badge/Language-Spanish%20(MX)-green.svg)](https://es.wikipedia.org/wiki/Espa%C3%B1ol_mexicano)
 [![CoTs](https://img.shields.io/badge/CoTs-25-blue.svg)](./cot/)
