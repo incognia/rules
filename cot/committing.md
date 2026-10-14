@@ -88,7 +88,8 @@ Pasos:
    - El bullet `-` inicia en columna 1 (sin espacios o tabs previos).
    - Si una viñeta es larga, partirla manualmente y alinear continuidad con dos espacios.
    - Una línea en blanco entre encabezado/cuerpo y cuerpo/pie.
-   - `Co-Authored-By` se resuelve dinámicamente al momento del *commit*, nunca está fijo en el texto:
+   - Si `/commit` recibió el argumento de modelo autor (`<familia><versión>` con versión obligatoria, en minúsculas y sin espacios: `opus5.5`, `sonnet5.5`, `haiku4.5`, etc.), el *trailer* es `Co-Authored-By: Claude <Familia> <versión> <noreply@anthropic.com>` construido de él, sin cambiar ni completar la versión; un argumento inválido o sin versión detiene el flujo antes del *staging*. Con `help`, solo muestra el uso y la tabla de modelos válidos del *skill* (`.agents/skills/commit/SKILL.md`) y termina sin ejecutar ningún comando de git.
+   - Sin argumento, `Co-Authored-By` se resuelve dinámicamente al momento del *commit*, nunca está fijo en el texto:
      1. Si la herramienta o el *harness* proporciona una línea de atribución para la sesión en curso (p. ej. la atribución de *commits* que inyecta Claude Code), usarla tal cual.
      2. Si no, construirla con la identidad que reporta la propia sesión: `Co-Authored-By: <nombre del agente/modelo según la sesión> <correo de atribución documentado por la herramienta>`.
      3. Si no es posible determinar la identidad activa, omitir el *trailer* y avisar al usuario; nunca adivinar.

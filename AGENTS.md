@@ -175,7 +175,7 @@ Available skills (16):
 
 Invoke with natural language (e.g. "use the commit skill") or slash command (e.g. `/commit`).
 
-`/changelogger` and `/commit` run in Claude Code as forked subagents on Claude Sonnet 5.5 (`context: fork`, `model: claude-sonnet-5-5`, `background: false` in their frontmatter): a small fresh context is cheaper than switching models inline on a long session, whose cache is model-scoped. They gather everything from the repository, so they do not need the conversation history.
+`/changelogger` and `/commit` run in Claude Code as forked subagents on Claude Sonnet 5.5 (`context: fork`, `model: claude-sonnet-5-5`, `background: false` in their frontmatter): a small fresh context is cheaper than switching models inline on a long session, whose cache is model-scoped. They gather everything from the repository, so they do not need the conversation history. Because the forked `/commit` only knows its own model, pass the model that did the work as an optional argument (`/commit opus5.5`, `/commit sonnet5.5`, `/commit haiku4.5`; lowercase, no spaces, version mandatory; `/commit help` lists the valid values) so the `Co-Authored-By` trailer credits it; without argument the trailer names the subagent's model.
 
 ## Workflows
 

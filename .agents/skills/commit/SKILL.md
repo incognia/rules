@@ -1,6 +1,7 @@
 ---
 name: commit
-description: "Full commit workflow with mandatory CHANGELOG validation, SSH validation, and conventional commits in English. Use this skill before making any git commit."
+description: "Full commit workflow with mandatory CHANGELOG validation, SSH validation, and conventional commits in English. Use this skill before making any git commit. Usage: /commit [author_model], e.g. /commit opus5.5"
+argument-hint: "[help|opus5.5|sonnet5.5|haiku4.5|fable5.1|…]"
 context: fork
 agent: general-purpose
 model: claude-sonnet-5-5
@@ -10,6 +11,35 @@ background: false
 # Commit workflow
 
 > **Execution (Claude Code):** this skill runs in a forked subagent on Claude Sonnet 5.5 (`context: fork`, `model: claude-sonnet-5-5`, `background: false`). The subagent starts with no conversation history: gather everything from the repository itself (`git status`, `git diff`, `CHANGELOG.md`) and report the result back to the main session in Spanish Mexican. Other tools ignore these frontmatter keys and run the skill inline.
+
+## Arguments
+
+- **Author model** (optional): $0 — the model that actually did the work, so the `Co-Authored-By` trailer credits it instead of the subagent that only packages the commit.
+  - Format: lowercase, no spaces, `<family><version>`; the version is mandatory. It must match `^(opus|sonnet|haiku|fable|mythos)[0-9]+(\.[0-9]+)?$`. Examples: `opus5.5`, `opus5`, `sonnet5.5`, `haiku4.5`, `fable5.1`.
+  - Mapping: capitalise the family and add the version as written → `Claude <Family> <version>` (`opus5.5` → `Claude Opus 5.5`, `haiku4.5` → `Claude Haiku 4.5`). Email: `noreply@anthropic.com`. Never change or complete the version.
+  - Anything else (missing version such as `sonnet`, unknown family, uppercase, spaces, extra words): stop before staging, show this usage and the table below, and do not commit.
+  - Without argument: the trailer names the model running this skill (in Claude Code, the subagent's: Claude Sonnet 5.5).
+  - `help`: show the usage and the table below in Spanish Mexican, then stop. No git command runs: no status, no staging, no commit.
+
+### Valid author models (`/commit help`)
+
+Claude API models as of 2026-10-06; Claude Code's `/model` may offer fewer (e.g. Haiku 4.5 only). The rule itself only requires `<family><version>`, so a newer model works before this table is updated.
+
+| Family | Argument | Model | Note |
+|--------|----------|-------|------|
+| Fable | `fable5.1` | Claude Fable 5.1 | most capable |
+| Fable | `fable5` | Claude Fable 5 | |
+| Mythos | `mythos5.1` | Claude Mythos 5.1 | Project Glasswing only |
+| Opus | `opus5.5` | Claude Opus 5.5 | current Opus |
+| Opus | `opus5` | Claude Opus 5 | |
+| Opus | `opus4.8` | Claude Opus 4.8 | |
+| Opus | `opus4.7` | Claude Opus 4.7 | |
+| Opus | `opus4.6` | Claude Opus 4.6 | |
+| Sonnet | `sonnet5.5` | Claude Sonnet 5.5 | current Sonnet; runs this skill's subagent |
+| Sonnet | `sonnet5` | Claude Sonnet 5 | |
+| Sonnet | `sonnet4.6` | Claude Sonnet 4.6 | |
+| Haiku | `haiku5.5` | Claude Haiku 5.5 | current Haiku in the API |
+| Haiku | `haiku4.5` | Claude Haiku 4.5 | |
 
 ## When to use
 
@@ -57,7 +87,8 @@ Before making any git commit in projects that follow the rules repository conven
    - Keep exactly one blank line between subject/body and body/footer.
    - Redundancy rule: commit body details MUST NOT include `update/edit CHANGELOG.md` (or equivalent), because changelog maintenance is a precondition validated by `/commit`, not a detail to report in the body.
    - `Co-Authored-By` is resolved dynamically at commit time, never hardcoded:
-     1. If the tool or harness supplies an attribution line for the current session (e.g. Claude Code's system-provided commit attribution), use it verbatim. When this skill runs forked on another model, the trailer names the model that actually ran the commit (the subagent's), not the main session's.
+     0. If an author model argument was given (see Arguments), use `Co-Authored-By: Claude <Family> <version> <noreply@anthropic.com>` built from it, and nothing else.
+     1. Without argument, if the tool or harness supplies an attribution line for the current session (e.g. Claude Code's system-provided commit attribution), use it verbatim. When this skill runs forked on another model, that is the subagent's model, not the main session's.
      2. Otherwise build it from the identity the session itself reports: `Co-Authored-By: <agent/model name as reported by the session> <tool's documented commit email>`.
      3. If the active identity cannot be determined, omit the trailer and tell the user; never guess.
      - Never copy a name, model or version from these rules, an earlier commit or another session.
