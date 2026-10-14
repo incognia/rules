@@ -327,6 +327,6 @@ Estos documentos sirven como referencia para mantener consistencia en:
 
 ---
 
-*Este proyecto fue elaborado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.*
+*Este proyecto fue elaborado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE. Los logotipos de Kabat One y las imágenes de firma de `templates/mail/assets/` quedan excluidos de la GPLv3: consulta el archivo NOTICE.*
 
 *Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*

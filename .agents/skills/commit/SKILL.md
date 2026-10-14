@@ -1,9 +1,15 @@
 ---
 name: commit
 description: "Full commit workflow with mandatory CHANGELOG validation, SSH validation, and conventional commits in English. Use this skill before making any git commit."
+context: fork
+agent: general-purpose
+model: claude-sonnet-5-5
+background: false
 ---
 
 # Commit workflow
+
+> **Execution (Claude Code):** this skill runs in a forked subagent on Claude Sonnet 5.5 (`context: fork`, `model: claude-sonnet-5-5`, `background: false`). The subagent starts with no conversation history: gather everything from the repository itself (`git status`, `git diff`, `CHANGELOG.md`) and report the result back to the main session in Spanish Mexican. Other tools ignore these frontmatter keys and run the skill inline.
 
 ## When to use
 
@@ -51,7 +57,7 @@ Before making any git commit in projects that follow the rules repository conven
    - Keep exactly one blank line between subject/body and body/footer.
    - Redundancy rule: commit body details MUST NOT include `update/edit CHANGELOG.md` (or equivalent), because changelog maintenance is a precondition validated by `/commit`, not a detail to report in the body.
    - `Co-Authored-By` is resolved dynamically at commit time, never hardcoded:
-     1. If the tool or harness supplies an attribution line for the current session (e.g. Claude Code's system-provided commit attribution), use it verbatim.
+     1. If the tool or harness supplies an attribution line for the current session (e.g. Claude Code's system-provided commit attribution), use it verbatim. When this skill runs forked on another model, the trailer names the model that actually ran the commit (the subagent's), not the main session's.
      2. Otherwise build it from the identity the session itself reports: `Co-Authored-By: <agent/model name as reported by the session> <tool's documented commit email>`.
      3. If the active identity cannot be determined, omit the trailer and tell the user; never guess.
      - Never copy a name, model or version from these rules, an earlier commit or another session.

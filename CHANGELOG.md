@@ -3,6 +3,14 @@
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-10-13] - Ejecutar `/changelogger` y `/commit` en subagentes y excluir marca y firma de la GPLv3
+
+- docs: documentar en `AGENTS.md` que `/changelogger` y `/commit` corren en Claude Code como subagentes bifurcados en Claude Sonnet 5.5 (`context: fork`, `model: claude-sonnet-5-5`, `background: false`), porque un contexto pequeño y nuevo cuesta menos que cambiar de modelo en línea en una sesión larga, cuya caché depende del modelo
+- feat: agregar al *frontmatter* de los *skills* `changelogger` y `commit` las llaves `context: fork`, `agent: general-purpose`, `model: claude-sonnet-5-5` y `background: false`, con una nota de ejecución que indica que el subagente no recibe el historial de la conversación, reúne todo desde el repositorio e informa el resultado en español mexicano; otras herramientas ignoran esas llaves y ejecutan el *skill* en línea
+- fix: precisar en `/commit` que, cuando el *skill* corre bifurcado en otro modelo, el *trailer* `Co-Authored-By` nombra al modelo que realmente hizo el *commit* (el del subagente) y no al de la sesión principal
+- docs: agregar el archivo `NOTICE` que excluye de la GPLv3 los logotipos de Kabat One (`templates/mail/assets/Kabat-One-*.png`) y las imágenes de firma personal (`templates/mail/assets/ralvarez_firma*.png`), con resumen en inglés, indicación de sustituirlos o eliminarlos al reutilizar el repositorio y recordatorio de que los datos sensibles viven solo en el `.env` no versionado
+- docs: referenciar el archivo `NOTICE` en el pie de licencia de `README.md`
+
 ## [2026-10-12] - Crear `/sdd-readiness` y *scripts* de Confluence en ADF
 
 - docs: registrar en `AGENTS.md` que el historial de git no se reescribe para eliminar datos sensibles pasados y que la protección aplica de aquí en adelante

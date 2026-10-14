@@ -1,9 +1,15 @@
 ---
 name: changelogger
 description: "Maintain CHANGELOG.md with correct CST dates, reverse chronological order, and the repository's primary language: Spanish Mexican or international English (UK). Use this skill when updating the changelog."
+context: fork
+agent: general-purpose
+model: claude-sonnet-5-5
+background: false
 ---
 
 # CHANGELOG.md maintenance
+
+> **Execution (Claude Code):** this skill runs in a forked subagent on Claude Sonnet 5.5 (`context: fork`, `model: claude-sonnet-5-5`, `background: false`). The subagent starts with no conversation history: gather everything from the repository itself (`git status`, `git diff`, `CHANGELOG.md`) and report the result back to the main session in Spanish Mexican. Other tools ignore these frontmatter keys and run the skill inline.
 
 ## When to use
 

@@ -175,6 +175,8 @@ Available skills (16):
 
 Invoke with natural language (e.g. "use the commit skill") or slash command (e.g. `/commit`).
 
+`/changelogger` and `/commit` run in Claude Code as forked subagents on Claude Sonnet 5.5 (`context: fork`, `model: claude-sonnet-5-5`, `background: false` in their frontmatter): a small fresh context is cheaper than switching models inline on a long session, whose cache is model-scoped. They gather everything from the repository, so they do not need the conversation history.
+
 ## Workflows
 
 Parameterised commands in `.warp/workflows/` for frequent operations:

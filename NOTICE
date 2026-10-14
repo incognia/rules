@@ -1,0 +1,45 @@
+rules — Aviso de licencia y de marcas
+Copyright (c) 2026, Rodrigo Ernesto Álvarez Aguilera (@incognia)
+
+El código, los scripts y la documentación de este repositorio se distribuyen
+bajo la GNU General Public License v3 (ver LICENSE), con las excepciones de
+este aviso.
+
+EXCLUIDO DE LA GPLv3
+
+Los siguientes archivos NO se distribuyen bajo la GPLv3 ni bajo ninguna otra
+licencia libre. Se incluyen solo para que las plantillas del repositorio
+funcionen; todos los derechos quedan reservados por sus titulares:
+
+1. Marca y logotipos de Kabat One
+   templates/mail/assets/Kabat-One-*.png
+   Titular: Kabat One. «Kabat One», su logotipo y su paleta de colores son
+   marcas de su titular. Su presencia aquí no concede ninguna licencia de uso
+   de marca.
+
+2. Firma personal
+   templates/mail/assets/ralvarez_firma*.png
+   Titular: Rodrigo Ernesto Álvarez Aguilera. Uso exclusivo de su titular en
+   su correspondencia; no se autoriza su reutilización por terceros.
+
+USO POR TERCEROS
+
+Quien reutilice o redistribuya este repositorio debe sustituir o eliminar los
+archivos anteriores. Las referencias a la marca en el texto (por ejemplo, en
+rulesets/STYLING.md o rulesets/LATEX.md) describen el uso interno y no
+otorgan derechos sobre la marca.
+
+Los datos sensibles (credenciales, hosts, IP, sitios y contactos) nunca forman
+parte del repositorio: viven en el archivo .env no versionado (ver
+.env.example).
+
+---
+
+rules — Licence and trademark notice (summary in English)
+
+Code, scripts and documentation are licensed under GPLv3 (see LICENSE). The
+Kabat One logos (templates/mail/assets/Kabat-One-*.png) and the personal
+signature images (templates/mail/assets/ralvarez_firma*.png) are excluded from
+the GPLv3 and from any other licence: all rights reserved by their owners.
+They are included only so the templates work; replace or remove them when
+reusing or redistributing this repository.
