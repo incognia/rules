@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-14] - Añadir CI, *hooks* de git y endurecer *scripts* y reglas
 
+- docs: actualizar en `rulesets/TEACHING.md` el resumen educativo para presentar el perfil como «Líder DevOps» en lugar de «Ingeniero DevOps»
 - feat: agregar integración continua en `.github/workflows/ci.yaml` (*lint* de Markdown con `npm ci` y `npm run lint:md`, y ShellCheck) y `.github/workflows/links.yaml` (revisión semanal de ligas, lunes 06:00 CST, no bloqueante), además de `.github/dependabot.yaml` para dependencias de npm y GitHub Actions semanales y `.github/CODEOWNERS`
 - feat: agregar los *hooks* de git `.githooks/pre-commit` (exige `CHANGELOG.md` en el *staging*, con salida de emergencia `SKIP_CHANGELOG_GATE=1`, y ejecuta *lint* sobre los `.md` en *staging*) y `.githooks/commit-msg` (valida el asunto con Conventional Commits y avisa si falta `Co-Authored-By`), activables con el nuevo *script* `npm run hooks:install`
 - chore: agregar `SECURITY.md`, `.editorconfig` y `.markdownlint-cli2.yaml`; versionar `package-lock.json` y fijar `markdownlint-cli2` 0.23.3 y `markdown-link-check` 3.15.0; ignorar `.claude/` en `.gitignore`; desactivar MD060 en `.markdownlint.yaml` por chocar con el separador compacto de tablas del repositorio

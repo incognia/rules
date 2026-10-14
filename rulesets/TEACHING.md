@@ -4,7 +4,7 @@
 
 ## Resumen educativo
 
-Ingeniero DevOps especializado en la **aplicación de metodologías y herramientas de ingeniería de software modernas para la educación STEM**. Con 8 años de experiencia docente, combino conocimientos técnicos avanzados en DevOps con pedagogía práctica para crear entornos de aprendizaje inmersivos y reproducibles.
+Líder DevOps especializado en la **aplicación de metodologías y herramientas de ingeniería de software modernas para la educación STEM**. Con 8 años de experiencia docente, combino conocimientos técnicos avanzados en DevOps con pedagogía práctica para crear entornos de aprendizaje inmersivos y reproducibles.
 
 Mi enfoque va más allá de la enseñanza tradicional: utilizo principios de infraestructura como código, automatización y contenedorización para democratizar el acceso a herramientas de desarrollo profesional en el aula.
 
