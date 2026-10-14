@@ -64,7 +64,7 @@ Este es el *stack* corporativo detallado; el resumen canónico de la especializa
 - Autonomía técnica para proponer y aplicar mejoras
 - Ambiente de colaboración, documentación y aprendizaje constante
 - Modalidad presencial en **Kabat One**
-- Ubicación: Colonia Verónica Anzures, Miguel Hidalgo, CDMX
+- Ubicación: CDMX (el detalle vive en `CORPORATE_LOCATION` del `.env`, no versionado)
 
 ---
 
