@@ -7,10 +7,11 @@
   "scripts": {
     "lint:md": "markdownlint-cli2 \"**/*.md\" \"#node_modules\"",
     "lint:md:fix": "markdownlint-cli2 --fix \"**/*.md\" \"#node_modules\"",
-    "check:links": "find . -name '*.md' -not -path './node_modules/*' -not -path './.git/*' -not -path './backups/*' -print0 | xargs -0 -n1 markdown-link-check -q -c .markdownlinkcheck.json"
+    "check:links": "find . -name '*.md' -not -path './node_modules/*' -not -path './.git/*' -not -path './backups/*' -print0 | xargs -0 -n1 markdown-link-check -q -c .markdownlinkcheck.json",
+    "hooks:install": "git config core.hooksPath .githooks"
   },
   "devDependencies": {
-    "markdownlint-cli2": "^0.13.0",
-    "markdown-link-check": "^3.12.2"
+    "markdown-link-check": "3.15.0",
+    "markdownlint-cli2": "0.23.3"
   }
 }

@@ -1,0 +1,6 @@
+# Opciones de markdownlint-cli2; las reglas viven en .markdownlint.yaml
+ignores:
+  - "node_modules/**"
+  - ".git/**"
+  - "backups/**"
+gitignore: true

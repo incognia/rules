@@ -1,0 +1,49 @@
+#!/bin/sh
+# pre-commit: enforce the CHANGELOG gate and lint staged Markdown.
+# Enable with: npm run hooks:install  (git config core.hooksPath .githooks)
+# Bypass the CHANGELOG gate in exceptional cases: SKIP_CHANGELOG_GATE=1 git commit ...
+
+set -eu
+
+git_dir=$(git rev-parse --git-dir)
+
+# Skip during merges, rebases, cherry-picks and reverts.
+if [ -f "$git_dir/MERGE_HEAD" ] || [ -f "$git_dir/CHERRY_PICK_HEAD" ] ||
+  [ -f "$git_dir/REVERT_HEAD" ] || [ -d "$git_dir/rebase-merge" ] ||
+  [ -d "$git_dir/rebase-apply" ]; then
+  exit 0
+fi
+
+staged=$(git diff --cached --name-only --diff-filter=ACMRD)
+
+if [ -z "$staged" ]; then
+  exit 0
+fi
+
+if [ "${SKIP_CHANGELOG_GATE:-0}" = "1" ]; then
+  echo "pre-commit: CHANGELOG gate skipped (SKIP_CHANGELOG_GATE=1)." >&2
+elif ! printf '%s\n' "$staged" | grep -qx 'CHANGELOG.md'; then
+  echo "pre-commit: CHANGELOG.md is not staged." >&2
+  echo "  Update it first (/changelogger), then stage it." >&2
+  echo "  Exceptional bypass: SKIP_CHANGELOG_GATE=1 git commit ..." >&2
+  exit 1
+fi
+
+# Lint staged Markdown files, only when dependencies are installed.
+top=$(git rev-parse --show-toplevel)
+lint="$top/node_modules/.bin/markdownlint-cli2"
+
+if [ -x "$lint" ]; then
+  md_files=$(git diff --cached --name-only --diff-filter=ACMR -- '*.md')
+  if [ -n "$md_files" ]; then
+    cd "$top"
+    # File names in this repository contain no whitespace; word splitting is intended.
+    # shellcheck disable=SC2086
+    if ! "$lint" $md_files; then
+      echo "pre-commit: markdownlint failed; fix it (npm run lint:md:fix) and stage again." >&2
+      exit 1
+    fi
+  fi
+fi
+
+exit 0

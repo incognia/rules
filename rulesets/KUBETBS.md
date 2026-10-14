@@ -9,8 +9,8 @@ Este documento define las convenciones para diagnosticar y resolver problemas en
 El diagnóstico siempre sigue este orden:
 
 1. **Eventos** → detectar *namespaces* y recursos con fallas
-2. **Pods inestables** → priorizar por reinicios
-3. **Patrones de error** → identificar causa en logs
+2. ***Pods* inestables** → priorizar por reinicios
+3. **Patrones de error** → identificar la causa en los *logs*
 4. **Dueño** → determinar Deployment/StatefulSet afectado
 5. **Red** → verificar Service, Endpoints, VirtualService
 6. **Dependencias** → buscar dependencias *cross-namespace*
@@ -24,19 +24,19 @@ El diagnóstico siempre sigue este orden:
 kubectl get events --all-namespaces --sort-by=.lastTimestamp | tail -50
 ```
 
-### Pods con más reinicios
+### *Pods* con más reinicios
 
 ```bash
 kubectl get pods -A --sort-by=.status.containerStatuses[0].restartCount | tail -30
 ```
 
-### Describir pod problemático (eventos + dueño)
+### Describir el *pod* problemático (eventos y dueño)
 
 ```bash
 kubectl describe pod -n <namespace> <pod>
 ```
 
-### Logs por etiqueta (todas las réplicas)
+### *Logs* por etiqueta (todas las réplicas)
 
 ```bash
 kubectl logs -n <namespace> -l app=<servicio> --since=60m --tail=500
@@ -55,7 +55,7 @@ kubectl get svc,ep -n <namespace> | grep -E "<servicio>|<dependencia>"
 kubectl get svc -A | grep -i <dependencia>
 ```
 
-### Verificar resolución DNS desde un pod temporal
+### Verificar resolución DNS desde un *pod* temporal
 
 ```bash
 kubectl -n <namespace> run tmp --rm -it --image=busybox --restart=Never -- \
@@ -73,16 +73,16 @@ kubectl -n <namespace> run tmp --rm -it --image=busybox --restart=Never -- \
 
 ### `CrashLoopBackOff`
 
-- Revisar logs del contenedor: `kubectl logs <pod> -n <namespace> --previous`
+- Revisar los *logs* del contenedor: `kubectl logs <pod> -n <namespace> --previous`
 - Verificar variables de entorno y *ConfigMaps*
 - Verificar que las dependencias (DB, Redis, *message broker*) estén accesibles
 
 ### `ImagePullBackOff`
 
-- Verificar que la imagen existe en el registro (ECR, Harbor, etc.)
+- Verificar que la imagen existe en el registro (ECR, Harbor, etcétera)
 - Verificar *secrets* de acceso al registro: `kubectl get secret -n <namespace> | grep registry`
 
-### Timeouts en *gateway*/ingreso
+### *Timeouts* en *gateway* o ingreso
 
 - Correlacionar con el servicio *backend*: los *timeouts* del *gateway* suelen ser síntoma de una falla aguas abajo
 - Verificar VirtualService y DestinationRule de Istio
@@ -94,7 +94,7 @@ kubectl -n <namespace> run tmp --rm -it --image=busybox --restart=Never -- \
 
 ## Regla de oro
 
-**Nunca desplegar una corrección sin validar la hipótesis primero.** Usar pod temporal con `busybox` para verificar DNS y conectividad antes de modificar cualquier recurso.
+**Nunca desplegar una corrección sin validar la hipótesis primero.** Usar un *pod* temporal con `busybox` para verificar DNS y conectividad antes de modificar cualquier recurso.
 
 ---
 

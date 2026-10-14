@@ -15,14 +15,11 @@ When creating a new project or when a project needs its LICENSE file and README 
 2. **Detect context** by analyzing the project:
    - Look for "Kabat One", "kabatone.com", "@incogniadev" (or the legacy "Promad", "promad.com.mx") → **Corporate (MIT)**
    - Look for "@incognia", "<incognia@gmail.com>" → **Personal (GPLv3)**
-3. **Create LICENSE file**: Download the full license text
-   - Corporate: MIT License with `Copyright (c) YYYY, Kabat One`
+3. **Create LICENSE file** with the current year from `date +%Y` (never hardcoded):
+   - Corporate: MIT License with `Copyright (c) <current year>, Kabat One`
    - Personal: GNU GPLv3 from <https://www.gnu.org/licenses/gpl-3.0.txt>
-4. **Add README footer**:
-   - Corporate: `*Este proyecto fue elaborado por Rodrigo Álvarez para Kabat One y se distribuye bajo la licencia MIT.*`
-   - Personal: `*Este proyecto fue elaborado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3.*`
-5. **Add copyright line** with current year
-6. **Verify**: Confirm LICENSE file exists and README footer is correct
+4. **Write the README footer** between the `<!-- licence:start -->` and `<!-- licence:end -->` markers, using the exact texts of `~/rules/rulesets/LICENSING.md` §3.1 as the CoT builds them (step 4). Replace only the marked block, or append it when absent; never delete ranges starting at the first `---` (that would wipe the frontmatter and the body). If an unmarked footer already exists, show it and ask before changing it. Use portable commands (no `sed -i` without suffix).
+5. **Verify**: LICENSE exists with the current year, the README has exactly one marked footer, and `git --no-pager diff --stat README.md` shows only the footer changed
 
 ## Context indicators
 

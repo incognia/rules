@@ -34,13 +34,13 @@ vault token renew
 
 ## Estructura de rutas estándar
 
-### Namespace: kv (Key-Value v2)
+### *Namespace*: kv (Key-Value v2)
 
 | Ruta | Propósito | Formato |
 |------|-----------|----------|
 | `kv/incognia/passwords` | Credenciales y contraseñas temporales | JSON con campos: `username`, `password`, `expires` |
 | `kv/incognia/ssh` | Claves SSH privadas y públicas | JSON con campos: `private_key`, `public_key`, `comment` |
-| `kv/incognia/tokens` | Tokens de API y servicios externos | JSON con campos: `token`, `service`, `expires`, `scope` |
+| `kv/incognia/tokens` | *Tokens* de API y servicios externos | JSON con campos: `token`, `service`, `expires`, `scope` |
 | `kv/incognia/certificates` | Certificados SSL/TLS | JSON con campos: `cert`, `key`, `ca`, `expires` |
 | `kv/incognia/database` | Credenciales de bases de datos | JSON con campos: `host`, `port`, `username`, `password`, `database` |
 | `kv/incognia/kubernetes` | Secretos de Kubernetes | JSON con campos: `kubeconfig`, `token`, `namespace` |
@@ -54,7 +54,7 @@ vault token renew
 vault kv list kv/incognia/
 
 # Crear/actualizar secreto
-vault kv put kv/incognia/passwords/myapp username="admin" password="secure123" expires="2025-12-31T23:59:59Z"
+vault kv put kv/incognia/passwords/myapp username="admin" password="<valor>" expires="2025-12-31T23:59:59Z"
 
 # Leer secreto (formato tabla)
 vault kv get kv/incognia/passwords/myapp
@@ -89,7 +89,7 @@ vault kv metadata put -max-versions=5 kv/incognia/passwords/myapp
 
 ### Descarga y formato de claves SSH
 
-Las claves almacenadas en `kv/incognia/ssh` requieren post-procesamiento con `jq` para extraerlas correctamente desde la salida JSON.
+Las claves almacenadas en `kv/incognia/ssh` requieren posprocesamiento con `jq` para extraerlas correctamente desde la salida JSON.
 
 ```bash
 # Extraer clave privada SSH
@@ -117,9 +117,9 @@ ssh-keygen -y -f ~/.ssh/id_rsa > /dev/null && echo "Clave privada válida" || ec
 ssh-keygen -y -f ~/.ssh/id_rsa | diff - ~/.ssh/id_rsa.pub
 ```
 
-## Gestión de tokens y credenciales
+## Gestión de *tokens* y credenciales
 
-### Tokens de API
+### *Tokens* de API
 
 ```bash
 # Almacenar token de API
@@ -153,7 +153,7 @@ DB_PASS=$(vault kv get -format=json kv/incognia/database/postgresql | jq -r '.da
 
 ## Integración con Kubernetes
 
-### Configuración de kubeconfig
+### Configuración de *kubeconfig*
 
 ```bash
 # Almacenar kubeconfig
@@ -168,13 +168,13 @@ vault kv get -format=json kv/incognia/kubernetes/cluster1 | \
 chmod 600 ~/.kube/config
 ```
 
-## Mejores prácticas de seguridad
+## Buenas prácticas de seguridad
 
-### Gestión de tokens
+### Gestión de *tokens*
 
-1. **Rotación regular**: Rotar tokens cada 30-90 días
-2. **Principio de menor privilegio**: Otorgar solo los permisos mínimos necesarios
-3. **Auditoría**: Revisar regularmente el acceso a secretos
+1. **Rotación regular**: rotar los *tokens* cada 30 a 90 días
+2. **Principio de menor privilegio**: otorgar solo los permisos mínimos necesarios
+3. **Auditoría**: revisar con regularidad el acceso a secretos
 
 ```bash
 # Crear token con TTL limitado
@@ -194,9 +194,9 @@ vault token lookup -format=json | jq -r '.data.policies[]'
 vault policy read incognia-dev
 ```
 
-## Automatización y scripting
+## Automatización y *scripting*
 
-### Scripts de respaldo
+### *Scripts* de respaldo
 
 ```bash
 #!/bin/bash
@@ -293,6 +293,4 @@ vault kv get kv/incognia/test 2>&1 | grep -q "permission denied" && \
 
 ---
 
-*Este documento fue desarrollado por Rodrigo Álvarez para la gestión segura de secretos en infraestructura DevOps y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
-
-*Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
+*Elaborado por Rodrigo Álvarez (@incognia)*

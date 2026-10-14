@@ -6,12 +6,12 @@ Este documento define las convenciones de estilo para documentos Markdown en dif
 
 ### Orden de secciones
 
-1. **Metadatos y encabezado** - Tags, logos y títulos principales
-2. **Contenido principal** - Desarrollo del tema
-3. **Pie de página** - Información de licencia y contacto
-4. **Estilos CSS** - Definiciones de apariencia (si aplica)
+1. **Metadatos y encabezado**: *tags*, logotipos y títulos principales
+2. **Contenido principal**: desarrollo del tema
+3. **Pie de página**: información de licencia y contacto
+4. **Estilos CSS**: definiciones de apariencia (si aplica)
 
-## Hedgedoc
+## HedgeDoc
 
 Documentos Markdown para HedgeDoc (sin licencia, solo firma corporativa).
 
@@ -36,25 +36,28 @@ tags: tag-1, tag-2, tag-3, tag-opcional
 
 **Notas importantes:**
 
-- Los tags deben ser descriptivos y relevantes al contenido
-- El logo de Kabat One es obligatorio en documentos corporativos
+- Los *tags* deben ser descriptivos y relevantes al contenido
+- El logotipo de Kabat One es obligatorio en documentos corporativos de HedgeDoc (no en GitLab ni GitHub)
 - El bloque `<div style="text-align: right;">` funciona **solo en HedgeDoc**; GitLab y GitHub eliminan los atributos `style`
 - El primer encabezado debe ser claro y conciso
-- La fecha de "Última modificación" debe actualizarse con la fecha y hora real al momento de editar el documento (formato: DD de mes de AAAA, HH:MM (CST))
-- **Regla de fecha única:** antes de insertar/actualizar "Última modificación", eliminar cualquier campo de fecha ya reportado (`Fecha:`, `Fecha de reporte:`, `[time=...]` u otro "Última modificación") para dejar solo uno.
+- La fecha de «Última modificación» debe actualizarse con la fecha y hora reales al momento de editar el documento (formato: DD de mes de AAAA, HH:MM (CST))
+- **Regla de fecha única:** antes de insertar o actualizar «Última modificación», eliminar cualquier campo de fecha ya reportado (`Fecha:`, `Fecha de reporte:`, `[time=...]` u otra «Última modificación») para dejar solo uno.
 - **Zona horaria obligatoria:** siempre usar CST de Ciudad de México (UTC-6), nunca UTC ni otra zona horaria
 
-⚠️ **ADVERTENCIA CRÍTICA:** Para generar timestamps CST correctos, NO es suficiente añadir "CST" a una fecha UTC. Debes restar 6 horas a UTC para obtener la fecha CST correcta. Por ejemplo, si UTC es 22:21, CST debe ser 16:21 (22:21 - 6 horas = 16:21). Usar `TZ="America/Mexico_City" date` garantiza la conversión automática.
+**Advertencia crítica:** no basta con añadir «CST» a una hora UTC; usa `TZ=America/Mexico_City date`, que hace la conversión (CST = UTC − 6 horas). La regla completa está en [LINGUISTICS.md](./LINGUISTICS.md#fechas-y-horas-cst-ciudad-de-méxico).
 
-**Ejemplos de generación de timestamp (CST, 24 horas):**
+**Ejemplos de generación de la marca de tiempo (CST, 24 horas):**
 
 ```bash
 # Formato corto (ISO-like): 2025-07-31 11:59 CST
 TZ=America/Mexico_City date '+%F %H:%M %Z'
 
 # Formato largo en español: 31 de julio de 2025, 11:59 (CST)
-LC_TIME=es_MX.UTF-8 TZ=America/Mexico_City date '+%d de %B de %Y, %H:%M (%Z)'
+# LC_TIME=es_MX.UTF-8 asegura el nombre del mes en español; %Z ya imprime CST
+LC_TIME=es_MX.UTF-8 TZ=America/Mexico_City date '+%-d de %B de %Y, %H:%M (%Z)'
 ```
+
+Si `locale -a` no lista `es_MX.UTF-8`, usa `es_ES.UTF-8` o traduce a mano el nombre del mes; nunca dejes el mes en inglés. El resultado ya incluye «(CST)», así que la plantilla es `Última modificación: <resultado>`, sin agregar otro «(CST)».
 
 ### Pie de página estándar
 
@@ -121,18 +124,18 @@ Todo documento HedgeDoc debe concluir con el siguiente pie de página (sin licen
 
 **Componentes del pie de página:**
 
-1. **Separador** - Línea horizontal
-2. **Firma corporativa** - Imagen de firma oficial
-3. **CSS corporativo** - Definición de colores y estilos de marca
+1. **Separador**: línea horizontal
+2. **Firma corporativa**: imagen de firma oficial
+3. **CSS corporativo**: definición de colores y estilos de marca
 
 ### Paleta de colores corporativa
 
 | Variable | Color | Hexadecimal | Uso |
 |----------|-------|-------------|-----|
-| `--midday` | Azul Kabat One | `#00A1FF` | Color principal de marca |
-| `--midnight` | Azul marino | `#24326A` | Enlaces (modo claro) |
-| `--ice` | Hielo | `#C3D8F3` | Hover en modo oscuro |
-| `--connect` | Conectar | `#31D8FF` | Acento complementario |
+| `--midday` | Azul Kabat One | `#00A1FF` | Color principal de marca: enlaces, borde del H1 y separadores |
+| `--midnight` | Azul marino | `#24326A` | Reservado (definido, sin uso en el CSS actual) |
+| `--ice` | Hielo | `#C3D8F3` | Reservado (definido, sin uso en el CSS actual) |
+| `--connect` | Conectar | `#31D8FF` | Enlaces al pasar el puntero (*hover*) |
 | `--code` | Código | `#007EB5` | Acento secundario |
 | `--deep` | Profundo | `#060E40` | Azul muy oscuro |
 | `--video` | Video | `#7252D8` | Enlaces visitados |
@@ -147,9 +150,9 @@ Todo documento HedgeDoc debe concluir con el siguiente pie de página (sin licen
 
 #### Texto
 
-- Los párrafos están justificados por defecto
-- Enlaces cambian de color al hacer hover
-- Soporte automático para modo claro y oscuro
+- Los párrafos están justificados de forma predeterminada
+- Los enlaces cambian de color al pasar el puntero (*hover*)
+- Compatibilidad automática con modo claro y oscuro
 
 #### Separadores
 
@@ -170,28 +173,28 @@ HedgeDoc admite extensiones que **no funcionan** en GitLab ni GitHub:
 | Bloques `mermaid` nativos | ✅ | ✅ | ✅ |
 | CSS inline (`<style>`) | ✅ | ❌ (ignorado) | ❌ (ignorado) |
 | HTML arbitrario | ✅ | parcial | parcial |
-| Badges (`shields.io`) | ✅ | ✅ | ✅ |
-| Frontmatter YAML (`---`) | ✅ (`tags:`) | ✅ (`title:`, `description:`) | ✅ (tabla horizontal) |
+| *Badges* (`shields.io`) | ✅ | ✅ | ✅ |
+| *Frontmatter* YAML (`---`) | ✅ (`tags:`) | ✅ (`title:`, `description:`) | ✅ (tabla horizontal) |
 
-**Regla crítica:** Al aplicar styling en GitLab o GitHub, eliminar o adaptar cualquier sintaxis exclusiva de HedgeDoc.
+**Regla crítica:** al aplicar el estilo en GitLab o GitHub, eliminar o adaptar cualquier sintaxis exclusiva de HedgeDoc. El *frontmatter* `tags:` de HedgeDoc se quita; el *frontmatter* `title`/`description` de un README.md se conserva.
 
 ## Plantillas
 
 Usar las plantillas en `templates/` como punto de partida:
 
-- `templates/hedgedoc.md` — Documento genérico para HedgeDoc
-- `templates/gitlab-readme.md` — README.md para GitLab (con licencia y badges)
-- `templates/github-readme.md` — README.md para GitHub (con licencia y badges)
+- `templates/hedgedoc.md` — documento genérico para HedgeDoc
+- `templates/gitlab-readme.md` — README.md para GitLab (con licencia y *badges*)
+- `templates/github-readme.md` — README.md para GitHub (con licencia y *badges*)
 
 ## GitLab
 
 Documentos Markdown para GitLab (README.md con licencia, otros documentos sin licencia).
 
-**Encabezado README.md:** Con frontmatter YAML (`title` + `description`) + H1 + timestamp en Markdown puro.
+**Encabezado README.md:** con *frontmatter* YAML (`title` y `description`), H1 y marca de tiempo en Markdown puro.
 
-GitHub renderiza el frontmatter como tabla horizontal. GitLab lo renderiza como bloque de código formateado. Ambos lo muestran al inicio del documento.
+GitHub muestra el *frontmatter* como tabla horizontal. GitLab lo muestra como bloque de código formateado. Ambos lo muestran al inicio del documento.
 
-**Encabezado otros documentos:** Sin frontmatter. Solo H1 + timestamp en Markdown puro.
+**Encabezado de otros documentos:** sin *frontmatter*; solo H1 y marca de tiempo en Markdown puro.
 
 ```markdown
 ---
@@ -204,13 +207,13 @@ description: "Breve descripción del proyecto"
 *Última modificación: DD de mes de AAAA, HH:MM (CST)*
 ```
 
-> ⚠️ No usar `<div style="...">` — GitLab y GitHub eliminan atributos `style`.
+> No usar `<div style="...">`: GitLab y GitHub eliminan los atributos `style`.
 > Los campos `title` y `description` son los estándar para ambas plataformas; no usar `tags` (exclusivo de HedgeDoc).
 > Regla de fecha única: mantener un solo `*Última modificación: ...*`; eliminar cualquier fecha previa redundante.
 
 **Pie de página para README.md:**
 
-Solo copyright. Sin firma, sin CSS:
+Solo *copyright*, sin firma ni CSS. El bloque va entre los marcadores `<!-- licence:start -->` y `<!-- licence:end -->` (ver [LICENSING.md](./LICENSING.md#31-pie-de-página-en-markdown-readmemd)); el año `AAAA` es el año en curso:
 
 ```markdown
 ---
@@ -230,25 +233,25 @@ Para MIT:
 *Copyright © AAAA, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
 ```
 
-**Pie de página para otros documentos:** Sin footer.
+**Pie de página para otros documentos:** ninguno.
 
-### Badges en README.md
+### *Badges* en README.md
 
-Cuando el README.md incluye licencia, debe incluir badges al inicio del contenido (después del timestamp y antes del primer párrafo). Si ya existen badges, verificar que sean correctos y estén actualizados.
+Cuando el README.md incluye licencia, debe incluir *badges* al inicio del contenido (después de la marca de tiempo y antes del primer párrafo). Si ya existen *badges*, verificar que sean correctos y estén actualizados.
 
-**Badge de licencia MIT:**
+***Badge* de licencia MIT:**
 
 ```markdown
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ```
 
-**Badge de licencia GPLv3:**
+***Badge* de licencia GPLv3:**
 
 ```markdown
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 ```
 
-**Badges adicionales recomendados según plataforma:**
+***Badges* adicionales recomendados según plataforma:**
 
 GitLab:
 
@@ -263,65 +266,65 @@ GitHub:
 [![CI](https://github.com/<owner>/<repo>/actions/workflows/<workflow>.yml/badge.svg)](https://github.com/<owner>/<repo>/actions)
 ```
 
-**Reglas de badges:**
+**Reglas de *badges*:**
 
-- El badge de licencia es obligatorio cuando se especifica `mit` o `gpl`
-- Los badges van después del timestamp y antes del primer párrafo de contenido
-- Si el README ya tiene badges, revisar que coincidan con la licencia y el estado actual del proyecto
-- Solo incluir badges de CI/cobertura si el proyecto los tiene configurados
+- El *badge* de licencia es obligatorio cuando se especifica `mit` o `gpl`
+- Los *badges* van después de la marca de tiempo y antes del primer párrafo de contenido
+- Si el README ya tiene *badges*, revisar que coincidan con la licencia y el estado actual del proyecto
+- Solo incluir *badges* de CI o cobertura si el proyecto los tiene configurados
 
 ## GitHub
 
 Documentos Markdown para GitHub (README.md con licencia, otros documentos sin licencia).
 
-**Encabezado:** Idéntico a GitLab: H1 + timestamp en Markdown puro (`*Última modificación: ...*`). Sin `<div style>`, sin logo, sin frontmatter YAML.
-Aplicar la misma regla de fecha única: eliminar fechas reportadas existentes antes de insertar el timestamp final.
+**Encabezado:** idéntico a GitLab: *frontmatter* `title`/`description` solo en README.md, H1 y marca de tiempo en Markdown puro (`*Última modificación: ...*`). Sin `<div style>` ni logotipo; los demás documentos van sin *frontmatter*.
+Aplicar la misma regla de fecha única: eliminar fechas reportadas existentes antes de insertar la marca de tiempo final.
 
-**Pie de página:** Idéntico a GitLab (copyright solo en README.md, sin firma ni CSS).
+**Pie de página:** idéntico a GitLab (*copyright* solo en README.md, sin firma ni CSS).
 
-## Mejores prácticas
+## Buenas prácticas
 
 ### Estructura de contenido
 
-1. **Metadatos apropiados**: Usar tags descriptivos y relevantes
-2. **Imágenes optimizadas**: Preferir enlaces estables para logos
-3. **Accesibilidad**: Incluir texto alternativo en imágenes
-4. **Responsive**: El CSS debe funcionar en diferentes tamaños de pantalla
+1. **Metadatos apropiados**: usar *tags* descriptivos y relevantes
+2. **Imágenes optimizadas**: preferir enlaces estables para logotipos
+3. **Accesibilidad**: incluir texto alternativo en imágenes
+4. **Diseño adaptable**: el CSS debe funcionar en distintos tamaños de pantalla
 
 ### Mantenimiento
 
-- **Actualizar enlaces**: Verificar periódicamente que las URLs de imágenes funcionen
-- **Consistencia**: Mantener el mismo formato en todos los documentos
-- **Versionado**: Documentar cambios importantes en el estilo
+- **Actualizar enlaces**: verificar periódicamente que las URLs de imágenes funcionen
+- **Consistencia**: mantener el mismo formato en todos los documentos
+- **Versionado**: documentar cambios importantes en el estilo
 
 ### Adaptaciones por contexto
 
-- **Documentos técnicos**: Incluir diagramas con mermaid cuando sea necesario
-- **Documentos internos**: Usar el pie de página completo
-- **Documentos públicos**: Evaluar qué información de contacto incluir
+- **Documentos técnicos**: incluir diagramas con Mermaid cuando sea necesario
+- **Documentos internos**: usar el pie de página completo
+- **Documentos públicos**: evaluar qué información de contacto incluir
 
 ## Validación
 
 Antes de publicar un documento, verificar:
 
-- [ ] Encabezado con logo Kabat One y tags apropiados
+- [ ] HedgeDoc: encabezado con logotipos de Kabat One y *tags* apropiados
+- [ ] GitLab/GitHub: README.md con *frontmatter* `title`/`description`; sin logotipo, firma ni CSS
 - [ ] Estructura jerárquica correcta de encabezados
-- [ ] Pie de página con firma corporativa
-- [ ] CSS corporativo incluido y funcional (si aplica)
+- [ ] HedgeDoc: pie de página con firma corporativa y CSS corporativo
 - [ ] Enlaces e imágenes funcionando correctamente
 - [ ] Formato consistente con otros documentos del proyecto
 - [ ] Existe un solo campo de fecha visible (`Última modificación`), sin fechas redundantes
 - [ ] Licencia solo en README.md (MIT o GPLv3)
 - [ ] Plataforma correcta (HedgeDoc/GitLab/GitHub)
 
-## Edición con `edit_files`
+## Edición con herramientas de buscar y reemplazar
 
-**Regla crítica de anclas:** Cuando se use `search_start_line_number`, el campo `search` debe comenzar en el primer carácter de esa línea. Anclas que inician a mitad de línea fallan siempre, sin importar el número de línea ni la codificación del archivo.
+**Regla crítica de anclas:** cuando la herramienta de edición del agente recibe un número de línea inicial además del texto a buscar, ese texto debe comenzar en el primer carácter de la línea indicada. Las anclas que inician a mitad de línea fallan siempre, sin importar el número de línea ni la codificación del archivo.
 
-- **Correcto**: empezar el `search` desde el inicio de la línea target, incluyendo suficiente contenido único hasta abarcar el fragmento a reemplazar.
+- **Correcto**: empezar el texto a buscar desde el inicio de la línea objetivo, con suficiente contenido único hasta abarcar el fragmento a reemplazar.
 - **Incorrecto**: usar como ancla un fragmento que aparece después del primer carácter de la línea.
 
-Cuando el fragmento a reemplazar está en medio de una línea, incluir en el `search` todo desde el inicio de esa línea, y en el `replace` reproducir la línea completa con la corrección aplicada.
+Cuando el fragmento a reemplazar está en medio de una línea, incluir en el texto a buscar todo desde el inicio de esa línea, y en el reemplazo reproducir la línea completa con la corrección aplicada.
 
 ---
 

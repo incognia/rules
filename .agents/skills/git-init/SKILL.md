@@ -7,63 +7,35 @@ description: "Initialize a git repo with SSH, identity and remote configured. Us
 
 ## Arguments
 
-- **Context**: $0 (personal or laboral)
-- **Key name**: $1 (name of the SSH key in ~/.ssh/, e.g. incognia, kone)
-- **Remote URL**: $2 (SSH URL, e.g. <git@github.com>:incognia/repo.git)
-- **Branch**: $3 (default branch name, e.g. main)
+Same arguments, in the same order, as `~/rules/scripts/git-init-context.sh`:
+
+- **Context**: $0 (`personal` or `laboral`) — required
+- **Key name**: $1 (SSH key in `~/.ssh/`; default `incognia` for personal, `kone` for laboral; a value containing `/` is used as a path)
+- **Remote URL**: $2 (SSH URL such as `git@github.com:incognia/repo.git` or `ssh://…`; optional, HTTPS is rejected)
+- **Branch**: $3 (default branch; default `main`)
 
 ## Instructions
 
 1. **Read the full CoT**: Load and follow `~/rules/cot/git_init.md` from line 1 to end
-2. **Initialize repo**: `git init`
-3. **Configure identity** based on context ($0):
-   - If `personal`:
-
-     ```bash
-     git config user.name "Rodrigo Álvarez"
-     git config user.email "incognia@gmail.com"
-     ```
-
-   - If `laboral`:
-
-     ```bash
-     git config user.name "Rodrigo Álvarez"
-     git config user.email "ralvarez@kabatone.com"
-     ```
-
-4. **Configure SSH key**: `git config core.sshCommand "ssh -i ~/.ssh/$1 -o IdentitiesOnly=yes"`
-   - Verify the key exists: `ls ~/.ssh/$1` — if not found, list available keys with `ls ~/.ssh/` and ask the user
-5. **Add remote**: `git remote add origin $2`
-6. **Set default branch**: `git branch -M $3`
-7. **Verify configuration**:
+2. **Context guard**: if $0 is missing, ask the user for the context (`personal` or `laboral`) and the remote URL; never run the script without arguments from an agent, because without arguments it becomes interactive.
+3. **Run the script non-interactively** from the repository root (or from the empty directory to initialise; the script runs `git init` when needed):
 
    ```bash
-   echo "=== CONFIGURATION ==="
-   echo "Email: $(git config user.email)"
-   echo "SSH: $(git config core.sshCommand)"
-   echo "Remote: $(git remote get-url origin)"
-   echo "Branch: $3"
-   echo "====================="
+   bash ~/rules/scripts/git-init-context.sh "$0" "$1" "$2" "$3"
    ```
 
-8. **Confirm**: Verify remote uses SSH (git@), not HTTPS
-
-## Defaults
-
-If arguments are missing, use these defaults based on context:
-
-- **personal**: key=`incognia`, branch=`main`
-- **laboral**: key=`kone`, branch=`main`
-
-If no arguments are provided at all, ask the user for context and remote URL.
+   Omit trailing arguments that were not given; the script applies the defaults above. It configures `user.name`, `user.email`, `core.sshCommand` with the key, the default branch and `origin`, and prints a configuration block.
+4. **Check the key warning**: if the script warns that the SSH key does not exist, list available keys with `ls ~/.ssh/` and ask the user which one to use, then run the script again with that key name.
+5. **Confirm**: verify in the printed block that the identity matches the context and the remote uses SSH (`git@` or `ssh://`), not HTTPS.
 
 ## Examples
 
 - `/git-init personal incognia git@github.com:incognia/myproject.git main`
 - `/git-init laboral kone git@gitlab.com:incogniadev/project.git main`
-- `/git-init personal` — uses defaults, asks for remote URL
+- `/git-init personal` — uses the default key and branch, and asks for the remote URL
 
 ## References
 
 - Detailed CoT: `~/rules/cot/git_init.md`
 - Rules: `~/rules/rulesets/GIT.md`
+- Script: `~/rules/scripts/git-init-context.sh`

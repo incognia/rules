@@ -3,7 +3,7 @@ domain: workflow
 task: configurar metadatos de repositorio GitHub (descripción, topics, configuraciones) sin editores
 dificultad: baja
 longitud_objetivo: corta
-validacion: metadatos actualizados correctamente via API, sin interacción con editores
+validacion: metadatos actualizados correctamente vía API, sin interacción con editores
 version: "1.0"
 last_updated: 2025-10-12
 ---
@@ -12,9 +12,9 @@ last_updated: 2025-10-12
 Razonamiento:
 
 - **CRÍTICO**: evitar cualquier comando que abra editores interactivos (gh repo edit con ciertos flags, comandos sin especificar completamente).
-- Usar API REST de GitHub directamente con curl para operaciones complejas.
+- Usar la API REST de GitHub directamente con curl para operaciones complejas.
 - Comandos gh simples solo para operaciones que garantizan no ser interactivas.
-- Configurar descripción, topics, homepage, license, y otras propiedades del repositorio.
+- Configurar descripción, *topics*, *homepage*, licencia y otras propiedades del repositorio.
 - Validar cambios sin abrir navegadores o editores.
 
 Pasos:
@@ -35,20 +35,20 @@ Pasos:
    - **Método 1 (gh, verificado no interactivo)**: `gh repo edit --description "descripción del proyecto"`
    - **Método 2 (curl, más seguro)**: `curl -s -H "Authorization: token $(gh auth token)" -H "Accept: application/vnd.github.v3+json" -X PATCH -d '{"description":"descripción del proyecto"}' https://api.github.com/repos/OWNER/REPO`
 
-4) Acción: configurar topics del repositorio (solo curl para evitar editores).
+4) Acción: configurar los *topics* del repositorio (solo curl, para evitar editores).
    **CRÍTICO**: NO usar `gh repo edit --add-topic` ya que puede abrir editor.
    Resultado: `curl -s -H "Authorization: token $(gh auth token)" -H "Accept: application/vnd.github.v3+json" -X PUT -d '{"names":["topic1","topic2","topic3","topic4"]}' https://api.github.com/repos/OWNER/REPO/topics`
-   Ejemplo de topics comunes:
+   Ejemplos de *topics* comunes:
    - Documentación: "documentation", "readme", "markdown"
    - Análisis técnico: "technical-analysis", "regression-analysis", "debugging"
    - Proyectos específicos: "warp-terminal", "github-issues", "open-source"
    - Lenguajes/tecnologías: "bash", "shell", "macos", "linux"
 
-5) Acción: configurar homepage del repositorio (opcional).
+5) Acción: configurar la *homepage* del repositorio (opcional).
    Resultado: `curl -s -H "Authorization: token $(gh auth token)" -H "Accept: application/vnd.github.v3+json" -X PATCH -d '{"homepage":"https://example.com"}' https://api.github.com/repos/OWNER/REPO`
 
 6) Acción: configurar configuraciones adicionales del repositorio.
-   Opciones disponibles via API:
+   Opciones disponibles vía API:
 
    ```bash
    # Habilitar issues
@@ -67,7 +67,7 @@ Pasos:
 7) Acción: validar cambios aplicados.
    Resultado: `curl -s -H "Authorization: token $(gh auth token)" -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/OWNER/REPO | jq '{description: .description, topics: .topics, homepage: .homepage, has_issues: .has_issues, has_wiki: .has_wiki, default_branch: .default_branch}'`
 
-8) (Opcional) Acción: configurar protección de branch main.
+8) (Opcional) Acción: configurar la protección de la rama `main`.
    Resultado:
 
    ```bash
@@ -93,7 +93,7 @@ Comandos SEGUROS (garantizados no interactivos):
 - `curl` con API REST de GitHub
 - `gh auth token` (para usar en curl)
 
-Plantillas de topics comunes:
+Plantillas de *topics* comunes:
 
 ```bash
 # Proyecto de documentación
@@ -135,5 +135,5 @@ Conclusión:
 - Solo usar gh para comandos simples y completamente especificados.
 - Siempre validar cambios con consultas GET a la API.
 - Mantener tokens seguros usando $(gh auth token) en lugar de variables expuestas.
-- Para repos con configuración compleja, usar scripts que combinen múltiples llamadas API.
+- Para repositorios con configuración compleja, usar *scripts* que combinen varias llamadas a la API.
 - Referencias: [GitHub REST API](https://docs.github.com/en/rest), [GitHub CLI Manual](https://cli.github.com/manual/), «~/rules/rulesets/GIT.md» ([../rulesets/GIT.md](../rulesets/GIT.md)).

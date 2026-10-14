@@ -1,8 +1,8 @@
-# Perfil profesional de Rodrigo Álvarez – ingeniero DevOps
+# Perfil profesional de Rodrigo Álvarez – líder DevOps
 
 ## Resumen profesional
 
-Ingeniero DevOps especializado en plataformas Kubernetes nativas, GitOps y observabilidad avanzada. Con experiencia en la construcción y operación de *stacks* completos sobre infraestructura *bare-metal*, enfocado en automatización, confiabilidad y mallas de servicios.
+Líder DevOps especializado en plataformas Kubernetes nativas, GitOps y observabilidad avanzada. Con experiencia en la construcción y operación de *stacks* completos sobre infraestructura *bare-metal*, enfocado en automatización, confiabilidad y mallas de servicios.
 
 Trabajo desde la base: desde levantar clústeres en *bare-metal* hasta instrumentar servicios con trazabilidad y métricas distribuidas. Mi enfoque va más allá del «despliegue en la nube», manteniendo control total sobre la infraestructura y aplicando principios de ingeniería de confiabilidad.
 
@@ -18,11 +18,13 @@ Mi enfoque de trabajo se rige por tres principios clave:
 
 ## *Stack* tecnológico
 
+Este es el *stack* corporativo detallado; el resumen canónico de la especialización técnica está en [PHILOSOPHY.md](../PHILOSOPHY.md#11-especialización-técnica).
+
 | Categoría           | Herramientas clave |
 |---------------------|--------------------|
-| Infraestructura     | **Proxmox VE (*bare-metal*)**, cloud-init, bridges/VLAN |
+| Infraestructura     | **Proxmox VE (*bare-metal*)**, cloud-init, *bridges* y VLAN |
 | Orquestación        | Kubernetes (kubeadm, containerd) |
-| Networking          | Cilium, MetalLB |
+| Redes               | Cilium, MetalLB |
 | Malla de servicios  | Istio, Envoy, Kiali |
 | Observabilidad      | Prometheus, Grafana, Fluentd, Elasticsearch, Kibana, OpenTelemetry |
 | CI/CD               | Jenkins, GitLab CI |
@@ -35,10 +37,10 @@ Mi enfoque de trabajo se rige por tres principios clave:
 ## Competencias técnicas principales
 
 - Experiencia sólida en **Kubernetes sobre Proxmox *bare-metal***
-- Conocimiento práctico de redes, bridges, cloud-init y aprovisionamiento de nodos
+- Conocimiento práctico de redes, *bridges*, cloud-init y aprovisionamiento de nodos
 - Dominio de herramientas CI/CD: Jenkins y GitLab CI
-- Implementación de flujos GitOps con Argo CD y Helm
-- Diseño e implementación de arquitecturas de observabilidad y trazabilidad
+- Puesta en marcha de flujos GitOps con Argo CD y Helm
+- Diseño y puesta en marcha de arquitecturas de observabilidad y trazabilidad
 - Gestión de entornos multi-ambiente (dev, QA, preprod, prod)
 - Nivel de inglés **C1** (lectura técnica y comunicación escrita)
 - Enfoque en trabajo colaborativo y documentación técnica
@@ -49,7 +51,7 @@ Mi enfoque de trabajo se rige por tres principios clave:
 
 - Instrumentación con OpenTelemetry y trazas distribuidas
 - Desarrollo y mantenimiento de *charts* de Helm y manifiestos YAML versionados
-- Implementación de seguridad en mallas de servicios (mTLS, RBAC, políticas de red)
+- Aplicación de seguridad en mallas de servicios (mTLS, RBAC, políticas de red)
 - Filosofía de mejora continua y documentación clara
 - Automatización de procesos de infraestructura y despliegue
 
@@ -59,7 +61,7 @@ Mi enfoque de trabajo se rige por tres principios clave:
 
 - Proyectos técnicos de alto impacto en producción
 - Operación de *stacks* modernos con infraestructura propia (no nube pública)
-- Autonomía técnica para proponer e implementar mejoras
+- Autonomía técnica para proponer y aplicar mejoras
 - Ambiente de colaboración, documentación y aprendizaje constante
 - Modalidad presencial en **Kabat One**
 - Ubicación: Colonia Verónica Anzures, Miguel Hidalgo, CDMX

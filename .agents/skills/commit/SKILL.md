@@ -48,7 +48,7 @@ Before making any git commit in projects that follow the rules repository conven
 ## Instructions
 
 1. **Read the full CoT**: Load and follow `~/rules/cot/committing.md` from line 1 to end
-2. **Validate identity (first time in session only)**: If you already validated identity in this conversation session, skip to step 3. Otherwise: run `git config --list | grep ^user\.` and `git remote -v`, verify email/name match expected context and remote uses SSH (not HTTPS).
+2. **Validate identity (first time in session only)**: If you already validated identity in this conversation session, skip to step 3. Otherwise run the full step 0 of `~/rules/cot/committing.md`: check `user.name`, `user.email`, `core.sshCommand` and `remote.origin`, show the identity block, confirm the remote uses SSH (not HTTPS) and the identity matches the context (personal or laboral). If anything is missing or wrong, stop and apply `~/rules/cot/git_init.md` first.
 3. **Validate CHANGELOG gate BEFORE staging (MANDATORY)**:
    a. Run change validation (staged or unstaged):
 
@@ -66,7 +66,7 @@ Before making any git commit in projects that follow the rules repository conven
 4. **(Optional) Inspect CHANGELOG diff**:
    - `git --no-pager diff -- CHANGELOG.md`
    - `git --no-pager diff --cached -- CHANGELOG.md`
-5. **Stage files**: `git add .`
+5. **Stage all changes**: `git add -A`. One `/commit` produces exactly one commit, because the CHANGELOG gate applies per commit. Split into several atomic commits (selective `git add`) only when the user explicitly asks; then each commit must carry its own part of `CHANGELOG.md` (see step 5 of the CoT).
 6. **Build commit message in temporary file**: create `/tmp/commit-msg.txt` using this detailed structure (international English, UK):
 
    ```text
@@ -96,7 +96,7 @@ Before making any git commit in projects that follow the rules repository conven
    Reuse and adjust `/tmp/commit-msg.txt` until the wording is final.
 7. **Commit from file**: `git commit -F /tmp/commit-msg.txt` — message MUST be in international English (UK), following Conventional Commits
 8. **Push**: `git push`
-9. **Verify**: `git --no-pager log --oneline -1`
+9. **Verify**: `git --no-pager log --oneline -5`
 
 ## Anti-error and anti-pattern protocol for /commit (MANDATORY)
 
@@ -115,6 +115,7 @@ Forbidden anti-patterns:
 - Including `update/edit CHANGELOG.md` (or equivalent) as a commit body detail.
 - Falling back to ad-hoc commit messages that skip `/tmp/commit-msg.txt`.
 - Using Spanish in commit message subject/body.
+- Splitting the work into several commits when the user did not ask for it.
 
 ## Rules
 
@@ -123,7 +124,8 @@ Forbidden anti-patterns:
 - Commit messages are ALWAYS in international English (UK)
 - Commit body must describe substantive changes only; do not include changelog-edit tasks in body bullets
 - Use non-interactive commands only (no pagers, no editors)
-- Prefer `git commit -F /tmp/commit-msg.txt` over `git commit -m` to keep detailed, reusable commit messages
+- Always use `git commit -F /tmp/commit-msg.txt`, never `git commit -m`
+- One `/commit` = one commit with `git add -A`; split only when the user asks
 - In `/tmp/commit-msg.txt`, keep bullets left-aligned and wrap long lines with aligned continuation indentation
 - `CHANGELOG.md` format maintenance belongs to `/changelogger` + `~/rules/cot/changelog.md`
 - CoT files classify as `feat:` not `docs:`

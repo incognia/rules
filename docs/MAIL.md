@@ -132,7 +132,7 @@ Desde la terminal, solicita un código de dispositivo:
 curl -s -X POST \
   "https://login.microsoftonline.com/$TENANT_ID/oauth2/v2.0/devicecode" \
   -d "client_id=$CLIENT_ID" \
-  -d "scope=https://graph.microsoft.com/Mail.Send"
+  -d "scope=offline_access https://graph.microsoft.com/Mail.Send"
 ```
 
 La respuesta incluye un `user_code` y un `device_code`. Abre la URL indicada (`https://login.microsoft.com/device`), ingresa el código de usuario y autentica con tu cuenta.
@@ -199,7 +199,7 @@ Los valores de `CLIENT_ID`, `TENANT_ID` y demás parámetros de la aplicación e
 
 ## Ciclo de vida del *token*
 
-El script `scripts/graph_auth.py` gestiona la autenticación con caché en `~/.graph_tokens.json`.
+El *script* `scripts/graph_auth.py` gestiona la autenticación con caché en `~/.graph_tokens.json`. Pide el *scope* `offline_access`, sin el cual Microsoft no emite `refresh_token`. `/mail token` ejecuta `python3 ~/rules/scripts/graph_auth.py`, y el modo `graph` llama `get_token(interactive=False)`, que nunca abre el flujo en el navegador.
 
 ```mermaid
 flowchart TD

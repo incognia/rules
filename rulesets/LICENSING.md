@@ -2,42 +2,42 @@
 
 ## 1. Propósito
 
-Este documento establece las directrices para crear un archivo LICENSE formal en proyectos que contienen múltiples documentos y/o scripts, asegurando coherencia legal y filosófica.
+Este documento establece las directrices para crear un archivo LICENSE formal en proyectos que contienen múltiples documentos y/o *scripts*, asegurando coherencia legal y filosófica.
 
-## 2. Selección de Licencias por Tipo de Proyecto
+## 2. Selección de licencias por tipo de proyecto
 
-### 2.1. Proyectos Laborales
+### 2.1. Proyectos laborales
 
 - **Licencia recomendada:** MIT
-- **Razón:** Natureza permisiva que facilita integración y adopción comercial.
+- **Razón:** naturaleza permisiva que facilita la integración y la adopción comercial.
 
-### 2.2. Proyectos Personales (Software)
+### 2.2. Proyectos personales (*software*)
 
 - **Licencia recomendada:** GNU GPLv3
-- **Razón:** Asegura que el código y derivados permanezcan libres, promoviendo el *copyleft*.
+- **Razón:** asegura que el código y derivados permanezcan libres, promoviendo el *copyleft*.
 
-(Puede aplicarse tanto a proyectos personales como laborales, según las necesidades específicas del proyecto)
-
-### 2.3. Proyectos de Diseño de Hardware
+### 2.3. Proyectos de diseño de *hardware*
 
 - **Licencia estándar:** CERN OHL v2
-- **Razón:** Permite modificar y distribuir libremente en el ámbito de hardware libre.
+- **Razón:** permite modificar y distribuir libremente en el ámbito del *hardware* libre.
 
-### 2.4. Proyectos de Documentación
+### 2.4. Proyectos de documentación
 
 - **Licencia:** GNU LGPLv3
 - **Alternativa:** Creative Commons para documentos generales no ligados a software.
 
-### 2.5. Proyectos Creativos
+### 2.5. Proyectos creativos
 
 - **Licencia estándar:** CC BY 4.0
-- **Razón:** Facilita máxima difusión y uso, requiriendo solo atribución.
+- **Razón:** facilita máxima difusión y uso, requiriendo solo atribución.
 
 ## 3. Ejemplos de aplicación
 
-A continuación, se muestran ejemplos de cómo incluir la información de licenciamiento y autoría en diferentes tipos de archivos, utilizando la información definida en el documento de autoría.
+Estos ejemplos muestran cómo incluir la información de licenciamiento y autoría en distintos tipos de archivos, con los datos definidos en [ATTRIBUTION.md](./ATTRIBUTION.md). En todos, el año del *copyright* es el año en curso (`date +%Y`); `AAAA` y las fechas de ejemplo no se copian tal cual.
 
 ### 3.1. Pie de página en Markdown (README.md)
+
+El pie va entre los marcadores `<!-- licence:start -->` y `<!-- licence:end -->`, para que «~/rules/cot/licensing.md» pueda reemplazarlo sin tocar el resto del README.
 
 #### Proyecto laboral
 
@@ -45,7 +45,7 @@ A continuación, se muestran ejemplos de cómo incluir la información de licenc
 
 *Este proyecto fue elaborado por Rodrigo Álvarez para Kabat One y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
 
-*Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
+*Copyright © AAAA, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
 
 #### Proyecto personal
 
@@ -53,7 +53,7 @@ A continuación, se muestran ejemplos de cómo incluir la información de licenc
 
 *Este proyecto fue elaborado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.*
 
-*Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*
+*Copyright © AAAA, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*
 
 ### 3.2. Encabezado en script de Bash (.sh)
 
@@ -204,7 +204,7 @@ metadata:
 spec:
   project: production-apps
   source:
-    repoURL: 'https://git.promad.com.mx/devops/webapp-backend.git'
+    repoURL: 'git@gitlab.com:incogniadev/webapp-backend.git'
     targetRevision: HEAD
     path: helm/
   destination:
@@ -233,7 +233,7 @@ spec:
 apiVersion: v2
 name: observability-stack
 description: |
-Stack completo de observabilidad con Prometheus, Grafana,
+  Stack completo de observabilidad con Prometheus, Grafana,
   OpenTelemetry y Jaeger para clústeres Kubernetes.
   Este chart está bajo GPL-3.0: software libre para la comunidad.
 

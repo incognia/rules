@@ -2,30 +2,30 @@
 
 ## Propósito
 
-Definir estándares para generar borradores de business email en inglés usando plantillas y frases funcionales inspiradas en `docs/business_email.pdf`.
+Definir estándares para generar borradores de correo empresarial (*business email*) en inglés usando plantillas y frases funcionales inspiradas en el libro *Business Email*. El libro es material de consulta externo y no está versionado en el repositorio; los bancos de frases ya están extraídos en `templates/bmail/`.
 
 ## Estructura base obligatoria
 
 Todo correo generado debe incluir:
 
-1. **Subject** específico y accionable.
-2. **Opening** con referencia contextual.
-3. **Core message** con información concreta.
-4. **Action request** clara (si aplica).
-5. **Polite close** con siguiente paso.
+1. ***Subject*** específico y accionable.
+2. ***Opening*** con referencia contextual.
+3. ***Core message*** con información concreta.
+4. ***Action request*** clara (si aplica).
+5. ***Polite close*** con siguiente paso.
 
 ## Tono y estilo
 
 - Profesional y cortés, sin lenguaje ambiguo.
 - Oraciones cortas y directas.
 - Evitar párrafos largos; preferir bloques de 2-4 líneas.
-- Usar verbos de acción: confirm, send, review, advise, clarify.
+- Usar verbos de acción: *confirm*, *send*, *review*, *advise*, *clarify*.
 
 ## Reglas de contenido
 
 - Un correo = una intención principal.
-- Incluir referencia (order ref, invoice, fecha o reunión) cuando exista.
-- Si hay retraso/problema, incluir:
+- Incluir referencia (*order ref*, *invoice*, fecha o reunión) cuando exista.
+- Si hay retraso o problema, incluir:
   - reconocimiento del problema,
   - disculpa,
   - causa breve,
@@ -34,19 +34,19 @@ Todo correo generado debe incluir:
 
 ## Frases modelo recomendadas (del libro)
 
-- “Thank you for your email of 14 June.”
-- “I am writing in reference to your advertisement in yesterday's New York Times.”
-- “I am writing with reference to your enquiry of 6 November.”
-- “Please could you confirm the deadline?”
-- “Would you please email me further information about...”
-- “We regret to inform you that....”
-- “Unfortunately, we are unable to…”
-- “Please accept my apologies for this.”
-- “Once again please accept my apologies for any inconvenience caused.”
+- «Thank you for your email of 14 June.»
+- «I am writing in reference to your advertisement in yesterday's New York Times.»
+- «I am writing with reference to your enquiry of 6 November.»
+- «Please could you confirm the deadline?»
+- «Would you please email me further information about...»
+- «We regret to inform you that....»
+- «Unfortunately, we are unable to…»
+- «Please accept my apologies for this.»
+- «Once again please accept my apologies for any inconvenience caused.»
 
-## Placeholders estándar
+## *Placeholders* estándar
 
-Usar placeholders en MAYÚSCULAS con llaves:
+Usar *placeholders* en MAYÚSCULAS con llaves:
 
 - `{SUBJECT}`
 - `{RECIPIENT_NAME}`

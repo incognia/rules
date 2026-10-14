@@ -21,7 +21,7 @@ Pandoc solo es aceptable para borradores rápidos internos sin requisito de cali
 
 ## Motor y compilación
 
-- **Motor obligatorio:** `xelatex` — soporta Unicode nativo, fontspec y emoji sin conversiones.
+- **Motor obligatorio:** `xelatex` — admite Unicode nativo, fontspec y emoji sin conversiones.
 - **Compilación:** `xelatex -interaction=nonstopmode archivo.tex`
 - **Verificación de errores:** usar comillas simples en `grep` para evitar problemas con `!` en zsh:
 
@@ -29,7 +29,7 @@ Pandoc solo es aceptable para borradores rápidos internos sin requisito de cali
   xelatex -interaction=nonstopmode archivo.tex 2>&1 | grep -iE 'error|missing|not found'
   ```
 
-- **Nota:** `grep` retorna exit code 1 cuando no encuentra coincidencias (sin errores). No confundir con fallo real.
+- **Nota:** `grep` devuelve el código de salida 1 cuando no encuentra coincidencias (sin errores). No confundir con fallo real.
 - **Instalación de paquetes faltantes:**
 
   ```bash
@@ -73,11 +73,11 @@ Pandoc solo es aceptable para borradores rápidos internos sin requisito de cali
 
 **Reglas:**
 
-- El timestamp va **debajo del logo**, alineado a la derecha con `\makebox[\linewidth][r]{...}`
+- La marca de tiempo va **debajo del logotipo**, alineado a la derecha con `\makebox[\linewidth][r]{...}`
 - **No** usar `\hfill` al inicio de línea — no funciona en ese contexto
 - Título en `\LARGE\bfseries`; subtítulo en `\large` sin negrita
 - Subtítulo con mayúscula inicial (estilo oración)
-- Logo siempre local: copiar `~/rules/templates/mail/assets/Kabat-One-600.png` junto al `.tex` (`cp ~/rules/templates/mail/assets/Kabat-One-600.png .`); **nunca** usar URLs en `\includegraphics`
+- Logotipo siempre local: copiar `~/rules/templates/mail/assets/Kabat-One-600.png` junto al `.tex` (`cp ~/rules/templates/mail/assets/Kabat-One-600.png .`); **nunca** usar URLs en `\includegraphics`
 - Descargar imágenes con `curl -sL URL -o archivo.png` antes de compilar
 
 ## Metadatos del documento
@@ -151,7 +151,7 @@ Valor A & Descripción larga que se adapta automáticamente \\
 ## Bloques de código
 
 **Paquete:** `tcolorbox` — genera bloques con fondo sólido y bordes redondeados.
-`listings` solo colorea línea por línea y deja espacios blancos entre ellas.
+`listings` solo colorea línea por línea y deja espacios en blanco entre ellas.
 
 ```latex
 \usepackage{tcolorbox}
@@ -225,7 +225,7 @@ apt update && apt dist-upgrade
   \captionsetup[figure]{format=empty,skip=0pt}
   ```
 
-## Paquetes por instalar en Fedora (session reference)
+## Paquetes por instalar en Fedora (referencia de sesión)
 
 ```bash
 sudo dnf install -y pandoc texlive-xetex texlive-collection-latexrecommended

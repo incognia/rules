@@ -71,4 +71,4 @@ description: "Compose structured business-email drafts in English from curated t
 - CoT: `~/rules/cot/bmail.md`
 - Ruleset: `~/rules/rulesets/BMAIL.md`
 - Templates: `~/rules/templates/bmail/`
-- Source material: `./docs/business_email.pdf`
+- Source material: the *Business Email* book (external, not versioned in this repository; its phrase banks already live in `~/rules/templates/bmail/`)

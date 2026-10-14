@@ -1,30 +1,30 @@
 ---
 domain: backups
-task: respaldo rápido en el mismo directorio (quick backup)
-Dificultad: muy baja
-longitud_objetivo: muy corta
+task: respaldo rápido en la misma carpeta (quick backup)
+dificultad: baja
+longitud_objetivo: corta
 validacion: archivo_YYYY-MM-DD.ext.bkp generado junto al original
 ---
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
 
-- Para archivos pequeños de texto, basta un respaldo local inmediato sin compresión ni checksum.
+- Para archivos pequeños de texto, basta un respaldo local inmediato sin compresión ni *checksum*.
 - Mantener la convención de fecha en CST (YYYY-MM-DD) y el sufijo .bkp.
-- Referencia: «~/rules/rulesets/BACKUPS.md» (sección de respaldo rápido) y script «~/rules/scripts/quick_bkp.sh».
+- Referencia: «~/rules/rulesets/BACKUPS.md» (sección de respaldo rápido) y *script* «~/rules/scripts/quick_bkp.sh».
 
 Pasos:
 
-1) Acción: identificar los archivos a respaldar (en el directorio actual).
-   Resultado: p. ej., `archivo.txt`.
+1) Acción: identificar los archivos a respaldar (en la carpeta actual).
+   Resultado: por ejemplo, `archivo.txt`.
 2) Acción: ejecutar respaldo rápido usando fecha CST.
    Resultado: `bash ~/rules/scripts/quick_bkp.sh archivo.txt` (puede aceptar varios archivos).
-3) Acción: validar que existe el backup junto al original.
+3) Acción: validar que existe el respaldo junto al original.
    Resultado: `ls -1 archivo_$(TZ=America/Mexico_City date +"%Y-%m-%d").txt.bkp`.
 4) (Opcional) Acción: repetir para múltiples archivos en un solo comando.
    Resultado: `bash ~/rules/scripts/quick_bkp.sh *.md`.
 
 Conclusión:
 
-- El respaldo queda como `nombre_YYYY-MM-DD.ext.bkp` en el mismo directorio.
-- Restauración manual: copiar/renombrar el .bkp al nombre original cuando se requiera.
+- El respaldo queda como `nombre_YYYY-MM-DD.ext.bkp` en la misma carpeta.
+- Restauración manual: copiar o renombrar el `.bkp` al nombre original cuando se requiera.

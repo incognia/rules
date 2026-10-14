@@ -1,79 +1,174 @@
 #!/bin/bash
 
 # =============================================================================
-# CONFLUENCE LIBRARY - Biblioteca de funciones para Confluence REST API v1
+# CONFLUENCE LIBRARY - Function library for the Confluence REST API (v1 and v2)
 # =============================================================================
-# Autor: Rodrigo Álvarez
-# Propósito: Biblioteca reutilizable para publicar/actualizar páginas y
-#            adjuntar imágenes (diagramas Mermaid renderizados a PNG) en
-#            Confluence, y publicar comentarios al pie en ADF, con las
-#            credenciales de atlassian-env.sh (misma cuenta Atlassian, válida
-#            para Jira y Confluence). Origen: ops/jira/scripts (promad-cad-all).
+# Author: Rodrigo Álvarez
+# Purpose: reusable library to publish and update pages, attach images
+#          (Mermaid diagrams rendered to PNG) and post ADF footer comments in
+#          Confluence, with the credentials loaded by atlassian-env.sh (the same
+#          Atlassian account works for Jira and Confluence).
+#
+# Security notes:
+#   - The credential never appears on a command line: every request goes
+#     through _confluence_curl, which feeds it to curl as a config file on
+#     stdin (printf is a shell builtin, so no process exposes it in `ps`).
+#   - Every request uses --fail-with-body (or --fail on old curl), so HTTP
+#     errors such as 401, 403 or 409 return a non-zero status while the
+#     response body is still printed for diagnosis.
+#   - Temporary files are created with mktemp without a suffix (BSD mktemp
+#     only substitutes trailing Xs) and removed after each call.
 # =============================================================================
 
 CONFLUENCE_LIB_SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 if [[ -f "$CONFLUENCE_LIB_SCRIPT_DIR/atlassian-env.sh" ]]; then
-    # shellcheck disable=SC1090
+    # shellcheck source=atlassian-env.sh
     source "$CONFLUENCE_LIB_SCRIPT_DIR/atlassian-env.sh"
 fi
 
-# ==================== CONFIGURACIÓN ====================
+# ==================== CONFIGURATION ====================
 
 CONFLUENCE_USER_EMAIL="${JIRA_USER_EMAIL:-${JIRA_EMAIL:-}}"
 CONFLUENCE_USER_TOKEN="${JIRA_USER_TOKEN:-${JIRA_TOKEN:-}}"
-CONFLUENCE_BASE="${CONFLUENCE_BASE:-}"  # obligatorio: definirlo en .env (https://<sitio>.atlassian.net/wiki)
+CONFLUENCE_BASE="${CONFLUENCE_BASE:-}"  # required: set it in .env (https://<site>.atlassian.net/wiki)
+CONFLUENCE_BASE="${CONFLUENCE_BASE%/}"
+
+# --fail-with-body needs curl >= 7.76; fall back to --fail on older versions.
+if curl --help all 2>/dev/null | grep -q -- '--fail-with-body'; then
+    CONFLUENCE_CURL_FAIL_FLAG="--fail-with-body"
+else
+    CONFLUENCE_CURL_FAIL_FLAG="--fail"
+fi
 
 confluence_check_credentials() {
     if [[ -z "$CONFLUENCE_USER_EMAIL" || -z "$CONFLUENCE_USER_TOKEN" ]]; then
-        echo "❌ Credenciales faltantes. Define JIRA_USER_EMAIL y JIRA_USER_TOKEN en .env (mismas usadas para Jira)." >&2
+        echo "❌ Missing credentials. Set JIRA_USER_EMAIL and JIRA_USER_TOKEN in .env (the same ones used for Jira)." >&2
         return 1
     fi
     if [[ -z "$CONFLUENCE_BASE" ]]; then
-        echo "❌ Falta CONFLUENCE_BASE en .env (https://<sitio>.atlassian.net/wiki)." >&2
+        echo "❌ Missing CONFLUENCE_BASE in .env (https://<site>.atlassian.net/wiki)." >&2
         return 1
     fi
     return 0
 }
 
-# ==================== PÁGINAS ====================
+# ==================== INTERNAL HELPERS ====================
 
-# Obtiene el body (storage/XHTML) y version.number actuales de una página
-# Uso: confluence_get_page_body '<page_id>'
-confluence_get_page_body() {
-    local page_id="$1"
-    confluence_check_credentials || return 1
-    curl -s -u "$CONFLUENCE_USER_EMAIL:$CONFLUENCE_USER_TOKEN" \
-        "$CONFLUENCE_BASE/rest/api/content/$page_id?expand=body.storage,version"
+# Single entry point for every HTTP request. Arguments are passed to curl.
+# The credential travels on stdin as a curl config line, never in argv.
+# Callers must not use stdin themselves (no --data @-).
+_confluence_curl() {
+    local cred="${CONFLUENCE_USER_EMAIL}:${CONFLUENCE_USER_TOKEN}"
+    cred="${cred//\\/\\\\}"
+    cred="${cred//\"/\\\"}"
+    printf 'user = "%s"\n' "$cred" | curl -sS "$CONFLUENCE_CURL_FAIL_FLAG" --config - "$@"
 }
 
-# Reemplaza por completo el body (storage/XHTML) de una página existente
-# Uso: confluence_update_page_body '<page_id>' '<title>' '<body_html_file>'
+# Create a private temporary file or directory (no suffix after the Xs).
+_confluence_tmp_base() {
+    local base="${TMPDIR:-/tmp}"
+    printf '%s' "${base%/}"
+}
+
+_confluence_mktemp() {
+    mktemp "$(_confluence_tmp_base)/confluence-$1.XXXXXX"
+}
+
+# Report a failed request on stderr and pass the status through.
+_confluence_report() {
+    local rc="$1" what="$2"
+    if (( rc != 0 )); then
+        echo "❌ Confluence request failed: $what (curl exit $rc; HTTP 409 means a version conflict, 401/403 a credential or permission problem)" >&2
+    fi
+    return "$rc"
+}
+
+# Send a JSON payload file and remove it afterwards.
+# Usage: _confluence_send_json <METHOD> <url> <payload_file> <description>
+_confluence_send_json() {
+    local method="$1" url="$2" payload_file="$3" what="$4" result rc
+    result=$(_confluence_curl -X "$method" -H "Content-Type: application/json" \
+        --data-binary @"$payload_file" "$url")
+    rc=$?
+    rm -f "$payload_file"
+    printf '%s\n' "$result"
+    _confluence_report "$rc" "$what"
+}
+
+# GET every page of a v2 collection, following _links.next, and print
+# {"results": [...], "size": N}.
+_confluence_get_all() {
+    local url="$1" what="$2" site tmp_dir page_file next rc n=0
+    site="${CONFLUENCE_BASE%/wiki}"
+    tmp_dir=$(mktemp -d "$(_confluence_tmp_base)/confluence-pages.XXXXXX") || return 1
+    while [[ -n "$url" ]]; do
+        n=$((n + 1))
+        page_file="$tmp_dir/$(printf '%05d' "$n").json"
+        _confluence_curl "$url" > "$page_file"
+        rc=$?
+        if (( rc != 0 )); then
+            cat "$page_file"
+            rm -rf "$tmp_dir"
+            _confluence_report "$rc" "$what"
+            return
+        fi
+        next=$(jq -r '._links.next // empty' "$page_file") || { rm -rf "$tmp_dir"; return 1; }
+        url="${next:+$site$next}"
+    done
+    jq -s '{results: (map(.results // []) | add // []), size: (map(.results // [] | length) | add // 0)}' \
+        "$tmp_dir"/*.json
+    rc=$?
+    rm -rf "$tmp_dir"
+    return "$rc"
+}
+
+# Print the next version number of a page (current + 1).
+_confluence_next_version() {
+    local page_id="$1" page version
+    if ! page=$(confluence_get_page_body "$page_id"); then
+        printf '%s\n' "$page" >&2
+        return 1
+    fi
+    if ! version=$(jq -er '.version.number' <<< "$page" 2>/dev/null); then
+        echo "❌ Could not read the current version of page $page_id" >&2
+        return 1
+    fi
+    echo $((version + 1))
+}
+
+# ==================== PAGES ====================
+
+# Get the current body (storage/XHTML) and version.number of a page
+# Usage: confluence_get_page_body '<page_id>'
+confluence_get_page_body() {
+    local page_id="${1:-}"
+    confluence_check_credentials || return 1
+    if [[ -z "$page_id" ]]; then
+        echo "❌ Usage: confluence_get_page_body '<page_id>'" >&2
+        return 1
+    fi
+    _confluence_curl "$CONFLUENCE_BASE/rest/api/content/$page_id?expand=body.storage,version"
+    _confluence_report $? "get page $page_id"
+}
+
+# Replace the whole body (storage/XHTML) of an existing page
+# Usage: confluence_update_page_body '<page_id>' '<title>' '<body_html_file>'
 confluence_update_page_body() {
-    local page_id="$1" title="$2" body_file="$3"
+    local page_id="${1:-}" title="${2:-}" body_file="${3:-}"
     confluence_check_credentials || return 1
 
     if [[ -z "$page_id" || -z "$title" || ! -f "$body_file" ]]; then
-        echo "❌ Uso: confluence_update_page_body '<page_id>' '<title>' '<body_html_file>'" >&2
+        echo "❌ Usage: confluence_update_page_body '<page_id>' '<title>' '<body_html_file>'" >&2
         return 1
     fi
 
-    local current_version
-    current_version=$(confluence_get_page_body "$page_id" | jq -r '.version.number')
-    if [[ -z "$current_version" || "$current_version" == "null" ]]; then
-        echo "❌ No se pudo leer la versión actual de la página $page_id" >&2
-        return 1
-    fi
-    local next_version=$((current_version + 1))
+    local next_version payload_file
+    next_version=$(_confluence_next_version "$page_id") || return 1
+    # Unique temporary file per call: never a fixed path in /tmp, which a
+    # concurrent session could overwrite halfway through.
+    payload_file=$(_confluence_mktemp update-payload) || return 1
 
-    # Archivo temporal único por invocación — NUNCA una ruta fija en /tmp:
-    # otras sesiones concurrentes en esta máquina pueden pisarla a medio
-    # proceso (mismo problema ya documentado con /tmp/commit-msg.txt),
-    # causando que el PUT mande contenido/versión de otra página o quede
-    # en carrera y Confluence responda 200 con el estado viejo sin cambios.
-    local payload_file
-    payload_file=$(mktemp "${TMPDIR:-/tmp}/confluence-update-payload.XXXXXX.json")
-
-    python3 - "$page_id" "$title" "$body_file" "$next_version" "$payload_file" << 'PYEOF'
+    if ! python3 - "$page_id" "$title" "$body_file" "$next_version" "$payload_file" << 'PYEOF'
 import json, sys
 page_id, title, body_file, next_version, out_path = sys.argv[1:6]
 with open(body_file) as f:
@@ -87,47 +182,35 @@ payload = {
 with open(out_path, "w") as f:
     json.dump(payload, f)
 PYEOF
+    then
+        rm -f "$payload_file"
+        return 1
+    fi
 
-    local result
-    result=$(curl -s -u "$CONFLUENCE_USER_EMAIL:$CONFLUENCE_USER_TOKEN" \
-        -X PUT -H "Content-Type: application/json" \
-        --data @"$payload_file" \
-        "$CONFLUENCE_BASE/rest/api/content/$page_id")
-    rm -f "$payload_file"
-    echo "$result"
+    _confluence_send_json PUT "$CONFLUENCE_BASE/rest/api/content/$page_id" "$payload_file" "update page $page_id"
 }
 
-# Reemplaza por completo el body de una página existente usando la representación
-# ADF nativa (API v1, body.atlas_doc_format) — la ruta correcta para actualizar el
-# contenido de una página ya migrada a ADF (ver "Formato de contenido: ADF" en
-# AGENTS.md). El archivo ADF se genera de antemano (con scripts/adf_lib.py) y se
-# sube tal cual vía curl --data @archivo: nunca pegar el JSON completo como
-# argumento literal de una tool call, arriesga transcripción manual en páginas
-# grandes y puede chocar con el truncamiento de salidas largas de la terminal.
-# Uso: confluence_update_page_adf '<page_id>' '<title>' '<archivo_adf.json>'
-#   archivo_adf.json: el documento ADF completo (`{"type":"doc","version":1,...}`),
-#   p.ej. escrito con adf_lib.write_doc() — NO envuelto en {"body": ...}.
+# Replace the whole body of an existing page with native ADF (API v1,
+# body.atlas_doc_format): the right path for pages already migrated to ADF.
+# Build the ADF file beforehand (scripts/atlassian/adf_lib.py); it is uploaded
+# from the file, never pasted as a literal argument.
+# Usage: confluence_update_page_adf '<page_id>' '<title>' '<adf_file.json>'
+#   adf_file.json: the full ADF document (`{"type":"doc","version":1,...}`),
+#   e.g. written with adf_lib.write_doc(), NOT wrapped in {"body": ...}.
 confluence_update_page_adf() {
-    local page_id="$1" title="$2" adf_file="$3"
+    local page_id="${1:-}" title="${2:-}" adf_file="${3:-}"
     confluence_check_credentials || return 1
 
     if [[ -z "$page_id" || -z "$title" || ! -f "$adf_file" ]]; then
-        echo "❌ Uso: confluence_update_page_adf '<page_id>' '<title>' '<archivo_adf.json>'" >&2
+        echo "❌ Usage: confluence_update_page_adf '<page_id>' '<title>' '<adf_file.json>'" >&2
         return 1
     fi
 
-    local current_version
-    current_version=$(confluence_get_page_body "$page_id" | jq -r '.version.number')
-    if [[ -z "$current_version" || "$current_version" == "null" ]]; then
-        echo "❌ No se pudo leer la versión actual de la página $page_id" >&2
-        return 1
-    fi
-    local next_version=$((current_version + 1))
+    local next_version payload_file
+    next_version=$(_confluence_next_version "$page_id") || return 1
+    payload_file=$(_confluence_mktemp adf-payload) || return 1
 
-    local payload_file
-    payload_file=$(mktemp "${TMPDIR:-/tmp}/confluence-adf-payload.XXXXXX.json")
-
-    python3 - "$adf_file" "$title" "$next_version" "$payload_file" << 'PYEOF'
+    if ! python3 - "$adf_file" "$title" "$next_version" "$payload_file" << 'PYEOF'
 import json, sys
 adf_file, title, next_version, out_path = sys.argv[1:5]
 with open(adf_file) as f:
@@ -146,35 +229,32 @@ payload = {
 with open(out_path, "w") as f:
     json.dump(payload, f, ensure_ascii=False)
 PYEOF
+    then
+        rm -f "$payload_file"
+        return 1
+    fi
 
-    local result
-    result=$(curl -s -u "$CONFLUENCE_USER_EMAIL:$CONFLUENCE_USER_TOKEN" \
-        -X PUT -H "Content-Type: application/json" \
-        --data @"$payload_file" \
-        "$CONFLUENCE_BASE/rest/api/content/$page_id")
-    rm -f "$payload_file"
-    echo "$result"
+    _confluence_send_json PUT "$CONFLUENCE_BASE/rest/api/content/$page_id" "$payload_file" "update page $page_id (ADF)"
 }
 
-# Crea una página nueva usando la representación ADF nativa (API v1, body.atlas_doc_format) —
-# la ruta correcta cuando el conector MCP (createConfluencePage) está bloqueado en la instancia
-# (403 "The app is not installed on this instance", ya visto en instancias con la app restringida).
-# Uso: confluence_create_page_adf '<space_key>' '<parent_id>' '<title>' '<archivo_adf.json>'
-#   archivo_adf.json: el documento ADF completo, p.ej. escrito con adf_lib.write_doc() —
-#   NO envuelto en {"body": ...}.
+# Create a new page with native ADF (API v1, body.atlas_doc_format): the
+# fallback when the MCP connector (createConfluencePage) is blocked on the
+# instance (403 "The app is not installed on this instance").
+# Usage: confluence_create_page_adf '<space_key>' '<parent_id>' '<title>' '<adf_file.json>'
+#   adf_file.json: the full ADF document, NOT wrapped in {"body": ...}.
 confluence_create_page_adf() {
-    local space_key="$1" parent_id="$2" title="$3" adf_file="$4"
+    local space_key="${1:-}" parent_id="${2:-}" title="${3:-}" adf_file="${4:-}"
     confluence_check_credentials || return 1
 
     if [[ -z "$space_key" || -z "$parent_id" || -z "$title" || ! -f "$adf_file" ]]; then
-        echo "❌ Uso: confluence_create_page_adf '<space_key>' '<parent_id>' '<title>' '<archivo_adf.json>'" >&2
+        echo "❌ Usage: confluence_create_page_adf '<space_key>' '<parent_id>' '<title>' '<adf_file.json>'" >&2
         return 1
     fi
 
     local payload_file
-    payload_file=$(mktemp "${TMPDIR:-/tmp}/confluence-create-payload.XXXXXX.json")
+    payload_file=$(_confluence_mktemp create-payload) || return 1
 
-    python3 - "$adf_file" "$title" "$space_key" "$parent_id" "$payload_file" << 'PYEOF'
+    if ! python3 - "$adf_file" "$title" "$space_key" "$parent_id" "$payload_file" << 'PYEOF'
 import json, sys
 adf_file, title, space_key, parent_id, out_path = sys.argv[1:6]
 with open(adf_file) as f:
@@ -194,62 +274,60 @@ payload = {
 with open(out_path, "w") as f:
     json.dump(payload, f, ensure_ascii=False)
 PYEOF
+    then
+        rm -f "$payload_file"
+        return 1
+    fi
 
-    local result
-    result=$(curl -s -u "$CONFLUENCE_USER_EMAIL:$CONFLUENCE_USER_TOKEN" \
-        -X POST -H "Content-Type: application/json" \
-        --data @"$payload_file" \
-        "$CONFLUENCE_BASE/rest/api/content")
-    rm -f "$payload_file"
-    echo "$result"
+    _confluence_send_json POST "$CONFLUENCE_BASE/rest/api/content" "$payload_file" "create page '$title'"
 }
 
-# ==================== COMENTARIOS AL PIE (API v2, ADF) ====================
+# ==================== FOOTER COMMENTS (API v2, ADF) ====================
 
-# Lista los comentarios al pie de una página, con su body en ADF
-# Uso: confluence_get_footer_comments '<page_id>'
+# List every footer comment of a page (all result pages), with ADF bodies
+# Usage: confluence_get_footer_comments '<page_id>'
 confluence_get_footer_comments() {
-    local page_id="$1"
+    local page_id="${1:-}"
     confluence_check_credentials || return 1
     if [[ -z "$page_id" ]]; then
-        echo "❌ Uso: confluence_get_footer_comments '<page_id>'" >&2
+        echo "❌ Usage: confluence_get_footer_comments '<page_id>'" >&2
         return 1
     fi
-    curl -s -u "$CONFLUENCE_USER_EMAIL:$CONFLUENCE_USER_TOKEN" \
-        "$CONFLUENCE_BASE/api/v2/pages/$page_id/footer-comments?body-format=atlas_doc_format&limit=100"
+    _confluence_get_all "$CONFLUENCE_BASE/api/v2/pages/$page_id/footer-comments?body-format=atlas_doc_format&limit=100" \
+        "footer comments of page $page_id"
 }
 
-# Lista las respuestas de un comentario al pie
-# Uso: confluence_get_comment_children '<comment_id>'
+# List every reply of a footer comment (all result pages)
+# Usage: confluence_get_comment_children '<comment_id>'
 confluence_get_comment_children() {
-    local comment_id="$1"
+    local comment_id="${1:-}"
     confluence_check_credentials || return 1
     if [[ -z "$comment_id" ]]; then
-        echo "❌ Uso: confluence_get_comment_children '<comment_id>'" >&2
+        echo "❌ Usage: confluence_get_comment_children '<comment_id>'" >&2
         return 1
     fi
-    curl -s -u "$CONFLUENCE_USER_EMAIL:$CONFLUENCE_USER_TOKEN" \
-        "$CONFLUENCE_BASE/api/v2/footer-comments/$comment_id/children?body-format=atlas_doc_format&limit=100"
+    _confluence_get_all "$CONFLUENCE_BASE/api/v2/footer-comments/$comment_id/children?body-format=atlas_doc_format&limit=100" \
+        "replies of comment $comment_id"
 }
 
-# Publica un comentario al pie nuevo, o una respuesta en un hilo, a partir de un archivo ADF.
-# Uso: confluence_add_footer_comment_adf page  '<page_id>'    '<archivo_adf.json>'
-#      confluence_add_footer_comment_adf reply '<comment_id>' '<archivo_adf.json>'
-#   archivo_adf.json: documento ADF completo (`{"type":"doc","version":1,...}`), p. ej. escrito con
-#   adf_lib.write_doc(); nunca pegar el JSON como argumento literal.
+# Post a new footer comment, or a reply in a thread, from an ADF file.
+# Usage: confluence_add_footer_comment_adf page  '<page_id>'    '<adf_file.json>'
+#        confluence_add_footer_comment_adf reply '<comment_id>' '<adf_file.json>'
+#   adf_file.json: full ADF document (`{"type":"doc","version":1,...}`), e.g.
+#   written with adf_lib.write_doc(); never paste the JSON as a literal argument.
 confluence_add_footer_comment_adf() {
-    local mode="$1" target_id="$2" adf_file="$3"
+    local mode="${1:-}" target_id="${2:-}" adf_file="${3:-}"
     confluence_check_credentials || return 1
 
     if [[ ! "$mode" =~ ^(page|reply)$ || -z "$target_id" || ! -f "$adf_file" ]]; then
-        echo "❌ Uso: confluence_add_footer_comment_adf <page|reply> '<page_id|comment_id>' '<archivo_adf.json>'" >&2
+        echo "❌ Usage: confluence_add_footer_comment_adf <page|reply> '<page_id|comment_id>' '<adf_file.json>'" >&2
         return 1
     fi
 
     local payload_file
-    payload_file=$(mktemp "${TMPDIR:-/tmp}/confluence-comment-payload.XXXXXX.json")
+    payload_file=$(_confluence_mktemp comment-payload) || return 1
 
-    python3 - "$mode" "$target_id" "$adf_file" "$payload_file" << 'PYEOF'
+    if ! python3 - "$mode" "$target_id" "$adf_file" "$payload_file" << 'PYEOF'
 import json, sys
 mode, target_id, adf_file, out_path = sys.argv[1:5]
 with open(adf_file) as f:
@@ -259,68 +337,68 @@ payload["pageId" if mode == "page" else "parentCommentId"] = str(target_id)
 with open(out_path, "w") as f:
     json.dump(payload, f, ensure_ascii=False)
 PYEOF
-
-    local result
-    result=$(curl -s -u "$CONFLUENCE_USER_EMAIL:$CONFLUENCE_USER_TOKEN" \
-        -X POST -H "Content-Type: application/json" \
-        --data @"$payload_file" \
-        "$CONFLUENCE_BASE/api/v2/footer-comments")
-    rm -f "$payload_file"
-    echo "$result"
-}
-
-# Ubica el hilo de comentarios al pie cuyo texto plano contiene una marca (por defecto, el pie de /sdd-readiness)
-# Uso: confluence_find_marked_comment '<page_id>' ['<marca>']
-# Imprime JSON: {"thread_id", "last_id", "last_created", "count"}
-confluence_find_marked_comment() {
-    local page_id="$1" marker="${2:-Automated review with /sdd-readiness}"
-    confluence_check_credentials || return 1
-    if [[ -z "$page_id" ]]; then
-        echo "❌ Uso: confluence_find_marked_comment '<page_id>' ['<marca>']" >&2
+    then
+        rm -f "$payload_file"
         return 1
     fi
-    CONFLUENCE_BASE="$CONFLUENCE_BASE" CONFLUENCE_USER_EMAIL="$CONFLUENCE_USER_EMAIL" \
-        CONFLUENCE_USER_TOKEN="$CONFLUENCE_USER_TOKEN" \
-        python3 "$CONFLUENCE_LIB_SCRIPT_DIR/find_marked_comment.py" "$page_id" "$marker"
+
+    _confluence_send_json POST "$CONFLUENCE_BASE/api/v2/footer-comments" "$payload_file" "post $mode comment on $target_id"
 }
 
-# ==================== ADJUNTOS (IMÁGENES) ====================
+# Find the footer-comment thread whose plain text contains a marker (by
+# default, the /sdd-readiness footer).
+# Usage: confluence_find_marked_comment '<page_id>' ['<marker>']
+# Prints JSON: {"thread_id", "last_id", "last_created", "count"}
+# The credential is passed to Python on stdin, not through its environment.
+confluence_find_marked_comment() {
+    local page_id="${1:-}" marker="${2:-Automated review with /sdd-readiness}"
+    confluence_check_credentials || return 1
+    if [[ -z "$page_id" ]]; then
+        echo "❌ Usage: confluence_find_marked_comment '<page_id>' ['<marker>']" >&2
+        return 1
+    fi
+    printf '%s\n%s\n' "$CONFLUENCE_USER_EMAIL" "$CONFLUENCE_USER_TOKEN" |
+        CONFLUENCE_BASE="$CONFLUENCE_BASE" \
+        python3 "$CONFLUENCE_LIB_SCRIPT_DIR/find_marked_comment.py" --credentials-stdin "$page_id" "$marker"
+}
 
-# Sube un archivo como adjunto de una página (o reemplaza uno existente del mismo nombre)
-# Uso: confluence_upload_attachment '<page_id>' '<file_path>' ['<comment>']
+# ==================== ATTACHMENTS (IMAGES) ====================
+
+# Upload a file as a page attachment, or add a new version of an existing
+# attachment with the same file name. Uses PUT on child/attachment, which the
+# v1 API documents as create-or-update (POST returns 400 when the name exists).
+# Usage: confluence_upload_attachment '<page_id>' '<file_path>' ['<comment>']
 confluence_upload_attachment() {
-    local page_id="$1" file_path="$2" comment="${3:-}"
+    local page_id="${1:-}" file_path="${2:-}" comment="${3:-}"
     confluence_check_credentials || return 1
 
     if [[ -z "$page_id" || ! -f "$file_path" ]]; then
-        echo "❌ Uso: confluence_upload_attachment '<page_id>' '<file_path>' ['<comment>']" >&2
+        echo "❌ Usage: confluence_upload_attachment '<page_id>' '<file_path>' ['<comment>']" >&2
         return 1
     fi
 
-    curl -s -u "$CONFLUENCE_USER_EMAIL:$CONFLUENCE_USER_TOKEN" \
-        -X POST -H "X-Atlassian-Token: no-check" \
+    # --form-string keeps a comment starting with @ or < from being read as a file.
+    _confluence_curl -X PUT -H "X-Atlassian-Token: no-check" \
         -F "file=@${file_path}" \
-        -F "comment=${comment}" \
+        --form-string "comment=${comment}" \
         "$CONFLUENCE_BASE/rest/api/content/$page_id/child/attachment"
+    _confluence_report $? "upload attachment $(basename "$file_path") to page $page_id"
 }
 
-# ==================== PANELES (INFO/NOTE/WARNING/ERROR/SUCCESS) ====================
+# ==================== PANELS (INFO/NOTE/WARNING/ERROR/SUCCESS) ====================
 
-# Genera el macro nativo de Confluence "Panel" en formato storage (XHTML).
-# NUNCA usar <div style="background-color:...">...</div> a mano — Confluence
-# lo guarda tal cual (normaliza el CSS) pero NO lo renderiza con el look real
-# de un panel (sin ícono, sin las esquinas/friso del macro nativo).
-# El macro YA trae su propio ícono según el tipo (ⓧ error, ⚠ warning, etc.)
-# — NUNCA anteponer un emoji a mano, queda duplicado/redundante (confirmado
-# con captura de pantalla el 2026-09-19).
-# Uso: confluence_panel '<tipo>' '<archivo_html_interno>'
-#   tipo: info | note | warning | error | success | tip
-#   archivo_html_interno: HTML ya envuelto en <p>...</p> (puede tener <strong>, <code>, <a>, etc.)
-# Ejemplo: confluence_panel error /tmp/snippet.html >> body.html
+# Generate the native Confluence "Panel" macro in storage format (XHTML).
+# NEVER hand-write <div style="background-color:...">: Confluence stores it
+# but does not render it as a real panel. The macro already carries its own
+# icon for each type, so never prepend an emoji.
+# Usage: confluence_panel '<type>' '<inner_html_file>'
+#   type: info | note | warning | error | success | tip
+#   inner_html_file: HTML already wrapped in <p>...</p>
+# Example: confluence_panel error snippet.html >> body.html
 confluence_panel() {
-    local panel_type="$1" inner_file="$2"
-    if [[ -z "$panel_type" || -z "$inner_file" || ! -f "$inner_file" ]]; then
-        echo "❌ Uso: confluence_panel '<tipo>' '<archivo_html_interno>'" >&2
+    local panel_type="${1:-}" inner_file="${2:-}"
+    if [[ ! "$panel_type" =~ ^(info|note|warning|error|success|tip)$ || -z "$inner_file" || ! -f "$inner_file" ]]; then
+        echo "❌ Usage: confluence_panel '<info|note|warning|error|success|tip>' '<inner_html_file>'" >&2
         return 1
     fi
 
@@ -337,18 +415,21 @@ print(
 PYEOF
 }
 
-# ==================== BLOQUES DE CÓDIGO ====================
+# ==================== CODE BLOCKS ====================
 
-# Genera el macro nativo de Confluence "Code Block" en formato storage (XHTML),
-# a partir de un archivo de texto plano. NUNCA usar <pre><code>...</code></pre>
-# a mano — Confluence NO lo convierte al macro real, lo renderiza como texto
-# preformateado con word-wrap feo en vez de scroll horizontal/resaltado.
-# Uso: confluence_code_block '<archivo_texto>' ['<lenguaje>']
-# Ejemplo: confluence_code_block /tmp/snippet.yaml yaml >> body.html
+# Generate the native Confluence "Code Block" macro in storage format (XHTML)
+# from a plain-text file. NEVER hand-write <pre><code>: Confluence does not
+# convert it to the real macro.
+# Usage: confluence_code_block '<text_file>' ['<language>']
+# Example: confluence_code_block snippet.yaml yaml >> body.html
 confluence_code_block() {
-    local text_file="$1" language="${2:-}"
+    local text_file="${1:-}" language="${2:-}"
     if [[ -z "$text_file" || ! -f "$text_file" ]]; then
-        echo "❌ Uso: confluence_code_block '<archivo_texto>' ['<lenguaje>']" >&2
+        echo "❌ Usage: confluence_code_block '<text_file>' ['<language>']" >&2
+        return 1
+    fi
+    if [[ ! "$language" =~ ^[A-Za-z0-9+#-]*$ ]]; then
+        echo "❌ Invalid language '$language' (letters, digits, +, # and - only)" >&2
         return 1
     fi
 
@@ -370,39 +451,54 @@ PYEOF
 
 # ==================== MERMAID → PNG ====================
 
-# Renderiza un archivo .mmd a .png usando mermaid-cli (vía npx, sin instalación global)
-# Uso: confluence_render_mermaid '<archivo.mmd>' '<archivo.png>'
-CONFLUENCE_DIAGRAM_WIDTH="${CONFLUENCE_DIAGRAM_WIDTH:-760}"  # ancho máximo de columna en este espacio (AC1)
+# Render a .mmd file to .png with mermaid-cli (through npx, no global install)
+# Usage: confluence_render_mermaid '<file.mmd>' '<file.png>' ['<width_px>']
+CONFLUENCE_DIAGRAM_WIDTH="${CONFLUENCE_DIAGRAM_WIDTH:-760}"  # maximum column width in this space
 
 confluence_render_mermaid() {
-    local mmd_file="$1" png_file="$2" width="${3:-$CONFLUENCE_DIAGRAM_WIDTH}"
-    if [[ -z "$mmd_file" || -z "$png_file" || ! -f "$mmd_file" ]]; then
-        echo "❌ Uso: confluence_render_mermaid '<archivo.mmd>' '<archivo.png>' ['<ancho_px>']" >&2
+    local mmd_file="${1:-}" png_file="${2:-}" width="${3:-$CONFLUENCE_DIAGRAM_WIDTH}"
+    if [[ -z "$mmd_file" || -z "$png_file" || ! -f "$mmd_file" || ! "$width" =~ ^[0-9]+$ ]]; then
+        echo "❌ Usage: confluence_render_mermaid '<file.mmd>' '<file.png>' ['<width_px>']" >&2
         return 1
     fi
     npx --yes @mermaid-js/mermaid-cli -i "$mmd_file" -o "$png_file" -b white -w "$width"
 }
 
-# Helper de alto nivel: renderiza un .mmd, lo sube como adjunto a una página,
-# e imprime el snippet <ac:image> listo para pegar en el body (storage format)
-# Uso: confluence_mermaid_to_page '<page_id>' '<archivo.mmd>' '<nombre_png>' ['<comment>']
+# High-level helper: render a .mmd, upload it as a page attachment and print
+# the <ac:image> snippet ready to paste into the body (storage format).
+# Usage: confluence_mermaid_to_page '<page_id>' '<file.mmd>' '<png_name>' ['<comment>']
+#   png_name: a bare file name (letters, digits, dot, underscore, hyphen).
 confluence_mermaid_to_page() {
-    local page_id="$1" mmd_file="$2" png_name="$3" comment="${4:-Diagram rendered from Mermaid source}"
-    local png_path="/tmp/${png_name}"
-
-    confluence_render_mermaid "$mmd_file" "$png_path" || return 1
-    echo "📤 Subiendo $png_name a la página $page_id..." >&2
-    local result
-    result=$(confluence_upload_attachment "$page_id" "$png_path" "$comment")
-    echo "$result" | jq -e '.results[0].id' > /dev/null 2>&1
-    if [[ $? -ne 0 ]]; then
-        echo "❌ Error al subir el adjunto:" >&2
-        echo "$result" >&2
+    local page_id="${1:-}" mmd_file="${2:-}" png_name="${3:-}" comment="${4:-Diagram rendered from Mermaid source}"
+    if [[ -z "$page_id" || -z "$mmd_file" || ! "$png_name" =~ ^[A-Za-z0-9_][A-Za-z0-9._-]*$ ]]; then
+        echo "❌ Usage: confluence_mermaid_to_page '<page_id>' '<file.mmd>' '<png_name>' ['<comment>']" >&2
+        echo "   png_name must be a bare file name without slashes or special characters." >&2
         return 1
     fi
-    echo "✅ Adjunto subido. Referencia para insertar en el body (storage format):" >&2
+
+    local tmp_dir png_path result
+    tmp_dir=$(mktemp -d "$(_confluence_tmp_base)/confluence-mermaid.XXXXXX") || return 1
+    png_path="$tmp_dir/$png_name"
+
+    if ! confluence_render_mermaid "$mmd_file" "$png_path"; then
+        rm -rf "$tmp_dir"
+        return 1
+    fi
+    echo "📤 Uploading $png_name to page $page_id..." >&2
+    if ! result=$(confluence_upload_attachment "$page_id" "$png_path" "$comment") ||
+        ! jq -e '.results[0].id' <<< "$result" > /dev/null 2>&1; then
+        echo "❌ Attachment upload failed:" >&2
+        printf '%s\n' "$result" >&2
+        rm -rf "$tmp_dir"
+        return 1
+    fi
+    rm -rf "$tmp_dir"
+    echo "✅ Attachment uploaded. Reference to insert in the body (storage format):" >&2
     echo "<ac:image ac:width=\"${CONFLUENCE_DIAGRAM_WIDTH}\"><ri:attachment ri:filename=\"${png_name}\" /></ac:image>"
 }
 
-echo "📚 Confluence Library cargada exitosamente" >&2
-echo "💡 Funciones: confluence_get_page_body, confluence_update_page_body, confluence_update_page_adf, confluence_create_page_adf, confluence_get_footer_comments, confluence_get_comment_children, confluence_add_footer_comment_adf, confluence_find_marked_comment, confluence_upload_attachment, confluence_panel, confluence_code_block, confluence_render_mermaid, confluence_mermaid_to_page" >&2
+# Show the banner only in interactive shells, not on every CLI invocation.
+if [[ $- == *i* ]]; then
+    echo "📚 Confluence library loaded" >&2
+    echo "💡 Functions: confluence_get_page_body, confluence_update_page_body, confluence_update_page_adf, confluence_create_page_adf, confluence_get_footer_comments, confluence_get_comment_children, confluence_add_footer_comment_adf, confluence_find_marked_comment, confluence_upload_attachment, confluence_panel, confluence_code_block, confluence_render_mermaid, confluence_mermaid_to_page" >&2
+fi

@@ -1,87 +1,71 @@
 #!/bin/bash
 
 # =============================================================================
-# CONFLUENCE MANAGEMENT - Script principal usando confluence-lib.sh
+# CONFLUENCE MANAGEMENT - Command-line entry point for confluence-lib.sh
 # =============================================================================
-# Autor: Rodrigo Álvarez
-# Propósito: CLI para publicar/actualizar páginas y adjuntar imágenes
-#            (diagramas Mermaid) en Confluence, y comentar en ADF. Mismo patrón que
-#            jira-management.sh — siempre invocar este archivo con `bash`/`./`,
-#            nunca hacer `source` directo desde un shell interactivo (zsh no
-#            resuelve BASH_SOURCE igual y las credenciales no cargan).
+# Author: Rodrigo Álvarez
+# Purpose: CLI to publish and update pages, attach images (Mermaid diagrams)
+#          and post ADF comments in Confluence. Always run this file with
+#          `bash` or `./`; never `source` it from an interactive zsh, which
+#          does not resolve BASH_SOURCE the same way (credentials do not load).
+# Exit status: the status of the library function (non-zero on HTTP errors).
 # =============================================================================
+
+set -uo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if [[ -f "$SCRIPT_DIR/confluence-lib.sh" ]]; then
+    # shellcheck source=confluence-lib.sh
     source "$SCRIPT_DIR/confluence-lib.sh"
 else
-    echo "❌ Error: No se encuentra confluence-lib.sh en $SCRIPT_DIR" >&2
+    echo "❌ Error: confluence-lib.sh not found in $SCRIPT_DIR" >&2
     exit 1
 fi
 
-case "$1" in
-    upload-attachment)
-        confluence_upload_attachment "$2" "$3" "$4"
-        ;;
-    update-page)
-        confluence_update_page_body "$2" "$3" "$4"
-        ;;
-    update-page-adf)
-        confluence_update_page_adf "$2" "$3" "$4"
-        ;;
-    create-page-adf)
-        confluence_create_page_adf "$2" "$3" "$4" "$5"
-        ;;
-    render-mermaid)
-        confluence_render_mermaid "$2" "$3"
-        ;;
-    code-block)
-        confluence_code_block "$2" "$3"
-        ;;
-    panel)
-        confluence_panel "$2" "$3"
-        ;;
-    mermaid-to-page)
-        confluence_mermaid_to_page "$2" "$3" "$4" "$5"
-        ;;
-    get-page)
-        confluence_get_page_body "$2"
-        ;;
-    get-comments)
-        confluence_get_footer_comments "$2"
-        ;;
-    get-replies)
-        confluence_get_comment_children "$2"
-        ;;
-    comment-adf)
-        confluence_add_footer_comment_adf page "$2" "$3"
-        ;;
-    reply-adf)
-        confluence_add_footer_comment_adf reply "$2" "$3"
-        ;;
+cmd="${1:-}"
+a2="${2:-}" a3="${3:-}" a4="${4:-}" a5="${5:-}"
+
+case "$cmd" in
+    upload-attachment) confluence_upload_attachment "$a2" "$a3" "$a4" ;;
+    update-page)       confluence_update_page_body "$a2" "$a3" "$a4" ;;
+    update-page-adf)   confluence_update_page_adf "$a2" "$a3" "$a4" ;;
+    create-page-adf)   confluence_create_page_adf "$a2" "$a3" "$a4" "$a5" ;;
+    render-mermaid)    confluence_render_mermaid "$a2" "$a3" "$a4" ;;
+    code-block)        confluence_code_block "$a2" "$a3" ;;
+    panel)             confluence_panel "$a2" "$a3" ;;
+    mermaid-to-page)   confluence_mermaid_to_page "$a2" "$a3" "$a4" "$a5" ;;
+    get-page)          confluence_get_page_body "$a2" ;;
+    get-comments)      confluence_get_footer_comments "$a2" ;;
+    get-replies)       confluence_get_comment_children "$a2" ;;
+    comment-adf)       confluence_add_footer_comment_adf page "$a2" "$a3" ;;
+    reply-adf)         confluence_add_footer_comment_adf reply "$a2" "$a3" ;;
     find-marked)
-        confluence_find_marked_comment "$2" "$3"
+        if [[ -n "$a3" ]]; then
+            confluence_find_marked_comment "$a2" "$a3"
+        else
+            confluence_find_marked_comment "$a2"
+        fi
         ;;
     *)
         cat << 'EOF'
-Uso: confluence-management.sh <comando> [args]
+Usage: confluence-management.sh <command> [args]
 
-Comandos:
-  upload-attachment '<page_id>' '<file_path>' ['<comment>']
-  update-page       '<page_id>' '<title>' '<body_html_file>'   # storage/XHTML — solo para páginas aún no migradas a ADF, o diagnóstico
-  update-page-adf   '<page_id>' '<title>' '<archivo_adf.json>' # ADF nativo (default) — archivo generado con scripts/adf_lib.py
-  create-page-adf   '<space_key>' '<parent_id>' '<title>' '<archivo_adf.json>' # crea página nueva — fallback cuando el MCP da 403
-  render-mermaid    '<archivo.mmd>' '<archivo.png>'
-  code-block        '<archivo_texto>' ['<lenguaje>']   # genera el macro nativo, nunca usar <pre><code>
-  panel             '<tipo>' '<archivo_html>'   # tipo: info|note|warning|error|success|tip; nunca usar <div style=...>; el macro ya trae su propio ícono, no anteponer emoji
-  mermaid-to-page   '<page_id>' '<archivo.mmd>' '<nombre_png>' ['<comment>']
+Commands:
+  upload-attachment '<page_id>' '<file_path>' ['<comment>']        # creates, or adds a new version if the name exists
+  update-page       '<page_id>' '<title>' '<body_html_file>'       # storage/XHTML: only for pages not yet migrated to ADF, or diagnosis
+  update-page-adf   '<page_id>' '<title>' '<adf_file.json>'        # native ADF (default); file built with scripts/atlassian/adf_lib.py
+  create-page-adf   '<space_key>' '<parent_id>' '<title>' '<adf_file.json>' # new page; fallback when the MCP returns 403
+  render-mermaid    '<file.mmd>' '<file.png>' ['<width_px>']
+  code-block        '<text_file>' ['<language>']                   # native macro; never use <pre><code>
+  panel             '<type>' '<html_file>'                         # type: info|note|warning|error|success|tip; never <div style=...>; no emoji
+  mermaid-to-page   '<page_id>' '<file.mmd>' '<png_name>' ['<comment>']
   get-page          '<page_id>'
-  get-comments      '<page_id>'                         # comentarios al pie (API v2, body en ADF)
-  get-replies       '<comment_id>'                      # respuestas de un comentario al pie
-  comment-adf       '<page_id>' '<archivo_adf.json>'    # comentario al pie nuevo en ADF
-  reply-adf         '<comment_id>' '<archivo_adf.json>' # respuesta en el hilo de un comentario, en ADF
-  find-marked       '<page_id>' ['<marca>']             # hilo y último comentario cuyo texto plano contiene la marca (default: pie de /sdd-readiness)
+  get-comments      '<page_id>'                                    # all footer comments (API v2, ADF bodies), paginated
+  get-replies       '<comment_id>'                                 # all replies of a footer comment, paginated
+  comment-adf       '<page_id>' '<adf_file.json>'                  # new ADF footer comment
+  reply-adf         '<comment_id>' '<adf_file.json>'               # ADF reply in a comment thread
+  find-marked       '<page_id>' ['<marker>']                       # thread and latest comment whose plain text holds the marker (default: /sdd-readiness footer)
 EOF
         exit 1
         ;;

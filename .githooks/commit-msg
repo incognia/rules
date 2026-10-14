@@ -1,0 +1,33 @@
+#!/bin/sh
+# commit-msg: validate the Conventional Commits subject and check for a
+# Co-Authored-By trailer (warning only).
+# Enable with: npm run hooks:install  (git config core.hooksPath .githooks)
+
+set -eu
+
+msg_file=$1
+
+# First line that is neither a comment nor empty.
+subject=$(grep -v '^#' "$msg_file" | sed -n '/[^[:space:]]/{p;q;}')
+
+case $subject in
+  "Merge "* | "Revert "* | "fixup! "* | "squash! "* | "amend! "*)
+    exit 0
+    ;;
+esac
+
+pattern='^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([a-z0-9._/-]+\))?!?: .+'
+
+if ! printf '%s\n' "$subject" | grep -Eq "$pattern"; then
+  echo "commit-msg: subject does not follow Conventional Commits:" >&2
+  echo "  $subject" >&2
+  echo "  Expected: type(scope)!: description" >&2
+  echo "  Types: feat fix docs style refactor perf test build ci chore revert" >&2
+  exit 1
+fi
+
+if ! grep -v '^#' "$msg_file" | grep -qi '^Co-Authored-By:'; then
+  echo "commit-msg: warning: no Co-Authored-By trailer found." >&2
+fi
+
+exit 0

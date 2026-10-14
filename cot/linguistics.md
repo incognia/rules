@@ -18,18 +18,18 @@ Pasos:
 1) Acción: verificar dialecto y regionalismos.
    Resultado: marcar peninsularismos («ordenador», «fichero», «vale»), argentinismos («piola»), colombianismos («bacano»), otros («chévere») y reemplazar por es_MX («computadora», «archivo», «está bien», «excelente»...).
 2) Acción: evitar calcos del inglés frecuentes.
-   Resultado: «hacer/ejecutar» (no «realizar» cuando sea calcado), «aplicar/poner en práctica» (no «implementar»), «admitir/permitir» (no «soportar»), «cambios incompatibles» (no «cambios rompedores»), «ahora» (no «actualmente»), etc.
+   Resultado: «hacer/ejecutar» (no «realizar» cuando sea calcado), «aplicar/poner en práctica» (no «implementar»), «admitir/permitir» (no «soportar»), «cambios incompatibles» (no «cambios rompedores»), «ahora» (no «actualmente»), etcétera.
 3) Acción: normalizar terminología técnica prioritaria.
    Resultado: «IA», «TI», «computadora», «archivo», «carpeta», «aplicación», «almacenamiento», «predeterminado», «clúster», «métricas», «nodo».
 4) Acción: revisar verbos técnicos.
-   Resultado: «desplegar», «respaldar», «compilar», «depurar», «probar/poner a prueba», «confirmar cambios», «reflejar», «hacer clic», «descargar»; evitar -ear spanglish (commitear, deployear, buildear...).
+   Resultado: «desplegar», «respaldar», «compilar», «depurar», «probar/poner a prueba», «confirmar cambios», «reflejar», «hacer clic», «descargar»; evitar verbos en -ear del *spanglish* (commitear, deployear, buildear...).
 5) Acción: préstamos técnicos (cursiva).
    Resultado: cursiva en *commit*, *pull request*, *pipeline*, *container*, *render*, *stack*, *bare-metal*.
 6) Acción: tipografía de títulos y encabezados.
    COMANDO OBLIGATORIO: `grep -n "^#" archivo.md` para listar TODOS los títulos H1-H6
-   Validación: Revisar cada línea encontrada individualmente y corregir Title Case
+   Validación: revisar cada línea encontrada por separado y corregir el *Title Case*
    Resultado: estilo oración (primera palabra y nombres propios con mayúscula), sin punto final; después de dos puntos, minúscula salvo nombre propio.
-   CRÍTICO: No marcar este paso como completo sin documentar cada título encontrado y su corrección aplicada.
+   CRÍTICO: no marcar este paso como completo sin documentar cada título encontrado y su corrección aplicada.
 7) Acción: comillas (texto vs código).
    Resultado: «» en texto; "" solo en comentarios de scripts/código. Verificar que ejemplos de código mantengan comillas dobles.
 8) Acción: sutilezas de redacción.
@@ -50,12 +50,12 @@ Pasos:
 VERIFICACIÓN OBLIGATORIA (antes de completar):
 
 - Ejecutar: `grep -n "^#" archivo.md` y documentar cada título encontrado
-- Confirmar: ninguno usa "Título Con Cada Palabra En Mayúscula"
+- Confirmar: ninguno usa «Título Con Cada Palabra En Mayúscula»
 - Listar: todos los cambios de capitalización aplicados
-- Validar: uso correcto de cursivas en préstamos técnicos (*stack*, *commit*, etc.)
+- Validar: uso correcto de cursivas en préstamos técnicos (*stack*, *commit*, etcétera)
 - Verificar: corrección de todos los calcos del inglés identificados
 
 Conclusión:
 
-- Entregar: (a) lista de hallazgos y reemplazos propuestos; (b) fragmentos corregidos con comillas y mayúsculas adecuadas; (c) si hay timestamps, ejemplo correcto con TZ; (d) nota si se usaron o moderaron expresiones idiomáticas.
+- Entregar: (a) lista de hallazgos y reemplazos propuestos; (b) fragmentos corregidos con comillas y mayúsculas adecuadas; (c) si hay marcas de tiempo, ejemplo correcto con `TZ`; (d) nota si se usaron o moderaron expresiones idiomáticas.
 - Referencias: «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)) y «~/rules/README.md» ([../README.md](../README.md)).

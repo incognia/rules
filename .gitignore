@@ -5,7 +5,6 @@ backups/
 node_modules/
 .npm/
 npm-debug.log*
-package-lock.json
 
 # Editors / OS
 .DS_Store
@@ -34,3 +33,6 @@ __pycache__/
 .env
 .env.*
 !.env.example
+
+# Configuración local de Claude Code
+.claude/

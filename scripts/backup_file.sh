@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 # Backups
-# Genera nombre por convención y resguarda archivo o directorio con log en CST.
-# Genera checksum solo si el tamaño es >= 100MB (configurable via BACKUP_SHA_THRESHOLD_BYTES)
-# Uso: backup_file.sh <ruta_origen> [directorio_respaldo]
+# Builds the backup name by convention and stores a file or directory, logging in CST.
+# A SHA-256 checksum is written only when the backup is >= 100 MB
+# (configurable via BACKUP_SHA_THRESHOLD_BYTES).
+# Usage: backup_file.sh <source_path> [backup_dir]
+# Portable: macOS (BSD) and Linux (GNU).
 
 set -euo pipefail
 
-SRC=${1:?"Falta ruta de origen"}
+SRC=${1:?"Missing source path. Usage: backup_file.sh <source_path> [backup_dir]"}
 DEST=${2:-backups}
 TS=$(TZ=America/Mexico_City date +"%Y-%m-%dT%H-%M-%S")
 LOGFILE=${BACKUP_LOG_FILE:-$DEST/backup.log}
@@ -17,12 +19,25 @@ log() {
   printf "%s | %s\n" "$(TZ=America/Mexico_City date '+%Y-%m-%d %H:%M:%S')" "$*" | tee -a "$LOGFILE"
 }
 
+# sha256sum on GNU, shasum -a 256 on macOS; both write and check the same format.
+sha256() {
+  if command -v sha256sum >/dev/null 2>&1; then
+    sha256sum "$@"
+  else
+    shasum -a 256 "$@"
+  fi
+}
+
+# File size in bytes without GNU-only stat -c.
+file_size() {
+  wc -c < "$1" | tr -d '[:space:]'
+}
+
 make_checksum_if_big() {
-  local filepath="$1"
-  local size
-  size=$(stat -c%s "$filepath")
+  local filepath="$1" size
+  size=$(file_size "$filepath")
   if [ "$size" -ge "$THRESH" ]; then
-    (cd "$(dirname "$filepath")" && sha256sum "$(basename "$filepath")" > "$(basename "$filepath").sha256")
+    (cd "$(dirname "$filepath")" && sha256 "$(basename "$filepath")" > "$(basename "$filepath").sha256")
     awk '{print $1}' "${filepath}.sha256"
   else
     echo "SMALL"
@@ -30,33 +45,26 @@ make_checksum_if_big() {
 }
 
 if [ -d "$SRC" ]; then
-  base=$(basename "$SRC")
+  base=$(basename "$(cd "$SRC" && pwd)")
   out="$DEST/${base}_${TS}.tar.zst"
-  tar -cf - -C "$(dirname "$SRC")" "$base" | zstd -T0 -19 -o "$out"
-  sum=$(make_checksum_if_big "$out")
-  if [ "$sum" = "SMALL" ]; then
-    log "backup | $out | ok | small (no checksum)"
-  else
-    log "backup | $out | ok | $sum"
-  fi
+  tar -cf - -C "$(dirname "$(cd "$SRC" && pwd)")" "$base" | zstd -q -T0 -19 -o "$out"
 elif [ -f "$SRC" ]; then
   file=$(basename "$SRC")
-  name_without_ext="${file%.*}"
-  ext="${file##*.}"
-  if [ "$file" = "$ext" ]; then
+  # A leading dot is part of the name (.bashrc has no extension; .config.yaml does).
+  if [[ "${file#.}" == *.* ]]; then
+    out="$DEST/${file%.*}_${TS}.${file##*.}.bkp"
+  else
     out="$DEST/${file}_${TS}.bkp"
-  else
-    out="$DEST/${name_without_ext}_${TS}.${ext}.bkp"
   fi
-  cp -a "$SRC" "$out"
-  sum=$(make_checksum_if_big "$out")
-  if [ "$sum" = "SMALL" ]; then
-    log "backup | $out | ok | small (no checksum)"
-  else
-    log "backup | $out | ok | $sum"
-  fi
+  cp -a -- "$SRC" "$out"
 else
-  echo "Origen no encontrado: $SRC" >&2
+  echo "Source not found: $SRC" >&2
   exit 1
 fi
 
+sum=$(make_checksum_if_big "$out")
+if [ "$sum" = "SMALL" ]; then
+  log "backup | $out | ok | small (no checksum)"
+else
+  log "backup | $out | ok | $sum"
+fi

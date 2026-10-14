@@ -9,8 +9,8 @@ validacion: HTML generado con placeholders completos, tono profesional y acción
 
 Razonamiento:
 
-- El objetivo de `bmail` es acelerar redacción de correos profesionales en inglés.
-- Se usarán plantillas temáticas y bancos de frases derivados de `docs/business_email.pdf`.
+- El objetivo de `bmail` es acelerar la redacción de correos profesionales en inglés.
+- Se usarán plantillas temáticas y bancos de frases de `~/rules/templates/bmail/`, derivados del libro *Business Email* (material externo, no versionado en el repositorio).
 - La salida debe ser reutilizable como borrador editable, con estructura consistente:
   asunto claro, apertura contextual, cuerpo accionable y cierre cortés.
 
@@ -21,22 +21,22 @@ Pasos:
    Resultado: plantilla objetivo seleccionada.
 
 2) Acción: recopilar datos mínimos.
-   - Subject, destinatario, contexto, detalle del pedido/información, fecha límite o siguiente paso.
+   - Asunto (*subject*), destinatario, contexto, detalle del pedido o la información, fecha límite o siguiente paso.
    Resultado: campos necesarios completos.
 
 3) Acción: seleccionar frases modelo del banco.
-   - Priorizar frases funcionales (referencing, requesting, apologising, informing).
+   - Priorizar frases funcionales (*referencing*, *requesting*, *apologising*, *informing*).
    - Evitar copia mecánica extensa; adaptar al contexto concreto.
    Resultado: frases candidatas integradas al borrador.
 
-4) Acción: sustituir placeholders en la plantilla HTML.
+4) Acción: sustituir los *placeholders* en la plantilla HTML.
    Resultado: correo completo con estructura consistente.
 
 5) Acción: revisar claridad y tono.
    - Una sola petición principal por correo.
    - Tono profesional, directo y cortés.
    - Cierre con acción o confirmación esperada.
-   Resultado: borrador listo para revisión/envío.
+   Resultado: borrador listo para revisión o envío.
 
 6) Acción: guardar archivo con convención de nombre.
    - `YYYY-MM-DD-bmail-{template-key}-{subject-slug}.html`
@@ -45,4 +45,4 @@ Pasos:
 Conclusión:
 
 - `bmail` transforma ejemplos del libro en plantillas operables.
-- El enfoque es rapidez + consistencia + personalización contextual.
+- El enfoque combina rapidez, consistencia y personalización contextual.

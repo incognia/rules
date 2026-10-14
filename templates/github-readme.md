@@ -33,8 +33,12 @@ proyecto/
 └── README.md
 ```
 
+<!-- licence:start -->
+
 ---
 
-*Este proyecto fue elaborado por Rodrigo Álvarez para [Nombre del cliente] y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
+*Este proyecto fue elaborado por Rodrigo Álvarez para Kabat One y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
 
 *Copyright © AAAA, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
+
+<!-- licence:end -->

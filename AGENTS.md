@@ -14,7 +14,7 @@ The repository combats three endemic problems in Latin American technology:
 - **Technical selfishness**: hoarding knowledge to create artificial dependencies
 - **Cultural identity loss**: abandoning Spanish cultural identity for perceived professional advancement
 
-All work prioritises **Spanish Mexican** as the cultural reference while using **international English (UK)** for technical code, commit messages and everything published to Confluence.
+All work prioritises **Spanish Mexican** as the cultural reference while using **international English (UK)** for code and code comments, commit messages and everything published to Confluence.
 
 ## Common development tasks
 
@@ -52,7 +52,7 @@ All documentation follows strict linguistic rules from `rulesets/LINGUISTICS.md`
 **MANDATORY PROCESS - Always follow this exact order:**
 
 1. **FIRST**: Update `CHANGELOG.md` with `/changelogger`, in the repository's primary language (Spanish Mexican here)
-2. **SECOND**: Run `/commit`, which checks the CHANGELOG gate, stages with `git add .` and builds `/tmp/commit-msg.txt`
+2. **SECOND**: Run `/commit`, which validates the git identity (once per session, full step 0 of `cot/committing.md`), checks the CHANGELOG gate, stages everything with `git add -A` and builds `/tmp/commit-msg.txt`
 3. **THIRD**: Commit from that file: `git commit -F /tmp/commit-msg.txt`
 4. **FOURTH**: Push: `git push`
 
@@ -68,11 +68,12 @@ DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")
 - Always use **international English (UK)** for commit messages
 - Follow [Conventional Commits](https://www.conventionalcommits.org/) specification
 - Resolve the `Co-Authored-By` trailer at commit time from the attribution the tool supplies for the session; never copy a name or model from an example or an earlier commit
+- One `/commit` produces one commit, because the CHANGELOG gate applies per commit; split into atomic commits only when the user asks
 - Use non-interactive commands: `git --no-pager log --oneline -5`
 
 ## Architecture and structure
 
-### Directory organization
+### Directory organisation
 
 ```text
 ├── rulesets/           # Core rules and documentation
@@ -101,14 +102,14 @@ The repository supports dual contexts with different rules:
 
 **Personal Projects (`@incognia`)**:
 
-- License: GPLv3 (copyleft)
+- Licence: GPLv3 (copyleft)
 - Email: <incognia@gmail.com>
 - SSH key: ~/.ssh/incognia
 - Documentation: Spanish Mexican
 
 **Corporate Projects (`@incogniadev` for Kabat One)**:
 
-- License: MIT (permissive)
+- Licence: MIT (permissive)
 - Email: <ralvarez@kabatone.com>
 - SSH key: ~/.ssh/kone
 - Documentation: Spanish Mexican with STYLING.md rules
@@ -183,7 +184,7 @@ Parameterised commands in `.warp/workflows/` for frequent operations:
 
 - **backup_file** — Backup a file or directory with checksums
 - **lint_markdown** — Run markdownlint on all files
-- **commit_flow** — Complete commit flow with type and description
+- **commit_flow** — Manual fallback for `/changelogger` + `/commit`: commit and push with a Conventional Commits type, optional scope and description; aborts when `CHANGELOG.md` has no changes
 - **cst_date** — Get current date/time in CST (Ciudad de México)
 
 ## Confluence and Jira (Atlassian)
@@ -217,23 +218,17 @@ TZ=America/Mexico_City date +"%Y-%m-%d"
 echo "UTC: $(date -u '+%H:%M')" && echo "CST: $(TZ=America/Mexico_City date '+%H:%M')"
 ```
 
-## Technical specialization context
+## Technical specialisation context
 
-Primary focus areas reflected in the documentation:
-
-- **Kubernetes on bare-metal Proxmox**: kubeadm, containerd, cloud-init
-- **GitOps automation**: Argo CD, Helm charts, versioned manifests
-- **Service mesh networking**: Istio, Envoy, Cilium, MetalLB
-- **Observability**: Prometheus, Grafana, OpenTelemetry, distributed tracing
-- **Enterprise CI/CD**: Jenkins, GitLab CI with GitOps integration
+The canonical technical profile lives in `PHILOSOPHY.md` (section 1.1, «Especialización técnica»); `rulesets/CORPORATE.md` extends it with the detailed corporate stack. In short: Kubernetes on bare-metal Proxmox, GitOps with Argo CD and Helm, service mesh (Istio, Cilium), observability and enterprise CI/CD. Read the canonical section instead of copying the list elsewhere.
 
 ## Key rules to follow
 
 1. **CRITICAL**: Always read complete CoT files from line 1 to end when referenced - never assume based on partial reading
 2. **CRITICAL**: Update CHANGELOG.md BEFORE every commit - this is mandatory workflow
 3. **CRITICAL**: Convert UTC to CST by subtracting 6 hours - never just append "CST" suffix
-4. **Language**: Spanish Mexican for documentation, international English (UK) for code, commits and Confluence; CHANGELOG and releases in the repository's primary language
-5. **Markdown**: Use .yaml extension (never .yml), always use Mermaid for diagrams (never ASCII)
+4. **Language**: Spanish Mexican for documentation, international English (UK) for code and code comments, commits and Confluence; CHANGELOG and releases in the repository's primary language
+5. **Markdown**: Use .yaml extension (never .yml), always use Mermaid for diagrams (never ASCII flow diagrams; plain directory trees in `text` blocks are fine)
 6. **Commits**: Non-interactive only, use conventional commits format
 7. **Files**: Markdown files use UPPERCASE.md format (README.md, PHILOSOPHY.md, etc.)
 8. **Secrets and sensitive data**: credentials, internal IPs and hosts, client names and personal contact details live only in the untracked `.env`; tracked files use placeholders such as `<client_ip>` or `{GATEWAY_IP}`, since the repository is public. Git history is never rewritten to remove past occurrences (decided 2026-10-12): protection applies from now on, so do not propose `git filter-repo` or force pushes for it

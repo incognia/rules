@@ -1,167 +1,137 @@
-# CoT: Aplicación automática de licenciamiento
-
-## Contexto
-
-Este Chain of Thought aplica automáticamente el licenciamiento apropiado a un proyecto basándose en las reglas definidas en `../rulesets/LICENSING.md`. Determina si el proyecto es personal (GPL) o laboral (MIT) analizando el contenido del README.md.
-
-## Razonamiento
-
-### 1. Análisis del README.md
-
-- **Objetivo:** Determinar la naturaleza del proyecto (personal vs laboral)
-- **Indicadores laborales:** Menciones de "Kabat One", "empresa", "trabajo", correo corporativo (@kabatone.com) o, en repositorios antiguos, "Promad" (@promad.com.mx)
-- **Indicadores personales:** Menciones de usuario personal (@incognia), correo personal (@gmail.com), proyectos de aprendizaje o experimentación
-
-### 2. Selección de licencia
-
-- **Proyectos laborales:** MIT License (permisiva, facilita adopción comercial)
-- **Proyectos personales:** GNU GPLv3 (copyleft, mantiene el código libre)
-
-### 3. Aplicación de licenciamiento
-
-- Crear archivo LICENSE con texto completo
-- Agregar footer apropiado al README.md
-- Validar consistencia con el contexto del proyecto
-
-## Pasos
-
-### Paso 1: Validar existencia del README.md
-
-```bash
-if [[ -f "README.md" ]]; then
-    echo "✓ README.md encontrado, analizando contenido..."
-else
-    echo "✗ README.md no encontrado. Creando README básico..."
-    # Solicitar información del proyecto para crear README
-fi
-```
-
-### Paso 2: Analizar naturaleza del proyecto
-
-```bash
-# Buscar indicadores laborales
-LABORAL_INDICATORS=$(grep -i "kabat\|@kabatone\.com\|promad\|@promad\.com\.mx\|empresa\|corporat\|business" README.md | wc -l)
-
-# Buscar indicadores personales  
-PERSONAL_INDICATORS=$(grep -i "@incognia\|@gmail\.com\|personal\|experimento\|aprendizaje\|github\.com/incognia" README.md | wc -l)
-
-if [[ $LABORAL_INDICATORS -gt 0 ]]; then
-    PROJECT_TYPE="laboral"
-    LICENSE_TYPE="MIT"
-    echo "🏢 Proyecto laboral detectado - Aplicando MIT License"
-elif [[ $PERSONAL_INDICATORS -gt 0 ]]; then
-    PROJECT_TYPE="personal" 
-    LICENSE_TYPE="GPLv3"
-    echo "👤 Proyecto personal detectado - Aplicando GPL v3"
-else
-    # Solicitar confirmación manual
-    echo "❓ Tipo de proyecto ambiguo. ¿Es personal (p) o laboral (l)?"
-fi
-```
-
-### Paso 3: Generar archivo LICENSE
-
-```bash
-CURRENT_YEAR=$(date +%Y)
-
-if [[ "$LICENSE_TYPE" == "MIT" ]]; then
-    # Crear MIT License
-    cat > LICENSE << 'EOF'
-MIT License
-
-Copyright (c) 2026 Kabat One
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-EOF
-    
-elif [[ "$LICENSE_TYPE" == "GPLv3" ]]; then
-    # Descargar GPL v3 completa
-    curl -s https://www.gnu.org/licenses/gpl-3.0.txt > LICENSE
-fi
-```
-
-### Paso 4: Agregar footer al README.md
-
-```bash
-# Remover footer existente si existe
-sed -i '/^---$/,$d' README.md
-
-# Agregar nuevo footer según tipo de proyecto
-if [[ "$PROJECT_TYPE" == "laboral" ]]; then
-    cat >> README.md << 'EOF'
-
 ---
-
-*Este proyecto fue elaborado por Rodrigo Álvarez para Kabat One y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
-
-*Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
-EOF
-
-elif [[ "$PROJECT_TYPE" == "personal" ]]; then
-    cat >> README.md << 'EOF'
-
+domain: workflow
+task: aplicar el licenciamiento correcto (GPLv3 personal o MIT laboral) con archivo LICENSE y pie de README
+dificultad: baja
+longitud_objetivo: media
+validacion: LICENSE creado con el texto completo y el año en curso; pie del README presente una sola vez, sin borrar contenido ajeno
 ---
+<!-- markdownlint-disable MD041 -->
 
-*Este proyecto fue elaborado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.*
+Razonamiento:
 
-*Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*
-EOF
-fi
-```
+- Aplicar las reglas de «~/rules/rulesets/LICENSING.md» ([../rulesets/LICENSING.md](../rulesets/LICENSING.md)): proyectos personales (`@incognia`) con GNU GPLv3 y proyectos laborales (`@incogniadev`, Kabat One) con MIT.
+- Detectar el contexto con indicadores del README y, si es ambiguo, preguntar al usuario en vez de adivinar.
+- Indicadores laborales: «Kabat One», `@kabatone.com`, `@incogniadev` o, en repositorios antiguos, «Promad» (`@promad.com.mx`). Indicadores personales: `@incognia`, `incognia@gmail.com`, `github.com/incognia`, proyectos de aprendizaje o experimentación.
+- El año del *copyright* siempre se calcula con `date +%Y`; nunca se escribe fijo.
+- El pie del README se delimita con marcadores HTML (`<!-- licence:start -->` y `<!-- licence:end -->`) para poder reemplazarlo sin tocar el resto del archivo. Nunca borrar rangos que empiecen en el primer `---`, porque ese separador también abre el *frontmatter* YAML y aparece en el cuerpo.
+- Los comandos deben funcionar con BSD (macOS) y GNU: nada de `sed -i` sin sufijo; editar con `awk` a un archivo temporal y `mv`.
 
-### Paso 5: Validar aplicación
+Pasos:
 
-```bash
-echo "📋 Validando aplicación de licenciamiento..."
+1) Acción: validar que existe `README.md` en la raíz del proyecto.
+   Resultado: `test -f README.md`. Si no existe, pedir al usuario los datos del proyecto y crear un README básico antes de continuar.
 
-# Verificar archivo LICENSE creado
-if [[ -f "LICENSE" ]]; then
-    echo "✓ Archivo LICENSE creado correctamente"
-    head -3 LICENSE
-else
-    echo "✗ Error: Archivo LICENSE no fue creado"
-fi
+2) Acción: detectar el contexto del proyecto.
+   Resultado:
 
-# Verificar footer en README.md
-if grep -q "Copyright.*2026.*Rodrigo" README.md; then
-    echo "✓ Footer de licenciamiento agregado al README.md"
-else
-    echo "✗ Error: Footer no fue agregado correctamente"
-fi
+   ```bash
+   LABORAL=$(grep -ciE 'kabat|@kabatone\.com|@incogniadev|promad|@promad\.com\.mx' README.md || true)
+   PERSONAL=$(grep -ciE '@incognia([^d]|$)|incognia@gmail\.com|github\.com/incognia([^d]|$)' README.md || true)
+   if [ "$LABORAL" -gt 0 ] && [ "$PERSONAL" -eq 0 ]; then
+       PROJECT_TYPE=laboral; LICENSE_TYPE=MIT
+   elif [ "$PERSONAL" -gt 0 ] && [ "$LABORAL" -eq 0 ]; then
+       PROJECT_TYPE=personal; LICENSE_TYPE=GPLv3
+   else
+       echo "Contexto ambiguo: pregunta al usuario si es personal o laboral." >&2
+   fi
+   ```
 
-# Mostrar resumen
-echo ""
-echo "📄 Resumen de licenciamiento aplicado:"
-echo "Tipo de proyecto: $PROJECT_TYPE"
-echo "Licencia aplicada: $LICENSE_TYPE"
-echo "Año de copyright: $CURRENT_YEAR"
-```
+   Si hay indicadores de ambos tipos o de ninguno, detenerse y preguntar.
 
-## Conclusión
+3) Acción: crear el archivo `LICENSE` con el año en curso.
+   Resultado:
 
-Este CoT automatiza la aplicación de licenciamiento siguiendo las reglas establecidas:
+   ```bash
+   CURRENT_YEAR=$(date +%Y)
+   if [ "$LICENSE_TYPE" = "MIT" ]; then
+       cat > LICENSE <<EOF
+   MIT License
 
-1. **Detección automática:** Analiza el README.md para determinar la naturaleza del proyecto
-2. **Aplicación consistente:** Usa las plantillas predefinidas según el tipo de proyecto
-3. **Validación:** Verifica que los archivos se hayan creado correctamente
-4. **Flexibilidad:** Permite intervención manual cuando la detección es ambigua
+   Copyright (c) ${CURRENT_YEAR}, Kabat One
 
-**Uso:** Ejecutar desde la raíz de cualquier proyecto que tenga README.md para aplicar automáticamente el licenciamiento apropiado.
+   Permission is hereby granted, free of charge, to any person obtaining a copy
+   of this software and associated documentation files (the "Software"), to deal
+   in the Software without restriction, including without limitation the rights
+   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+   copies of the Software, and to permit persons to whom the Software is
+   furnished to do so, subject to the following conditions:
 
-**Requisitos:** README.md existente en el directorio actual, acceso a internet para descargar GPL v3.
+   The above copyright notice and this permission notice shall be included in all
+   copies or substantial portions of the Software.
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+   SOFTWARE.
+   EOF
+   else
+       curl -fsSL https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE
+   fi
+   ```
+
+   El *heredoc* va sin comillas (`<<EOF`) para que `${CURRENT_YEAR}` se expanda; el texto de la licencia no contiene otras variables. Si `LICENSE` ya existe, mostrar la diferencia y pedir confirmación antes de reemplazarlo.
+
+4) Acción: escribir el pie del README entre marcadores, sin borrar nada más.
+   Resultado: generar el pie en un archivo temporal y reemplazar solo el bloque marcado, o agregarlo al final si no existe:
+
+   ```bash
+   FOOTER=$(mktemp)
+   if [ "$PROJECT_TYPE" = "laboral" ]; then
+       cat > "$FOOTER" <<EOF
+   <!-- licence:start -->
+
+   ---
+
+   *Este proyecto fue elaborado por Rodrigo Álvarez para Kabat One y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
+
+   *Copyright © ${CURRENT_YEAR}, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
+
+   <!-- licence:end -->
+   EOF
+   else
+       cat > "$FOOTER" <<EOF
+   <!-- licence:start -->
+
+   ---
+
+   *Este proyecto fue elaborado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.*
+
+   *Copyright © ${CURRENT_YEAR}, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*
+
+   <!-- licence:end -->
+   EOF
+   fi
+
+   if grep -q '^<!-- licence:start -->$' README.md; then
+       TMP=$(mktemp)
+       awk -v footer="$FOOTER" '
+           /^<!-- licence:start -->$/ { while ((getline line < footer) > 0) print line; close(footer); skip = 1; next }
+           /^<!-- licence:end -->$/   { skip = 0; next }
+           !skip { print }
+       ' README.md > "$TMP" && mv "$TMP" README.md
+   elif grep -q '^\*Este proyecto fue elaborado por' README.md; then
+       echo "README.md ya tiene un pie de licencia sin marcadores: muéstralo al usuario y pide confirmación antes de cambiarlo." >&2
+   else
+       { echo; cat "$FOOTER"; } >> README.md
+   fi
+   rm -f "$FOOTER"
+   ```
+
+   Si el README ya tiene un pie sin marcadores (proyectos anteriores a esta regla), no borrarlo de forma automática: mostrar las líneas al usuario, y con su confirmación sustituir solo esas líneas por el bloque marcado.
+
+5) Acción: validar el resultado.
+   Resultado:
+   - `head -3 LICENSE` muestra la licencia correcta y, en MIT, `Copyright (c) <año en curso>, Kabat One`.
+   - `grep -c '^<!-- licence:start -->$' README.md` devuelve `1` (un solo pie).
+   - `grep -q "Copyright.*${CURRENT_YEAR}.*Rodrigo" README.md` encuentra el *copyright* del año en curso.
+   - `git --no-pager diff --stat README.md` confirma que solo cambió el pie.
+
+Conclusión:
+
+- El proyecto queda con `LICENSE` completo (GPLv3 personal o MIT laboral) y un único pie de licencia en el README, con el año calculado por `date +%Y`.
+- Ningún paso borra contenido del README fuera del bloque marcado; ante un pie sin marcadores o un contexto ambiguo, se pregunta al usuario.
+- Requisitos: `README.md` en el directorio actual y acceso a internet para descargar la GPLv3.
+- Referencias: «~/rules/rulesets/LICENSING.md» ([../rulesets/LICENSING.md](../rulesets/LICENSING.md)) y «~/rules/rulesets/ATTRIBUTION.md» ([../rulesets/ATTRIBUTION.md](../rulesets/ATTRIBUTION.md)).

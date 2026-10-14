@@ -2,7 +2,7 @@
 
 ## 1. Propósito
 
-Este documento establece cómo darme crédito y atribución en documentos individuales, scripts o archivos que no requieren un archivo LICENSE completo. Para proyectos con múltiples archivos que requieren licenciamiento formal, consulta **[LICENSING.md](./LICENSING.md)**.
+Este documento establece cómo darme crédito y atribución en documentos individuales, *scripts* o archivos que no requieren un archivo LICENSE completo. Para proyectos con múltiples archivos que requieren licenciamiento formal, consulta **[LICENSING.md](./LICENSING.md)**.
 
 ## 2. Identidad del autor
 
@@ -19,20 +19,13 @@ Este documento establece cómo darme crédito y atribución en documentos indivi
 
 - **Contexto hispanohablante:** se utilizan dos apellidos, siendo el paterno «Álvarez» y el materno «Aguilera».
 - **Contexto técnico e internacional:** para garantizar una correcta atribución en sistemas que no manejan nombres compuestos, usar como apellido principal «Álvarez».
-- **Alternativa sin caracteres especiales:** en sistemas que no soporten la `á`, utilizar la versión «Alvarez».
+- **Alternativa sin caracteres especiales:** en sistemas que no admitan la `á`, usar la versión «Alvarez».
 
 ## 3. Especialización profesional
 
-Rodrigo es **Ingeniero DevOps** especializado en plataformas Kubernetes nativas, GitOps y observabilidad avanzada. Con experiencia en la construcción y operación de *stacks* completos sobre infraestructura *bare-metal*, enfocado en automatización, confiabilidad y mallas de servicios.
+Rodrigo es **Líder DevOps** en Kabat One, especializado en plataformas Kubernetes nativas, GitOps y observabilidad avanzada sobre infraestructura *bare-metal*.
 
-Sus competencias técnicas principales incluyen:
-
-- **Plataformas Kubernetes bare-metal:** construcción y operación de clústeres sobre Proxmox VE, aprovisionamiento con kubeadm y cloud-init
-- **GitOps y automatización declarativa:** implementación de flujos con Argo CD, gestión de Helm charts y manifiestos versionados
-- **Service mesh y networking avanzado:** configuración de Istio, Envoy, Cilium, MetalLB, bridges y VLANs
-- **Observabilidad y trazabilidad distribuida:** instrumentación con OpenTelemetry, Prometheus, Grafana, Fluentd y Elasticsearch
-- **CI/CD empresarial:** diseño de *pipelines* con Jenkins y GitLab CI integrados a flujos GitOps
-- **Seguridad en mallas de servicios:** implementación de mTLS, RBAC y políticas de red en entornos productivos
+Sus competencias técnicas se mantienen en un solo lugar para que no diverjan: consulta la especialización técnica en [PHILOSOPHY.md](../PHILOSOPHY.md#11-especialización-técnica) y el *stack* corporativo detallado en [CORPORATE.md](./CORPORATE.md).
 
 ## 4. Identificadores digitales
 
@@ -54,7 +47,7 @@ Sus competencias técnicas principales incluyen:
 
 - **Contribución personal:** «elaborado por Rodrigo Álvarez (@incognia)»
 - **Documentación técnica:** «documentado por Rodrigo Ernesto Álvarez Aguilera (GitHub: @incognia)»
-- **Contribución laboral:** «este trabajo fue realizado por Rodrigo Álvarez en su calidad de Ingeniero DevOps para Kabat One (@incogniadev)»
+- **Contribución laboral:** «este trabajo fue realizado por Rodrigo Álvarez en su calidad de Líder DevOps para Kabat One (@incogniadev)»
 
 ### 5.2. Firma en commits de Git
 
@@ -77,7 +70,7 @@ Sus competencias técnicas principales incluyen:
 ### 6.1. Filosofía de licenciamiento
 
 - **Proyectos profesionales/laborales:** la licencia a utilizar es **MIT**, por su permisividad y compatibilidad.
-- **Proyectos personales:** el licenciamiento puede variar, pero la preferencia es por licencias de código abierto como MIT o Apache 2.0.
+- **Proyectos personales:** la licencia a usar es **GNU GPLv3**, para preservar la libertad del software (ver [LICENSING.md](./LICENSING.md)).
 
 ### 6.2. Firma de contribuciones (alias)
 
@@ -89,15 +82,16 @@ Sus competencias técnicas principales incluyen:
 
 ### 7.1. Idioma
 
-- **Mensajes de *commit* y código:** los mensajes de *commit* y los comentarios dentro del código deben estar en **inglés internacional**.
-- **Documentación (README, CHANGELOG, etc.):** el idioma será **español mexicano**, a menos que el contexto del proyecto exija explícitamente el inglés. Los títulos y encabezados en español seguirán la capitalización de frase (solo la primera palabra en mayúscula).
-- **Nombres de archivos y directorios:** siempre en **inglés internacional** para mantener la consistencia técnica.
+- **Mensajes de *commit* y código:** los mensajes de *commit*, el código y los comentarios dentro del código van en **inglés internacional (UK)**.
+- **Documentación (README, guías, etcétera):** **español mexicano**, a menos que el contexto del proyecto exija explícitamente el inglés. Los títulos y encabezados en español siguen la capitalización de frase (solo la primera palabra en mayúscula).
+- **CHANGELOG y *releases*:** el idioma principal del repositorio (español mexicano, o inglés internacional (UK) si el repositorio es mixto o en inglés); ver [COMMITTING.md](./COMMITTING.md#26-idioma-por-contexto).
+- **Nombres de archivos y carpetas:** siempre en **inglés internacional** para mantener la consistencia técnica.
 
 ### 7.2. Mensajes de *commit*
 
 - **Convención:** seguir la convención de *Conventional Commits*.
-- **Idioma:** redactar los mensajes en inglés.
-- **Formato:** estructurarlos con un prefijo (`feat`, `fix`, `docs`, `refactor`, etc.).
+- **Idioma:** redactar los mensajes en inglés internacional (UK).
+- **Formato:** estructurarlos con un prefijo (`feat`, `fix`, `docs`, `refactor`, etcétera); el flujo completo está en [COMMITTING.md](./COMMITTING.md).
 - **Emojis:** no usar emojis.
 
 ### 7.3. Diagramas
@@ -106,7 +100,7 @@ Para la creación de diagramas en archivos Markdown, usar exclusivamente **Merma
 
 ---
 
-*Este documento está diseñado para su uso en proyectos personales, detallando cómo dar atribución adecuada sin requerir un archivo de licencia completo. Para proyectos laborales o con múltiples scripts/documentos, consulta **[LICENSING.md](./LICENSING.md)**.*
+*Este documento está diseñado para su uso en proyectos personales, detallando cómo dar atribución adecuada sin requerir un archivo de licencia completo. Para proyectos laborales o con múltiples *scripts* o documentos, consulta **[LICENSING.md](./LICENSING.md)**.*
 
 ---
 

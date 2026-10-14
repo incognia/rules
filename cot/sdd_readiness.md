@@ -40,7 +40,7 @@ Pasos:
    Resultado: título, versión o fecha de última edición, cuerpo de la especificación y páginas hijas relevantes.
 
 3) Acción: recolectar preguntas abiertas y la evaluación anterior.
-   Herramientas: `getConfluencePageInlineComments` (MCP) y `bash ~/rules/scripts/atlassian/confluence-management.sh get-comments <PAGE_ID>` (comentarios al pie con body en ADF; respuestas con `get-replies <comment_id>`). Si falta `~/rules/.env`, usar `getConfluencePageFooterComments` del MCP.
+   Herramientas: `getConfluencePageInlineComments` (MCP) y `bash ~/rules/scripts/atlassian/confluence-management.sh get-comments <PAGE_ID>` (comentarios al pie con cuerpo en ADF; respuestas con `get-replies <comment_id>`). Si falta `~/rules/.env`, usar `getConfluencePageFooterComments` del MCP.
    - Clasificar los comentarios sin resolver: los que cambian alcance o comportamiento cuentan para H3 y BL3; los de forma (redacción, ortografía) no.
    - Ubicar la evaluación anterior con `bash ~/rules/scripts/atlassian/confluence-management.sh find-marked <PAGE_ID>`: busca el pie `Automated review with /sdd-readiness` en el texto plano de cada comentario y de sus respuestas (nunca con `grep` sobre el JSON, porque el pie mezcla texto y `code`). `thread_id` es el comentario raíz al que se responde; `last_id` es la evaluación más reciente contra la que se compara (leer su puntaje, veredicto y bloqueadores).
    - Excluir de la clasificación de preguntas abiertas los comentarios de `/sdd-readiness`.
@@ -48,7 +48,7 @@ Pasos:
 
 4) Acción: clasificar el cambio.
    Determinar:
-   - tipo: funcionalidad nueva, modificación, retiro, infraestructura, refactor o documentación;
+   - tipo: funcionalidad nueva, modificación, retiro, infraestructura, *refactor* o documentación;
    - impacto en tiempo de ejecución o infraestructura (sí/no) → decide si aplica la dimensión P;
    - impacto en producción y en datos → decide si aplican BL5-BL7.
    Resultado: clasificación con justificación de una línea.

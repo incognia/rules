@@ -1,9 +1,12 @@
 name: Backup file or directory
-command: ./scripts/backup_file.sh {{source_path}}
-description: Backup a file or directory with standard naming (CST timestamp) and optional checksum
+command: "\"$HOME/rules/scripts/backup_file.sh\" \"{{source_path}}\" \"{{backup_dir}}\""
+description: Backup a file or directory with standard naming (CST timestamp) and a checksum for large backups
 tags:
   - backup
   - files
 arguments:
   - name: source_path
     description: Path to the file or directory to backup
+  - name: backup_dir
+    description: Directory where the backup is written (relative to the current directory)
+    default_value: backups

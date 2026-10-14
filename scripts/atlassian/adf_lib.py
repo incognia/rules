@@ -6,7 +6,7 @@ Import it, don't re-derive these builders in a throwaway script:
     from adf_lib import parse_inline, pp, lip, tc, md_table  # bulk markdown-inline -> ADF helpers, see their docstrings
     from adf_lib import status, decision_list, decision_item, expand, rule, date_node, heading  # used by /sdd-readiness comments
 
-Origin: ops/jira/scripts (promad-cad-all). Gotchas already paid for once:
+Gotchas already paid for once:
 - `taskItem.content` must be INLINE nodes (text/mention), never a `paragraph` wrapper — unlike `listItem`,
   which DOES need a `paragraph`/block wrapper. `task_item()` below already gets this right.
 - Confluence panel `attrs.panelType` accepts info/note/warning/error/success — this is the ADF-native way;
@@ -197,8 +197,8 @@ def write_doc(adf_doc, path):
 
 
 def write_wrapped(adf_doc, field_name, path):
-    """{field_name: doc} wrapper for jira_process_adf_content. field_name is "body" for comment/edit-comment,
-    "description" for update-description — NOT a free-form label; jira-lib.sh looks up this exact key."""
+    """{field_name: doc} wrapper for Jira REST payloads. field_name is "body" for comment/edit-comment,
+    "description" for update-description — NOT a free-form label; the Jira API expects this exact key."""
     with open(path, "w") as f:
         json.dump({field_name: adf_doc}, f, ensure_ascii=False, separators=(",", ":"))
 

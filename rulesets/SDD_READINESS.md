@@ -15,7 +15,7 @@ La evaluación mide qué tan directo es convertir la especificación en estos ar
 | `proposal.md` | intención, alcance (dentro y fuera) y enfoque | contexto, objetivos, alcance |
 | `specs/<capacidad>/spec.md` | *delta* con `## ADDED Requirements`, `## MODIFIED Requirements` o `## REMOVED Requirements`; cada `### Requirement:` con MUST/SHALL y uno o más `#### Scenario:` con GIVEN/WHEN/THEN | requisitos funcionales y criterios de aceptación |
 | `design.md` | enfoque técnico, decisiones de arquitectura, flujo de datos, archivos afectados | diseño técnico, arquitectura |
-| `tasks.md` | grupos numerados con *checkboxes* `- [ ] 1.1 …`, tareas de una sesión y verificables | plan de implementación |
+| `tasks.md` | grupos numerados con *checkboxes* `- [ ] 1.1 …`, tareas de una sesión y verificables | plan de trabajo |
 
 Reglas de OpenSpec que la especificación debe permitir cumplir:
 
@@ -101,11 +101,11 @@ Si el cambio es trivial y no amerita `design.md`, E2-E4 pueden ser N/A con justi
 
 ### P. Platform Readiness (peso 20)
 
-Aplica cuando el cambio tiene impacto en tiempo de ejecución o infraestructura. Si no lo tiene (documentación, refactor sin cambio desplegable), toda la dimensión es N/A con justificación.
+Aplica cuando el cambio tiene impacto en tiempo de ejecución o infraestructura. Si no lo tiene (documentación, *refactor* sin cambio desplegable), toda la dimensión es N/A con justificación.
 
 Criterios base:
 
-| Clave | Criterio | Evidencia esperada (stack de referencia) |
+| Clave | Criterio | Evidencia esperada (*stack* de referencia) |
 |-------|----------|-------------------------------------------|
 | `deployment_strategy` | cómo se despliega y se promueve entre ambientes | *rolling*, *canary* o *blue-green* (Argo Rollouts, división de tráfico en Istio), sincronización con Argo CD, orden de despliegue entre servicios |
 | `rollback_strategy` | cómo se revierte y en cuánto tiempo | *revert* en Git/Argo CD, reversibilidad de migraciones de datos, *feature flags*, criterio que dispara el *rollback* |
@@ -191,7 +191,7 @@ Si falta `~/rules/.env`, la publicación cae al MCP (`createConfluenceFooterComm
 | Orden | Bloque | Nodo ADF |
 |-------|--------|----------|
 | 1 | Veredicto: título, insignias de veredicto, puntaje, bloqueadores y Platform Readiness, y una frase de lectura | `panel` (`error` si «No lista», `warning` si «Lista con observaciones», `success` si «Lista») con `heading` y `status` |
-| 2 | Menciones por defecto: `cc` a cada persona de `SDD_READINESS_MENTIONS` | `paragraph` con nodos `mention` |
+| 2 | Menciones predeterminadas: `cc` a cada persona de `SDD_READINESS_MENTIONS` | `paragraph` con nodos `mention` |
 | 2b | Cambios contra la evaluación anterior (solo en reevaluaciones) | `paragraph` con `status` |
 | 3 | Bloqueadores | `decisionList` con `decisionItem` en `UNDECIDED` |
 | 4 | Puntaje por dimensión: dimensión, peso, puntaje y brecha principal | `table`; puntaje como `status` verde (≥ 80), amarillo (≥ 50) o rojo (< 50) |
@@ -205,7 +205,7 @@ Reglas del contenido:
 
 - Cada brecha y cada inconsistencia cita la sección de la página (`§ 4.2`).
 - Los `localId` de decisiones y tareas son cadenas nuevas y únicas por comentario (`sdd-d1`, `sdd-q1`); nunca se copian de otro contenido.
-- Las menciones por defecto salen de `SDD_READINESS_MENTIONS` en `~/rules/.env` (`accountId|Nombre`, separados por coma). Los `accountId` nunca se escriben en el repositorio, que es público. Si la variable no existe, el comentario va sin menciones y se avisa al usuario. El borrador siempre muestra a quién se va a notificar.
+- Las menciones predeterminadas salen de `SDD_READINESS_MENTIONS` en `~/rules/.env` (`accountId|Nombre`, separados por coma). Los `accountId` nunca se escriben en el repositorio, que es público. Si la variable no existe, el comentario va sin menciones y se avisa al usuario. El borrador siempre muestra a quién se va a notificar.
 - Si Confluence rechaza un nodo dentro del comentario (`expand`, `decisionList`), se reemplaza por un `heading` de nivel 4 seguido de lista o tabla y se reintenta una vez.
 
 ## Reglas operativas

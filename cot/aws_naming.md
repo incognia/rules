@@ -1,7 +1,7 @@
 ---
 domain: aws
-task: normalización de nombres de assets para S3 y CloudFront
-dificultad: intermedia
+task: normalización de nombres de recursos (assets) para S3 y CloudFront
+dificultad: media
 longitud_objetivo: media
 validacion: nombres resultantes contienen solo caracteres seguros, extensiones normalizadas y registro .tsv generado
 ---
@@ -24,7 +24,7 @@ Pasos:
    Resultado: se evitan problemas con codificación URL (`%20`) y secuencias de espacios múltiples que AWS advierte pueden perderse [3, 4, 5].
 
 3) Acción: eliminar acentos (ñ → n) y conservar únicamente caracteres seguros: `a-z`, `0-9`, `-`, `_` y `.` (solo para extensión).
-   Resultado: se eliminan caracteres No-ASCII y símbolos que requieren manejo especial (`&`, `$`, `@`, `~`, etc.) [6, 7, 8, 9, 10].
+   Resultado: se eliminan caracteres no ASCII y símbolos que requieren manejo especial (`&`, `$`, `@`, `~`, etcétera) [6, 7, 8, 9, 10].
 
 4) Acción: normalizar extensiones de archivo según la siguiente tabla.
    - `.jpeg` → `.jpg`
@@ -35,7 +35,7 @@ Pasos:
    Resultado: extensiones consistentes y predecibles para políticas de caché en CloudFront y reglas de *Content-Type* en S3.
 
 5) Acción: verificar que el nombre no contenga puntos consecutivos ni secuencias de ruta relativa (`../`, `./`).
-   Resultado: se evitan comportamientos inesperados por interpretación de directorios [7, 12]. El punto solo aparece antes de la extensión final.
+   Resultado: se evitan comportamientos inesperados por interpretación de carpetas [7, 12]. El punto solo aparece antes de la extensión final.
 
 6) Acción: validar que la ruta resultante no exceda 255 caracteres (límite de CloudFront [2]; el límite de S3 es 1,024 bytes [13]).
    Resultado: si excede, truncar el nombre conservando la extensión e indicar advertencia.

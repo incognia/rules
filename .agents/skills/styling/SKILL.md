@@ -53,19 +53,20 @@ Use as starting point:
      ---
      ```
 
-     > ⚠️ Always quote values with double quotes — values containing `:` cause YAML parse errors if unquoted.
+     > Always quote values with double quotes — values containing `:` cause YAML parse errors if unquoted.
    - **GitLab/GitHub other docs**: no frontmatter
    - H1 title
    - **Single-date cleanup (MANDATORY)**: before inserting/updating the timestamp, detect and remove any existing reported date field (for example `Última modificación:`, `Fecha:`, `Fecha de reporte:`, `[time=...]`) so only one date remains.
-   - Timestamp: `LC_TIME=es_MX.UTF-8 TZ=America/Mexico_City date '+%d de %B de %Y, %H:%M (%Z)'`
-   - **HedgeDoc**: `<div style="text-align: right;"><em>Última modificación: [timestamp] (CST)</em></div><br>`
-   - **GitLab/GitHub**: `*Última modificación: [timestamp] (CST)*` — plain Markdown italic, no HTML (GL/GH strip inline styles)
+   - Timestamp: `LC_TIME=es_MX.UTF-8 TZ=America/Mexico_City date '+%-d de %B de %Y, %H:%M (%Z)'` → e.g. `5 de enero de 2026, 09:07 (CST)`. `LC_TIME=es_MX.UTF-8` keeps the month in Spanish; if `locale -a` does not list it, fall back to `es_ES.UTF-8` or translate the month by hand (never leave it in English). The output already ends in `(CST)`.
+   - **HedgeDoc**: `<div style="text-align: right;"><em>Última modificación: [timestamp]</em></div><br>`
+   - **GitLab/GitHub**: `*Última modificación: [timestamp]*` — plain Markdown italic, no HTML (GL/GH strip inline styles)
+   - Never append another `(CST)` after `[timestamp]`: the result must not read `(CST) (CST)`.
 4. **Apply content rules**: hierarchy H1→H2→H3→H4, no skipped levels, sentence case titles
    - **GitLab/GitHub only**: strip or adapt HedgeDoc-exclusive syntax:
      - Remove `[TOC]`, `[name=...]`, `[time=...]`, `[color=...]`
      - Convert `:::info`/`:::warning` admonition blocks to plain blockquotes (`> **Nota:**`)
-     - Remove frontmatter YAML block (GitLab/GitHub ignore it)
-     - Remove `<style>` blocks (ignored by both platforms)
+     - Remove a HedgeDoc frontmatter (`tags:`) if present; keep the `title`/`description` frontmatter inserted in step 3 for README.md, and use no frontmatter in other documents
+     - Remove `<style>` blocks, HedgeDoc logos and the signature image (HedgeDoc only)
 5. **Remove ALL stray `---` separators** (CRITICAL — AI-generated documents tend to abuse these):
    - Run: `grep -n "^---$" <last_argument>` to locate every occurrence
    - The YAML frontmatter `---` (lines 1 and 3) are allowed
@@ -161,7 +162,7 @@ No footer. Do not add anything.
 - **GitLab/GitHub README.md** (with `mit`/`gpl`): copyright text only. No signature. No CSS.
 - **GitLab/GitHub other docs**: no footer at all.
 - Single-date policy: final document must keep exactly one visible reported date field (`Última modificación`), with all previous/duplicate date fields removed.
-- **`edit_files` anchors**: When using `search_start_line_number`, the `search` string MUST start at the very first character of that line. A mid-line anchor fails unconditionally, regardless of encoding or line number. Always include content from the start of the target line outward until the fragment is uniquely identified.
+- **Edit anchors**: when the agent's search-and-replace tool also takes a starting line number, the search text MUST start at the very first character of that line. A mid-line anchor fails unconditionally, regardless of encoding or line number. Always include content from the start of the target line outward until the fragment is uniquely identified.
 
 ## References
 

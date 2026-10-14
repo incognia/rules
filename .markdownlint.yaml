@@ -35,8 +35,5 @@ MD041: false
 MD046:
   style: fenced
 MD048: true
-
-ignores:
-  - node_modules/
-  - .git/
-
+# MD060 (markdownlint 0.38+) choca con el separador compacto |---| que usa el repositorio
+MD060: false

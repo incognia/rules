@@ -9,7 +9,7 @@ Este documento define las convenciones para analizar el estado de clústeres Kub
 ### Conexión SSH
 
 - **Usuario**: generalmente `ubuntu` (puede variar)
-- **Llaves SSH**: `kone` (infra propia) o `cad` (servidores de clientes)
+- **Llaves SSH**: `kone` (infraestructura propia) o `cad` (servidores de clientes)
 - **Comando**: `ssh -i ~/.ssh/<llave> <usuario>@<ip>`
 
 ### Estructura de manifiestos en el servidor
@@ -33,10 +33,10 @@ Los manifiestos se organizan por *namespace*/proyecto en el `$HOME` del usuario:
 ### Herramientas del *stack*
 
 - **Kubernetes**: kubeadm, containerd
-- **Service mesh**: Istio (VirtualServices, Gateway, mTLS)
-- **Observabilidad**: Kiali (malla), Prometheus (métricas), Grafana (dashboards)
-- **GitOps**: ArgoCD (sincronización automática)
-- **CI/CD**: Jenkins (pipelines de *build*)
+- ***Service mesh***: Istio (VirtualServices, Gateway, mTLS)
+- **Observabilidad**: Kiali (malla), Prometheus (métricas), Grafana (*dashboards*)
+- **GitOps**: Argo CD (sincronización automática)
+- **CI/CD**: Jenkins (*pipelines* de *build*)
 - **Registro**: AWS ECR (imágenes Docker)
 
 ## Comandos de diagnóstico esenciales
@@ -92,9 +92,9 @@ kubectl top pods -n <namespace>
 - **Prometheus**: puerto 9090 (NodePort 31570)
 - **Grafana**: puerto 3000 (LoadBalancer o NodePort 32716)
 - **Jenkins**: `http://<ip>:8080/jenkins`
-- **ArgoCD**: `https://<ip>:30443` o `http://<ip>:30080`
+- **Argo CD**: `https://<ip>:30443` o `http://<ip>:30080`
 
-### Cómo obtener las IPs y puertos reales
+### Cómo obtener las IP y los puertos reales
 
 ```bash
 kubectl get svc -n istio-system | grep -iE 'kiali|prometheus|grafana'
@@ -102,10 +102,10 @@ kubectl get svc -n istio-system | grep -iE 'kiali|prometheus|grafana'
 
 ## Convenciones de nombres
 
-- *Namespace*: nombre del proyecto o ambiente (ej. `stab`, `produccion`, `qa`)
-- Servicios: `<nombre-servicio>` (ej. `kabat-authorization-service`)
-- Prefijos Istio: `/<prefijo>` sin slash final (ej. `/kabat-auth`)
-- Manifiestos: directorio `kubernetes-<namespace>/`
+- *Namespace*: nombre del proyecto o ambiente (por ejemplo, `stab`, `produccion`, `qa`)
+- Servicios: `<nombre-servicio>` (por ejemplo, `kabat-authorization-service`)
+- Prefijos Istio: `/<prefijo>` sin diagonal final (por ejemplo, `/kabat-auth`)
+- Manifiestos: carpeta `kubernetes-<namespace>/`
 
 ---
 

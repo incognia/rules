@@ -1,6 +1,6 @@
 # Filosofía de un pinche prieto que a veces *codea* pero siempre se rifa
 
-*Última modificación: 27 de marzo de 2026, 23:21 (CST)*
+*Última modificación: 14 de octubre de 2026, 00:03 (CST)*
 
 > «El desarrollo tecnológico y los descubrimientos científicos no pueden considerarse progreso si no están al alcance de todos.»
 >
@@ -22,12 +22,12 @@ Esta dualidad entre ser «Agüelo» y «Hagrid» no es casualidad: refleja una i
 
 ### 1.1. Especialización técnica
 
-Mi trabajo se centra en **ingeniería DevOps**, con enfoque en plataformas Kubernetes nativas y observabilidad avanzada:
+Mi trabajo se centra en **ingeniería DevOps**, con enfoque en plataformas Kubernetes nativas y observabilidad avanzada. Esta lista es la fuente canónica del perfil técnico: README, AGENTS y ATTRIBUTION la enlazan, y [CORPORATE.md](./rulesets/CORPORATE.md) la amplía con el *stack* corporativo detallado.
 
 - **Kubernetes sobre Proxmox *bare-metal*:** aprovisionamiento con kubeadm, containerd y cloud-init
 - **GitOps y automatización:** flujos con Argo CD, Helm *charts* y manifiestos versionados
-- **Malla de servicios y networking:** Istio, Envoy, Cilium, MetalLB, configuración de bridges/VLAN
-- **Observabilidad y trazabilidad:** Prometheus, Grafana, OpenTelemetry, trazas distribuidas
+- **Malla de servicios y redes:** Istio, Envoy, Cilium, MetalLB, configuración de *bridges* y VLAN
+- **Observabilidad y trazabilidad:** Prometheus, Grafana, OpenTelemetry, Fluentd, Elasticsearch y trazas distribuidas
 - **CI/CD empresarial:** Jenkins, GitLab CI con integración GitOps
 - **Seguridad en mallas de servicios:** mTLS, RBAC, políticas de red
 
@@ -52,11 +52,9 @@ Toda la documentación se redacta en **español mexicano** como referente cultur
 
 ### 2.2. Bilingüismo técnico
 
-El enfoque teórico establece que el código y los mensajes de *commit* se redacten en **inglés internacional** para garantizar la interoperabilidad global, mientras que la documentación utiliza español mexicano para preservar la identidad cultural.
+El código, los comentarios en código y los mensajes de *commit* se redactan en **inglés internacional (UK)** para garantizar la interoperabilidad global, mientras que la documentación usa español mexicano para preservar la identidad cultural. La regla detallada vive en [LINGUISTICS.md](./rulesets/LINGUISTICS.md#aplicación).
 
-Sin embargo, la realidad del trabajo en equipos mexicanos requiere una adaptación pragmática:
-
-**Comentarios en código:** aunque tengo un nivel de inglés B2 próximo a C1, mis colegas manejan niveles A2 y B1. Para cumplir con los principios de **transparencia y accesibilidad**, los comentarios internos se redactan en español mexicano, garantizando que todo el equipo pueda entender y mantener el código sin barreras lingüísticas.
+**Documentación accesible:** aunque tengo un nivel de inglés C1, mis colegas manejan niveles A2 y B1. Para cumplir con los principios de **transparencia y accesibilidad**, todo lo que explica el *porqué* de un cambio (README, guías, CHANGELOG de repositorios en español) va en español mexicano, para que todo el equipo pueda entender y mantener el código sin barreras lingüísticas; los comentarios en código se mantienen breves y en inglés.
 
 **Mensajes de *commit*:** se mantienen en inglés por una razón práctica adicional: los PM y gerentes rara vez leen la documentación técnica extendida. Su interacción con el desarrollo técnico se limita a revisar algunos *commits* (si es que los leen) o simplemente contar la frecuencia en las gráficas de actividad. El inglés en los *commits* mantiene un estándar profesional en esas revisiones superficiales.
 
@@ -115,7 +113,7 @@ Estas reglas y filosofías son documentos vivos que evolucionan con la experienc
 
 ### 6.2. Aprendizaje continuo
 
-La filosofía incorpora lecciones aprendidas y mejores prácticas emergentes, manteniendo un equilibrio entre la estabilidad y la innovación.
+La filosofía incorpora lecciones aprendidas y buenas prácticas emergentes, manteniendo un equilibrio entre la estabilidad y la innovación.
 
 ## 7. Compromiso con la comunidad
 
@@ -125,31 +123,7 @@ Los proyectos personales bajo GPLv3 contribuyen al *commons* del software libre,
 
 ## Referencias
 
-Los detalles específicos de implementación de esta filosofía se encuentran organizados en los siguientes documentos (para una visión rápida, ver README.md):
-
-### Reglas universales (ambos contextos)
-
-- **[LINGUISTICS.md](./rulesets/LINGUISTICS.md)** - reglas lingüísticas de español mexicano como referente
-- **[COMMITTING.md](./rulesets/COMMITTING.md)** - reglas para mensajes de *commit* y gestión de cambios
-- **[BACKUPS.md](./rulesets/BACKUPS.md)** - políticas de respaldos y operaciones destructivas
-- **[GIT.md](./rulesets/GIT.md)** - configuración inicial de repositorios
-- **[GLOSSARY.md](./rulesets/GLOSSARY.md)** - glosario técnico de términos empleados
-- **[CHANGELOG.md](./CHANGELOG.md)** - historial de cambios del proyecto
-- **[AGENTS.md](./AGENTS.md)** - guía para agentes IA
-
-### Reglas de uso dual (aplicación diferenciada por contexto)
-
-- **[LICENSING.md](./rulesets/LICENSING.md)** - reglas de licenciamiento para proyectos
-- **[CORPORATE.md](./rulesets/CORPORATE.md)** - perfil profesional corporativo
-- **[TEACHING.md](./rulesets/TEACHING.md)** - perfil educativo y de divulgación científica
-
-### Reglas de uso exclusivamente personal
-
-- **[ATTRIBUTION.md](./rulesets/ATTRIBUTION.md)** - reglas de atribución personal
-
-### Reglas de uso exclusivamente laboral
-
-- **[STYLING.md](./rulesets/STYLING.md)** - reglas de estilo para documentos Markdown corporativos
+Los detalles específicos de esta filosofía están organizados en los *rulesets* del repositorio. La clasificación canónica por contexto (universales, de uso dual, exclusivamente personales y exclusivamente laborales) está en [README.md](./README.md#flujo-de-decisión-para-aplicación-de-reglas); no se duplica aquí para que no diverja.
 
 *Este documento fue elaborado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.*
 

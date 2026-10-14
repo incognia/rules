@@ -1,6 +1,6 @@
 name: Lint Markdown files
-command: npm run lint:md
-description: Run markdownlint on all Markdown files in the repository
+command: npm --prefix "$HOME/rules" run lint:md
+description: Run markdownlint on all Markdown files of the rules repository (~/rules)
 tags:
   - lint
   - markdown

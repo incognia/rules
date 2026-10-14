@@ -1,13 +1,55 @@
 name: Commit flow
-command: git add . && git commit -m "{{type}}: {{description}}"
-description: "Complete commit flow: stage all files and commit with conventional format (CHANGELOG must be updated first)"
+command: |-
+  (
+  set -eu
+  type=$(cat <<'__WARP_ARG__'
+  {{type}}
+  __WARP_ARG__
+  )
+  scope=$(cat <<'__WARP_ARG__'
+  {{scope}}
+  __WARP_ARG__
+  )
+  description=$(cat <<'__WARP_ARG__'
+  {{description}}
+  __WARP_ARG__
+  )
+  case "$type" in
+  feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert) ;;
+  *) echo "Invalid Conventional Commits type: $type" >&2; exit 1 ;;
+  esac
+  case "$scope" in
+  *[!a-z0-9._/-]*) echo "Invalid scope (use lowercase letters, digits, . _ / -): $scope" >&2; exit 1 ;;
+  esac
+  [ -n "$description" ] || { echo "The description is empty." >&2; exit 1; }
+  cd "$(git rev-parse --show-toplevel)"
+  [ -f CHANGELOG.md ] || { echo "No CHANGELOG.md in this repository." >&2; exit 1; }
+  if git ls-files --error-unmatch CHANGELOG.md >/dev/null 2>&1 && git diff --quiet HEAD -- CHANGELOG.md; then
+  echo "CHANGELOG.md has no changes: update it with /changelogger before committing." >&2
+  exit 1
+  fi
+  git add .
+  msg_file=$(mktemp "${TMPDIR:-/tmp}/commit-msg.XXXXXX")
+  trap 'rm -f "$msg_file"' EXIT
+  if [ -n "$scope" ]; then
+  printf '%s(%s): %s\n' "$type" "$scope" "$description" > "$msg_file"
+  else
+  printf '%s: %s\n' "$type" "$description" > "$msg_file"
+  fi
+  git commit -F "$msg_file"
+  git push
+  )
+description: "Commit and push with a Conventional Commits message, aborting when CHANGELOG.md has no changes. Prefer /changelogger and /commit; this is the manual fallback."
 tags:
   - git
   - commit
   - workflow
 arguments:
   - name: type
-    description: "Conventional commit type"
+    description: "Conventional Commits type (feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert)"
     default_value: feat
+  - name: scope
+    description: "Optional scope, e.g. scripts (leave empty for none)"
+    default_value: ""
   - name: description
-    description: "Commit message description (in English)"
+    description: "Commit description in international English (UK); taken literally, never run as shell code"

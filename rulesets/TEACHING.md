@@ -15,24 +15,24 @@ Mi enfoque pedagógico se fundamenta en principios claros y no negociables:
 - **Aprendizaje *hands-on*:** la experiencia práctica es fundamental para el aprendizaje efectivo en STEM
 - **Entornos reproducibles:** cada estudiante debe tener acceso a las mismas herramientas y configuraciones profesionales
 - **Tecnología como facilitador:** las herramientas DevOps eliminan barreras técnicas y permiten enfocarse en el aprendizaje
-- **Compromiso con el software libre:** en educación básica y media superior (primaria, secundaria y preparatoria) el uso es exclusivo por principio ético y pedagógico. Fuera de educación superior no hay justificación técnica o pedagógica para usar software privativo; su presencia suele responder al hábito de docentes en plataformas cerradas, no a necesidades reales del alumnado.
+- **Compromiso con el software libre:** en educación básica y media superior (primaria, secundaria y preparatoria) el uso es exclusivo por principio ético y pedagógico. Fuera de la educación superior no hay justificación técnica o pedagógica para usar software privativo; su presencia suele responder al hábito de docentes en plataformas cerradas, no a necesidades reales del alumnado.
 - **Competencia multiplataforma:** enseñanza en Linux, Windows y macOS para formar profesionales versátiles y adaptables
 
 ---
 
 ## Principios transversales
 
-- **Política bilingüe (alineada con PHILOSOPHY.md):** el razonamiento, documentación y comentarios se escriben en español mexicano; los identificadores, nombres de archivos y código se mantienen en inglés internacional cuando corresponda por interoperabilidad.
+- **Política bilingüe (alineada con PHILOSOPHY.md):** el razonamiento y la documentación se escriben en español mexicano; el código, sus comentarios, los identificadores y los nombres de archivos se mantienen en inglés internacional (UK) por interoperabilidad.
 - **Infraestructura como código y reproducibilidad:** la configuración de laboratorios y contenidos se define declarativamente para garantizar entornos idénticos.
 - **Accesibilidad y cero barreras:** el acceso no depende de plataformas cerradas ni de licencias restrictivas.
-- **Timestamps correctos (CST Ciudad de México):** cuando se incluyan marcas de tiempo en ejemplos o bitácoras, se calculan con TZ=America/Mexico_City en formato de 24 horas.
+- **Marcas de tiempo correctas (CST Ciudad de México):** cuando incluyo marcas de tiempo en ejemplos o bitácoras, las calculo con `TZ=America/Mexico_City` en formato de 24 horas.
 
 ## Especialización en educación STEM
 
 ### Metodologías pedagógicas innovadoras
 
 - **Infraestructura educativa como código:** uso de Docker Compose para orquestar entornos de aprendizaje personalizados
-- **Automatización educativa:** scripts en Python para distribución automatizada de ejercicios y tareas
+- **Automatización educativa:** *scripts* en Python para distribución automatizada de ejercicios y tareas
 - **Entornos contenedorizados:** JupyterLab desplegado en contenedores Docker para garantizar consistencia
 - **Gestión de configuraciones:** volúmenes persistentes para preservar el progreso estudiantil
 - **Panel de administración:** interfaces web (panel web) para facilitar el acceso y el monitoreo de laboratorios
@@ -42,7 +42,7 @@ Mi enfoque pedagógico se fundamenta en principios claros y no negociables:
 | Categoría | Herramientas |
 |-----------|-------------|
 | **Contenedorización** | Docker, Docker Compose |
-| **Automatización** | scripts de Python, scripts de Bash |
+| **Automatización** | *scripts* de Python y de Bash |
 | **Entorno de desarrollo** | JupyterLab, VS Code, Neovim |
 | **Infraestructura** | Linux (Debian/Ubuntu), SSH, volúmenes persistentes |
 | **Monitoreo** | panel web (Node.js), htop, registros de contenedor |
@@ -61,15 +61,15 @@ Mi enfoque pedagógico se fundamenta en principios claros y no negociables:
 
 ### Gestión de laboratorios tecnológicos
 
-- **Administración multi-contenedor:** gestión simultánea de 20+ entornos estudiantiles
+- **Administración de múltiples contenedores:** gestión simultánea de 20+ entornos estudiantiles
 - **Resolución de problemas en tiempo real:** solución de incidencias de conectividad, permisos y configuración
-- **Mantenimiento automatizado:** scripts en Bash/Python para limpieza, actualización y respaldo de entornos
+- **Mantenimiento automatizado:** *scripts* en Bash o Python para limpieza, actualización y respaldo de entornos
 - **Monitoreo de recursos:** supervisión de CPU, memoria y almacenamiento
 
 ### Adaptación tecnológica
 
-- **Compatibilidad multi-distribución:** Ubuntu, Debian, Fedora, RHEL
-- **Instalación automatizada:** scripts que detectan y configuran dependencias por distribución
+- **Compatibilidad con varias distribuciones:** Ubuntu, Debian, Fedora, RHEL
+- **Instalación automatizada:** *scripts* que detectan y configuran dependencias por distribución
 - **Personalización cultural:** JupyterLab en español mexicano, comentarios de código bilingües
 - **Accesibilidad:** interfaces web responsivas, documentación clara
 
@@ -102,14 +102,14 @@ Mi enfoque pedagógico se fundamenta en principios claros y no negociables:
 
 ### Juno | JupyterLab-Based STEM Learning Environment
 
-**Descripción:** Entorno de aprendizaje STEM inmersivo para estudiantes de secundaria (12-15 años) utilizando JupyterLab desplegado mediante Docker Compose.
+**Descripción:** entorno de aprendizaje STEM inmersivo para estudiantes de secundaria (12-15 años) utilizando JupyterLab desplegado mediante Docker Compose.
 
 **Características técnicas:**
 
-- **Orquestación automatizada:** script Python genera archivos `compose.yaml` personalizados según la lista de estudiantes
+- **Orquestación automatizada:** un *script* en Python genera archivos `compose.yaml` personalizados según la lista de estudiantes
 - **Escalabilidad:** asignación automática de puertos SSH (1022, 1122, 1222...) y JupyterLab (1088, 1188, 1288...)
-- **Persistencia de datos:** volúmenes Docker para preservar configuraciones SSH y directorios home de estudiantes
-- **Distribución de contenido:** script automatizado para copiar notebooks de Jupyter a todos los contenedores
+- **Persistencia de datos:** volúmenes Docker para preservar configuraciones SSH y carpetas *home* de los estudiantes
+- **Distribución de contenido:** *script* automatizado para copiar *notebooks* de Jupyter a todos los contenedores
 - **Panel web:** interfaz en Node.js para acceso simplificado y monitoreo de contenedores
 
 **Impacto educativo:**
@@ -119,11 +119,11 @@ Mi enfoque pedagógico se fundamenta en principios claros y no negociables:
 - Entornos idénticos para todos los estudiantes
 - Persistencia de trabajo estudiantil entre sesiones
 
-**Reconocimientos:** Inspirado en el trabajo de Serena Bonaretti ([Learn Python with Jupyter](https://learnpythonwithjupyter.com/))
+**Reconocimientos:** inspirado en el trabajo de Serena Bonaretti ([Learn Python with Jupyter](https://learnpythonwithjupyter.com/))
 
 ### Chicxulub | Post-Apocalyptic Programming
 
-**Descripción:** Proyecto de divulgación científica que combina programación Python y geofísica para enseñar conceptos de cartografía y navegación usando el cráter de Chicxulub como caso de estudio.
+**Descripción:** proyecto de divulgación científica que combina programación Python y geofísica para enseñar conceptos de cartografía y navegación usando el cráter de Chicxulub como caso de estudio.
 
 **Características educativas:**
 
@@ -156,22 +156,22 @@ Mi enfoque pedagógico se fundamenta en principios claros y no negociables:
 
 ### Enfoques pedagógicos
 
-- **Educación Montessori:** Aplicación de principios de aprendizaje autodirigido, desarrollando la curiosidad innata y la auto-motivación en un entorno cuidadosamente preparado
-- **Secundarias activas:** Promoción de la participación activa de los estudiantes y la co-creación del conocimiento a través de proyectos colaborativos y aprendizaje práctico
+- **Educación Montessori:** aplicación de principios de aprendizaje autodirigido, desarrollando la curiosidad innata y la automotivación en un entorno cuidadosamente preparado
+- **Secundarias activas:** promoción de la participación activa de los estudiantes y la cocreación del conocimiento a través de proyectos colaborativos y aprendizaje práctico
 
 ### Participación social
 
-- **Programas educativos en comunidades vulnerables:** Diseño y ejecución de proyectos para ofrecer educación accesible a poblaciones de bajos ingresos utilizando tecnologías abiertas y metodologías inclusivas
-- **Enseñanza de C++ con Arduino:** Enfoque en programación de microcontroladores para proyectos prácticos de electrónica y robótica educativa
+- **Programas educativos en comunidades vulnerables:** diseño y ejecución de proyectos para ofrecer educación accesible a poblaciones de bajos ingresos utilizando tecnologías abiertas y metodologías inclusivas
+- **Enseñanza de C++ con Arduino:** enfoque en programación de microcontroladores para proyectos prácticos de electrónica y robótica educativa
 
 ### Integración de experiencia y filosofía
 
-Tu experiencia diversa en educación Montessori, secundarias activas y programas sociales te ha permitido entender y aplicar principios de democratización del conocimiento en contextos variados. Al usar herramientas libres en estos entornos, garantizas que todos los estudiantes, independientemente de su trasfondo socioeconómico, tengan acceso a una educación de calidad. Además, fomentas la autonomía y el aprendizaje autodirigido, alineándote con una filosofía educativa que empodera a los estudiantes a ser protagonistas de su propio proceso de aprendizaje.
+Mi experiencia diversa en educación Montessori, secundarias activas y programas sociales me ha permitido entender y aplicar principios de democratización del conocimiento en contextos variados. Al usar herramientas libres en estos entornos, garantizo que todos los estudiantes, independientemente de su trasfondo socioeconómico, tengan acceso a una educación de calidad. Además, fomento la autonomía y el aprendizaje autodirigido, en línea con una filosofía educativa que empodera a los estudiantes a ser protagonistas de su propio proceso de aprendizaje.
 
 ### Estudiantes destacados
 
 - **Carlos (@cgzdev):** desarrollo de funcionalidades avanzadas en proyectos colaborativos
-- **Ian (@calmestprism226):** contribuciones significativas en automatización y scripting
+- **Ian (@calmestprism226):** contribuciones significativas en automatización y *scripting*
 - **Fernando (@fer1495):** liderazgo en depuración y optimización de entornos
 
 ### Impacto cuantitativo
@@ -207,8 +207,6 @@ Tu experiencia diversa en educación Montessori, secundarias activas y programas
 - **Mentoría técnica:** formación de nuevos talentos en DevOps y programación
 
 ---
----
-**Documento principal:** [PHILOSOPHY.md](../PHILOSOPHY.md) · **Entrada rápida:** [README.md](../README.md)
 
 ## Evolución y aprendizaje continuo
 
@@ -216,7 +214,7 @@ Tu experiencia diversa en educación Montessori, secundarias activas y programas
 
 - **Actualización de herramientas:** migración de versiones, adopción de nuevas tecnologías
 - **Retroalimentación estudiantil:** incorporación de sugerencias para mejora continua
-- **Mejores prácticas:** integración de nuevos enfoques pedagógicos y técnicos
+- **Buenas prácticas:** integración de nuevos enfoques pedagógicos y técnicos
 
 ### Desarrollo profesional
 

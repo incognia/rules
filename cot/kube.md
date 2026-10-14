@@ -1,7 +1,7 @@
 ---
 domain: infrastructure
 task: analizar estado de clúster Kubernetes vía SSH
-dificultad: intermedio
+dificultad: media
 longitud_objetivo: media
 validacion: reporte de estado con nodos, pods, servicios, VirtualServices e Istio
 ---
@@ -9,8 +9,8 @@ validacion: reporte de estado con nodos, pods, servicios, VirtualServices e Isti
 
 Razonamiento:
 
-- Los clústeres corren sobre bare-metal con Istio, ArgoCD, Prometheus, Grafana y Kiali.
-- El acceso es vía SSH con usuario `ubuntu` (u otro) y llave `kone` (infra propia) o `cad` (clientes).
+- Los clústeres corren sobre *bare-metal* con Istio, Argo CD, Prometheus, Grafana y Kiali.
+- El acceso es vía SSH con usuario `ubuntu` (u otro) y llave `kone` (infraestructura propia) o `cad` (clientes).
 - Los manifiestos están en `/home/<usuario>/kubernetes-<namespace>/services/`.
 - Referencia principal: «~/rules/rulesets/KUBE.md» ([../rulesets/KUBE.md](../rulesets/KUBE.md)).
 
@@ -25,13 +25,13 @@ Pasos:
    - `kubectl get nodes -o wide` → todos los nodos en Ready
    - `kubectl top nodes` → uso de CPU y memoria
 
-3) Acción: listar pods del *namespace* objetivo.
+3) Acción: listar los *pods* del *namespace* objetivo.
    Resultado:
    - `kubectl get pods -n <namespace> -o wide`
-   - Buscar pods en estado distinto a Running/Completed
+   - Buscar *pods* en estado distinto de Running o Completed
    - Si hay problemas: `kubectl describe pod <pod> -n <namespace>`
 
-4) Acción: revisar servicios y endpoints.
+4) Acción: revisar servicios y *endpoints*.
    Resultado:
    - `kubectl get svc -n <namespace>`
    - `kubectl get endpoints -n <namespace>`
@@ -41,12 +41,12 @@ Pasos:
    - `kubectl get vs -n <namespace>`
    - `kubectl get gateway -n <namespace>`
    - `istioctl analyze -n <namespace>` (si está disponible)
-   - `istioctl proxy-status` (verificar sincronización de sidecars)
+   - `istioctl proxy-status` (verificar la sincronización de los *sidecars*)
 
-6) Acción: verificar ArgoCD.
+6) Acción: verificar Argo CD.
    Resultado:
    - `kubectl get app -n argocd | grep <namespace>`
-   - Confirmar estado Synced y Healthy
+   - Confirmar el estado Synced y Healthy
 
 7) Acción: revisar eventos recientes.
    Resultado:
@@ -63,7 +63,7 @@ Pasos:
    - `curl -s http://<gateway_ip>/<prefijo>/actuator/health`
 
 10) Acción: verificar observabilidad.
-    Descubrir IPs y puertos: `kubectl get svc -n istio-system | grep -iE 'kiali|prometheus|grafana'`
+    Descubrir las IP y los puertos: `kubectl get svc -n istio-system | grep -iE 'kiali|prometheus|grafana'`
     Resultado:
     - Kiali: puerto 20001 (LoadBalancer o NodePort)
     - Prometheus: puerto 9090 (NodePort)
@@ -72,6 +72,6 @@ Pasos:
 
 Conclusión:
 
-- Entregar reporte con: estado de nodos, pods problemáticos, servicios y VirtualServices, estado de ArgoCD, eventos recientes y estado de observabilidad.
-- Si hay problemas, incluir logs relevantes (`kubectl logs <pod> -n <namespace> --tail=50`).
+- Entregar un reporte con: estado de nodos, *pods* problemáticos, servicios y VirtualServices, estado de Argo CD, eventos recientes y estado de observabilidad.
+- Si hay problemas, incluir los *logs* relevantes (`kubectl logs <pod> -n <namespace> --tail=50`).
 - Referencias: «~/rules/rulesets/KUBE.md» ([../rulesets/KUBE.md](../rulesets/KUBE.md)).

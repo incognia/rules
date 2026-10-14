@@ -1,6 +1,6 @@
 ---
 name: mail
-description: "Compose and send OWA-compatible HTML email. Usage: /mail <owa|mac|graph> <delivery|generic> <subject>"
+description: "Compose and send OWA-compatible HTML email in four modes (token, owa, mac, graph). Usage: /mail <owa|mac|graph> <delivery|generic> <subject> or /mail token"
 ---
 
 # Compose and send HTML email
@@ -76,12 +76,17 @@ description: "Compose and send OWA-compatible HTML email. Usage: /mail <owa|mac|
 
 ### Mode: `token` (authenticate and cache)
 
-1. Run `~/rules/scripts/graph_auth.py` via `get_token()`
-2. If no cached token exists, prompts device code flow (browser auth)
-3. Saves tokens to `~/.graph_tokens.json` (permissions 600)
-4. Subsequent `graph` sends reuse the token silently for ~1 hour
-5. After expiry, `graph` refreshes silently via refresh_token (~90 days)
-6. Only need to run `/mail token` again if refresh_token expires
+1. Run the module's entry point, which calls `get_token()` and reports the cache state without printing tokens:
+
+   ```bash
+   python3 ~/rules/scripts/graph_auth.py
+   ```
+
+2. If no valid cached or refreshable token exists, it starts the device code flow (browser auth)
+3. Tokens are saved to `~/.graph_tokens.json` (permissions 600)
+4. Subsequent `graph` sends reuse the token silently while it is valid
+5. After expiry, `get_token()` tries a silent refresh; see `~/rules/docs/MAIL.md` for the token lifecycle
+6. Run `/mail token` again only when the silent refresh fails
 
 ### Mode: `owa` (Linux — manual copy-paste)
 
@@ -111,13 +116,13 @@ description: "Compose and send OWA-compatible HTML email. Usage: /mail <owa|mac|
 
 ### Mode: `graph` (any OS — direct send via API)
 
-1. Call `get_token()` from `~/rules/scripts/graph_auth.py` (uses cached token; if no cache, tells user to run `/mail token` first)
+1. Import `~/rules/scripts/graph_auth.py` and call `get_token(interactive=False)`: it reuses or silently refreshes the cached token, and exits asking for `/mail token` when neither works, so the send never blocks on a browser login
 2. Read and base64-encode `~/rules/templates/mail/assets/ralvarez_firma_740.png`
-5. Send via `POST https://graph.microsoft.com/v1.0/me/sendMail` with:
+3. Send via `POST https://graph.microsoft.com/v1.0/me/sendMail` with:
    - HTML body containing `<img src="cid:firma_ralvarez">`
    - Inline attachment with `contentId: "firma_ralvarez"` and `isInline: true`
    - `saveToSentItems: true`
-6. Save the HTML file as well (same logic as `owa`) for archival
+4. Save the HTML file as well (same logic as `owa`) for archival
 
 ## Critical rules
 

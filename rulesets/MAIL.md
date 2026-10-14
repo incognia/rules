@@ -20,7 +20,7 @@ Las plantillas viven en `templates/mail/` de este repositorio:
    - **`mac`**: abrir borrador en Outlook vía AppleScript. Outlook inyecta la firma «Kabat One». Enviar con ⌘+Enter.
    - **`graph`**: enviar vía Microsoft Graph API con firma como imagen CID *inline*. Autenticar con `~/rules/scripts/graph_auth.py`.
 
-> Invocación con *skill*: `/mail <owa|mac|graph> <delivery|generic> <asunto>`
+> Invocación con *skill*: `/mail <owa|mac|graph> <delivery|generic> <asunto>`; `/mail token` solo autentica y guarda en caché el *token* de Graph.
 
 ## Reglas HTML críticas
 
@@ -38,7 +38,7 @@ OWA solo captura el `background-color` del `<td>` que contiene el texto. Además
 
 ### Estructura del contenedor
 
-Tabla exterior (fondo gris `#f0f0f0`) → tabla interior (fondo blanco `#ffffff`, max 800px). Los fondos van en los `<td>`.
+Tabla exterior (fondo gris `#f0f0f0`) → tabla interior (fondo blanco `#ffffff`, máximo 800 px). Los fondos van en los `<td>`.
 
 ### Cajas de color
 
@@ -68,7 +68,7 @@ Filas alternas: agregar `style="background-color:#f9f9f9;"` manualmente en cada 
 - `border-radius`
 - `overflow-x:auto`
 - `tr:nth-child(even)`
-- Flexbox, Grid
+- *Flexbox*, *Grid*
 - `position:absolute`
 - *Media queries*
 
@@ -98,10 +98,10 @@ Filas alternas: agregar `style="background-color:#f9f9f9;"` manualmente en cada 
 ## *Placeholders* de la plantilla de entrega
 
 - `{NOMBRE_SERVICIO}` — nombre completo del microservicio
-- `{PREFIJO}` — prefijo de ruta sin slash inicial
+- `{PREFIJO}` — prefijo de ruta sin diagonal inicial
 - `{VERSION}` — versión desplegada
 - `{DESTINATARIO}` — nombre del desarrollador
-- `{FECHA}` — fecha en formato largo (ej. 21 de marzo de 2026)
+- `{FECHA}` — fecha en formato largo (por ejemplo, 21 de marzo de 2026)
 - `{RAMA_BASE}` — rama de origen (main, DEV-1.1, etc.)
 - `{DESCRIPCION}` — una oración sobre qué hace el servicio
 
@@ -120,7 +120,7 @@ Si falta alguna variable, preguntar el valor al usuario; no inventarlo.
 - *Pipeline*: 5 *stages* (sin compilar ni SonarQube)
 - Docker: cambiar a *multi-stage* Node 22 + Nginx
 - Quitar fila de Swagger UI en tabla de acceso
-- Tiempo estimado: 5-8 min *build* + 3 min ArgoCD
+- Tiempo estimado: 5-8 min de *build* y 3 min de Argo CD
 
 ## Envío vía Microsoft Graph API
 

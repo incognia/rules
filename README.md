@@ -5,14 +5,14 @@ description: "Estándares, filosofía y cadenas de razonamiento (CoT) que guían
 
 # Reglas técnicas: prompts y CoT para acelerar el contexto de los LLM
 
-*Última modificación: 12 de octubre de 2026, 20:01 (CST)*
+*Última modificación: 14 de octubre de 2026, 00:03 (CST)*
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)
 [![Spanish](https://img.shields.io/badge/Language-Spanish%20(MX)-green.svg)](https://es.wikipedia.org/wiki/Espa%C3%B1ol_mexicano)
-[![CoTs](https://img.shields.io/badge/CoTs-25-blue.svg)](./cot/)
+[![CoTs](https://img.shields.io/badge/CoTs-24-blue.svg)](./cot/)
 [![Skills](https://img.shields.io/badge/Skills-16-green.svg)](./.agents/skills/)
-[![Rulesets](https://img.shields.io/badge/Rulesets-21-orange.svg)](./rulesets/)
+[![Rulesets](https://img.shields.io/badge/Rulesets-19-orange.svg)](./rulesets/)
 
 ## Definiciones rápidas
 
@@ -40,42 +40,30 @@ Principio operativo: los documentos de `rulesets/` contienen la lógica y las re
 
 ### Configuración inicial (una sola vez)
 
-#### macOS y Linux
+#### Instalar o actualizar (macOS, Linux y Windows con WSL)
 
 ```bash
-# 1. Clonar el repositorio
-git clone git@github.com:incognia/rules.git ~/rules
-
-# 2. Instalar skills y workflows globales (detecta plataforma automáticamente)
-~/rules/scripts/sync_global.sh
-```
-
-#### Windows (WSL)
-
-```bash
-# 1. Clonar el repositorio (dentro de WSL)
-git clone git@github.com:incognia/rules.git ~/rules
-
-# 2. Instalar skills y workflows globales
-~/rules/scripts/sync_global.sh
-```
-
-#### Sin clonar (ejecución remota)
-
-```bash
-# Instalar o actualizar desde el repo público directamente
+# 1. Clonar el repositorio (en WSL, dentro de WSL) o actualizarlo si ya existe
 git clone git@github.com:incognia/rules.git ~/rules 2>/dev/null || git -C ~/rules pull
+
+# 2. Instalar skills y workflows globales (detecta la plataforma automáticamente)
 ~/rules/scripts/sync_global.sh
+
+# 3. (Opcional, para contribuir) activar los hooks de commit del repositorio
+npm --prefix ~/rules run hooks:install
 ```
+
+`sync_global.sh` siempre se ejecuta desde un clon local: no se admite ejecutarlo con `curl … | bash`, para que puedas revisar lo que corre antes de ejecutarlo.
 
 **Notas**:
 
-- `sync_global.sh` detecta la plataforma (macOS, Linux, Windows/WSL) y copia a las rutas correctas:
-  - *Skills* (`SKILL.md`): `~/.agents/skills/` (copia; reconocidos por Warp, Cursor, Copilot, Gemini y otros)
-  - *Skills* para Claude Code: cada `SKILL.md` ya copiado en `~/.agents/skills/<nombre>/` se enlaza además a `~/.claude/commands/<nombre>.md`, para que Claude Code reconozca `/nombre` (sin este enlace, Claude Code ignora los slash commands)
+- `sync_global.sh` detecta la plataforma (macOS, Linux, Windows o WSL) y copia a las rutas correctas:
+  - *Skills* (`SKILL.md`): `~/.agents/skills/` (en WSL, la carpeta de usuario de Windows); se reflejan completas, así que los archivos borrados dentro de una *skill* también se eliminan, y se quitan las *skills* que el *script* instaló antes y ya no existen en el repositorio. Las reconocen Warp, Cursor, Copilot, Gemini y otros
+  - *Skills* para Claude Code: cada `SKILL.md` instalado se enlaza a `~/.claude/commands/<nombre>.md` para que Claude Code reconozca `/nombre` (sin este enlace, Claude Code ignora los *slash commands*); solo enlaza las *skills* de este repositorio, nunca sobrescribe un comando ajeno y limpia los enlaces colgantes
   - *Workflows* (`*.yaml`) en macOS: `~/.warp/workflows/`
   - *Workflows* en Linux: `$XDG_DATA_HOME/warp-terminal/workflows/`
-  - *Workflows* en Windows: `$APPDATA\warp\Warp\data\workflows\`
+  - *Workflows* en Windows: `$APPDATA\warp\Warp\data\workflows\`; en WSL no hay una ruta conocida de Warp y se usa `~/.warp/workflows/`
+  - Los *workflows* que el *script* instaló antes y ya no existen en el repositorio se eliminan
 - `cot/`, `rulesets/` y `templates/` se copian a `~/rules/` solo si el repositorio está clonado en otra ruta; si el clon ya vive en `~/rules/`, no se copia nada
 - `scripts/atlassian/` y el `.env` local (credenciales Atlassian, permisos 600) también se copian a `~/rules/` en ese caso; el resto de `scripts/` no se copia y se ejecuta directo desde el repositorio
 - El `.env` nunca se versiona: se crea a partir de `.env.example` y guarda credenciales y datos sensibles (sitios de Atlassian, IP e infraestructura de los ambientes, datos de contacto). El repositorio es público, así que los archivos versionados solo llevan marcadores como `<client_ip>` o `{GATEWAY_IP}`
@@ -107,7 +95,7 @@ flowchart LR
     
     I --> J["Tarea completada<br/>según protocolo"]
     
-    K["📚 Referencia conceptual<br/>~/rules/rulesets/*.md"] -.-> B
+    K["Referencia conceptual<br/>~/rules/rulesets/*.md"] -.-> B
     
     style A fill:#f9f,stroke:#333,stroke-width:2px
     style J fill:#9f9,stroke:#333,stroke-width:2px
@@ -129,9 +117,8 @@ flowchart LR
 - **[CORPORATE.md](./rulesets/CORPORATE.md)** - perfil profesional corporativo
 - **[TEACHING.md](./rulesets/TEACHING.md)** - perfil educativo y de divulgación científica
 - **[ATTRIBUTION.md](./rulesets/ATTRIBUTION.md)** - reglas de atribución personal
-- **[COMMITTING.md](./rulesets/COMMITTING.md)** - reglas para mensajes de *commit* y gestión de cambios
-- **[COMMIT_LANGUAGE_PROTOCOL.md](./rulesets/COMMIT_LANGUAGE_PROTOCOL.md)** - protocolo de idioma de *commits* en inglés internacional (UK)
-- **[RELEASING.md](./rulesets/RELEASING.md)** - reglas de tags semánticos y *releases* en GitHub o GitLab
+- **[COMMITTING.md](./rulesets/COMMITTING.md)** - reglas para mensajes de *commit*, idioma por contexto y gestión de cambios
+- **[RELEASING.md](./rulesets/RELEASING.md)** - reglas de *tags* semánticos y *releases* en GitHub o GitLab
 - **[SDD_READINESS.md](./rulesets/SDD_READINESS.md)** - rúbrica de madurez de especificaciones para OpenSpec, con Platform Readiness
 - **[CRITICAL_COT_READING.md](./rulesets/CRITICAL_COT_READING.md)** - regla de lectura completa de los CoT
 - **[GIT.md](./rulesets/GIT.md)** - configuración inicial de cuentas GitHub y GitLab
@@ -146,17 +133,13 @@ flowchart LR
 - **[KUBETBS.md](./rulesets/KUBETBS.md)** - reglas de *troubleshooting* de microservicios en Kubernetes
 - **[LATEX.md](./rulesets/LATEX.md)** - reglas de generación de documentos LaTeX con XeLaTeX
 - **[VAULT.md](./rulesets/VAULT.md)** - reglas de operación con HashiCorp Vault CLI
-- **[docs/MAIL.md](./docs/MAIL.md)** - envío de correo desde CLI (modos owa/mac/graph, configuración de Graph API, ciclo de vida del *token*)
+- **[docs/MAIL.md](./docs/MAIL.md)** - envío de correo desde CLI (modos owa, mac, graph y token; configuración de Graph API y ciclo de vida del *token*)
 - **[docs/SYNC.md](./docs/SYNC.md)** - mecanismo de sincronización global de `sync_global.sh`
 - **[CHANGELOG.md](./CHANGELOG.md)** - historial de cambios del proyecto
 
 ## Especialización técnica
 
-- ingeniería DevOps con enfoque en Kubernetes nativo
-- plataformas *bare-metal* sobre Proxmox VE
-- GitOps y automatización declarativa
-- observabilidad y mallas de servicios
-- seguridad en entornos distribuidos
+Ingeniería DevOps con enfoque en Kubernetes nativo sobre Proxmox VE *bare-metal*, GitOps, observabilidad y mallas de servicios. El perfil técnico completo se mantiene en un solo lugar: [PHILOSOPHY.md](./PHILOSOPHY.md#11-especialización-técnica).
 
 ## Flujo de decisión para aplicación de reglas
 
@@ -164,8 +147,8 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 
 ### 1. Identificación del contexto del proyecto
 
-- 💼 **Contexto laboral**: proyectos desarrollados para o bajo contrato con **Kabat One**
-- 📺 **Contexto personal**: proyectos independientes, experimentales o de desarrollo personal
+- **Contexto laboral**: proyectos desarrollados para o bajo contrato con **Kabat One**
+- **Contexto personal**: proyectos independientes, experimentales o de desarrollo personal
 
 ### 2. Aplicación de reglas por contexto
 
@@ -173,38 +156,47 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 |---------|------------------------|---------------------------|
 | **Licenciamiento** | GPLv3 (copyleft) | MIT (permisiva) |
 | **Autoría** | Rodrigo Álvarez (@incognia) | Rodrigo Álvarez (@incogniadev) |
-| **Email** | [incognia@gmail.com](mailto:incognia@gmail.com) | [ralvarez@kabatone.com](mailto:ralvarez@kabatone.com) |
-| **SSH Key (repos)** | ~/.ssh/incognia | ~/.ssh/kone |
-| **SSH Key (servers)** | ~/.ssh/faraday | ~/.ssh/cad |
+| **Correo** | [incognia@gmail.com](mailto:incognia@gmail.com) | [ralvarez@kabatone.com](mailto:ralvarez@kabatone.com) |
+| **Llave SSH (repositorios)** | ~/.ssh/incognia | ~/.ssh/kone |
+| **Llave SSH (servidores)** | ~/.ssh/faraday | ~/.ssh/cad |
 | **Estilo de documentos** | No definido aún | [STYLING.md](./rulesets/STYLING.md) aplicable |
 | **Idioma documentación** | Español mexicano | Español mexicano |
-| **Idioma código/commits** | Inglés internacional (UK) | Inglés internacional (UK) |
+| **Idioma de código, comentarios y *commits*** | Inglés internacional (UK) | Inglés internacional (UK) |
 | **Idioma CHANGELOG y *releases*** | Idioma principal del repositorio | Idioma principal del repositorio |
 | **Idioma en Confluence** | Inglés internacional (UK) | Inglés internacional (UK) |
 
+Esta es la clasificación canónica de los *rulesets*; PHILOSOPHY.md la enlaza en vez de repetirla.
+
 ### 3. Reglas universales (aplican a ambos contextos)
 
-- **LINGUISTICS.md**: español mexicano como estándar cultural
-- **COMMITTING.md**: Conventional Commits en inglés internacional (UK)
-- **RELEASING.md**: tags `vX.Y.Z` y *releases* no interactivas
 - **PHILOSOPHY.md**: principios generales de trabajo
+- **LINGUISTICS.md**: español mexicano como estándar cultural
+- **COMMITTING.md**: Conventional *Commits* en inglés internacional (UK) e idioma por contexto
+- **RELEASING.md**: *tags* `vX.Y.Z` y *releases* no interactivas
+- **GIT.md**: configuración inicial de repositorios
 - **BACKUPS.md**: políticas de respaldos y operaciones destructivas
 - **GLOSSARY.md**: términos técnicos estandarizados
-- **GIT.md**: configuración inicial de repositorios
+- **CRITICAL_COT_READING.md**: lectura completa de los CoT
+- **VAULT.md**: operación con HashiCorp Vault CLI
 
 ### 4. Reglas de uso dual (diferentes aplicaciones según contexto)
 
 - **LICENSING.md**: define qué licencia usar según el contexto (personal: GPLv3, laboral: MIT)
 - **CORPORATE.md**: perfil profesional adaptado a cada entorno
-- **TEACHING.md**: perfil educativo y de divulgación (contexto personal)
+- **TEACHING.md**: perfil educativo y de divulgación científica
 
 ### 5. Reglas de uso exclusivamente personal
 
-- **ATTRIBUTION.md**: atribución personal en documentos/scripts individuales
+- **ATTRIBUTION.md**: atribución personal en documentos o *scripts* individuales
 
-### 6. Reglas de uso exclusivamente laboral
+### 6. Reglas de uso exclusivamente laboral (Kabat One)
 
 - **STYLING.md**: reglas de estilo para documentos Markdown corporativos
+- **LATEX.md**: documentos LaTeX con la marca Kabat One
+- **MAIL.md**: correos HTML compatibles con OWA
+- **BMAIL.md**: correo empresarial en inglés
+- **KUBE.md** y **KUBETBS.md**: análisis de clústeres y diagnóstico de microservicios
+- **SDD_READINESS.md**: madurez de especificaciones de Confluence para OpenSpec
 
 ## Arquitectura: *skills*, CoTs y *rulesets*
 
@@ -238,18 +230,18 @@ sequenceDiagram
 - **rulesets/** — reglas y documentación de referencia (LINGUISTICS.md, COMMITTING.md, etc.)
 - **cot/** — cadenas de razonamiento (CoT) para ejecución diaria
 - **templates/** — plantillas reutilizables
-- **scripts/** — scripts de automatización y respaldos
+- **scripts/** — *scripts* de automatización y respaldos
 - **.agents/skills/** — *skills* descubribles por agentes IA:
   - `/commit` — flujo completo de *commit* con CHANGELOG obligatorio, mensaje en inglés internacional (UK) y atribución del agente resuelta en cada sesión
   - `/changelogger` — mantenimiento de CHANGELOG.md con fechas CST, en el idioma principal del repositorio
-  - `/release vX.Y.Z` — publicar tag y *release* en GitHub o GitLab con notas derivadas del CHANGELOG
+  - `/release vX.Y.Z` — publicar *tag* y *release* en GitHub o GitLab con notas derivadas del CHANGELOG
   - `/linguistics <archivo>` — aplicar reglas de español mexicano
   - `/context` — detección rápida de contexto de proyecto
   - `/backup` — respaldo con nomenclatura estándar
   - `/licensing` — licenciamiento automático (GPLv3 vs MIT)
-  - `/git-init <personal|laboral> <llave> <url> <rama>` — inicializar repo con SSH
+  - `/git-init <personal|laboral> <llave> <url> <rama>` — inicializar repo con SSH (mismos argumentos que `scripts/git-init-context.sh`)
   - `/ssh-import <faraday|cad>` — importar llave SSH desde GitHub a un servidor
-  - `/mail <owa|mac|graph> <delivery|generic> <asunto>` — componer y enviar correo HTML compatible con OWA
+  - `/mail <owa|mac|graph> <delivery|generic> <asunto>` o `/mail token` — componer y enviar correo HTML compatible con OWA, o revisar el *token* de Graph
   - `/bmail <plantilla> <asunto>` — redactar correo empresarial en inglés con plantillas
   - `/styling <hedgedoc|gitlab|github> [mit|gpl] <archivo>` — aplicar estilo Kabat One a un documento Markdown
   - `/kube <llave> <usuario> <ip> <namespace>` — analizar el estado de un clúster Kubernetes vía SSH
@@ -257,15 +249,15 @@ sequenceDiagram
   - `/aws-naming <directorio|archivo>` — normalizar nombres de archivos para S3 y CloudFront
   - `/sdd-readiness <enlace a Confluence>` — evaluar si una especificación está lista para ejecutarse con OpenSpec, incluida Platform Readiness
 - **.warp/workflows/** — comandos parametrizados YAML (`Ctrl+Shift+R` en Warp):
-  - `backup_file` — respaldar archivo/directorio
+  - `backup_file` — respaldar archivo o carpeta
   - `lint_markdown` — ejecutar *markdownlint*
-  - `commit_flow` — `git add` + `git commit` con tipo y descripción
+  - `commit_flow` — alternativa manual a `/changelogger` y `/commit`: *commit* y *push* con mensaje de Commits Convencionales (tipo, ámbito opcional y descripción), que aborta si `CHANGELOG.md` no tiene cambios
   - `cst_date` — obtener fecha/hora en CST
 
 ## Herramientas y scripts
 
 - Sincronización: scripts/sync_global.sh (instala *skills* y *workflows* globales, multiplataforma)
-- Git (post init): scripts/git-init-context.sh
+- Git (tras `git init`): `scripts/git-init-context.sh <personal|laboral> <llave> <url_remota> <rama>` (no interactivo)
 - Fecha CST: scripts/cst_date.sh
 - Correo vía Graph API: scripts/graph_auth.py (autenticación y caché de *token*)
 - Confluence: scripts/atlassian/ (`confluence-management.sh` para páginas, adjuntos, comentarios al pie y respuestas en ADF, y `find-marked` para ubicar un hilo marcado; `adf_lib.py` para construir y leer ADF; credenciales en `.env`)
@@ -277,7 +269,7 @@ sequenceDiagram
 
 ## Cómo usar CoT rápidamente
 
-- Todos los CoT: carpeta [cot/](./cot/) (25 archivos)
+- Todos los CoT: carpeta [cot/](./cot/) (24 archivos)
 - Lingüística: [cot/linguistics.md](./cot/linguistics.md) + [LINGUISTICS.md](./rulesets/LINGUISTICS.md)
 - *Commits*: [cot/committing.md](./cot/committing.md) + [COMMITTING.md](./rulesets/COMMITTING.md)
 - Contexto de proyecto: [cot/context.md](./cot/context.md)
@@ -291,7 +283,7 @@ sequenceDiagram
 - Formato: 24 horas, zona «CST (Ciudad de México)».
 - **CRÍTICO**: No rotular «CST» a horas UTC sin cálculo; CST = UTC - 6 horas.
 - **Verificación obligatoria**: usar `TZ=America/Mexico_City date` para obtener tiempo real.
-- Zona a usar en scripts: TZ=America/Mexico_City.
+- Zona a usar en *scripts*: TZ=America/Mexico_City.
 - CHANGELOG.md: solo fecha (YYYY-MM-DD), sin hora.
 
 Más detalles: ver [LINGUISTICS.md – Fechas y horas (CST Ciudad de México)](./rulesets/LINGUISTICS.md#fechas-y-horas-cst-ciudad-de-méxico).
@@ -325,8 +317,12 @@ Estos documentos sirven como referencia para mantener consistencia en:
 - convenciones lingüísticas y culturales
 - aplicación correcta de reglas según el contexto del proyecto
 
+<!-- licence:start -->
+
 ---
 
 *Este proyecto fue elaborado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE. Los logotipos de Kabat One y las imágenes de firma de `templates/mail/assets/` quedan excluidos de la GPLv3: consulta el archivo NOTICE.*
 
 *Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*
+
+<!-- licence:end -->
