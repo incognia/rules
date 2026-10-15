@@ -88,9 +88,17 @@ Reglas de formato obligatorias para esta plantilla:
 - Mantén una línea en blanco entre asunto y cuerpo, y otra entre cuerpo y pie.
 - El cuerpo describe solo cambios sustantivos: no incluyas viñetas del tipo «update CHANGELOG.md», porque el CHANGELOG es una precondición que valida la puerta de la sección 3.1, no un detalle del cambio.
 - `Co-Authored-By` se resuelve de forma dinámica al momento del *commit*, nunca está fijo en el texto (ver el detalle completo en «~/rules/cot/committing.md»):
-  - Si `/commit` recibió el argumento de modelo autor (por ejemplo, `/commit opus5.5`), el *trailer* se construye con él según `.agents/skills/commit/SKILL.md`.
-  - Sin argumento, usa la línea de atribución que proporcione la herramienta para la sesión en curso; si no hay, constrúyela con el nombre del agente o modelo que reporta la propia sesión y el correo de atribución documentado por la herramienta.
-  - Si no es posible determinar la identidad activa, omite el *trailer* y avisa al usuario; nunca copies nombre, modelo o versión de un ejemplo, de un *commit* anterior o de otra sesión.
+  - Formato común para todos los agentes: `Co-Authored-By: [<Herramienta> ]<Modelo> (<esfuerzo>) <correo>`; sin esfuerzo disponible, sin paréntesis.
+
+    | Herramienta | Ejemplo | Correo |
+    |-------------|---------|--------|
+    | Claude Code | `Claude Opus 5.5 (medium)` | `noreply@anthropic.com` |
+    | Codex | `Codex GPT-6.1 Sol (high)` | `noreply@openai.com` |
+    | GitHub Copilot CLI | `Copilot GPT-6 Luna (low)` | `223556219+Copilot@users.noreply.github.com` |
+
+  - En esas tres herramientas, resuélvelo con `python3 ~/rules/scripts/commit_trailer.py` justo antes de cada *commit*. El *script* detecta la herramienta por el entorno (`--tool codex|claude|copilot` la fuerza) y lee **solo** la sesión activa: en Claude Code, el modelo del último turno del hilo principal (descarta subagentes y `<synthetic>`) y el esfuerzo de `CLAUDE_EFFORT`; en Codex, el último `turn_context` del hilo; en Copilot CLI, el último registro de uso del agente raíz. Usa su salida solo si termina con código 0.
+  - El formato de las sesiones no es una API documentada: si cambia, el *script* falla en vez de adivinar. Entonces usa la línea de atribución que proporcione la herramienta, en el formato común; si tampoco hay, omite el *trailer* y avisa al usuario.
+  - Nunca copies nombre, modelo o esfuerzo de un ejemplo, de un *commit* anterior, de otra sesión o de la configuración predeterminada.
 
 Después haz el *commit* con:
 
@@ -135,13 +143,13 @@ Si se hizo un *commit* con el idioma equivocado y todavía no se envió, detén 
 **Proceso obligatorio:**
 
 1. **Primero:** actualizar `CHANGELOG.md` con `/changelogger`.
-2. **Segundo:** ejecutar `/commit`, que valida la identidad (una vez por sesión), comprueba la puerta del CHANGELOG, agrega todos los cambios con `git add -A` y construye `/tmp/commit-msg.txt`.
-3. **Tercero:** hacer el *commit* desde ese archivo: `git commit -F /tmp/commit-msg.txt`.
+2. **Segundo:** ejecutar `/commit`, que valida la identidad (una vez por sesión), comprueba la puerta del CHANGELOG, planea *commits* atómicos, prepara cada grupo con `git add` selectivo y construye `/tmp/commit-msg.txt` para cada uno.
+3. **Tercero:** hacer cada *commit* desde ese archivo: `git commit -F /tmp/commit-msg.txt`; `CHANGELOG.md` va en el último.
 4. **Cuarto:** enviar con `git push`.
 
 **Advertencia:** si `CHANGELOG.md` no tiene cambios, el flujo debe abortar y sugerir `/changelogger`.
 
-**Refuerzo local en este repositorio:** el *hook* `.githooks/pre-commit` rechaza cualquier *commit* que no lleve `CHANGELOG.md` en *staging*, y `.githooks/commit-msg` valida el formato de *Commits* Convencionales. Actívalos una vez por clon con `npm run hooks:install`. La variable `SKIP_CHANGELOG_GATE=1` existe solo para casos excepcionales.
+**Refuerzo local en este repositorio:** el *hook* `.githooks/pre-commit` rechaza cualquier *commit* cuando `CHANGELOG.md` no está en *staging* ni tiene cambios pendientes (así pasan los *commits* intermedios de una serie atómica), y `.githooks/commit-msg` valida el formato de *Commits* Convencionales. Actívalos una vez por clon con `npm run hooks:install`. La variable `SKIP_CHANGELOG_GATE=1` existe solo para casos excepcionales.
 
 #### 3.1.1. Protocolo anti-errores y anti-patrones (obligatorio, sin excepción)
 
@@ -157,7 +165,7 @@ Antes de continuar a `git add`/`git commit`, cumple este protocolo:
    ```
 
 2. Si la puerta falla (sin cambios), detén la ejecución de inmediato.
-3. Si la puerta pasa (hay cambios en *staging* o fuera de él), continúa con `git add -A` y `git commit -F`.
+3. Si la puerta pasa (hay cambios en *staging* o fuera de él), continúa con los *commits* atómicos (`git add -- <archivos>` y `git commit -F`).
 4. Verifica la puerta de idioma: asunto y cuerpo de `/tmp/commit-msg.txt` completamente en inglés internacional (UK). Si falla, corrige el archivo antes de continuar.
 5. El mantenimiento de formato e idioma del CHANGELOG se delega a `/changelogger` y «~/rules/cot/changelog.md».
 
@@ -183,30 +191,31 @@ if git --no-pager diff --quiet -- CHANGELOG.md && git --no-pager diff --cached -
     exit 1
 fi
 
-# 3. Agregar todos los cambios
-git add -A
+# 3. Preparar solo los archivos de este commit atómico (CHANGELOG.md va con el último)
+git add -- rulesets/COMMITTING.md CHANGELOG.md
 
 # 4. Preparar el mensaje detallado y hacer commit (no interactivo)
-cat > /tmp/commit-msg.txt <<EOF
+cat > /tmp/commit-msg.txt <<'EOF'
 docs: validate changelog gate before commit
 
 - Enforce changelog diff gate before staging and commit
 - Abort commit flow when changelog has no repo diff
 - Keep commit message workflow in English using temporary file
 
-Co-Authored-By: <agente en turno> <identificador>
 EOF
+python3 ~/rules/scripts/commit_trailer.py >> /tmp/commit-msg.txt
 git commit -F /tmp/commit-msg.txt
 
 # 5. Enviar
 git push
 ```
 
-### 3.2. Un *commit* por ejecución de `/commit`
+### 3.2. *Commits* atómicos
 
-- **Política predeterminada:** cada ejecución de `/commit` produce **un solo *commit*** con todos los cambios (`git add -A`), porque la puerta del CHANGELOG se aplica por *commit*.
-- **Propósito claro:** procura que cada ejecución agrupe un cambio coherente; si el trabajo mezcla temas sin relación, conviene llamar a `/changelogger` y `/commit` por separado para cada tema.
-- **División atómica solo a petición:** divide en varios *commits* (con `git add` selectivo) únicamente cuando el usuario lo pida. En ese caso, cada *commit* debe pasar su propia puerta del CHANGELOG, así que lleva en *staging* la parte de `CHANGELOG.md` que le corresponde.
+- **Un cambio lógico por *commit*:** analiza `git status` y separa los cambios de tipos distintos (`feat`, `fix`, `docs`, `refactor`…) en *commits* independientes, con `git add -- <archivos>`. Nunca uses `git add .` ni `git add -A` con cambios mezclados.
+- **`CHANGELOG.md` va con el último *commit* de la serie:** `/changelogger` lo actualiza una vez para todo el trabajo; los *commits* intermedios pasan la puerta porque el archivo sigue con cambios pendientes.
+- **Atribución por *commit*:** vuelve a ejecutar `scripts/commit_trailer.py` antes de cada uno.
+- **Un solo *push*** al final de la serie.
 
 ### 3.3. Asociación con tareas
 
@@ -266,7 +275,7 @@ git config --global pager.diff false
 **Solución:** presiona Ctrl+C para cancelar el comando incompleto y usa el archivo temporal, que evita por completo los problemas de escape:
 
 ```bash
-cat > /tmp/commit-msg.txt <<EOF
+cat > /tmp/commit-msg.txt <<'EOF'
 fix: correct "user" validation
 
 - Validate user payload before persistence
@@ -274,8 +283,8 @@ fix: correct "user" validation
   preserve backward compatibility for existing callers
 - Add explicit error handling for invalid identifiers
 
-Co-Authored-By: <agente en turno> <identificador>
 EOF
+python3 ~/rules/scripts/commit_trailer.py >> /tmp/commit-msg.txt
 git commit -F /tmp/commit-msg.txt
 ```
 

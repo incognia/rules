@@ -1,45 +1,11 @@
 ---
 name: commit
-description: "Full commit workflow with mandatory CHANGELOG validation, SSH validation, and conventional commits in English. Use this skill before making any git commit. Usage: /commit [author_model], e.g. /commit opus5.5"
-argument-hint: "[help|opus5.5|sonnet5.5|haiku4.5|fable5.1|…]"
-context: fork
-agent: general-purpose
-model: claude-sonnet-5-5
-background: false
+description: "Full commit workflow with mandatory CHANGELOG validation, SSH validation, atomic conventional commits in English and a co-author trailer detected from the active session. Use this skill before making any git commit."
 ---
 
 # Commit workflow
 
-> **Execution (Claude Code):** this skill runs in a forked subagent on Claude Sonnet 5.5 (`context: fork`, `model: claude-sonnet-5-5`, `background: false`). The subagent starts with no conversation history: gather everything from the repository itself (`git status`, `git diff`, `CHANGELOG.md`) and report the result back to the main session in Spanish Mexican. Other tools ignore these frontmatter keys and run the skill inline.
-
-## Arguments
-
-- **Author model** (optional): $0 — the model that actually did the work, so the `Co-Authored-By` trailer credits it instead of the subagent that only packages the commit.
-  - Format: lowercase, no spaces, `<family><version>`; the version is mandatory. It must match `^(opus|sonnet|haiku|fable|mythos)[0-9]+(\.[0-9]+)?$`. Examples: `opus5.5`, `opus5`, `sonnet5.5`, `haiku4.5`, `fable5.1`.
-  - Mapping: capitalise the family and add the version as written → `Claude <Family> <version>` (`opus5.5` → `Claude Opus 5.5`, `haiku4.5` → `Claude Haiku 4.5`). Email: `noreply@anthropic.com`. Never change or complete the version.
-  - Anything else (missing version such as `sonnet`, unknown family, uppercase, spaces, extra words): stop before staging, show this usage and the table below, and do not commit.
-  - Without argument: the trailer names the model running this skill (in Claude Code, the subagent's: Claude Sonnet 5.5).
-  - `help`: show the usage and the table below in Spanish Mexican, then stop. No git command runs: no status, no staging, no commit.
-
-### Valid author models (`/commit help`)
-
-Claude API models as of 2026-10-06; Claude Code's `/model` may offer fewer (e.g. Haiku 4.5 only). The rule itself only requires `<family><version>`, so a newer model works before this table is updated.
-
-| Family | Argument | Model | Note |
-|--------|----------|-------|------|
-| Fable | `fable5.1` | Claude Fable 5.1 | most capable |
-| Fable | `fable5` | Claude Fable 5 | |
-| Mythos | `mythos5.1` | Claude Mythos 5.1 | Project Glasswing only |
-| Opus | `opus5.5` | Claude Opus 5.5 | current Opus |
-| Opus | `opus5` | Claude Opus 5 | |
-| Opus | `opus4.8` | Claude Opus 4.8 | |
-| Opus | `opus4.7` | Claude Opus 4.7 | |
-| Opus | `opus4.6` | Claude Opus 4.6 | |
-| Sonnet | `sonnet5.5` | Claude Sonnet 5.5 | current Sonnet; runs this skill's subagent |
-| Sonnet | `sonnet5` | Claude Sonnet 5 | |
-| Sonnet | `sonnet4.6` | Claude Sonnet 4.6 | |
-| Haiku | `haiku5.5` | Claude Haiku 5.5 | current Haiku in the API |
-| Haiku | `haiku4.5` | Claude Haiku 4.5 | |
+> **Execution:** this skill runs inline in the main session, never as a forked subagent, so the model that did the work is the one that commits and `scripts/commit_trailer.py` can read it from the active session.
 
 ## When to use
 
@@ -66,8 +32,8 @@ Before making any git commit in projects that follow the rules repository conven
 4. **(Optional) Inspect CHANGELOG diff**:
    - `git --no-pager diff -- CHANGELOG.md`
    - `git --no-pager diff --cached -- CHANGELOG.md`
-5. **Stage all changes**: `git add -A`. One `/commit` produces exactly one commit, because the CHANGELOG gate applies per commit. Split into several atomic commits (selective `git add`) only when the user explicitly asks; then each commit must carry its own part of `CHANGELOG.md` (see step 5 of the CoT).
-6. **Build commit message in temporary file**: create `/tmp/commit-msg.txt` using this detailed structure (international English, UK):
+5. **Plan atomic commits**: run `git status --short`, classify the changes by logical type and purpose (e.g. `feat` + `fix`, `docs` + `refactor`) and plan one commit per group. Stage each group only with `git add -- <file>...`; never `git add .` or `git add -A` across mixed changes (a single homogeneous group may use `git add -A`). `CHANGELOG.md` goes in the **last** commit of the series, together with that group's files; earlier commits pass the gate because `CHANGELOG.md` still has pending changes.
+6. **Build the commit message for the current group**: create (or rewrite before each commit) `/tmp/commit-msg.txt` using this detailed structure (international English, UK):
 
    ```text
    type(scope): short summary in english
@@ -86,16 +52,15 @@ Before making any git commit in projects that follow the rules repository conven
    - Continuation lines MUST be indented with two spaces so text stays aligned with the bullet content.
    - Keep exactly one blank line between subject/body and body/footer.
    - Redundancy rule: commit body details MUST NOT include `update/edit CHANGELOG.md` (or equivalent), because changelog maintenance is a precondition validated by `/commit`, not a detail to report in the body.
-   - `Co-Authored-By` is resolved dynamically at commit time, never hardcoded:
-     0. If an author model argument was given (see Arguments), use `Co-Authored-By: Claude <Family> <version> <noreply@anthropic.com>` built from it, and nothing else.
-     1. Without argument, if the tool or harness supplies an attribution line for the current session (e.g. Claude Code's system-provided commit attribution), use it verbatim. When this skill runs forked on another model, that is the subagent's model, not the main session's.
-     2. Otherwise build it from the identity the session itself reports: `Co-Authored-By: <agent/model name as reported by the session> <tool's documented commit email>`.
-     3. If the active identity cannot be determined, omit the trailer and tell the user; never guess.
-     - Never copy a name, model or version from these rules, an earlier commit or another session.
-     - Reference commit emails by vendor (the name always comes from the session): Anthropic `noreply@anthropic.com`, OpenAI `noreply@openai.com`, Google Antigravity `antigravity-agent@google.com`, Warp `oz-agent@warp.dev`; any other tool → its documented address, or `noreply@<tool-domain>` if none is published.
+   - `Co-Authored-By` is resolved from the active session immediately before **each** commit (the model can change mid-conversation), never hardcoded. Shared format: `Co-Authored-By: [<Tool> ]<Model> (<effort>) <email>`, e.g. `Claude Opus 5.5 (medium)`, `Codex GPT-6.1 Sol (high)`, `Copilot GPT-6 Luna (low)`:
+     1. In Claude Code, Codex or GitHub Copilot CLI, run `python3 ~/rules/scripts/commit_trailer.py` and use its stdout only when it exits 0. If it reports that the effort is unavailable, the printed model-only trailer is still valid.
+     2. If the helper fails, use the attribution line the tool or harness supplies for the session (e.g. Claude Code's system-provided commit attribution), kept in the shared format.
+     3. Other tools: build it from the identity the session itself reports, in the shared format, with the tool's documented commit email (Anthropic `noreply@anthropic.com`, OpenAI `noreply@openai.com`, GitHub Copilot `223556219+Copilot@users.noreply.github.com`, Google Antigravity `antigravity-agent@google.com`, Warp `oz-agent@warp.dev`; otherwise `noreply@<tool-domain>`).
+     4. If the model cannot be verified, omit the trailer and tell the user; never guess.
+     - Never copy a name, model or effort from these rules, an earlier commit, another session or configuration defaults.
    Reuse and adjust `/tmp/commit-msg.txt` until the wording is final.
-7. **Commit from file**: `git commit -F /tmp/commit-msg.txt` — message MUST be in international English (UK), following Conventional Commits
-8. **Push**: `git push`
+7. **Commit from file**: `git commit -F /tmp/commit-msg.txt` — message MUST be in international English (UK), following Conventional Commits. Repeat steps 5–7 for each group (re-running the trailer helper each time) until the working tree is clean.
+8. **Push** once, after the last commit: `git push`
 9. **Verify**: `git --no-pager log --oneline -5`
 
 ## Anti-error and anti-pattern protocol for /commit (MANDATORY)
@@ -115,7 +80,8 @@ Forbidden anti-patterns:
 - Including `update/edit CHANGELOG.md` (or equivalent) as a commit body detail.
 - Falling back to ad-hoc commit messages that skip `/tmp/commit-msg.txt`.
 - Using Spanish in commit message subject/body.
-- Splitting the work into several commits when the user did not ask for it.
+- Mixing unrelated change types in one commit, or `git add .`/`git add -A` across mixed changes.
+- Committing `CHANGELOG.md` before the last commit of the series.
 
 ## Rules
 
@@ -125,7 +91,8 @@ Forbidden anti-patterns:
 - Commit body must describe substantive changes only; do not include changelog-edit tasks in body bullets
 - Use non-interactive commands only (no pagers, no editors)
 - Always use `git commit -F /tmp/commit-msg.txt`, never `git commit -m`
-- One `/commit` = one commit with `git add -A`; split only when the user asks
+- Atomic commits: one logical change per commit, staged selectively; `CHANGELOG.md` travels with the last one
+- Re-run `scripts/commit_trailer.py` before every commit
 - In `/tmp/commit-msg.txt`, keep bullets left-aligned and wrap long lines with aligned continuation indentation
 - `CHANGELOG.md` format maintenance belongs to `/changelogger` + `~/rules/cot/changelog.md`
 - CoT files classify as `feat:` not `docs:`

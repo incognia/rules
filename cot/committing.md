@@ -1,11 +1,11 @@
 ---
 domain: workflow
-task: seguir COMMITTING.md (validar identidad y CHANGELOG preactualizado, un commit convencional y push simple)
+task: seguir COMMITTING.md (validar identidad y CHANGELOG preactualizado, commits atómicos convencionales y push simple)
 dificultad: baja
 longitud_objetivo: corta
 validacion: CHANGELOG detectado como modificado, identidad confirmada y commit/push exitosos
-version: "1.4"
-last_updated: 2026-10-14
+version: "1.5"
+last_updated: 2026-10-15
 ---
 <!-- markdownlint-disable MD041 -->
 
@@ -13,7 +13,8 @@ Razonamiento:
 
 - Cumplir el flujo obligatorio: `CHANGELOG.md` debe llegar previamente actualizado; `/commit` SOLO valida ese prerrequisito y luego ejecuta *add*, *commit* y *push* (ver «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md))).
 - Si `CHANGELOG.md` no tiene cambios respecto al repositorio, abortar y delegar la actualización a `/changelogger`.
-- Política predeterminada: una ejecución de `/commit` produce un solo *commit* con todos los cambios (`git add -A`), porque la puerta del CHANGELOG se aplica por *commit*. Dividir en *commits* atómicos solo cuando el usuario lo pida.
+- *Commits* atómicos: cada *commit* representa un solo cambio lógico. Analiza `git status` y, si los cambios son de tipos mezclados (p. ej. `feat` + `fix`, `docs` + `refactor`), divídelos con `git add` selectivo; `CHANGELOG.md` viaja en el último *commit* de la serie.
+- `/commit` corre en la sesión principal, nunca en un subagente, para que el *trailer* acredite al modelo que hizo el trabajo.
 - CRÍTICO: mensaje de *commit* SIEMPRE en inglés internacional (UK) con Conventional *Commits*; documentación en español mexicano.
 - El *push* debe ser simple (`git push`) siempre que el repositorio se haya configurado inicialmente (ver «~/rules/rulesets/GIT.md», sección de configuración inicial).
 
@@ -47,7 +48,9 @@ Pasos:
    Resultado: repositorio validado con SSH, identidad confirmada y listo para el *commit*.
 
 1) Acción: revisar el estado del repositorio.
-   Resultado: `git status` y `git --no-pager diff --stat` para entender qué cambió y redactar el mensaje. Si el usuario pidió dividir en varios *commits*, planear aquí qué archivos van en cada uno.
+   Resultado: `git status --short` y `git --no-pager diff --stat` para entender qué cambió.
+   Evaluación: determinar si los cambios son de un solo tipo (p. ej. solo `docs`) o mixtos (p. ej. `feat` + `fix`).
+   Decisión: si son mixtos, planear aquí los grupos de archivos de cada *commit* atómico; `CHANGELOG.md` va con el último.
 
 2) Acción: validar la puerta de `CHANGELOG.md` antes del *staging*.
    Comandos obligatorios:
@@ -85,13 +88,12 @@ Pasos:
    - La viñeta `-` inicia en columna 1 (sin espacios ni tabuladores previos).
    - Si una viñeta es larga, partirla a mano y alinear la continuación con dos espacios.
    - Una línea en blanco entre encabezado y cuerpo, y entre cuerpo y pie.
-   - Si `/commit` recibió el argumento de modelo autor (`<familia><versión>` con versión obligatoria, en minúsculas y sin espacios: `opus5.5`, `sonnet5.5`, `haiku4.5`, etc.), el *trailer* es `Co-Authored-By: Claude <Familia> <versión> <noreply@anthropic.com>` construido de él, sin cambiar ni completar la versión; un argumento inválido o sin versión detiene el flujo antes del *staging*. Con `help`, solo muestra el uso y la tabla de modelos válidos del *skill* (`.agents/skills/commit/SKILL.md`) y termina sin ejecutar ningún comando de git.
-   - Sin argumento, `Co-Authored-By` se resuelve dinámicamente al momento del *commit*, nunca está fijo en el texto:
-     1. Si la herramienta o el *harness* proporciona una línea de atribución para la sesión en curso (p. ej. la atribución de *commits* que inyecta Claude Code), usarla tal cual.
-     2. Si no, construirla con la identidad que reporta la propia sesión: `Co-Authored-By: <nombre del agente/modelo según la sesión> <correo de atribución documentado por la herramienta>`.
-     3. Si no es posible determinar la identidad activa, omitir el *trailer* y avisar al usuario; nunca adivinar.
-     - Prohibido copiar nombre, modelo o versión de estas reglas, de un *commit* anterior o de otra sesión.
-     - Correos de referencia por proveedor (el nombre siempre sale de la sesión): Anthropic `noreply@anthropic.com`, OpenAI `noreply@openai.com`, Google Antigravity `antigravity-agent@google.com`, Warp `oz-agent@warp.dev`; otra herramienta → su correo documentado, o `noreply@<dominio-de-la-herramienta>` si no publica uno.
+   - `Co-Authored-By` se resuelve con la sesión activa justo antes de **cada** *commit* (el modelo puede cambiar a media conversación); nunca está fijo en el texto. Formato común: `Co-Authored-By: [<Herramienta> ]<Modelo> (<esfuerzo>) <correo>`, por ejemplo `Claude Opus 5.5 (medium)`, `Codex GPT-6.1 Sol (high)` o `Copilot GPT-6 Luna (low)`:
+     1. En Claude Code, Codex o GitHub Copilot CLI, ejecutar `python3 ~/rules/scripts/commit_trailer.py` y usar su salida solo si termina con código 0. Si avisa que no hay esfuerzo disponible, el *trailer* con el modelo solo es válido.
+     2. Si el *script* falla, usar la línea de atribución que proporcione la herramienta o el *harness* para la sesión (p. ej. la que inyecta Claude Code), en el formato común.
+     3. Otras herramientas: construirlo con la identidad que reporta la propia sesión y el correo documentado (Anthropic `noreply@anthropic.com`, OpenAI `noreply@openai.com`, GitHub Copilot `223556219+Copilot@users.noreply.github.com`, Google Antigravity `antigravity-agent@google.com`, Warp `oz-agent@warp.dev`; otra → `noreply@<dominio-de-la-herramienta>`).
+     4. Si no se puede verificar el modelo, omitir el *trailer* y avisar al usuario; nunca adivinar.
+     - Prohibido copiar nombre, modelo o esfuerzo de estas reglas, de un *commit* anterior, de otra sesión o de la configuración predeterminada.
 
 4) Acción: punto de control obligatorio de idioma antes de `git commit -F`.
    Declaración obligatoria:
@@ -101,13 +103,15 @@ Pasos:
    Validación:
 
    - Mostrar y revisar el contenido de `/tmp/commit-msg.txt` y confirmar inglés en asunto y cuerpo.
-   - Confirmar la presencia de `Co-Authored-By` con el nombre real del agente o herramienta que ejecuta el *commit* (o el del argumento de modelo autor), no un ejemplo copiado de otra sesión.
+   - Confirmar la presencia de `Co-Authored-By` con el nombre real del agente o herramienta que ejecuta el *commit* (resuelto con `scripts/commit_trailer.py` o, si falla, con la atribución de la herramienta), no un ejemplo copiado de otra sesión.
 
    Resultado: mensaje validado en inglés internacional (UK) y listo para el *commit* no interactivo.
 
-5) Acción: agregar todos los cambios y hacer un solo *commit* con el archivo temporal.
-   Resultado: `git add -A && git commit -F /tmp/commit-msg.txt`.
-   Excepción (solo si el usuario pidió dividir): repetir por cada grupo `git add <archivos> && git commit -F /tmp/commit-msg.txt`, reescribiendo `/tmp/commit-msg.txt` antes de cada uno; cada *commit* debe llevar en *staging* su parte de `CHANGELOG.md`, porque la puerta del paso 2 se aplica por *commit*.
+5) Acción: hacer *commits* atómicos según el análisis del paso 1, uno por grupo, con el archivo temporal del paso 3.
+   - Cambios homogéneos (un solo tipo): `git add -A && git commit -F /tmp/commit-msg.txt`.
+   - Cambios mixtos: por cada grupo, `git add -- <archivos> && git commit -F /tmp/commit-msg.txt`, reescribiendo `/tmp/commit-msg.txt` y volviendo a ejecutar `scripts/commit_trailer.py` antes de cada uno.
+   - `CHANGELOG.md` entra en el **último** *commit* de la serie, junto con los archivos de ese grupo. Los anteriores pasan la puerta porque `CHANGELOG.md` sigue con cambios pendientes (el *hook* `pre-commit` acepta ese caso).
+   Resultado: un *commit* por cambio lógico y árbol de trabajo limpio.
 
 6) Acción: *push* simple.
    Resultado: `git push`.
@@ -128,5 +132,6 @@ Conclusión:
   - Incluir en el cuerpo del *commit* una viñeta de edición o mantenimiento de `CHANGELOG.md` como detalle del cambio.
   - Hacer *commit* con mensaje en español o sin punto de control explícito de idioma.
   - Usar flujo interactivo (editor o paginador) en lugar de `git commit -F /tmp/commit-msg.txt`.
-  - Dividir en varios *commits* sin que el usuario lo haya pedido.
+  - Mezclar tipos de cambio sin relación en un mismo *commit*, o usar `git add .`/`git add -A` con cambios mezclados.
+  - Incluir `CHANGELOG.md` antes del último *commit* de la serie.
 - Referencias: «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)), «~/rules/cot/changelog.md» ([./changelog.md](./changelog.md)), «~/rules/cot/git_init.md» ([./git_init.md](./git_init.md)), «~/rules/rulesets/GIT.md» ([../rulesets/GIT.md](../rulesets/GIT.md)), «~/rules/README.md» ([../README.md](../README.md)) y «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)).
