@@ -4,7 +4,7 @@
 
 ## Regla principal
 
-**Todo el contenido debe escribirse en español mexicano, sin calcos del inglés ni regionalismos de otras variantes del español**
+**Todo el contenido debe escribirse en español mexicano, sin calcos del inglés ni regionalismos de otras variantes del español.**
 
 ---
 
@@ -60,6 +60,7 @@
 - «Cambios rompedores» (breaking changes) → «Cambios incompatibles»
 - «Direccionar» (directing) → «Dirigir/Llevar/Trasladar»
 - «App» (application) → «Aplicación»
+- «De manual» o «de libro de texto» (textbook) → «Elemental» o «Básico»
 
 ### Peninsularismos (España)
 
@@ -83,7 +84,7 @@
 
 - «Chévere» (Venezuela) → «Excelente»
 - «Pana» (Venezuela) → «Amigo»
-- «Chiche» (Nicaragaua) → «Fácil»
+- «Chiche» (Nicaragua) → «Fácil»
 
 ---
 
@@ -107,7 +108,7 @@
 - **«Está chingón»** - Funciona muy bien, excelente calidad, agradable a la vista
 - **«Está perro»** - Muy bueno, impresionante
 - **«Está machín»** - Muy bueno, robusto, confiable
-- **«Está del nabo»** - No funciona bien, tiene problemas (y eres chavorruco)
+- **«Está del nabo»** - No funciona bien, tiene problemas
 - **«No está padre»** - No funciona bien, tiene problemas
 - **«Es chafa»** - De mala calidad, deficiente
 - **«Ya valió madres»** - Se rompió, falló completamente
@@ -168,7 +169,7 @@
 - Incorrecto: `### configuración de proxmox ve` (necesita corrección)
 - Incorrecto: `### Configuración De Proxmox VE` (necesita corrección)
 
-****CRÍTICO:** después de dos puntos y seguido se escribirá con minúscula en todos los casos, excepto nombres propios (error MUY frecuente)**
+**CRÍTICO:** después de dos puntos y seguido se escribirá con minúscula en todos los casos, excepto nombres propios (error MUY frecuente)
 
 *Ejemplos de mayúsculas después de dos puntos:*
 
@@ -282,7 +283,7 @@ Los siguientes términos generan **rechazo particular** y deben evitarse a toda 
 - **«IT»** por «TI» - usar siempre el español
 - **Peninsularismos** («ordenador», «fichero») - RECHAZADOS
 - **Verbos inventados con -ear** (commitear, deployear) - EVITAR
-- **Títulos Con Cada Palabra En Mayúscula** - Usar solo en la primera palabra
+- **Títulos Con Cada Palabra En Mayúscula** - Usar mayúscula solo en la primera palabra
 - **Uso de mayúscula donde no corresponde** - «Lunes» por «lunes» o «Julio» por «julio» - INACEPTABLE
 - **Mayúscula después de dos puntos** - «Razón: Los nombres...» por «Razón: los nombres...» - ERROR MUY FRECUENTE E INACEPTABLE
 - **Pluralizar las siglas** - «VMs/VEs/ONGs» por «VM/VE/ONG» - Sin importar si es uno o 20: INACEPTABLE

@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-14] - Añadir CI, *hooks* de git y endurecer *scripts* y reglas
 
+- docs: corregir en `rulesets/LINGUISTICS.md` detalles de la revisión de Fabián Torres (negritas rotas en la regla de mayúsculas después de dos puntos, «Nicaragua», «usar mayúscula solo en la primera palabra», punto final de la regla general y quitar un comentario en broma) y agregar el calco «de manual» o «de libro de texto» → «elemental» o «básico», que él propuso
 - docs: incorporar la revisión de Fabián Torres a `rulesets/LINGUISTICS.md` (calcos nuevos «direccionar», «app» y «chiche», «ya se la sabe», sección de mayúsculas reordenada, puntos finales y «más de 130 millones», y sin la regla repetida de «IA») y a `cot/linguistics.md` («sea el caso», «comenzar» en lugar de «iniciar» y listas cerradas sin puntos suspensivos)
 - fix: mover a `CORPORATE_LOCATION` del `.env` no versionado la colonia de la ubicación laboral de `rulesets/CORPORATE.md`, que ahora indica solo «CDMX», y agregar la variable con un marcador en `.env.example`, porque el repositorio es público
 - docs: actualizar en `rulesets/TEACHING.md` el resumen educativo para presentar el perfil como «Líder DevOps» en lugar de «Ingeniero DevOps»
