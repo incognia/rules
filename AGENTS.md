@@ -156,11 +156,12 @@ Key CoT files:
 
 Skills are lightweight, agent-discoverable instruction sets in `.agents/skills/`. Each skill references detailed CoTs and rulesets without duplicating content.
 
-Available skills (16):
+Available skills (17):
 
 - **commit** — Full commit workflow with mandatory CHANGELOG gate and international English (UK) messages
 - **changelogger** — CHANGELOG.md maintenance with CST dates, in the repository's primary language
 - **release** — Semantic tag and release on GitHub or GitLab, notes derived from the CHANGELOG
+- **mr** — Open a GitLab merge request from the current branch, with the reviewer taken from the company context in `~/rules/.env` (`MR_CONTEXTS`) matched against `origin`
 - **sdd-readiness** — Assess whether a Confluence spec is ready for OpenSpec and post the result as an ADF comment after a confirmed draft
 - **linguistics** — Apply Spanish Mexican linguistic rules
 - **context** — Quick project context detection

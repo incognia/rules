@@ -247,6 +247,7 @@ sequenceDiagram
   - `/commit` — flujo completo de *commits* atómicos con CHANGELOG obligatorio, mensaje en inglés internacional (UK) y atribución `Co-Authored-By` detectada de la sesión activa con `scripts/commit_trailer.py` (Claude Code, Codex, Copilot CLI y Antigravity CLI `agy`)
   - `/changelogger` — mantenimiento de CHANGELOG.md con fechas CST, en el idioma principal del repositorio
   - `/release vX.Y.Z` — publicar *tag* y *release* en GitHub o GitLab con notas derivadas del CHANGELOG
+  - `/mr [rama-destino] [draft]` — abrir un *merge request* en GitLab desde la rama actual, con el revisor del contexto de empresa (`MR_CONTEXTS` en `~/rules/.env`) según el `origin`
   - `/linguistics <archivo>` — aplicar reglas de español mexicano
   - `/context` — detección rápida de contexto de proyecto
   - `/backup` — respaldo con nomenclatura estándar
