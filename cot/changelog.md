@@ -75,7 +75,10 @@ Pasos:
    Resultado: entrada compacta y consistente.
 
 6b) Acción: insertar viñetas en orden cronológico inverso dentro de la entrada de fecha.
-   REGLA CRÍTICA: la nueva viñeta va PRIMERO dentro del bloque de la fecha.
+   REGLA CRÍTICA: dentro del bloque de cada fecha, las viñetas van en orden cronológico inverso: el cambio más reciente queda hasta arriba, justo debajo del encabezado del día, y el más antiguo hasta abajo.
+   Corridas sucesivas el mismo día: la viñeta nueva va PRIMERO, arriba de la primera viñeta existente.
+   Varias viñetas en una misma corrida: ordénalas según el orden en que se harán sus *commits* atómicos, de modo que la del último *commit* (el que lleva `CHANGELOG.md`) quede hasta arriba y la del primero quede hasta abajo del grupo nuevo. `/commit` hace los *commits* siguiendo ese orden de abajo hacia arriba.
+   Nunca reordenes viñetas ya existentes; el orden solo se aplica a las que agregas en la corrida actual.
    TÉCNICA DE EDICIÓN OBLIGATORIA con la herramienta de edición del agente (buscar y reemplazar: `search` es el texto exacto que se busca y `replace` el texto que lo sustituye, sea cual sea el nombre de los parámetros en la herramienta):
 
 - REGLA DE ORO: el `search` termina en la ÚLTIMA LÍNEA que se desea como ancla. El `replace` reproduce esa línea intacta y AÑADE el nuevo contenido ANTES o DESPUÉS de ella. NUNCA incluir en el `search` una línea que luego se reproduzca truncada o modificada en el `replace`.
@@ -94,7 +97,7 @@ Pasos:
      - Hunk 2: usar como ancla el siguiente encabezado `## [FECHA_ANTERIOR]` y reemplazarlo por `línea en blanco + el mismo encabezado` para forzar el separador.
    - Prohibido repetir el mismo parche de inserción (`+6`) cuando la previsualización sigue sin separador en blanco.
    - Si el `search` falla, volver a leer el bloque con la herramienta de lectura del agente para obtener el contenido exacto antes de reintentar.
-   Resultado: viñetas tipadas ordenadas cronológicamente dentro de cada fecha, con la nueva viñeta al tope.
+   Resultado: viñetas tipadas en orden cronológico inverso dentro de cada fecha: la más reciente arriba, debajo del encabezado del día.
 
 6c) Acción: validar diff mínimo inmediatamente después de cada edición.
    COMANDO OBLIGATORIO: `git --no-pager diff -- CHANGELOG.md`

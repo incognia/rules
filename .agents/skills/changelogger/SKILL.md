@@ -28,6 +28,7 @@ When adding or updating entries in CHANGELOG.md for any project following rules 
    - **If the date already exists**: add new typed bullets inside that existing block; do NOT create a duplicate heading.
    - **First-attempt rule (MANDATORY)**: for an existing date block, the first attempt MUST use one single-hunk micro-block replacement with exact `search` = `## [YYYY-MM-DD] - ...` + immediate blank line + first existing bullet.
    - **Insertion rule (MANDATORY)**: in that same hunk, reproduce the heading and blank line intact, then insert the new bullet above the previous first bullet.
+   - **Bullet order (MANDATORY)**: inside a date block, bullets are in reverse chronological order — the most recent change at the top, right under the day heading. When one run adds several bullets, order them by the atomic commits that will carry them: the last commit's bullet (the one that ships `CHANGELOG.md`) at the top, the first commit's at the bottom of the new group; `/commit` commits them bottom-up. Never reorder existing bullets.
    - **No intra-block blank line (MANDATORY)**: keep bullets contiguous inside the same date block; never add an empty line between bullets of that block.
    - **If the date does not exist**: create `## [YYYY-MM-DD] - Título descriptivo breve` at the top and add typed bullets.
    - **Spacing rule (MANDATORY)**: keep exactly one blank line between the last bullet of the target date block and the next `## [YYYY-MM-DD]` heading.
