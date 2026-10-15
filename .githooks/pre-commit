@@ -1,5 +1,7 @@
 #!/bin/sh
 # pre-commit: enforce the CHANGELOG gate and lint staged Markdown.
+# The gate passes when CHANGELOG.md is staged, or still has unstaged changes
+# (intermediate commits of an atomic series; CHANGELOG.md goes with the last one).
 # Enable with: npm run hooks:install  (git config core.hooksPath .githooks)
 # Bypass the CHANGELOG gate in exceptional cases: SKIP_CHANGELOG_GATE=1 git commit ...
 
@@ -22,9 +24,15 @@ fi
 
 if [ "${SKIP_CHANGELOG_GATE:-0}" = "1" ]; then
   echo "pre-commit: CHANGELOG gate skipped (SKIP_CHANGELOG_GATE=1)." >&2
-elif ! printf '%s\n' "$staged" | grep -qx 'CHANGELOG.md'; then
-  echo "pre-commit: CHANGELOG.md is not staged." >&2
-  echo "  Update it first (/changelogger), then stage it." >&2
+elif printf '%s\n' "$staged" | grep -qx 'CHANGELOG.md'; then
+  : # CHANGELOG.md travels with this commit
+elif ! git diff --quiet -- CHANGELOG.md; then
+  # Intermediate commit of an atomic series: CHANGELOG.md is already updated
+  # and will be staged with the last commit.
+  :
+else
+  echo "pre-commit: CHANGELOG.md is neither staged nor pending." >&2
+  echo "  Update it first (/changelogger); stage it with the last commit of the series." >&2
   echo "  Exceptional bypass: SKIP_CHANGELOG_GATE=1 git commit ..." >&2
   exit 1
 fi
