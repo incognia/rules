@@ -69,6 +69,7 @@ DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")
 - Follow [Conventional Commits](https://www.conventionalcommits.org/) specification
 - Atomic commits: one logical change per commit, staged with `git add -- <files>`; `CHANGELOG.md` travels with the last commit of the series
 - Build the `Co-Authored-By` trailer before each commit with `python3 ~/rules/scripts/commit_trailer.py` (Claude Code, Codex, Copilot CLI; shared format `[<Tool> ]<Model> (<effort>) <email>`), falling back to the tool-supplied attribution; never copy a name, model or effort from an example or an earlier commit
+- Rewrite `/tmp/commit-msg.txt` from scratch for every commit: it persists across commits and invocations, so never reuse a subject or body without checking it against the staged files (`git diff --cached --stat`)
 - Use non-interactive commands: `git --no-pager log --oneline -5`
 
 ## Architecture and structure

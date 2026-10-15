@@ -103,6 +103,7 @@ Pasos:
    Validación:
 
    - Mostrar y revisar el contenido de `/tmp/commit-msg.txt` y confirmar inglés en asunto y cuerpo.
+   - `/tmp/commit-msg.txt` persiste entre *commits* e invocaciones: reescribirlo completo (asunto incluido) para cada *commit* y comprobar con `git diff --cached --stat` que asunto y cuerpo describen exactamente lo que está en *staging*.
    - Confirmar la presencia de `Co-Authored-By` con el nombre real del agente o herramienta que ejecuta el *commit* (resuelto con `scripts/commit_trailer.py` o, si falla, con la atribución de la herramienta), no un ejemplo copiado de otra sesión.
 
    Resultado: mensaje validado en inglés internacional (UK) y listo para el *commit* no interactivo.
@@ -134,4 +135,5 @@ Conclusión:
   - Usar flujo interactivo (editor o paginador) en lugar de `git commit -F /tmp/commit-msg.txt`.
   - Mezclar tipos de cambio sin relación en un mismo *commit*, o usar `git add .`/`git add -A` con cambios mezclados.
   - Incluir `CHANGELOG.md` antes del último *commit* de la serie.
+  - Mensaje rancio: reutilizar el asunto o el cuerpo que dejó en `/tmp/commit-msg.txt` un *commit* o una invocación anterior sin cotejarlo con lo que está en *staging*.
 - Referencias: «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)), «~/rules/cot/changelog.md» ([./changelog.md](./changelog.md)), «~/rules/cot/git_init.md» ([./git_init.md](./git_init.md)), «~/rules/rulesets/GIT.md» ([../rulesets/GIT.md](../rulesets/GIT.md)), «~/rules/README.md» ([../README.md](../README.md)) y «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)).

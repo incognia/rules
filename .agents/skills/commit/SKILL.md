@@ -58,7 +58,7 @@ Before making any git commit in projects that follow the rules repository conven
      3. Other tools: build it from the identity the session itself reports, in the shared format, with the tool's documented commit email (Anthropic `noreply@anthropic.com`, OpenAI `noreply@openai.com`, GitHub Copilot `223556219+Copilot@users.noreply.github.com`, Google Antigravity `antigravity-agent@google.com`, Warp `oz-agent@warp.dev`; otherwise `noreply@<tool-domain>`).
      4. If the model cannot be verified, omit the trailer and tell the user; never guess.
      - Never copy a name, model or effort from these rules, an earlier commit, another session or configuration defaults.
-   Reuse and adjust `/tmp/commit-msg.txt` until the wording is final.
+   `/tmp/commit-msg.txt` persists across commits and invocations: rewrite it from scratch (subject included) for every commit, and before `git commit -F` check that subject and body describe exactly what `git diff --cached --stat` shows.
 7. **Commit from file**: `git commit -F /tmp/commit-msg.txt` — message MUST be in international English (UK), following Conventional Commits. Repeat steps 5–7 for each group (re-running the trailer helper each time) until the working tree is clean.
 8. **Push** once, after the last commit: `git push`
 9. **Verify**: `git --no-pager log --oneline -5`
@@ -82,6 +82,7 @@ Forbidden anti-patterns:
 - Using Spanish in commit message subject/body.
 - Mixing unrelated change types in one commit, or `git add .`/`git add -A` across mixed changes.
 - Committing `CHANGELOG.md` before the last commit of the series.
+- Stale commit message: reusing a subject or body left in `/tmp/commit-msg.txt` by an earlier commit or invocation without checking it against the staged files.
 
 ## Rules
 
