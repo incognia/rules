@@ -32,7 +32,7 @@ Before making any git commit in projects that follow the rules repository conven
 4. **(Optional) Inspect CHANGELOG diff**:
    - `git --no-pager diff -- CHANGELOG.md`
    - `git --no-pager diff --cached -- CHANGELOG.md`
-5. **Plan atomic commits**: run `git status --short`, classify the changes by logical type and purpose (e.g. `feat` + `fix`, `docs` + `refactor`) and plan one commit per group. Stage each group only with `git add -- <file>...`; never `git add .` or `git add -A` across mixed changes (a single homogeneous group may use `git add -A`). `CHANGELOG.md` goes in the **last** commit of the series, together with that group's files; earlier commits pass the gate because `CHANGELOG.md` still has pending changes.
+5. **Plan atomic commits**: run `git status --short`, classify the changes by logical type and purpose (e.g. `feat` + `fix`, `docs` + `refactor`) and plan one commit per group, ordered by the new bullets of the day block in `CHANGELOG.md` from bottom to top (first commit = lowest new bullet; last commit = top bullet), so the CHANGELOG's reverse chronological order matches git history. Stage each group only with `git add -- <file>...`; never `git add .` or `git add -A` across mixed changes (a single homogeneous group may use `git add -A`). `CHANGELOG.md` goes in the **last** commit of the series, together with that group's files; earlier commits pass the gate because `CHANGELOG.md` still has pending changes.
 6. **Build the commit message for the current group**: create (or rewrite before each commit) `/tmp/commit-msg.txt` using this detailed structure (international English, UK):
 
    ```text

@@ -213,6 +213,7 @@ git push
 ### 3.2. *Commits* atómicos
 
 - **Un cambio lógico por *commit*:** analiza `git status` y separa los cambios de tipos distintos (`feat`, `fix`, `docs`, `refactor`…) en *commits* independientes, con `git add -- <archivos>`. Nunca uses `git add .` ni `git add -A` con cambios mezclados.
+- **Orden de la serie:** los *commits* siguen las viñetas nuevas del día en `CHANGELOG.md` de abajo hacia arriba; el primero corresponde a la viñeta nueva de más abajo y el último a la de hasta arriba, que es la más reciente. `/changelogger` las ordena así desde el principio (ver «~/rules/cot/changelog.md», paso 6b) y nunca se reordenan viñetas existentes.
 - **`CHANGELOG.md` va con el último *commit* de la serie:** `/changelogger` lo actualiza una vez para todo el trabajo; los *commits* intermedios pasan la puerta porque el archivo sigue con cambios pendientes.
 - **Atribución por *commit*:** vuelve a ejecutar `scripts/commit_trailer.py` antes de cada uno.
 - **Un solo *push*** al final de la serie.

@@ -50,7 +50,7 @@ Pasos:
 1) Acción: revisar el estado del repositorio.
    Resultado: `git status --short` y `git --no-pager diff --stat` para entender qué cambió.
    Evaluación: determinar si los cambios son de un solo tipo (p. ej. solo `docs`) o mixtos (p. ej. `feat` + `fix`).
-   Decisión: si son mixtos, planear aquí los grupos de archivos de cada *commit* atómico; `CHANGELOG.md` va con el último.
+   Decisión: si son mixtos, planear aquí los grupos de archivos de cada *commit* atómico. El orden de los *commits* sigue las viñetas nuevas del día en `CHANGELOG.md` de abajo hacia arriba: el primer *commit* corresponde a la viñeta nueva de más abajo y el último, que lleva `CHANGELOG.md`, a la de hasta arriba. Así el orden cronológico inverso del CHANGELOG coincide con el historial de git.
 
 2) Acción: validar la puerta de `CHANGELOG.md` antes del *staging*.
    Comandos obligatorios:
