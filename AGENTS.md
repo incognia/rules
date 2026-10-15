@@ -52,7 +52,7 @@ All documentation follows strict linguistic rules from `rulesets/LINGUISTICS.md`
 **MANDATORY PROCESS - Always follow this exact order:**
 
 1. **FIRST**: Update `CHANGELOG.md` with `/changelogger`, in the repository's primary language (Spanish Mexican here)
-2. **SECOND**: Run `/commit`, which validates the git identity (once per session, full step 0 of `cot/committing.md`), checks the CHANGELOG gate, stages everything with `git add -A` and builds `/tmp/commit-msg.txt`
+2. **SECOND**: Run `/commit`, which validates the git identity (once per session, full step 0 of `cot/committing.md`), checks the CHANGELOG gate, plans atomic commits, stages each group selectively and builds `/tmp/commit-msg.txt` for each
 3. **THIRD**: Commit from that file: `git commit -F /tmp/commit-msg.txt`
 4. **FOURTH**: Push: `git push`
 
@@ -67,8 +67,8 @@ DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")
 
 - Always use **international English (UK)** for commit messages
 - Follow [Conventional Commits](https://www.conventionalcommits.org/) specification
-- Resolve the `Co-Authored-By` trailer at commit time from the attribution the tool supplies for the session; never copy a name or model from an example or an earlier commit
-- One `/commit` produces one commit, because the CHANGELOG gate applies per commit; split into atomic commits only when the user asks
+- Atomic commits: one logical change per commit, staged with `git add -- <files>`; `CHANGELOG.md` travels with the last commit of the series
+- Build the `Co-Authored-By` trailer before each commit with `python3 ~/rules/scripts/commit_trailer.py` (Claude Code, Codex, Copilot CLI; shared format `[<Tool> ]<Model> (<effort>) <email>`), falling back to the tool-supplied attribution; never copy a name, model or effort from an example or an earlier commit
 - Use non-interactive commands: `git --no-pager log --oneline -5`
 
 ## Architecture and structure
@@ -176,7 +176,7 @@ Available skills (16):
 
 Invoke with natural language (e.g. "use the commit skill") or slash command (e.g. `/commit`).
 
-`/changelogger` and `/commit` run in Claude Code as forked subagents on Claude Sonnet 5.5 (`context: fork`, `model: claude-sonnet-5-5`, `background: false` in their frontmatter): a small fresh context is cheaper than switching models inline on a long session, whose cache is model-scoped. They gather everything from the repository, so they do not need the conversation history. Because the forked `/commit` only knows its own model, pass the model that did the work as an optional argument (`/commit opus5.5`, `/commit sonnet5.5`, `/commit haiku4.5`; lowercase, no spaces, version mandatory; `/commit help` lists the valid values) so the `Co-Authored-By` trailer credits it; without argument the trailer names the subagent's model.
+`/changelogger` runs in Claude Code as a forked subagent on Claude Sonnet 5.5 (`context: fork`, `model: claude-sonnet-5-5`, `background: false` in its frontmatter): a small fresh context is cheaper than switching models inline on a long session, whose cache is model-scoped, and it gathers everything from the repository. `/commit` runs inline in the main session, so the model that did the work is the one that commits and `scripts/commit_trailer.py` reads it from the active session.
 
 ## Workflows
 

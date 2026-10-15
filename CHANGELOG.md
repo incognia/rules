@@ -3,6 +3,14 @@
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-10-15] - Hacer atómicos los *commits* y detectar la atribución con `commit_trailer.py`
+
+- feat: agregar `scripts/commit_trailer.py`, que imprime el *trailer* `Co-Authored-By` del modelo de la sesión activa de Claude Code, Codex o GitHub Copilot CLI (detecta la herramienta por el entorno, con `--tool` para forzarla; lee solo la sesión en curso y falla en lugar de adivinar si el formato de la sesión cambia), con el formato común `[<Herramienta> ]<Modelo> (<esfuerzo>) <correo>`
+- feat: cambiar `/commit` (`.agents/skills/commit/SKILL.md`), `cot/committing.md` y `rulesets/COMMITTING.md` a *commits* atómicos: analizar `git status`, separar los cambios por tipo lógico, preparar cada grupo con `git add -- <archivos>` (nunca `git add .` ni `git add -A` con cambios mezclados), reescribir `/tmp/commit-msg.txt` antes de cada *commit*, incluir `CHANGELOG.md` solo en el último y hacer un único *push* al final
+- refactor: ejecutar `/commit` en línea en la sesión principal y no como subagente bifurcado, y quitar de su *frontmatter* `context`, `agent`, `model`, `background` y el argumento de modelo autor `/commit [modelo]`, para que el *trailer* acredite al modelo que hizo el trabajo y se resuelva con `scripts/commit_trailer.py` justo antes de cada *commit*, con respaldo en la atribución de la herramienta y omisión con aviso si no se puede verificar el modelo
+- fix: permitir en `.githooks/pre-commit` que pasen la puerta del CHANGELOG los *commits* intermedios de una serie atómica cuando `CHANGELOG.md` aún tiene cambios pendientes, y actualizar el mensaje de rechazo
+- docs: actualizar `AGENTS.md` (flujo de *commits* atómicos, construcción del *trailer* con `commit_trailer.py` y `/commit` en línea frente a `/changelogger` bifurcado) y la descripción de `/commit` en `README.md`
+
 ## [2026-10-14] - Añadir CI, *hooks* de git y endurecer *scripts* y reglas
 
 - docs: corregir en `rulesets/LINGUISTICS.md` detalles de la revisión de Fabián Torres (negritas rotas en la regla de mayúsculas después de dos puntos, «Nicaragua», «usar mayúscula solo en la primera palabra», punto final de la regla general y quitar un comentario en broma) y agregar el calco «de manual» o «de libro de texto» → «elemental» o «básico», que él propuso

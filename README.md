@@ -232,7 +232,7 @@ sequenceDiagram
 - **templates/** — plantillas reutilizables
 - **scripts/** — *scripts* de automatización y respaldos
 - **.agents/skills/** — *skills* descubribles por agentes IA:
-  - `/commit` — flujo completo de *commit* con CHANGELOG obligatorio, mensaje en inglés internacional (UK) y atribución del agente resuelta en cada sesión
+  - `/commit` — flujo completo de *commits* atómicos con CHANGELOG obligatorio, mensaje en inglés internacional (UK) y atribución `Co-Authored-By` detectada de la sesión activa con `scripts/commit_trailer.py` (Claude Code, Codex y Copilot CLI)
   - `/changelogger` — mantenimiento de CHANGELOG.md con fechas CST, en el idioma principal del repositorio
   - `/release vX.Y.Z` — publicar *tag* y *release* en GitHub o GitLab con notas derivadas del CHANGELOG
   - `/linguistics <archivo>` — aplicar reglas de español mexicano
