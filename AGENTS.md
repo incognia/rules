@@ -240,6 +240,10 @@ This file is symlinked as `CLAUDE.md` so Claude Code loads it automatically as p
 
 `scripts/sync_global.sh` symlinks each `SKILL.md` already copied into `~/.agents/skills/<name>/` to `~/.claude/commands/<name>.md`, so Claude Code recognises `/name`. This is the mechanism validated in practice — without it, Claude Code ignored these slash commands.
 
+## Other coding agents
+
+GitHub Copilot CLI and Codex discover the skills directly in `~/.agents/skills/<name>/` (Codex also reads `.agents/skills/` from the repository up to its root), so `sync_global.sh` needs no extra step for them. Claude Code and Copilot invoke a skill as `/name`; Codex uses `$name` (`/changelogger` → `$changelogger`, `/linguistics README.md` → `$linguistics README.md`). `scripts/commit_trailer.py` resolves the commit trailer in all three.
+
 ## Integration with other repositories
 
 When working in other projects, reference this repository:

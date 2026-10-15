@@ -58,7 +58,7 @@ npm --prefix ~/rules run hooks:install
 **Notas**:
 
 - `sync_global.sh` detecta la plataforma (macOS, Linux, Windows o WSL) y copia a las rutas correctas:
-  - *Skills* (`SKILL.md`): `~/.agents/skills/` (en WSL, la carpeta de usuario de Windows); se reflejan completas, así que los archivos borrados dentro de una *skill* también se eliminan, y se quitan las *skills* que el *script* instaló antes y ya no existen en el repositorio. Las reconocen Warp, Cursor, Copilot, Gemini y otros
+  - *Skills* (`SKILL.md`): `~/.agents/skills/` (en WSL, la carpeta de usuario de Windows); se reflejan completas, así que los archivos borrados dentro de una *skill* también se eliminan, y se quitan las *skills* que el *script* instaló antes y ya no existen en el repositorio. Las reconocen Warp, Cursor, Gemini y otros; GitHub Copilot CLI y Codex las descubren directo en esta carpeta, sin copia ni enlace adicional
   - *Skills* para Claude Code: cada `SKILL.md` instalado se enlaza a `~/.claude/commands/<nombre>.md` para que Claude Code reconozca `/nombre` (sin este enlace, Claude Code ignora los *slash commands*); solo enlaza las *skills* de este repositorio, nunca sobrescribe un comando ajeno y limpia los enlaces colgantes
   - *Workflows* (`*.yaml`) en macOS: `~/.warp/workflows/`
   - *Workflows* en Linux: `$XDG_DATA_HOME/warp-terminal/workflows/`
@@ -69,6 +69,16 @@ npm --prefix ~/rules run hooks:install
 - El `.env` nunca se versiona: se crea a partir de `.env.example` y guarda credenciales y datos sensibles (sitios de Atlassian, IP e infraestructura de los ambientes, datos de contacto). El repositorio es público, así que los archivos versionados solo llevan marcadores como `<client_ip>` o `{GATEWAY_IP}`
 - Para actualizar después de un `git pull`, solo ejecuta: `~/rules/scripts/sync_global.sh`
 - `cot/`, `rulesets/` y `templates/` se acceden por ruta canónica, sin enlace simbólico (`~/rules/cot/`, `~/rules/rulesets/`); la excepción es la exportación de *skills* a Claude Code arriba, que sí usa un enlace simbólico
+
+**Invocación de *skills* por herramienta**: la misma *skill* usa el prefijo de la herramienta que la ejecuta; el nombre y los argumentos no cambian.
+
+| Herramienta | De dónde la lee | Invocar | Con argumentos |
+|-------------|-----------------|---------|----------------|
+| Claude Code | `~/.claude/commands/<nombre>.md` (enlace de `sync_global.sh`) | `/changelogger` | `/linguistics README.md` |
+| GitHub Copilot CLI | `~/.agents/skills/<nombre>/` | `/changelogger` | `/linguistics README.md` |
+| Codex | `~/.agents/skills/<nombre>/` (y `.agents/skills/` del repositorio) | `$changelogger` | `$linguistics README.md` |
+
+En este README los ejemplos usan `/nombre`; en Codex cambia el prefijo por `$`. Con `/skills` dentro de Codex ves las que descubrió.
 
 ### Uso diario
 
@@ -231,7 +241,7 @@ sequenceDiagram
 - **cot/** — cadenas de razonamiento (CoT) para ejecución diaria
 - **templates/** — plantillas reutilizables
 - **scripts/** — *scripts* de automatización y respaldos
-- **.agents/skills/** — *skills* descubribles por agentes IA:
+- **.agents/skills/** — *skills* descubribles por agentes IA (ejemplos con `/` de Claude Code y Copilot; en Codex usa `$`):
   - `/commit` — flujo completo de *commits* atómicos con CHANGELOG obligatorio, mensaje en inglés internacional (UK) y atribución `Co-Authored-By` detectada de la sesión activa con `scripts/commit_trailer.py` (Claude Code, Codex y Copilot CLI)
   - `/changelogger` — mantenimiento de CHANGELOG.md con fechas CST, en el idioma principal del repositorio
   - `/release vX.Y.Z` — publicar *tag* y *release* en GitHub o GitLab con notas derivadas del CHANGELOG
