@@ -5,12 +5,13 @@ description: "Estándares, filosofía y cadenas de razonamiento (CoT) que guían
 
 # Reglas técnicas: prompts y CoT para acelerar el contexto de los LLM
 
-*Última modificación: 14 de octubre de 2026, 00:03 (CST)*
+*Última modificación: 15 de octubre de 2026, 15:26 (CST)*
 
+[![CI](https://github.com/incognia/rules/actions/workflows/ci.yaml/badge.svg)](https://github.com/incognia/rules/actions/workflows/ci.yaml)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
-[![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](http://commonmark.org)
+[![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](https://commonmark.org)
 [![Spanish](https://img.shields.io/badge/Language-Spanish%20(MX)-green.svg)](https://es.wikipedia.org/wiki/Espa%C3%B1ol_mexicano)
-[![CoTs](https://img.shields.io/badge/CoTs-24-blue.svg)](./cot/)
+[![CoTs](https://img.shields.io/badge/CoTs-23-blue.svg)](./cot/)
 [![Skills](https://img.shields.io/badge/Skills-16-green.svg)](./.agents/skills/)
 [![Rulesets](https://img.shields.io/badge/Rulesets-19-orange.svg)](./rulesets/)
 
@@ -58,7 +59,7 @@ npm --prefix ~/rules run hooks:install
 **Notas**:
 
 - `sync_global.sh` detecta la plataforma (macOS, Linux, Windows o WSL) y copia a las rutas correctas:
-  - *Skills* (`SKILL.md`): `~/.agents/skills/` (en WSL, la carpeta de usuario de Windows); se reflejan completas, así que los archivos borrados dentro de una *skill* también se eliminan, y se quitan las *skills* que el *script* instaló antes y ya no existen en el repositorio. Las reconocen Warp, Cursor, Gemini y otros; GitHub Copilot CLI y Codex las descubren directo en esta carpeta, sin copia ni enlace adicional
+  - *Skills* (`SKILL.md`): `~/.agents/skills/` (en WSL, la carpeta de usuario de Windows); se reflejan completas, así que los archivos borrados dentro de una *skill* también se eliminan, y se quitan las *skills* que el *script* instaló antes y ya no existen en el repositorio. Las reconocen Warp, Cursor, Gemini y otros; GitHub Copilot CLI, Codex y Antigravity CLI (`agy`) las descubren directo en esta carpeta, sin copia ni enlace adicional
   - *Skills* para Claude Code: cada `SKILL.md` instalado se enlaza a `~/.claude/commands/<nombre>.md` para que Claude Code reconozca `/nombre` (sin este enlace, Claude Code ignora los *slash commands*); solo enlaza las *skills* de este repositorio, nunca sobrescribe un comando ajeno y limpia los enlaces colgantes
   - *Workflows* (`*.yaml`) en macOS: `~/.warp/workflows/`
   - *Workflows* en Linux: `$XDG_DATA_HOME/warp-terminal/workflows/`
@@ -269,6 +270,7 @@ sequenceDiagram
 
 - Sincronización: scripts/sync_global.sh (instala *skills* y *workflows* globales, multiplataforma)
 - Git (tras `git init`): `scripts/git-init-context.sh <personal|laboral> <llave> <url_remota> <rama>` (no interactivo)
+- Atribución de *commits*: `scripts/commit_trailer.py` (imprime el *trailer* `Co-Authored-By` del modelo de la sesión activa en Claude Code, Codex, Copilot CLI o Antigravity CLI `agy`; `--tool` fuerza la herramienta)
 - Fecha CST: scripts/cst_date.sh
 - Correo vía Graph API: scripts/graph_auth.py (autenticación y caché de *token*)
 - Confluence: scripts/atlassian/ (`confluence-management.sh` para páginas, adjuntos, comentarios al pie y respuestas en ADF, y `find-marked` para ubicar un hilo marcado; `adf_lib.py` para construir y leer ADF; credenciales en `.env`)
