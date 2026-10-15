@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-14] - Añadir CI, *hooks* de git y endurecer *scripts* y reglas
 
+- docs: incorporar la revisión de Fabián Torres a `rulesets/LINGUISTICS.md` (calcos nuevos «direccionar», «app» y «chiche», «ya se la sabe», sección de mayúsculas reordenada, puntos finales y «más de 130 millones», y sin la regla repetida de «IA») y a `cot/linguistics.md` («sea el caso», «comenzar» en lugar de «iniciar» y listas cerradas sin puntos suspensivos)
 - fix: mover a `CORPORATE_LOCATION` del `.env` no versionado la colonia de la ubicación laboral de `rulesets/CORPORATE.md`, que ahora indica solo «CDMX», y agregar la variable con un marcador en `.env.example`, porque el repositorio es público
 - docs: actualizar en `rulesets/TEACHING.md` el resumen educativo para presentar el perfil como «Líder DevOps» en lugar de «Ingeniero DevOps»
 - feat: agregar integración continua en `.github/workflows/ci.yaml` (*lint* de Markdown con `npm ci` y `npm run lint:md`, y ShellCheck) y `.github/workflows/links.yaml` (revisión semanal de ligas, lunes 06:00 CST, no bloqueante), además de `.github/dependabot.yaml` para dependencias de npm y GitHub Actions semanales y `.github/CODEOWNERS`

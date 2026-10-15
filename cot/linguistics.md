@@ -11,18 +11,18 @@ Razonamiento:
 
 - Regla principal: todo en español mexicano, sin calcos del inglés ni regionalismos ajenos (ver «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md))).
 - Recorrer de lo general a lo específico: dialecto/es_MX → evitar calcos → terminología → verbos → préstamos en cursiva → tipografía (títulos y mayúscula tras dos puntos) → comillas (texto vs código) → sutilezas de redacción → siglas → tiempos verbales → fechas/horas (CST) → nomenclatura de archivos → odios especiales → expresiones idiomáticas (uso/moderación).
-- Producir hallazgos concretos y una versión corregida mínima (diff mental) cuando aplique.
+- Producir hallazgos concretos y una versión corregida mínima (diff mental) cuando sea el caso.
 
 Pasos:
 
 1) Acción: verificar dialecto y regionalismos.
-   Resultado: marcar peninsularismos («ordenador», «fichero», «vale»), argentinismos («piola»), colombianismos («bacano»), otros («chévere») y reemplazar por es_MX («computadora», «archivo», «está bien», «excelente»...).
+   Resultado: marcar peninsularismos («ordenador», «fichero», «vale»), argentinismos («piola»), colombianismos («bacano»), otros («chévere») y reemplazar por es_MX («computadora», «archivo», «está bien», «excelente» y otros).
 2) Acción: evitar calcos del inglés frecuentes.
    Resultado: «hacer/ejecutar» (no «realizar» cuando sea calcado), «aplicar/poner en práctica» (no «implementar»), «admitir/permitir» (no «soportar»), «cambios incompatibles» (no «cambios rompedores»), «ahora» (no «actualmente»), etcétera.
 3) Acción: normalizar terminología técnica prioritaria.
    Resultado: «IA», «TI», «computadora», «archivo», «carpeta», «aplicación», «almacenamiento», «predeterminado», «clúster», «métricas», «nodo».
 4) Acción: revisar verbos técnicos.
-   Resultado: «desplegar», «respaldar», «compilar», «depurar», «probar/poner a prueba», «confirmar cambios», «reflejar», «hacer clic», «descargar»; evitar verbos en -ear del *spanglish* (commitear, deployear, buildear...).
+   Resultado: «desplegar», «respaldar», «compilar», «depurar», «probar/poner a prueba», «confirmar cambios», «reflejar», «hacer clic», «descargar»; evitar verbos en -ear del *spanglish* (commitear, deployear y buildear, entre otros).
 5) Acción: préstamos técnicos (cursiva).
    Resultado: cursiva en *commit*, *pull request*, *pipeline*, *container*, *render*, *stack*, *bare-metal*.
 6) Acción: tipografía de títulos y encabezados.
@@ -33,7 +33,7 @@ Pasos:
 7) Acción: comillas (texto vs código).
    Resultado: «» en texto; "" solo en comentarios de scripts/código. Verificar que ejemplos de código mantengan comillas dobles.
 8) Acción: sutilezas de redacción.
-   Resultado: no iniciar oración con cifras; evitar cerrar párrafos con símbolos/abreviaturas (usar «por ciento», «etcétera»); reescribir cuando aplique.
+   Resultado: no comenzar oración con cifras; evitar cerrar párrafos con símbolos/abreviaturas (usar «por ciento», «etcétera»); reescribir cuando sea el caso.
 9) Acción: siglas.
    Resultado: invariables (no pluralizar: VM, no VMs). Usar numerales o «instancias de VM» para claridad.
 10) Acción: tiempos verbales.

@@ -4,7 +4,7 @@
 
 ## Regla principal
 
-**Todo el contenido debe escribirse en español mexicano, sin calcos del inglés ni regionalismos de otras variantes del español.**
+**Todo el contenido debe escribirse en español mexicano, sin calcos del inglés ni regionalismos de otras variantes del español**
 
 ---
 
@@ -21,7 +21,7 @@
 - **«Aplicación»** (no «app» ni «aplicativo»)
 - **«Almacenamiento»** (no «storage»)
 - **«Predeterminado»** (no «por defecto»)
-- **«Clúster»** (no «cluster»), con tilde en español
+- **«Clúster»** (no «cluster», con tilde en español)
 - **«Métricas»** (con tilde) para datos de observabilidad
 
 ### Verbos técnicos
@@ -52,13 +52,14 @@
 
 ### Calcos del inglés
 
-- «AI» → «IA» (inteligencia artificial)
 - «Realizar» (perform) → «Hacer/Ejecutar/Llevar a cabo»
 - «Actualmente» (currently) → «En este momento/Ahora»
 - «Eventualmente» (eventually) → «Finalmente/Al final/En algún momento»
 - «Soportar» (support) → «Admitir/Permitir»
 - «Implementar» (implement) → «Poner en práctica/Aplicar»
 - «Cambios rompedores» (breaking changes) → «Cambios incompatibles»
+- «Direccionar» (directing) → «Dirigir/Llevar/Trasladar»
+- «App» (application) → «Aplicación»
 
 ### Peninsularismos (España)
 
@@ -82,6 +83,7 @@
 
 - «Chévere» (Venezuela) → «Excelente»
 - «Pana» (Venezuela) → «Amigo»
+- «Chiche» (Nicaragaua) → «Fácil»
 
 ---
 
@@ -95,7 +97,7 @@
 - **«Ya quedó»** - Se completó exitosamente (por ejemplo, «El despliegue con Argo CD ya quedó»)
 - **«Se la rifó»** - Hizo un trabajo excelente, se esforzó mucho
 - **«No le sabe»** - No tiene conocimiento suficiente del tema (por ejemplo, «No le sabe a Istio»)
-- **«Le sabe un chingo»** - Tiene mucho conocimiento y experiencia (por ejemplo, «Le sabe un chingo a Proxmox»)
+- **«Le sabe un chingo»/«Ya se la sabe»** - Tiene mucho conocimiento y experiencia (por ejemplo, «Le sabe un chingo a Proxmox» o «no le explico porque ya se la sabe»)
 
 ### Expresiones de evaluación
 
@@ -105,7 +107,7 @@
 - **«Está chingón»** - Funciona muy bien, excelente calidad, agradable a la vista
 - **«Está perro»** - Muy bueno, impresionante
 - **«Está machín»** - Muy bueno, robusto, confiable
-- **«Está del nabo»** - No funciona bien, tiene problemas
+- **«Está del nabo»** - No funciona bien, tiene problemas (y eres chavorruco)
 - **«No está padre»** - No funciona bien, tiene problemas
 - **«Es chafa»** - De mala calidad, deficiente
 - **«Ya valió madres»** - Se rompió, falló completamente
@@ -147,24 +149,28 @@
 
 ### Títulos y encabezados
 
+**Sólo se usan mayúsculas en la letra inicial y en nombres propios**
+
 - Correcto: «Instalación de Prometheus»
 - Incorrecto: «Instalación De Prometheus»
 - Correcto: «*Script* para crear VM en Proxmox VE»
 - Incorrecto: «*Script* Para Crear VM En Proxmox VE»
-- Sólo la primera palabra y nombres propios llevan mayúscula inicial
-- **CRÍTICO:** sólo nombres propios llevan mayúscula inicial después de dos puntos y seguido (error MUY frecuente)
-- No se usan puntos en títulos y subtítulos
-- **IMPORTANTE:** en títulos de tercer nivel (###) NO corregir las mayúsculas si ya están bien aplicadas según las reglas anteriores
 
-**Ejemplos correctos de títulos de tercer nivel (###):**
+**No se usan puntos en títulos y subtítulos**
 
-- Correcto: `### Configuración de Proxmox VE` (ya está correcto, NO cambiar)
-- Correcto: `### Instalación de Docker` (ya está correcto, NO cambiar)
-- Correcto: `### Métricas de observabilidad` (ya está correcto, NO cambiar)
-- Incorrecto: `### configuración de proxmox ve` (este SÍ necesita corrección)
-- Incorrecto: `### Configuración De Proxmox VE` (este SÍ necesita corrección)
+**IMPORTANTE:** en títulos de tercer nivel (###) NO corregir las mayúsculas si ya están bien aplicadas según las reglas anteriores
 
-**Ejemplos de mayúsculas después de dos puntos:**
+*Ejemplos correctos e incorrectos de títulos de tercer nivel (###):*
+
+- Correcto: `### Configuración de Proxmox VE` (NO cambiar)
+- Correcto: `### Instalación de Docker` (NO cambiar)
+- Correcto: `### Métricas de observabilidad` (NO cambiar)
+- Incorrecto: `### configuración de proxmox ve` (necesita corrección)
+- Incorrecto: `### Configuración De Proxmox VE` (necesita corrección)
+
+****CRÍTICO:** después de dos puntos y seguido se escribirá con minúscula en todos los casos, excepto nombres propios (error MUY frecuente)**
+
+*Ejemplos de mayúsculas después de dos puntos:*
 
 - Correcto: **Regla:** los nombres de archivos deben estar en inglés
 - Incorrecto: **Regla:** Los nombres de archivos deben estar en inglés
@@ -173,8 +179,8 @@
 
 - Reportes y *postmortems*: usar tiempo pasado y primera persona («yo» o «nosotros» si es trabajo colectivo).
 - Guías y manuales: usar segunda persona (tú) en presente/imperativo o futuro para pasos por realizar.
-- En listas de pasos, se puede omitir el sujeto: «Instala», «Ejecuta», «Verifica».
-- Evitar construcciones impersonales en tercera persona («se configuró», «se debe…»).
+- En listas de pasos se puede omitir el sujeto: «Instala», «Ejecuta», «Verifica».
+- Evitar construcciones impersonales en tercera persona («se configuró», «se debe instalar»).
 
 **Ejemplos correctos para reportes (pasado, primera persona):**
 
@@ -198,7 +204,7 @@
 ### Fechas y horas (CST Ciudad de México)
 
 - Usar formato de 24 horas y zona horaria de la Ciudad de México.
-- Calcular la hora LOCAL correctamente antes de añadir el sufijo «CST». No rotular «CST» una hora calculada en UTC.
+- Calcular la **hora local** correctamente antes de añadir el sufijo «CST». No rotular «CST» una hora calculada en UTC.
 - Zona a usar: `America/Mexico_City` (UTC−06:00; sin horario de verano).
 - Formatos aceptados:
   - Corto: «2025-07-28 14:30 CST»
@@ -226,13 +232,13 @@ backup_vm() {
 
 ### Sutilezas de redacción
 
-- **No iniciar oraciones con cifras.** Preferir redactar con palabras o reordenar la frase.
+- **No comenzar oraciones con cifras.** Preferir redactar con palabras o reordenar la frase.
   - Incorrecto: «20 años después, sigo aquí esperando»
   - Correcto: «Después de 20 años sigo esperando»
 - **Evitar terminar párrafos con símbolos o abreviaturas.** Sustituir por la palabra completa o reestructurar.
   - «Hay un déficit de 20%» → «Hay un déficit de 20 por ciento»
-  - «Trajeron higos, mangos, etc.» → «Trajeron higos, mangos, etcétera» (y, si es posible, especificar el listado completo)
-- Nota: esta práctica proviene de criterios editoriales periodísticos y se observa también en subtitulación profesional (las frases que inician con número se escriben con letra).
+  - «Trajeron higos, mangos, etc.» → «Trajeron higos, mangos, etcétera» (si es posible, especificar la lista completa)
+- Nota: esta práctica proviene de criterios editoriales periodísticos y se observa también en subtitulación profesional (las frases que comienzan con número se escriben con letra).
 
 ### Préstamos lingüísticos
 
@@ -254,17 +260,17 @@ backup_vm() {
 
 ### Demográfica y cultural
 
-- **México:** la mayor población hispanohablante nativa del mundo (130+ millones de habitantes)
-- **España:** país pequeño con menor relevancia cultural mundial (47 millones)
-- **Productos culturales**: doblaje de películas, series y videojuegos, entre otros, usan español mexicano
-- **Distribución internacional**: Netflix, Disney y otros estudios usan español mexicano como estándar
+- **México:** la mayor población hispanohablante nativa del mundo (más de 130 millones de habitantes).
+- **España:** país pequeño con menor relevancia cultural mundial (47 millones).
+- **Productos culturales:** doblaje de películas, series y videojuegos, entre otros, usan español mexicano.
+- **Distribución internacional**: Netflix, Disney y otros estudios usan español mexicano como estándar.
 
 ### Criterio para el inglés
 
 - El **español mexicano** es el referente del español por peso demográfico y cultural, no por imposición de un registro ajeno.
 - Para el inglés el criterio es distinto: no se elige por dominio cultural, sino como **registro neutro de colaboración** internacional.
-- **En estos repositorios:** todo lo que se redacta en inglés (mensajes de *commit*, código y comentarios en código, `CHANGELOG.md` de repositorios en inglés) usa **inglés internacional (UK)**, con ortografía británica (`-ise`, *colour*, *behaviour*, *licence*) como registro neutro de colaboración
-- **Confluence:** todo lo que se publica en Confluence (páginas y comentarios) va en inglés internacional (UK)
+- **En estos repositorios:** todo lo que se redacta en inglés (mensajes de *commit*, código y comentarios en código, `CHANGELOG.md` de repositorios en inglés) usa **inglés internacional (UK)**, con ortografía británica (`-ise`, *colour*, *behaviour*, *licence*) como registro neutro de colaboración.
+- **Confluence:** todo lo que se publica en Confluence (páginas y comentarios) va en inglés internacional (UK).
 
 ---
 
@@ -276,7 +282,7 @@ Los siguientes términos generan **rechazo particular** y deben evitarse a toda 
 - **«IT»** por «TI» - usar siempre el español
 - **Peninsularismos** («ordenador», «fichero») - RECHAZADOS
 - **Verbos inventados con -ear** (commitear, deployear) - EVITAR
-- **Títulos Con Cada Palabra En Mayúscula** - Usar solo inicial en primera palabra
+- **Títulos Con Cada Palabra En Mayúscula** - Usar solo en la primera palabra
 - **Uso de mayúscula donde no corresponde** - «Lunes» por «lunes» o «Julio» por «julio» - INACEPTABLE
 - **Mayúscula después de dos puntos** - «Razón: Los nombres...» por «Razón: los nombres...» - ERROR MUY FRECUENTE E INACEPTABLE
 - **Pluralizar las siglas** - «VMs/VEs/ONGs» por «VM/VE/ONG» - Sin importar si es uno o 20: INACEPTABLE
