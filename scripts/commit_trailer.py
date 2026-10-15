@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Print a co-author trailer for the model running the active coding-agent session.
 
-Supports Codex, Claude Code, and GitHub Copilot CLI. Reads only the active
-session; config defaults and Git history are never used.
+Supports Codex, Claude Code, GitHub Copilot CLI, and Google Antigravity CLI (agy).
+Reads only the active session; config defaults and Git history are never used.
 """
 
 import argparse
@@ -16,6 +16,7 @@ ID_RE = r"[A-Za-z0-9_-]+"
 EFFORT_RE = r"[A-Za-z0-9][A-Za-z0-9_-]*"
 MODEL_RE = r"[A-Za-z0-9][A-Za-z0-9._:-]*"
 COPILOT_EMAIL = "223556219+Copilot@users.noreply.github.com"
+ANTIGRAVITY_EMAIL = "noreply@antigravity.google"
 
 
 def detect_tool():
@@ -26,10 +27,12 @@ def detect_tool():
         active.append("claude")
     if os.environ.get("COPILOT_AGENT_SESSION_ID"):
         active.append("copilot")
+    if os.environ.get("ANTIGRAVITY_CONVERSATION_ID") or os.environ.get("ANTIGRAVITY_AGENT"):
+        active.append("antigravity")
     if len(active) > 1:
         raise ValueError("multiple active coding-agent sessions detected; specify --tool")
     if not active:
-        raise ValueError("no active Codex, Claude Code, or Copilot CLI session detected")
+        raise ValueError("no active Codex, Claude Code, Copilot CLI, or Antigravity session detected")
     return active[0]
 
 
@@ -228,11 +231,115 @@ def copilot_identity(state_dir, session_id):
     return format_trailer("Copilot", display_name, effort, COPILOT_EMAIL), bool(effort)
 
 
+# ---------------------------------------------------------------- Antigravity CLI (agy)
+
+def parse_antigravity_label(label):
+    match = re.match(r"^(.*?)(?:\s*\(([^)]+)\))?$", label.strip())
+    if not match:
+        return label.strip(), None
+    model_part, effort_part = match.groups()
+    effort = effort_part.lower() if effort_part else None
+    return model_part.strip(), effort
+
+
+def antigravity_agent(app_data_dir, conv_id, explicit_agent=None):
+    if explicit_agent and explicit_agent.strip():
+        return explicit_agent.strip()
+    env_agent = os.environ.get("ANTIGRAVITY_AGENT_NAME") or os.environ.get("AGY_AGENT")
+    if env_agent and env_agent.strip():
+        return env_agent.strip()
+    db_path = app_data_dir / "conversation_summaries.db"
+    if db_path.is_file():
+        try:
+            import sqlite3
+            with sqlite3.connect(f"file:{db_path}?mode=ro", uri=True) as con:
+                cur = con.cursor()
+                cur.execute("SELECT agent_name FROM conversation_summaries WHERE conversation_id = ?", (conv_id,))
+                row = cur.fetchone()
+                if row and row[0] and row[0].strip():
+                    return row[0].strip()
+        except Exception:
+            pass
+    return None
+
+
+def antigravity_identity(app_data_dir, conv_id, explicit_agent=None, explicit_model=None, explicit_effort=None):
+    """Return (trailer, effort_known) for the active Antigravity CLI session."""
+    if not conv_id or not re.fullmatch(ID_RE, conv_id):
+        raise ValueError("missing or invalid active Antigravity conversation ID")
+
+    agent = antigravity_agent(app_data_dir, conv_id, explicit_agent)
+
+    model = explicit_model
+    effort = explicit_effort
+
+    if not model:
+        # 1. Inspect transcript.jsonl for user setting changes
+        transcript_path = app_data_dir / "brain" / conv_id / ".system_generated" / "logs" / "transcript.jsonl"
+        latest_label = None
+        if transcript_path.is_file():
+            with transcript_path.open(encoding="utf-8") as stream:
+                for line in stream:
+                    if not line.strip():
+                        continue
+                    try:
+                        record = json.loads(line)
+                    except json.JSONDecodeError:
+                        continue
+                    if record.get("source") == "USER_EXPLICIT" and record.get("type") == "USER_INPUT":
+                        content = record.get("content", "")
+                        match = re.search(r"The user changed setting `Model Selection` from .*? to (.+?)\.\s*(?:No need|If reporting|\n|$)", content)
+                        if match:
+                            latest_label = match.group(1).strip()
+
+        # 2. Fall back to CLI logs
+        if not latest_label:
+            logs = sorted((app_data_dir / "log").glob("cli-*.log"), key=os.path.getmtime, reverse=True)
+            for log_path in logs:
+                try:
+                    with log_path.open(encoding="utf-8", errors="replace") as stream:
+                        lines = stream.readlines()
+                    if any(conv_id in l for l in lines):
+                        for l in reversed(lines):
+                            m = re.search(r'model_config_manager\.go:.*\] Propagating selected model override to backend: label="([^"]+)"', l)
+                            if m:
+                                latest_label = m.group(1).strip()
+                                break
+                    if latest_label:
+                        break
+                except OSError:
+                    continue
+
+        if not latest_label:
+            raise ValueError("active Antigravity session has no detectable model in transcript or logs")
+
+        parsed_model, parsed_effort = parse_antigravity_label(latest_label)
+        model = parsed_model
+        if effort is None:
+            effort = parsed_effort
+
+    if not isinstance(model, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9 ._:+/-]*", model):
+        raise ValueError("active Antigravity session has an invalid model identifier")
+
+    effort = valid_effort(effort)
+
+    if agent and agent.lower() not in ("antigravity", "default"):
+        prefix = f"Antigravity {agent.capitalize()}" if not agent.lower().startswith("antigravity") else agent
+    else:
+        prefix = "Antigravity"
+
+    return format_trailer(prefix, model, effort, ANTIGRAVITY_EMAIL), bool(effort)
+
+
 # ---------------------------------------------------------------- CLI
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--tool", choices=("codex", "claude", "copilot"), help="force the tool instead of detecting it")
+    parser.add_argument(
+        "--tool",
+        choices=("codex", "claude", "copilot", "antigravity", "agy"),
+        help="force the tool instead of detecting it",
+    )
     parser.add_argument(
         "--sessions-dir",
         type=Path,
@@ -256,11 +363,6 @@ def main():
         help="Claude Code session to inspect (defaults to the active session)",
     )
     parser.add_argument(
-        "--effort",
-        default=os.environ.get("CLAUDE_EFFORT"),
-        help="Claude Code effort (defaults to CLAUDE_EFFORT)",
-    )
-    parser.add_argument(
         "--copilot-state-dir",
         type=Path,
         default=Path(os.environ.get("COPILOT_HOME") or Path.home() / ".copilot"),
@@ -271,15 +373,51 @@ def main():
         default=os.environ.get("COPILOT_AGENT_SESSION_ID"),
         help="Copilot CLI session to inspect (defaults to the active session)",
     )
+    parser.add_argument(
+        "--antigravity-dir",
+        type=Path,
+        default=Path(os.environ.get("ANTIGRAVITY_APP_DATA_DIR") or Path.home() / ".gemini" / "antigravity-cli"),
+        help="Antigravity app data directory (defaults to ANTIGRAVITY_APP_DATA_DIR or ~/.gemini/antigravity-cli)",
+    )
+    parser.add_argument(
+        "--conversation-id",
+        default=os.environ.get("ANTIGRAVITY_CONVERSATION_ID"),
+        help="Antigravity conversation to inspect (defaults to the active conversation ID)",
+    )
+    parser.add_argument(
+        "--agent",
+        default=os.environ.get("ANTIGRAVITY_AGENT_NAME") or os.environ.get("AGY_AGENT"),
+        help="Agent override (defaults to ANTIGRAVITY_AGENT_NAME or AGY_AGENT)",
+    )
+    parser.add_argument(
+        "--model",
+        default=os.environ.get("ANTIGRAVITY_MODEL") or os.environ.get("AGY_MODEL"),
+        help="Model override (defaults to ANTIGRAVITY_MODEL or AGY_MODEL)",
+    )
+    parser.add_argument(
+        "--effort",
+        default=os.environ.get("CLAUDE_EFFORT") or os.environ.get("ANTIGRAVITY_EFFORT") or os.environ.get("AGY_EFFORT"),
+        help="Reasoning effort override (defaults to CLAUDE_EFFORT, ANTIGRAVITY_EFFORT, or AGY_EFFORT)",
+    )
     args = parser.parse_args()
     try:
         tool = args.tool or detect_tool()
+        if tool == "agy":
+            tool = "antigravity"
         if tool == "codex":
             trailer, effort_known = codex_trailer(codex_context(args.sessions_dir, args.thread_id))
         elif tool == "claude":
             trailer, effort_known = claude_trailer(claude_model(args.projects_dir, args.session_id), args.effort)
-        else:
+        elif tool == "copilot":
             trailer, effort_known = copilot_identity(args.copilot_state_dir, args.copilot_session_id)
+        else:
+            trailer, effort_known = antigravity_identity(
+                args.antigravity_dir,
+                args.conversation_id,
+                explicit_agent=args.agent,
+                explicit_model=args.model,
+                explicit_effort=args.effort,
+            )
     except (OSError, UnicodeError, ValueError) as error:
         print(f"commit_trailer: {error}", file=sys.stderr)
         return 1
