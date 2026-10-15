@@ -88,10 +88,10 @@ Pasos:
    - La viñeta `-` inicia en columna 1 (sin espacios ni tabuladores previos).
    - Si una viñeta es larga, partirla a mano y alinear la continuación con dos espacios.
    - Una línea en blanco entre encabezado y cuerpo, y entre cuerpo y pie.
-   - `Co-Authored-By` se resuelve con la sesión activa justo antes de **cada** *commit* (el modelo puede cambiar a media conversación); nunca está fijo en el texto. Formato común: `Co-Authored-By: [<Herramienta> ]<Modelo> (<esfuerzo>) <correo>`, por ejemplo `Claude Opus 5.5 (medium)`, `Codex GPT-6.1 Sol (high)` o `Copilot GPT-6 Luna (low)`:
-     1. En Claude Code, Codex o GitHub Copilot CLI, ejecutar `python3 ~/rules/scripts/commit_trailer.py` y usar su salida solo si termina con código 0. Si avisa que no hay esfuerzo disponible, el *trailer* con el modelo solo es válido.
+   - `Co-Authored-By` se resuelve con la sesión activa justo antes de **cada** *commit* (el modelo puede cambiar a media conversación); nunca está fijo en el texto. Formato común: `Co-Authored-By: [<Herramienta> ]<Modelo> (<esfuerzo>) <correo>`, por ejemplo `Claude Opus 5.5 (medium)`, `Codex GPT-6.1 Sol (high)`, `Copilot GPT-6 Luna (low)` o `Antigravity Gemini 3.8 Flash (high)`:
+     1. En Claude Code, Codex, GitHub Copilot CLI o Antigravity CLI (`agy`), ejecutar `python3 ~/rules/scripts/commit_trailer.py` y usar su salida solo si termina con código 0. Si avisa que no hay esfuerzo disponible, el *trailer* con el modelo solo es válido.
      2. Si el *script* falla, usar la línea de atribución que proporcione la herramienta o el *harness* para la sesión (p. ej. la que inyecta Claude Code), en el formato común.
-     3. Otras herramientas: construirlo con la identidad que reporta la propia sesión y el correo documentado (Anthropic `noreply@anthropic.com`, OpenAI `noreply@openai.com`, GitHub Copilot `223556219+Copilot@users.noreply.github.com`, Google Antigravity `antigravity-agent@google.com`, Warp `oz-agent@warp.dev`; otra → `noreply@<dominio-de-la-herramienta>`).
+     3. Otras herramientas: construirlo con la identidad que reporta la propia sesión y el correo documentado (Anthropic `noreply@anthropic.com`, OpenAI `noreply@openai.com`, GitHub Copilot `223556219+Copilot@users.noreply.github.com`, Google Antigravity `noreply@antigravity.google`, Warp `oz-agent@warp.dev`; otra → `noreply@<dominio-de-la-herramienta>`).
      4. Si no se puede verificar el modelo, omitir el *trailer* y avisar al usuario; nunca adivinar.
      - Prohibido copiar nombre, modelo o esfuerzo de estas reglas, de un *commit* anterior, de otra sesión o de la configuración predeterminada.
 

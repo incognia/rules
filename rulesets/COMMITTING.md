@@ -95,8 +95,9 @@ Reglas de formato obligatorias para esta plantilla:
     | Claude Code | `Claude Opus 5.5 (medium)` | `noreply@anthropic.com` |
     | Codex | `Codex GPT-6.1 Sol (high)` | `noreply@openai.com` |
     | GitHub Copilot CLI | `Copilot GPT-6 Luna (low)` | `223556219+Copilot@users.noreply.github.com` |
+    | Antigravity CLI (`agy`) | `Antigravity Gemini 3.8 Flash (high)` | `noreply@antigravity.google` |
 
-  - En esas tres herramientas, resuélvelo con `python3 ~/rules/scripts/commit_trailer.py` justo antes de cada *commit*. El *script* detecta la herramienta por el entorno (`--tool codex|claude|copilot` la fuerza) y lee **solo** la sesión activa: en Claude Code, el modelo del último turno del hilo principal (descarta subagentes y `<synthetic>`) y el esfuerzo de `CLAUDE_EFFORT`; en Codex, el último `turn_context` del hilo; en Copilot CLI, el último registro de uso del agente raíz. Usa su salida solo si termina con código 0.
+  - En esas cuatro herramientas, resuélvelo con `python3 ~/rules/scripts/commit_trailer.py` justo antes de cada *commit*. El *script* detecta la herramienta por el entorno (`--tool codex|claude|copilot|antigravity|agy` la fuerza) y lee **solo** la sesión activa: en Claude Code, el modelo del último turno del hilo principal (descarta subagentes y `<synthetic>`) y el esfuerzo de `CLAUDE_EFFORT`; en Codex, el último `turn_context` del hilo; en Copilot CLI, el último registro de uso del agente raíz; en Antigravity CLI (`agy`), el modelo y esfuerzo del *transcript* o registros de la sesión y el agente del resumen o entorno. Usa su salida solo si termina con código 0.
   - El formato de las sesiones no es una API documentada: si cambia, el *script* falla en vez de adivinar. Entonces usa la línea de atribución que proporcione la herramienta, en el formato común; si tampoco hay, omite el *trailer* y avisa al usuario.
   - Nunca copies nombre, modelo o esfuerzo de un ejemplo, de un *commit* anterior, de otra sesión o de la configuración predeterminada.
 

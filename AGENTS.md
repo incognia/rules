@@ -68,7 +68,7 @@ DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")
 - Always use **international English (UK)** for commit messages
 - Follow [Conventional Commits](https://www.conventionalcommits.org/) specification
 - Atomic commits: one logical change per commit, staged with `git add -- <files>`; `CHANGELOG.md` travels with the last commit of the series
-- Build the `Co-Authored-By` trailer before each commit with `python3 ~/rules/scripts/commit_trailer.py` (Claude Code, Codex, Copilot CLI; shared format `[<Tool> ]<Model> (<effort>) <email>`), falling back to the tool-supplied attribution; never copy a name, model or effort from an example or an earlier commit
+- Build the `Co-Authored-By` trailer before each commit with `python3 ~/rules/scripts/commit_trailer.py` (Claude Code, Codex, Copilot CLI, Antigravity CLI `agy`; shared format `[<Tool> ]<Model> (<effort>) <email>`), falling back to the tool-supplied attribution; never copy a name, model or effort from an example or an earlier commit
 - Rewrite `/tmp/commit-msg.txt` from scratch for every commit: it persists across commits and invocations, so never reuse a subject or body without checking it against the staged files (`git diff --cached --stat`)
 - Use non-interactive commands: `git --no-pager log --oneline -5`
 
@@ -242,7 +242,7 @@ This file is symlinked as `CLAUDE.md` so Claude Code loads it automatically as p
 
 ## Other coding agents
 
-GitHub Copilot CLI and Codex discover the skills directly in `~/.agents/skills/<name>/` (Codex also reads `.agents/skills/` from the repository up to its root), so `sync_global.sh` needs no extra step for them. Claude Code and Copilot invoke a skill as `/name`; Codex uses `$name` (`/changelogger` → `$changelogger`, `/linguistics README.md` → `$linguistics README.md`). `scripts/commit_trailer.py` resolves the commit trailer in all three.
+GitHub Copilot CLI, Codex and Google Antigravity CLI (`agy`) discover the skills directly in `~/.agents/skills/<name>/` (Codex and Antigravity also read `.agents/skills/` from the repository up to its root), so `sync_global.sh` needs no extra step for them. Claude Code, Copilot and Antigravity invoke a skill as `/name`; Codex uses `$name` (`/changelogger` → `$changelogger`, `/linguistics README.md` → `$linguistics README.md`). `scripts/commit_trailer.py` resolves the commit trailer in all four.
 
 ## Integration with other repositories
 

@@ -77,6 +77,7 @@ npm --prefix ~/rules run hooks:install
 | Claude Code | `~/.claude/commands/<nombre>.md` (enlace de `sync_global.sh`) | `/changelogger` | `/linguistics README.md` |
 | GitHub Copilot CLI | `~/.agents/skills/<nombre>/` | `/changelogger` | `/linguistics README.md` |
 | Codex | `~/.agents/skills/<nombre>/` (y `.agents/skills/` del repositorio) | `$changelogger` | `$linguistics README.md` |
+| Antigravity CLI (`agy`) | `~/.agents/skills/<nombre>/` (y `.agents/skills/` del repositorio) | `/changelogger` | `/linguistics README.md` |
 
 En este README los ejemplos usan `/nombre`; en Codex cambia el prefijo por `$`. Con `/skills` dentro de Codex ves las que descubrió.
 
@@ -241,8 +242,8 @@ sequenceDiagram
 - **cot/** — cadenas de razonamiento (CoT) para ejecución diaria
 - **templates/** — plantillas reutilizables
 - **scripts/** — *scripts* de automatización y respaldos
-- **.agents/skills/** — *skills* descubribles por agentes IA (ejemplos con `/` de Claude Code y Copilot; en Codex usa `$`):
-  - `/commit` — flujo completo de *commits* atómicos con CHANGELOG obligatorio, mensaje en inglés internacional (UK) y atribución `Co-Authored-By` detectada de la sesión activa con `scripts/commit_trailer.py` (Claude Code, Codex y Copilot CLI)
+- **.agents/skills/** — *skills* descubribles por agentes IA (ejemplos con `/` de Claude Code, Copilot y Antigravity; en Codex usa `$`):
+  - `/commit` — flujo completo de *commits* atómicos con CHANGELOG obligatorio, mensaje en inglés internacional (UK) y atribución `Co-Authored-By` detectada de la sesión activa con `scripts/commit_trailer.py` (Claude Code, Codex, Copilot CLI y Antigravity CLI `agy`)
   - `/changelogger` — mantenimiento de CHANGELOG.md con fechas CST, en el idioma principal del repositorio
   - `/release vX.Y.Z` — publicar *tag* y *release* en GitHub o GitLab con notas derivadas del CHANGELOG
   - `/linguistics <archivo>` — aplicar reglas de español mexicano
