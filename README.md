@@ -12,7 +12,7 @@ description: "Estándares, filosofía y cadenas de razonamiento (CoT) que guían
 [![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](https://commonmark.org)
 [![Spanish](https://img.shields.io/badge/Language-Spanish%20(MX)-green.svg)](https://es.wikipedia.org/wiki/Espa%C3%B1ol_mexicano)
 [![CoTs](https://img.shields.io/badge/CoTs-23-blue.svg)](./cot/)
-[![Skills](https://img.shields.io/badge/Skills-16-green.svg)](./.agents/skills/)
+[![Skills](https://img.shields.io/badge/Skills-17-green.svg)](./.agents/skills/)
 [![Rulesets](https://img.shields.io/badge/Rulesets-19-orange.svg)](./rulesets/)
 
 ## Definiciones rápidas
@@ -59,7 +59,8 @@ npm --prefix ~/rules run hooks:install
 **Notas**:
 
 - `sync_global.sh` detecta la plataforma (macOS, Linux, Windows o WSL) y copia a las rutas correctas:
-  - *Skills* (`SKILL.md`): `~/.agents/skills/` (en WSL, la carpeta de usuario de Windows); se reflejan completas, así que los archivos borrados dentro de una *skill* también se eliminan, y se quitan las *skills* que el *script* instaló antes y ya no existen en el repositorio. Las reconocen Warp, Cursor, Gemini y otros; GitHub Copilot CLI, Codex y Antigravity CLI (`agy`) las descubren directo en esta carpeta, sin copia ni enlace adicional
+  - *Skills* (`SKILL.md`): `~/.agents/skills/` (en WSL, la carpeta de usuario de Windows); se reflejan completas, así que los archivos borrados dentro de una *skill* también se eliminan, y se quitan las *skills* que el *script* instaló antes y ya no existen en el repositorio. Las reconocen Warp, Cursor, Gemini y otros; GitHub Copilot CLI y Codex las descubren directo en esta carpeta, sin copia ni enlace adicional
+  - *Skills* para Antigravity CLI (`agy`): no lee `~/.agents/skills/`, así que, si está instalado (`~/.gemini/antigravity-cli/`), cada *skill* se enlaza como carpeta en `~/.gemini/antigravity-cli/skills/<nombre>/`; nunca sobrescribe una ajena y limpia los enlaces colgantes
   - *Skills* para Claude Code: cada `SKILL.md` instalado se enlaza a `~/.claude/commands/<nombre>.md` para que Claude Code reconozca `/nombre` (sin este enlace, Claude Code ignora los *slash commands*); solo enlaza las *skills* de este repositorio, nunca sobrescribe un comando ajeno y limpia los enlaces colgantes
   - *Workflows* (`*.yaml`) en macOS: `~/.warp/workflows/`
   - *Workflows* en Linux: `$XDG_DATA_HOME/warp-terminal/workflows/`
@@ -78,7 +79,7 @@ npm --prefix ~/rules run hooks:install
 | Claude Code | `~/.claude/commands/<nombre>.md` (enlace de `sync_global.sh`) | `/changelogger` | `/linguistics README.md` |
 | GitHub Copilot CLI | `~/.agents/skills/<nombre>/` | `/changelogger` | `/linguistics README.md` |
 | Codex | `~/.agents/skills/<nombre>/` (y `.agents/skills/` del repositorio) | `$changelogger` | `$linguistics README.md` |
-| Antigravity CLI (`agy`) | `~/.agents/skills/<nombre>/` (y `.agents/skills/` del repositorio) | `/changelogger` | `/linguistics README.md` |
+| Antigravity CLI (`agy`) | `~/.gemini/antigravity-cli/skills/<nombre>/` (enlace de `sync_global.sh`) y `.agents/skills/` del repositorio | `/changelogger` | `/linguistics README.md` |
 
 En este README los ejemplos usan `/nombre`; en Codex cambia el prefijo por `$`. Con `/skills` dentro de Codex ves las que descubrió.
 

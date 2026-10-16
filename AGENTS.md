@@ -243,7 +243,7 @@ This file is symlinked as `CLAUDE.md` so Claude Code loads it automatically as p
 
 ## Other coding agents
 
-GitHub Copilot CLI, Codex and Google Antigravity CLI (`agy`) discover the skills directly in `~/.agents/skills/<name>/` (Codex and Antigravity also read `.agents/skills/` from the repository up to its root), so `sync_global.sh` needs no extra step for them. Claude Code, Copilot and Antigravity invoke a skill as `/name`; Codex uses `$name` (`/changelogger` → `$changelogger`, `/linguistics README.md` → `$linguistics README.md`). `scripts/commit_trailer.py` resolves the commit trailer in all four.
+GitHub Copilot CLI and Codex discover the skills directly in `~/.agents/skills/<name>/` (Codex also reads `.agents/skills/` from the repository up to its root), so `sync_global.sh` needs no extra step for them. Google Antigravity CLI (`agy`) does not read `~/.agents/skills/`: its global skills live in `~/.gemini/antigravity-cli/skills/<name>/`, where `sync_global.sh` symlinks each installed skill directory when Antigravity CLI is installed; it also reads the repository's `.agents/skills/`. Claude Code, Copilot and Antigravity invoke a skill as `/name`; Codex uses `$name` (`/changelogger` → `$changelogger`, `/linguistics README.md` → `$linguistics README.md`). `scripts/commit_trailer.py` resolves the commit trailer in all four.
 
 ## Integration with other repositories
 
