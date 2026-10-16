@@ -10,6 +10,7 @@ import json
 import os
 from pathlib import Path
 import re
+import sqlite3
 import sys
 
 ID_RE = r"[A-Za-z0-9_-]+"
@@ -251,72 +252,84 @@ def antigravity_agent(app_data_dir, conv_id, explicit_agent=None):
     db_path = app_data_dir / "conversation_summaries.db"
     if db_path.is_file():
         try:
-            import sqlite3
             with sqlite3.connect(f"file:{db_path}?mode=ro", uri=True) as con:
                 cur = con.cursor()
                 cur.execute("SELECT agent_name FROM conversation_summaries WHERE conversation_id = ?", (conv_id,))
                 row = cur.fetchone()
                 if row and row[0] and row[0].strip():
                     return row[0].strip()
-        except Exception:
-            pass
+        except sqlite3.Error:
+            pass  # unreadable or locked summary database: fall back to the default agent name
     return None
 
 
-def antigravity_identity(app_data_dir, conv_id, explicit_agent=None, explicit_model=None, explicit_effort=None):
+# Conversation IDs in CLI logs; other UUIDs on the same line (e.g. trajectory_id) are ignored
+CONV_ID_RE = re.compile(r"(?:cascade_id:|convID=|conversation )([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})")
+OVERRIDE_RE = re.compile(r'model_config_manager\.go:.*\] Propagating selected model override to backend: label="([^"]+)"')
+
+
+def antigravity_log_label(log_dir, conv_id):
+    """Return the latest model label propagated while the active conversation was current.
+
+    A CLI log can mix several conversations and its override lines carry no
+    conversation ID, so each override is attributed to the conversation ID
+    (cascade_id, convID or "conversation <id>") that appeared most recently before it; overrides of other conversations are ignored.
+    """
+    logs = sorted(log_dir.glob("cli-*.log"), key=os.path.getmtime, reverse=True)
+    for log_path in logs:
+        try:
+            with log_path.open(encoding="utf-8", errors="replace") as stream:
+                current = None
+                label = None
+                for line in stream:
+                    ids = CONV_ID_RE.findall(line)
+                    if ids:
+                        current = ids[-1]
+                    match = OVERRIDE_RE.search(line)
+                    if match and current == conv_id:
+                        label = match.group(1).strip()
+        except OSError:
+            continue
+        if label:
+            return label
+    return None
+
+
+def antigravity_identity(app_data_dir, conv_id, explicit_agent=None, explicit_effort=None):
     """Return (trailer, effort_known) for the active Antigravity CLI session."""
     if not conv_id or not re.fullmatch(ID_RE, conv_id):
         raise ValueError("missing or invalid active Antigravity conversation ID")
 
     agent = antigravity_agent(app_data_dir, conv_id, explicit_agent)
 
-    model = explicit_model
-    effort = explicit_effort
-
-    if not model:
-        # 1. Inspect transcript.jsonl for user setting changes
-        transcript_path = app_data_dir / "brain" / conv_id / ".system_generated" / "logs" / "transcript.jsonl"
-        latest_label = None
-        if transcript_path.is_file():
-            with transcript_path.open(encoding="utf-8") as stream:
-                for line in stream:
-                    if not line.strip():
-                        continue
-                    try:
-                        record = json.loads(line)
-                    except json.JSONDecodeError:
-                        continue
-                    if record.get("source") == "USER_EXPLICIT" and record.get("type") == "USER_INPUT":
-                        content = record.get("content", "")
-                        match = re.search(r"The user changed setting `Model Selection` from .*? to (.+?)\.\s*(?:No need|If reporting|\n|$)", content)
-                        if match:
-                            latest_label = match.group(1).strip()
-
-        # 2. Fall back to CLI logs
-        if not latest_label:
-            logs = sorted((app_data_dir / "log").glob("cli-*.log"), key=os.path.getmtime, reverse=True)
-            for log_path in logs:
-                try:
-                    with log_path.open(encoding="utf-8", errors="replace") as stream:
-                        lines = stream.readlines()
-                    if any(conv_id in l for l in lines):
-                        for l in reversed(lines):
-                            m = re.search(r'model_config_manager\.go:.*\] Propagating selected model override to backend: label="([^"]+)"', l)
-                            if m:
-                                latest_label = m.group(1).strip()
-                                break
-                    if latest_label:
-                        break
-                except OSError:
+    # 1. Inspect transcript.jsonl for user setting changes
+    transcript_path = app_data_dir / "brain" / conv_id / ".system_generated" / "logs" / "transcript.jsonl"
+    latest_label = None
+    if transcript_path.is_file():
+        with transcript_path.open(encoding="utf-8") as stream:
+            for line in stream:
+                if not line.strip():
                     continue
+                try:
+                    record = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if record.get("source") == "USER_EXPLICIT" and record.get("type") == "USER_INPUT":
+                    content = record.get("content", "")
+                    match = re.search(r"The user changed setting `Model Selection` from .*? to (.+?)\.\s*(?:No need|If reporting|\n|$)", content)
+                    if match:
+                        latest_label = match.group(1).strip()
 
-        if not latest_label:
-            raise ValueError("active Antigravity session has no detectable model in transcript or logs")
+    # 2. Fall back to CLI logs, scoped to the active conversation
+    if not latest_label:
+        latest_label = antigravity_log_label(app_data_dir / "log", conv_id)
 
-        parsed_model, parsed_effort = parse_antigravity_label(latest_label)
-        model = parsed_model
-        if effort is None:
-            effort = parsed_effort
+    if not latest_label:
+        raise ValueError("active Antigravity session has no detectable model in transcript or logs")
+
+    model, effort = parse_antigravity_label(latest_label)
+    if effort is None:
+        effort = explicit_effort
 
     if not isinstance(model, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9 ._:+/-]*", model):
         raise ValueError("active Antigravity session has an invalid model identifier")
@@ -390,14 +403,10 @@ def main():
         help="Agent override (defaults to ANTIGRAVITY_AGENT_NAME or AGY_AGENT)",
     )
     parser.add_argument(
-        "--model",
-        default=os.environ.get("ANTIGRAVITY_MODEL") or os.environ.get("AGY_MODEL"),
-        help="Model override (defaults to ANTIGRAVITY_MODEL or AGY_MODEL)",
-    )
-    parser.add_argument(
         "--effort",
-        default=os.environ.get("CLAUDE_EFFORT") or os.environ.get("ANTIGRAVITY_EFFORT") or os.environ.get("AGY_EFFORT"),
-        help="Reasoning effort override (defaults to CLAUDE_EFFORT, ANTIGRAVITY_EFFORT, or AGY_EFFORT)",
+        default=None,
+        help="reasoning effort when the session does not record it (Claude Code defaults to CLAUDE_EFFORT; "
+        "Antigravity to ANTIGRAVITY_EFFORT or AGY_EFFORT, used only if the model label has no effort)",
     )
     args = parser.parse_args()
     try:
@@ -407,7 +416,7 @@ def main():
         if tool == "codex":
             trailer, effort_known = codex_trailer(codex_context(args.sessions_dir, args.thread_id))
         elif tool == "claude":
-            trailer, effort_known = claude_trailer(claude_model(args.projects_dir, args.session_id), args.effort)
+            trailer, effort_known = claude_trailer(claude_model(args.projects_dir, args.session_id), args.effort or os.environ.get("CLAUDE_EFFORT"))
         elif tool == "copilot":
             trailer, effort_known = copilot_identity(args.copilot_state_dir, args.copilot_session_id)
         else:
@@ -415,8 +424,7 @@ def main():
                 args.antigravity_dir,
                 args.conversation_id,
                 explicit_agent=args.agent,
-                explicit_model=args.model,
-                explicit_effort=args.effort,
+                explicit_effort=args.effort or os.environ.get("ANTIGRAVITY_EFFORT") or os.environ.get("AGY_EFFORT"),
             )
     except (OSError, UnicodeError, ValueError) as error:
         print(f"commit_trailer: {error}", file=sys.stderr)
