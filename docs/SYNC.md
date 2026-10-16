@@ -29,6 +29,7 @@ El *script* corre con `set -Eeuo pipefail`: cualquier paso que falle detiene la 
 |-----------|---------|-------|
 | *Skills* (`.agents/skills/<nombre>/`) | `~/.agents/skills/<nombre>/` (en WSL, el *home* de Windows) | Copia reflejada de cada carpeta, con limpieza |
 | Comandos de Claude Code | `~/.claude/commands/<nombre>.md` | Enlace simbólico al `SKILL.md` instalado |
+| *Skills* de Antigravity CLI (`agy`) | `~/.gemini/antigravity-cli/skills/<nombre>/` | Enlace simbólico a la carpeta instalada, solo si existe `~/.gemini/antigravity-cli/` |
 | *Workflows* (`.warp/workflows/*.yaml`) | Carpeta de *workflows* de Warp según la plataforma | Copia, con limpieza |
 | `cot/`, `rulesets/`, `templates/`, `scripts/atlassian/` | `~/rules/` | Copia, solo si el clon no es `~/rules` |
 | `.env` (no versionado) | `~/rules/.env` | Copia con permisos 600, solo si el clon no es `~/rules` |
@@ -44,7 +45,10 @@ flowchart TD
     B -->|Sí| C[Detectar plataforma]
     C --> D[Skills: retirar obsoletos<br/>y reflejar cada carpeta]
     D --> F[Claude Code: enlazar comandos<br/>y borrar enlaces colgantes]
-    F --> G[Workflows: retirar obsoletos<br/>y copiar los vigentes]
+    F --> AG{¿Existe ~/.gemini/antigravity-cli?}
+    AG -->|Sí| AH[Antigravity CLI: enlazar skills<br/>y borrar enlaces colgantes]
+    AG -->|No| G
+    AH --> G[Workflows: retirar obsoletos<br/>y copiar los vigentes]
     G --> H{¿El clon es ~/rules?}
     H -->|Sí| J([Synchronisation complete.])
     H -->|No, y ~/rules es otro checkout de git| I[Aviso: no copiar, actualizar con git pull]
@@ -100,6 +104,16 @@ Claude Code reconoce `/nombre` cuando existe `~/.claude/commands/<nombre>.md`. S
 - Nunca sobrescribe un comando ajeno: si ya existe un archivo normal con ese nombre, o un enlace que apunta fuera de la carpeta de *skills*, lo deja intacto y muestra un aviso.
 - Borra los enlaces colgantes de `~/.claude/commands/` que apuntan a la carpeta de *skills*, por ejemplo los de una *skill* retirada.
 
+## *Skills* de Antigravity CLI
+
+Antigravity CLI (`agy`) no lee `~/.agents/skills/`: sus *skills* globales viven en `~/.gemini/antigravity-cli/skills/<nombre>/`, y a nivel de repositorio lee `.agents/skills/` (ver la [documentación de Antigravity](https://antigravity.google/docs/skills)). Si existe `~/.gemini/antigravity-cli/`, el *script*:
+
+- Crea un enlace simbólico `~/.gemini/antigravity-cli/skills/<nombre>` → `<carpeta de skills>/<nombre>` para cada *skill* de este repositorio.
+- Nunca sobrescribe una *skill* ajena: si ya existe una carpeta normal con ese nombre, o un enlace que apunta fuera de la carpeta de *skills*, la deja intacta y muestra un aviso.
+- Borra los enlaces colgantes que apuntan a la carpeta de *skills*.
+
+Si Antigravity CLI no está instalado, omite este paso.
+
 ## *Workflows*
 
 Los *workflows* de Warp se copian a una carpeta que depende de la plataforma:
@@ -140,6 +154,11 @@ Al final, si no existe `~/rules/.env`, recuerda copiar `.env.example` a `.env` y
 ~/.claude/commands/
 ├── changelogger.md -> ~/.agents/skills/changelogger/SKILL.md
 ├── commit.md       -> ~/.agents/skills/commit/SKILL.md
+└── ...
+
+~/.gemini/antigravity-cli/skills/   ← solo si Antigravity CLI está instalado
+├── changelogger -> ~/.agents/skills/changelogger
+├── commit       -> ~/.agents/skills/commit
 └── ...
 
 ~/.warp/workflows/            ← macOS; ver la tabla de destinos

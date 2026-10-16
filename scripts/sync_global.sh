@@ -14,9 +14,12 @@
 #   2. Symlinks ~/.claude/commands/<name>.md to each installed SKILL.md, only
 #      for skills from this repository, never overwriting a command it does
 #      not own, and removes dangling links into the skills directory.
-#   3. Copies .warp/workflows/*.yaml to Warp's workflow directory and removes
+#   3. When Antigravity CLI is installed, symlinks each installed skill
+#      directory into ~/.gemini/antigravity-cli/skills/ (it does not read
+#      ~/.agents/skills) and removes dangling links there.
+#   4. Copies .warp/workflows/*.yaml to Warp's workflow directory and removes
 #      workflows it installed earlier that no longer exist in the repository.
-#   4. When the clone is not ~/rules itself, copies cot/, rulesets/,
+#   5. When the clone is not ~/rules itself, copies cot/, rulesets/,
 #      templates/ and scripts/atlassian/ to ~/rules, plus .env with mode 600.
 #
 # Author: Rodrigo Álvarez (incognia) <incognia@gmail.com>
@@ -179,6 +182,49 @@ for link in "$CLAUDE_COMMANDS_DIR"/*.md; do
 done
 echo "  $CLAUDE_SKILL_COUNT skills linked → $CLAUDE_COMMANDS_DIR"
 echo ""
+
+# --- Antigravity CLI ---
+# Antigravity CLI (agy) does not read ~/.agents/skills: its global skills live
+# in ~/.gemini/antigravity-cli/skills/<name>/ (workspace skills come from the
+# repository's .agents/skills/). Each skill directory is symlinked to the
+# installed copy, only when Antigravity CLI is installed.
+AGY_HOME="$HOME/.gemini/antigravity-cli"
+if [ -d "$AGY_HOME" ]; then
+    echo "=== Antigravity CLI ==="
+    AGY_SKILLS_DIR="$AGY_HOME/skills"
+    mkdir -p "$AGY_SKILLS_DIR"
+
+    AGY_SKILL_COUNT=0
+    while IFS= read -r skill_name; do
+        [ -z "$skill_name" ] && continue
+        skill_src="$SKILLS_DST/$skill_name"
+        skill_link="$AGY_SKILLS_DIR/$skill_name"
+        [ -f "$skill_src/SKILL.md" ] || continue
+        if [ -L "$skill_link" ]; then
+            if ! points_into_skills "$(readlink "$skill_link")"; then
+                echo "  ! $skill_name is a symlink not managed by this script; left untouched"
+                continue
+            fi
+        elif [ -e "$skill_link" ]; then
+            echo "  ! $skill_name already exists as a regular directory; left untouched"
+            continue
+        fi
+        ln -sfn "$skill_src" "$skill_link"
+        AGY_SKILL_COUNT=$((AGY_SKILL_COUNT + 1))
+        echo "  ✓ $skill_name → $skill_src"
+    done < "$MANAGED_SKILLS_FILE"
+
+    # Remove dangling links into the skills directory (skills that were removed).
+    for link in "$AGY_SKILLS_DIR"/*; do
+        [ -L "$link" ] || continue
+        if points_into_skills "$(readlink "$link")" && [ ! -e "$link" ]; then
+            rm -f "$link"
+            echo "  - removed dangling link: $(basename "$link")"
+        fi
+    done
+    echo "  $AGY_SKILL_COUNT skills linked → $AGY_SKILLS_DIR"
+    echo ""
+fi
 
 # --- Warp workflows (path depends on the platform) ---
 WORKFLOWS_SRC="$REPO_ROOT/.warp/workflows"
