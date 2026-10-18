@@ -132,6 +132,10 @@ branch legit-mention; new_block "$TODAY"; git add -A
 BODY="Explain the CHANGELOG rules that the check enforces, as /changelogger defines them" commit "docs: describe the check"
 expect_pass legit-mention "naming the changelog without reporting upkeep passes"
 
+branch describes-rule; new_block "$TODAY"; git add -A
+BODY="Make the gate fail only on phrases that report changelog maintenance, not on changelog upkeep as a topic" commit "fix(pr-check): describe the changelog rule"
+expect_pass describes-rule "describing changelog upkeep or maintenance as a topic passes"
+
 branch upkeep-update; new_block "$TODAY"; git add -A
 BODY="Update the CHANGELOG" commit "docs: add a test entry"
 expect_fail upkeep-update "reporting that the changelog was updated fails" "mentions the changelog upkeep"

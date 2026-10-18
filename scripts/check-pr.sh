@@ -85,7 +85,7 @@ HEADING_RE='^## \[[0-9]{4}-[0-9]{2}-[0-9]{2}\] - .+'
 strip_quoted() { sed -E 's/"[^"]*"//g; s/`[^`]*`//g; s/«[^»]*»//g; s/“[^”]*”//g'; }
 UPKEEP_VERBS='(update|updates|updated|updating|edit|edits|edited|editing|modify|modifies|modified|amend|bump|regenerate|touch|sync|append|rewrite|refresh)'
 RECORD_VERBS='(add|adds|added|adding|record|records|recorded|log|logs|logged|write|writes|wrote)'
-CHANGELOG_UPKEEP_RE="(^|[^[:alpha:]])$UPKEEP_VERBS( (the|a|an|our|this|that|all|every|its))? (project )?changelog([^[:alpha:]]|\$)|changelog(\\.md)? (entry|entries|bullet|bullets|update|updates|upkeep|maintenance)|(^|[^[:alpha:]])$RECORD_VERBS [^.]{0,40}(to|in|into) (the |a |our )?(project )?changelog([^[:alpha:]]|\$)"
+CHANGELOG_UPKEEP_RE="(^|[^[:alpha:]])$UPKEEP_VERBS( (the|a|an|our|this|that|all|every|its))? (project )?changelog([^[:alpha:]]|\$)|changelog(\\.md)? (entry|entries|bullet|bullets|update|updates)|(^|[^[:alpha:]])$RECORD_VERBS [^.]{0,40}(to|in|into) (the |a |our )?(project )?changelog([^[:alpha:]]|\$)"
 
 # CHANGELOG.md helpers; they read the file from stdin.
 cl_dates()  { grep -E '^## \[[0-9]{4}-[0-9]{2}-[0-9]{2}\]' | cut -c5-14; }

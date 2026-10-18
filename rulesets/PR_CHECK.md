@@ -12,7 +12,7 @@ Un *pull request* que no cumple las reglas de `/commit` y de `/changelogger` se 
 | G2 | Asunto con Conventional Commits: `tipo(ámbito): resumen` | `/commit` | `check-pr.sh` |
 | G3 | Asunto en inglés internacional (UK) | `/commit` | `check-pr.sh` (heurística de acentos y «ñ») |
 | G4 | Línea en blanco tras el asunto y viñetas del cuerpo desde la columna 1 | `/commit` | `check-pr.sh` |
-| G5 | El mensaje no reporta el mantenimiento del CHANGELOG («update the CHANGELOG», «CHANGELOG entry», «add … to the changelog»); nombrar el CHANGELOG o `/changelogger` sí se permite | `/commit` | `check-pr.sh` (frases de mantenimiento) |
+| G5 | El mensaje no reporta el mantenimiento del CHANGELOG («update the CHANGELOG», «CHANGELOG entry», «add … to the changelog»); nombrar el CHANGELOG o `/changelogger`, o hablar de su mantenimiento como tema («changelog upkeep»), sí se permite | `/commit` | `check-pr.sh` (frases de mantenimiento) |
 | G6 | `Co-Authored-By` de la herramienta y el modelo usados | `/commit` | Presencia: `check-pr.sh`; autenticidad: manual |
 | G7 | Sin *commits* `fixup!`, `squash!` ni `amend!` | `/commit` | `check-pr.sh` |
 | G8 | `CHANGELOG.md` cambia solo en el último *commit* de la serie | `/commit` | `check-pr.sh` |

@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-18] - Crear `/pr-check` para verificar *pull requests*
 
+- fix: dejar de rechazar en `scripts/check-pr.sh` (G5) los mensajes de *commit* que hablan del mantenimiento del CHANGELOG como tema («changelog upkeep», «changelog maintenance»): `CHANGELOG_UPKEEP_RE` conserva solo «changelog entry», «bullet» y «update» como frases de reporte; documentarlo en la regla G5 de `rulesets/PR_CHECK.md` y cubrirlo con una prueba de descripción de la regla en `scripts/tests/check-pr.test.sh`
 - fix: agregar título a los seis encabezados de fecha de `CHANGELOG.md` que no lo tenían (2026-04-18, 2026-03-27, 2026-02-26, 2026-01-23, 2025-12-29 y 2025-10-15), a partir de sus viñetas
 - fix: unificar en `CHANGELOG.md` los dos bloques con fecha 2026-03-23 en uno solo con título (el primero no tenía) y quitar las 45 líneas en blanco entre viñetas de un mismo bloque, defectos previos que reportó `/pr-check`
 - fix: ignorar en `scripts/check-pr.sh` (G5) el texto citado entre comillas dobles, comillas invertidas o comillas angulares al buscar frases de mantenimiento del CHANGELOG en los mensajes de *commit* (`strip_quoted`), porque así se citan las frases de las que habla un mensaje; las comillas simples no se ignoran por ser también apóstrofos; documentarlo en los límites de G5 de `rulesets/PR_CHECK.md` y cubrirlo con una prueba de frase citada en `scripts/tests/check-pr.test.sh`
