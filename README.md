@@ -11,7 +11,7 @@ description: "Estándares, filosofía y cadenas de razonamiento (CoT) que guían
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](https://commonmark.org)
 [![Spanish](https://img.shields.io/badge/Language-Spanish%20(MX)-green.svg)](https://es.wikipedia.org/wiki/Espa%C3%B1ol_mexicano)
-[![CoTs](https://img.shields.io/badge/CoTs-23-blue.svg)](./cot/)
+[![CoTs](https://img.shields.io/badge/CoTs-24-blue.svg)](./cot/)
 [![Skills](https://img.shields.io/badge/Skills-19-green.svg)](./.agents/skills/)
 [![Rulesets](https://img.shields.io/badge/Rulesets-20-orange.svg)](./rulesets/)
 
