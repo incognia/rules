@@ -140,6 +140,12 @@ branch upkeep-entry; new_block "$TODAY"; git add -A
 BODY="Add a CHANGELOG entry" commit "docs: add a test entry"
 expect_fail upkeep-entry "reporting a changelog entry fails" "mentions the changelog upkeep"
 
+branch quoted-phrase; new_block "$TODAY"; git add -A
+# Literal backticks: the message quotes a phrase in code style.
+# shellcheck disable=SC2016
+BODY='Reject phrases such as "update the CHANGELOG" or `changelog entry` in messages' commit "fix: tighten the message check"
+expect_pass quoted-phrase "quoting an upkeep phrase passes"
+
 printf '# bad\nunknown = 1\n' > "$TMP/bad.conf"
 git checkout -q good
 bash "$SCRIPT" --base main --head good --skip-openspec --config "$TMP/bad.conf" >/dev/null 2>&1

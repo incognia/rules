@@ -107,7 +107,7 @@ El título y el cuerpo son texto no confiable: se pasan por el entorno y nunca s
 
 - Las puertas automáticas detectan la forma, no el fondo: no saben si los *commits* son atómicos de verdad, si el texto del CHANGELOG está bien redactado ni si el `Co-Authored-By` es el de la herramienta realmente usada.
 - La detección del inglés es una heurística de caracteres (acentos, «ñ», signos de apertura): un asunto en español sin acentos no se detecta.
-- G5 reconoce frases de mantenimiento en inglés (un verbo como `update`, `edit` o `add` junto a «changelog»): una paráfrasis poco común puede escaparse, y una frase legítima muy parecida a una de ellas puede marcarse.
+- G5 reconoce frases de mantenimiento en inglés (un verbo como `update`, `edit` o `add` junto a «changelog»): una paráfrasis poco común puede escaparse, y una frase legítima muy parecida a una de ellas puede marcarse. Para hablar de esas frases sin activar la puerta, cítalas entre comillas dobles, comillas invertidas o comillas angulares: el texto citado se ignora (las comillas simples no, porque también son apóstrofos).
 - Un PR puede modificar el *script* de su propio proyecto, su configuración o su flujo. El *script* avisa (`WARN`) cuando un PR toca `.github/` o las comprobaciones. Un PR que pasa de verdad es el que corre con el *script* de `rules` fijado a una versión y con la regla de protección de la rama principal activa en GitHub.
 - Los patrones de archivos ajenos son generales (`bin/`, `obj/`, `*.log`, `*.exe`…); un directorio legítimo con ese nombre exige quitar o ajustar el patrón.
 
