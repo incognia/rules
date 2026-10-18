@@ -9,7 +9,7 @@ description: "Full commit workflow with mandatory CHANGELOG validation, SSH vali
 
 ## When to use
 
-Before making any git commit in projects that follow the rules repository conventions.
+Before making any git commit in projects that follow the rules repository conventions. Repositories with their own contribution rules have their own skill instead: use `/hedgedoc-commit` in `hedgedoc/hedgedoc` and its forks.
 
 ## Instructions
 

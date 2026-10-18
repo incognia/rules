@@ -3,6 +3,11 @@
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-10-17] - Crear `/hedgedoc-commit` para contribuir a HedgeDoc
+
+- docs: documentar el *skill* `/hedgedoc-commit` en `AGENTS.md` (lista de *skills* a 18) y en la lista de `.agents/skills/` y el *badge* de *skills* de `README.md`, y remitir en `/commit` (`.agents/skills/commit/SKILL.md`) a `/hedgedoc-commit` para `hedgedoc/hedgedoc` y sus *forks*
+- feat: crear el *skill* `/hedgedoc-commit` (`.agents/skills/hedgedoc-commit/SKILL.md`) para contribuir a `hedgedoc/hedgedoc`: firma DCO, estilo de mensajes del repositorio de origen, CHANGELOG por paquete solo para cambios visibles al usuario y sin *push* automático, en sustitución de `/commit` y `/changelogger` en ese repositorio
+
 ## [2026-10-15] - Hacer atómicos los *commits* y detectar la atribución con `commit_trailer.py`
 
 - docs: corregir en `AGENTS.md` y `README.md` que Antigravity CLI (`agy`) no descubre las *skills* en `~/.agents/skills/` sino en `~/.gemini/antigravity-cli/skills/<nombre>/`, con la nueva nota de `sync_global.sh` y la fila de la tabla de invocación por herramienta, y actualizar el *badge* de *skills* a 17

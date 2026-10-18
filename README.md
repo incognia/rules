@@ -12,7 +12,7 @@ description: "Estándares, filosofía y cadenas de razonamiento (CoT) que guían
 [![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](https://commonmark.org)
 [![Spanish](https://img.shields.io/badge/Language-Spanish%20(MX)-green.svg)](https://es.wikipedia.org/wiki/Espa%C3%B1ol_mexicano)
 [![CoTs](https://img.shields.io/badge/CoTs-23-blue.svg)](./cot/)
-[![Skills](https://img.shields.io/badge/Skills-17-green.svg)](./.agents/skills/)
+[![Skills](https://img.shields.io/badge/Skills-18-green.svg)](./.agents/skills/)
 [![Rulesets](https://img.shields.io/badge/Rulesets-19-orange.svg)](./rulesets/)
 
 ## Definiciones rápidas
@@ -246,6 +246,7 @@ sequenceDiagram
 - **scripts/** — *scripts* de automatización y respaldos
 - **.agents/skills/** — *skills* descubribles por agentes IA (ejemplos con `/` de Claude Code, Copilot y Antigravity; en Codex usa `$`):
   - `/commit` — flujo completo de *commits* atómicos con CHANGELOG obligatorio, mensaje en inglés internacional (UK) y atribución `Co-Authored-By` detectada de la sesión activa con `scripts/commit_trailer.py` (Claude Code, Codex, Copilot CLI y Antigravity CLI `agy`)
+  - `/hedgedoc-commit` — flujo de *commits* para contribuir a `hedgedoc/hedgedoc` (firma DCO, estilo de mensajes de arriba, CHANGELOG por paquete solo para cambios visibles y sin *push* automático); sustituye a `/commit` y `/changelogger` en ese repositorio
   - `/changelogger` — mantenimiento de CHANGELOG.md con fechas CST, en el idioma principal del repositorio
   - `/release vX.Y.Z` — publicar *tag* y *release* en GitHub o GitLab con notas derivadas del CHANGELOG
   - `/mr [rama-destino] [draft]` — abrir un *merge request* en GitLab desde la rama actual, con el revisor del contexto de empresa (`MR_CONTEXTS` en `~/rules/.env`) según el `origin`
