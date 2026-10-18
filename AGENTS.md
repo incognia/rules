@@ -71,6 +71,7 @@ DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")
 - Build the `Co-Authored-By` trailer before each commit with `python3 ~/rules/scripts/commit_trailer.py` (Claude Code, Codex, Copilot CLI, Antigravity CLI `agy`; shared format `[<Tool> ]<Model> (<effort>) <email>`), falling back to the tool-supplied attribution; never copy a name, model or effort from an example or an earlier commit
 - Rewrite `/tmp/commit-msg.txt` from scratch for every commit: it persists across commits and invocations, so never reuse a subject or body without checking it against the staged files (`git diff --cached --stat`)
 - Use non-interactive commands: `git --no-pager log --oneline -5`
+- Before opening a pull request, run `/pr-check` (`scripts/check-pr.sh`): a pull request that fails its gates is rejected without reviewing the code (`rulesets/PR_CHECK.md`)
 
 ## Architecture and structure
 
@@ -150,17 +151,19 @@ Key CoT files:
 - `cot/linguistics.md` - Apply Spanish Mexican rules
 - `cot/changelog.md` - Maintain CHANGELOG.md
 - `cot/release.md` - Publish semantic releases on GitHub or GitLab
+- `cot/pr_check.md` - Verify a pull request against the commit and CHANGELOG gates
 - `cot/sdd_readiness.md` - Assess a Confluence spec for OpenSpec
 
 ## Skills
 
 Skills are lightweight, agent-discoverable instruction sets in `.agents/skills/`. Each skill references detailed CoTs and rulesets without duplicating content.
 
-Available skills (18):
+Available skills (19):
 
 - **commit** — Full commit workflow with mandatory CHANGELOG gate and international English (UK) messages
 - **hedgedoc-commit** — Commit workflow for upstream `hedgedoc/hedgedoc` contributions (DCO sign-off, upstream message style, per-package changelog only for user-visible changes, no automatic push); replaces `/commit` and `/changelogger` there
 - **changelogger** — CHANGELOG.md maintenance with CST dates, in the repository's primary language
+- **pr-check** — Verify that a pull request follows the `/commit` and `/changelogger` conventions (gates automated by `scripts/check-pr.sh`) and report what would get it rejected
 - **release** — Semantic tag and release on GitHub or GitLab, notes derived from the CHANGELOG
 - **mr** — Open a GitLab merge request from the current branch, with the reviewer taken from the company context in `~/rules/.env` (`MR_CONTEXTS`) matched against `origin`
 - **sdd-readiness** — Assess whether a Confluence spec is ready for OpenSpec and post the result as an ADF comment after a confirmed draft

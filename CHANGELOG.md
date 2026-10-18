@@ -3,6 +3,11 @@
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-10-18] - Crear `/pr-check` para verificar *pull requests*
+
+- docs: documentar el *skill* `/pr-check` y su CoT `cot/pr_check.md` en `AGENTS.md` (lista de *skills* a 19, CoT clave y regla de ejecutarlo antes de abrir un *pull request*) y en `README.md` (*badges* de *skills* a 19 y *rulesets* a 20, diagrama de uso diario, lista de *rulesets*, lista de `.agents/skills/`, «Herramientas y scripts» y CoT rápidos a 25 archivos)
+- feat: crear el *skill* `/pr-check [rama-base]` (`.agents/skills/pr-check/SKILL.md`), su CoT `cot/pr_check.md`, las reglas `rulesets/PR_CHECK.md` y el *script* `scripts/check-pr.sh` (configurable por proyecto con `.github/pr-check.conf` y con pruebas en `scripts/tests/check-pr.test.sh`) para verificar que un *pull request* cumple las convenciones de `/commit` y `/changelogger` (Conventional Commits en inglés, *trailer* `Co-Authored-By`, *commits* atómicos, reglas del CHANGELOG, archivos ajenos, plantilla del PR y OpenSpec) e informar qué lo haría rechazar
+
 ## [2026-10-17] - Crear `/hedgedoc-commit` para contribuir a HedgeDoc
 
 - docs: documentar el *skill* `/hedgedoc-commit` en `AGENTS.md` (lista de *skills* a 18) y en la lista de `.agents/skills/` y el *badge* de *skills* de `README.md`, y remitir en `/commit` (`.agents/skills/commit/SKILL.md`) a `/hedgedoc-commit` para `hedgedoc/hedgedoc` y sus *forks*

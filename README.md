@@ -12,8 +12,8 @@ description: "Estándares, filosofía y cadenas de razonamiento (CoT) que guían
 [![Markdown](https://img.shields.io/badge/Made%20with-Markdown-1f425f.svg)](https://commonmark.org)
 [![Spanish](https://img.shields.io/badge/Language-Spanish%20(MX)-green.svg)](https://es.wikipedia.org/wiki/Espa%C3%B1ol_mexicano)
 [![CoTs](https://img.shields.io/badge/CoTs-23-blue.svg)](./cot/)
-[![Skills](https://img.shields.io/badge/Skills-18-green.svg)](./.agents/skills/)
-[![Rulesets](https://img.shields.io/badge/Rulesets-19-orange.svg)](./rulesets/)
+[![Skills](https://img.shields.io/badge/Skills-19-green.svg)](./.agents/skills/)
+[![Rulesets](https://img.shields.io/badge/Rulesets-20-orange.svg)](./rulesets/)
 
 ## Definiciones rápidas
 
@@ -96,6 +96,7 @@ flowchart LR
     B -->|Hacer respaldos| H["~/rules/cot/backup.md"]
     B -->|Publicar versión| L["~/rules/cot/release.md"]
     B -->|Evaluar spec para OpenSpec| M["~/rules/cot/sdd_readiness.md"]
+    B -->|Revisar un pull request| N["~/rules/cot/pr_check.md"]
     
     C --> I["Ejecución de CoT<br/>en herramienta LLM"]
     D --> I
@@ -105,6 +106,7 @@ flowchart LR
     H --> I
     L --> I
     M --> I
+    N --> I
     
     I --> J["Tarea completada<br/>según protocolo"]
     
@@ -131,6 +133,7 @@ flowchart LR
 - **[TEACHING.md](./rulesets/TEACHING.md)** - perfil educativo y de divulgación científica
 - **[ATTRIBUTION.md](./rulesets/ATTRIBUTION.md)** - reglas de atribución personal
 - **[COMMITTING.md](./rulesets/COMMITTING.md)** - reglas para mensajes de *commit*, idioma por contexto y gestión de cambios
+- **[PR_CHECK.md](./rulesets/PR_CHECK.md)** - puertas de verificación de *pull requests* (formato de *commits*, CHANGELOG y archivos ajenos), con su *script* y su integración en CI
 - **[RELEASING.md](./rulesets/RELEASING.md)** - reglas de *tags* semánticos y *releases* en GitHub o GitLab
 - **[SDD_READINESS.md](./rulesets/SDD_READINESS.md)** - rúbrica de madurez de especificaciones para OpenSpec, con Platform Readiness
 - **[CRITICAL_COT_READING.md](./rulesets/CRITICAL_COT_READING.md)** - regla de lectura completa de los CoT
@@ -185,6 +188,7 @@ Esta es la clasificación canónica de los *rulesets*; PHILOSOPHY.md la enlaza e
 - **PHILOSOPHY.md**: principios generales de trabajo
 - **LINGUISTICS.md**: español mexicano como estándar cultural
 - **COMMITTING.md**: Conventional *Commits* en inglés internacional (UK) e idioma por contexto
+- **PR_CHECK.md**: puertas que debe pasar un *pull request* para no ser rechazado
 - **RELEASING.md**: *tags* `vX.Y.Z` y *releases* no interactivas
 - **GIT.md**: configuración inicial de repositorios
 - **BACKUPS.md**: políticas de respaldos y operaciones destructivas
@@ -248,6 +252,7 @@ sequenceDiagram
   - `/commit` — flujo completo de *commits* atómicos con CHANGELOG obligatorio, mensaje en inglés internacional (UK) y atribución `Co-Authored-By` detectada de la sesión activa con `scripts/commit_trailer.py` (Claude Code, Codex, Copilot CLI y Antigravity CLI `agy`)
   - `/hedgedoc-commit` — flujo de *commits* para contribuir a `hedgedoc/hedgedoc` (firma DCO, estilo de mensajes de arriba, CHANGELOG por paquete solo para cambios visibles y sin *push* automático); sustituye a `/commit` y `/changelogger` en ese repositorio
   - `/changelogger` — mantenimiento de CHANGELOG.md con fechas CST, en el idioma principal del repositorio
+  - `/pr-check [rama-base]` — verificar que un *pull request* cumple las reglas de `/commit` y `/changelogger` (formato de *commits*, `Co-Authored-By`, CHANGELOG, archivos ajenos, plantilla y OpenSpec) con `scripts/check-pr.sh`, e informar qué lo haría rechazar
   - `/release vX.Y.Z` — publicar *tag* y *release* en GitHub o GitLab con notas derivadas del CHANGELOG
   - `/mr [rama-destino] [draft]` — abrir un *merge request* en GitLab desde la rama actual, con el revisor del contexto de empresa (`MR_CONTEXTS` en `~/rules/.env`) según el `origin`
   - `/linguistics <archivo>` — aplicar reglas de español mexicano
@@ -274,6 +279,7 @@ sequenceDiagram
 - Sincronización: scripts/sync_global.sh (instala *skills* y *workflows* globales, multiplataforma)
 - Git (tras `git init`): `scripts/git-init-context.sh <personal|laboral> <llave> <url_remota> <rama>` (no interactivo)
 - Atribución de *commits*: `scripts/commit_trailer.py` (imprime el *trailer* `Co-Authored-By` del modelo de la sesión activa en Claude Code, Codex, Copilot CLI o Antigravity CLI `agy`; `--tool` fuerza la herramienta)
+- Verificación de *pull requests*: `scripts/check-pr.sh --base <rama>` (comprueba las puertas de `/commit` y `/changelogger`; se configura por proyecto con `.github/pr-check.conf`; pruebas en `scripts/tests/check-pr.test.sh`)
 - Fecha CST: scripts/cst_date.sh
 - Correo vía Graph API: scripts/graph_auth.py (autenticación y caché de *token*)
 - Confluence: scripts/atlassian/ (`confluence-management.sh` para páginas, adjuntos, comentarios al pie y respuestas en ADF, y `find-marked` para ubicar un hilo marcado; `adf_lib.py` para construir y leer ADF; credenciales en `.env`)
@@ -285,9 +291,10 @@ sequenceDiagram
 
 ## Cómo usar CoT rápidamente
 
-- Todos los CoT: carpeta [cot/](./cot/) (24 archivos)
+- Todos los CoT: carpeta [cot/](./cot/) (25 archivos)
 - Lingüística: [cot/linguistics.md](./cot/linguistics.md) + [LINGUISTICS.md](./rulesets/LINGUISTICS.md)
 - *Commits*: [cot/committing.md](./cot/committing.md) + [COMMITTING.md](./rulesets/COMMITTING.md)
+- Verificación de *pull requests*: [cot/pr_check.md](./cot/pr_check.md) + [PR_CHECK.md](./rulesets/PR_CHECK.md)
 - Contexto de proyecto: [cot/context.md](./cot/context.md)
 - CHANGELOG: [cot/changelog.md](./cot/changelog.md)
 - *Releases*: [cot/release.md](./cot/release.md) + [RELEASING.md](./rulesets/RELEASING.md)
