@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-18] - Crear `/pr-check` para verificar *pull requests*
 
+- fix: agregar título a los seis encabezados de fecha de `CHANGELOG.md` que no lo tenían (2026-04-18, 2026-03-27, 2026-02-26, 2026-01-23, 2025-12-29 y 2025-10-15), a partir de sus viñetas
 - fix: unificar en `CHANGELOG.md` los dos bloques con fecha 2026-03-23 en uno solo con título (el primero no tenía) y quitar las 45 líneas en blanco entre viñetas de un mismo bloque, defectos previos que reportó `/pr-check`
 - fix: ignorar en `scripts/check-pr.sh` (G5) el texto citado entre comillas dobles, comillas invertidas o comillas angulares al buscar frases de mantenimiento del CHANGELOG en los mensajes de *commit* (`strip_quoted`), porque así se citan las frases de las que habla un mensaje; las comillas simples no se ignoran por ser también apóstrofos; documentarlo en los límites de G5 de `rulesets/PR_CHECK.md` y cubrirlo con una prueba de frase citada en `scripts/tests/check-pr.test.sh`
 - fix: distinguir en `scripts/check-pr.sh` (G10) los defectos del CHANGELOG que ya existían en la rama base de los que introduce el *pull request*: fechas duplicadas, fechas fuera de orden y líneas en blanco entre viñetas de un mismo bloque solo advierten (`WARN`) si ya estaban en la base y fallan únicamente si el PR los agrega; documentarlo en `rulesets/PR_CHECK.md` y cubrirlo con nuevas pruebas en `scripts/tests/check-pr.test.sh` (base con defectos previos, fecha duplicada nueva y línea en blanco nueva)
@@ -192,7 +193,7 @@
 - improve: optimizar `.agents/skills/commit/SKILL.md` (repo y global): fusionar pasos de validación (identidad + SSH) en un solo paso condicional; saltar directamente al paso de fecha CST si ya se validó en la sesión
 - improve: agregar guard de paso 0 en `.agents/skills/mail/SKILL.md` (repo y global): mostrar ayuda con uso, modos, tipos, asunto y ejemplos cuando se invoca sin parámetros; detener ejecución sin cargar CoT ni reglas
 
-## [2026-04-18]
+## [2026-04-18] - Cambiar el correo laboral a `kabatone.com`
 
 - docs: actualizar correo laboral en todas las reglas, CoT, *skills* y plantillas: `ralvarez@promad.com.mx` → `ralvarez@kabatone.com` para proyectos laborales (`@incogniadev`) en GitHub y GitLab
 - docs: actualizar `rulesets/GIT.md`: bloques de configuración `git config user.email` para proyectos laborales (sección recomendada y pasos manuales)
@@ -254,7 +255,7 @@
 - fix: corregir conteo de CoTs en README.md: 20 → 22 (faltaban `mail.md` y `kube.md`)
 - fix: agregar descripción faltante al encabezado de *workflows* en sección de estructura
 
-## [2026-03-27]
+## [2026-03-27] - Reestructurar el repositorio y crear *skills*, *workflows* y `sync_global.sh`
 
 - refactor: simplificar estructura de directorios del repositorio
   - renombrar `docs/` → `rulesets/` (más descriptivo del contenido)
@@ -340,22 +341,22 @@
 - feat: documentar razón crítica para NO usar pandoc directo: tablas inconsistentes, bloques de código con fondo roto y encabezado/pie incontrolables
 - docs: agregar regla crítica en cot/styling.md (paso 5): eliminar todos los `---` del cuerpo del documento; el único permitido es el que precede inmediatamente a `## Contacto`
 
-## [2026-02-26]
+## [2026-02-26] - Actualizar el título profesional y el correo corporativo en `STYLING.md`
 
 - docs: actualizar STYLING.md: cambiar título profesional de «Ingeniero DevOps» a «Líder DevOps» y correo corporativo de promad.com.mx a kabatone.com en plantilla de firma
 
-## [2026-01-23]
+## [2026-01-23] - Actualizar las fechas de *copyright* a 2026
 
 - docs: actualizar fechas de copyright de 2025 a 2026 en README.md, PHILOSOPHY.md, rulesets/VAULT.md, rulesets/LICENSING.md y cot/licensing.md
 - docs: actualizar fechas de ejemplo en rulesets/LICENSING.md de 2025-07-30 a 2026-01-23 en plantillas de encabezados para scripts Bash, Python y manifiestos YAML
 - docs: actualizar validación de fecha en cot/licensing.md de 2025 a 2026 para verificación de footer en README.md
 
-## [2025-12-29]
+## [2025-12-29] - Planear la refactorización de la estructura de carpetas
 
 - docs: crear REFACTOR.md: checklist detallado para refactorización de estructura de directorios (9 fases, 60+ pasos, comandos ejecutables)
 - style: aplicar LINGUISTICS.md a REFACTOR.md: corregir 22 títulos de Title Case a estilo oración, agregar cursivas a préstamos técnicos (*symlink*, *snippet*, *commit*, *push*, *markdown-link-check*, *markdownlint*), corregir calcos del inglés («testing» → «pruebas», «linting» → «análisis estático»)
 
-## [2025-10-15]
+## [2025-10-15] - Clasificar los CoT como `feat:` en `COMMITTING.md`
 
 - docs: clarificar COMMITTING.md: los archivos CoT se clasifican como `feat:` (funcionalidad automatizada) no `docs:` (documentación)
 
