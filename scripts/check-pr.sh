@@ -75,6 +75,13 @@ SUBJECT_RE="^($COMMIT_TYPES)(\\([a-z0-9._/-]+\\))?!?: [^ ].*"
 BULLET_RE="^- ($CHANGELOG_TYPES): .+"
 HEADING_RE='^## \[[0-9]{4}-[0-9]{2}-[0-9]{2}\] - .+'
 
+# A commit message must not report CHANGELOG upkeep ("update the CHANGELOG", "CHANGELOG entry",
+# "add a line to the changelog"). Merely naming the CHANGELOG, or the /changelogger skill,
+# is fine: a commit that documents or implements the checks has to talk about it.
+UPKEEP_VERBS='(update|updates|updated|updating|edit|edits|edited|editing|modify|modifies|modified|amend|bump|regenerate|touch|sync|append|rewrite|refresh)'
+RECORD_VERBS='(add|adds|added|adding|record|records|recorded|log|logs|logged|write|writes|wrote)'
+CHANGELOG_UPKEEP_RE="(^|[^[:alpha:]])$UPKEEP_VERBS( (the|a|an|our|this|that|all|every|its))? (project )?changelog([^[:alpha:]]|\$)|changelog(\\.md)? (entry|entries|bullet|bullets|update|updates|upkeep|maintenance)|(^|[^[:alpha:]])$RECORD_VERBS [^.]{0,40}(to|in|into) (the |a |our )?(project )?changelog([^[:alpha:]]|\$)"
+
 # Build output, logs and OS files do not belong in a pull request. A project adds its own
 # patterns with "stray = <glob>" in its configuration file.
 STRAY_PATTERNS='.DS_Store
@@ -174,7 +181,7 @@ for sha in $COMMITS; do
     has_spanish "$body" && WARN_BODY_LANG="$WARN_BODY_LANG $short"
     [ -z "$(printf '%s\n' "$msg" | sed -n '2p')" ] || BAD_BLANK="$BAD_BLANK $short"
     printf '%s\n' "$msg" | grep -q -E '^[[:space:]]+- ' && BAD_BULLET="$BAD_BULLET $short"
-    printf '%s\n' "$msg" | grep -q -i 'changelog' && BAD_CHANGELOG="$BAD_CHANGELOG $short"
+    printf '%s\n' "$msg" | grep -q -i -E "$CHANGELOG_UPKEEP_RE" && BAD_CHANGELOG="$BAD_CHANGELOG $short"
     printf '%s\n' "$msg" | grep -q -E '^Co-Authored-By: .+ <[^>]+@[^>]+>$' || BAD_TRAILER="$BAD_TRAILER $short"
 done
 
@@ -189,8 +196,8 @@ if [ -n "$COMMITS" ]; then
                             || fail "missing blank line after the subject in:$BAD_BLANK"
     [ -z "$BAD_BULLET" ]    && pass "body bullets start at column 1" \
                             || fail "indented bullet in the body of:$BAD_BULLET (bullets start at column 1, continuation lines use two spaces)"
-    [ -z "$BAD_CHANGELOG" ] && pass "no commit message mentions the changelog" \
-                            || fail "commit message mentions the changelog in:$BAD_CHANGELOG (changelog upkeep is not a body detail)"
+    [ -z "$BAD_CHANGELOG" ] && pass "no commit message reports CHANGELOG upkeep" \
+                            || fail "commit message mentions the changelog upkeep in:$BAD_CHANGELOG (changelog upkeep is not a body detail)"
     [ -z "$BAD_TRAILER" ]   && pass "every commit has a Co-Authored-By trailer" \
                             || fail "missing 'Co-Authored-By: [Tool ]Model (effort) <email>' trailer in:$BAD_TRAILER"
     [ -z "$WARN_BODY_LANG" ] || warn "the body seems to be in Spanish in:$WARN_BODY_LANG"

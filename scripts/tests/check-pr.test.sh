@@ -45,10 +45,10 @@ new_repo() {
 
 branch() { git checkout -q main && git checkout -q -b "$1"; }
 
-# commit "<subject>" [no-trailer]: a message with a body and, by default, a trailer.
+# [BODY=<text>] commit "<subject>" [no-trailer]: a message with a one-bullet body and, by default, a trailer.
 commit() {
     {
-        printf '%s\n\n- Change something\n' "$1"
+        printf '%s\n\n- %s\n' "$1" "${BODY:-Change something}"
         [ "${2-}" = "no-trailer" ] || printf '\nCo-Authored-By: Test Tool 1.0 <noreply@example.com>\n'
     } > "$TMP/msg"
     git commit -q -F "$TMP/msg"
@@ -119,6 +119,18 @@ branch touches-checks; new_block "$TODAY"; echo "# more" >> .github/pr-check.con
 run touches-checks
 if [ "$CODE" -eq 0 ] && printf '%s' "$OUT" | grep -q -F "[WARN]"; then ok "changing the checks passes with a warning"
 else nok "changing the checks passes with a warning (got $CODE)"; printf '%s\n' "$OUT" | sed 's/^/      /'; fi
+
+branch legit-mention; new_block "$TODAY"; git add -A
+BODY="Explain the CHANGELOG rules that the check enforces, as /changelogger defines them" commit "docs: describe the check"
+expect_pass legit-mention "naming the changelog without reporting upkeep passes"
+
+branch upkeep-update; new_block "$TODAY"; git add -A
+BODY="Update the CHANGELOG" commit "docs: add a test entry"
+expect_fail upkeep-update "reporting that the changelog was updated fails" "mentions the changelog upkeep"
+
+branch upkeep-entry; new_block "$TODAY"; git add -A
+BODY="Add a CHANGELOG entry" commit "docs: add a test entry"
+expect_fail upkeep-entry "reporting a changelog entry fails" "mentions the changelog upkeep"
 
 printf '# bad\nunknown = 1\n' > "$TMP/bad.conf"
 git checkout -q good

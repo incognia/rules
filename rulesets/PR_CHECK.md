@@ -12,7 +12,7 @@ Un *pull request* que no cumple las reglas de `/commit` y de `/changelogger` se 
 | G2 | Asunto con Conventional Commits: `tipo(ámbito): resumen` | `/commit` | `check-pr.sh` |
 | G3 | Asunto en inglés internacional (UK) | `/commit` | `check-pr.sh` (heurística de acentos y «ñ») |
 | G4 | Línea en blanco tras el asunto y viñetas del cuerpo desde la columna 1 | `/commit` | `check-pr.sh` |
-| G5 | El mensaje no menciona el CHANGELOG | `/commit` | `check-pr.sh` |
+| G5 | El mensaje no reporta el mantenimiento del CHANGELOG («update the CHANGELOG», «CHANGELOG entry», «add … to the changelog»); nombrar el CHANGELOG o `/changelogger` sí se permite | `/commit` | `check-pr.sh` (frases de mantenimiento) |
 | G6 | `Co-Authored-By` de la herramienta y el modelo usados | `/commit` | Presencia: `check-pr.sh`; autenticidad: manual |
 | G7 | Sin *commits* `fixup!`, `squash!` ni `amend!` | `/commit` | `check-pr.sh` |
 | G8 | `CHANGELOG.md` cambia solo en el último *commit* de la serie | `/commit` | `check-pr.sh` |
@@ -107,6 +107,7 @@ El título y el cuerpo son texto no confiable: se pasan por el entorno y nunca s
 
 - Las puertas automáticas detectan la forma, no el fondo: no saben si los *commits* son atómicos de verdad, si el texto del CHANGELOG está bien redactado ni si el `Co-Authored-By` es el de la herramienta realmente usada.
 - La detección del inglés es una heurística de caracteres (acentos, «ñ», signos de apertura): un asunto en español sin acentos no se detecta.
+- G5 reconoce frases de mantenimiento en inglés (un verbo como `update`, `edit` o `add` junto a «changelog»): una paráfrasis poco común puede escaparse, y una frase legítima muy parecida a una de ellas puede marcarse.
 - Un PR puede modificar el *script* de su propio proyecto, su configuración o su flujo. El *script* avisa (`WARN`) cuando un PR toca `.github/` o las comprobaciones. Un PR que pasa de verdad es el que corre con el *script* de `rules` fijado a una versión y con la regla de protección de la rama principal activa en GitHub.
 - Los patrones de archivos ajenos son generales (`bin/`, `obj/`, `*.log`, `*.exe`…); un directorio legítimo con ese nombre exige quitar o ajustar el patrón.
 
