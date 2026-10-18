@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-10-18] - Crear `/pr-check` para verificar *pull requests*
 
+- fix: unificar en `CHANGELOG.md` los dos bloques con fecha 2026-03-23 en uno solo con título (el primero no tenía) y quitar las 45 líneas en blanco entre viñetas de un mismo bloque, defectos previos que reportó `/pr-check`
 - fix: ignorar en `scripts/check-pr.sh` (G5) el texto citado entre comillas dobles, comillas invertidas o comillas angulares al buscar frases de mantenimiento del CHANGELOG en los mensajes de *commit* (`strip_quoted`), porque así se citan las frases de las que habla un mensaje; las comillas simples no se ignoran por ser también apóstrofos; documentarlo en los límites de G5 de `rulesets/PR_CHECK.md` y cubrirlo con una prueba de frase citada en `scripts/tests/check-pr.test.sh`
 - fix: distinguir en `scripts/check-pr.sh` (G10) los defectos del CHANGELOG que ya existían en la rama base de los que introduce el *pull request*: fechas duplicadas, fechas fuera de orden y líneas en blanco entre viñetas de un mismo bloque solo advierten (`WARN`) si ya estaban en la base y fallan únicamente si el PR los agrega; documentarlo en `rulesets/PR_CHECK.md` y cubrirlo con nuevas pruebas en `scripts/tests/check-pr.test.sh` (base con defectos previos, fecha duplicada nueva y línea en blanco nueva)
 - fix: afinar en `scripts/check-pr.sh` la puerta G5 para que rechace solo los mensajes de *commit* que reportan el mantenimiento del CHANGELOG («update the CHANGELOG», «CHANGELOG entry», «add … to the changelog») y permita nombrar el CHANGELOG o `/changelogger`, porque un *commit* que documenta o implementa las comprobaciones tiene que hablar de ello; actualizar la regla G5 y sus límites en `rulesets/PR_CHECK.md` y agregar pruebas de mención legítima y de mantenimiento en `scripts/tests/check-pr.test.sh`
@@ -215,12 +216,9 @@
 - style: agregar tipografías corporativas vía Google Fonts: Space Grotesk (primaria, texto general) y Montserrat (secundaria, encabezados)
 - style: aplicar nueva paleta y tipografías a plantillas de correo HTML (`delivery_template.html`, `generic_template.html`): reemplazar colores genéricos por paleta Kabat One (Midday, Midnight, Safety, Traffic, Dispatch, Video, Code, Ice), agregar Space Grotesk/Montserrat con *fallback* Arial
 - style: actualizar paleta de colores en `rulesets/MAIL.md` con nombres de la nueva paleta
-
 - fix: eliminar `color` explícito de `.markdown-body` en CSS de HedgeDoc; delegar manejo de color de texto claro/oscuro al tema nativo de HedgeDoc
 - fix: detectar WSL en `sync_global.sh` usando `/proc/version` y `$WSL_DISTRO_NAME`; copiar *skills* al home de Windows (`%USERPROFILE%/.agents/skills/`) en lugar del home de Linux, que Warp no puede leer al correr sobre Windows
-
 - docs: crear `docs/SYNC.md`: documentación detallada del mecanismo de sincronización con diagramas Mermaid (flujo general, detección de plataforma, destinos por plataforma, flujo de actualización)
-
 - refactor: mover `MAIL.md` → `docs/MAIL.md`: separar documentación de proceso (Graph API, Entra, OAuth2) de reglas y CoT
 - refactor: invertir dirección de referencias: `cot/mail.md` y `rulesets/MAIL.md` ya no apuntan a docs; `docs/MAIL.md` referencia al CoT, *ruleset*, *skill* y script
 - refactor: aclarar en README.md qué copia `sync_global.sh` (*skills* y *workflows*) y qué no (`scripts/`, `templates/`, `rulesets/`, `cot/`)
@@ -234,14 +232,11 @@
   - `graph`: enviar directo vía Microsoft Graph API con firma *inline* CID (cualquier OS)
 - feat: crear `MAIL.md`: documentación completa del proceso de registro de aplicación en Microsoft Entra, permisos delegados, *device code flow* y envío vía Graph API
 - feat: integrar firma como adjunto *inline* CID en modo `graph` usando `~/rules/templates/mail/assets/ralvarez_firma.png`
-
 - docs: actualizar `cot/mail.md`: agregar pasos 9 y 10 con guardado de archivo y entrega según modo; actualizar razonamiento y conclusión
 - docs: actualizar `rulesets/MAIL.md`: flujo de trabajo con tres modos, nueva sección de referencia a Graph API
-
 - feat: crear `scripts/graph_auth.py`: autenticación Graph API con caché de tokens en `~/.graph_tokens.json` (caché → *refresh* silencioso → *device code flow*)
 - feat: agregar modo `token` al *skill* mail: `/mail token` para autenticar y cachear el *token* una sola vez (~90 días)
 - feat: cambiar firma del modo `graph` a `ralvarez_firma_740.png` (740px = área útil del contenedor de 800px con 30px de *padding*)
-
 - docs: actualizar `MAIL.md`: documentar dimensiones del contenedor (800 − 60 = 740px), ciclo de vida del *token* con diagrama Mermaid, periodicidad y archivos involucrados
 - docs: agregar variantes de firma a `templates/mail/assets/`: `_740.png`, `_1024.png`
 
@@ -251,13 +246,10 @@
 - feat: crear `rulesets/KUBE.md`: reglas de análisis de clústeres (acceso SSH, estructura de manifiestos, comandos de diagnóstico, puertos de observabilidad, convenciones de nombres)
 - feat: crear `cot/kube.md`: CoT de 10 pasos para análisis completo (nodos, pods, servicios, VirtualServices, Istio, ArgoCD, manifiestos, *health checks*, observabilidad)
 - feat: documentar puertos reales de observabilidad: Kiali 20001 (LoadBalancer), Prometheus 9090 (NodePort), Grafana 3000 (LoadBalancer)
-
 - docs: agregar diagrama de secuencia Mermaid en README.md: flujo *skill* (interfaz) → CoT (*middleware*) → *ruleset* (*backend*)
-
 - feat: crear *skill* kubetbs para *troubleshooting* de microservicios en Kubernetes: `/kubetbs <llave> <usuario> <ip> <namespace> [servicio]`
 - feat: crear `rulesets/KUBETBS.md`: metodología de afuera hacia adentro, comandos de diagnóstico, errores comunes (CrashLoopBackOff, ImagePullBackOff, *cross-namespace*)
 - feat: renombrar `cot/kubernetes.md` → `cot/kubetbs.md` y agregar referencia a nuevo *ruleset*
-
 - fix: corregir rutas relativas a canónicas (`~/rules/cot/`, `~/rules/rulesets/`, `~/rules/templates/`) en todos los *skills* (kube, kubetbs, mail, git-init)
 - fix: corregir conteo de CoTs en README.md: 20 → 22 (faltaban `mail.md` y `kube.md`)
 - fix: agregar descripción faltante al encabezado de *workflows* en sección de estructura
@@ -276,7 +268,6 @@
   - eliminar bloque `<citations>` (artefacto de Warp que no pertenece al archivo versionado)
   - reescribir contenido sin referencias específicas a Warp como producto
 - refactor: eliminar archivos obsoletos: PROMPTS.md (redundante con README y CoTs), ROADMAP.md (6 meses sin actualizar), REFACTOR.md (reemplazado por este cambio)
-
 - feat: crear 6 *skills* descubribles por agentes IA en `.agents/skills/`
   - **commit**: flujo completo de *commit* con CHANGELOG obligatorio
   - **changelog**: mantenimiento de CHANGELOG.md con fechas CST
@@ -293,9 +284,7 @@
 - docs: actualizar README.md: nueva estructura de directorios, sección de *skills* y *workflows*, corregir comandos de *symlink*
 - docs: actualizar PHILOSOPHY.md: reemplazar referencias a ROADMAP.md y TODO.md por AGENTS.md
 - docs: actualizar AGENTS.md: rutas a nueva estructura (`rulesets/`, `cot/`)
-
 - fix: corregir rutas de invocación en README.md: usar `~/rules/cot/` (ruta canónica) en lugar de `~/cot/` (dependiente de *symlink*) en ejemplos y diagrama Mermaid
-
 - feat: crear `scripts/sync_global.sh`: script multiplataforma para sincronizar *skills* y *workflows* globales
   - detecta automáticamente macOS, Linux y Windows/WSL
   - copia *skills* a `~/.agents/skills/` y *workflows* a la ruta correcta por plataforma
@@ -307,18 +296,14 @@
 - docs: documentar rutas por plataforma en notas del setup
 - docs: documentar acceso a *workflows* YAML vía *Workflow Search* (`Ctrl+Shift+R`) en macOS, Linux y Windows
 - docs: marcar como pendiente de validar las rutas de *workflows* en Linux y Windows
-
 - improve: parametrizar *skill* linguistics con argumento `$0` para archivo objetivo: `/linguistics README.md`
-
 - feat: crear *skill* git-init parametrizado con 4 argumentos: contexto (personal/laboral), nombre de llave SSH (se busca en `~/.ssh/`), URL remota y rama
-
 - feat: crear *skill* mail parametrizado para componer correos HTML compatibles con OWA: `/mail <delivery|generic> <asunto>`
 - feat: crear `rulesets/MAIL.md`: reglas de composición de correos HTML (restricciones de OWA, `bgcolor` en `<td>`, paleta de colores, *placeholders*)
 - feat: crear `cot/mail.md`: CoT de 9 pasos para elaborar correos desde plantillas
 - feat: migrar plantillas de correo del repo stab a `templates/mail/` (`delivery_template.html`, `generic_template.html`)
 - feat: migrar imagen de firma (`ralvarez_firma.png`) a `templates/mail/assets/` y corregir rutas en plantillas
 - feat: agregar paso obligatorio de firma con imagen en *skill* mail
-
 - feat: crear *skill* ssh-import parametrizado para importar llaves SSH a servidores remotos vía GitHub: `/ssh-import <faraday|cad> <user@server>`
   - `faraday` → servidores personales (GitHub: @incognia)
   - `cad` → servidores de clientes (GitHub: @incogniadev)
@@ -326,20 +311,15 @@
 
 - docs: actualizar llaves SSH en todos los archivos: `id_ed25519` → `incognia` (personal), `promad_ed25519` → `kone` (laboral/repos)
 - docs: documentar convención de 4 llaves: `incognia` (repos personales), `kone` (repos laborales + infra), `faraday` (servidores personales), `cad` (servidores de clientes)
-
 - docs: actualizar README.md: lista completa de 9 *skills* con sintaxis, 4 *workflows*, 4 llaves SSH (repos + servers), MAIL.md en documentos, sync_global.sh en herramientas
-
 - style: aplicar LINGUISTICS.md a README.md: convertir texto suelto en encabezados (`Definiciones rápidas`, `Ejemplos de comandos`), cursivas en préstamos (*Prompt*, *Chain-of-Thought*), corregir calco «ciclar» → «navegar»
-
 - style: aplicar LINGUISTICS.md a PHILOSOPHY.md: cursiva en préstamo (`Helm *charts*`), corregir calco «desarrollado» → «elaborado» en footer
 - style: aplicar LINGUISTICS.md a CHANGELOG.md: cursiva en *overview* y *lint*, corregir calco «comprehensiva» → «exhaustiva», corregir errata «systemáticamente» → «sistemáticamente»
-
 - feat: crear *skill* `styling` parametrizado para aplicar estilo Kabat One a documentos Markdown por plataforma: `/styling <hedgedoc|gitlab|github> [mit|gpl] <archivo>`
   - encabezado con logo Kabat One, timestamp CST y tags YAML (exclusivo HedgeDoc)
   - pie de página con firma corporativa (exclusivo HedgeDoc); *copyright* GPLv3/MIT (solo README.md en GitLab/GitHub)
   - eliminación obligatoria de separadores `---` espurios; badges de licencia obligatorios
 - feat: crear plantillas por plataforma en `templates/`: `hedgedoc.md`, `gitlab-readme.md`, `github-readme.md`
-
 - docs: actualizar `rulesets/STYLING.md`: nuevo branding Kabat One, estructura por plataforma, tabla de diferencias de sintaxis, reglas de badges y plantillas
 - docs: actualizar `cot/styling.md`: reforzar regla de eliminación de `---` con paso programático
 - docs: actualizar `cot/changelog.md`: agregar validación obligatoria de entrada existente antes de crear encabezado nuevo para la misma fecha
@@ -353,14 +333,11 @@
 - docs: corregir error YAML en `README.md`: entrecomillar valores con comillas dobles; valores con `:` sin comillas causan «mapping values are not allowed» en GitHub; actualizar plantillas y *skill* con la misma regla
 - docs: corregir rutas relativas en todos los *skills*: sustituir referencias como `cot/X.md` y `rulesets/X.md` por rutas absolutas `~/rules/cot/X.md` y `~/rules/rulesets/X.md` para evitar que el agente las busque en `~/.agents/skills/` en lugar de `~/rules/`
 
-## [2026-03-23]
+## [2026-03-23] - Reglas para documentos LaTeX y separadores en el CoT de *styling*
 
 - feat: crear rulesets/LATEX.md: referencia completa de reglas para generar documentos LaTeX con XeLaTeX en Fedora (fuentes, tablas con `tabularx`+`booktabs`, bloques de código con `tcolorbox`, paleta PROMAD, encabezado/pie estándar, instalación de paquetes con `dnf`)
 - feat: crear cot/latex.md: CoT de 8 pasos para generar documentos LaTeX desde cero usando el Markdown como referencia de contenido
 - feat: documentar razón crítica para NO usar pandoc directo: tablas inconsistentes, bloques de código con fondo roto y encabezado/pie incontrolables
-
-## [2026-03-23] - Regla de separadores en CoT de *styling*
-
 - docs: agregar regla crítica en cot/styling.md (paso 5): eliminar todos los `---` del cuerpo del documento; el único permitido es el que precede inmediatamente a `## Contacto`
 
 ## [2026-02-26]
@@ -376,7 +353,6 @@
 ## [2025-12-29]
 
 - docs: crear REFACTOR.md: checklist detallado para refactorización de estructura de directorios (9 fases, 60+ pasos, comandos ejecutables)
-
 - style: aplicar LINGUISTICS.md a REFACTOR.md: corregir 22 títulos de Title Case a estilo oración, agregar cursivas a préstamos técnicos (*symlink*, *snippet*, *commit*, *push*, *markdown-link-check*, *markdownlint*), corregir calcos del inglés («testing» → «pruebas», «linting» → «análisis estático»)
 
 ## [2025-10-15]
@@ -411,7 +387,6 @@
 - docs: incluir diagrama de uso diario (flowchart LR) con opciones de CoT más comunes y convergencia hacia ejecución en LLM
 - docs: aplicar colores diferenciados: rosa para inicio, verde para éxito, azul para referencias conceptuales
 - docs: integrar diagramas orgánicamente con comandos paso a paso y ejemplos de invocación para mejor *onboarding*
-
 - fix: corregir comando de enlace simbólico en configuración inicial: usar `ln -s ~/rules/prompts/cot cot` (sin ~ en destino) para correcta creación de enlace local
 - fix: actualizar comando de recreación de enlace para mantener consistencia con la sintaxis corregida
 - fix: aplicar reglas lingüísticas de LINGUISTICS.md al README.md: corregir calco del inglés "desarrollado" por "elaborado" en footer del proyecto
@@ -446,7 +421,6 @@
 - docs: incluir especialización técnica: Kubernetes, GitOps, mallas de servicios, observabilidad
 - docs: definir 7 reglas clave incluyendo lectura completa de CoT y flujo obligatorio de CHANGELOG
 - docs: establecer integración con otros repositorios mediante rutas ~/rules/
-
 - improve: afinar cot/committing.md v1.1: agregar validación visual de identidad activa para usuarios con múltiples cuentas y llaves SSH
 - improve: incluir display obligatorio de email, nombre, llave SSH y remoto antes de proceder con commits
 - improve: agregar verificación crítica para confirmar que la identidad mostrada coincide con la esperada para el repositorio
@@ -455,7 +429,6 @@
 ## [2025-09-17] - Mejoras críticas para cálculo preciso de zona horaria CST y reorganización estructural
 
 - feat: crear cot/context.md v2.0: CoT genérico portable para cualquier proyecto con detección automática de tecnologías (Node.js, Python, Go, Rust, Java, Docker), análisis de estructura con *tree*, instalación multiplataforma (*dnf*, *apt*, *apk*, *pacman*, *brew*) y identificación de archivos de documentación estándar
-
 - docs: actualizar README.md: añadir referencia a CoT genérico context.md en sección de uso rápido
 - docs: actualizar ROADMAP.md: incrementar estadísticas de CoT (14→15 archivos, 57%→60% independientes), documentar progreso *Sprint* 1 con CoT completado y actualizar infraestructura completada con características del nuevo CoT
 - docs: consolidar ROADMAP.md en raíz combinando infraestructura CoT con análisis de cobertura específica
@@ -472,16 +445,13 @@
 - docs: actualizar README.md y ROADMAP.md con menciones de CoT de *changelog* y mejoras a CoT de *committing* con validación SSH
 - docs: aplicar reglas lingüísticas a ROADMAP.md: corregir títulos a estilo oración y agregar cursivas a préstamos técnicos (*Sprint*, *commits*, *timestamps*)
 - docs: aplicar reglas lingüísticas a CHANGELOG.md: agregar cursivas a préstamos técnicos (*commit*, *git log*, *push*, *hook*, *prompt*, *git status*)
-
 - fix: corregir enlaces relativos rotos en cot/changelog.md tras movimiento de ubicación inicial
-
 - refactor: mover CRITICAL_COT_READING.md de raíz a rulesets/ para mejor organización
 - refactor: consolidar CRITICAL_COMMIT_LANGUAGE.md y COMMIT_LANGUAGE_PROTOCOL.md en rulesets/COMMIT_LANGUAGE_PROTOCOL.md unificado
 - refactor: limpiar raíz del repositorio eliminando archivos duplicados y moviendo protocolos a rulesets/
 - refactor: remover directorio .githooks/ y *hook* pre-*commit* no funcional para simplificar estructura
 - refactor: actualizar referencia en CHANGELOG.md para reflejar nueva ubicación de archivos
 - refactor: eliminar sección de *git hooks* del README.md
-
 - docs: reforzar instrucciones de timezone en cot/committing.md para evitar error común de rotular CST a horas UTC
 - docs: añadir verificación obligatoria con `TZ=America/Mexico_City date` para obtener tiempo CST real
 - docs: incluir ejemplos prácticos de conversión: UTC 14:30 → CST 08:30, UTC 03:15 → CST 21:15 (día anterior)
@@ -496,7 +466,6 @@
 - improve: requerir documentación explícita de cada título encontrado y su corrección aplicada
 - improve: añadir sección de verificación obligatoria antes de completar el CoT
 - improve: prevenir omisión de corrección de Title Case mediante verificación programática forzada
-
 - fix: corregir inconsistencia en regla de idioma de *commits*: TODOS los mensajes de *commit* deben estar en inglés internacional
 - fix: actualizar cot/committing.md línea 15: enfatizar «CRÍTICO» para mensajes de *commit* en inglés
 - fix: actualizar referencia en rulesets/COMMIT_LANGUAGE_PROTOCOL.md para mantener consistencia con el texto corregido
@@ -520,7 +489,6 @@
 
 - docs: corregir COMMITTING.md y cot/committing.md para eliminar uso de editores interactivos, especialmente con *git log* (usar --no-pager)
 - docs: documentar problema común de `quote>` en *git commit* por escape incorrecto de comillas en mensajes
-
 - fix: configurar repositorio personal para usar identidad personal `incognia@gmail.com` y llave SSH personal (id_ed25519) en lugar de credenciales laborales
 
 ## [2025-08-18] - Reorganización de prompts, CoT y mejoras de documentación
@@ -552,17 +520,14 @@
 - docs: style(md): corrección de espacios finales (MD009) en múltiples archivos (rulesets/*, cot/*, VAULT.md, LINGUISTICS.md, LICENSING.md)
 - docs: style(md): correcciones MD012 (eliminar líneas en blanco consecutivas) en TEACHING.md, BACKUPS.md y cot/lint.md
 - docs: style(md): correcciones MD022 (líneas en blanco alrededor de encabezados) en múltiples documentos (ATTRIBUTION.md, BACKUPS.md, STYLING.md, TEACHING.md, LINGUISTICS.md, LICENSING.md, PHILOSOPHY.md)
-
 - feat: scripts/git-init-context.sh: asistente interactivo para configurar identidad y SSH (por repo) y remoto SSH opcional
 - feat: scripts/backup_file.sh: respaldo de archivo/directorio con compresión zstd y checksums condicionados por tamaño
 - feat: scripts/backup_rsync_snapshot.sh: snapshots diarios incrementales con rsync --link-dest
 - feat: scripts/verify_backups.sh: verificación masiva de checksums
 - feat: scripts/quick_bkp.sh: respaldo rápido en el mismo directorio con fecha CST (YYYY-MM-DD)
-
 - chore: Añadir configuración de linter de Markdown (.markdownlint.yaml) alineada al estilo del repo
 - chore: Añadir verificador de enlaces (.markdownlinkcheck.json) con ajustes de tiempo de espera y cabeceras para shields.io
 - chore: Inicializar package.json con scripts: `lint:md`, `lint:md:fix`, `check:links`
-
 - ci: Limpiar repo: agregar .gitignore para excluir node_modules/ y artefactos; retirar node_modules/ del control con `git rm -r --cached`
 - ci: npm install: error E404 al intentar instalar paquete inexistente `markdownlint-cli2-fix@^0.3.0`; se eliminó del package.json
 - ci: Actualizar scripts npm: `lint:md` usa markdownlint-cli2 sin globs (se invoca con npx "**/*.md" "#node_modules")
@@ -585,7 +550,6 @@
 - docs: ROADMAP.md: creado roadmap a 90 días (CoT, evaluación, automatización)
 - docs: TODO.md: creado plan táctico CoT (tareas inmediatas)
 - docs: TEACHING.md: restablecer énfasis ético en el uso exclusivo de software libre en K-12 y en divulgación; mejoras de redacción y principios transversales (bilingüismo, reproducibilidad, accesibilidad, CST)
-
 - feat: .githooks/pre-commit: *hook* opcional para bloquear 'CST' sin TZ=America/Mexico_City en líneas añadidas
 
 ## [2025-08-01] - Refinamiento de LINGUISTICS.md y desarrollo de TEACHING.md
@@ -593,7 +557,6 @@
 - fix: corregir terminología en LICENSING.md: cambiar "desarrollado por" por "elaborado por"
 - fix: alinear terminología con perfil de tecnólogo en lugar de desarrollador
 - fix: aplicar corrección tanto en proyectos laborales como personales
-
 - docs: añadir precisión en LINGUISTICS.md para evitar sobre-corrección de títulos de tercer nivel (###)
 - docs: agregar regla específica sobre NO corregir mayúsculas en títulos ### ya correctos
 - docs: incluir ejemplos claros de títulos de tercer nivel correctos e incorrectos
@@ -632,7 +595,6 @@
 - docs: incluir filosofía de divulgación científica y contribuciones a la comunidad educativa
 - docs: enfatizar actualización obligatoria del CHANGELOG.md en COMMITTING.md con proceso paso a paso
 - docs: añadir advertencias y ejemplos de flujo correcto para evitar olvidos en futuras actualizaciones
-
 - docs: añadir filosofía de herramientas libres como parte fundamental de la metodología educativa
 - docs: enfatizar uso exclusivo de software libre en entornos educativos
 - docs: clarificar compromiso con licenciamiento GPL para todos los contenidos educativos
@@ -643,7 +605,6 @@
 - docs: enfatizar enseñanza de WSL en Windows como puente hacia entornos Unix
 - docs: refinar redacción y estructura de filosofía multiplataforma con secciones claras
 - docs: eliminar redundancias en principios fundamentales de competencia técnica
-
 - fix: corregir TEACHING.md para cumplir con reglas de LINGUISTICS.md: cursivas en términos técnicos (*hands-on*), anglicismos (troubleshooting → resolución de problemas, feedback → retroalimentación), formato de préstamos lingüísticos
 - fix: corregir experiencia docente en TEACHING.md de 6+ años a 8 años y actualizar métricas de impacto educativo
 - fix: corregir terminología en TEACHING.md: "backup" → "respaldo", "debugging" → "depuración", "implementación" → "aplicación", "realizar" → "hacer", "Soporte" → "Compatibilidad"
@@ -660,7 +621,6 @@
 - docs: especificar uso obligatorio de zona horaria CST Ciudad de México en COMMITTING.md para fechas del CHANGELOG.md
 - docs: agregar comandos SSH específicos por contexto en COMMITTING.md (personal vs laboral)
 - docs: crear GIT.md con configuración inicial de cuentas GitHub y GitLab
-
 - refactor: separar responsabilidades entre GIT.md (setup inicial) y COMMITTING.md (flujo diario)
 - refactor: eliminar redundancias entre ambos documentos
 - refactor: enfocar GIT.md en configuración de repositorios nuevos
@@ -676,18 +636,13 @@
 - refactor: clasificar CORPORATE.md como regla de uso dual
 - refactor: especificar ATTRIBUTION.md como uso exclusivamente personal
 - refactor: especificar STYLING.md como uso exclusivamente laboral
-
 - fix: corregir uso de mayúsculas después de dos puntos en README.md para cumplir con LINGUISTICS.md
 - fix: renombrar COMMITING.md a COMMITTING.md para corregir error ortográfico
-
 - feat: crear BACKUPS.md con políticas de respaldos y operaciones destructivas, zona horaria CST obligatoria y scripts actualizados con TZ="America/Mexico_City"
 - feat: añadir badges informativos al README.md (licencia GPLv3, Markdown, español mexicano) y sección de flujo de decisión para reglas duales
-
 - feat: crear *skill* git-init parametrizado con 4 argumentos: contexto (personal/laboral), llave SSH, URL remota y rama
-
 - style: crear STYLING.md con reglas de estilo para documentos Markdown laborales: paleta corporativa (midnight, electric, lavender), estructura estándar para encabezados/pies, timestamp dinámico en español mexicano
 - style: cambiar color de iconos en sección de contacto a --promad para consistencia visual
-
 - docs: actualizar PHILOSOPHY.md para reflejar cambio de nombre de COMMITTING.md y añadir referencia a STYLING.md con alcance laboral
 - docs: mejorar documentación de colores CSS con nomenclatura descriptiva
 - docs: clarificar que información de licencia y timestamps deben ser dinámicos, no hardcodeados
@@ -698,9 +653,7 @@
 - fix: corregir uso de mayúsculas después de dos puntos en GLOSSARY.md para cumplir con las reglas de LINGUISTICS.md
 - fix: corregir casos restantes de mayúsculas después de dos puntos en ATTRIBUTION.md (sección de especialización profesional)
 - fix: corregir capitalización del título en README.md ("Ingeniero" → "ingeniero")
-
 - feat: crear *skill* git-init parametrizado con 4 argumentos: contexto (personal/laboral), llave SSH, URL remota y rama
-
 - style: ajustar README.md para mejor alineación con LINGUISTICS.md (uso de minúsculas en listas y corrección de "acomplejos")
 - style: actualizar formato de enlaces en PHILOSOPHY.md para que coincida con el estilo de README.md
 
