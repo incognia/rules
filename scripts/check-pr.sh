@@ -82,6 +82,11 @@ UPKEEP_VERBS='(update|updates|updated|updating|edit|edits|edited|editing|modify|
 RECORD_VERBS='(add|adds|added|adding|record|records|recorded|log|logs|logged|write|writes|wrote)'
 CHANGELOG_UPKEEP_RE="(^|[^[:alpha:]])$UPKEEP_VERBS( (the|a|an|our|this|that|all|every|its))? (project )?changelog([^[:alpha:]]|\$)|changelog(\\.md)? (entry|entries|bullet|bullets|update|updates|upkeep|maintenance)|(^|[^[:alpha:]])$RECORD_VERBS [^.]{0,40}(to|in|into) (the |a |our )?(project )?changelog([^[:alpha:]]|\$)"
 
+# CHANGELOG.md helpers; they read the file from stdin.
+cl_dates()  { grep -E '^## \[[0-9]{4}-[0-9]{2}-[0-9]{2}\]' | cut -c5-14; }
+cl_dupes()  { cl_dates | sort | uniq -d; }
+cl_blanks() { awk '/^$/ {blank=1; next} /^- / {if (blank && last) print; last=1; blank=0; next} {last=0; blank=0}' | sort; }
+
 # Build output, logs and OS files do not belong in a pull request. A project adds its own
 # patterns with "stray = <glob>" in its configuration file.
 STRAY_PATTERNS='.DS_Store
@@ -242,15 +247,32 @@ else
                          || fail "CHANGELOG.md has dates after today in Mexico City time:$FUTURE (dates are CST, not UTC)"
     fi
 
-    DATES=$(git show "$HEAD_REF:CHANGELOG.md" | grep -E '^## \[[0-9]{4}-[0-9]{2}-[0-9]{2}\]' | cut -c5-14)
-    DUPES=$(printf '%s\n' "$DATES" | sort | uniq -d)
-    [ -z "$DUPES" ] && pass "CHANGELOG.md has one heading per date" \
-                    || fail "CHANGELOG.md has duplicate date headings: $(printf '%s' "$DUPES" | tr '\n' ' ')"
-    [ "$DATES" = "$(printf '%s\n' "$DATES" | sort -r)" ] && pass "CHANGELOG.md dates are in reverse chronological order" \
-                                                         || fail "CHANGELOG.md dates are not in reverse chronological order"
-    BLANK_BETWEEN=$(git show "$HEAD_REF:CHANGELOG.md" | awk '/^$/ {blank=1; next} /^- / {if (blank && last) bad=NR; last=1; blank=0; next} {last=0; blank=0} END {if (bad) print bad}')
-    [ -z "$BLANK_BETWEEN" ] && pass "no blank line between bullets of the same date block" \
-                            || fail "blank line between bullets of the same date block near line $BLANK_BETWEEN of CHANGELOG.md"
+    # Defects that CHANGELOG.md already had before the pull request are reported as warnings:
+    # only the ones the pull request introduces fail it.
+    BASE_CL=$(git show "$BASE:CHANGELOG.md" 2>/dev/null || true)
+    HEAD_CL=$(git show "$HEAD_REF:CHANGELOG.md")
+
+    NEW_DUPES=$(comm -13 <(printf '%s\n' "$BASE_CL" | cl_dupes) <(printf '%s\n' "$HEAD_CL" | cl_dupes))
+    OLD_DUPES=$(comm -12 <(printf '%s\n' "$BASE_CL" | cl_dupes) <(printf '%s\n' "$HEAD_CL" | cl_dupes))
+    [ -z "$NEW_DUPES" ] && pass "the pull request adds no duplicate date headings" \
+                        || fail "CHANGELOG.md has duplicate date headings: $(printf '%s' "$NEW_DUPES" | tr '\n' ' ')"
+    [ -z "$OLD_DUPES" ] || warn "CHANGELOG.md already had duplicate date headings before this pull request: $(printf '%s' "$OLD_DUPES" | tr '\n' ' ')"
+
+    HEAD_DATES=$(printf '%s\n' "$HEAD_CL" | cl_dates)
+    BASE_DATES=$(printf '%s\n' "$BASE_CL" | cl_dates)
+    if [ "$HEAD_DATES" = "$(printf '%s\n' "$HEAD_DATES" | sort -r)" ]; then
+        pass "CHANGELOG.md dates are in reverse chronological order"
+    elif [ "$BASE_DATES" = "$(printf '%s\n' "$BASE_DATES" | sort -r)" ]; then
+        fail "the pull request breaks the reverse chronological order of the CHANGELOG.md dates"
+    else
+        warn "CHANGELOG.md dates were already out of order before this pull request"
+    fi
+
+    NEW_BLANKS=$(comm -13 <(printf '%s\n' "$BASE_CL" | cl_blanks) <(printf '%s\n' "$HEAD_CL" | cl_blanks))
+    OLD_BLANKS=$(comm -12 <(printf '%s\n' "$BASE_CL" | cl_blanks) <(printf '%s\n' "$HEAD_CL" | cl_blanks))
+    [ -z "$NEW_BLANKS" ] && pass "the pull request adds no blank line between bullets of the same date block" \
+                         || fail "the pull request adds a blank line between bullets of the same date block, before: $(printf '%s\n' "$NEW_BLANKS" | head -1 | cut -c1-80)"
+    [ -z "$OLD_BLANKS" ] || warn "CHANGELOG.md already had $(printf '%s\n' "$OLD_BLANKS" | wc -l | tr -d ' ') blank line(s) between bullets before this pull request"
 fi
 
 # ---------------------------------------------------------------- stray files

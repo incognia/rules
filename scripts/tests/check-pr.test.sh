@@ -43,6 +43,14 @@ new_repo() {
     git commit -q -m "docs: base"
 }
 
+# A base whose CHANGELOG already had a duplicate date heading and a blank line between bullets.
+legacy_repo() {
+    new_repo
+    printf '\n- docs: legacy bullet after a blank line\n\n## [%s] - Duplicate heading\n\n- docs: legacy\n' "$YESTERDAY" >> CHANGELOG.md
+    git add -A
+    git commit -q -m "docs: legacy defects"
+}
+
 branch() { git checkout -q main && git checkout -q -b "$1"; }
 
 # [BODY=<text>] commit "<subject>" [no-trailer]: a message with a one-bullet body and, by default, a trailer.
@@ -138,6 +146,22 @@ bash "$SCRIPT" --base main --head good --skip-openspec --config "$TMP/bad.conf" 
 if [ $? -eq 2 ]; then ok "an unknown configuration key is a usage error"; else nok "an unknown configuration key is a usage error"; fi
 
 if bash "$SCRIPT" --help >/dev/null 2>&1; then ok "--help exits successfully"; else nok "--help exits successfully"; fi
+
+legacy_repo
+
+branch legacy-ok; new_block "$TODAY"; git add -A; commit "docs: add a test entry"
+run legacy-ok
+if [ "$CODE" -eq 0 ] && printf '%s' "$OUT" | grep -q -F "already had duplicate" && printf '%s' "$OUT" | grep -q -F "already had 1 blank"
+then ok "defects the CHANGELOG already had only warn"
+else nok "defects the CHANGELOG already had only warn (got $CODE)"; printf '%s\n' "$OUT" | sed 's/^/      /'; fi
+
+branch new-duplicate; new_block "$TODAY"; new_block "$TODAY"; git add -A; commit "docs: add a test entry"
+expect_fail new-duplicate "a duplicate date heading added by the pull request fails" "duplicate date headings"
+
+branch new-blank; new_block "$TODAY"
+awk '{ print } $0 == "- docs: add a test entry" { print "\n- docs: second entry" }' CHANGELOG.md > CHANGELOG.tmp && mv CHANGELOG.tmp CHANGELOG.md
+git add -A; commit "docs: add a test entry"
+expect_fail new-blank "a blank line between bullets added by the pull request fails" "blank line between bullets"
 
 echo
 echo "$PASSED passed, $FAILED failed"

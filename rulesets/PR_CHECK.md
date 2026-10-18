@@ -17,7 +17,7 @@ Un *pull request* que no cumple las reglas de `/commit` y de `/changelogger` se 
 | G7 | Sin *commits* `fixup!`, `squash!` ni `amend!` | `/commit` | `check-pr.sh` |
 | G8 | `CHANGELOG.md` cambia solo en el último *commit* de la serie | `/commit` | `check-pr.sh` |
 | G9 | El diff de `CHANGELOG.md` solo añade líneas | `/changelogger` | `check-pr.sh` |
-| G10 | Formato del CHANGELOG: viñetas `tipo:`, encabezado `## [AAAA-MM-DD] - Título`, fecha en hora de Ciudad de México, un bloque por fecha, orden inverso y sin líneas en blanco entre viñetas | `/changelogger` | `check-pr.sh`; texto en español de México y sin emojis: manual |
+| G10 | Formato del CHANGELOG: viñetas `tipo:`, encabezado `## [AAAA-MM-DD] - Título`, fecha en hora de Ciudad de México, un bloque por fecha, orden inverso y sin líneas en blanco entre viñetas. Los defectos que el archivo ya tenía en la rama base solo advierten; fallan los que introduce el PR | `/changelogger` | `check-pr.sh`; texto en español de México y sin emojis: manual |
 | G11 | El orden de las viñetas nuevas coincide con el de los *commits* (el último arriba) | `/changelogger` y `/commit` | Manual |
 | G12 | Sin archivos ajenos: binarios, registros, archivos del sistema ni reformateos | Criterio del proyecto | `check-pr.sh` con los patrones del proyecto |
 | G13 | Título del PR con Conventional Commits en inglés | `/commit` | `check-pr.sh --title` |
