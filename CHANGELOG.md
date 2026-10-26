@@ -3,6 +3,10 @@
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-10-26] - Hacer determinista e idempotente `/changelogger`
+
+- feat: agregar a `/changelogger` (`.agents/skills/changelogger/SKILL.md`) y `cot/changelog.md` el paso 0d, que elige el modo de forma determinística (creación si `CHANGELOG.md` no existe, normalización si no está versionado ni es canónico, inserción incremental si es canónico y detención con reporte si está versionado y no es canónico), la excepción del paso 0b cuando el archivo no existe, el criterio de aceptación de la normalización, la regla de idempotencia (no duplicar viñetas del mismo cambio en el bloque del día) y dos antipatrones nuevos; renumerar los pasos del *skill*
+
 ## [2026-10-18] - Crear `/pr-check` para verificar *pull requests*
 
 - docs: actualizar en `README.md` el *badge* de CoTs de 23 a 24

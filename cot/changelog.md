@@ -27,11 +27,23 @@ Pasos:
    HARD STOP ABSOLUTO: si esta lectura exacta no se ejecutó en la corrida actual, detener el proceso y reiniciar desde 0.
    Restricción: no se permite ejecutar `grep`, búsquedas, cálculo de fecha, cálculo de anclas, `diff` ni parches antes de completar y validar este paso.
    Validación: confirmar encabezado del día en turno, separación entre bloques de fecha y primera viñeta del bloque objetivo.
+   Excepción: si `CHANGELOG.md` no existe (`test -f CHANGELOG.md` falla), esa comprobación es la evidencia del paso 0b y se continúa al paso 0d (modo creación) sin HARD STOP.
    Resultado: contexto base exacto cargado antes de ejecutar `grep`, calcular anclas o intentar parches.
 0c) Acción: validar precondición transversal de los pasos 0 y 0b antes de cualquier otra sección.
-   Validación: exigir evidencia explícita en la corrida actual de `git --no-pager status --short` y de la lectura precisa `CHANGELOG.md` (1-200).
+   Validación: exigir evidencia explícita en la corrida actual de `git --no-pager status --short` y de la lectura precisa `CHANGELOG.md` (1-200), o de que el archivo no existe.
    Regla de detención: si falta evidencia de cualquiera de los dos pasos, HARD STOP inmediato y reinicio desde 0; prohibido continuar o «corregir en caliente».
    Resultado: ninguna sección posterior puede ejecutarse sin pasos 0 y 0b validados.
+0d) Acción: elegir el modo de operación de forma determinística, según el estado de `CHANGELOG.md` en Git y su formato.
+   COMANDOS OBLIGATORIOS: `test -f CHANGELOG.md` (¿existe?) y `git ls-files --error-unmatch CHANGELOG.md` (¿está versionado?).
+   Formato canónico (solo si el archivo existe): la primera línea es `# Historial de cambios` o `# Changelog`; sigue la nota de zona horaria CST; `<!-- markdownlint-disable MD013 MD024 MD022 MD032 -->` va justo antes del primer `## [`; todo encabezado de nivel 2 cumple `## [YYYY-MM-DD] - Título descriptivo` y no hay encabezados `###`, `## [Unreleased]` ni `## [Sin publicar]` (estilo Keep a Changelog).
+   Este paso solo elige el modo: ningún modo escribe hasta tener `DATE_CST` (paso 1) y el idioma (paso 4).
+   Decisión (tabla cerrada, sin criterio subjetivo):
+   (a) No existe → **modo creación**: escribir el archivo con el encabezado canónico del paso 4 y un bloque `## [DATE_CST]`.
+   (b) Existe, NO versionado y NO canónico → **modo normalización**: reescribir el archivo completo con el encabezado canónico y convertir su contenido en viñetas tipadas dentro de un único bloque `## [DATE_CST]`, en el orden de los *commits* atómicos (paso 6b). Se descartan secciones `[Unreleased]`/`[Sin publicar]`, subencabezados `### Added`/`### Añadido` y viñetas de cambios que ningún *commit* llevará (por ejemplo, directorios vacíos, que Git no versiona). Aquí sí se permiten líneas eliminadas: el archivo no tiene historial que proteger.
+   (c) Existe y canónico (versionado o no) → modo inserción incremental (pasos 1 en adelante).
+   (d) Existe, versionado y NO canónico → detenerse y reportar las desviaciones; no reescribir sin instrucción explícita del usuario, porque borrar historial versionado requiere confirmación.
+   Idempotencia (OBLIGATORIA en todos los modos): antes de agregar una viñeta, comprobar si el bloque `DATE_CST` ya contiene una viñeta del mismo tipo para el mismo cambio (mismo archivo y mismo propósito); si existe, no duplicarla. Una segunda corrida sin cambios nuevos en el árbol de trabajo no produce diff, y dos corridas sobre el mismo estado producen el mismo archivo.
+   Resultado: el mismo estado del repositorio produce siempre el mismo `CHANGELOG.md`, sin importar quién lo haya escrito antes ni en qué formato.
 
 1) Acción: calcular fecha y hora CST correcta y definir `DATE_CST`, que usan los pasos siguientes.
    COMANDOS OBLIGATORIOS:
@@ -103,7 +115,7 @@ Pasos:
    COMANDO OBLIGATORIO: `git --no-pager diff -- CHANGELOG.md`
    Criterio de aceptación obligatorio:
    - En modo inserción incremental: solo líneas añadidas (`+`) en el bloque de la fecha objetivo.
-   - Cero líneas eliminadas (`-`) en todo `CHANGELOG.md`, salvo instrucción explícita del usuario para borrar.
+   - Cero líneas eliminadas (`-`) en todo `CHANGELOG.md`, salvo instrucción explícita del usuario para borrar o modo normalización del paso 0d (archivo no versionado; como Git no muestra *diff* de archivos no versionados, validar con `cat CHANGELOG.md` contra el formato canónico).
    - NUNCA editar líneas fuera de `DATE_CST` (día en turno) salvo instrucción explícita del usuario.
    Gestión de fallos:
    - Si falla la validación: releer bloque exacto y corregir una sola vez con edición mínima.
@@ -149,7 +161,7 @@ VERIFICACIÓN CRÍTICA (antes de completar):
 
 ANTI-PATRONES PROHIBIDOS (detener y pedir confirmación si ocurre cualquiera):
 1. Reintentar el mismo parche sobre el encabezado sin cambiar la ancla real del bloque.
-2. Escalar a reescritura total de `CHANGELOG.md` para insertar una viñeta puntual.
+2. Escalar a reescritura total de `CHANGELOG.md` para insertar una viñeta puntual (la reescritura solo procede en modo creación o normalización del paso 0d).
 3. Hacer más de un reintento sin releer antes el bloque exacto.
 4. Encadenar intentos fallidos sin validar diff en cada intento.
 5. NUNCA editar entradas fuera de `DATE_CST` (día en turno), salvo instrucción explícita del usuario.
@@ -167,6 +179,8 @@ ANTI-PATRONES PROHIBIDOS (detener y pedir confirmación si ocurre cualquiera):
 17. Continuar cualquier sección del flujo sin evidencia explícita de `git --no-pager status --short` en la corrida actual.
 18. Continuar cualquier sección del flujo sin evidencia explícita de lectura precisa de `CHANGELOG.md` (1-200) en la corrida actual.
 19. Intentar reanudar el flujo después de omitir el paso 0 o 0b en vez de reiniciar desde 0.
+20. Conservar un formato ajeno (Keep a Changelog, `[Unreleased]`, `### Added`) en un `CHANGELOG.md` no versionado y anteponerle un bloque canónico, de modo que convivan dos estilos.
+21. Agregar una viñeta que ya existe en el bloque `DATE_CST` para el mismo cambio, o producir un archivo distinto al repetir la corrida sobre el mismo estado.
 
 Conclusión:
 - Entregar: CHANGELOG.md actualizado con nueva entrada en posición cronológica correcta, fecha CST precisa, idioma consistente con el idioma principal del repositorio, sea español mexicano o inglés internacional (UK), sin duplicados y viñetas tipadas organizados semánticamente.

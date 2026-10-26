@@ -22,9 +22,16 @@ When adding or updating entries in CHANGELOG.md for any project following rules 
    If this exact status check has not been executed in the current run, HARD STOP immediately, restart from step 0 (`git --no-pager status --short`), and do absolutely nothing else (no read, `grep`, search, date calculation, anchor calculation, diff, or patch).
 3. **Step 0b (MANDATORY)**: read `CHANGELOG.md` lines `1-200` with the agent's file-reading tool before any `grep`, search loop, or patch attempt.
    If this exact read has not been executed in the current run, HARD STOP immediately, restart from step 0, and do absolutely nothing else.
-4. **Get CST date**: `DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")` — NEVER use UTC with "CST" suffix
-5. **Check existing entries**: Verify if `## [YYYY-MM-DD]` already exists to avoid duplicate headings
-6. **Update the target date block** (reverse chronological order):
+   Exception: if `CHANGELOG.md` does not exist (`test -f CHANGELOG.md` fails), that check is the step 0b evidence; go on to step 0d (create mode) without a hard stop.
+4. **Step 0d — pick the mode deterministically (MANDATORY)**: run `test -f CHANGELOG.md` and `git ls-files --error-unmatch CHANGELOG.md`, then check the canonical format (only when the file exists): line 1 is `# Historial de cambios` or `# Changelog`, followed by the CST note, `<!-- markdownlint-disable MD013 MD024 MD022 MD032 -->` right before the first `## [`, every level-2 heading is `## [YYYY-MM-DD] - Title`, and there is no `###`, `## [Unreleased]` or `## [Sin publicar]` (Keep a Changelog style). This step only picks the mode: no mode writes anything until `DATE_CST` (step 5) and the language (step 8) are known.
+   - Missing → **create mode**: write the canonical header in the detected language (step 8) plus one `## [DATE_CST]` block.
+   - Exists, untracked, not canonical → **normalise mode**: rewrite the whole file with the canonical header and turn its content into typed bullets inside a single `## [DATE_CST]` block, ordered by the atomic commits (step 7). Drop `[Unreleased]`/`[Sin publicar]` sections, `### Added`/`### Añadido` subheadings and bullets for changes no commit will carry (e.g. empty directories, which Git does not track). Deleted lines are allowed here: the file has no history to protect.
+   - Exists and canonical (tracked or not) → **incremental insertion mode** (steps 5 onwards).
+   - Exists, tracked, not canonical → stop and report the deviations; never rewrite tracked history without explicit user instruction.
+   - **Idempotency (MANDATORY, every mode)**: before adding a bullet, check whether the `DATE_CST` block already has a bullet of the same type for the same change (same file, same purpose); if so, do not add it. A second run with no new working-tree changes yields no diff, and two runs on the same state yield the same file.
+5. **Get CST date**: `DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")` — NEVER use UTC with "CST" suffix
+6. **Check existing entries**: Verify if `## [YYYY-MM-DD]` already exists to avoid duplicate headings
+7. **Update the target date block** (reverse chronological order):
    - **If the date already exists**: add new typed bullets inside that existing block; do NOT create a duplicate heading.
    - **First-attempt rule (MANDATORY)**: for an existing date block, the first attempt MUST use one single-hunk micro-block replacement with exact `search` = `## [YYYY-MM-DD] - ...` + immediate blank line + first existing bullet.
    - **Insertion rule (MANDATORY)**: in that same hunk, reproduce the heading and blank line intact, then insert the new bullet above the previous first bullet.
@@ -56,7 +63,7 @@ When adding or updating entries in CHANGELOG.md for any project following rules 
      - International English (UK): `# Changelog` + `**Note:** All dates are in Mexico City CST (UTC-6).`
      - Then `<!-- markdownlint-disable MD013 MD024 MD022 MD032 -->` right before the first `## [YYYY-MM-DD]` heading.
 
-7. **Language**: write entries (title and bullets) in the repository's **primary language**, no emojis. Same rule for personal and corporate repos.
+8. **Language**: write entries (title and bullets) in the repository's **primary language**, no emojis. Same rule for personal and corporate repos.
    - **Detection, in this order**:
      1. `CHANGELOG.md` already has entries → keep their language, so the file never mixes languages.
      2. No prior entries → primary language of `README.md` and the docs (`*.md` at the root and in `docs/`): mostly Spanish → **Spanish Mexican**; mostly English → **international English (UK)**.
@@ -65,20 +72,21 @@ When adding or updating entries in CHANGELOG.md for any project following rules 
    - **Spanish Mexican**: apply `~/rules/rulesets/LINGUISTICS.md` (angular quotes «», italics for loanwords such as *commit* or *pipeline*, no anglicisms).
    - **International English (UK)**: `-ise`/`-isation` (organise, standardisation), `colour`, `behaviour`, `licence` (noun), `catalogue`; sentence-case titles; straight double quotes `""` instead of `«»`; no italics for technical terms.
    - Typed prefixes (`feat:`, `fix:`, etc.), `[YYYY-MM-DD]` format and CST date rules stay the same in both languages.
-8. **Type in bullets**: Each bullet MUST start with `tipo:` and match valid commit types (`feat`, `fix`, `docs`, `style`, `refactor`, `chore`, `ci`, `perf`, `test`, `build`)
-9. **Verify**: Check that the new entry is above all previous entries
+9. **Type in bullets**: Each bullet MUST start with `tipo:` and match valid commit types (`feat`, `fix`, `docs`, `style`, `refactor`, `chore`, `ci`, `perf`, `test`, `build`)
+10. **Verify**: Check that the new entry is above all previous entries
 
 ## Critical rules
 
 - Date format: `[YYYY-MM-DD]` only — no time component
 - CST = UTC - 6 hours (verify with `TZ=America/Mexico_City date`)
 - No emojis in CHANGELOG entries
-- Language: the repository's primary language, detected per instruction 7: Spanish Mexican or international English (UK), defaulting to international English (UK) when there are several with no clear primary one
+- Language: the repository's primary language, detected per instruction 8: Spanish Mexican or international English (UK), defaulting to international English (UK) when there are several with no clear primary one
 - Descriptive title after the date: `## [YYYY-MM-DD] - Título descriptivo`
 - Do NOT use subheadings like `### feat`/`### fix` inside a date entry
 - Keep exactly one blank line between consecutive date blocks (`## [YYYY-MM-DD]`)
 - Keep bullets contiguous within the same date block (no blank lines between bullets)
-- Incremental mode is insert-only by default: only `+` additions are allowed; deleting existing `CHANGELOG.md` lines requires explicit user instruction
+- Incremental mode is insert-only by default: only `+` additions are allowed; deleting existing `CHANGELOG.md` lines requires explicit user instruction. The only exception is normalise mode (step 0d): an untracked, non-canonical file is rewritten in canonical form, never kept with two styles side by side
+- Deterministic and idempotent: the same repository state always yields the same `CHANGELOG.md`; re-running with no new changes yields no diff
 - Step 0 is mandatory: run `git --no-pager status --short` first to validate all current changes in the run
 - HARD STOP absolute: if step 0 (`git --no-pager status --short`) or the precise read of `CHANGELOG.md` lines `1-200` is missing in the current run, stop and restart from step 0; no other action is allowed
 - NEVER edit entries from dates different than `DATE_CST` (current day) unless explicitly instructed by the user
