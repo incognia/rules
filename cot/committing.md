@@ -57,11 +57,12 @@ Pasos:
 
    - `git --no-pager diff --quiet -- CHANGELOG.md`
    - `git --no-pager diff --cached --quiet -- CHANGELOG.md`
+   - `git ls-files --others --exclude-standard -- CHANGELOG.md` (archivo nuevo sin versionar, p. ej. el primer *commit* de un repositorio nuevo: `git diff` no lo ve)
 
    Decisión crítica:
 
-   - Si **ambos comandos retornan 0**: no hay cambios en `CHANGELOG.md` (ni en *staging* ni fuera de él) → **ABORTAR** el flujo y sugerir `/changelogger`.
-   - Si **alguno retorna 1**: `CHANGELOG.md` sí tiene cambios → continuar.
+   - Si **los dos primeros retornan 0 y el tercero no imprime nada**: no hay cambios en `CHANGELOG.md` (ni en *staging*, ni fuera de él, ni como archivo nuevo sin versionar) → **ABORTAR** el flujo y sugerir `/changelogger`.
+   - Si **alguno de los dos primeros retorna 1 o el tercero imprime `CHANGELOG.md`**: `CHANGELOG.md` sí tiene cambios → continuar.
 
    Opcional, para trazabilidad: `git --no-pager diff -- CHANGELOG.md` y `git --no-pager diff --cached -- CHANGELOG.md`.
    Resultado: prerrequisito de CHANGELOG confirmado.

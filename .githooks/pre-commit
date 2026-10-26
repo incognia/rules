@@ -30,6 +30,10 @@ elif ! git diff --quiet -- CHANGELOG.md; then
   # Intermediate commit of an atomic series: CHANGELOG.md is already updated
   # and will be staged with the last commit.
   :
+elif [ -n "$(git ls-files --others --exclude-standard -- CHANGELOG.md)" ]; then
+  # New, untracked CHANGELOG.md (first commits of a new repository): git diff
+  # does not see it, but it will be staged with the last commit.
+  :
 else
   echo "pre-commit: CHANGELOG.md is neither staged nor pending." >&2
   echo "  Update it first (/changelogger); stage it with the last commit of the series." >&2

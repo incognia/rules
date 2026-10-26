@@ -19,12 +19,14 @@ Before making any git commit in projects that follow the rules repository conven
    a. Run change validation (staged or unstaged):
 
       ```bash
-      git --no-pager diff --quiet -- CHANGELOG.md && git --no-pager diff --cached --quiet -- CHANGELOG.md
+      git --no-pager diff --quiet -- CHANGELOG.md \
+        && git --no-pager diff --cached --quiet -- CHANGELOG.md \
+        && [ -z "$(git ls-files --others --exclude-standard -- CHANGELOG.md)" ]
       ```
 
    b. Interpretation:
       - **Exit code 0**: `CHANGELOG.md` has NO changes versus repo → **abort** `/commit` flow.
-      - **Exit code 1**: `CHANGELOG.md` has changes → continue.
+      - **Exit code 1**: `CHANGELOG.md` has changes → continue. The third test catches a new, untracked `CHANGELOG.md` (first commit of a new repository), which `git diff` does not see.
 
    c. If there are no changes in `CHANGELOG.md`, stop execution and suggest:
       - `Run /changelogger to update CHANGELOG.md, then run /commit again.`

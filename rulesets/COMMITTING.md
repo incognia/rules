@@ -159,7 +159,9 @@ Antes de continuar a `git add`/`git commit`, cumple este protocolo:
 1. Ejecuta la puerta de cambios en `CHANGELOG.md`:
 
    ```bash
-   if git --no-pager diff --quiet -- CHANGELOG.md && git --no-pager diff --cached --quiet -- CHANGELOG.md; then
+   if git --no-pager diff --quiet -- CHANGELOG.md \
+    && git --no-pager diff --cached --quiet -- CHANGELOG.md \
+    && [ -z "$(git ls-files --others --exclude-standard -- CHANGELOG.md)" ]; then
        echo "ERROR: CHANGELOG.md sin cambios. Ejecuta /changelogger y vuelve a intentar /commit."
        exit 1
    fi
@@ -187,7 +189,9 @@ Anti-patrones prohibidos:
 /changelogger
 
 # 2. Validar la puerta del changelog
-if git --no-pager diff --quiet -- CHANGELOG.md && git --no-pager diff --cached --quiet -- CHANGELOG.md; then
+if git --no-pager diff --quiet -- CHANGELOG.md \
+    && git --no-pager diff --cached --quiet -- CHANGELOG.md \
+    && [ -z "$(git ls-files --others --exclude-standard -- CHANGELOG.md)" ]; then
     echo "ERROR: CHANGELOG.md sin cambios. Ejecuta /changelogger y vuelve a intentar /commit."
     exit 1
 fi
