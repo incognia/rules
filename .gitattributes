@@ -1,0 +1,5 @@
+# Scripts and git hooks always use LF, whatever core.autocrlf says: with CRLF
+# they fail under WSL, Linux and macOS ($'\r': command not found).
+*.sh          text eol=lf
+*.py          text eol=lf
+.githooks/*   text eol=lf
