@@ -241,7 +241,7 @@ The canonical technical profile lives in `PHILOSOPHY.md` (section 1.1, «Especia
 
 ## Claude Code specifics
 
-This file is symlinked as `CLAUDE.md` so Claude Code loads it automatically as project context.
+`CLAUDE.md` imports this file with `@AGENTS.md`, so Claude Code loads it automatically as project context. It is a regular file rather than a symbolic link because Windows checks a link out as a plain text file holding only the target name unless Developer Mode and `core.symlinks` are enabled.
 
 `scripts/sync_global.sh` symlinks each `SKILL.md` already copied into `~/.agents/skills/<name>/` to `~/.claude/commands/<name>.md`, so Claude Code recognises `/name`. This is the mechanism validated in practice — without it, Claude Code ignored these slash commands.
 
