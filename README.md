@@ -72,6 +72,26 @@ npm --prefix ~/rules run hooks:install
 - Para actualizar después de un `git pull`, solo ejecuta: `~/rules/scripts/sync_global.sh`
 - `cot/`, `rulesets/` y `templates/` se acceden por ruta canónica, sin enlace simbólico (`~/rules/cot/`, `~/rules/rulesets/`); la excepción es la exportación de *skills* a Claude Code arriba, que sí usa un enlace simbólico
 
+#### Instalar o actualizar (Windows nativo)
+
+```powershell
+# 1. Clonar el repositorio (o actualizarlo con: git -C $HOME\rules pull)
+git clone git@github.com:incognia/rules.git $HOME\rules
+
+# 2. Instalar skills y workflows globales
+pwsh -NoProfile -ExecutionPolicy Bypass -File $HOME\rules\scripts\sync_global.ps1
+
+# 3. Verificar Python (lo usan scripts/commit_trailer.py y scripts/atlassian/)
+python3 --version
+```
+
+**Notas**:
+
+- En Windows nativo se usa `sync_global.ps1`, no `sync_global.sh`: desde PowerShell, `bash` abre WSL, y en Git Bash los enlaces simbólicos se vuelven copias que no se actualizan. Detalles en [docs/SYNC.md](./docs/SYNC.md)
+- **Python se instala desde [python.org](https://www.python.org/downloads/windows/)**, con el *Python install manager* o con el instalador de la versión estable más reciente, y no desde la Microsoft Store ni con winget, que suelen ir atrás de las versiones de seguridad. Por ejemplo, el 7 de noviembre de 2026 winget no tenía la serie 3.15, y su 3.13.17 no traía la corrección de certificados de la 3.13.18. En macOS y Linux se usa el Python del sistema o del gestor de paquetes
+- Conviene la instalación por usuario, que es la del *Python install manager*: las instalaciones para todos los usuarios en `C:\Program Files` fueron justo el escenario de la escalada de privilegios CVE-2026-12003 en las versiones vulnerables
+- `python3 --version` debe responder con la versión instalada. Si abre la Microsoft Store o dice que no se encontró Python, `python3` sigue apuntando al alias de la Store: se desactiva en Configuración > Aplicaciones > Configuración avanzada de aplicaciones > Alias de ejecución de aplicaciones. El *Python install manager* crea `python`, `python3` y `py`
+
 **Invocación de *skills* por herramienta**: la misma *skill* usa el prefijo de la herramienta que la ejecuta; el nombre y los argumentos no cambian.
 
 | Herramienta | De dónde la lee | Invocar | Con argumentos |

@@ -1,8 +1,8 @@
 # Mecanismo de sincronización global
 
-*Última modificación: 14 de octubre de 2026, 00:08 (CST)*
+*Última modificación: 7 de noviembre de 2026, 14:06 (CST)*
 
-Este documento describe cómo funciona `scripts/sync_global.sh`: qué copia, a dónde, qué limpia y por qué cada decisión de diseño existe.
+Este documento describe cómo funciona `scripts/sync_global.sh` (macOS, Linux y WSL) y su contraparte para Windows nativo, `scripts/sync_global.ps1`: qué copian, a dónde, qué limpian y por qué existe cada decisión de diseño.
 
 ## Propósito
 
@@ -22,6 +22,36 @@ git -C ~/rules pull && ~/rules/scripts/sync_global.sh
 ```
 
 El *script* corre con `set -Eeuo pipefail`: cualquier paso que falle detiene la sincronización e imprime la línea del error, así que nunca muestra «✓» ni «Synchronisation complete.» después de una falla. Sus mensajes están en inglés internacional (Reino Unido), como el resto del código.
+
+## Windows nativo: `sync_global.ps1`
+
+En Windows nativo se usa `scripts/sync_global.ps1`, que hace los mismos cinco pasos desde PowerShell 7 o Windows PowerShell 5.1, sin Git Bash ni WSL:
+
+```powershell
+# Instalar por primera vez
+git clone git@github.com:incognia/rules.git $HOME\rules
+pwsh -NoProfile -ExecutionPolicy Bypass -File $HOME\rules\scripts\sync_global.ps1
+
+# Actualizar
+git -C $HOME\rules pull; pwsh -NoProfile -ExecutionPolicy Bypass -File $HOME\rules\scripts\sync_global.ps1
+```
+
+`sync_global.sh` no sirve bien en Windows nativo por dos razones:
+
+- **Desde PowerShell, `bash` abre WSL**: `C:\Windows\System32\bash.exe` tiene prioridad sobre Git Bash, así que el *script* corre en Linux y escribe en el *home* de WSL, no en el de Windows.
+- **En Git Bash, `ln -s` copia en lugar de enlazar** (sin `MSYS=winsymlinks:nativestrict`): a partir de la segunda ejecución el *script* ya no reconoce como suyos esos archivos, los deja intactos y los comandos de Claude Code se quedan congelados en su primera versión.
+
+Diferencias de `sync_global.ps1` respecto a la versión de *shell*:
+
+| Aspecto | `sync_global.sh` | `sync_global.ps1` |
+|---------|------------------|-------------------|
+| Reflejo de carpetas | `rsync -a --delete` o copia completa | `robocopy /E /PURGE` |
+| Comandos de Claude Code | Enlace simbólico | Enlace simbólico; si Windows lo rechaza (sin modo desarrollador ni elevación), copia registrada en `.rules-managed-commands`, que se actualiza en cada ejecución |
+| *Skills* de Antigravity CLI | Enlace simbólico | Enlace simbólico o, si Windows lo rechaza, unión de directorios (*junction*), que no requiere privilegios |
+| *Workflows* de Warp | Según la plataforma | `%APPDATA%\warp\Warp\data\workflows` |
+| Permisos de `.env` | `install -m 600` | `icacls` sin herencia, solo para el usuario actual |
+
+Las listas `.rules-managed-skills` y `.rules-managed-workflows` tienen el mismo formato en ambos *scripts* (LF y sin BOM), así que se puede alternar entre WSL y PowerShell sobre las mismas carpetas. Con el modo desarrollador de Windows activo, PowerShell 7 crea enlaces simbólicos sin elevación; Windows PowerShell 5.1 no puede, y usa la copia registrada.
 
 ## Qué se sincroniza
 
@@ -122,7 +152,7 @@ Los *workflows* de Warp se copian a una carpeta que depende de la plataforma:
 |------------|---------|
 | macOS | `~/.warp/workflows/` |
 | Linux nativo | `$XDG_DATA_HOME/warp-terminal/workflows/` (predeterminado: `~/.local/share/warp-terminal/workflows/`) |
-| Windows nativo (Git Bash, MSYS, Cygwin) | `$APPDATA/warp/Warp/data/workflows/` o, si falta `APPDATA`, `~/.warp/workflows/` |
+| Windows nativo (`sync_global.ps1`, Git Bash, MSYS, Cygwin) | `$APPDATA/warp/Warp/data/workflows/` o, si falta `APPDATA`, `~/.warp/workflows/` |
 | WSL y plataformas desconocidas | `~/.warp/workflows/` del *home* de Linux, con un aviso: el *script* no conoce una ruta de Warp para ellas |
 
 Igual que con las *skills*, el *script* lleva la lista de *workflows* que instaló en `.rules-managed-workflows` y borra los que ya no existen en el repositorio. Los *workflows* que el usuario agregó por su cuenta no se tocan.
@@ -190,7 +220,7 @@ sequenceDiagram
 
 ## Referencias
 
-- *Script* fuente: [`scripts/sync_global.sh`](../scripts/sync_global.sh)
+- *Scripts* fuente: [`scripts/sync_global.sh`](../scripts/sync_global.sh) y, para Windows nativo, [`scripts/sync_global.ps1`](../scripts/sync_global.ps1)
 - *Skills* del repositorio: [`.agents/skills/`](../.agents/skills/)
 - *Workflows* del repositorio: [`.warp/workflows/`](../.warp/workflows/)
 - Plantilla de configuración local: [`.env.example`](../.env.example)

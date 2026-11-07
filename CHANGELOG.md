@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-11-07] - Reemplazar el enlace simbólico de `CLAUDE.md` y sincronizar en Windows
 
+- docs: documentar en `README.md` (sección «Instalar o actualizar (Windows nativo)»), `AGENTS.md` y `docs/SYNC.md` el uso de `scripts/sync_global.ps1` en Windows nativo en lugar de `sync_global.sh` (desde PowerShell `bash` abre WSL y en Git Bash `ln -s` copia), con la tabla de diferencias entre ambos *scripts*, y precisar que Python en Windows se instala desde python.org y no desde la Microsoft Store ni con winget, con la verificación de `python3 --version` contra el alias de la Store
 - chore: agregar `.gitattributes` que fuerza finales de línea LF en `*.sh`, `*.py` y `.githooks/*` sin importar `core.autocrlf`, porque con CRLF los *scripts* fallan en WSL, Linux y macOS (`$'\r': command not found`)
 - docs: precisar en `/context` (`.agents/skills/context/SKILL.md`) y `cot/context.md` que, cuando `CLAUDE.md` solo importa `AGENTS.md` con `@AGENTS.md`, se lee únicamente `AGENTS.md`, igual que cuando es un enlace simbólico
 - fix: convertir `CLAUDE.md` de enlace simbólico a archivo regular que importa `AGENTS.md` con `@AGENTS.md`, porque en Windows Git lo extrae como un archivo de texto con solo el nombre del destino si no están activos el modo desarrollador y `core.symlinks`, y explicarlo en la sección «Claude Code specifics» de `AGENTS.md`
