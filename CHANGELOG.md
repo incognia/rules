@@ -3,6 +3,12 @@
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-11-07] - Reemplazar el enlace simbólico de `CLAUDE.md` y sincronizar en Windows
+
+- docs: precisar en `/context` (`.agents/skills/context/SKILL.md`) y `cot/context.md` que, cuando `CLAUDE.md` solo importa `AGENTS.md` con `@AGENTS.md`, se lee únicamente `AGENTS.md`, igual que cuando es un enlace simbólico
+- fix: convertir `CLAUDE.md` de enlace simbólico a archivo regular que importa `AGENTS.md` con `@AGENTS.md`, porque en Windows Git lo extrae como un archivo de texto con solo el nombre del destino si no están activos el modo desarrollador y `core.symlinks`, y explicarlo en la sección «Claude Code specifics» de `AGENTS.md`
+- feat: agregar `scripts/sync_global.ps1`, contraparte de `scripts/sync_global.sh` para Windows nativo (PowerShell 7 o Windows PowerShell 5.1): espeja los *skills* en `~/.agents/skills` con poda, enlaza `~/.claude/commands/<nombre>.md` (con copia registrada en `.rules-managed-commands` si Windows rechaza el enlace simbólico), enlaza los *skills* en Antigravity CLI (enlace simbólico o unión), instala los flujos de Warp y copia `cot/`, `rulesets/`, `templates/`, `scripts/atlassian/` y el `.env` a `~/rules`, con las mismas listas administradas que la versión de *shell*
+
 ## [2026-10-26] - Hacer determinista e idempotente `/changelogger`
 
 - fix: detectar en la puerta del CHANGELOG de `/commit` (`.agents/skills/commit/SKILL.md`, `cot/committing.md` y `rulesets/COMMITTING.md`) y en `.githooks/pre-commit` un `CHANGELOG.md` nuevo sin versionar (primer *commit* de un repositorio nuevo), que `git diff` no ve, con una tercera comprobación `git ls-files --others --exclude-standard -- CHANGELOG.md`

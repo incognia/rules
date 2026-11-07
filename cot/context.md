@@ -48,7 +48,7 @@ Pasos:
    [ -f AGENTS.md ] && { echo "=== AGENTS.md ==="; head -30 AGENTS.md; }
    ```
 
-   Si `CLAUDE.md` es un enlace simbólico a `AGENTS.md`, leer solo uno. Leer también los primeros 20 renglones de los README de subcarpetas encontrados en el paso 2. Extraer propósito, tecnologías, estado actual y próximos pasos.
+   Si `CLAUDE.md` es un enlace simbólico a `AGENTS.md` o solo lo importa con `@AGENTS.md`, leer solo `AGENTS.md`. Leer también los primeros 20 renglones de los README de subcarpetas encontrados en el paso 2. Extraer propósito, tecnologías, estado actual y próximos pasos.
 
 4) Acción: detectar tecnologías, contenedores, orquestación y CI/CD.
    Resultado:

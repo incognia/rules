@@ -18,7 +18,7 @@ When starting work on a new or unfamiliar repository to quickly understand its s
 5. **Check orchestration**: Look for k8s/, kubernetes/, manifests/, Helm charts
 6. **Check CI/CD**: Look for .github/workflows/, .gitlab-ci.yml, Jenkinsfile
 7. **Analyze structure**: Run `tree -L 2 -I node_modules` or `ls -la`
-8. **Read key files**: First lines of README.md, CHANGELOG.md and any AGENTS.md found (read only one of CLAUDE.md/AGENTS.md when one is a symlink to the other); never print secrets such as `.env` or kubeconfig contents
+8. **Read key files**: First lines of README.md, CHANGELOG.md and any AGENTS.md found (read only one of CLAUDE.md/AGENTS.md when one is a symlink to the other or CLAUDE.md only imports AGENTS.md with `@AGENTS.md`); never print secrets such as `.env` or kubeconfig contents
 9. **Identify context**: Determine if personal (@incognia) or corporate (@incogniadev) project
 10. **Summarize findings**: Technologies, structure, CI/CD, documentation, context
 
