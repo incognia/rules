@@ -25,7 +25,7 @@ Mi enfoque pedagógico se fundamenta en principios claros y no negociables:
 - **Política bilingüe (alineada con PHILOSOPHY.md):** el razonamiento y la documentación se escriben en español mexicano; el código, sus comentarios, los identificadores y los nombres de archivos se mantienen en inglés internacional (UK) por interoperabilidad.
 - **Infraestructura como código y reproducibilidad:** la configuración de laboratorios y contenidos se define declarativamente para garantizar entornos idénticos.
 - **Accesibilidad y cero barreras:** el acceso no depende de plataformas cerradas ni de licencias restrictivas.
-- **Marcas de tiempo correctas (CST Ciudad de México):** cuando incluyo marcas de tiempo en ejemplos o bitácoras, las calculo con `TZ=America/Mexico_City` en formato de 24 horas.
+- **Marcas de tiempo correctas (CST Ciudad de México):** cuando incluyo marcas de tiempo en ejemplos o bitácoras, las calculo con `TZ=CST6` en formato de 24 horas.
 
 ## Especialización en educación STEM
 

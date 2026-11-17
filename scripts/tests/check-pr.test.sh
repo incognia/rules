@@ -20,8 +20,8 @@ FAILED=0
 OUT=""
 CODE=0
 
-TODAY=$(TZ=America/Mexico_City date +%F)
-YESTERDAY=$(TZ=America/Mexico_City date -v-1d +%F 2>/dev/null || TZ=America/Mexico_City date -d yesterday +%F)
+TODAY=$(TZ=CST6 date +%F)
+YESTERDAY=$(TZ=CST6 date -v-1d +%F 2>/dev/null || TZ=CST6 date -d yesterday +%F)
 
 ok()  { echo "ok   - $*"; PASSED=$((PASSED + 1)); }
 nok() { echo "FAIL - $*"; FAILED=$((FAILED + 1)); }

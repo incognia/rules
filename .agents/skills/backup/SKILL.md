@@ -12,7 +12,7 @@ Before any destructive operation, or when explicitly asked to create a backup.
 ## Instructions
 
 1. **Read the full CoT**: Load and follow `~/rules/cot/backup.md` from line 1 to end
-2. **Generate timestamp**: `TS=$(TZ=America/Mexico_City date +"%Y-%m-%dT%H-%M-%S")`
+2. **Generate timestamp**: `TS=$(TZ=CST6 date +"%Y-%m-%dT%H-%M-%S")`
 3. **Name the backup**: `[name_without_ext]_[timestamp].[original_ext].bkp`
 4. **For files**: `cp source.txt backups/source_${TS}.txt.bkp`
 5. **For directories**: `tar --owner=0 --group=0 --numeric-owner -cf - dir/ | zstd -T0 -19 -o "dir_${TS}.tar.zst"`

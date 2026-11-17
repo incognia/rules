@@ -88,7 +88,7 @@ Pasos:
    Resultado: borrador del *change*.
 
 10) Acción: armar el borrador del comentario.
-    - Construir el documento ADF con la estructura de la sección «Comentario en Confluence» del *ruleset*, en inglés internacional (UK), con fecha de evaluación en CST (`TZ=America/Mexico_City date +"%Y-%m-%d %H:%M"`).
+    - Construir el documento ADF con la estructura de la sección «Comentario en Confluence» del *ruleset*, en inglés internacional (UK), con fecha de evaluación en CST (`TZ=CST6 date +"%Y-%m-%d %H:%M"`).
     - Escribir un *script* Python en el *scratchpad* que importe `~/rules/scripts/atlassian/adf_lib.py` y guarde el documento con `write_doc()` en un archivo temporal; nunca escribir el JSON a mano ni pegarlo como argumento.
     - Agregar después del panel de veredicto un `cc` con un nodo `mention` por cada persona de `SDD_READINESS_MENTIONS` (`~/rules/.env`, formato `accountId|Nombre` separado por comas); si la variable no existe, omitirlo y avisar.
     - Si hay `PREVIOUS_EVALUATION_ID`, abrir con la diferencia contra esa evaluación (puntaje, veredicto, bloqueadores cerrados o nuevos).

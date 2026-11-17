@@ -12,7 +12,7 @@ if [ "$#" -lt 1 ]; then
   exit 1
 fi
 
-DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")
+DATE_CST=$(TZ=CST6 date +"%Y-%m-%d")
 status=0
 
 for SRC in "$@"; do

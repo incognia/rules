@@ -39,7 +39,7 @@ Pasos:
 10) Acción: tiempos verbales.
     Resultado: reportes en pasado y primera persona; guías en segunda persona (imperativo/presente/futuro); evitar tercera impersonal («se configuró...»).
 11) Acción: fechas y horas (CST Ciudad de México).
-    Resultado: usar 24 h y TZ=America/Mexico_City; no rotular CST a una hora UTC. En CHANGELOG: solo fecha [YYYY-MM-DD].
+    Resultado: usar 24 h y TZ=CST6; no rotular CST a una hora UTC. En CHANGELOG: solo fecha [YYYY-MM-DD].
 12) Acción: nomenclatura de archivos.
     Resultado: nombres en inglés internacional; Markdown en NOMBRES_EN_MAYUSCULAS.md (extensión en minúsculas).
 13) Acción: odios especiales (bloqueo explícito).

@@ -9,7 +9,7 @@ validacion: respaldo creado, checksum generado y verificado, entrada en log
 
 Razonamiento:
 
-- Usar siempre CST de la Ciudad de México para los *timestamps* (`TZ=America/Mexico_City`) y registrar las acciones.
+- Usar siempre CST de la Ciudad de México para los *timestamps* (`TZ=CST6`) y registrar las acciones.
 - Generar *checksum* (`.sha256`) para verificar la integridad.
 - Para directorios, empaquetar y comprimir con zstd para eficiencia.
 - Referencia: «~/rules/rulesets/BACKUPS.md» (restauración, verificación, compresión, rsync incrementales).
@@ -20,7 +20,7 @@ Pasos:
    Resultado: variables definidas, por ejemplo, `SRC=./mi_carpeta DEST=backups/daily`.
 2) Acción: crear (si aplica) carpeta del día en CST.
    Resultado:
-   - `DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")`
+   - `DATE_CST=$(TZ=CST6 date +"%Y-%m-%d")`
    - `mkdir -p "$DEST/$DATE_CST"`
 3) Acción: ejecutar el respaldo básico con el *script*.
    Resultado:

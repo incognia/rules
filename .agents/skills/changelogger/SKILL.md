@@ -29,7 +29,7 @@ When adding or updating entries in CHANGELOG.md for any project following rules 
    - Exists and canonical (tracked or not) → **incremental insertion mode** (steps 5 onwards).
    - Exists, tracked, not canonical → stop and report the deviations; never rewrite tracked history without explicit user instruction.
    - **Idempotency (MANDATORY, every mode)**: before adding a bullet, check whether the `DATE_CST` block already has a bullet of the same type for the same change (same file, same purpose); if so, do not add it. A second run with no new working-tree changes yields no diff, and two runs on the same state yield the same file.
-5. **Get CST date**: `DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")` — NEVER use UTC with "CST" suffix
+5. **Get CST date**: `DATE_CST=$(TZ=CST6 date +"%Y-%m-%d")` — NEVER use UTC with "CST" suffix
 6. **Check existing entries**: Verify if `## [YYYY-MM-DD]` already exists to avoid duplicate headings
 7. **Update the target date block** (reverse chronological order):
    - **If the date already exists**: add new typed bullets inside that existing block; do NOT create a duplicate heading.
@@ -78,7 +78,7 @@ When adding or updating entries in CHANGELOG.md for any project following rules 
 ## Critical rules
 
 - Date format: `[YYYY-MM-DD]` only — no time component
-- CST = UTC - 6 hours (verify with `TZ=America/Mexico_City date`)
+- CST = UTC - 6 hours (verify with `TZ=CST6 date`)
 - No emojis in CHANGELOG entries
 - Language: the repository's primary language, detected per instruction 8: Spanish Mexican or international English (UK), defaulting to international English (UK) when there are several with no clear primary one
 - Descriptive title after the date: `## [YYYY-MM-DD] - Título descriptivo`
@@ -97,7 +97,7 @@ When adding or updating entries in CHANGELOG.md for any project following rules 
 2. HARD STOP gate: if there is no explicit evidence that the status check happened in the current run, stop immediately and restart from step 0; absolutely no further action is allowed.
 3. Read `CHANGELOG.md` lines `1-200` as the second operation of the run (step 0b) (before `grep`, extra search, or patch attempts).
 4. HARD STOP gate: if there is no explicit evidence that the `1-200` read happened in the current run, stop immediately and restart from step 0; absolutely no further action is allowed.
-5. Verify CST date and existing heading before editing (`TZ=America/Mexico_City date` + `grep -n "^## \\[${DATE_CST}\\]" CHANGELOG.md`).
+5. Verify CST date and existing heading before editing (`TZ=CST6 date` + `grep -n "^## \\[${DATE_CST}\\]" CHANGELOG.md`).
 6. Read the exact target date block before inserting bullets.
 7. If `DATE_CST` heading exists, first attempt MUST be one single-hunk micro-block replacement (`heading + blank line + first bullet`) and insertion of the new bullet at top of the block (no blank line between bullets).
 8. Validate immediately with `git --no-pager diff -- CHANGELOG.md`.

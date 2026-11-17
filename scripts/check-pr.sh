@@ -233,7 +233,7 @@ else
                              || fail "CHANGELOG.md diff removes or edits $REMOVED existing line(s); it must be insertion-only"
 
         BAD_LINES=""
-        TODAY=$(TZ=America/Mexico_City date +%F)
+        TODAY=$(TZ=CST6 date +%F)
         FUTURE=""
         while IFS= read -r line; do
             l=${line#+}

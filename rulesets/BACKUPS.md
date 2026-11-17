@@ -37,7 +37,7 @@ Evita sobrescribir respaldos previos. La convención de fecha y hora permite con
 
 **Zona horaria obligatoria:** todos los *timestamps* deben generarse usando la zona horaria CST de Ciudad de México (UTC-6). Nunca usar UTC ni la zona horaria local del sistema si es diferente a CST.
 
-**Advertencia crítica:** no basta con añadir «CST» a una hora UTC; usa `TZ=America/Mexico_City` (ver [LINGUISTICS.md](./LINGUISTICS.md#fechas-y-horas-cst-ciudad-de-méxico)).
+**Advertencia crítica:** no basta con añadir «CST» a una hora UTC; usa `TZ=CST6` (ver [LINGUISTICS.md](./LINGUISTICS.md#fechas-y-horas-cst-ciudad-de-méxico)).
 
 ## Política de respaldos antes de operaciones destructivas
 
@@ -73,7 +73,7 @@ Toda acción de borrado deberá ser registrada con:
 - Resultado del respaldo
 - Elementos afectados por el borrado
 
-**Importante:** en el registro de auditoría, usar siempre `TZ=America/Mexico_City date` (ver la advertencia de la sección anterior).
+**Importante:** en el registro de auditoría, usar siempre `TZ=CST6 date` (ver la advertencia de la sección anterior).
 
 ### Buenas prácticas recomendadas
 
@@ -95,7 +95,7 @@ backups/
 Ejemplo con fecha del día (CST):
 
 ```bash
-DATE_CST=$(TZ="America/Mexico_City" date +"%Y-%m-%d")
+DATE_CST=$(TZ=CST6 date +"%Y-%m-%d")
 mkdir -p "backups/daily/${DATE_CST}"
 ```
 
@@ -145,7 +145,7 @@ find backups -type f -name "*.sha256" -exec sha256sum -c {} \;
 - Ejemplo para empaquetar y comprimir un archivo/directorio:
 
 ```bash
-TS=$(TZ=America/Mexico_City date +"%Y-%m-%dT%H-%M-%S")
+TS=$(TZ=CST6 date +"%Y-%m-%dT%H-%M-%S")
 TARGET="mi_carpeta"
 tar --mtime="$(date -d "$TS" +%Y-%m-%d)" --owner=0 --group=0 --numeric-owner -cf - "$TARGET" | zstd -T0 -19 -o "${TARGET}_${TS}.tar.zst"
 ```
@@ -158,7 +158,7 @@ tar --mtime="$(date -d "$TS" +%Y-%m-%d)" --owner=0 --group=0 --numeric-owner -cf
 ```bash
 BASE="/datos"
 DEST="backups/daily"
-DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")
+DATE_CST=$(TZ=CST6 date +"%Y-%m-%d")
 SNAP="$DEST/$DATE_CST"
 LAST=$(ls -1 "$DEST" | sort | tail -n1)
 mkdir -p "$SNAP"
@@ -195,7 +195,7 @@ Ejemplo de unidades:
 
 Variables recomendadas en el servicio:
 
-- Environment=TZ=America/Mexico_City
+- Environment=TZ=CST6
 - Logs a ruta fija en CST.
 
 ## Registro y auditoría
@@ -251,14 +251,14 @@ bash ~/rules/scripts/quick_bkp.sh archivo.txt
 set -euo pipefail
 
 log() {
-  printf "%s | %s\n" "$(TZ=America/Mexico_City date '+%Y-%m-%d %H:%M:%S')" "$*" | tee -a "${BACKUP_LOG_FILE:-backups/backup.log}"
+  printf "%s | %s\n" "$(TZ=CST6 date '+%Y-%m-%d %H:%M:%S')" "$*" | tee -a "${BACKUP_LOG_FILE:-backups/backup.log}"
 }
 
 # Función para crear respaldo con timestamp y checksum
 create_backup() {
   local source_file="$1"
   local backup_dir="${2:-backups}"
-  local timestamp=$(TZ="America/Mexico_City" date +"%Y-%m-%dT%H-%M-%S")
+  local timestamp=$(TZ=CST6 date +"%Y-%m-%dT%H-%M-%S")
   local filename=$(basename "$source_file")
   local name_without_ext="${filename%.*}"
   local extension="${filename##*.}"
@@ -289,7 +289,7 @@ safe_delete() {
     fi
   fi
   rm -f "$target"
-  echo "$(TZ="America/Mexico_City" date '+%Y-%m-%d %H:%M:%S') - Eliminado: $target" >> backups/deletion.log
+  echo "$(TZ=CST6 date '+%Y-%m-%d %H:%M:%S') - Eliminado: $target" >> backups/deletion.log
 }
 ```
 

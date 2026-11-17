@@ -30,7 +30,7 @@ Pasos:
    Resultado: el documento conserva un solo campo de fecha visible.
 
 4) Acción: generar la marca de tiempo de «Última modificación» en CST (24 horas) con el mes en español.
-   Resultado: `LC_TIME=es_MX.UTF-8 TZ=America/Mexico_City date '+%-d de %B de %Y, %H:%M (%Z)'` produce, por ejemplo, «31 de julio de 2025, 11:59 (CST)». Si el sistema no tiene el *locale* `es_MX.UTF-8` (`locale -a`), usar `es_ES.UTF-8` o traducir el mes a mano. La salida ya termina en «(CST)»: insertarla tal cual, sin agregar otro sufijo.
+   Resultado: `LC_TIME=es_MX.UTF-8 TZ=CST6 date '+%-d de %B de %Y, %H:%M (%Z)'` produce, por ejemplo, «31 de julio de 2025, 11:59 (CST)». Si el sistema no tiene el *locale* `es_MX.UTF-8` (`locale -a`), usar `es_ES.UTF-8` o traducir el mes a mano. La salida ya termina en «(CST)»: insertarla tal cual, sin agregar otro sufijo.
 
    - HedgeDoc: `<div style="text-align: right;"><em>Última modificación: <marca de tiempo></em></div><br>`
    - GitLab o GitHub: `*Última modificación: <marca de tiempo>*`

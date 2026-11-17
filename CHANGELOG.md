@@ -3,6 +3,10 @@
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-11-16] - Calcular la hora CST con una zona fija que funcione en Git Bash
+
+- fix: reemplazar `TZ=America/Mexico_City` por `TZ=CST6` en las reglas, los *skills*, los procedimientos de `cot/`, los *scripts* (`check-pr.sh`, `cst_date.sh` y los de respaldo) y el flujo de Warp, porque Git Bash en Windows no trae la base de zonas horarias, no reconoce el nombre y calcula en UTC sin avisar, de modo que de 18:00 a 23:59 `/changelogger` fechaba el bloque con el día siguiente; explicarlo en «Fechas y horas» de `rulesets/LINGUISTICS.md` y en el paso 1 de `cot/changelog.md`
+
 ## [2026-11-07] - Reemplazar el enlace simbólico de `CLAUDE.md` y sincronizar en Windows
 
 - docs: documentar en `README.md` (sección «Instalar o actualizar (Windows nativo)»), `AGENTS.md` y `docs/SYNC.md` el uso de `scripts/sync_global.ps1` en Windows nativo en lugar de `sync_global.sh` (desde PowerShell `bash` abre WSL y en Git Bash `ln -s` copia), con la tabla de diferencias entre ambos *scripts*, y precisar que Python en Windows se instala desde python.org y no desde la Microsoft Store ni con winget, con la verificación de `python3 --version` contra el alias de la Store

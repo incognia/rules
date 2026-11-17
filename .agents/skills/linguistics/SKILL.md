@@ -28,7 +28,7 @@ If no file was specified, ask the user which file to review.
 
 - «IA» not «AI», «TI» not «IT», «Biblioteca» not «Librería»
 - «Desplegar» not «deployar», «Respaldar» not «backupear»
-- Time: 24h format, CST (Ciudad de México), TZ=America/Mexico_City
+- Time: 24h format, CST (Ciudad de México), TZ=CST6
 
 ## References
 

@@ -20,7 +20,7 @@ Pasos:
 2) Acción: ejecutar respaldo rápido usando fecha CST.
    Resultado: `bash ~/rules/scripts/quick_bkp.sh archivo.txt` (puede aceptar varios archivos).
 3) Acción: validar que existe el respaldo junto al original.
-   Resultado: `ls -1 archivo_$(TZ=America/Mexico_City date +"%Y-%m-%d").txt.bkp`.
+   Resultado: `ls -1 archivo_$(TZ=CST6 date +"%Y-%m-%d").txt.bkp`.
 4) (Opcional) Acción: repetir para múltiples archivos en un solo comando.
    Resultado: `bash ~/rules/scripts/quick_bkp.sh *.md`.
 

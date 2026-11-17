@@ -206,14 +206,14 @@
 
 - Usar formato de 24 horas y zona horaria de la Ciudad de México.
 - Calcular la **hora local** correctamente antes de añadir el sufijo «CST». No rotular «CST» una hora calculada en UTC.
-- Zona a usar: `America/Mexico_City` (UTC−06:00; sin horario de verano).
+- Zona a usar: la de `America/Mexico_City` (UTC−06:00; sin horario de verano desde 2022), escrita en los comandos como `TZ=CST6`, una zona POSIX de desfase fijo. No usar `TZ=America/Mexico_City`: Git Bash en Windows no trae la base de zonas horarias (`/usr/share/zoneinfo`), no reconoce el nombre y calcula en UTC sin avisar, así que de 18:00 a 23:59 da la fecha del día siguiente. `TZ=CST6` da la misma hora en macOS, Linux, WSL y Git Bash.
 - Formatos aceptados:
   - Corto: «2025-07-28 14:30 CST»
-  - Largo: «28 de julio de 2025, 14:30 (CST)»; con `LC_TIME=es_MX.UTF-8 TZ=America/Mexico_City date '+%-d de %B de %Y, %H:%M (%Z)'` (el *locale* en español garantiza el nombre del mes en español)
+  - Largo: «28 de julio de 2025, 14:30 (CST)»; con `LC_TIME=es_MX.UTF-8 TZ=CST6 date '+%-d de %B de %Y, %H:%M (%Z)'` (el *locale* en español garantiza el nombre del mes en español)
 - Ejemplos en shell:
-  - `TZ=America/Mexico_City date '+%F %H:%M %Z'`
-  - `TS=$(TZ=America/Mexico_City date '+%F %H:%M %Z'); echo "$TS"`
-- En *scripts* y generadores, NO confiar en la zona predeterminada del sistema: establecer `TZ=America/Mexico_City` explícitamente.
+  - `TZ=CST6 date '+%F %H:%M %Z'`
+  - `TS=$(TZ=CST6 date '+%F %H:%M %Z'); echo "$TS"`
+- En *scripts* y generadores, NO confiar en la zona predeterminada del sistema: establecer `TZ=CST6` explícitamente.
 
 ### Comillas
 

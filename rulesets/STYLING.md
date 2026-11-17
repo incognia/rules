@@ -44,17 +44,17 @@ tags: tag-1, tag-2, tag-3, tag-opcional
 - **Regla de fecha única:** antes de insertar o actualizar «Última modificación», eliminar cualquier campo de fecha ya reportado (`Fecha:`, `Fecha de reporte:`, `[time=...]` u otra «Última modificación») para dejar solo uno.
 - **Zona horaria obligatoria:** siempre usar CST de Ciudad de México (UTC-6), nunca UTC ni otra zona horaria
 
-**Advertencia crítica:** no basta con añadir «CST» a una hora UTC; usa `TZ=America/Mexico_City date`, que hace la conversión (CST = UTC − 6 horas). La regla completa está en [LINGUISTICS.md](./LINGUISTICS.md#fechas-y-horas-cst-ciudad-de-méxico).
+**Advertencia crítica:** no basta con añadir «CST» a una hora UTC; usa `TZ=CST6 date`, que hace la conversión (CST = UTC − 6 horas). La regla completa está en [LINGUISTICS.md](./LINGUISTICS.md#fechas-y-horas-cst-ciudad-de-méxico).
 
 **Ejemplos de generación de la marca de tiempo (CST, 24 horas):**
 
 ```bash
 # Formato corto (ISO-like): 2025-07-31 11:59 CST
-TZ=America/Mexico_City date '+%F %H:%M %Z'
+TZ=CST6 date '+%F %H:%M %Z'
 
 # Formato largo en español: 31 de julio de 2025, 11:59 (CST)
 # LC_TIME=es_MX.UTF-8 asegura el nombre del mes en español; %Z ya imprime CST
-LC_TIME=es_MX.UTF-8 TZ=America/Mexico_City date '+%-d de %B de %Y, %H:%M (%Z)'
+LC_TIME=es_MX.UTF-8 TZ=CST6 date '+%-d de %B de %Y, %H:%M (%Z)'
 ```
 
 Si `locale -a` no lista `es_MX.UTF-8`, usa `es_ES.UTF-8` o traduce a mano el nombre del mes; nunca dejes el mes en inglés. El resultado ya incluye «(CST)», así que la plantilla es `Última modificación: <resultado>`, sin agregar otro «(CST)».

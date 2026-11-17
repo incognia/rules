@@ -31,7 +31,7 @@ Pasos:
    - Si era archivo: `sha256sum ./archivo_restaurado.ext` (comparar)
    - Si era `.tar.zst`: inspección previa con `tar -tvf` y verificación por muestreo, o con *checksums* internos si se generaron.
 5) Acción: registro en el *log*.
-   Resultado: `echo "$(TZ=America/Mexico_City date '+%Y-%m-%d %H:%M:%S') | restore | $BKP | ok" >> backups/backup.log`.
+   Resultado: `echo "$(TZ=CST6 date '+%Y-%m-%d %H:%M:%S') | restore | $BKP | ok" >> backups/backup.log`.
 
 Conclusión:
 

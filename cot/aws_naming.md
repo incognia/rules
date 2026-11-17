@@ -41,7 +41,7 @@ Pasos:
    Resultado: si excede, truncar el nombre conservando la extensión e indicar advertencia.
 
 7) Acción: registrar cada transformación en un archivo `.tsv` con formato `original\tnormalizado`.
-   - Nombre del archivo: `normalizacion_YYYYMMDD.tsv` (fecha CST: `TZ=America/Mexico_City date +"%Y%m%d"`).
+   - Nombre del archivo: `normalizacion_YYYYMMDD.tsv` (fecha CST: `TZ=CST6 date +"%Y%m%d"`).
    - Primera línea: encabezados `original\tnormalizado`.
    - Una línea por archivo procesado, incluyendo los que no requirieron cambios.
    Resultado: archivo de registro que permite auditoría y reversión de los renombramientos.

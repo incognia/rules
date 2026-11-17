@@ -10,13 +10,13 @@ set -euo pipefail
 
 SRC=${1:?"Missing source path. Usage: backup_file.sh <source_path> [backup_dir]"}
 DEST=${2:-backups}
-TS=$(TZ=America/Mexico_City date +"%Y-%m-%dT%H-%M-%S")
+TS=$(TZ=CST6 date +"%Y-%m-%dT%H-%M-%S")
 LOGFILE=${BACKUP_LOG_FILE:-$DEST/backup.log}
 THRESH=${BACKUP_SHA_THRESHOLD_BYTES:-104857600}
 mkdir -p "$DEST"
 
 log() {
-  printf "%s | %s\n" "$(TZ=America/Mexico_City date '+%Y-%m-%d %H:%M:%S')" "$*" | tee -a "$LOGFILE"
+  printf "%s | %s\n" "$(TZ=CST6 date '+%Y-%m-%d %H:%M:%S')" "$*" | tee -a "$LOGFILE"
 }
 
 # sha256sum on GNU, shasum -a 256 on macOS; both write and check the same format.

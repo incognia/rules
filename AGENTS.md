@@ -60,7 +60,7 @@ All documentation follows strict linguistic rules from `rulesets/LINGUISTICS.md`
 
 ```bash
 # Get correct CST date (never use UTC with "CST" suffix)
-DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")
+DATE_CST=$(TZ=CST6 date +"%Y-%m-%d")
 ```
 
 **Commit message rules:**
@@ -215,13 +215,13 @@ Parameterised commands in `.warp/workflows/` for frequent operations:
 
 ```bash
 # Always use this for accurate CST dates
-TZ=America/Mexico_City date +"%Y-%m-%d %H:%M %Z"
+TZ=CST6 date +"%Y-%m-%d %H:%M %Z"
 
 # For CHANGELOG.md (date only)
-TZ=America/Mexico_City date +"%Y-%m-%d"
+TZ=CST6 date +"%Y-%m-%d"
 
 # Verify conversion
-echo "UTC: $(date -u '+%H:%M')" && echo "CST: $(TZ=America/Mexico_City date '+%H:%M')"
+echo "UTC: $(date -u '+%H:%M')" && echo "CST: $(TZ=CST6 date '+%H:%M')"
 ```
 
 ## Technical specialisation context

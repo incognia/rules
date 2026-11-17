@@ -1,5 +1,5 @@
 name: CST date/time
-command: TZ=America/Mexico_City date +"{{format}}"
+command: TZ=CST6 date +"{{format}}"
 description: "Get current date/time in CST (Ciudad de México, UTC-6)"
 tags:
   - date

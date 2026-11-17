@@ -8,7 +8,7 @@ set -euo pipefail
 
 SRC=${1:?"Missing source_dir. Usage: backup_rsync_snapshot.sh <source_dir> [dest_dir]"}
 DEST=${2:-backups/daily}
-DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")
+DATE_CST=$(TZ=CST6 date +"%Y-%m-%d")
 
 [ -d "$SRC" ] || { echo "Source directory not found: $SRC" >&2; exit 1; }
 mkdir -p "$DEST"
@@ -37,4 +37,4 @@ else
 fi
 
 mkdir -p "$(dirname "$LOG")"
-echo "$(TZ=America/Mexico_City date '+%Y-%m-%d %H:%M:%S') | snapshot | $SNAP | $mode" | tee -a "$LOG"
+echo "$(TZ=CST6 date '+%Y-%m-%d %H:%M:%S') | snapshot | $SNAP | $mode" | tee -a "$LOG"

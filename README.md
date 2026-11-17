@@ -325,8 +325,8 @@ sequenceDiagram
 
 - Formato: 24 horas, zona «CST (Ciudad de México)».
 - **CRÍTICO**: No rotular «CST» a horas UTC sin cálculo; CST = UTC - 6 horas.
-- **Verificación obligatoria**: usar `TZ=America/Mexico_City date` para obtener tiempo real.
-- Zona a usar en *scripts*: TZ=America/Mexico_City.
+- **Verificación obligatoria**: usar `TZ=CST6 date` para obtener tiempo real.
+- Zona a usar en *scripts*: TZ=CST6.
 - CHANGELOG.md: solo fecha (YYYY-MM-DD), sin hora.
 
 Más detalles: ver [LINGUISTICS.md – Fechas y horas (CST Ciudad de México)](./rulesets/LINGUISTICS.md#fechas-y-horas-cst-ciudad-de-méxico).
@@ -335,14 +335,14 @@ Más detalles: ver [LINGUISTICS.md – Fechas y horas (CST Ciudad de México)](.
 
 ```bash
 # Fecha (CST) para CHANGELOG.md
-TZ=America/Mexico_City date +"%Y-%m-%d"
+TZ=CST6 date +"%Y-%m-%d"
 
 # Fecha y hora (CST) legible
-TZ=America/Mexico_City date '+%F %H:%M %Z'
-LC_TIME=es_MX.UTF-8 TZ=America/Mexico_City date '+%d de %B de %Y, %H:%M (%Z)'
+TZ=CST6 date '+%F %H:%M %Z'
+LC_TIME=es_MX.UTF-8 TZ=CST6 date '+%d de %B de %Y, %H:%M (%Z)'
 
 # Verificar cálculo correcto comparando UTC vs CST
-echo "UTC: $(date -u '+%H:%M')" && echo "CST: $(TZ=America/Mexico_City date '+%H:%M')"
+echo "UTC: $(date -u '+%H:%M')" && echo "CST: $(TZ=CST6 date '+%H:%M')"
 ```
 
 Ejemplos de conversión UTC → CST:

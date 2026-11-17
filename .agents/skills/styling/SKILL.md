@@ -57,7 +57,7 @@ Use as starting point:
    - **GitLab/GitHub other docs**: no frontmatter
    - H1 title
    - **Single-date cleanup (MANDATORY)**: before inserting/updating the timestamp, detect and remove any existing reported date field (for example `Última modificación:`, `Fecha:`, `Fecha de reporte:`, `[time=...]`) so only one date remains.
-   - Timestamp: `LC_TIME=es_MX.UTF-8 TZ=America/Mexico_City date '+%-d de %B de %Y, %H:%M (%Z)'` → e.g. `5 de enero de 2026, 09:07 (CST)`. `LC_TIME=es_MX.UTF-8` keeps the month in Spanish; if `locale -a` does not list it, fall back to `es_ES.UTF-8` or translate the month by hand (never leave it in English). The output already ends in `(CST)`.
+   - Timestamp: `LC_TIME=es_MX.UTF-8 TZ=CST6 date '+%-d de %B de %Y, %H:%M (%Z)'` → e.g. `5 de enero de 2026, 09:07 (CST)`. `LC_TIME=es_MX.UTF-8` keeps the month in Spanish; if `locale -a` does not list it, fall back to `es_ES.UTF-8` or translate the month by hand (never leave it in English). The output already ends in `(CST)`.
    - **HedgeDoc**: `<div style="text-align: right;"><em>Última modificación: [timestamp]</em></div><br>`
    - **GitLab/GitHub**: `*Última modificación: [timestamp]*` — plain Markdown italic, no HTML (GL/GH strip inline styles)
    - Never append another `(CST)` after `[timestamp]`: the result must not read `(CST) (CST)`.

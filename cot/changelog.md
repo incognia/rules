@@ -47,9 +47,9 @@ Pasos:
 
 1) Acción: calcular fecha y hora CST correcta y definir `DATE_CST`, que usan los pasos siguientes.
    COMANDOS OBLIGATORIOS:
-   - `DATE_CST=$(TZ=America/Mexico_City date +"%Y-%m-%d")`
-   - `TZ=America/Mexico_City date +"%Y-%m-%d %H:%M:%S"` (hora de referencia)
-   Validación: confirmar cálculo matemático CST = UTC - 6 horas; si cada comando corre en un *shell* nuevo, volver a definir `DATE_CST` en el mismo comando que lo usa o sustituir el valor literal.
+   - `DATE_CST=$(TZ=CST6 date +"%Y-%m-%d")`
+   - `TZ=CST6 date +"%Y-%m-%d %H:%M:%S"` (hora de referencia)
+   Validación: confirmar cálculo matemático CST = UTC - 6 horas (no usar `TZ=America/Mexico_City`: en Git Bash para Windows no hay base de zonas y calcula en UTC; ver LINGUISTICS.md); si cada comando corre en un *shell* nuevo, volver a definir `DATE_CST` en el mismo comando que lo usa o sustituir el valor literal.
    Resultado: fecha actual en CST en `DATE_CST` para la nueva entrada, nunca etiquetar hora UTC como CST.
 
 2) Acción: revisar estructura y orden cronológico del CHANGELOG.md.
@@ -149,7 +149,7 @@ Pasos:
     Resultado: changelog listo para continuar con `/commit` sin edición adicional.
 
 VERIFICACIÓN CRÍTICA (antes de completar):
-- Confirmar: `TZ=America/Mexico_City date` ejecutado para fecha CST real
+- Confirmar: `TZ=CST6 date` ejecutado para fecha CST real
 - Validar: orden cronológico inverso con `grep "^## \[" CHANGELOG.md`
 - Verificar: sin duplicados con conteo de encabezados idénticos
 - Revisar: idioma único según el idioma principal del repositorio (paso 4): 100% español mexicano según LINGUISTICS.md, o 100% inglés internacional (UK)

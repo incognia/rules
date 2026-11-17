@@ -26,7 +26,7 @@ Before uploading files to an S3 bucket, or when normalizing existing object keys
 5. **Generate audit log**:
 
    ```bash
-   TSV="normalizacion_$(TZ=America/Mexico_City date +'%Y%m%d').tsv"
+   TSV="normalizacion_$(TZ=CST6 date +'%Y%m%d').tsv"
    printf 'original\tnormalizado\n' > "$TSV"
    ```
 
@@ -48,7 +48,7 @@ Before uploading files to an S3 bucket, or when normalizing existing object keys
 - Only safe characters survive: `a-z`, `0-9`, `-`, `_` and `.` (for extension only)
 - Tilde (`~`) is forbidden (CloudFront cache invalidation incompatibility)
 - CloudFront path limit: 255 characters; truncate name (preserve extension) if exceeded
-- `.tsv` filename uses CST date: `TZ=America/Mexico_City date +'%Y%m%d'`
+- `.tsv` filename uses CST date: `TZ=CST6 date +'%Y%m%d'`
 - Never overwrite an existing file during rename; if collision, append numeric suffix (`-1`, `-2`)
 
 ## References
