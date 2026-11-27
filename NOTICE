@@ -22,6 +22,14 @@ funcionen; todos los derechos quedan reservados por sus titulares:
    Titular: Rodrigo Ernesto Álvarez Aguilera. Uso exclusivo de su titular en
    su correspondencia; no se autoriza su reutilización por terceros.
 
+BAJO LICENCIA MIT (EN VEZ DE GPLv3)
+
+La carpeta marketplace/ (especificaciones de OpenSpec y kit de arranque en
+marketplace/kit/) se distribuye bajo la licencia MIT (ver
+marketplace/LICENSE), no bajo la GPLv3, para que cualquier organización,
+también una que licencia su trabajo bajo MIT, pueda copiarla como base de su
+propio marketplace de plugins sin heredar el copyleft.
+
 USO POR TERCEROS
 
 Quien reutilice o redistribuya este repositorio debe sustituir o eliminar los
@@ -43,3 +51,8 @@ signature images (templates/mail/assets/ralvarez_firma*.png) are excluded from
 the GPLv3 and from any other licence: all rights reserved by their owners.
 They are included only so the templates work; replace or remove them when
 reusing or redistributing this repository.
+
+The marketplace/ folder (OpenSpec specifications and the starter kit in
+marketplace/kit/) is licensed under the MIT licence instead (see
+marketplace/LICENSE), so any organisation can copy it as the base of its
+own plugin marketplace.
