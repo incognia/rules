@@ -13,6 +13,9 @@
       "pattern": "(%3C|<)[A-Za-z_-]+(%3E|>)"
     },
     {
+      "pattern": "^(%7B|\\{)[A-Z_]+(%7D|\\})$"
+    },
+    {
       "pattern": "^https://www\\.gnu\\.org/licenses/"
     }
   ],
