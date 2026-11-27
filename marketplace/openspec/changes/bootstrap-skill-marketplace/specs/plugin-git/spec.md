@@ -5,7 +5,7 @@ Defines the `git` plugin: a per-user identity profile and repository set-up, cha
 ## ADDED Requirements
 
 ### Requirement: Per-user Git profile
-The plugin SHALL keep one profile per user in `{CONFIG_DIR}/git-profile.json` (or the path in `{ENV_PREFIX}GIT_PROFILE`), mode `600`, holding full name, forge user, email, SSH key name and folder, and conversation language; it SHALL be read and written only through the plugin's profile script.
+The plugin SHALL keep one profile per user in `{CONFIG_DIR}/git-profile.json` (or the path in `{ENV_PREFIX}GIT_PROFILE`), mode `600`, holding full name, email, conversation language and, per forge host (`{GIT_HOST_DOMAIN}` first), the forge user and the SSH key name and folder; it SHALL be read and written only through the plugin's profile script.
 
 #### Scenario: No profile yet
 - **WHEN** a user runs `/git:init` for the first time on a machine
@@ -15,15 +15,34 @@ The plugin SHALL keep one profile per user in `{CONFIG_DIR}/git-profile.json` (o
 - **WHEN** the profile exists and passes validation
 - **THEN** `/git:init` shows it in one line and goes on to configure the repository without asking again
 
+### Requirement: Corporate profiles carry company data
+In a `corporate` instance, the profile SHALL also hold the user's `{COMPANY_FIELDS}` (team, role, job title and email signature), asked once in the `/git:init` form; the company's name and legal name SHALL come from `{ORG}` and `{LICENCE_HOLDER}`, never typed by the user. A `personal` profile SHALL NOT ask for them.
+
+#### Scenario: First run in a corporate instance
+- **WHEN** a user of a corporate instance fills the form for the first time
+- **THEN** the form asks for their team, role, job title and email signature, and shows the company name without asking for it
+
+#### Scenario: First run in a personal instance
+- **WHEN** the owner of a personal instance fills the form
+- **THEN** it asks only for name, forge user, email, SSH key and language
+
+#### Scenario: Corporate profile missing company data
+- **WHEN** an existing corporate profile lacks the job title
+- **THEN** the profile check reports `ERROR [job_title]` and the form asks only for it
+
 ### Requirement: Only allowed email domains
-The profile and every commit SHALL use an email in `{EMAIL_DOMAINS}`, with the first domain suggested as preferred; personal or other domains SHALL be rejected when saving the profile and when committing.
+In a `corporate` instance, the profile and every commit SHALL use an email in `{EMAIL_DOMAINS}`, with the first domain suggested as preferred; personal or other domains SHALL be rejected when saving the profile and when committing. A `personal` instance SHALL accept any email the user owns.
 
 #### Scenario: Personal email in the form
-- **WHEN** a user types an email outside `{EMAIL_DOMAINS}`
+- **WHEN** a user of a corporate instance types an email outside `{EMAIL_DOMAINS}`
 - **THEN** saving fails with `ERROR [email]` and the form asks only for the email again
 
+#### Scenario: Personal instance
+- **WHEN** the owner of a personal instance types their personal email
+- **THEN** the profile is saved
+
 ### Requirement: The SSH key authenticates as the declared forge user
-Before saving, the profile script SHALL check with `ssh -T git@{GIT_HOST_DOMAIN}` that the chosen key, offered alone (identities-only, ignoring the SSH configuration and agent), authenticates as the declared forge user; the form SHALL offer only keys that do.
+Before saving, the profile script SHALL check, on each forge host the profile records and with `ssh -T git@<host>`, that its key, offered alone (identities-only, ignoring the SSH configuration and agent), authenticates as the declared forge user; the form SHALL offer only keys that do.
 
 #### Scenario: Key registered to another account
 - **WHEN** the chosen key authenticates as a different forge user
@@ -44,6 +63,10 @@ When the user has no suitable key, `/git:init` SHALL offer to create an ed25519 
 - **WHEN** the key still does not authenticate after the user confirms three times
 - **THEN** the skill stops and explains the likely causes
 
+#### Scenario: Generated key type
+- **WHEN** `/git:init` generates a key for a user whose other keys are RSA
+- **THEN** the new key is ed25519
+
 ### Requirement: Profile form
 The first-run form SHALL offer detected candidates (full names, forge users per local key, allowed emails and suggestions built from the name) and always a free-text option; when the profile is invalid, it SHALL ask only the fields that failed.
 
@@ -52,7 +75,7 @@ The first-run form SHALL offer detected candidates (full names, forge users per 
 - **THEN** the form asks only for the language, defaulting to the detected one
 
 ### Requirement: Per-repository configuration
-`/git:init [ssh_url] [branch]` SHALL set `user.name`, `user.email` and `core.sshCommand` (the profile key with identities-only) in the repository's own configuration, the branch (default `main`) and an SSH-only `origin`, then test access with `git ls-remote origin HEAD`.
+`/git:init [ssh_url] [branch]` SHALL set `user.name`, `user.email` and `core.sshCommand` (the profile key for the remote's host, with identities-only) in the repository's own configuration, the branch (default `main`) and an SSH-only `origin`, then test access with `git ls-remote origin HEAD`.
 
 #### Scenario: HTTPS remote given
 - **WHEN** the user gives an HTTPS remote URL
@@ -62,6 +85,21 @@ The first-run form SHALL offer detected candidates (full names, forge users per 
 - **WHEN** `git ls-remote origin HEAD` fails
 - **THEN** the skill reports a wrong key or missing access instead of continuing
 
+### Requirement: A valid key for every target repository
+`/git:init` SHALL configure a key that authenticates on the target remote's host and can read the repository. When the profile has no key for that host, the skill SHALL offer the user's local keys that authenticate there, and otherwise generate an ed25519 key, guide its registration on that forge and record it in the profile for that host.
+
+#### Scenario: Repository on another forge
+- **WHEN** the profile only has a key for `{GIT_HOST_DOMAIN}` and the target remote is on another forge
+- **THEN** the skill finds or generates a key that authenticates on that forge, records it for that host and configures the repository with it
+
+#### Scenario: Account without access to the repository
+- **WHEN** the key authenticates on the host but `git ls-remote` is refused
+- **THEN** the skill reports that the account lacks access to that repository and does not generate another key for it
+
+#### Scenario: Repositories on two forges
+- **WHEN** the user sets up one repository on GitLab and another on GitHub
+- **THEN** each repository's `core.sshCommand` names the key of its own host
+
 ### Requirement: Canonical changelog format
 `CHANGELOG.md` SHALL start with its title, a note naming the time zone of its dates and a markdownlint-disable comment, then one `## [YYYY-MM-DD] - Title` block per day, newest first, each with `- type: description` bullets; it SHALL NOT have `###` headings or an unreleased block.
 
@@ -70,18 +108,48 @@ The first-run form SHALL offer detected candidates (full names, forge users per 
 - **THEN** both bullets sit under one heading for that date
 
 ### Requirement: UTC changelog variant
-`/git:changelog` SHALL write dates in UTC and bullets in `{COMMIT_LANGUAGE}`, and SHALL be the default for new repositories, so teams in different time zones share the same calendar day.
+`/git:changelog` SHALL write dates in UTC and bullets in international English (UK), so teams in different time zones share the same calendar day; it is the default changelog skill when `{FORMAT_MODE}` is `multinational`.
 
 #### Scenario: Late evening in a western time zone
 - **WHEN** a change is recorded at 23:30 local time in a zone six hours behind UTC
 - **THEN** the entry is dated the next calendar day, as in UTC
 
 ### Requirement: Local-time changelog variant
-`/git:changelogger` SHALL write dates in `{LOCAL_TZ}` and bullets in the repository's primary language: that of existing entries, otherwise the majority language of its README and documents. It SHALL never label a UTC date as local and SHALL follow the language reference shipped in the plugin.
+`/git:changelogger` SHALL write dates in `{LOCAL_TZ}` and bullets in the repository's primary language: that of existing entries, otherwise the majority language of its README and documents, otherwise `{REGION_LANGUAGE}`. It is the default when `{FORMAT_MODE}` is `regional`, SHALL never label a UTC date as local and SHALL follow the plugin's language reference.
 
 #### Scenario: Spanish repository without a changelog
 - **WHEN** a repository whose documents are mostly Spanish gets its first changelog through `/git:changelogger`
 - **THEN** the file uses a Spanish title, a `{LOCAL_TZ}` note and Spanish bullets
+
+### Requirement: New changelogs follow the format gate
+In create mode, a changelog skill SHALL use the variant of the `{FORMAT_MODE}` shipped with the plugin; an existing changelog SHALL keep the convention its header note declares, whatever the mode. With no declared mode and no changelog, the skill SHALL stop and ask instead of guessing.
+
+#### Scenario: Regional instance, repository with a UTC changelog
+- **WHEN** a regional instance works on a repository whose changelog declares UTC dates
+- **THEN** the entry is added in UTC and international English (UK), and the formats never mix in one file
+
+#### Scenario: Wrong skill for a new repository
+- **WHEN** a user of a `regional` instance runs `/git:changelog` on a repository with no changelog
+- **THEN** the skill says the instance's mode is `regional`, suggests `/git:changelogger` and creates the file only if the user confirms UTC for that repository
+
+#### Scenario: Plugin without a declared mode
+- **WHEN** the plugin's data file has no mode and the repository has no changelog
+- **THEN** the skill asks whether the repository is regional or multinational before creating anything
+
+### Requirement: Local dates use a POSIX time-zone string
+Every command that computes a local date SHALL set `TZ` to `{LOCAL_TZ}`, a full POSIX time-zone string that needs no time-zone database: a fixed offset for a zone without daylight saving (`CST6`) or the offset with its daylight-saving rules (`IST-2IDT,M3.4.4/26,M10.5.0`). It SHALL never use an IANA name or the system's default zone.
+
+#### Scenario: Git Bash without a time-zone database
+- **WHEN** `/git:changelogger` runs at 18:30 Mexico City time in Git Bash on Windows, which has no time-zone database
+- **THEN** the entry is dated that same day, not the next one
+
+#### Scenario: Region with daylight saving
+- **WHEN** a regional instance's zone observes daylight saving, such as Israel
+- **THEN** `{LOCAL_TZ}` carries its rules (`IST-2IDT,M3.4.4/26,M10.5.0`) and a change recorded at 23:30 local time is dated that same day in both summer and winter
+
+#### Scenario: IANA name in the parameters
+- **WHEN** an instance sets `{LOCAL_TZ}` to an IANA name such as `America/Mexico_City`
+- **THEN** the bootstrap rejects it and asks for the equivalent POSIX string (`CST6`)
 
 ### Requirement: Deterministic changelog modes
 Both changelog skills SHALL pick a mode from the file's state: create when missing; normalise an untracked non-canonical file; insert into a canonical file; and stop on a tracked non-canonical file, reporting the deviations and suggesting the other variant when that is the cause.
@@ -109,7 +177,7 @@ When one run adds several bullets, they SHALL be ordered by the atomic commits t
 - **THEN** today's block shows the documentation bullet first, then the feature, then the fix
 
 ### Requirement: Identity check before committing
-Once per session and repository, `/git:commit` SHALL check that the repository's `user.name` and `user.email` match the profile, the email is in `{EMAIL_DOMAINS}`, `core.sshCommand` uses the profile key and `origin` is SSH; any mismatch stops it and suggests `/git:init`.
+Once per session and repository, `/git:commit` SHALL check that the repository's `user.name` and `user.email` match the profile, the email is in `{EMAIL_DOMAINS}` (corporate instances), `core.sshCommand` uses the profile key and `origin` is SSH; any mismatch stops it and suggests `/git:init`.
 
 #### Scenario: Personal email in the repository
 - **WHEN** a repository is configured with a personal email
@@ -123,11 +191,15 @@ Once per session and repository, `/git:commit` SHALL check that the repository's
 - **THEN** nothing is committed and the user is told to run `/git:changelog` or `/git:changelogger` first
 
 ### Requirement: Atomic Conventional Commits
-Each commit SHALL hold one logical change, staged with explicit paths, with a Conventional Commits subject and body in `{COMMIT_LANGUAGE}`, committed with `git commit -F`; `CHANGELOG.md` SHALL travel in the last commit of the series. The message SHALL be checked against the staged diff first.
+Each commit SHALL hold one logical change, staged with explicit paths, with a Conventional Commits subject and body always in international English (UK), committed with `git commit -F`; `CHANGELOG.md` SHALL travel in the last commit of the series. The message SHALL be checked against the staged diff first.
 
 #### Scenario: Mixed changes
 - **WHEN** the working tree holds a fix and an unrelated documentation change
 - **THEN** they become two commits, and the changelog goes with the last one
+
+#### Scenario: Repository documented in Spanish
+- **WHEN** a repository keeps its changelog, `README.md` and `AGENTS.md` in Spanish Mexican
+- **THEN** its commit messages are still in international English (UK)
 
 ### Requirement: One message file per session
 `/git:commit` SHALL write each message to `<tmp>/<session-id>-commit.txt`, with the id of the active agent session (Claude Code, Codex, Copilot CLI or Antigravity), stop when there is no session id or more than one, never use a fixed shared file, and delete its file after pushing.
@@ -176,7 +248,7 @@ Reviewers SHALL come from the arguments, then from a reviewers section of the re
 - **THEN** the skill asks the user who should review
 
 ### Requirement: Request content from real changes
-The request title SHALL be in `{COMMIT_LANGUAGE}`: the commit subject, or one Conventional Commits subject summing up several. The description SHALL be in the changelog's language and list what it does and why, the changes traceable to commits or changelog, and only validation that really ran.
+The request title SHALL be in international English (UK): the commit subject, or one Conventional Commits subject summing up several. The description SHALL be in the changelog's language and list what it does and why, the changes traceable to commits or changelog, and only validation that really ran.
 
 #### Scenario: No tests were run
 - **WHEN** the branch was not tested
@@ -204,7 +276,7 @@ Before publishing, the tree SHALL be clean on the source branch (`dev` if it exi
 - **THEN** the skill stops and reports it
 
 ### Requirement: Version checked against the changes
-The skill SHALL compare the requested bump with the commits and changelog entries since the previous tag: any breaking change requires MAJOR (MINOR while `0.x`), any feature at least MINOR, otherwise PATCH; a smaller or unexplained larger bump SHALL be questioned before publishing.
+The skill SHALL compare the requested bump with the commits and changelog entries since the previous tag (its date taken in the changelog's own zone): any breaking change requires MAJOR (MINOR while `0.x`), any feature at least MINOR, otherwise PATCH; a smaller or unexplained larger bump SHALL be questioned before publishing.
 
 #### Scenario: Feature released as a patch
 - **WHEN** the range holds a `feat` commit and the user asks for a PATCH version
@@ -229,15 +301,19 @@ The skill SHALL fast-forward the default branch from `dev` when it exists, creat
 - **THEN** the skill shows the difference and replaces it only after approval
 
 ### Requirement: Licence footer between markers
-The skill SHALL write the licence footer, crediting the author from the profile, between `<!-- licence:start -->` and `<!-- licence:end -->` in `README.md` and every `README.<lang>.md`, in `{LICENCE_FOOTER_LANGUAGE}` unless the user asks for another, changing nothing outside the markers.
+The skill SHALL write the licence footer, crediting the author from the profile (with job title and company in a `corporate` instance, the name only in a `personal` one), between `<!-- licence:start -->` and `<!-- licence:end -->` in `README.md` and every `README.<lang>.md`, in `{LICENCE_FOOTER_LANGUAGE}` unless the user asks for another, changing nothing outside the markers.
 
 #### Scenario: README with an unmarked footer
 - **WHEN** a README already has credit lines without markers
 - **THEN** the skill shows them and moves them into the marked block only after approval
 
-### Requirement: Licence only for the organisation's repositories
-`/git:license` SHALL check that `origin` is under `{ORG_NAMESPACES}` on `{GIT_HOST_DOMAIN}`, or ask the user to confirm the repository belongs to `{ORG}`; it SHALL NOT license personal projects or need anything beyond the profile.
+### Requirement: Licence only for the owner's repositories
+`/git:license` SHALL check that `origin` is under `{ORG_NAMESPACES}` on `{GIT_HOST_DOMAIN}` (the company's groups, or the person's own namespace), or ask the user to confirm the repository belongs to `{ORG}`; a `corporate` instance SHALL NOT apply the company's licence to personal projects.
 
-#### Scenario: Personal repository
+#### Scenario: Personal repository in a corporate instance
 - **WHEN** the repository's origin is outside `{ORG_NAMESPACES}` and the user does not confirm it belongs to `{ORG}`
 - **THEN** nothing is written
+
+#### Scenario: Personal instance
+- **WHEN** the owner of a personal instance licenses a repository under their own namespace
+- **THEN** `LICENSE` carries their licence and their name as holder

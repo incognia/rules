@@ -53,21 +53,24 @@ Every placeholder in the specs is one of these. An instance records its values i
 
 | Parameter | Meaning | Reference instance `k1` |
 |-----------|---------|-------------------------|
-| `{ORG}` | Organisation that owns the marketplace | Kabat One |
+| `{PROJECT_MODE}` | Project gate: `corporate` (a company, its data in every profile) or `personal` (one person, flat profile) | `corporate`; the origin `rules` would be `personal` |
+| `{ORG}` | Owner of the marketplace: the company (`corporate`) or the person (`personal`) | Kabat One |
 | `{MARKETPLACE}` | Marketplace name; plugins install as `<plugin>@{MARKETPLACE}` | `k1` |
-| `{TEAMS}` | Teams that publish and use plugins | two teams, Mexico and Israel |
+| `{TEAMS}` | Teams that publish and use plugins (`corporate` only) | two teams, Mexico and Israel |
+| `{COMPANY_FIELDS}` | Company data each user's profile holds (`corporate` only); the company's own name and legal name come from `{ORG}` and `{LICENCE_HOLDER}` | team, role, job title and email signature |
 | `{GIT_HOST}` | Forge of the marketplace and of most repositories: `gitlab` or `github` | `gitlab` |
 | `{GIT_HOST_DOMAIN}` | SSH host of that forge | `gitlab.com` |
 | `{MARKETPLACE_URL}` | SSH URL of the marketplace repository | `git@gitlab.com:<group>/skill-marketplace.git` |
-| `{ORG_NAMESPACES}` | Forge namespaces whose repositories belong to `{ORG}` | the organisation's top-level group |
-| `{EMAIL_DOMAINS}` | Email domains allowed for commits, the first one preferred | `kabatone.com` first, plus a second corporate domain |
+| `{ORG_NAMESPACES}` | Forge namespaces whose repositories belong to `{ORG}`: the company's groups, or the person's own namespace | the organisation's top-level group |
+| `{EMAIL_DOMAINS}` | Email domains allowed for commits, the first one preferred (`corporate` only; `personal` has no allow-list) | `kabatone.com` first, plus a second corporate domain |
 | `{DOC_LANGUAGE}` | Language of `README.md` (source of truth) and every other document | international English (UK) |
 | `{DOC_TRANSLATIONS}` | Languages of `README.<lang>.md` translations | Spanish Mexican (`es`), Hebrew (`he`) |
 | `{DESCRIPTION_LANGUAGES}` | Languages of every plugin, catalogue-entry and skill description | English and Spanish |
 | `{CONVERSATION_LANGUAGES}` | Languages the skills talk to users in | `en`, `es` |
-| `{COMMIT_LANGUAGE}` | Language of commits, request titles, the default changelog and wiki comments | international English (UK) |
-| `{LOCAL_TZ}` | Time zone of the local-time changelog variant | `America/Mexico_City` (UTC−6, no daylight saving) |
-| `{LICENCE}` / `{LICENCE_HOLDER}` | Licence of the marketplace and of the organisation's repositories; copyright holder | MIT / Kabat One |
+| `{FORMAT_MODE}` | Format gate: `multinational` (UTC dates, changelogs in international English, UK) or `regional` (dates in `{LOCAL_TZ}`, changelogs in `{REGION_LANGUAGE}`) | `multinational` (teams in two countries, one with daylight saving) |
+| `{LOCAL_TZ}` | Time zone of the region as a full POSIX `TZ` string (offset, plus daylight-saving rules where the region has them), never an IANA name | `CST6` (Mexico City, UTC−6, no daylight saving since 2022); with daylight saving, Israel would be `IST-2IDT,M3.4.4/26,M10.5.0` |
+| `{REGION_LANGUAGE}` | Language of changelogs and release notes in `regional` mode | Spanish Mexican (only for repositories kept with `/git:changelogger`) |
+| `{LICENCE}` / `{LICENCE_HOLDER}` | Licence of the marketplace and of `{ORG}`'s repositories; copyright holder (the company's legal name, or the person) | MIT / Kabat One; a `personal` instance like the origin: GPLv3 / the person |
 | `{LICENCE_FOOTER_LANGUAGE}` | Default language of the README licence footer | Spanish |
 | `{CONFIG_DIR}` | Per-user configuration folder (profile, credentials) | `~/.config/k1/` |
 | `{CACHE_DIR}` | Per-user cache folder prefix | `~/.cache/k1-<plugin>` |
@@ -122,14 +125,95 @@ per plugin (plugins cannot import across folders) and one in the repository's `s
 compared in CI. *Alternative:* shell scripts were kept only where they are trivial
 (`git-init.sh`); JSON handling, SSH probing and API calls are safer in Python.
 
-### D6. UTC changelog by default, local time as a variant
+### D6. Two changelog variants, never mixed
 
 Teams in different time zones (one with daylight saving) need the same calendar day in every
-changelog, so `/git:changelog` writes UTC dates in `{COMMIT_LANGUAGE}`. Repositories that
-already keep a changelog in local time and another language (the origin's convention) use
-`/git:changelogger`. The commit gate only checks that `CHANGELOG.md` changed, so it works
-with both. *Alternative:* one skill with a flag was rejected because the two formats must
-never mix in one file and a flag is easy to forget.
+changelog, so `/git:changelog` writes UTC dates in international English (UK). An organisation that
+works in one region (the origin's convention: Mexico City time, Spanish) uses
+`/git:changelogger`, with dates in `{LOCAL_TZ}` and `{REGION_LANGUAGE}`. The commit gate only
+checks that `CHANGELOG.md` changed, so it works with both. *Alternative:* one skill with a
+flag was rejected because the two formats must never mix in one file and a flag is easy to
+forget.
+
+### D12. Format gate: regional or multinational
+
+Which variant a new repository gets is not left to each user: the instance declares
+`{FORMAT_MODE}` before building anything, and the `git` plugin ships it in a data file its
+skills read.
+
+| | `multinational` (recommended across time zones) | `regional` (one region, e.g. Mexico) |
+|---|---|---|
+| Changelog dates | UTC | `{LOCAL_TZ}` (`CST6` for Mexico) |
+| Changelog and release-notes language | international English (UK) | `{REGION_LANGUAGE}` (Spanish Mexican) |
+| Default changelog skill | `/git:changelog` | `/git:changelogger` |
+| Marketplace's own `CHANGELOG.md` | UTC, international English (UK) | `{LOCAL_TZ}`, `{REGION_LANGUAGE}` |
+| Commits and request titles | international English (UK) | international English (UK) |
+| Wiki comments | international English (UK) | international English (UK) |
+| Machine timestamps (`summary.json`, caches, manifests) | UTC, ISO 8601 | UTC, ISO 8601 |
+
+**Commits are not part of the choice.** Commit messages and merge or pull request titles are
+always in international English (UK), whatever the language of `CHANGELOG.md`, `README.md`
+or `AGENTS.md`: a commit history is read by tools and by anyone who joins later, in any
+country, and one language keeps it searchable. That is why the language of commits is not a
+parameter.
+
+The mode only chooses the default for **new** changelogs: an existing changelog keeps the
+convention its own header note declares, so a regional instance can still work on a
+repository with a UTC changelog and the other way round. Without a declared mode, a changelog
+skill in create mode stops and asks instead of guessing.
+
+`{LOCAL_TZ}` is a full POSIX `TZ` string, not an IANA name (`TZ=America/Mexico_City`): Git
+Bash on Windows ships no time-zone database, silently computes in UTC and, from 18:00 to
+23:59 in Mexico City, dates the entry the next day. A POSIX string carries everything the C
+library needs, so it gives the same result on macOS, Linux, WSL and Git Bash:
+
+- a region without daylight saving uses a fixed offset: `CST6` for Mexico City;
+- a region with daylight saving adds its rules, `<STD><offset><DST>,<start>,<end>`: Israel is
+  `IST-2IDT,M3.4.4/26,M10.5.0`. A fixed offset there would be an hour wrong half the year.
+
+The cost: the string must be updated by hand when a government changes its rules (the
+database would have done it). *Alternative:* an IANA name with a check that the database
+exists was rejected: the check is one more place to fail, and the POSIX string already
+matches the origin's rule (`rulesets/LINGUISTICS.md`).
+
+### D13. Project gate: corporate or personal
+
+The origin already separates two contexts (`rulesets/LICENSING.md`, `ATTRIBUTION.md`):
+corporate work and personal projects, each with its own email, key and licence. The instance
+declares `{PROJECT_MODE}` before building anything, next to `{FORMAT_MODE}`, and the `git`
+plugin ships it in the same data file.
+
+| | `corporate` | `personal` |
+|---|---|---|
+| `{ORG}` | The company | The person |
+| Profile | Name, forge user, corporate email, SSH key, language and `{COMPANY_FIELDS}` (team, role, job title, email signature) | Name, forge user, email, SSH key, language |
+| Email | Only `{EMAIL_DOMAINS}`, personal addresses refused | Any address the person owns; no allow-list |
+| Licence | The company's (`{LICENCE}`, e.g. MIT), holder `{LICENCE_HOLDER}` | The person's (e.g. GPLv3), holder the person |
+| README licence footer | Author, job title and company | Author only |
+| Signed outward content (wiki comments, reports, emails) | Name, job title, role, company and the email signature | Name only |
+| Ownership and review | `{TEAMS}`, reviews across teams, `CODEOWNERS` | One owner; no team rules |
+| `/git:license` ownership check | Repository under `{ORG_NAMESPACES}` | Repository under the person's own namespace |
+
+The company's name and legal name are instance parameters (`{ORG}`, `{LICENCE_HOLDER}`), so
+nobody types them; each user only adds their own team, role, job title and signature once,
+in the `/git:init` form. *Alternative:* one profile shape for both was rejected: a personal
+marketplace would ask for data that does not exist, and a corporate one would let commits go
+out under a personal address.
+
+### D14. A working key per target forge, ed25519 when generated
+
+A repository is only usable once its configured key reaches it, so `/git:init` checks the
+target remote's own host, not only `{GIT_HOST_DOMAIN}`: a user who works on GitLab and GitHub
+gets one key per forge host in the profile, and each repository's `core.sshCommand` names the
+key of its host. When no local key authenticates there, the skill generates one.
+
+Every generated key is ed25519: short, fast and without the parameter choices of RSA or
+ECDSA. An existing RSA, ECDSA or DSA key that still authenticates is **not** a stopper: the
+skill uses it, recommends an ed25519 replacement once and goes on; the user decides when to
+retire the old key, which the skill never deletes. (A DSA key no longer authenticates on
+current OpenSSH, so it fails the access check by itself, not by this rule.) *Alternative:*
+refusing older keys was rejected: it would block people on a working key for a
+recommendation.
 
 ### D7. One commit-message file per session
 
@@ -171,9 +255,9 @@ the same commit.
 
 | Plugin skill | Origin in `rules` | What changed |
 |--------------|-------------------|--------------|
-| `/git:init` | `git-init` (`cot/git_init.md`, `rulesets/GIT.md`) | A profile form replaces the `personal`/`laboral` argument; the key must authenticate on the forge as the declared user; it can create and register a key |
-| `/git:changelog` | new | UTC dates and `{COMMIT_LANGUAGE}` for teams across time zones |
-| `/git:changelogger` | `changelogger` (`cot/changelog.md`, `rulesets/COMMITTING.md`) | Same CST flow; dates in `{LOCAL_TZ}`; language rules shipped as a plugin reference |
+| `/git:init` | `git-init` (`cot/git_init.md`, `rulesets/GIT.md`) | A profile form replaces the `personal`/`laboral` argument; the key must authenticate as the declared user on the target repository's own forge (GitLab, GitHub or another); it creates and registers an ed25519 key when none works |
+| `/git:changelog` | new | UTC dates and international English (UK) for teams across time zones |
+| `/git:changelogger` | `changelogger` (`cot/changelog.md`, `rulesets/COMMITTING.md`) | Same CST flow, generalised to `{LOCAL_TZ}` as a POSIX time-zone string; default in `regional` mode; language rules shipped as a plugin reference |
 | `/git:commit` | `commit` (`cot/committing.md`) | Identity checked against the profile; per-session message file; gate accepts either changelog skill |
 | `/git:mr` | `mr` | GitHub pull requests too; reviewers from arguments, `AGENTS.md` or `CODEOWNERS` instead of a private `.env` |
 | `/git:release` | `release` (`rulesets/RELEASING.md`) | Fork-safe (`--repo` always); notes in the changelog's language |
@@ -216,8 +300,10 @@ For a new instance:
 
 1. Copy `openspec/changes/bootstrap-skill-marketplace/` into the new repository's
    `openspec/changes/`, with an empty `openspec/specs/`.
-2. Fill the parameter table in the copy of this design and choose `{PLUGINS}`; delete the
-   delta specs of plugins the instance does not include.
+2. Pass both gates: choose `{PROJECT_MODE}` (`corporate` or `personal`) and `{FORMAT_MODE}`
+   (and, for `regional`, `{LOCAL_TZ}` and `{REGION_LANGUAGE}`). Then fill the rest of the parameter table in the copy of this
+   design and choose `{PLUGINS}`; delete the delta specs of plugins the instance does not
+   include.
 3. Run `openspec validate --strict`, then work through `tasks.md`.
 4. Archive the change when every task is done; the instance's main specs are the result.
 

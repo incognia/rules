@@ -55,7 +55,7 @@ The form SHALL offer only hosts that hold the type's template, octets that are f
 - **THEN** those choices are not offered for that host
 
 ### Requirement: Owner never assumed
-The machine's owner (system user, full name, email in `{EMAIL_DOMAINS}`, SSH key and the forge account of that key) SHALL be typed by the operator, never taken from the profile, the machine or an earlier machine; the key SHALL authenticate on the forge as that account before anything is created.
+The machine's owner (system user, full name, email (in `{EMAIL_DOMAINS}` for a `corporate` instance), SSH key and the forge account of that key) SHALL be typed by the operator, never taken from the profile, the machine or an earlier machine; the key SHALL authenticate on the forge as that account before anything is created.
 
 #### Scenario: Key not registered on the forge
 - **WHEN** the owner's key does not authenticate on the forge
@@ -63,7 +63,11 @@ The machine's owner (system user, full name, email in `{EMAIL_DOMAINS}`, SSH key
 
 #### Scenario: Key with a passphrase
 - **WHEN** the named key has a passphrase or its public half does not match
-- **THEN** the skill explains why it cannot be used and asks for another key or offers to create one
+- **THEN** the skill explains why it cannot be used and asks for another key or offers to create one, always ed25519
+
+#### Scenario: Owner key of an older type
+- **WHEN** the owner's usable key is RSA or ECDSA
+- **THEN** the skill recommends an ed25519 key and offers to create it, but goes on with the existing key if the operator prefers
 
 ### Requirement: Secrets typed in dialogs and passed on standard input
 The machine's password SHALL be typed twice in a masked dialog and kept in a temporary file with mode `600`; it, the owner's private key and an optional forge token SHALL reach the control plane only on the SSH session's standard input and SHALL NOT be stored there.

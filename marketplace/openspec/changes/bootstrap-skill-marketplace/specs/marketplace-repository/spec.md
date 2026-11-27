@@ -22,6 +22,40 @@ The catalogue SHALL always include the `git` and `ai` plugins, and SHALL include
 - **WHEN** an instance leaves `provision` out of `{PLUGINS}`
 - **THEN** the repository has no `plugins/provision/` folder and no catalogue entry for it, and the other plugins work without it
 
+### Requirement: Format gate
+Before any plugin is built, the instance SHALL declare `{FORMAT_MODE}`: `multinational` (UTC dates, changelogs in international English, UK), recommended when teams span more than one time zone, or `regional` (dates in `{LOCAL_TZ}`, changelogs in `{REGION_LANGUAGE}`) for one region. The `git` plugin SHALL ship the declared mode in a data file its skills read.
+
+#### Scenario: Organisation in one country
+- **WHEN** an organisation whose teams all work in Mexico builds its marketplace
+- **THEN** it declares `regional` with `{LOCAL_TZ}` set to `CST6` and `{REGION_LANGUAGE}` set to Spanish Mexican, and `/git:changelogger` becomes the default changelog skill
+
+#### Scenario: Teams in several time zones
+- **WHEN** an organisation has teams in Mexico and in a country with daylight saving
+- **THEN** it declares `multinational`, and `/git:changelog` with UTC dates becomes the default changelog skill
+
+#### Scenario: Mode not declared
+- **WHEN** the parameters leave `{FORMAT_MODE}` empty
+- **THEN** the build does not start: the `git` plugin's data file cannot be written and every later task waits for the decision
+
+#### Scenario: Commits in a regional instance
+- **WHEN** a regional instance keeps its changelog, `README.md` and `AGENTS.md` in Spanish Mexican
+- **THEN** its commit messages and request titles are still in international English (UK); the format gate never changes the language of commits
+
+### Requirement: Project gate
+Before any plugin is built, the instance SHALL declare `{PROJECT_MODE}`: `corporate`, for a company whose profiles carry `{COMPANY_FIELDS}`, commit emails limited to `{EMAIL_DOMAINS}` and the company's licence, or `personal`, for one person with a flat profile, any email they own and their own licence. The `git` plugin SHALL ship it with `{FORMAT_MODE}`.
+
+#### Scenario: Company marketplace
+- **WHEN** a company builds its marketplace
+- **THEN** it declares `corporate`, sets `{ORG}` and `{LICENCE_HOLDER}` to the company, and `/git:init` asks each user for their team, role, job title and email signature
+
+#### Scenario: Personal marketplace
+- **WHEN** one person builds a marketplace for their own projects
+- **THEN** it declares `personal`, `{ORG}` is that person, and no form asks for company data or limits the email domain
+
+#### Scenario: Mode not declared
+- **WHEN** the parameters leave `{PROJECT_MODE}` empty
+- **THEN** the build does not start until it is declared
+
 ### Requirement: Catalogue entries use relative sources
 Each catalogue entry SHALL set `"source": "./plugins/<plugin>"`, a `name` equal to the plugin folder and to the `name` in its `plugin.json`, a `description` and `tags`. An entry SHALL NOT carry a `version`.
 
@@ -133,11 +167,15 @@ The README SHALL state that automatic updates are off for private marketplaces, 
 - **THEN** the README tells them to update the marketplace and reload plugins or start a new session
 
 ### Requirement: Ownership and review
-Each plugin SHALL belong to one of `{TEAMS}`. Every change SHALL go through a reviewed merge or pull request, and a team SHALL NOT change another team's plugin without that team's review; once more than one team publishes, `CODEOWNERS` SHALL map each plugin folder to its team.
+In a `corporate` instance, each plugin SHALL belong to one of `{TEAMS}`, every change SHALL go through a reviewed merge or pull request, and a team SHALL NOT change another team's plugin without that team's review; once more than one team publishes, `CODEOWNERS` SHALL map each plugin folder to its team. A `personal` instance has one owner and no team rules.
 
 #### Scenario: Change to another team's plugin
-- **WHEN** a member of one team changes a plugin owned by another
+- **WHEN** a member of one team changes a plugin owned by another in a corporate instance
 - **THEN** the change waits for a review by the owning team
+
+#### Scenario: Personal instance
+- **WHEN** the owner of a personal instance changes a plugin
+- **THEN** no team review or `CODEOWNERS` entry is required
 
 ### Requirement: No secrets or large binaries in the repository
 The repository SHALL NOT contain tokens, passwords, private keys or Git LFS objects; skills read secrets at run time as `cross-cutting-rules` defines.
@@ -165,8 +203,12 @@ CI jobs of the marketplace, and images a plugin runs, SHALL start from a glibc-b
 - **THEN** its image is a versioned glibc-based slim image
 
 ### Requirement: The marketplace follows its own Git workflow
-Changes to the marketplace SHALL be recorded with `/git:changelog` (UTC dates, `{COMMIT_LANGUAGE}`) and committed with `/git:commit`, using the plugin name as the Conventional Commits scope when a change touches one plugin.
+Changes to the marketplace SHALL be recorded with the changelog skill of its `{FORMAT_MODE}` and committed with `/git:commit`, using the plugin name as the Conventional Commits scope when a change touches one plugin.
 
-#### Scenario: Release of the security plugin
-- **WHEN** a feature of the `security` plugin is committed
+#### Scenario: Release of the security plugin in a multinational instance
+- **WHEN** a feature of the `security` plugin is committed in an instance whose mode is `multinational`
 - **THEN** the commit subject starts with `feat(security):` and `CHANGELOG.md` has a matching bullet under the UTC date
+
+#### Scenario: Regional instance
+- **WHEN** the same change is committed in an instance whose mode is `regional`
+- **THEN** the bullet is in `{REGION_LANGUAGE}` under the date in `{LOCAL_TZ}`, and the commit subject is still in international English (UK)

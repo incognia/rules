@@ -1,6 +1,6 @@
 # *Marketplace* de *plugins* para Claude Code: especificación genérica
 
-*Última modificación: 27 de noviembre de 2026, 13:43 (CST)*
+*Última modificación: 27 de noviembre de 2026, 14:17 (CST)*
 
 Proyecto de OpenSpec que especifica cómo construir **desde cero** un *marketplace* de *plugins* y *skills* de Claude Code para cualquier organización o proyecto. Nace de llevar a *plugins* reutilizables las *skills* personales de este repositorio (`.agents/skills/`, `cot/` y `rulesets/`) y toma como referencia de resultado el *marketplace* `k1`, que es solo un ejemplo de instancia, no un requisito.
 
@@ -38,9 +38,9 @@ Una capacidad por *plugin* y dos compartidas por todos:
 
 | Capacidad | Qué cubre | Requisitos |
 |-----------|-----------|-----------:|
-| `marketplace-repository` | Estructura del repositorio y del catálogo (`marketplace.json`), manifiesto de cada *plugin*, versionado semántico por *plugin*, validación con `claude plugin validate`, instalación por SSH, actualizaciones, revisión por equipo y página de catálogo opcional | 21 |
-| `cross-cutting-rules` | Python con parches de seguridad vigentes, secretos que nunca llegan al repositorio, las salidas ni la conversación, idioma de la conversación según el perfil, documentación multilingüe sincronizada, comandos no interactivos y confirmación antes de publicar o crear | 17 |
-| `plugin-git` | Perfil e identidad (`/git:init`), CHANGELOG en UTC (`/git:changelog`) y en hora local con el idioma del repositorio (`/git:changelogger`), *commits* atómicos con su *gate* (`/git:commit`), *merge requests* y *pull requests* (`/git:mr`), *releases* (`/git:release`) y licencia (`/git:license`), en GitLab y GitHub | 30 |
+| `marketplace-repository` | Estructura del repositorio y del catálogo (`marketplace.json`), manifiesto de cada *plugin*, versionado semántico por *plugin*, validación con `claude plugin validate`, instalación por SSH, actualizaciones, revisión por equipo, página de catálogo opcional y los *gates* de tipo de proyecto y de formato | 23 |
+| `cross-cutting-rules` | Python con parches de seguridad vigentes, secretos que nunca llegan al repositorio, las salidas ni la conversación, idioma de la conversación según el perfil, fechas para personas según el formato y marcas de tiempo de máquina en UTC, documentación multilingüe sincronizada, comandos no interactivos, confirmación antes de publicar o crear, firma del contenido saliente desde el perfil y llaves SSH ed25519 (las de otro algoritmo se recomienda cambiarlas, sin bloquear) | 20 |
+| `plugin-git` | Perfil e identidad (`/git:init`, con datos de la compañía en modo corporativo y una llave válida por forja de cada repositorio objetivo, generada si hace falta), CHANGELOG en UTC (`/git:changelog`) y en hora local (cadena POSIX) con el idioma del repositorio (`/git:changelogger`), elegidos por el *gate* de formato, *commits* atómicos con su *gate* (`/git:commit`), *merge requests* y *pull requests* (`/git:mr`), *releases* (`/git:release`) y licencia (`/git:license`), en GitLab y GitHub | 34 |
 | `plugin-ai` | `AGENTS.md` como única fuente de instrucciones y un `CLAUDE.md` de texto que lo importa (`/ai:init`) | 6 |
 | `plugin-sdd` | Evaluación de una especificación de la wiki para OpenSpec, publicada como comentario solo tras confirmar (`/sdd:readiness`) | 6 |
 | `plugin-llm` | Bifurcar sesiones de agentes de código a otra máquina por SSH (`/llm:fork-session`) | 8 |
@@ -48,6 +48,43 @@ Una capacidad por *plugin* y dos compartidas por todos:
 | `plugin-provision` | Escaneo de capacidad, formulario validado, canon de nombres, secretos por la entrada estándar y plan confirmado antes de crear | 12 |
 
 `git` y `ai` van siempre; `sdd`, `llm`, `security` y `provision` son opcionales y cada instancia elige cuáles incluye.
+
+## *Gates* de la instancia
+
+Antes de construir cualquier *plugin*, la instancia pasa dos *gates*; sin esas decisiones no avanza ninguna tarea.
+
+### Tipo de proyecto: corporativo o personal
+
+`{PROJECT_MODE}` decide cuántos datos lleva cada perfil y a nombre de quién va todo:
+
+| | `corporate` | `personal` |
+|---|---|---|
+| `{ORG}` | La compañía | La persona |
+| Perfil de `/git:init` | Nombre, usuario de la forja, correo corporativo, llave SSH, idioma y `{COMPANY_FIELDS}`: equipo, rol, puesto y firma de correo | Nombre, usuario de la forja, correo, llave SSH e idioma |
+| Correo de los *commits* | Solo `{EMAIL_DOMAINS}`; se rechazan los personales | Cualquiera que sea de la persona |
+| Licencia | La de la compañía (p. ej. MIT) a su nombre legal | La de la persona (p. ej. GPLv3) a su nombre |
+| Firma en comentarios, reportes y correos | Nombre, puesto, rol, compañía y firma de correo | Solo el nombre |
+| Revisión | Equipos `{TEAMS}`, revisión cruzada y `CODEOWNERS` | Un solo dueño, sin reglas de equipo |
+
+El nombre y la razón social de la compañía son parámetros de la instancia: nadie los teclea. Cada usuario solo agrega una vez su equipo, rol, puesto y firma.
+
+### Formato: regional o multinacional
+
+`{FORMAT_MODE}` decide las fechas y el idioma de los CHANGELOG:
+
+| | `multinational` | `regional` (por ejemplo, México) |
+|---|---|---|
+| Cuándo | Equipos en varias zonas horarias (recomendado) | Toda la organización en una región |
+| Fechas del CHANGELOG | UTC | `{LOCAL_TZ}`, p. ej. `CST6` |
+| Idioma del CHANGELOG y de las notas de *release* | inglés UK | `{REGION_LANGUAGE}` (español mexicano) |
+| *Skill* predeterminada | `/git:changelog` | `/git:changelogger` |
+| *Commits* y títulos de *merge requests* | inglés UK | inglés UK |
+| Comentarios en la wiki | inglés UK | inglés UK |
+| Marcas de tiempo de máquina (`summary.json`, cachés) | UTC, ISO 8601 | UTC, ISO 8601 |
+
+Los *commits* van **siempre** en inglés internacional (UK), sin importar el idioma del CHANGELOG, del README o del `AGENTS.md`; por eso su idioma no es un parámetro.
+
+El modo solo decide el formato de los CHANGELOG **nuevos**: uno existente conserva la convención que declara su encabezado, y los dos formatos nunca se mezclan en un archivo. `{LOCAL_TZ}` se escribe como cadena POSIX completa, nunca como nombre IANA (`America/Mexico_City`): Git Bash en Windows no trae la base de zonas horarias y de 18:00 a 23:59 fecharía la entrada al día siguiente, como advierte `rulesets/LINGUISTICS.md`. Una región sin horario de verano usa un desfase fijo (`CST6` para la Ciudad de México); una con horario de verano incluye sus reglas (Israel: `IST-2IDT,M3.4.4/26,M10.5.0`), porque un desfase fijo daría la hora mal la mitad del año. El detalle está en la decisión D12 de [design.md](openspec/changes/bootstrap-skill-marketplace/design.md#d12-format-gate-regional-or-multinational).
 
 ## Parámetros
 
@@ -60,7 +97,7 @@ Este repositorio es público: ni las *specs* ni el ejemplo llevan direcciones in
 ```mermaid
 flowchart LR
     A["rules/marketplace<br/>specs + change"] -->|copiar el change| B["repositorio nuevo<br/>openspec/changes/"]
-    B -->|llenar parámetros<br/>y elegir plugins| C["openspec validate --strict"]
+    B -->|gates, parámetros<br/>y plugins| C["openspec validate --strict"]
     C -->|tasks.md| D["marketplace construido"]
     D -->|openspec archive| E["specs de la instancia"]
 ```
@@ -75,7 +112,7 @@ flowchart LR
    cp -R ~/rules/marketplace/openspec/changes/bootstrap-skill-marketplace openspec/changes/
    ```
 
-2. Llena la tabla de parámetros del `design.md` copiado y define `{PLUGINS}`; borra las *specs* delta y las tareas de los *plugins* opcionales que no vayas a incluir.
+2. Pasa los dos *gates* (`{PROJECT_MODE}`; `{FORMAT_MODE}` y, si es `regional`, `{LOCAL_TZ}` y `{REGION_LANGUAGE}`), llena el resto de la tabla de parámetros del `design.md` copiado y define `{PLUGINS}`; borra las *specs* delta y las tareas de los *plugins* opcionales que no vayas a incluir.
 3. Valida el *change* instanciado:
 
    ```bash

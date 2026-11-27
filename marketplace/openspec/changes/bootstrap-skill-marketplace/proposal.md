@@ -22,7 +22,7 @@ and get the same result.
   language taken from the user's profile, and multilingual documentation kept in sync with
   one source of truth.
 - Add the `git` plugin (always included): identity profile and repository set-up
-  (`/git:init`), two changelog variants (`/git:changelog` in UTC and `{COMMIT_LANGUAGE}`,
+  (`/git:init`), two changelog variants (`/git:changelog` in UTC and international English (UK),
   `/git:changelogger` in `{LOCAL_TZ}` and the repository's language), atomic commits behind
   a changelog gate (`/git:commit`), merge or pull requests (`/git:mr`) and releases
   (`/git:release`) on GitLab and GitHub, and the organisation's licence (`/git:license`).
@@ -35,6 +35,15 @@ and get the same result.
     run locally, on a worker over SSH or in CI, with a common `summary.json` contract;
   - `provision`: machines created through a control plane from a form validated against a
     live capacity scan, with secrets passed only on standard input.
+- Add a format gate: before building, the instance declares `{FORMAT_MODE}`,
+  `multinational` (UTC dates, recommended when teams span time zones) or `regional` (dates
+  in `{LOCAL_TZ}`, a POSIX time-zone string such as `CST6`, and changelogs in `{REGION_LANGUAGE}`), which
+  sets the default changelog variant for new repositories. Commits are always in
+  international English (UK), in both modes.
+- Add a project gate: before building, the instance declares `{PROJECT_MODE}`, `corporate`
+  (each profile carries the user's `{COMPANY_FIELDS}`: team, role, job title and email
+  signature; commit emails limited to `{EMAIL_DOMAINS}`; the company's licence) or
+  `personal` (a flat profile, any email the owner has, their own licence).
 - Introduce the instance parameters (organisation, marketplace name, Git host and domain,
   allowed email domains, languages, time zone, licence, paths, environment prefix, Python
   minimums and the optional plugins' settings), recorded in `design.md`.

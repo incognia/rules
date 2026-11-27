@@ -26,7 +26,7 @@ The result SHALL give a verdict (ready, ready with observations or not ready), a
 - **THEN** the Platform Readiness score cites that gap and the verdict follows the rubric's thresholds
 
 ### Requirement: Post only after confirmation
-The comment SHALL be written in `{COMMIT_LANGUAGE}`, shown to the user as a draft in the conversation language's report, and posted to the page only after explicit approval; the page itself SHALL never be edited.
+The comment SHALL be written in international English (UK), shown to the user as a draft in the conversation language's report, and posted to the page only after explicit approval; the page itself SHALL never be edited.
 
 #### Scenario: User asks for changes to the draft
 - **WHEN** the user edits or rejects the draft
