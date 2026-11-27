@@ -5,7 +5,7 @@ description: "Estándares, filosofía y cadenas de razonamiento (CoT) que guían
 
 # Reglas técnicas: prompts y CoT para acelerar el contexto de los LLM
 
-*Última modificación: 15 de octubre de 2026, 15:26 (CST)*
+*Última modificación: 27 de noviembre de 2026, 13:59 (CST)*
 
 [![CI](https://github.com/incognia/rules/actions/workflows/ci.yaml/badge.svg)](https://github.com/incognia/rules/actions/workflows/ci.yaml)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
@@ -268,6 +268,10 @@ sequenceDiagram
 - **cot/** — cadenas de razonamiento (CoT) para ejecución diaria
 - **templates/** — plantillas reutilizables
 - **scripts/** — *scripts* de automatización y respaldos
+- **docs/** — documentación de procesos (`MAIL.md` y `SYNC.md`)
+- **marketplace/** — especificación genérica en OpenSpec de un *marketplace* de *plugins* y *skills* de Claude Code para cualquier organización (ver [marketplace/README.md](./marketplace/README.md))
+- **.githooks/** — *hooks* de git del repositorio (puerta del CHANGELOG, lint y formato de *commits*); se activan con `npm run hooks:install`
+- **.github/** — integración continua (lint, ShellCheck, Python y gitleaks), revisión semanal de ligas y Dependabot
 - **.agents/skills/** — *skills* descubribles por agentes IA (ejemplos con `/` de Claude Code, Copilot y Antigravity; en Codex usa `$`):
   - `/commit` — flujo completo de *commits* atómicos con CHANGELOG obligatorio, mensaje en inglés internacional (UK) y atribución `Co-Authored-By` detectada de la sesión activa con `scripts/commit_trailer.py` (Claude Code, Codex, Copilot CLI y Antigravity CLI `agy`)
   - `/hedgedoc-commit` — flujo de *commits* para contribuir a `hedgedoc/hedgedoc` (firma DCO, estilo de mensajes de arriba, CHANGELOG por paquete solo para cambios visibles y sin *push* automático); sustituye a `/commit` y `/changelogger` en ese repositorio
@@ -296,7 +300,7 @@ sequenceDiagram
 
 ## Herramientas y scripts
 
-- Sincronización: scripts/sync_global.sh (instala *skills* y *workflows* globales, multiplataforma)
+- Sincronización: scripts/sync_global.sh en macOS, Linux y WSL, y scripts/sync_global.ps1 en Windows nativo (instalan *skills* y *workflows* globales; detalles en [docs/SYNC.md](./docs/SYNC.md))
 - Git (tras `git init`): `scripts/git-init-context.sh <personal|laboral> <llave> <url_remota> <rama>` (no interactivo)
 - Atribución de *commits*: `scripts/commit_trailer.py` (imprime el *trailer* `Co-Authored-By` del modelo de la sesión activa en Claude Code, Codex, Copilot CLI o Antigravity CLI `agy`; `--tool` fuerza la herramienta)
 - Verificación de *pull requests*: `scripts/check-pr.sh --base <rama>` (comprueba las puertas de `/commit` y `/changelogger`; se configura por proyecto con `.github/pr-check.conf`; pruebas en `scripts/tests/check-pr.test.sh`)

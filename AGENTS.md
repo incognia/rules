@@ -95,6 +95,9 @@ DATE_CST=$(TZ=CST6 date +"%Y-%m-%d")
 │   └── atlassian/          # Confluence REST and ADF tooling (see below)
 ├── .agents/skills/     # AI agent-discoverable skills (see below)
 ├── .warp/workflows/    # Parameterised command workflows (see below)
+├── .githooks/         # Git hooks: CHANGELOG gate, Markdown lint, Conventional Commits
+├── .github/           # CI, weekly link check and Dependabot
+├── marketplace/       # Generic OpenSpec spec of a Claude Code plugin marketplace
 └── .env.example        # Template for the untracked .env (credentials and sensitive data)
 ```
 
