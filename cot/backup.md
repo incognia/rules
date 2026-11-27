@@ -11,7 +11,7 @@ Razonamiento:
 
 - Usar siempre CST de la Ciudad de México para los *timestamps* (`TZ=CST6`) y registrar las acciones.
 - Generar *checksum* (`.sha256`) para verificar la integridad.
-- Para directorios, empaquetar y comprimir con zstd para eficiencia.
+- Para carpetas, empaquetar y comprimir con zstd para eficiencia.
 - Referencia: «~/rules/rulesets/BACKUPS.md» (restauración, verificación, compresión, rsync incrementales).
 
 Pasos:

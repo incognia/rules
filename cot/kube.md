@@ -10,7 +10,7 @@ validacion: reporte de estado con nodos, pods, servicios, VirtualServices e Isti
 Razonamiento:
 
 - Los clústeres corren sobre *bare-metal* con Istio, Argo CD, Prometheus, Grafana y Kiali.
-- El acceso es vía SSH con usuario `ubuntu` (u otro) y llave `kone` (infraestructura propia) o `cad` (clientes).
+- El acceso es vía SSH con usuario `ubuntu` (u otro) y llave de servidores: `faraday` (personales) o `cad` (laborales y de clientes); `kone` solo donde siga instalada.
 - Los manifiestos están en `/home/<usuario>/kubernetes-<namespace>/services/`.
 - Referencia principal: «~/rules/rulesets/KUBE.md» ([../rulesets/KUBE.md](../rulesets/KUBE.md)).
 

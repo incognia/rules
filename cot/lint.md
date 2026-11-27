@@ -35,13 +35,13 @@ Pasos:
    Resultado:
    - Numerar las listas de forma consecutiva (`1.`, `2.`, `3.`) en pasos y procedimientos.
 
-5) Acción: convertir bare URLs problemáticas (MD034) a enlaces con texto.
+5) Acción: convertir cada URL suelta problemática (MD034) en un enlace con texto.
    Resultado:
    - Ejemplos: DOI/arXiv → `[arXiv:2201.11903](https://arxiv.org/abs/2201.11903)`; correos → `mailto:` si aplica.
 
 6) Acción (acotada): manejar casos especiales.
    Resultado:
-   - CHANGELOG.md ya ignora MD022/MD032/MD013/MD024 (no cambiar contenido, sólo mantener cabecera de excepciones).
+   - CHANGELOG.md ya ignora MD022/MD032/MD013/MD024 (no cambiar contenido, solo mantener la cabecera de excepciones).
    - Documentos con varios H1 (MD025): fusionar en un solo H1 y pasar el resto a H2 o H3; para literales como `backup@.service`, usar código en línea para evitar MD034.
    - «Elaborado por …» (MD036): la regla está desactivada en `.markdownlint.yaml`, así que el pie en cursiva no requiere cambios.
 

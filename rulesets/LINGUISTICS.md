@@ -1,6 +1,6 @@
 # Reglas lingüísticas de español mexicano como referente
 
-*Última modificación: 16 de noviembre de 2026, 19:48 (CST)*
+*Última modificación: 27 de noviembre de 2026, 16:11 (CST)*
 
 ## Regla principal
 
@@ -150,7 +150,7 @@
 
 ### Títulos y encabezados
 
-**Sólo se usan mayúsculas en la letra inicial y en nombres propios**
+**Solo se usan mayúsculas en la letra inicial y en nombres propios**
 
 - Correcto: «Instalación de Prometheus»
 - Incorrecto: «Instalación De Prometheus»
@@ -287,7 +287,7 @@ Los siguientes términos generan **rechazo particular** y deben evitarse a toda 
 - **Uso de mayúscula donde no corresponde** - «Lunes» por «lunes» o «Julio» por «julio» - INACEPTABLE
 - **Mayúscula después de dos puntos** - «Razón: Los nombres...» por «Razón: los nombres...» - ERROR MUY FRECUENTE E INACEPTABLE
 - **Pluralizar las siglas** - «VMs/VEs/ONGs» por «VM/VE/ONG» - Sin importar si es uno o 20: INACEPTABLE
-- **Escribir en tercera persona** - «Se realizo/Se hizo/Se diseñó/Se configuró» en vez de «Hice/Llevé a cabo/Apliqué/Configuré» - ESPECIALMENTE INACEPTABLE
+- **Escribir en tercera persona** - «Se realizó/Se hizo/Se diseñó/Se configuró» en vez de «Hice/Llevé a cabo/Apliqué/Configuré» - ESPECIALMENTE INACEPTABLE
 
 ---
 
@@ -305,13 +305,10 @@ Los siguientes términos generan **rechazo particular** y deben evitarse a toda 
 Esta regla se aplica en:
 
 - Documentación técnica
-- Mensajes para el usuario de *scripts* y herramientas
 - Toda comunicación escrita en español
 
-No se aplica al código ni a los comentarios en código, a los mensajes de *commit* ni a lo que se publica en Confluence: todo eso va en inglés internacional (UK). El `CHANGELOG.md` y las *releases* siguen el idioma principal del repositorio.
+No se aplica al código, a los comentarios en código, a los mensajes que imprimen los *scripts* y herramientas, a los mensajes de *commit* ni a lo que se publica en Confluence: todo eso va en inglés internacional (UK). Esto incluye los comentarios y mensajes de los ejemplos de código de la documentación. El `CHANGELOG.md` y las *releases* siguen el idioma principal del repositorio.
 
 ---
 
-*Este documento fue desarrollado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.*
-
-*Elaborado por Rodrigo Álvarez (@incognia)*
+*Este documento fue elaborado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.*

@@ -89,7 +89,7 @@ Sin línea base declarada, basta la validación genérica: todos los *tags* `v*`
 
 Después de publicar, validar siempre:
 
-- que sólo exista el *tag* correcto en el remoto para la versión;
+- que solo exista el *tag* correcto en el remoto para la versión;
 - que exista la *release* asociada al mismo *tag*;
 - que el nombre y las notas respeten la convención y el idioma del repositorio.
 

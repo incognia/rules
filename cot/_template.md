@@ -1,6 +1,6 @@
 ---
 domain: devops
-task: diagnostico de despliegue fallido
+task: diagnóstico de despliegue fallido
 dificultad: media
 longitud_objetivo: corta
 validacion: salida de comando coincide con estado esperado
@@ -10,18 +10,18 @@ validacion: salida de comando coincide con estado esperado
 Razonamiento:
 
 - Identificar el punto de falla en el *pipeline* de despliegue.
-- Verificar prerequisitos y dependencias en orden lógico.
+- Verificar prerrequisitos y dependencias en orden lógico.
 - Referencias de estilo y flujo: «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)) y «~/rules/README.md» ([../README.md](../README.md)).
 
 Pasos:
 
-1) Acción: revisar logs de CI en último job fallido.
+1) Acción: revisar los *logs* de CI del último *job* fallido.
    Resultado: error de autenticación al acceder al registro de contenedores.
-2) Acción: verificar variable de entorno del token de acceso.
-   Resultado: variable no definida en el entorno del runner.
-3) Acción: consultar documentación interna para provisión de secretos.
+2) Acción: verificar la variable de entorno del *token* de acceso.
+   Resultado: variable no definida en el entorno del *runner*.
+3) Acción: consultar la documentación interna sobre el manejo de secretos.
    Resultado: el secreto debe inyectarse a nivel de repositorio.
 
 Conclusión:
 
-- Solución: definir el token como secreto del repositorio y referenciarlo en el job; reintentar el *pipeline*.
+- Solución: definir el *token* como secreto del repositorio y referenciarlo en el *job*; reintentar el *pipeline*.

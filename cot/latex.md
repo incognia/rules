@@ -18,7 +18,7 @@ Razonamiento:
 Pasos:
 
 1) Acción: descargar imágenes localmente antes de escribir el .tex.
-   CRÍTICO: XeLaTeX no puede cargar URLs en `\includegraphics`. Siempre `curl -sL URL -o archivo.png` y verificar con `file archivo.png`.
+   CRÍTICO: XeLaTeX no puede cargar una URL en `\includegraphics`. Siempre `curl -sL URL -o archivo.png` y verificar con `file archivo.png`.
    Resultado: imágenes disponibles en la misma carpeta que el `.tex`.
 
 2) Acción: escribir el preámbulo completo con los paquetes obligatorios.
@@ -50,7 +50,7 @@ Pasos:
 7) Acción: compilar y resolver paquetes faltantes.
    COMANDO: `xelatex -interaction=nonstopmode archivo.tex 2>&1 | grep -iE 'error|missing|not found'`
    CRÍTICO: usar comillas simples en el patrón de grep (zsh interpreta `!` en comillas dobles).
-   Si falta un paquete: `sudo dnf install -y 'tex(nombre.sty)'`
+   Si falta un paquete: en Fedora, `sudo dnf install -y 'tex(nombre.sty)'`; en macOS con MacTeX, `sudo tlmgr install <paquete>`
    Repetir hasta que la salida del grep esté vacía.
    Nota: grep sin coincidencias devuelve el código de salida 1; eso es éxito, no error.
 
@@ -62,5 +62,5 @@ Conclusión:
 
 - Entregar: archivo `.tex` limpio, PDF generado e imágenes locales descargadas.
 - Verificar: tablas de ancho completo, bloques de código con fondo sólido, marca de tiempo alineada a la derecha, sin «Figura 1» en el logotipo.
-- Si se detecta un paquete faltante durante la compilación, instalarlo con `dnf` y volver a compilar; nunca intentar omitir el paquete.
+- Si se detecta un paquete faltante durante la compilación, instalarlo (`dnf` en Fedora, `tlmgr` en macOS) y volver a compilar; nunca intentar omitir el paquete.
 - Referencias: «~/rules/rulesets/LATEX.md» ([../rulesets/LATEX.md](../rulesets/LATEX.md)), «~/rules/rulesets/STYLING.md» ([../rulesets/STYLING.md](../rulesets/STYLING.md)) y «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)).

@@ -34,9 +34,9 @@ description: "Troubleshoot a problematic microservice in Kubernetes by correlati
 
 ## Examples
 
-- `/kubetbs kone ubuntu <client_ip> <client>-qa <service>` — troubleshoot a specific service
-- `/kubetbs kone ubuntu <client_ip> <client>-qa` — auto-detect the problematic service
-- `/kubetbs cad ubuntu <client_ip> <namespace> <service>` — client server via cad
+- `/kubetbs cad ubuntu <client_ip> <client>-qa <service>` — troubleshoot a specific service
+- `/kubetbs cad ubuntu <client_ip> <client>-qa` — auto-detect the problematic service
+- `/kubetbs kone ubuntu <infra_ip> <namespace> <service>` — older corporate server that still has the `kone` key
 
 Real hosts and namespaces are never written in this repository: keep them in your own notes or in the untracked `~/rules/.env`.
 

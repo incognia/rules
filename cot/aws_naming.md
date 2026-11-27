@@ -18,13 +18,13 @@ Razonamiento:
 Pasos:
 
 1) Acción: convertir todo el nombre de archivo y extensión a minúsculas.
-   Resultado: los *Object Keys* en S3 son sensibles a mayúsculas [1] y los patrones de caché de CloudFront también (`*.jpg` no aplica para `LOGO.JPG`) [2].
+   Resultado: los *Object Keys* en S3 son sensibles a mayúsculas y los patrones de caché de CloudFront también (`*.jpg` no aplica para `LOGO.JPG`).
 
 2) Acción: reemplazar todos los espacios en blanco por guiones medios (`-`).
-   Resultado: se evitan problemas con codificación URL (`%20`) y secuencias de espacios múltiples que AWS advierte pueden perderse [3, 4, 5].
+   Resultado: se evitan problemas con codificación URL (`%20`) y secuencias de espacios múltiples que AWS advierte pueden perderse.
 
 3) Acción: eliminar acentos (ñ → n) y conservar únicamente caracteres seguros: `a-z`, `0-9`, `-`, `_` y `.` (solo para extensión).
-   Resultado: se eliminan caracteres no ASCII y símbolos que requieren manejo especial (`&`, `$`, `@`, `~`, etcétera) [6, 7, 8, 9, 10].
+   Resultado: se eliminan caracteres no ASCII y símbolos que requieren manejo especial (`&`, `$`, `@`, `~`, etcétera).
 
 4) Acción: normalizar extensiones de archivo según la siguiente tabla.
    - `.jpeg` → `.jpg`
@@ -35,9 +35,9 @@ Pasos:
    Resultado: extensiones consistentes y predecibles para políticas de caché en CloudFront y reglas de *Content-Type* en S3.
 
 5) Acción: verificar que el nombre no contenga puntos consecutivos ni secuencias de ruta relativa (`../`, `./`).
-   Resultado: se evitan comportamientos inesperados por interpretación de carpetas [7, 12]. El punto solo aparece antes de la extensión final.
+   Resultado: se evitan comportamientos inesperados por interpretación de carpetas. El punto solo aparece antes de la extensión final.
 
-6) Acción: validar que la ruta resultante no exceda 255 caracteres (límite de CloudFront [2]; el límite de S3 es 1,024 bytes [13]).
+6) Acción: validar que la ruta resultante no exceda 255 caracteres (límite de CloudFront; el límite de S3 es 1,024 bytes).
    Resultado: si excede, truncar el nombre conservando la extensión e indicar advertencia.
 
 7) Acción: registrar cada transformación en un archivo `.tsv` con formato `original\tnormalizado`.
@@ -50,3 +50,4 @@ Conclusión:
 
 - Los nombres resultantes solo contienen caracteres seguros para S3/CloudFront: minúsculas, dígitos, guiones medios, guiones bajos y un punto antes de la extensión normalizada.
 - El archivo `normalizacion_YYYYMMDD.tsv` documenta cada transformación para trazabilidad completa.
+- Referencias: [reglas de nombres de claves de objeto de Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html) y [patrones de ruta de CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html).

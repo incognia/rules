@@ -109,7 +109,7 @@ Pasos:
 
 11) Acción: verificar publicación final.
     Validaciones obligatorias:
-    - `git ls-remote --tags origin "${TARGET_VERSION}" "${TARGET_VERSION}^{}"` devuelve sólo el *tag* esperado;
+    - `git ls-remote --tags origin "${TARGET_VERSION}" "${TARGET_VERSION}^{}"` devuelve solo el *tag* esperado;
     - GitHub: `gh release view "${TARGET_VERSION}" --repo "${PROJECT}" --json tagName,name,body`; GitLab: `glab api "projects/${PROJECT}/releases/${TARGET_VERSION}"`;
     - nombre y notas cumplen la convención y el idioma;
     - en un *fork*, confirmar que el repositorio de origen no recibió nada (`gh release list --repo <upstream>` sin la versión nueva).
@@ -121,6 +121,6 @@ Pasos:
 
 Conclusión:
 
-- Una *release* se considera correcta sólo si pasa validación histórica, evita colisiones de versión, usa una versión acorde a los cambios, deriva descriptor y notas desde cambios reales en el idioma del repositorio y cumple el flujo no interactivo completo.
+- Una *release* se considera correcta solo si pasa validación histórica, evita colisiones de versión, usa una versión acorde a los cambios, deriva descriptor y notas desde cambios reales en el idioma del repositorio y cumple el flujo no interactivo completo.
 - Si hay inconsistencias de formato previas, primero se corrigen y luego se publica la nueva versión.
 - Referencias: `~/rules/rulesets/RELEASING.md`, `~/rules/rulesets/COMMITTING.md`, `~/rules/cot/changelog.md`, `AGENTS.md` del repositorio objetivo.

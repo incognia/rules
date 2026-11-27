@@ -29,7 +29,7 @@ description: "Analyze Kubernetes cluster state via SSH. Usage: /kube <key> <user
    - `kubectl get gateway -n $3`
    - `istioctl analyze -n $3` (if available)
    - `istioctl proxy-status`
-7. **ArgoCD**:
+7. **Argo CD**:
    - `kubectl get app -n argocd | grep $3`
 8. **Manifests on disk**:
    - `ls /home/$1/kubernetes-$3/services/overlays/dev/`
@@ -41,13 +41,13 @@ description: "Analyze Kubernetes cluster state via SSH. Usage: /kube <key> <user
     - Kiali: port 20001
     - Prometheus: port 9090
     - Grafana: port 3000
-11. **Report**: Summarize findings — nodes, problematic pods, services, VirtualServices, ArgoCD sync, recent events, observability
+11. **Report**: Summarize findings — nodes, problematic pods, services, VirtualServices, Argo CD sync, recent events, observability
 
 ## Examples
 
-- `/kube kone ubuntu <infra_ip> <namespace>` — own infrastructure server
-- `/kube kone ubuntu <client_ip> <client>-qa` — client server via kone
-- `/kube cad admin <client_ip> <namespace>` — client server via cad
+- `/kube cad ubuntu <infra_ip> <namespace>` — corporate infrastructure server
+- `/kube cad admin <client_ip> <client>-qa` — client server
+- `/kube kone ubuntu <infra_ip> <namespace>` — older corporate server that still has the `kone` key
 
 Real hosts and namespaces are never written in this repository: keep them in your own notes or in the untracked `~/rules/.env`.
 

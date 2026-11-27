@@ -33,6 +33,8 @@ Si se encuentra un archivo con extensión «.bak» o «.bkp» que no cumpla con 
 
 La inclusión de la hora garantiza nombres únicos y trazabilidad precisa, independientemente de la frecuencia de respaldos en el día.
 
+**Excepción, respaldo rápido:** `scripts/quick_bkp.sh` deja una copia junto al original con solo la fecha (`archivo_YYYY-MM-DD.ext.bkp`), para archivos pequeños antes de una edición manual. Es una red de seguridad del día, no un respaldo con historial: una segunda copia el mismo día no sobrescribe la primera: el *script* avisa y no la toca. Lo que deba conservarse va a `backups/` con la convención completa.
+
 Evita sobrescribir respaldos previos. La convención de fecha y hora permite conservar la secuencia histórica de cada copia.
 
 **Zona horaria obligatoria:** todos los *timestamps* deben generarse usando la zona horaria CST de Ciudad de México (UTC-6). Nunca usar UTC ni la zona horaria local del sistema si es diferente a CST.
@@ -81,7 +83,7 @@ Toda acción de borrado deberá ser registrada con:
 - Utilizar variables de entorno para definir rutas de respaldo
 - Incluir pruebas en entornos de *staging* antes de aplicar en producción
 
-## Estructura de directorios de respaldos
+## Estructura de carpetas de respaldos
 
 ```text
 backups/
@@ -108,23 +110,23 @@ mkdir -p "backups/daily/${DATE_CST}"
 Ejemplo (archivo suelto):
 
 ```bash
-# Verificación previa (si hay checksum)
+# Check first (when there is a checksum)
 sha256sum -c backups/daily/2025-08-18/archivo_2025-08-18T12-00-00.txt.bkp.sha256
 
-# Restauración
+# Restore
 cp backups/daily/2025-08-18/archivo_2025-08-18T12-00-00.txt.bkp ./archivo.txt
 
-# Validación posterior (opcional)
+# Check afterwards (optional)
 sha256sum ./archivo.txt
 ```
 
 Ejemplo (tar.zst):
 
 ```bash
-# Verificar e inspeccionar
+# Verify and inspect
 zstd -t archivo_2025-08-18T12-00-00.tar.zst
 unzstd -c archivo_2025-08-18T12-00-00.tar.zst | tar -tvf -
-# Restaurar en ruta destino
+# Restore into the destination
 unzstd -c archivo_2025-08-18T12-00-00.tar.zst | tar -xvf - -C /ruta/destino
 ```
 
@@ -142,12 +144,13 @@ find backups -type f -name "*.sha256" -exec sha256sum -c {} \;
 ## Compresión recomendada (zstd)
 
 - Mejor relación/velocidad que gzip en muchos casos.
-- Ejemplo para empaquetar y comprimir un archivo/directorio:
+- Ejemplo para empaquetar y comprimir un archivo o una carpeta:
 
 ```bash
 TS=$(TZ=CST6 date +"%Y-%m-%dT%H-%M-%S")
 TARGET="mi_carpeta"
-tar --mtime="$(date -d "$TS" +%Y-%m-%d)" --owner=0 --group=0 --numeric-owner -cf - "$TARGET" | zstd -T0 -19 -o "${TARGET}_${TS}.tar.zst"
+# --owner, --group and --numeric-owner are GNU tar options (on macOS: gtar, from Homebrew)
+tar --owner=0 --group=0 --numeric-owner -cf - "$TARGET" | zstd -T0 -19 -o "${TARGET}_${TS}.tar.zst"
 ```
 
 ## Incrementales eficientes con rsync (--link-dest)
@@ -238,11 +241,11 @@ mysql "$MYSQL_DATABASE" < "db_${DATE_CST}.sql"
 
 ### *Script* de respaldo básico
 
-#### Respaldo rápido en el mismo directorio (archivos pequeños)
+#### Respaldo rápido en la misma carpeta (archivos pequeños)
 
 ```bash
-# Uso: quick_bkp.sh archivo1 [archivo2 ...]
-# Ejemplo: archivo.txt -> archivo_YYYY-MM-DD.txt.bkp
+# Usage: quick_bkp.sh file1 [file2 ...]
+# Example: archivo.txt -> archivo_YYYY-MM-DD.txt.bkp
 bash ~/rules/scripts/quick_bkp.sh archivo.txt
 ```
 
@@ -254,7 +257,7 @@ log() {
   printf "%s | %s\n" "$(TZ=CST6 date '+%Y-%m-%d %H:%M:%S')" "$*" | tee -a "${BACKUP_LOG_FILE:-backups/backup.log}"
 }
 
-# Función para crear respaldo con timestamp y checksum
+# Create a backup with a timestamp and a checksum
 create_backup() {
   local source_file="$1"
   local backup_dir="${2:-backups}"
@@ -275,21 +278,21 @@ create_backup() {
   log "backup | $backup_dir/$backup_name | ok | $(awk '{print $1}' "$backup_dir/$backup_name.sha256")"
 }
 
-# Función para operaciones destructivas con confirmación
+# Destructive operation behind a confirmation
 safe_delete() {
   local target="$1"
-  echo "ADVERTENCIA: Se eliminará permanentemente: $target"
-  read -p "¿Desea crear un respaldo antes de continuar? (s/n): " -n 1 -r; echo
+  echo "WARNING: this permanently deletes: $target"
+  read -p "Create a backup first? (y/n): " -n 1 -r; echo
   if [[ $REPLY =~ ^[SsYy]$ ]]; then
     create_backup "$target" "backups/pre-delete"
   else
-    read -p "¿Está seguro de continuar sin respaldo? (escriba 'CONFIRMAR'): " confirm
-    if [[ ${confirm:-} != "CONFIRMAR" ]]; then
-      echo "Operación cancelada"; return 1
+    read -p "Continue without a backup? (type 'CONFIRM'): " confirm
+    if [[ ${confirm:-} != "CONFIRM" ]]; then
+      echo "Cancelled"; return 1
     fi
   fi
   rm -f "$target"
-  echo "$(TZ=CST6 date '+%Y-%m-%d %H:%M:%S') - Eliminado: $target" >> backups/deletion.log
+  echo "$(TZ=CST6 date '+%Y-%m-%d %H:%M:%S') | delete | $target | ok" >> backups/deletion.log
 }
 ```
 
@@ -316,14 +319,14 @@ export BACKUP_LOG_FILE="$BACKUP_DIR/backup.log"
 Respaldos mayores a 7 días deben comprimirse automáticamente para optimizar el espacio de almacenamiento:
 
 ```bash
-# Comprimir respaldos antiguos
-find backups/ -name "*.bkp" -mtime +7 -exec gzip {} \;
+# Compress old backups
+find backups/ -name "*.bkp" -mtime +7 -exec zstd --rm -q {} \;
 ```
 
 ### Limpieza automática
 
 ```bash
-# Eliminar respaldos expirados
+# Delete expired backups
 find backups/daily/ -name "*.bkp*" -mtime +30 -delete
 find backups/manual/ -name "*.bkp*" -mtime +90 -delete
 ```

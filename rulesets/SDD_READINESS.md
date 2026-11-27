@@ -68,7 +68,7 @@ Cada criterio se califica así:
 
 - D1. Capacidades o dominios afectados identificables (futuros `specs/<capacidad>/`).
 - D2. Distingue comportamiento nuevo, modificado y retirado (ADDED, MODIFIED, REMOVED).
-- D3. Sistemas, servicios, APIs o datos impactados enumerados.
+- D3. Sistemas, servicios, API o datos impactados enumerados.
 - D4. Compatibilidad hacia atrás y consumidores afectados considerados.
 
 ### E. Diseño técnico (peso 10)
@@ -76,7 +76,7 @@ Cada criterio se califica así:
 - E1. Enfoque técnico descrito (componentes y responsabilidades).
 - E2. Decisiones de arquitectura con alternativas y razones.
 - E3. Flujo de datos o secuencia de interacción (idealmente con diagrama Mermaid).
-- E4. Contratos definidos: APIs, eventos, esquemas o formatos.
+- E4. Contratos definidos: API, eventos, esquemas o formatos.
 
 Si el cambio es trivial y no amerita `design.md`, E2-E4 pueden ser N/A con justificación.
 

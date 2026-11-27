@@ -1,6 +1,6 @@
 # Reglas de generación de documentos LaTeX
 
-Este documento define las convenciones para generar documentos LaTeX corporativos en Fedora Linux con XeLaTeX.
+Este documento define las convenciones para generar documentos LaTeX corporativos con XeLaTeX. Los comandos de instalación son de Fedora Linux, donde se validó el flujo; en macOS, el equivalente es MacTeX con `tlmgr`.
 
 ## Pandoc vs. LaTeX desde cero
 
@@ -77,7 +77,7 @@ Pandoc solo es aceptable para borradores rápidos internos sin requisito de cali
 - **No** usar `\hfill` al inicio de línea — no funciona en ese contexto
 - Título en `\LARGE\bfseries`; subtítulo en `\large` sin negrita
 - Subtítulo con mayúscula inicial (estilo oración)
-- Logotipo siempre local: copiar `~/rules/templates/mail/assets/Kabat-One-600.png` junto al `.tex` (`cp ~/rules/templates/mail/assets/Kabat-One-600.png .`); **nunca** usar URLs en `\includegraphics`
+- Logotipo siempre local: copiar `~/rules/templates/mail/assets/Kabat-One-600.png` junto al `.tex` (`cp ~/rules/templates/mail/assets/Kabat-One-600.png .`); **nunca** usar una URL en `\includegraphics`
 - Descargar imágenes con `curl -sL URL -o archivo.png` antes de compilar
 
 ## Metadatos del documento
@@ -215,7 +215,7 @@ apt update && apt dist-upgrade
 ## Imágenes
 
 - **Obligatorio:** descargar localmente antes de compilar
-- **No usar URLs** en `\includegraphics` con XeLaTeX
+- **No usar una URL** en `\includegraphics` con XeLaTeX
 - Verificar con `file imagen.png` que la descarga fue exitosa
 - Suprimir «Figura 1»:
 
