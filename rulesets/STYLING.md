@@ -24,9 +24,9 @@ Todo documento HedgeDoc debe incluir el siguiente encabezado:
 tags: tag-1, tag-2, tag-3, tag-opcional
 ---
 
-<img src="https://hedgedoc.promad.com.mx:31418/uploads/9217e5d8-2a84-4e41-9634-ea3b5a6bd45a.png" class="logo-light" alt="Kabat One logo">
+<img src="{HEDGEDOC_LOGO_LIGHT_URL}" class="logo-light" alt="Kabat One logo">
 
-<img src="https://hedgedoc.promad.com.mx:31418/uploads/e0f5ef2b-4519-48ee-bd2d-16013c7f44c4.png" class="logo-dark" alt="Kabat One logo">
+<img src="{HEDGEDOC_LOGO_DARK_URL}" class="logo-dark" alt="Kabat One logo">
 
 # Primer encabezado nivel 1
 
@@ -36,6 +36,7 @@ tags: tag-1, tag-2, tag-3, tag-opcional
 
 **Notas importantes:**
 
+- Los marcadores `{HEDGEDOC_LOGO_LIGHT_URL}`, `{HEDGEDOC_LOGO_DARK_URL}` y `{HEDGEDOC_SIGNATURE_URL}` se llenan con `STYLING_HEDGEDOC_LOGO_LIGHT_URL`, `STYLING_HEDGEDOC_LOGO_DARK_URL` y `STYLING_HEDGEDOC_SIGNATURE_URL` del `.env` no versionado (`~/rules/.env`, plantilla en `.env.example`): la instancia de HedgeDoc es interna y su dirección nunca se escribe en el repositorio. Si falta alguna variable, pregunta el valor; no lo inventes.
 - Los *tags* deben ser descriptivos y relevantes al contenido
 - El logotipo de Kabat One es obligatorio en documentos corporativos de HedgeDoc (no en GitLab ni GitHub)
 - El bloque `<div style="text-align: right;">` funciona **solo en HedgeDoc**; GitLab y GitHub eliminan los atributos `style`
@@ -66,7 +67,7 @@ Todo documento HedgeDoc debe concluir con el siguiente pie de página (sin licen
 ```markdown
 ---
 
-![FIRMA](https://hedgedoc.promad.com.mx:31418/uploads/010e09ff-5e2d-4ba8-828b-850a1424eafa.png)
+![FIRMA]({HEDGEDOC_SIGNATURE_URL})
 
 [//]: # (CSS Corporativo)
 
@@ -165,16 +166,16 @@ HedgeDoc admite extensiones que **no funcionan** en GitLab ni GitHub:
 
 | Característica | HedgeDoc | GitLab | GitHub |
 |---|---|---|---|
-| `[TOC]` tabla de contenidos | ✅ | ❌ | ❌ |
-| `:::` bloques admonition (`:::info`, `:::warning`, etc.) | ✅ | ❌ | ❌ |
-| `[name=Autor]` metadato de autor | ✅ | ❌ | ❌ |
-| `[time=fecha]` metadato de fecha | ✅ | ❌ | ❌ |
-| `[color=#hex]` color de texto | ✅ | ❌ | ❌ |
-| Bloques `mermaid` nativos | ✅ | ✅ | ✅ |
-| CSS inline (`<style>`) | ✅ | ❌ (ignorado) | ❌ (ignorado) |
-| HTML arbitrario | ✅ | parcial | parcial |
-| *Badges* (`shields.io`) | ✅ | ✅ | ✅ |
-| *Frontmatter* YAML (`---`) | ✅ (`tags:`) | ✅ (`title:`, `description:`) | ✅ (tabla horizontal) |
+| `[TOC]` tabla de contenidos | sí | no | no |
+| `:::` bloques de aviso (`:::info`, `:::warning`, etcétera) | sí | no | no |
+| `[name=Autor]` metadato de autor | sí | no | no |
+| `[time=fecha]` metadato de fecha | sí | no | no |
+| `[color=#hex]` color de texto | sí | no | no |
+| Bloques `mermaid` nativos | sí | sí | sí |
+| CSS en línea (`<style>`) | sí | no (ignorado) | no (ignorado) |
+| HTML arbitrario | sí | parcial | parcial |
+| *Badges* (`shields.io`) | sí | sí | sí |
+| *Frontmatter* YAML (`---`) | sí (`tags:`) | sí (`title:`, `description:`) | sí (tabla horizontal) |
 
 **Regla crítica:** al aplicar el estilo en GitLab o GitHub, eliminar o adaptar cualquier sintaxis exclusiva de HedgeDoc. El *frontmatter* `tags:` de HedgeDoc se quita; el *frontmatter* `title`/`description` de un README.md se conserva.
 
@@ -223,14 +224,14 @@ Solo *copyright*, sin firma ni CSS. El bloque va entre los marcadores `<!-- lice
 *Copyright © AAAA, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*
 ```
 
-Para MIT:
+Para MIT laboral, `{EMPLEADOR}` es la empresa para la que hice el trabajo (por ejemplo, Kabat One); en un proyecto personal bajo MIT, el pie es el de GPLv3 con «licencia MIT» y sin la segunda frase (ver [LICENSING.md](./LICENSING.md#31-pie-de-página-en-markdown-readmemd)):
 
 ```markdown
 ---
 
-*Este proyecto fue elaborado por Rodrigo Álvarez para Kabat One y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
+*Este proyecto fue elaborado por Rodrigo Álvarez (@incogniadev) para {EMPLEADOR} y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
 
-*Copyright © AAAA, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
+*Copyright © AAAA, {EMPLEADOR}.*
 ```
 
 **Pie de página para otros documentos:** ninguno.
@@ -263,7 +264,7 @@ GitLab:
 GitHub:
 
 ```markdown
-[![CI](https://github.com/<owner>/<repo>/actions/workflows/<workflow>.yml/badge.svg)](https://github.com/<owner>/<repo>/actions)
+[![CI](https://github.com/<owner>/<repo>/actions/workflows/<workflow>.yaml/badge.svg)](https://github.com/<owner>/<repo>/actions)
 ```
 
 **Reglas de *badges*:**
@@ -293,7 +294,7 @@ Aplicar la misma regla de fecha única: eliminar fechas reportadas existentes an
 
 ### Mantenimiento
 
-- **Actualizar enlaces**: verificar periódicamente que las URLs de imágenes funcionen
+- **Actualizar enlaces**: verificar periódicamente que las URL de imágenes funcionen
 - **Consistencia**: mantener el mismo formato en todos los documentos
 - **Versionado**: documentar cambios importantes en el estilo
 

@@ -2,9 +2,9 @@
 tags: tag-1, tag-2, tag-3
 ---
 
-<img src="https://hedgedoc.promad.com.mx:31418/uploads/9217e5d8-2a84-4e41-9634-ea3b5a6bd45a.png" class="logo-light" alt="Kabat One logo">
+<img src="{HEDGEDOC_LOGO_LIGHT_URL}" class="logo-light" alt="Kabat One logo">
 
-<img src="https://hedgedoc.promad.com.mx:31418/uploads/e0f5ef2b-4519-48ee-bd2d-16013c7f44c4.png" class="logo-dark" alt="Kabat One logo">
+<img src="{HEDGEDOC_LOGO_DARK_URL}" class="logo-dark" alt="Kabat One logo">
 
 # Título del documento
 
@@ -22,7 +22,7 @@ Contenido.
 
 ---
 
-![FIRMA](https://hedgedoc.promad.com.mx:31418/uploads/010e09ff-5e2d-4ba8-828b-850a1424eafa.png)
+![FIRMA]({HEDGEDOC_SIGNATURE_URL})
 
 [//]: # (CSS Corporativo)
 

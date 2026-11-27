@@ -36,12 +36,12 @@ Use as starting point:
 1. **Read the full CoT**: Load and follow `~/rules/cot/styling.md` from line 1 to end
 2. **Parse arguments**: first arg is platform, last arg is the file. If 3 args are given, middle arg is license (`mit`|`gpl`). If only 2 args, there is no license. If any required argument is missing, ask the user before proceeding.
 3. **Insert standard header** (varies by platform):
-   - **HedgeDoc only**: YAML frontmatter with descriptive `tags` + dual Kabat One logos for light/dark mode:
+   - **HedgeDoc only**: YAML frontmatter with descriptive `tags` + dual Kabat One logos for light/dark mode. Fill `{HEDGEDOC_LOGO_LIGHT_URL}`, `{HEDGEDOC_LOGO_DARK_URL}` and, in the footer, `{HEDGEDOC_SIGNATURE_URL}` from `STYLING_HEDGEDOC_LOGO_LIGHT_URL`, `STYLING_HEDGEDOC_LOGO_DARK_URL` and `STYLING_HEDGEDOC_SIGNATURE_URL` in `~/rules/.env` (read only those keys, never print the file); the HedgeDoc instance is internal, so its address is never written in the repository. If a variable is missing, ask for the value:
 
      ```html
-     <img src="https://hedgedoc.promad.com.mx:31418/uploads/9217e5d8-2a84-4e41-9634-ea3b5a6bd45a.png" class="logo-light" alt="Kabat One logo">
+     <img src="{HEDGEDOC_LOGO_LIGHT_URL}" class="logo-light" alt="Kabat One logo">
 
-     <img src="https://hedgedoc.promad.com.mx:31418/uploads/e0f5ef2b-4519-48ee-bd2d-16013c7f44c4.png" class="logo-dark" alt="Kabat One logo">
+     <img src="{HEDGEDOC_LOGO_DARK_URL}" class="logo-dark" alt="Kabat One logo">
      ```
 
    - **GitLab/GitHub README.md only**: YAML frontmatter with `title` and `description` (rendered as table on GitHub, code block on GitLab):
@@ -79,11 +79,12 @@ Use as starting point:
 ```markdown
 ---
 
-![FIRMA](https://hedgedoc.promad.com.mx:31418/uploads/010e09ff-5e2d-4ba8-828b-850a1424eafa.png)
+![FIRMA]({HEDGEDOC_SIGNATURE_URL})
 
 [//]: # (CSS Corporativo)
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
   :root {
     --midday: #00A1FF;
     --midnight: #24326A;
@@ -93,7 +94,6 @@ Use as starting point:
     --deep: #060E40;
     --video: #7252D8;
   }
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
   a { color: var(--midday); }
   a:visited { color: var(--video); }
   a:hover { color: var(--connect); text-decoration: none; }
@@ -139,14 +139,14 @@ Additional badges (only if the project has them configured):
 *Copyright © AAAA, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*
 ```
 
-For MIT:
+For corporate MIT, `{EMPLEADOR}` is the employer the work was made for (for example, Kabat One); a personal MIT project uses the personal footer with «licencia MIT» (see `~/rules/rulesets/LICENSING.md` §3.1):
 
 ```markdown
 ---
 
-*Este proyecto fue elaborado por Rodrigo Álvarez para Kabat One y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
+*Este proyecto fue elaborado por Rodrigo Álvarez (@incogniadev) para {EMPLEADOR} y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
 
-*Copyright © AAAA, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
+*Copyright © AAAA, {EMPLEADOR}.*
 ```
 
 **No signature. No CSS.**
