@@ -4,16 +4,16 @@ task: configurar metadatos de repositorio GitHub (descripción, topics, configur
 dificultad: baja
 longitud_objetivo: corta
 validacion: metadatos actualizados correctamente vía API, sin interacción con editores
-version: "1.0"
-last_updated: 2026-10-14
+version: "2.0"
+last_updated: 2026-11-27
 ---
 <!-- markdownlint-disable MD041 -->
 
 Razonamiento:
 
-- **CRÍTICO**: evitar cualquier comando que abra editores interactivos (gh repo edit con ciertos flags, comandos sin especificar completamente).
-- Usar la API REST de GitHub directamente con curl para operaciones complejas.
-- Comandos gh simples solo para operaciones que garantizan no ser interactivas.
+- **CRÍTICO**: evitar cualquier comando que abra editores o haga preguntas (`gh repo edit` sin *flags*, `gh pr create` o `gh issue create` sin título y cuerpo).
+- Usar `gh api` para la API REST de GitHub: toma la credencial de `gh` sin exponerla en la línea de comandos ni en la lista de procesos, cosa que sí pasa con `curl -H "Authorization: token $(gh auth token)"`.
+- El cuerpo JSON viaja por la entrada estándar (`--input -`), nunca como argumento con datos sensibles.
 - Configurar descripción, *topics*, *homepage*, licencia y otras propiedades del repositorio.
 - Validar cambios sin abrir navegadores o editores.
 
@@ -23,21 +23,20 @@ Pasos:
    Resultado:
    - `gh --version` para confirmar instalación
    - `gh auth status` para verificar autenticación
-   - `gh auth token` debe devolver token válido (sin mostrarlo en pantalla)
-   Si no está autenticado: `gh auth login` siguiendo el flujo no interactivo.
+   Si no está autenticado, pedir al usuario que ejecute `gh auth login` por su cuenta: es un flujo interactivo y el *token* nunca se imprime ni se pega en la conversación.
 
 2) Acción: obtener información actual del repositorio.
-   Resultado: `curl -s -H "Authorization: token $(gh auth token)" -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/OWNER/REPO | jq '{name: .name, description: .description, topics: .topics, homepage: .homepage, license: .license.spdx_id}'`
+   Resultado: `gh api repos/OWNER/REPO --jq '{name: .name, description: .description, topics: .topics, homepage: .homepage, license: .license.spdx_id}'`
    Nota: reemplazar OWNER/REPO con valores reales del repositorio.
 
 3) Acción: configurar descripción del repositorio (método seguro).
    Opciones:
-   - **Método 1 (gh, verificado no interactivo)**: `gh repo edit --description "descripción del proyecto"`
-   - **Método 2 (curl, más seguro)**: `curl -s -H "Authorization: token $(gh auth token)" -H "Accept: application/vnd.github.v3+json" -X PATCH -d '{"description":"descripción del proyecto"}' https://api.github.com/repos/OWNER/REPO`
+   - **Método 1**: `gh repo edit OWNER/REPO --description "descripción del proyecto"`
+   - **Método 2 (API)**: `gh api -X PATCH repos/OWNER/REPO --input - <<< '{"description":"descripción del proyecto"}'`
 
-4) Acción: configurar los *topics* del repositorio (solo curl, para evitar editores).
-   **CRÍTICO**: NO usar `gh repo edit --add-topic` ya que puede abrir editor.
-   Resultado: `curl -s -H "Authorization: token $(gh auth token)" -H "Accept: application/vnd.github.v3+json" -X PUT -d '{"names":["topic1","topic2","topic3","topic4"]}' https://api.github.com/repos/OWNER/REPO/topics`
+4) Acción: configurar los *topics* del repositorio.
+   `gh repo edit OWNER/REPO --add-topic <topic>` agrega uno sin abrir editor; para reemplazar la lista completa de una vez, usar la API:
+   Resultado: `gh api -X PUT repos/OWNER/REPO/topics --input - <<< '{"names":["topic1","topic2","topic3","topic4"]}'`
    Ejemplos de *topics* comunes:
    - Documentación: "documentation", "readme", "markdown"
    - Análisis técnico: "technical-analysis", "regression-analysis", "debugging"
@@ -45,95 +44,90 @@ Pasos:
    - Lenguajes/tecnologías: "bash", "shell", "macos", "linux"
 
 5) Acción: configurar la *homepage* del repositorio (opcional).
-   Resultado: `curl -s -H "Authorization: token $(gh auth token)" -H "Accept: application/vnd.github.v3+json" -X PATCH -d '{"homepage":"https://example.com"}' https://api.github.com/repos/OWNER/REPO`
+   Resultado: `gh api -X PATCH repos/OWNER/REPO --input - <<< '{"homepage":"https://example.com"}'`
 
 6) Acción: configurar configuraciones adicionales del repositorio.
    Opciones disponibles vía API:
 
    ```bash
-   # Habilitar issues
-   curl -s -H "Authorization: token $(gh auth token)" -H "Accept: application/vnd.github.v3+json" -X PATCH -d '{"has_issues":true}' https://api.github.com/repos/OWNER/REPO
+   # Enable issues
+   gh api -X PATCH repos/OWNER/REPO --input - <<< '{"has_issues":true}'
    
-   # Habilitar wiki
-   curl -s -H "Authorization: token $(gh auth token)" -H "Accept: application/vnd.github.v3+json" -X PATCH -d '{"has_wiki":true}' https://api.github.com/repos/OWNER/REPO
+   # Enable the wiki
+   gh api -X PATCH repos/OWNER/REPO --input - <<< '{"has_wiki":true}'
    
-   # Habilitar pages
-   curl -s -H "Authorization: token $(gh auth token)" -H "Accept: application/vnd.github.v3+json" -X PATCH -d '{"has_pages":false}' https://api.github.com/repos/OWNER/REPO
+   # Disable Pages
+   gh api -X PATCH repos/OWNER/REPO --input - <<< '{"has_pages":false}'
    
-   # Configurar branch por defecto
-   curl -s -H "Authorization: token $(gh auth token)" -H "Accept: application/vnd.github.v3+json" -X PATCH -d '{"default_branch":"main"}' https://api.github.com/repos/OWNER/REPO
+   # Set the default branch
+   gh api -X PATCH repos/OWNER/REPO --input - <<< '{"default_branch":"main"}'
    ```
 
 7) Acción: validar cambios aplicados.
-   Resultado: `curl -s -H "Authorization: token $(gh auth token)" -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/OWNER/REPO | jq '{description: .description, topics: .topics, homepage: .homepage, has_issues: .has_issues, has_wiki: .has_wiki, default_branch: .default_branch}'`
+   Resultado: `gh api repos/OWNER/REPO --jq '{description: .description, topics: .topics, homepage: .homepage, has_issues: .has_issues, has_wiki: .has_wiki, default_branch: .default_branch}'`
 
 8) (Opcional) Acción: configurar la protección de la rama `main`.
    Resultado:
 
    ```bash
-   curl -s -H "Authorization: token $(gh auth token)" \
-        -H "Accept: application/vnd.github.v3+json" \
-        -X PUT \
-        -d '{"required_status_checks":null,"enforce_admins":false,"required_pull_request_reviews":null,"restrictions":null}' \
-        https://api.github.com/repos/OWNER/REPO/branches/main/protection
+   # Block force pushes and deletion of main; the four null or false fields are mandatory in this API
+   gh api -X PUT repos/OWNER/REPO/branches/main/protection --input - <<< \
+     '{"required_status_checks":null,"enforce_admins":false,"required_pull_request_reviews":null,"restrictions":null,"allow_force_pushes":false,"allow_deletions":false}'
    ```
 
 Comandos a EVITAR (pueden abrir editores):
 
-- `gh repo edit` sin flags específicos
-- `gh repo edit --add-topic` (conocido por abrir editor)
-- `gh issue create` sin `-t` y `-b`
-- `gh pr create` sin flags completos
-- Cualquier comando gh que no especifique completamente todos los parámetros
+- `gh repo edit` sin *flags*
+- `gh issue create` sin `--title` y `--body` (o `--body-file`)
+- `gh pr create` sin `--title` y `--body` (o `--body-file`)
+- `curl` con el *token* en la línea de comandos
 
 Comandos SEGUROS (garantizados no interactivos):
 
-- `gh repo edit --description "texto"`
-- `gh repo view --json campo`
-- `curl` con API REST de GitHub
-- `gh auth token` (para usar en curl)
+- `gh repo edit OWNER/REPO --description "texto"` y `--add-topic <topic>`
+- `gh repo view OWNER/REPO --json campo`
+- `gh api` con la API REST de GitHub
 
 Plantillas de *topics* comunes:
 
 ```bash
-# Proyecto de documentación
+# Documentation project
 ["documentation","markdown","readme","technical-writing"]
 
-# Análisis de issues/bugs
+# Issue and bug analysis
 ["technical-analysis","debugging","regression-analysis","github-issues"]
 
-# Proyecto open source
+# Open source project
 ["open-source","community","foss","libre-software"]
 
-# Herramientas específicas
+# Specific tools
 ["warp-terminal","terminal","shell","command-line"]
 
-# Tecnologías
+# Technologies
 ["bash","shell-scripting","macos","linux","cross-platform"]
 ```
 
 Ejemplos de uso completo:
 
 ```bash
-# Configurar repo de documentación técnica
+# Set up a technical documentation repository
 OWNER="incognia"
 REPO="OSS"
 
-# Descripción
-curl -s -H "Authorization: token $(gh auth token)" -H "Accept: application/vnd.github.v3+json" -X PATCH -d '{"description":"Technical documentation of issues in open source projects"}' https://api.github.com/repos/$OWNER/$REPO
+# Description
+gh api -X PATCH repos/$OWNER/$REPO --input - <<< '{"description":"Technical documentation of issues in open source projects"}'
 
 # Topics
-curl -s -H "Authorization: token $(gh auth token)" -H "Accept: application/vnd.github.v3+json" -X PUT -d '{"names":["documentation","open-source","technical-analysis","github-issues","regression-analysis"]}' https://api.github.com/repos/$OWNER/$REPO/topics
+gh api -X PUT repos/$OWNER/$REPO/topics --input - <<< '{"names":["documentation","open-source","technical-analysis","github-issues","regression-analysis"]}'
 
-# Validar
-curl -s -H "Authorization: token $(gh auth token)" -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/$OWNER/$REPO | jq '{description: .description, topics: .topics}'
+# Validate
+gh api repos/$OWNER/$REPO --jq '{description: .description, topics: .topics}'
 ```
 
 Conclusión:
 
-- Usar curl + API REST para máximo control y evitar editores.
-- Solo usar gh para comandos simples y completamente especificados.
+- Usar `gh api` para la API REST: no abre editores y no expone el *token*.
+- Pasar siempre `OWNER/REPO` explícito: en un *fork*, `gh` resuelve por omisión al repositorio de origen.
 - Siempre validar cambios con consultas GET a la API.
-- Mantener tokens seguros usando $(gh auth token) en lugar de variables expuestas.
 - Para repositorios con configuración compleja, usar *scripts* que combinen varias llamadas a la API.
 - Referencias: [GitHub REST API](https://docs.github.com/en/rest), [GitHub CLI Manual](https://cli.github.com/manual/), «~/rules/rulesets/GIT.md» ([../rulesets/GIT.md](../rulesets/GIT.md)).
