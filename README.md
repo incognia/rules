@@ -5,7 +5,7 @@ description: "Estándares, filosofía y cadenas de razonamiento (CoT) que guían
 
 # Reglas técnicas: prompts y CoT para acelerar el contexto de los LLM
 
-*Última modificación: 27 de noviembre de 2026, 13:59 (CST)*
+*Última modificación: 27 de noviembre de 2026, 15:32 (CST)*
 
 [![CI](https://github.com/incognia/rules/actions/workflows/ci.yaml/badge.svg)](https://github.com/incognia/rules/actions/workflows/ci.yaml)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
@@ -269,7 +269,7 @@ sequenceDiagram
 - **templates/** — plantillas reutilizables
 - **scripts/** — *scripts* de automatización y respaldos
 - **docs/** — documentación de procesos (`MAIL.md` y `SYNC.md`)
-- **marketplace/** — especificación genérica en OpenSpec de un *marketplace* de *plugins* y *skills* de Claude Code para cualquier organización (ver [marketplace/README.md](./marketplace/README.md))
+- **marketplace/** — especificación genérica en OpenSpec de un *marketplace* de *plugins* y *skills* de Claude Code para cualquier organización, con un kit de arranque copiable en [marketplace/kit/](./marketplace/kit/README.md); toda la carpeta va bajo licencia MIT (ver [marketplace/README.md](./marketplace/README.md))
 - **.githooks/** — *hooks* de git del repositorio (puerta del CHANGELOG, lint y formato de *commits*); se activan con `npm run hooks:install`
 - **.github/** — integración continua (lint, ShellCheck, Python y gitleaks), revisión semanal de ligas y Dependabot
 - **.agents/skills/** — *skills* descubribles por agentes IA (ejemplos con `/` de Claude Code, Copilot y Antigravity; en Codex usa `$`):
@@ -304,6 +304,7 @@ sequenceDiagram
 - Git (tras `git init`): `scripts/git-init-context.sh <personal|laboral> <llave> <url_remota> <rama>` (no interactivo)
 - Atribución de *commits*: `scripts/commit_trailer.py` (imprime el *trailer* `Co-Authored-By` del modelo de la sesión activa en Claude Code, Codex, Copilot CLI o Antigravity CLI `agy`; `--tool` fuerza la herramienta; `--message-file` imprime la ruta del archivo de mensaje propio de la sesión, para que dos sesiones en paralelo no compartan `/tmp/commit-msg.txt`)
 - Verificación de *pull requests*: `scripts/check-pr.sh --base <rama>` (comprueba las puertas de `/commit` y `/changelogger`; se configura por proyecto con `.github/pr-check.conf`; pruebas en `scripts/tests/check-pr.test.sh`)
+- Verificación del *marketplace*: `scripts/check-marketplace.sh` (valida las *specs* con OpenSpec, su sincronía con el *change* y el kit de arranque; también corre en el CI)
 - Fecha CST: scripts/cst_date.sh
 - Correo vía Graph API: scripts/graph_auth.py (autenticación y caché de *token*)
 - Confluence: scripts/atlassian/ (`confluence-management.sh` para páginas, adjuntos, comentarios al pie y respuestas en ADF, y `find-marked` para ubicar un hilo marcado; `adf_lib.py` para construir y leer ADF; credenciales en `.env`)

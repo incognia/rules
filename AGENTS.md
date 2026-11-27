@@ -97,7 +97,7 @@ DATE_CST=$(TZ=CST6 date +"%Y-%m-%d")
 ├── .warp/workflows/    # Parameterised command workflows (see below)
 ├── .githooks/         # Git hooks: CHANGELOG gate, Markdown lint, Conventional Commits
 ├── .github/           # CI, weekly link check and Dependabot
-├── marketplace/       # Generic OpenSpec spec of a Claude Code plugin marketplace
+├── marketplace/       # Generic OpenSpec spec of a Claude Code plugin marketplace and its starter kit (MIT)
 └── .env.example        # Template for the untracked .env (credentials and sensitive data)
 ```
 
