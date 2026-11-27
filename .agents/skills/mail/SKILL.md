@@ -9,7 +9,7 @@ description: "Compose and send OWA-compatible HTML email in four modes (token, o
 
 - **Mode**: $0 — delivery method:
   - `token` → authenticate and cache Graph API token (run once, lasts ~90 days)
-  - `owa` → save HTML file for manual copy-paste into Outlook Web (Linux)
+  - `owa` → save HTML file for manual copy-paste into Outlook Web (any OS)
   - `mac` → open draft in Outlook via AppleScript with native signature (macOS)
   - `graph` → send directly via Microsoft Graph API with inline signature (any OS)
 - **Type**: $1 — email type (`delivery` or `generic`) — not needed for `token` mode
@@ -24,7 +24,7 @@ description: "Compose and send OWA-compatible HTML email in four modes (token, o
 
    Modes ($0):
      token    Authenticate and cache Graph API token (run once, lasts ~90 days)
-     owa      Save HTML for copy-paste into Outlook Web (Linux)
+     owa      Save HTML for copy-paste into Outlook Web (any OS)
      mac      Open draft in Outlook via AppleScript with native signature (macOS)
      graph    Send directly via Microsoft Graph API with inline signature (any OS)
 
@@ -36,10 +36,10 @@ description: "Compose and send OWA-compatible HTML email in four modes (token, o
 
    Examples:
      /mail token
-     /mail owa delivery kabat-authorization-service
+     /mail owa delivery <service-name>
      /mail mac generic cambio de configuración Kafka
      /mail graph generic decisión técnica WebSocket
-     /mail graph delivery kabat-notification-service
+     /mail graph delivery <service-name>
    ```
 
 1. **Read the full CoT**: Load and follow `~/rules/cot/mail.md` from line 1 to end
@@ -88,7 +88,7 @@ description: "Compose and send OWA-compatible HTML email in four modes (token, o
 5. After expiry, `get_token()` tries a silent refresh; see `~/rules/docs/MAIL.md` for the token lifecycle
 6. Run `/mail token` again only when the silent refresh fails
 
-### Mode: `owa` (Linux — manual copy-paste)
+### Mode: `owa` (any OS — manual copy-paste)
 
 1. Save the HTML file:
    - If the user specified a path, use that path
@@ -130,21 +130,21 @@ description: "Compose and send OWA-compatible HTML email in four modes (token, o
 - `bgcolor` goes on `<td>`, NEVER only on `<table>`
 - No `border-radius`, no flexbox, no grid, no media queries
 - Font: `Arial,sans-serif` everywhere, `'Courier New',monospace` for code
-- Graph API tokens expire in ~1 hour; if sending fails with 401, re-authenticate
+- Graph API access tokens expire in ~1 hour and are refreshed silently; run `/mail token` again only when the refresh fails
 
 ## Examples
 
 - `/mail token` — authenticate and cache Graph API token (run once)
-- `/mail owa delivery kabat-authorization-service` — compose delivery email, save for OWA paste
+- `/mail owa delivery <service-name>` — compose delivery email, save for OWA paste
 - `/mail mac generic cambio de configuración Kafka` — compose and open draft in Outlook on macOS
 - `/mail graph generic decisión técnica WebSocket` — compose and send directly via Graph API
-- `/mail graph delivery kabat-notification-service` — compose and send delivery email via Graph API
+- `/mail graph delivery <service-name>` — compose and send delivery email via Graph API
 
 ## References
 
 - Detailed CoT: `~/rules/cot/mail.md`
 - HTML rules: `~/rules/rulesets/MAIL.md`
 - Graph API docs: `~/rules/docs/MAIL.md`
-- API credentials: `~/.secrets.yaml` (key `GRAPH_API`)
+- API credentials: `GRAPH_CLIENT_ID` and `GRAPH_TENANT_ID` in `~/rules/.env`
 - Templates: `~/rules/templates/mail/delivery_template.html` and `~/rules/templates/mail/generic_template.html`
 - Signature image: `~/rules/templates/mail/assets/ralvarez_firma_740.png` (for `graph` mode)
