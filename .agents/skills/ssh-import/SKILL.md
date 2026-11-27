@@ -14,6 +14,8 @@ description: "Import SSH public key from GitHub into the current server. Run fro
 - **faraday** → GitHub user `incognia` (personal servers and infra)
 - **cad** → GitHub user `incogniadev` (client servers)
 
+Both methods import **every** public key published on that GitHub account, not only the one the argument names: keep on each account only the keys that should reach servers.
+
 ## Instructions
 
 ### 1. Determine GitHub user from key name
@@ -41,7 +43,11 @@ ssh-import-id gh:GITHUB_USER
 
 ```bash
 mkdir -p "$SHELL_HOME/.ssh" && chmod 700 "$SHELL_HOME/.ssh"
-curl -s "https://github.com/GITHUB_USER.keys" >> "$SHELL_HOME/.ssh/authorized_keys"
+KEYS=$(mktemp)
+# -f makes curl fail on HTTP errors, so an error page never reaches authorized_keys
+curl -fsS "https://github.com/GITHUB_USER.keys" -o "$KEYS"
+grep -Eq '^(ssh-ed25519|ssh-rsa|ecdsa-sha2-|sk-)' "$KEYS" || { echo "No SSH keys downloaded" >&2; rm -f "$KEYS"; exit 1; }
+cat "$KEYS" >> "$SHELL_HOME/.ssh/authorized_keys" && rm -f "$KEYS"
 sort -u -o "$SHELL_HOME/.ssh/authorized_keys" "$SHELL_HOME/.ssh/authorized_keys"
 chmod 600 "$SHELL_HOME/.ssh/authorized_keys"
 ```
@@ -50,7 +56,7 @@ chmod 600 "$SHELL_HOME/.ssh/authorized_keys"
 
 ```bash
 echo "User: $SHELL_USER"
-echo "Keys in authorized_keys: $(grep -c 'ssh-ed25519' "$SHELL_HOME/.ssh/authorized_keys")"
+echo "Keys in authorized_keys: $(grep -cE '^(ssh-|ecdsa-|sk-)' "$SHELL_HOME/.ssh/authorized_keys")"
 ```
 
 ## For cloud-init provisioning (before install)
