@@ -3,6 +3,11 @@
 **Nota:** Todas las fechas están en zona horaria CST de Ciudad de México (UTC-6).
 
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
+## [2026-11-27] - Especificar un *marketplace* genérico de *plugins* para Claude Code
+
+- docs: agregar las ocho *specs* canónicas de `marketplace/openspec/specs/` (`marketplace-repository`, `cross-cutting-rules`, `plugin-git`, `plugin-ai`, `plugin-sdd`, `plugin-llm`, `plugin-security` y `plugin-provision`), resultado de archivar el *change* `bootstrap-skill-marketplace`, que no se archiva porque es la plantilla de cada instancia, y `marketplace/README.md` en español mexicano; los valores propios de cada organización son parámetros entre llaves y el repositorio no lleva direcciones, máquinas ni rutas de secretos internas porque es público
+- feat: agregar `marketplace/`, un proyecto de OpenSpec que especifica desde cero un *marketplace* de *plugins* y *skills* de Claude Code para cualquier organización, con el *change* `bootstrap-skill-marketplace` (`marketplace/openspec/changes/bootstrap-skill-marketplace/`: *proposal*, *design*, *tasks*, `.openspec.yaml` y los deltas por capacidad), `marketplace/openspec/config.yaml`, `marketplace/openspec/.markdownlint.yaml` y `marketplace/openspec/changes/archive/.gitkeep`
+
 ## [2026-11-16] - Calcular la hora CST con una zona fija que funcione en Git Bash
 
 - fix: reemplazar `TZ=America/Mexico_City` por `TZ=CST6` en las reglas, los *skills*, los procedimientos de `cot/`, los *scripts* (`check-pr.sh`, `cst_date.sh` y los de respaldo) y el flujo de Warp, porque Git Bash en Windows no trae la base de zonas horarias, no reconoce el nombre y calcula en UTC sin avisar, de modo que de 18:00 a 23:59 `/changelogger` fechaba el bloque con el día siguiente; explicarlo en «Fechas y horas» de `rulesets/LINGUISTICS.md` y en el paso 1 de `cot/changelog.md`
