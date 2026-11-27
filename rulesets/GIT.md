@@ -127,12 +127,13 @@ git remote -v
 
 ## 5. Primer *commit* y *push*
 
-El primer *commit* sigue el flujo normal de [COMMITTING.md](./COMMITTING.md): crea `CHANGELOG.md` con `/changelogger` y después ejecuta `/commit`, que agrega los cambios y hace el *commit* desde `/tmp/commit-msg.txt`.
+El primer *commit* sigue el flujo normal de [COMMITTING.md](./COMMITTING.md): crea `CHANGELOG.md` con `/changelogger` y después ejecuta `/commit`, que agrega los cambios y hace el *commit* desde el archivo de mensaje de la sesión (ver [COMMITTING.md](./COMMITTING.md), «Formato»).
 
 ```bash
-# Primer commit (mensaje en /tmp/commit-msg.txt, nunca con -m)
+# Primer commit (mensaje en el archivo de la sesión, nunca con -m)
+MSG=$(python3 ~/rules/scripts/commit_trailer.py --message-file 2>/dev/null || mktemp "${TMPDIR:-/tmp}/commit-msg.XXXXXX")
 git add -A
-git commit -F /tmp/commit-msg.txt
+git commit -F "$MSG"
 
 # Push inicial con upstream
 git push -u origin main

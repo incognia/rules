@@ -67,8 +67,9 @@ Pasos:
    Opcional, para trazabilidad: `git --no-pager diff -- CHANGELOG.md` y `git --no-pager diff --cached -- CHANGELOG.md`.
    Resultado: prerrequisito de CHANGELOG confirmado.
 
-3) Acción: construir el mensaje detallado del *commit* en un archivo temporal reutilizable.
-   Resultado: crear `/tmp/commit-msg.txt` con esta plantilla:
+3) Acción: construir el mensaje detallado del *commit* en el archivo de mensaje de la sesión.
+   Ruta: `python3 ~/rules/scripts/commit_trailer.py --message-file` imprime `<tmp>/<herramienta>-<id-de-sesión>-commit.txt`, propia de esta sesión, para que otra sesión que hace *commit* en paralelo no la pise; fuera de una sesión de agente, `mktemp "${TMPDIR:-/tmp}/commit-msg.XXXXXX"`. Nunca usar un archivo fijo compartido como `/tmp/commit-msg.txt`. Cada comando corre en un *shell* nuevo: recalcular `MSG` en el mismo comando que lo usa (la ruta es determinista) o escribirla literal. En adelante, `$MSG`.
+   Resultado: crear `$MSG` con esta plantilla:
 
    ```text
    <tipo>[scope opcional]: <resumen en inglés>
@@ -103,20 +104,20 @@ Pasos:
 
    Validación:
 
-   - Mostrar y revisar el contenido de `/tmp/commit-msg.txt` y confirmar inglés en asunto y cuerpo.
-   - `/tmp/commit-msg.txt` persiste entre *commits* e invocaciones: reescribirlo completo (asunto incluido) para cada *commit* y comprobar con `git diff --cached --stat` que asunto y cuerpo describen exactamente lo que está en *staging*.
+   - Mostrar y revisar el contenido de `$MSG` y confirmar inglés en asunto y cuerpo.
+   - `$MSG` persiste entre *commits* e invocaciones de la misma sesión: reescribirlo completo (asunto incluido) para cada *commit* y comprobar con `git diff --cached --stat` que asunto y cuerpo describen exactamente lo que está en *staging*.
    - Confirmar la presencia de `Co-Authored-By` con el nombre real del agente o herramienta que ejecuta el *commit* (resuelto con `scripts/commit_trailer.py` o, si falla, con la atribución de la herramienta), no un ejemplo copiado de otra sesión.
 
    Resultado: mensaje validado en inglés internacional (UK) y listo para el *commit* no interactivo.
 
 5) Acción: hacer *commits* atómicos según el análisis del paso 1, uno por grupo, con el archivo temporal del paso 3.
-   - Cambios homogéneos (un solo tipo): `git add -A && git commit -F /tmp/commit-msg.txt`.
-   - Cambios mixtos: por cada grupo, `git add -- <archivos> && git commit -F /tmp/commit-msg.txt`, reescribiendo `/tmp/commit-msg.txt` y volviendo a ejecutar `scripts/commit_trailer.py` antes de cada uno.
+   - Cambios homogéneos (un solo tipo): `git add -A && git commit -F "$MSG"`.
+   - Cambios mixtos: por cada grupo, `git add -- <archivos> && git commit -F "$MSG"`, reescribiendo `$MSG` y volviendo a ejecutar `scripts/commit_trailer.py` antes de cada uno.
    - `CHANGELOG.md` entra en el **último** *commit* de la serie, junto con los archivos de ese grupo. Los anteriores pasan la puerta porque `CHANGELOG.md` sigue con cambios pendientes (el *hook* `pre-commit` acepta ese caso).
    Resultado: un *commit* por cambio lógico y árbol de trabajo limpio.
 
-6) Acción: *push* simple.
-   Resultado: `git push`.
+6) Acción: *push* simple y limpieza.
+   Resultado: `git push` y, después, `rm -f "$MSG"`.
 
 7) Acción: verificación no interactiva.
    Resultado: `git --no-pager log --oneline -5` (últimos *commits* sin paginador).
@@ -125,7 +126,7 @@ Conclusión:
 
 - Verifica que el *commit* aparece en `git --no-pager log --oneline -5`.
 - CRÍTICO: la identidad mostrada en el paso 0 coincide con la esperada para este repositorio (correo y llave SSH correctos).
-- Para evitar `quote>` y errores de escape, usa siempre `git commit -F /tmp/commit-msg.txt`.
+- Para evitar `quote>` y errores de escape, usa siempre `git commit -F "$MSG"`.
 - Pista: si `git remote -v` muestra URL con `https://` en lugar de `git@`, la configuración es incorrecta y debe aplicarse git_init.
 - Pista de cuentas múltiples: si el correo o la llave no coinciden con lo esperado, revisa la configuración del repositorio antes de proceder.
 - Anti-patrones prohibidos (detener y pedir confirmación si aparece cualquiera):
@@ -133,8 +134,9 @@ Conclusión:
   - Intentar editar `CHANGELOG.md` desde `/commit` en vez de ejecutar `/changelogger`.
   - Incluir en el cuerpo del *commit* una viñeta de edición o mantenimiento de `CHANGELOG.md` como detalle del cambio.
   - Hacer *commit* con mensaje en español o sin punto de control explícito de idioma.
-  - Usar flujo interactivo (editor o paginador) en lugar de `git commit -F /tmp/commit-msg.txt`.
+  - Usar flujo interactivo (editor o paginador) en lugar de `git commit -F "$MSG"`.
   - Mezclar tipos de cambio sin relación en un mismo *commit*, o usar `git add .`/`git add -A` con cambios mezclados.
   - Incluir `CHANGELOG.md` antes del último *commit* de la serie.
-  - Mensaje rancio: reutilizar el asunto o el cuerpo que dejó en `/tmp/commit-msg.txt` un *commit* o una invocación anterior sin cotejarlo con lo que está en *staging*.
+  - Usar un archivo de mensaje fijo y compartido (`/tmp/commit-msg.txt`) en vez del de la sesión: otra sesión en paralelo puede pisarlo.
+  - Mensaje rancio: reutilizar el asunto o el cuerpo que dejó en `$MSG` un *commit* o una invocación anterior sin cotejarlo con lo que está en *staging*.
 - Referencias: «~/rules/rulesets/COMMITTING.md» ([../rulesets/COMMITTING.md](../rulesets/COMMITTING.md)), «~/rules/cot/changelog.md» ([./changelog.md](./changelog.md)), «~/rules/cot/git_init.md» ([./git_init.md](./git_init.md)), «~/rules/rulesets/GIT.md» ([../rulesets/GIT.md](../rulesets/GIT.md)), «~/rules/README.md» ([../README.md](../README.md)) y «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)).

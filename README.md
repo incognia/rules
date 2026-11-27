@@ -302,7 +302,7 @@ sequenceDiagram
 
 - Sincronización: scripts/sync_global.sh en macOS, Linux y WSL, y scripts/sync_global.ps1 en Windows nativo (instalan *skills* y *workflows* globales; detalles en [docs/SYNC.md](./docs/SYNC.md))
 - Git (tras `git init`): `scripts/git-init-context.sh <personal|laboral> <llave> <url_remota> <rama>` (no interactivo)
-- Atribución de *commits*: `scripts/commit_trailer.py` (imprime el *trailer* `Co-Authored-By` del modelo de la sesión activa en Claude Code, Codex, Copilot CLI o Antigravity CLI `agy`; `--tool` fuerza la herramienta)
+- Atribución de *commits*: `scripts/commit_trailer.py` (imprime el *trailer* `Co-Authored-By` del modelo de la sesión activa en Claude Code, Codex, Copilot CLI o Antigravity CLI `agy`; `--tool` fuerza la herramienta; `--message-file` imprime la ruta del archivo de mensaje propio de la sesión, para que dos sesiones en paralelo no compartan `/tmp/commit-msg.txt`)
 - Verificación de *pull requests*: `scripts/check-pr.sh --base <rama>` (comprueba las puertas de `/commit` y `/changelogger`; se configura por proyecto con `.github/pr-check.conf`; pruebas en `scripts/tests/check-pr.test.sh`)
 - Fecha CST: scripts/cst_date.sh
 - Correo vía Graph API: scripts/graph_auth.py (autenticación y caché de *token*)

@@ -52,9 +52,9 @@ All documentation follows strict linguistic rules from `rulesets/LINGUISTICS.md`
 **MANDATORY PROCESS - Always follow this exact order:**
 
 1. **FIRST**: Update `CHANGELOG.md` with `/changelogger`, in the repository's primary language (Spanish Mexican here)
-2. **SECOND**: Run `/commit`, which validates the git identity (once per session, full step 0 of `cot/committing.md`), checks the CHANGELOG gate, plans atomic commits, stages each group selectively and builds `/tmp/commit-msg.txt` for each
-3. **THIRD**: Commit from that file: `git commit -F /tmp/commit-msg.txt`
-4. **FOURTH**: Push: `git push`
+2. **SECOND**: Run `/commit`, which validates the git identity (once per session, full step 0 of `cot/committing.md`), checks the CHANGELOG gate, plans atomic commits, stages each group selectively and builds the session's message file for each (`python3 ~/rules/scripts/commit_trailer.py --message-file` prints its path, `<tmp>/<tool>-<session-id>-commit.txt`, so parallel sessions never share one)
+3. **THIRD**: Commit from that file: `git commit -F "$MSG"`
+4. **FOURTH**: Push: `git push`, then delete the message file (`rm -f "$MSG"`)
 
 **Date calculation for CHANGELOG.md:**
 
@@ -69,7 +69,7 @@ DATE_CST=$(TZ=CST6 date +"%Y-%m-%d")
 - Follow [Conventional Commits](https://www.conventionalcommits.org/) specification
 - Atomic commits: one logical change per commit, staged with `git add -- <files>`; `CHANGELOG.md` travels with the last commit of the series
 - Build the `Co-Authored-By` trailer before each commit with `python3 ~/rules/scripts/commit_trailer.py` (Claude Code, Codex, Copilot CLI, Antigravity CLI `agy`; shared format `[<Tool> ]<Model> (<effort>) <email>`), falling back to the tool-supplied attribution; never copy a name, model or effort from an example or an earlier commit
-- Rewrite `/tmp/commit-msg.txt` from scratch for every commit: it persists across commits and invocations, so never reuse a subject or body without checking it against the staged files (`git diff --cached --stat`)
+- Rewrite the session's message file from scratch for every commit and never use a fixed shared file such as `/tmp/commit-msg.txt`: it persists across commits and invocations, so never reuse a subject or body without checking it against the staged files (`git diff --cached --stat`)
 - Use non-interactive commands: `git --no-pager log --oneline -5`
 - Before opening a pull request, run `/pr-check` (`scripts/check-pr.sh`): a pull request that fails its gates is rejected without reviewing the code (`rulesets/PR_CHECK.md`)
 

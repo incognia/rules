@@ -35,7 +35,7 @@ Before making any git commit in projects that follow the rules repository conven
    - `git --no-pager diff -- CHANGELOG.md`
    - `git --no-pager diff --cached -- CHANGELOG.md`
 5. **Plan atomic commits**: run `git status --short`, classify the changes by logical type and purpose (e.g. `feat` + `fix`, `docs` + `refactor`) and plan one commit per group, ordered by the new bullets of the day block in `CHANGELOG.md` from bottom to top (first commit = lowest new bullet; last commit = top bullet), so the CHANGELOG's reverse chronological order matches git history. Stage each group only with `git add -- <file>...`; never `git add .` or `git add -A` across mixed changes (a single homogeneous group may use `git add -A`). `CHANGELOG.md` goes in the **last** commit of the series, together with that group's files; earlier commits pass the gate because `CHANGELOG.md` still has pending changes.
-6. **Build the commit message for the current group**: create (or rewrite before each commit) `/tmp/commit-msg.txt` using this detailed structure (international English, UK):
+6. **Build the commit message for the current group** in this session's own message file, never a fixed shared one such as `/tmp/commit-msg.txt` (a parallel session would overwrite it). Get its path with `python3 ~/rules/scripts/commit_trailer.py --message-file` (`<tmp>/<tool>-<session-id>-commit.txt`; outside an agent session, `mktemp "${TMPDIR:-/tmp}/commit-msg.XXXXXX"`); every command runs in a fresh shell, so recompute it in the same command (the path is deterministic) or write it literally. Below it is `$MSG`. Create (or rewrite before each commit) `$MSG` using this detailed structure (international English, UK):
 
    ```text
    type(scope): short summary in english
@@ -60,9 +60,9 @@ Before making any git commit in projects that follow the rules repository conven
      3. Other tools: build it from the identity the session itself reports, in the shared format, with the tool's documented commit email (Anthropic `noreply@anthropic.com`, OpenAI `noreply@openai.com`, GitHub Copilot `223556219+Copilot@users.noreply.github.com`, Google Antigravity `noreply@antigravity.google`, Warp `oz-agent@warp.dev`; otherwise `noreply@<tool-domain>`).
      4. If the model cannot be verified, omit the trailer and tell the user; never guess.
      - Never copy a name, model or effort from these rules, an earlier commit, another session or configuration defaults.
-   `/tmp/commit-msg.txt` persists across commits and invocations: rewrite it from scratch (subject included) for every commit, and before `git commit -F` check that subject and body describe exactly what `git diff --cached --stat` shows.
-7. **Commit from file**: `git commit -F /tmp/commit-msg.txt` — message MUST be in international English (UK), following Conventional Commits. Repeat steps 5–7 for each group (re-running the trailer helper each time) until the working tree is clean.
-8. **Push** once, after the last commit: `git push`
+   `$MSG` persists across commits and invocations of the session: rewrite it from scratch (subject included) for every commit, and before `git commit -F` check that subject and body describe exactly what `git diff --cached --stat` shows.
+7. **Commit from file**: `git commit -F "$MSG"` — message MUST be in international English (UK), following Conventional Commits. Repeat steps 5–7 for each group (re-running the trailer helper each time) until the working tree is clean.
+8. **Push** once, after the last commit: `git push`, then delete the message file: `rm -f "$MSG"`
 9. **Verify**: `git --no-pager log --oneline -5`
 
 ## Anti-error and anti-pattern protocol for /commit (MANDATORY)
@@ -71,7 +71,7 @@ Before making any git commit in projects that follow the rules repository conven
 2. If CHANGELOG gate fails, abort and suggest `/changelogger` before any further commit action.
 3. Before committing, enforce language checkpoint declaration:
    - `⚠️ LANGUAGE CHECK: All commit messages must be in international English (UK) per the CRÍTICO language rule in ~/rules/cot/committing.md`
-4. Build or update `/tmp/commit-msg.txt`, then verify content is English before `git commit -F`.
+4. Build or update `$MSG`, then verify content is English before `git commit -F`.
 5. Never use interactive editors/pagers in commit flow.
 6. Stop immediately if any forbidden anti-pattern appears and request user confirmation before continuing.
 
@@ -80,11 +80,12 @@ Forbidden anti-patterns:
 - Commit/push while `CHANGELOG.md` has no diff versus repo.
 - Editing `CHANGELOG.md` from `/commit` instead of using `/changelogger`.
 - Including `update/edit CHANGELOG.md` (or equivalent) as a commit body detail.
-- Falling back to ad-hoc commit messages that skip `/tmp/commit-msg.txt`.
+- Falling back to ad-hoc commit messages that skip the message file.
+- Writing the message to a fixed shared file such as `/tmp/commit-msg.txt` instead of this session's own file.
 - Using Spanish in commit message subject/body.
 - Mixing unrelated change types in one commit, or `git add .`/`git add -A` across mixed changes.
 - Committing `CHANGELOG.md` before the last commit of the series.
-- Stale commit message: reusing a subject or body left in `/tmp/commit-msg.txt` by an earlier commit or invocation without checking it against the staged files.
+- Stale commit message: reusing a subject or body left in `$MSG` by an earlier commit or invocation without checking it against the staged files.
 
 ## Rules
 
@@ -93,10 +94,10 @@ Forbidden anti-patterns:
 - Commit messages are ALWAYS in international English (UK)
 - Commit body must describe substantive changes only; do not include changelog-edit tasks in body bullets
 - Use non-interactive commands only (no pagers, no editors)
-- Always use `git commit -F /tmp/commit-msg.txt`, never `git commit -m`
+- Always use `git commit -F "$MSG"` with this session's message file, never `git commit -m`
 - Atomic commits: one logical change per commit, staged selectively; `CHANGELOG.md` travels with the last one
 - Re-run `scripts/commit_trailer.py` before every commit
-- In `/tmp/commit-msg.txt`, keep bullets left-aligned and wrap long lines with aligned continuation indentation
+- In `$MSG`, keep bullets left-aligned and wrap long lines with aligned continuation indentation
 - `CHANGELOG.md` format maintenance belongs to `/changelogger` + `~/rules/cot/changelog.md`
 - CoT files classify as `feat:` not `docs:`
 

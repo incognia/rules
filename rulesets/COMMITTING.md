@@ -40,7 +40,12 @@ Usa la especificación de [Commits Convencionales](https://www.conventionalcommi
 - **Descripción:** concisa, en imperativo y en minúsculas (por ejemplo, `fix: correct user login flow`).
 - **Cuerpo:** opcional, para explicar el *qué* y el *porqué* del cambio.
 - **Pie:** opcional, para referencias a *issues* (`Refs: #123`) o para marcar cambios incompatibles (`BREAKING CHANGE:`).
-- **Formato:** construye siempre el mensaje en `/tmp/commit-msg.txt` y haz el *commit* con `git commit -F /tmp/commit-msg.txt`; no uses `git commit -m`.
+- **Formato:** construye siempre el mensaje en el archivo de mensaje de la sesión y haz el *commit* con `git commit -F "$MSG"`; no uses `git commit -m`.
+- **Archivo de mensaje de la sesión (`$MSG`):** la ruta que imprime `python3 ~/rules/scripts/commit_trailer.py --message-file`, `<tmp>/<herramienta>-<id-de-sesión>-commit.txt`, propia de cada sesión de Claude Code, Codex, Copilot CLI o Antigravity CLI, para que dos sesiones que hacen *commit* en paralelo nunca se pisen el mensaje. Fuera de una sesión de agente, usa `mktemp`. Nunca uses un archivo fijo compartido como `/tmp/commit-msg.txt`. Cada comando del agente corre en un *shell* nuevo: vuelve a calcular la ruta en el mismo comando que la usa (es determinista) o escríbela literal. Reescríbelo completo para cada *commit* y bórralo después del *push*:
+
+  ```bash
+  MSG=$(python3 ~/rules/scripts/commit_trailer.py --message-file 2>/dev/null || mktemp "${TMPDIR:-/tmp}/commit-msg.XXXXXX")
+  ```
 
 ### 2.4. Ejemplos
 
@@ -104,7 +109,7 @@ Reglas de formato obligatorias para esta plantilla:
 Después haz el *commit* con:
 
 ```bash
-git commit -F /tmp/commit-msg.txt
+git commit -F "$MSG"
 ```
 
 ### 2.6. Idioma por contexto
@@ -133,7 +138,7 @@ fix: resolver problema de autenticación
 
 > «⚠️ LANGUAGE CHECK: All *commit* messages must be in international English (UK) per the CRÍTICO language rule in ~/rules/cot/committing.md»
 
-Si se hizo un *commit* con el idioma equivocado y todavía no se envió, detén el flujo, corrígelo con `git commit --amend -F /tmp/commit-msg.txt` y vuelve a validar. Si ya se envió, avisa al usuario en vez de reescribir el historial.
+Si se hizo un *commit* con el idioma equivocado y todavía no se envió, detén el flujo, corrígelo con `git commit --amend -F "$MSG"` y vuelve a validar. Si ya se envió, avisa al usuario en vez de reescribir el historial.
 
 ## 3. Flujo de trabajo y gestión de cambios
 
@@ -144,9 +149,9 @@ Si se hizo un *commit* con el idioma equivocado y todavía no se envió, detén 
 **Proceso obligatorio:**
 
 1. **Primero:** actualizar `CHANGELOG.md` con `/changelogger`.
-2. **Segundo:** ejecutar `/commit`, que valida la identidad (una vez por sesión), comprueba la puerta del CHANGELOG, planea *commits* atómicos, prepara cada grupo con `git add` selectivo y construye `/tmp/commit-msg.txt` para cada uno.
-3. **Tercero:** hacer cada *commit* desde ese archivo: `git commit -F /tmp/commit-msg.txt`; `CHANGELOG.md` va en el último.
-4. **Cuarto:** enviar con `git push`.
+2. **Segundo:** ejecutar `/commit`, que valida la identidad (una vez por sesión), comprueba la puerta del CHANGELOG, planea *commits* atómicos, prepara cada grupo con `git add` selectivo y construye el archivo de mensaje de la sesión (`$MSG`) para cada uno.
+3. **Tercero:** hacer cada *commit* desde ese archivo: `git commit -F "$MSG"`; `CHANGELOG.md` va en el último.
+4. **Cuarto:** enviar con `git push` y borrar el archivo de mensaje (`rm -f "$MSG"`).
 
 **Advertencia:** si `CHANGELOG.md` no tiene cambios, el flujo debe abortar y sugerir `/changelogger`.
 
@@ -169,7 +174,7 @@ Antes de continuar a `git add`/`git commit`, cumple este protocolo:
 
 2. Si la puerta falla (sin cambios), detén la ejecución de inmediato.
 3. Si la puerta pasa (hay cambios en *staging* o fuera de él), continúa con los *commits* atómicos (`git add -- <archivos>` y `git commit -F`).
-4. Verifica la puerta de idioma: asunto y cuerpo de `/tmp/commit-msg.txt` completamente en inglés internacional (UK). Si falla, corrige el archivo antes de continuar.
+4. Verifica la puerta de idioma: asunto y cuerpo de `$MSG` completamente en inglés internacional (UK). Si falla, corrige el archivo antes de continuar.
 5. El mantenimiento de formato e idioma del CHANGELOG se delega a `/changelogger` y «~/rules/cot/changelog.md».
 
 Si cualquiera de las dos puertas falla dos veces seguidas, pide confirmación al usuario antes de otro intento.
@@ -180,7 +185,8 @@ Anti-patrones prohibidos:
 - Intentar editar `CHANGELOG.md` desde `/commit` en lugar de usar `/changelogger`.
 - Omitir la puerta del CHANGELOG y depender solo de `git status` general.
 - Hacer *commit* en español u omitir la declaración de idioma.
-- Saltarse `/tmp/commit-msg.txt` y caer en mensajes improvisados con `-m`.
+- Saltarse el archivo de mensaje y caer en mensajes improvisados con `-m`.
+- Usar un archivo de mensaje fijo y compartido (`/tmp/commit-msg.txt`) en vez del de la sesión.
 
 **Ejemplo del flujo correcto:**
 
@@ -199,8 +205,9 @@ fi
 # 3. Preparar solo los archivos de este commit atómico (CHANGELOG.md va con el último)
 git add -- rulesets/COMMITTING.md CHANGELOG.md
 
-# 4. Preparar el mensaje detallado y hacer commit (no interactivo)
-cat > /tmp/commit-msg.txt <<'EOF'
+# 4. Preparar el mensaje detallado en el archivo de la sesión y hacer commit (no interactivo)
+MSG=$(python3 ~/rules/scripts/commit_trailer.py --message-file 2>/dev/null || mktemp "${TMPDIR:-/tmp}/commit-msg.XXXXXX")
+cat > "$MSG" <<'EOF'
 docs: validate changelog gate before commit
 
 - Enforce changelog diff gate before staging and commit
@@ -208,11 +215,11 @@ docs: validate changelog gate before commit
 - Keep commit message workflow in English using temporary file
 
 EOF
-python3 ~/rules/scripts/commit_trailer.py >> /tmp/commit-msg.txt
-git commit -F /tmp/commit-msg.txt
+python3 ~/rules/scripts/commit_trailer.py >> "$MSG"
+git commit -F "$MSG"
 
-# 5. Enviar
-git push
+# 5. Enviar y borrar el archivo de mensaje
+git push && rm -f "$MSG"
 ```
 
 ### 3.2. *Commits* atómicos
@@ -281,7 +288,8 @@ git config --global pager.diff false
 **Solución:** presiona Ctrl+C para cancelar el comando incompleto y usa el archivo temporal, que evita por completo los problemas de escape:
 
 ```bash
-cat > /tmp/commit-msg.txt <<'EOF'
+MSG=$(python3 ~/rules/scripts/commit_trailer.py --message-file 2>/dev/null || mktemp "${TMPDIR:-/tmp}/commit-msg.XXXXXX")
+cat > "$MSG" <<'EOF'
 fix: correct "user" validation
 
 - Validate user payload before persistence
@@ -290,8 +298,8 @@ fix: correct "user" validation
 - Add explicit error handling for invalid identifiers
 
 EOF
-python3 ~/rules/scripts/commit_trailer.py >> /tmp/commit-msg.txt
-git commit -F /tmp/commit-msg.txt
+python3 ~/rules/scripts/commit_trailer.py >> "$MSG"
+git commit -F "$MSG"
 ```
 
 ---

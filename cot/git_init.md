@@ -28,7 +28,7 @@ Pasos (opción recomendada: *script* no interactivo):
 3) Acción: revisar el bloque `=== CONFIGURATION ===` que imprime el *script*.
    Resultado: identidad, `core.sshCommand`, remoto y rama correctos. Si avisa que la llave no existe, revisar `ls ~/.ssh/` y repetir con la llave correcta.
 4) Acción: primer *commit* no interactivo, siguiendo el flujo normal.
-   Resultado: crear `CHANGELOG.md` con `/changelogger` y después aplicar `/commit` (o «~/rules/cot/committing.md»), que construye `/tmp/commit-msg.txt` y hace `git commit -F /tmp/commit-msg.txt`.
+   Resultado: crear `CHANGELOG.md` con `/changelogger` y después aplicar `/commit` (o «~/rules/cot/committing.md»), que construye el archivo de mensaje de la sesión (`$MSG`, de `scripts/commit_trailer.py --message-file`) y hace `git commit -F "$MSG"`.
 5) Acción: primer *push* con *upstream*.
    Resultado: `git push -u origin main` (o la rama elegida).
 
