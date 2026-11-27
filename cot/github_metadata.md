@@ -5,7 +5,7 @@ dificultad: baja
 longitud_objetivo: corta
 validacion: metadatos actualizados correctamente vía API, sin interacción con editores
 version: "1.0"
-last_updated: 2025-10-12
+last_updated: 2026-10-14
 ---
 <!-- markdownlint-disable MD041 -->
 

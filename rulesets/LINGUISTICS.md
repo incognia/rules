@@ -1,6 +1,6 @@
 # Reglas lingüísticas de español mexicano como referente
 
-*Última modificación: 14 de octubre de 2026, 00:03 (CST)*
+*Última modificación: 16 de noviembre de 2026, 19:48 (CST)*
 
 ## Regla principal
 

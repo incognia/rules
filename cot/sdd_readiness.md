@@ -5,7 +5,7 @@ dificultad: media
 longitud_objetivo: media
 validacion: comentario ADF en inglés internacional (UK) con veredicto, puntaje por dimensión con evidencia, bloqueadores, inconsistencias, preguntas abiertas, Platform Readiness y vista previa del change de OpenSpec, publicado solo tras confirmar el borrador
 version: "1.1"
-last_updated: 2026-10-12
+last_updated: 2026-11-16
 ---
 <!-- markdownlint-disable MD041 -->
 

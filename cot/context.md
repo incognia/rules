@@ -4,8 +4,8 @@ task: obtener rápidamente el contexto del proyecto en la carpeta actual (ubicac
 dificultad: baja
 longitud_objetivo: media
 validacion: resumen estructurado con propósito, tecnologías, estructura, estado y herramientas, con rutas de archivos citadas
-version: "3.0"
-last_updated: 2026-10-14
+version: "3.1"
+last_updated: 2026-11-07
 ---
 <!-- markdownlint-disable MD041 -->
 

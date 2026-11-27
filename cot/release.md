@@ -5,7 +5,7 @@ dificultad: media
 longitud_objetivo: media
 validacion: tag remoto único, release alineada y notas en formato oficial
 version: "2.1"
-last_updated: 2026-10-07
+last_updated: 2026-10-14
 ---
 <!-- markdownlint-disable MD041 -->
 

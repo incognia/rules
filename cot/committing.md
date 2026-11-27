@@ -4,8 +4,8 @@ task: seguir COMMITTING.md (validar identidad y CHANGELOG preactualizado, commit
 dificultad: baja
 longitud_objetivo: corta
 validacion: CHANGELOG detectado como modificado, identidad confirmada y commit/push exitosos
-version: "1.5"
-last_updated: 2026-10-15
+version: "1.6"
+last_updated: 2026-11-27
 ---
 <!-- markdownlint-disable MD041 -->
 
