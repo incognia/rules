@@ -16,12 +16,12 @@
 
 - [ ] 2.0 Copy the origin's starter kit (`marketplace/kit/`, MIT like all of `marketplace/`, so a corporate instance can use it; `marketplace/kit/README.md` explains it): `kit/skeleton/` as the repository root (`.claude-plugin/marketplace.json`, the example plugin with the inline skill `hello`, the forked skill `report`, `scripts/` and `references/`, `scripts/python_check.py`, `tests/`, `AGENTS.md`, `CLAUDE.md`, `CONTRIBUTING.md`, `RELEASING.md`, `README.md` and `.gitignore`), then remove or rename the example plugin. Only `kit/skeleton/` is copied as is; `kit/templates/` and `kit/ci/` are taken piece by piece in tasks 2.7, 4.4 and 10.2
 - [ ] 2.1 Create the repository on `{GIT_HOST}` and set the maintainer's identity and SSH remote, until `/git:init` exists, with the origin's `.agents/skills/git-init/SKILL.md`, `cot/git_init.md`, `rulesets/GIT.md` and `scripts/git-init-context.sh` (adapt its personal and corporate contexts and default keys to the maintainer's own)
-- [ ] 2.2 Add `LICENSE` (the first of `{LICENCES}`, `{LICENCE_HOLDER}`) and a `.gitignore` that excludes environment files, keys, Python caches, editor files and the generated catalogue output
-- [ ] 2.3 Create `.claude-plugin/marketplace.json` with `name` `{MARKETPLACE}`, the multilingual description, `owner` and an empty `plugins` list
-- [ ] 2.4 Write `AGENTS.md` (what the repository is, plugin rules, languages, Git workflow, parameters) and a `CLAUDE.md` holding only `@AGENTS.md`
-- [ ] 2.5 Write `CONTRIBUTING.md`: layout, manifest fields, description languages, version rule, validation commands, documentation languages, Git workflow, review and security
-- [ ] 2.6 Write `README.md` in `{DOC_LANGUAGE}`: installation, access check, updates, team-repository scope, plugin table, layout, contributing and security; then one `README.<lang>.md` per `{DOC_TRANSLATIONS}` with the same structure
-- [ ] 2.7 Create `TODO.md`, and `CHANGELOG.md` from the kit's `templates/CHANGELOG.multinational.md` or `templates/CHANGELOG.regional.md`, as `{FORMAT_MODE}` declares (UTC or `{LOCAL_TZ}`)
+- [ ] 2.2 Add `LICENSE` (the first of `{LICENCES}`, `{LICENCE_HOLDER}`; the kit ships none, because it depends on the instance) and check that the kit's `.gitignore` excludes environment files, keys, Python caches, editor files and the generated catalogue output
+- [ ] 2.3 Adapt the kit's `.claude-plugin/marketplace.json`: `name` `{MARKETPLACE}`, the multilingual description and `owner`; keep the example plugin's entry until the first real plugin replaces it (task 4.1)
+- [ ] 2.4 Fill the placeholders of the kit's `AGENTS.md` (what the repository is, plugin rules, languages, Git workflow, parameters) and keep its `CLAUDE.md` holding only `@AGENTS.md`
+- [ ] 2.5 Adapt the kit's `CONTRIBUTING.md` and `RELEASING.md`: layout, manifest fields, description languages, version rule, validation commands, documentation languages, Git workflow, review and security
+- [ ] 2.6 Complete the kit's `README.md` in `{DOC_LANGUAGE}`: installation, access check, updates, team-repository scope, plugin table, layout, contributing and security; then one `README.<lang>.md` per `{DOC_TRANSLATIONS}` with the same structure
+- [ ] 2.7 Create `TODO.md` (the kit ships none), and `CHANGELOG.md` from the kit's `templates/CHANGELOG.multinational.md` or `templates/CHANGELOG.regional.md`, as `{FORMAT_MODE}` declares (UTC or `{LOCAL_TZ}`)
 - [ ] 2.8 Run `claude plugin validate .`
 
 ## 3. Shared rules

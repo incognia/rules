@@ -5,7 +5,7 @@ description: "Estándares, filosofía y cadenas de razonamiento (CoT) que guían
 
 # Reglas técnicas: prompts y CoT para acelerar el contexto de los LLM
 
-*Última modificación: 27 de noviembre de 2026, 15:32 (CST)*
+*Última modificación: 27 de noviembre de 2026, 16:11 (CST)*
 
 [![CI](https://github.com/incognia/rules/actions/workflows/ci.yaml/badge.svg)](https://github.com/incognia/rules/actions/workflows/ci.yaml)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
@@ -68,7 +68,7 @@ npm --prefix ~/rules run hooks:install
   - Los *workflows* que el *script* instaló antes y ya no existen en el repositorio se eliminan
 - `cot/`, `rulesets/` y `templates/` se copian a `~/rules/` solo si el repositorio está clonado en otra ruta; si el clon ya vive en `~/rules/`, no se copia nada
 - `scripts/atlassian/` y el `.env` local (credenciales Atlassian, permisos 600) también se copian a `~/rules/` en ese caso; el resto de `scripts/` no se copia y se ejecuta directo desde el repositorio
-- El `.env` nunca se versiona: se crea a partir de `.env.example` y guarda credenciales y datos sensibles (sitios de Atlassian, IP e infraestructura de los ambientes, datos de contacto). El repositorio es público, así que los archivos versionados solo llevan marcadores como `<client_ip>` o `{GATEWAY_IP}`
+- El `.env` nunca se versiona: se crea a partir de `.env.example` y guarda credenciales y datos sensibles (sitios de Atlassian, identificadores de la aplicación de Graph, la instancia de HedgeDoc, IP e infraestructura de los ambientes, datos de contacto). `sync_global.sh` lo refleja en la sección `RULES_ENV` de `~/.secrets.yaml`. El repositorio es público, así que los archivos versionados solo llevan marcadores como `<client_ip>` o `{GATEWAY_IP}`
 - Para actualizar después de un `git pull`, solo ejecuta: `~/rules/scripts/sync_global.sh`
 - `cot/`, `rulesets/` y `templates/` se acceden por ruta canónica, sin enlace simbólico (`~/rules/cot/`, `~/rules/rulesets/`); la excepción es la exportación de *skills* a Claude Code arriba, que sí usa un enlace simbólico
 
@@ -170,7 +170,10 @@ flowchart LR
 - **[LATEX.md](./rulesets/LATEX.md)** - reglas de generación de documentos LaTeX con XeLaTeX
 - **[VAULT.md](./rulesets/VAULT.md)** - reglas de operación con HashiCorp Vault CLI
 - **[docs/MAIL.md](./docs/MAIL.md)** - envío de correo desde CLI (modos owa, mac, graph y token; configuración de Graph API y ciclo de vida del *token*)
-- **[docs/SYNC.md](./docs/SYNC.md)** - mecanismo de sincronización global de `sync_global.sh`
+- **[docs/SYNC.md](./docs/SYNC.md)** - mecanismo de sincronización global de `sync_global.sh` y `sync_global.ps1`, y espejo del `.env` en `~/.secrets.yaml`
+- **[marketplace/README.md](./marketplace/README.md)** - especificación genérica de un *marketplace* de *plugins* de Claude Code y su kit de arranque (bajo MIT)
+- **[SECURITY.md](./SECURITY.md)** - cómo reportar una vulnerabilidad y dónde viven los datos sensibles
+- **[NOTICE](./NOTICE)** - qué queda fuera de la GPLv3: marcas, firma y la carpeta `marketplace/` (MIT)
 - **[CHANGELOG.md](./CHANGELOG.md)** - historial de cambios del proyecto
 
 ## Especialización técnica
@@ -190,7 +193,7 @@ La mayoría de las reglas en este repositorio tienen una **dualidad de contextos
 
 | Aspecto | Personal (`@incognia`) | Laboral (`@incogniadev`) |
 |---------|------------------------|---------------------------|
-| **Licenciamiento** | GPLv3 (copyleft) | MIT (permisiva) |
+| **Licenciamiento** | GPLv3 (*copyleft*) de forma predeterminada; MIT cuando así lo decido | MIT (permisiva), con el empleador como titular |
 | **Autoría** | Rodrigo Álvarez (@incognia) | Rodrigo Álvarez (@incogniadev) |
 | **Correo** | [incognia@gmail.com](mailto:incognia@gmail.com) | [ralvarez@kabatone.com](mailto:ralvarez@kabatone.com) |
 | **Llave SSH (repositorios)** | ~/.ssh/incognia | ~/.ssh/kone |
@@ -218,7 +221,7 @@ Esta es la clasificación canónica de los *rulesets*; PHILOSOPHY.md la enlaza e
 
 ### 4. Reglas de uso dual (diferentes aplicaciones según contexto)
 
-- **LICENSING.md**: define qué licencia usar según el contexto (personal: GPLv3, laboral: MIT)
+- **LICENSING.md**: define qué licencia usar según el contexto (personal: GPLv3 de forma predeterminada o MIT; laboral: MIT, con el empleador como titular)
 - **CORPORATE.md**: perfil profesional adaptado a cada entorno
 - **TEACHING.md**: perfil educativo y de divulgación científica
 
@@ -271,7 +274,7 @@ sequenceDiagram
 - **docs/** — documentación de procesos (`MAIL.md` y `SYNC.md`)
 - **marketplace/** — especificación genérica en OpenSpec de un *marketplace* de *plugins* y *skills* de Claude Code para cualquier organización, con un kit de arranque copiable en [marketplace/kit/](./marketplace/kit/README.md); toda la carpeta va bajo licencia MIT (ver [marketplace/README.md](./marketplace/README.md))
 - **.githooks/** — *hooks* de git del repositorio (puerta del CHANGELOG, lint y formato de *commits*); se activan con `npm run hooks:install`
-- **.github/** — integración continua (lint, ShellCheck, Python y gitleaks), revisión semanal de ligas y Dependabot
+- **.github/** — integración continua (lint, ShellCheck, sintaxis de Python, pruebas de los *scripts*, verificación de `marketplace/` y gitleaks), revisión semanal de ligas y Dependabot
 - **.agents/skills/** — *skills* descubribles por agentes IA (ejemplos con `/` de Claude Code, Copilot y Antigravity; en Codex usa `$`):
   - `/commit` — flujo completo de *commits* atómicos con CHANGELOG obligatorio, mensaje en inglés internacional (UK) y atribución `Co-Authored-By` detectada de la sesión activa con `scripts/commit_trailer.py` (Claude Code, Codex, Copilot CLI y Antigravity CLI `agy`)
   - `/hedgedoc-commit` — flujo de *commits* para contribuir a `hedgedoc/hedgedoc` (firma DCO, estilo de mensajes de arriba, CHANGELOG por paquete solo para cambios visibles y sin *push* automático); sustituye a `/commit` y `/changelogger` en ese repositorio
@@ -282,7 +285,7 @@ sequenceDiagram
   - `/linguistics <archivo>` — aplicar reglas de español mexicano
   - `/context` — detección rápida de contexto de proyecto
   - `/backup` — respaldo con nomenclatura estándar
-  - `/licensing` — licenciamiento automático (GPLv3 vs MIT)
+  - `/licensing` — licenciamiento según el contexto (laboral: MIT a nombre del empleador; personal: GPLv3 o MIT)
   - `/git-init <personal|laboral> <llave> <url> <rama>` — inicializar repo con SSH (mismos argumentos que `scripts/git-init-context.sh`)
   - `/ssh-import <faraday|cad>` — importar llave SSH desde GitHub a un servidor
   - `/mail <owa|mac|graph> <delivery|generic> <asunto>` o `/mail token` — componer y enviar correo HTML compatible con OWA, o revisar el *token* de Graph
@@ -290,7 +293,7 @@ sequenceDiagram
   - `/styling <hedgedoc|gitlab|github> [mit|gpl] <archivo>` — aplicar estilo Kabat One a un documento Markdown
   - `/kube <llave> <usuario> <ip> <namespace>` — analizar el estado de un clúster Kubernetes vía SSH
   - `/kubetbs <llave> <usuario> <ip> <namespace> <servicio>` — diagnosticar un microservicio en Kubernetes
-  - `/aws-naming <directorio|archivo>` — normalizar nombres de archivos para S3 y CloudFront
+  - `/aws-naming <carpeta|archivo>` — normalizar nombres de archivos para S3 y CloudFront
   - `/sdd-readiness <enlace a Confluence>` — evaluar si una especificación está lista para ejecutarse con OpenSpec, incluida Platform Readiness
 - **.warp/workflows/** — comandos parametrizados YAML (`Ctrl+Shift+R` en Warp):
   - `backup_file` — respaldar archivo o carpeta
@@ -305,12 +308,13 @@ sequenceDiagram
 - Atribución de *commits*: `scripts/commit_trailer.py` (imprime el *trailer* `Co-Authored-By` del modelo de la sesión activa en Claude Code, Codex, Copilot CLI o Antigravity CLI `agy`; `--tool` fuerza la herramienta; `--message-file` imprime la ruta del archivo de mensaje propio de la sesión, para que dos sesiones en paralelo no compartan `/tmp/commit-msg.txt`)
 - Verificación de *pull requests*: `scripts/check-pr.sh --base <rama>` (comprueba las puertas de `/commit` y `/changelogger`; se configura por proyecto con `.github/pr-check.conf`; pruebas en `scripts/tests/check-pr.test.sh`)
 - Verificación del *marketplace*: `scripts/check-marketplace.sh` (valida las *specs* con OpenSpec, su sincronía con el *change* y el kit de arranque; también corre en el CI)
+- Secretos: `scripts/sync_secrets.py` (refleja el `.env` en la sección `RULES_ENV` de `~/.secrets.yaml`, sin imprimir valores; `--check` solo comprueba; `sync_global.sh` lo ejecuta)
 - Fecha CST: scripts/cst_date.sh
-- Correo vía Graph API: scripts/graph_auth.py (autenticación y caché de *token*)
+- Correo vía Graph API: scripts/graph_auth.py (autenticación y caché de *token*; lee `GRAPH_CLIENT_ID` y `GRAPH_TENANT_ID` del `.env`)
 - Confluence: scripts/atlassian/ (`confluence-management.sh` para páginas, adjuntos, comentarios al pie y respuestas en ADF, y `find-marked` para ubicar un hilo marcado; `adf_lib.py` para construir y leer ADF; credenciales en `.env`)
 - Respaldos:
-  - scripts/quick_bkp.sh (copia rápida en el mismo directorio: `archivo_YYYY-MM-DD.ext.bkp`)
-  - scripts/backup_file.sh (archivos/directorios, .tar.zst, *checksum* >=100 MB, log CST)
+  - scripts/quick_bkp.sh (copia rápida en la misma carpeta: `archivo_YYYY-MM-DD.ext.bkp`)
+  - scripts/backup_file.sh (archivos y carpetas, .tar.zst, *checksum* >=100 MB, log CST)
   - scripts/backup_rsync_snapshot.sh (incrementales diarios con rsync --link-dest)
   - scripts/verify_backups.sh (verificación masiva de .sha256)
 
@@ -344,7 +348,7 @@ TZ=CST6 date +"%Y-%m-%d"
 
 # Fecha y hora (CST) legible
 TZ=CST6 date '+%F %H:%M %Z'
-LC_TIME=es_MX.UTF-8 TZ=CST6 date '+%d de %B de %Y, %H:%M (%Z)'
+LC_TIME=es_MX.UTF-8 TZ=CST6 date '+%-d de %B de %Y, %H:%M (%Z)'
 
 # Verificar cálculo correcto comparando UTC vs CST
 echo "UTC: $(date -u '+%H:%M')" && echo "CST: $(TZ=CST6 date '+%H:%M')"
@@ -369,7 +373,7 @@ Estos documentos sirven como referencia para mantener consistencia en:
 
 ---
 
-*Este proyecto fue elaborado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE. Los logotipos de Kabat One y las imágenes de firma de `templates/mail/assets/` quedan excluidos de la GPLv3: consulta el archivo NOTICE.*
+*Este proyecto fue elaborado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE. Los logotipos de Kabat One y las imágenes de firma de `templates/mail/assets/` quedan excluidos de la GPLv3, y la carpeta `marketplace/` se distribuye bajo MIT: consulta el archivo NOTICE.*
 
 *Copyright © 2026, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*
 

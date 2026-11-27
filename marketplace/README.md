@@ -1,6 +1,6 @@
 # *Marketplace* de *plugins* para Claude Code: especificación genérica
 
-*Última modificación: 27 de noviembre de 2026, 15:34 (CST)*
+*Última modificación: 27 de noviembre de 2026, 16:11 (CST)*
 
 Proyecto de OpenSpec que especifica cómo construir **desde cero** un *marketplace* de *plugins* y *skills* de Claude Code para cualquier organización o proyecto. Nace de llevar a *plugins* reutilizables las *skills* personales de este repositorio (`.agents/skills/`, `cot/` y `rulesets/`) y toma como referencia de resultado el *marketplace* `k1`, que es solo un ejemplo de instancia, no un requisito.
 
