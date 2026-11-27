@@ -24,7 +24,7 @@ Pasos:
    CONDICIÓN DE SESIÓN: si ya ejecutaste este paso con éxito en esta misma sesión de conversación, omítelo y continúa en el paso 1. No repitas la validación dentro de la misma sesión.
    Comandos obligatorios:
 
-   - `git config --list | grep -E "^(user\.(name|email)|core\.sshCommand|remote\.origin)"`
+   - `git config --list | grep -iE "^(user\.(name|email)|core\.sshCommand|remote\.origin)"` (`-i` porque `git config --list` escribe las claves en minúsculas, `core.sshcommand`)
    - `git remote -v` para verificar las URL de los remotos
    - Mostrar la identidad activa en pantalla:
 

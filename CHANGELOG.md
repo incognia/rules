@@ -5,6 +5,7 @@
 <!-- markdownlint-disable MD013 MD024 MD022 MD032 -->
 ## [2026-11-27] - Especificar un *marketplace* genérico de *plugins* para Claude Code
 
+- fix: hacer que la validación de identidad del paso 0 de `cot/committing.md` no distinga mayúsculas (`grep -iE`), porque `git config --list` escribe las claves en minúsculas (`core.sshcommand`) y el filtro anterior no encontraba `core.sshCommand`
 - docs: agregar las ocho *specs* canónicas de `marketplace/openspec/specs/` (`marketplace-repository`, `cross-cutting-rules`, `plugin-git`, `plugin-ai`, `plugin-sdd`, `plugin-llm`, `plugin-security` y `plugin-provision`), resultado de archivar el *change* `bootstrap-skill-marketplace`, que no se archiva porque es la plantilla de cada instancia, y `marketplace/README.md` en español mexicano; los valores propios de cada organización son parámetros entre llaves y el repositorio no lleva direcciones, máquinas ni rutas de secretos internas porque es público
 - feat: agregar `marketplace/`, un proyecto de OpenSpec que especifica desde cero un *marketplace* de *plugins* y *skills* de Claude Code para cualquier organización, con el *change* `bootstrap-skill-marketplace` (`marketplace/openspec/changes/bootstrap-skill-marketplace/`: *proposal*, *design*, *tasks*, `.openspec.yaml` y los deltas por capacidad), `marketplace/openspec/config.yaml`, `marketplace/openspec/.markdownlint.yaml` y `marketplace/openspec/changes/archive/.gitkeep`
 
