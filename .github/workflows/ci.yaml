@@ -37,6 +37,14 @@ jobs:
           find scripts -type f -name '*.sh' -print0 | xargs -0 shellcheck -x -P SCRIPTDIR
           find .githooks -type f -print0 | xargs -0 shellcheck -x -P SCRIPTDIR
 
+  tests:
+    name: Script tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Run the check-pr.sh test suite
+        run: bash scripts/tests/check-pr.test.sh
+
   python:
     name: Python syntax
     runs-on: ubuntu-latest
