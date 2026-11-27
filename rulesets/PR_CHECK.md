@@ -78,15 +78,15 @@ jobs:
   conventions:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           repository: incognia/rules
-          ref: main            # fija una etiqueta o un SHA
+          ref: v0.2.0          # una etiqueta o un SHA, nunca main
           path: .rules
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: '22'   # OpenSpec requiere Node.js 20.19 o superior
       - name: Check the pull request
@@ -109,7 +109,7 @@ El título y el cuerpo son texto no confiable: se pasan por el entorno y nunca s
 - La detección del inglés es una heurística de caracteres (acentos, «ñ», signos de apertura): un asunto en español sin acentos no se detecta.
 - G5 reconoce frases de mantenimiento en inglés (un verbo como `update`, `edit` o `add` junto a «changelog»): una paráfrasis poco común puede escaparse, y una frase legítima muy parecida a una de ellas puede marcarse. Para hablar de esas frases sin activar la puerta, cítalas entre comillas dobles, comillas invertidas o comillas angulares: el texto citado se ignora (las comillas simples no, porque también son apóstrofos).
 - Un PR puede modificar el *script* de su propio proyecto, su configuración o su flujo. El *script* avisa (`WARN`) cuando un PR toca `.github/` o las comprobaciones. Un PR que pasa de verdad es el que corre con el *script* de `rules` fijado a una versión y con la regla de protección de la rama principal activa en GitHub.
-- Los patrones de archivos ajenos son generales (`bin/`, `obj/`, `*.log`, `*.exe`…); un directorio legítimo con ese nombre exige quitar o ajustar el patrón.
+- Los patrones de archivos ajenos son generales (`bin/`, `obj/`, `*.log`, `*.exe`…); una carpeta legítima con ese nombre exige quitar o ajustar el patrón.
 
 ## 7. Relación con los *hooks*
 
