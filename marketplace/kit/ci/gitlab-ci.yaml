@@ -1,0 +1,33 @@
+# Example CI for a marketplace hosted on GitLab. Copy to .gitlab-ci.yml.
+# Images are glibc-based slim images with an explicit version, never musl-based ones.
+# Check that `claude plugin validate` runs unauthenticated on your runner before relying on it.
+stages: [check]
+
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+validate:
+  stage: check
+  image: node:22-slim
+  script:
+    - npm install --global @anthropic-ai/claude-code
+    - claude plugin validate .
+    - for plugin in plugins/*/; do claude plugin validate "./$plugin"; done
+
+scripts:
+  stage: check
+  image: python:3.14-slim
+  script:
+    - for copy in plugins/*/scripts/python_check.py; do cmp scripts/python_check.py "$copy"; done
+    - find . -name '*.py' -print0 | xargs -0 python3 -m py_compile
+    - python3 -m unittest discover -s tests
+
+secrets:
+  stage: check
+  image:
+    name: zricethezav/gitleaks:v8.30.1
+    entrypoint: [""]
+  script:
+    - gitleaks detect --redact --no-banner

@@ -1,0 +1,11 @@
+{
+  "project_mode": "corporate",
+  "org": "Example Organisation",
+  "licence_holder": "Example Organisation Ltd",
+  "licences": ["MIT"],
+  "email_domains": ["example.com"],
+  "company_fields": ["team", "role", "job_title", "email_signature"],
+  "format_mode": "multinational",
+  "local_tz": null,
+  "region_language": null
+}

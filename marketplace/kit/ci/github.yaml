@@ -1,0 +1,54 @@
+# Example CI for a marketplace hosted on GitHub. Copy to .github/workflows/ci.yaml.
+# Check that `claude plugin validate` runs unauthenticated on your runner before relying on it.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Plugin validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - run: npm install --global @anthropic-ai/claude-code
+      - name: Validate the catalogue and every plugin
+        run: |
+          claude plugin validate .
+          for plugin in plugins/*/; do claude plugin validate "./$plugin"; done
+
+  scripts:
+    name: Script checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"
+      - name: Compare every copy of python_check.py
+        run: |
+          for copy in plugins/*/scripts/python_check.py; do cmp scripts/python_check.py "$copy"; done
+      - name: Compile and test
+        run: |
+          find . -name '*.py' -print0 | xargs -0 python3 -m py_compile
+          python3 -m unittest discover -s tests
+
+  secrets:
+    name: Secret scanning
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v3.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

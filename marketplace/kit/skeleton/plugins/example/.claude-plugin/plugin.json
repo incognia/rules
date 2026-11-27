@@ -1,0 +1,9 @@
+{
+  "name": "example",
+  "version": "0.1.0",
+  "description": "Minimal example plugin: one inline skill and one forked skill / Plugin mínimo de ejemplo: una skill en línea y una en subagente",
+  "license": "MIT",
+  "author": {
+    "name": "Example Organisation"
+  }
+}

@@ -1,0 +1,19 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+id_*
+
+# Python
+__pycache__/
+*.pyc
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/
+
+# Generated catalogue page
+public/

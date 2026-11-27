@@ -1,0 +1,11 @@
+{
+  "project_mode": "personal",
+  "org": "Your Name",
+  "licence_holder": "Your Name",
+  "licences": ["GPL-3.0-or-later", "MIT"],
+  "email_domains": [],
+  "company_fields": [],
+  "format_mode": "regional",
+  "local_tz": "CST6",
+  "region_language": "es-MX"
+}
