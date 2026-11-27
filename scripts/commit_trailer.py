@@ -3,6 +3,8 @@
 
 Supports Codex, Claude Code, GitHub Copilot CLI, and Google Antigravity CLI (agy).
 Reads only the active session; config defaults and Git history are never used.
+With --message-file it prints instead the path of the session's own commit message file,
+so parallel sessions on one machine never share /tmp/commit-msg.txt.
 """
 
 import argparse
@@ -12,6 +14,7 @@ from pathlib import Path
 import re
 import sqlite3
 import sys
+import tempfile
 
 ID_RE = r"[A-Za-z0-9_-]+"
 EFFORT_RE = r"[A-Za-z0-9][A-Za-z0-9_-]*"
@@ -344,6 +347,22 @@ def antigravity_identity(app_data_dir, conv_id, explicit_agent=None, explicit_ef
     return format_trailer(prefix, model, effort, ANTIGRAVITY_EMAIL), bool(effort)
 
 
+# ---------------------------------------------------------------- message file
+
+def message_file(tool, args):
+    """Return <tmp>/<tool>-<session-id>-commit.txt for the active session."""
+    session_ids = {
+        "codex": args.thread_id,
+        "claude": args.session_id,
+        "copilot": args.copilot_session_id,
+        "antigravity": args.conversation_id,
+    }
+    session_id = session_ids[tool]
+    if not session_id or not re.fullmatch(ID_RE, session_id):
+        raise ValueError(f"active {tool} session has no valid session ID for the message file")
+    return Path(tempfile.gettempdir()) / f"{tool}-{session_id}-commit.txt"
+
+
 # ---------------------------------------------------------------- CLI
 
 def main():
@@ -408,11 +427,19 @@ def main():
         help="reasoning effort when the session does not record it (Claude Code defaults to CLAUDE_EFFORT; "
         "Antigravity to ANTIGRAVITY_EFFORT or AGY_EFFORT, used only if the model label has no effort)",
     )
+    parser.add_argument(
+        "--message-file",
+        action="store_true",
+        help="print the path of this session's commit message file instead of the trailer",
+    )
     args = parser.parse_args()
     try:
         tool = args.tool or detect_tool()
         if tool == "agy":
             tool = "antigravity"
+        if args.message_file:
+            print(message_file(tool, args))
+            return 0
         if tool == "codex":
             trailer, effort_known = codex_trailer(codex_context(args.sessions_dir, args.thread_id))
         elif tool == "claude":
