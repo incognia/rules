@@ -1,0 +1,5 @@
+# OpenSpec writes requirements and scenarios with no blank line after their headings
+# and before their WHEN/THEN lists; keep the repository's rules otherwise.
+extends: ../../.markdownlint.yaml
+MD022: false
+MD032: false

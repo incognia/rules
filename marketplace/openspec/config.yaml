@@ -1,0 +1,36 @@
+schema: spec-driven
+
+# Generic specification of a Claude Code plugin marketplace, written to be replicated in any
+# organisation or project. Each instance sets the parameters below; the specs never name a
+# concrete organisation, host, address, secret path or internal project.
+context: |
+  This OpenSpec project specifies how to build, from scratch, a marketplace of Claude Code
+  plugins and skills for any organisation or project. It is generic: every
+  organisation-specific value is a parameter written as an upper-case placeholder in braces
+  and backticks, for example `{MARKETPLACE}` or `{EMAIL_DOMAINS}`. The parameter table, with
+  the reference instance `k1` as an example, lives in
+  changes/bootstrap-skill-marketplace/design.md.
+
+  Origin: the personal skills and rulesets of the `rules` repository (.agents/skills/,
+  cot/, rulesets/) carried into reusable plugins. Reference result: the `k1` marketplace,
+  which is an example instance, never a requirement.
+
+  Language: every OpenSpec artifact (specs, proposal, design, tasks) is written in
+  international English (UK): -ise/-isation, colour, behaviour, licence (noun), catalogue.
+
+  Never write into a spec, design or task an internal address, host name, secret path,
+  token, personal email, client name or internal project name: the repository that holds
+  these specs is public. Use a parameter or a placeholder such as `<host>` instead.
+
+rules:
+  proposal:
+    - State which plugins the change adds or alters and which parameters it introduces
+  specs:
+    - One capability per plugin (plugin-<name>), plus marketplace-repository and cross-cutting-rules
+    - Use parameters in braces for every organisation-specific value; give concrete values only as examples of an instance
+    - Keep each requirement description at 500 characters or fewer; put examples and edge cases in scenarios
+  design:
+    - Record every parameter with its meaning and the value of the reference instance
+    - Trace each skill to its origin in the rules repository, or mark it as new
+  tasks:
+    - Group tasks by plugin, in the order a new instance builds them: parameters, repository, shared rules, git, the other plugins, CI and verification
