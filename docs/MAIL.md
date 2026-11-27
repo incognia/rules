@@ -28,7 +28,7 @@ Documenta los tres flujos disponibles para componer y enviar correos HTML desde 
 - Aplicación registrada en Microsoft Entra (ver pasos abajo)
 - Python 3 y `curl` instalados
 - Imagen de firma en `~/rules/templates/mail/assets/ralvarez_firma_740.png`
-- Credenciales en `~/.secrets.yaml` bajo la clave `GRAPH_API`
+- Credenciales de la aplicación: `GRAPH_CLIENT_ID` y `GRAPH_TENANT_ID` en `~/rules/.env` (plantilla en `.env.example`)
 
 ---
 
@@ -91,7 +91,7 @@ Microsoft Graph no inyecta la firma configurada en Outlook. Debes incluir la ima
 
 ### Configuración inicial (una sola vez)
 
-## Paso 1: registra la aplicación en Microsoft Entra
+#### Paso 1: registra la aplicación en Microsoft Entra
 
 1. Abre [entra.microsoft.com](https://entra.microsoft.com) e inicia sesión con tu cuenta corporativa
 2. Ve a **Entra ID → Registros de aplicaciones → Nuevo registro**
@@ -104,7 +104,7 @@ Microsoft Graph no inyecta la firma configurada en Outlook. Debes incluir la ima
    - **Id. de aplicación (cliente)**: tu `CLIENT_ID`
    - **Id. de directorio (inquilino)**: tu `TENANT_ID`
 
-## Paso 2: agrega permisos de API
+#### Paso 2: agrega permisos de API
 
 1. En la aplicación registrada, ve a **Permisos de API**
 2. Haz clic en **Agregar un permiso → Microsoft Graph → Permisos delegados**
@@ -115,7 +115,7 @@ Microsoft Graph no inyecta la firma configurada en Outlook. Debes incluir la ima
 
 Los tres permisos deben quedar como **Delegada** y con **«No»** en la columna «Se necesita consentimiento de administrador».
 
-## Paso 3: habilita flujos de cliente público
+#### Paso 3: habilita flujos de cliente público
 
 1. Ve a **Autenticación** en el menú lateral de la aplicación
 2. Abre la pestaña **Configuración**
@@ -124,7 +124,7 @@ Los tres permisos deben quedar como **Delegada** y con **«No»** en la columna 
 
 > **Nota:** si el *toggle* no guarda correctamente (error `invalid_client` al autenticar), ve a **Manifiesto**, busca `"allowPublicClient"` y cámbialo a `true` manualmente.
 
-## Paso 4: autenticación por *device code flow*
+#### Paso 4: autenticación por *device code flow*
 
 Desde la terminal, solicita un código de dispositivo:
 
@@ -149,7 +149,7 @@ curl -s -X POST \
 
 La respuesta contiene un `access_token` válido (típicamente por una hora) y un `refresh_token` para renovarlo.
 
-## Paso 5: envía correo vía Microsoft Graph
+#### Paso 5: envía correo vía Microsoft Graph
 
 Usa el *endpoint* `/me/sendMail` con el *token* obtenido:
 
@@ -193,7 +193,7 @@ En el HTML del correo, referencia la firma como imagen *inline*:
 
 ## Valores de la aplicación registrada
 
-Los valores de `CLIENT_ID`, `TENANT_ID` y demás parámetros de la aplicación están en `~/.secrets.yaml` bajo la clave `GRAPH_API`.
+Los valores de la aplicación viven en el `.env` no versionado: `GRAPH_CLIENT_ID` y `GRAPH_TENANT_ID` en `~/rules/.env`. `scripts/sync_secrets.py` los refleja, con el resto del `.env`, en la sección `RULES_ENV` de `~/.secrets.yaml`.
 
 ---
 
@@ -234,13 +234,13 @@ flowchart TD
 
 - **`scripts/graph_auth.py`** — lógica de autenticación (caché → *refresh* → *device code*)
 - **`~/.graph_tokens.json`** — caché de tokens (permisos 600, no se versiona)
-- **`~/.secrets.yaml`** — `CLIENT_ID` y `TENANT_ID` bajo la clave `GRAPH_API`
+- **`~/rules/.env`** — `GRAPH_CLIENT_ID` y `GRAPH_TENANT_ID` (reflejados en `~/.secrets.yaml`)
 
 ---
 
 ## Notas técnicas
 
-- **SMTP AUTH**: deprecado por Microsoft a partir del 1 de marzo de 2026, con deshabilitación completa el 30 de abril de 2026. El modo `graph` es el reemplazo oficial.
+- **SMTP AUTH**: Microsoft lo retiró por etapas entre el 1 de marzo y el 30 de abril de 2026. El modo `graph` es el reemplazo oficial.
 - **Firma en cada modo**: `owa` y `mac` delegan la firma a Outlook; `graph` la incluye como adjunto *inline* CID.
 - **Plantillas HTML**: las reglas de composición (estilos *inline*, `bgcolor` en `<td>`, sin CSS externo) están en `rulesets/MAIL.md`.
 - **Invocación**: usa el *skill* `/mail <token|owa|mac|graph> <delivery|generic> <asunto>`.

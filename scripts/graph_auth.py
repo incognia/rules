@@ -16,7 +16,8 @@ Token lifecycle:
     3. Fall back to device code flow only if there is no valid refresh_token
 
 Token cache: ~/.graph_tokens.json (created with mode 600, never printed)
-Credentials: ~/.secrets.yaml under GRAPH_API key (CLIENT_ID and TENANT_ID)
+Credentials: GRAPH_CLIENT_ID and GRAPH_TENANT_ID in ~/rules/.env (legacy fallback:
+~/.secrets.yaml under the GRAPH_API key)
 """
 
 import urllib.request
@@ -29,7 +30,8 @@ import sys
 import time
 
 TOKEN_CACHE = os.path.expanduser("~/.graph_tokens.json")
-SECRETS_FILE = os.path.expanduser("~/.secrets.yaml")
+ENV_FILE = os.path.expanduser("~/rules/.env")
+SECRETS_FILE = os.path.expanduser("~/.secrets.yaml")  # legacy fallback
 SCOPE = "offline_access https://graph.microsoft.com/Mail.Send"
 TIMEOUT = 30
 
@@ -42,20 +44,39 @@ def _post(url, fields):
         return json.loads(resp.read())
 
 
+def _read_env():
+    """Read GRAPH_CLIENT_ID and GRAPH_TENANT_ID from ~/rules/.env; None when absent."""
+    try:
+        with open(ENV_FILE) as f:
+            content = f.read()
+    except OSError:
+        return None
+    values = {}
+    for key in ("GRAPH_CLIENT_ID", "GRAPH_TENANT_ID"):
+        found = re.search(rf"^(?:export[ \t]+)?{key}=[\"']?([^\s\"'#]+)", content, re.MULTILINE)
+        if not found:
+            return None
+        values[key] = found.group(1)
+    return values["GRAPH_CLIENT_ID"], values["GRAPH_TENANT_ID"]
+
+
 def _read_secrets():
-    """Read CLIENT_ID and TENANT_ID from ~/.secrets.yaml."""
+    """Read the client and tenant IDs: ~/rules/.env first, then the legacy ~/.secrets.yaml."""
+    from_env = _read_env()
+    if from_env:
+        return from_env
     try:
         with open(SECRETS_FILE) as f:
             content = f.read()
-    except OSError as exc:
-        raise SystemExit(f"Cannot read {SECRETS_FILE}: {exc.strerror}")
+    except OSError:
+        raise SystemExit(f"Set GRAPH_CLIENT_ID and GRAPH_TENANT_ID in {ENV_FILE} (template: .env.example)")
     match = re.search(r"^GRAPH_API:[ \t]*\n((?:[ \t]+.*\n?|[ \t]*\n)*)", content, re.MULTILINE)
     block = match.group(1) if match else ""
     values = {}
     for key in ("CLIENT_ID", "TENANT_ID"):
         found = re.search(rf"^[ \t]+{key}:[ \t]*[\"']?([^\s\"'#]+)", block, re.MULTILINE)
         if not found:
-            raise SystemExit(f"Missing GRAPH_API.{key} in {SECRETS_FILE}")
+            raise SystemExit(f"Set GRAPH_CLIENT_ID and GRAPH_TENANT_ID in {ENV_FILE} (template: .env.example)")
         values[key] = found.group(1)
     return values["CLIENT_ID"], values["TENANT_ID"]
 

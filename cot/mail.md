@@ -15,7 +15,7 @@ Razonamiento:
 - Las plantillas están en `~/rules/templates/mail/` (`delivery_template.html` y `generic_template.html`).
 - Hay cuatro modos: tres de entrega, `owa` (copiar y pegar), `mac` (AppleScript y Outlook) y `graph` (Microsoft Graph API), más `token`, que solo autentica y guarda en caché el *token* de Graph para los envíos con `graph`.
 - Referencia de composición: «~/rules/rulesets/MAIL.md» ([../rulesets/MAIL.md](../rulesets/MAIL.md)).
-- Credenciales de Graph API: `~/.secrets.yaml` (clave `GRAPH_API`).
+- Credenciales de Graph API: `GRAPH_CLIENT_ID` y `GRAPH_TENANT_ID` en `~/rules/.env`.
 
 Pasos:
 
@@ -70,7 +70,7 @@ Pasos:
 
 - **`owa`**: indica al usuario «abrir en navegador → Ctrl+A → Ctrl+C → pegar en OWA». No incluir firma (OWA la agrega).
 - **`mac`**: abre un borrador en Outlook vía AppleScript (`open newMsg`, nunca `send`). No incluir firma (Outlook la inyecta). Indicar al usuario enviar con ⌘+Enter.
-- **`graph`**: incluir firma como imagen CID *inline*. Obtener el *token* con `get_token(interactive=False)` de `~/rules/scripts/graph_auth.py`, que reutiliza o renueva en silencio la caché `~/.graph_tokens.json` y, si no puede, termina pidiendo `/mail token` (`python3 ~/rules/scripts/graph_auth.py`, que inicia el *device code flow* con las credenciales de `~/.secrets.yaml`, clave `GRAPH_API`). Enviar con `POST /me/sendMail`. Guardar también el HTML como respaldo.
+- **`graph`**: incluir firma como imagen CID *inline*. Obtener el *token* con `get_token(interactive=False)` de `~/rules/scripts/graph_auth.py`, que reutiliza o renueva en silencio la caché `~/.graph_tokens.json` y, si no puede, termina pidiendo `/mail token` (`python3 ~/rules/scripts/graph_auth.py`, que inicia el *device code flow* con `GRAPH_CLIENT_ID` y `GRAPH_TENANT_ID` de `~/rules/.env`). Enviar con `POST /me/sendMail`. Guardar también el HTML como respaldo.
    Resultado: correo entregado o borrador abierto.
 
 Conclusión:

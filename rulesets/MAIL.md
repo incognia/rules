@@ -125,7 +125,7 @@ Si falta alguna variable, preguntar el valor al usuario; no inventarlo.
 ## Envío vía Microsoft Graph API
 
 - Autenticación: `~/rules/scripts/graph_auth.py` (caché → *refresh* → *device code flow*)
-- Credenciales: `~/.secrets.yaml` (clave `GRAPH_API`)
+- Credenciales: `GRAPH_CLIENT_ID` y `GRAPH_TENANT_ID` en `~/rules/.env`
 - Firma *inline*: `~/rules/templates/mail/assets/ralvarez_firma_740.png` como adjunto CID
 - Documentación detallada del registro en Entra y flujo OAuth2: `~/rules/docs/MAIL.md`
 
