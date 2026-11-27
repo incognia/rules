@@ -39,7 +39,7 @@ Pasos:
    Este paso solo elige el modo: ningún modo escribe hasta tener `DATE_CST` (paso 1) y el idioma (paso 4).
    Decisión (tabla cerrada, sin criterio subjetivo):
    (a) No existe → **modo creación**: escribir el archivo con el encabezado canónico del paso 4 y un bloque `## [DATE_CST]`.
-   (b) Existe, NO versionado y NO canónico → **modo normalización**: reescribir el archivo completo con el encabezado canónico y convertir su contenido en viñetas tipadas dentro de un único bloque `## [DATE_CST]`, en el orden de los *commits* atómicos (paso 6b). Se descartan secciones `[Unreleased]`/`[Sin publicar]`, subencabezados `### Added`/`### Añadido` y viñetas de cambios que ningún *commit* llevará (por ejemplo, directorios vacíos, que Git no versiona). Aquí sí se permiten líneas eliminadas: el archivo no tiene historial que proteger.
+   (b) Existe, NO versionado y NO canónico → **modo normalización**: reescribir el archivo completo con el encabezado canónico y convertir su contenido en viñetas tipadas dentro de un único bloque `## [DATE_CST]`, en el orden de los *commits* atómicos (paso 6b). Se descartan secciones `[Unreleased]`/`[Sin publicar]`, subencabezados `### Added`/`### Añadido` y viñetas de cambios que ningún *commit* llevará (por ejemplo, carpetas vacías, que Git no versiona). Aquí sí se permiten líneas eliminadas: el archivo no tiene historial que proteger.
    (c) Existe y canónico (versionado o no) → modo inserción incremental (pasos 1 en adelante).
    (d) Existe, versionado y NO canónico → detenerse y reportar las desviaciones; no reescribir sin instrucción explícita del usuario, porque borrar historial versionado requiere confirmación.
    Idempotencia (OBLIGATORIA en todos los modos): antes de agregar una viñeta, comprobar si el bloque `DATE_CST` ya contiene una viñeta del mismo tipo para el mismo cambio (mismo archivo y mismo propósito); si existe, no duplicarla. Una segunda corrida sin cambios nuevos en el árbol de trabajo no produce diff, y dos corridas sobre el mismo estado producen el mismo archivo.
@@ -83,6 +83,7 @@ Pasos:
    Resultado: encabezado conforme al formato establecido.
 6) Acción: organizar cambios en viñetas tipadas dentro de la fecha.
    Formato de cada viñeta: `- tipo: descripción` (ej. `- feat: ...`, `- fix: ...`, `- docs: ...`)
+   Tipo de los cambios a CoT y *skills*: nunca `docs:`; `feat:` si agregan comportamiento, `fix:` si lo corrigen y `refactor:` si solo lo reacomodan. `docs:` queda para lo que no cambia lo que hace el agente (una fecha, una liga o una errata).
    Validación: no usar subencabezados `### tipo`; usar viñetas directas con prefijo de tipo
    Resultado: entrada compacta y consistente.
 
@@ -172,7 +173,7 @@ ANTI-PATRONES PROHIBIDOS (detener y pedir confirmación si ocurre cualquiera):
 10. Repetir búsquedas exploratorias cuando el bloque objetivo ya está identificado.
 11. Usar anclas parciales para fecha existente (como `search` de solo encabezado) en lugar del micro-bloque exacto del primer intento.
 12. Empezar con lectura de changelog, `grep`, búsquedas exploratorias o intentos de parche sin haber ejecutado `git --no-pager status --short` y sin haber leído `CHANGELOG.md` líneas `1-200` en esa ejecución; si ocurre, aplicar hard stop inmediato y reiniciar desde 0, nunca continuar desde pasos intermedios.
-13. Usar `search = encabezado + primer bullet` sin incluir la línea en blanco intermedia obligatoria en fecha existente.
+13. Usar `search = encabezado + primera viñeta` sin incluir la línea en blanco intermedia obligatoria en fecha existente.
 14. Anclar inserciones de fecha existente desde el H1 del archivo (`# Historial de cambios` o `# Changelog`) o reescribir el bloque superior del archivo.
 15. Aceptar un parche de «solo inserción» que muestre líneas eliminadas (`-`) en encabezados o separadores en blanco.
 16. Borrar cualquier línea existente de `CHANGELOG.md` durante inserciones incrementales sin instrucción explícita del usuario.
@@ -183,7 +184,7 @@ ANTI-PATRONES PROHIBIDOS (detener y pedir confirmación si ocurre cualquiera):
 21. Agregar una viñeta que ya existe en el bloque `DATE_CST` para el mismo cambio, o producir un archivo distinto al repetir la corrida sobre el mismo estado.
 
 Conclusión:
-- Entregar: CHANGELOG.md actualizado con nueva entrada en posición cronológica correcta, fecha CST precisa, idioma consistente con el idioma principal del repositorio, sea español mexicano o inglés internacional (UK), sin duplicados y viñetas tipadas organizados semánticamente.
+- Entregar: CHANGELOG.md actualizado con nueva entrada en posición cronológica correcta, fecha CST precisa, idioma consistente con el idioma principal del repositorio, sea español mexicano o inglés internacional (UK), sin duplicados y con viñetas tipadas organizadas semánticamente.
 - Evitar: mezclar idiomas, etiquetar UTC como CST, orden cronológico incorrecto, duplicar entradas, micro-cambios sin agrupar.
 - Operación esperada: ejecutar este CoT desde `/changelogger` y después invocar `/commit` (que solo valida la puerta del CHANGELOG y el idioma del *commit*).
 - Referencias: «~/rules/CHANGELOG.md» ([../CHANGELOG.md](../CHANGELOG.md)), «~/rules/rulesets/LINGUISTICS.md» ([../rulesets/LINGUISTICS.md](../rulesets/LINGUISTICS.md)), «~/rules/cot/committing.md» ([./committing.md](./committing.md)) para flujo completo.

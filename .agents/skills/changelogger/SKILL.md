@@ -72,7 +72,7 @@ When adding or updating entries in CHANGELOG.md for any project following rules 
    - **Spanish Mexican**: apply `~/rules/rulesets/LINGUISTICS.md` (angular quotes «», italics for loanwords such as *commit* or *pipeline*, no anglicisms).
    - **International English (UK)**: `-ise`/`-isation` (organise, standardisation), `colour`, `behaviour`, `licence` (noun), `catalogue`; sentence-case titles; straight double quotes `""` instead of `«»`; no italics for technical terms.
    - Typed prefixes (`feat:`, `fix:`, etc.), `[YYYY-MM-DD]` format and CST date rules stay the same in both languages.
-9. **Type in bullets**: Each bullet MUST start with `tipo:` and match valid commit types (`feat`, `fix`, `docs`, `style`, `refactor`, `chore`, `ci`, `perf`, `test`, `build`)
+9. **Type in bullets**: Each bullet MUST start with `tipo:` and match valid commit types (`feat`, `fix`, `docs`, `style`, `refactor`, `chore`, `ci`, `perf`, `test`, `build`). A change to a CoT or a skill is never `docs:`: use `feat:` for new behaviour, `fix:` for a correction and `refactor:` for a reshuffle; `docs:` only when nothing the agent does changes (a date, a link, a typo)
 10. **Verify**: Check that the new entry is above all previous entries
 
 ## Critical rules

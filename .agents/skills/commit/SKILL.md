@@ -99,7 +99,7 @@ Forbidden anti-patterns:
 - Re-run `scripts/commit_trailer.py` before every commit
 - In `$MSG`, keep bullets left-aligned and wrap long lines with aligned continuation indentation
 - `CHANGELOG.md` format maintenance belongs to `/changelogger` + `~/rules/cot/changelog.md`
-- CoT files classify as `feat:` not `docs:`
+- A change to a CoT or a skill is never `docs:`: new behaviour is `feat:`, a correction is `fix:`, a reshuffle with no behaviour change is `refactor:`; `docs:` only for what does not change what the agent does (a date, a link, a typo)
 
 ## References
 

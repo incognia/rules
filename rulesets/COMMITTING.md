@@ -31,7 +31,7 @@ Usa la especificación de [Commits Convencionales](https://www.conventionalcommi
 - **ci:** cambios en los archivos y *scripts* de configuración de CI.
 - **chore:** otros cambios que no modifican el código fuente ni las pruebas (por ejemplo, actualización de dependencias).
 
-**Importante:** los archivos CoT (*Chain of Thought*) como `cot/committing.md` son documentos funcionales que definen flujos automatizados. Se clasifican como **`feat:`** (no `docs:`), ya que representan nueva funcionalidad y automatización del proyecto, no simple documentación.
+**Importante:** los archivos CoT (*Chain of Thought*) y las *skills*, como `cot/committing.md`, son documentos funcionales que definen flujos automatizados: un cambio en ellos nunca es `docs:`. Un flujo o comportamiento nuevo es **`feat:`**, la corrección de uno existente es **`fix:`** y un reacomodo sin cambio de comportamiento es **`refactor:`**. Solo es `docs:` lo que no cambia lo que hace el agente, como una fecha, una liga o una errata.
 
 ### 2.3. Reglas del mensaje
 
@@ -80,7 +80,7 @@ docs: add frontend/backend cross-references
 - Document the frontend and backend repositories using canonical URLs
 - Replace relative backend references with repository links and
   backend-local startup commands
-- Add SSH key alignment notes in README and docs/SERVERS.md
+- Add SSH key alignment notes in README and docs/SYNC.md
 
 Co-Authored-By: <agente en turno> <identificador>
 ```
@@ -155,7 +155,7 @@ Si se hizo un *commit* con el idioma equivocado y todavía no se envió, detén 
 
 **Advertencia:** si `CHANGELOG.md` no tiene cambios, el flujo debe abortar y sugerir `/changelogger`.
 
-**Refuerzo local en este repositorio:** el *hook* `.githooks/pre-commit` rechaza cualquier *commit* cuando `CHANGELOG.md` no está en *staging* ni tiene cambios pendientes (así pasan los *commits* intermedios de una serie atómica), y `.githooks/commit-msg` valida el formato de *Commits* Convencionales. Actívalos una vez por clon con `npm run hooks:install`. La variable `SKIP_CHANGELOG_GATE=1` existe solo para casos excepcionales.
+**Refuerzo local en este repositorio:** el *hook* `.githooks/pre-commit` rechaza cualquier *commit* cuando `CHANGELOG.md` no está en *staging*, no tiene cambios pendientes ni es un archivo nuevo sin versionar (así pasan los *commits* intermedios de una serie atómica y el primero de un repositorio nuevo), y `.githooks/commit-msg` valida el formato de *Commits* Convencionales. Actívalos una vez por clon con `npm run hooks:install`. La variable `SKIP_CHANGELOG_GATE=1` existe solo para casos excepcionales.
 
 #### 3.1.1. Protocolo anti-errores y anti-patrones (obligatorio, sin excepción)
 
