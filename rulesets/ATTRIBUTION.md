@@ -47,7 +47,7 @@ Sus competencias técnicas se mantienen en un solo lugar para que no diverjan: c
 
 - **Contribución personal:** «elaborado por Rodrigo Álvarez (@incognia)»
 - **Documentación técnica:** «documentado por Rodrigo Ernesto Álvarez Aguilera (GitHub: @incognia)»
-- **Contribución laboral:** «este trabajo fue realizado por Rodrigo Álvarez en su calidad de Líder DevOps para Kabat One (@incogniadev)»
+- **Contribución laboral:** «este trabajo lo hizo Rodrigo Álvarez (@incogniadev), en su calidad de Líder DevOps, para Kabat One» (o el empleador que corresponda)
 
 ### 5.2. Firma en commits de Git
 
@@ -69,8 +69,8 @@ Sus competencias técnicas se mantienen en un solo lugar para que no diverjan: c
 
 ### 6.1. Filosofía de licenciamiento
 
-- **Proyectos profesionales/laborales:** la licencia a utilizar es **MIT**, por su permisividad y compatibilidad.
-- **Proyectos personales:** la licencia a usar es **GNU GPLv3**, para preservar la libertad del software (ver [LICENSING.md](./LICENSING.md)).
+- **Proyectos profesionales/laborales:** la licencia es **MIT**, por su permisividad y compatibilidad; el titular del *copyright* es el empleador y yo figuro como autor.
+- **Proyectos personales:** la licencia predeterminada es **GNU GPLv3**, para preservar la libertad del software; uso **MIT** cuando decido que algo debe poder reutilizarse sin *copyleft* (ver [LICENSING.md](./LICENSING.md)).
 
 ### 6.2. Firma de contribuciones (alias)
 

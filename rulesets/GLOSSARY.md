@@ -47,7 +47,7 @@ Este glosario recoge términos clave utilizados en los documentos de reglas y fi
 : cultura y conjunto de prácticas que buscan integrar equipos de desarrollo y operaciones para entregar software de manera más ágil, estable y segura.
 
 **Dualidad de contextos (personal/laboral)**
-: distinción entre proyectos personales (licencia GPLv3, alias incognia) y laborales (licencia MIT, alias incogniadev), cada uno con reglas y atribución específicas.
+: distinción entre proyectos personales (licencia GPLv3 de forma predeterminada o MIT, alias incognia) y laborales (licencia MIT a nombre del empleador, alias incogniadev), cada uno con reglas y atribución específicas.
 
 **Emojis (en commits)**
 : iconos gráficos que se desaconsejan totalmente en mensajes de *commit* y documentación profesional dentro de este sistema.

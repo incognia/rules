@@ -1,6 +1,6 @@
 # Filosofía de un pinche prieto que a veces *codea* pero siempre se rifa
 
-*Última modificación: 14 de octubre de 2026, 00:03 (CST)*
+*Última modificación: 27 de noviembre de 2026, 16:11 (CST)*
 
 > «El desarrollo tecnológico y los descubrimientos científicos no pueden considerarse progreso si no están al alcance de todos.»
 >
@@ -36,7 +36,7 @@ Mi trabajo se centra en **ingeniería DevOps**, con enfoque en plataformas Kuber
 Esta especialización técnica se aplica en dos entornos:
 
 - **Corporativo (`incogniadev`):** proyectos para Kabat One con licenciamiento MIT
-- **Personal y educativo (`incognia`):** proyectos bajo GPLv3 y metodologías pedagógicas que democratizan el acceso a herramientas profesionales
+- **Personal y educativo (`incognia`):** proyectos bajo GPLv3 (o MIT cuando así lo decido) y metodologías pedagógicas que democratizan el acceso a herramientas profesionales
 
 En ambos casos, las metodologías DevOps sirven tanto para infraestructura de producción como para crear entornos de aprendizaje reproducibles mediante Docker Compose y automatización.
 
@@ -78,8 +78,8 @@ Actualizar el `CHANGELOG.md` **antes** de cada *commit*, manteniendo la sincroni
 
 ### 4.1. Filosofía de licencias
 
-- **Proyectos laborales:** MIT para facilitar la integración comercial.
-- **Proyectos personales:** GPLv3 para preservar la libertad del software.
+- **Proyectos laborales:** MIT para facilitar la integración comercial; el titular es el empleador y yo figuro como autor.
+- **Proyectos personales:** GPLv3 de forma predeterminada, para preservar la libertad del software, o MIT cuando decido que algo debe poder reutilizarse sin *copyleft*.
 - **Hardware:** CERN OHL v2 para diseños abiertos.
 - **Documentación:** LGPLv3 o Creative Commons según el contexto.
 - **Proyectos privados:** negociación específica con cada cliente.

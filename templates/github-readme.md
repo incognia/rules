@@ -8,7 +8,7 @@ description: "Breve descripción del proyecto"
 *Última modificación: DD de mes de AAAA, HH:MM (CST)*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![CI](https://github.com/<owner>/<repo>/actions/workflows/<workflow>.yml/badge.svg)](https://github.com/<owner>/<repo>/actions)
+[![CI](https://github.com/<owner>/<repo>/actions/workflows/<workflow>.yaml/badge.svg)](https://github.com/<owner>/<repo>/actions)
 
 Breve descripción del propósito del proyecto.
 
@@ -37,8 +37,8 @@ proyecto/
 
 ---
 
-*Este proyecto fue elaborado por Rodrigo Álvarez para Kabat One y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
+*Este proyecto fue elaborado por Rodrigo Álvarez (@incogniadev) para {EMPLEADOR} y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
 
-*Copyright © AAAA, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
+*Copyright © AAAA, {EMPLEADOR}.*
 
 <!-- licence:end -->

@@ -37,8 +37,8 @@ proyecto/
 
 ---
 
-*Este proyecto fue elaborado por Rodrigo Álvarez para Kabat One y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
+*Este proyecto fue elaborado por Rodrigo Álvarez (@incogniadev) para {EMPLEADOR} y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
 
-*Copyright © AAAA, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
+*Copyright © AAAA, {EMPLEADOR}.*
 
 <!-- licence:end -->

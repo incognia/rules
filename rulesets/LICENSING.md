@@ -8,13 +8,16 @@ Este documento establece las directrices para crear un archivo LICENSE formal en
 
 ### 2.1. Proyectos laborales
 
-- **Licencia recomendada:** MIT
+- **Licencia:** MIT
 - **Razón:** naturaleza permisiva que facilita la integración y la adopción comercial.
+- **Titular del *copyright*:** el empleador, es decir, la empresa para la que hice el trabajo (hoy Kabat One, pero la regla vale para cualquier empleador). Mi nombre va como autor: es algo que yo hice para una empresa.
 
 ### 2.2. Proyectos personales (*software*)
 
-- **Licencia recomendada:** GNU GPLv3
+- **Licencia predeterminada:** GNU GPLv3
 - **Razón:** asegura que el código y derivados permanezcan libres, promoviendo el *copyleft*.
+- **Alternativa:** MIT, cuando lo decido para un proyecto o una parte de él que debe poder reutilizarse sin *copyleft* (por ejemplo, `marketplace/` en `rules`, que también sirve de base a instancias laborales). Si el proyecto ya tiene una de las dos, se respeta; si no queda claro cuál aplicar, se pregunta.
+- **Titular del *copyright*:** yo, con mi nombre legal.
 
 ### 2.3. Proyectos de diseño de *hardware*
 
@@ -41,19 +44,29 @@ El pie va entre los marcadores `<!-- licence:start -->` y `<!-- licence:end -->`
 
 #### Proyecto laboral
 
+`{EMPLEADOR}` es la empresa para la que hice el trabajo (por ejemplo, Kabat One): titular del *copyright* en el pie y en `LICENSE`.
+
 ---
 
-*Este proyecto fue elaborado por Rodrigo Álvarez para Kabat One y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
+*Este proyecto fue elaborado por Rodrigo Álvarez (@incogniadev) para {EMPLEADOR} y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
 
-*Copyright © AAAA, Rodrigo Ernesto Álvarez Aguilera (@incogniadev).*
+*Copyright © AAAA, {EMPLEADOR}.*
 
-#### Proyecto personal
+#### Proyecto personal (GPLv3, la predeterminada)
 
 ---
 
 *Este proyecto fue elaborado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia GPLv3. Para más detalles, consulta el archivo LICENSE.*
 
 *Copyright © AAAA, Rodrigo Ernesto Álvarez Aguilera. Este es software libre bajo los términos de la GNU General Public License v3.*
+
+#### Proyecto personal (MIT)
+
+---
+
+*Este proyecto fue elaborado por Rodrigo Álvarez (@incognia) y se distribuye bajo la licencia MIT. Para más detalles, consulta el archivo LICENSE.*
+
+*Copyright © AAAA, Rodrigo Ernesto Álvarez Aguilera.*
 
 ### 3.2. Encabezado en script de Bash (.sh)
 
@@ -68,7 +81,7 @@ El pie va entre los marcadores `<!-- licence:start -->` y `<!-- licence:end -->`
 # Fecha:          2026-01-23
 # Licencia:       MIT License
 #
-# Copyright (c) 2026, Kabat One
+# Copyright (c) 2026, {EMPLEADOR}
 #
 # Se concede permiso, de forma gratuita, a cualquier persona que obtenga una copia
 # de este software y de los archivos de documentación asociados (el "Software"), para tratar
@@ -126,7 +139,7 @@ El pie va entre los marcadores `<!-- licence:start -->` y `<!-- licence:end -->`
 # Date:         2026-01-23
 # License:      MIT License
 #
-# Copyright (c) 2026, Kabat One
+# Copyright (c) 2026, {EMPLEADOR}
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -192,7 +205,7 @@ Módulo de ejemplo para demostrar la inclusión de la licencia GPLv3.
 # License: MIT
 # Company: Kabat One
 #
-# Copyright (c) 2026, Kabat One
+# Copyright (c) 2026, {EMPLEADOR}
 
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -268,6 +281,7 @@ maintainers:
 
 - **Proyectos laborales (MIT):** compatible con la mayoría de licencias de código abierto y propietario.
 - **Proyectos personales (GPLv3):** requiere que todos los trabajos derivados mantengan la misma licencia (*copyleft*).
+- **Mezcla de licencias en un repositorio:** una parte bajo MIT dentro de un repositorio GPLv3 se declara en `NOTICE` y lleva su propio `LICENSE` en esa carpeta; lo que una instancia MIT copie debe salir solo de esa parte.
 - **Dependencias externas:** verificar compatibilidad antes de integrar bibliotecas de terceros.
 
 ### 4.5. Atribución en proyectos colaborativos
