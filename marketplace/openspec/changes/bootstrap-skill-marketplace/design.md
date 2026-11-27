@@ -4,7 +4,9 @@
 
 See `proposal.md` for the motivation. Two sources shape the approach:
 
-- **Origin:** the `rules` repository holds personal skills (`.agents/skills/<name>/SKILL.md`)
+- **Origin:** the public `rules` repository (<https://github.com/incognia/rules>, GPLv3 except
+  its `marketplace/` folder, these specs and the starter kit, which is MIT as its `NOTICE`
+  declares, so a corporate instance can copy it) holds personal skills (`.agents/skills/<name>/SKILL.md`)
   that point to chain-of-thought files (`cot/`) and rulesets (`rulesets/COMMITTING.md`,
   `LINGUISTICS.md`, `LICENSING.md`, `RELEASING.md`, `SDD_READINESS.md`). They assume one
   person, two contexts (personal and corporate), Spanish Mexican documentation and a sync
@@ -22,7 +24,15 @@ Claude Code constraints that every decision respects:
   bodies, but it is not an environment variable inside Bash.
 - Users receive an update only when the plugin's `version` changes; private marketplaces do
   not update automatically.
-- Claude Code clones with the machine's `git` and never prompts for a password.
+- Claude Code clones with the machine's `git` and never prompts for a password, so every
+  machine needs a key with read access; a read-only deploy key also needs an SSH host alias.
+- `claude plugin update` fails with "is not installed" for a plugin never installed on that
+  machine: plugins are installed one by one on each machine first.
+- A relative Markdown link to `references/` does not resolve inside an installed skill: a
+  skill body says "read `${CLAUDE_PLUGIN_ROOT}/references/<file>.md`".
+- A skill with `context: fork` runs in a subagent that cannot read the main session, so a
+  skill that reads the active session (the commit trailer) runs inline.
+- On macOS, `python3` may be the old interpreter bundled with the system.
 
 ## Goals / Non-Goals
 
@@ -70,7 +80,8 @@ Every placeholder in the specs is one of these. An instance records its values i
 | `{FORMAT_MODE}` | Format gate: `multinational` (UTC dates, changelogs in international English, UK) or `regional` (dates in `{LOCAL_TZ}`, changelogs in `{REGION_LANGUAGE}`) | `multinational` (teams in two countries, one with daylight saving) |
 | `{LOCAL_TZ}` | Time zone of the region as a full POSIX `TZ` string (offset, plus daylight-saving rules where the region has them), never an IANA name | `CST6` (Mexico City, UTC−6, no daylight saving since 2022); with daylight saving, Israel would be `IST-2IDT,M3.4.4/26,M10.5.0` |
 | `{REGION_LANGUAGE}` | Language of changelogs and release notes in `regional` mode | Spanish Mexican (only for repositories kept with `/git:changelogger`) |
-| `{LICENCE}` / `{LICENCE_HOLDER}` | Licence of the marketplace and of `{ORG}`'s repositories; copyright holder (the company's legal name, or the person) | MIT / Kabat One; a `personal` instance like the origin: GPLv3 / the person |
+| `{LICENCES}` / `{LICENCE_HOLDER}` | Licences allowed for `{ORG}`'s repositories, as SPDX identifiers, the first one the default and the marketplace's own (`corporate`: exactly one; `personal`: one or more, chosen per repository); copyright holder (the company's legal name, or the person) | `MIT` / Kabat One; a `personal` instance like the origin: `MIT`, `GPL-3.0-or-later` / the person |
+| `{ORIGIN_REF}` | Tag of the public `rules` repository the instance starts from, recorded in its own copy of this design | a release tag such as `v0.1.0` (`k1` predates the tags) |
 | `{LICENCE_FOOTER_LANGUAGE}` | Default language of the README licence footer | Spanish |
 | `{CONFIG_DIR}` | Per-user configuration folder (profile, credentials) | `~/.config/k1/` |
 | `{CACHE_DIR}` | Per-user cache folder prefix | `~/.cache/k1-<plugin>` |
@@ -135,6 +146,44 @@ checks that `CHANGELOG.md` changed, so it works with both. *Alternative:* one sk
 flag was rejected because the two formats must never mix in one file and a flag is easy to
 forget.
 
+### D7. One commit-message file per session
+
+The origin wrote every message to one shared temporary file; an orchestrating session and
+the sessions it delegated to overwrote each other's message. The file name now comes from the
+active agent and session (`<tmp>/<tool>-<session-id>-commit.txt`), printed by the trailer
+helper with `--message-file`, as the origin's `scripts/commit_trailer.py` already does;
+outside an agent session the commit uses a new `mktemp` file instead of stopping. No separate
+message-file script is needed.
+
+### D8. Forge facts from `origin`, never from the forge CLI's default
+
+In a fork, `gh` resolves the default repository to the upstream one, so a release or pull
+request would land in somebody else's repository. One helper derives platform, project,
+branches and fork status from `origin`, and every `gh` command passes `--repo`.
+
+### D9. Security scans: CI first, one summary contract
+
+Scanners and their caches take several gigabytes, so scans run in CI (default), on a worker
+over SSH, or locally only when the user accepts the download. All three produce the same
+`summary.json`, and `summarize` builds it from reports another system produced, so the skill
+reads one format whatever ran the scan.
+
+### D10. Provisioning through a control plane, secrets on standard input
+
+Only the control plane sees the internal network at layer 2 (needed to prove an address is
+free by ARP) and holds the infrastructure tokens. The skill collects and validates values,
+then drives the control plane's own scripts over SSH; passwords, private keys and tokens
+travel only on that session's standard input and are never stored there.
+
+### D11. Where these specs live
+
+The `rules` repository keeps the main specs (`openspec/specs/`) as the canonical, generic
+version, and this change as the build plan a new instance applies. To replicate: copy this
+change into the new marketplace repository's `openspec/changes/` (with an empty
+`openspec/specs/`), fill the parameters, apply it and archive it there. The main specs here
+are what that archive produces; a requirement edited in one place is edited in the other in
+the same commit.
+
 ### D12. Format gate: regional or multinational
 
 Which variant a new repository gets is not left to each user: the instance declares
@@ -188,7 +237,7 @@ plugin ships it in the same data file.
 | `{ORG}` | The company | The person |
 | Profile | Name, forge user, corporate email, SSH key, language and `{COMPANY_FIELDS}` (team, role, job title, email signature) | Name, forge user, email, SSH key, language |
 | Email | Only `{EMAIL_DOMAINS}`, personal addresses refused | Any address the person owns; no allow-list |
-| Licence | The company's (`{LICENCE}`, e.g. MIT), holder `{LICENCE_HOLDER}` | The person's (e.g. GPLv3), holder the person |
+| Licence | Exactly one in `{LICENCES}` (e.g. MIT), applied without asking; holder `{LICENCE_HOLDER}` | One or more in `{LICENCES}` (e.g. MIT and GPLv3): the repository's own if allowed, otherwise asked per repository; holder the person |
 | README licence footer | Author, job title and company | Author only |
 | Signed outward content (wiki comments, reports, emails) | Name, job title, role, company and the email signature | Name only |
 | Ownership and review | `{TEAMS}`, reviews across teams, `CODEOWNERS` | One owner; no team rules |
@@ -215,42 +264,6 @@ current OpenSSH, so it fails the access check by itself, not by this rule.) *Alt
 refusing older keys was rejected: it would block people on a working key for a
 recommendation.
 
-### D7. One commit-message file per session
-
-The origin wrote every message to one shared temporary file; an orchestrating session and
-the sessions it delegated to overwrote each other's message. The plugin derives the file
-name from the active session id (`<tmp>/<session-id>-commit.txt`) and refuses to run without
-one.
-
-### D8. Forge facts from `origin`, never from the forge CLI's default
-
-In a fork, `gh` resolves the default repository to the upstream one, so a release or pull
-request would land in somebody else's repository. One helper derives platform, project,
-branches and fork status from `origin`, and every `gh` command passes `--repo`.
-
-### D9. Security scans: CI first, one summary contract
-
-Scanners and their caches take several gigabytes, so scans run in CI (default), on a worker
-over SSH, or locally only when the user accepts the download. All three produce the same
-`summary.json`, and `summarize` builds it from reports another system produced, so the skill
-reads one format whatever ran the scan.
-
-### D10. Provisioning through a control plane, secrets on standard input
-
-Only the control plane sees the internal network at layer 2 (needed to prove an address is
-free by ARP) and holds the infrastructure tokens. The skill collects and validates values,
-then drives the control plane's own scripts over SSH; passwords, private keys and tokens
-travel only on that session's standard input and are never stored there.
-
-### D11. Where these specs live
-
-The `rules` repository keeps the main specs (`openspec/specs/`) as the canonical, generic
-version, and this change as the build plan a new instance applies. To replicate: copy this
-change into the new marketplace repository's `openspec/changes/` (with an empty
-`openspec/specs/`), fill the parameters, apply it and archive it there. The main specs here
-are what that archive produces; a requirement edited in one place is edited in the other in
-the same commit.
-
 ## Origin of each skill
 
 | Plugin skill | Origin in `rules` | What changed |
@@ -261,7 +274,7 @@ the same commit.
 | `/git:commit` | `commit` (`cot/committing.md`) | Identity checked against the profile; per-session message file; gate accepts either changelog skill |
 | `/git:mr` | `mr` | GitHub pull requests too; reviewers from arguments, `AGENTS.md` or `CODEOWNERS` instead of a private `.env` |
 | `/git:release` | `release` (`rulesets/RELEASING.md`) | Fork-safe (`--repo` always); notes in the changelog's language |
-| `/git:license` | `licensing` (`rulesets/LICENSING.md`, `ATTRIBUTION.md`) | Only the organisation's `{LICENCE}`; author from the profile; footer between markers in every README translation |
+| `/git:license` | `licensing` (`rulesets/LICENSING.md`, `ATTRIBUTION.md`) | Only licences in `{LICENCES}` (one fixed licence in `corporate`, a choice per repository in `personal`); author from the profile; footer between markers in every README translation |
 | `/ai:init` | `AGENTS.md`/`CLAUDE.md` rule of `rules` («Claude Code specifics») | Turned into a skill that migrates or fixes any repository |
 | `/sdd:readiness` | `sdd-readiness` (`rulesets/SDD_READINESS.md`) | Credentials per user in `{CONFIG_DIR}`; falls back to the wiki connector |
 | `/llm:fork-session` | new | — |
@@ -269,7 +282,7 @@ the same commit.
 | `/provision:scan`, `/provision:desktop` | new | — |
 
 Shared scripts with an origin: `commit_trailer.py` (`scripts/commit_trailer.py`, same
-four agents), and the language reference of `/git:changelogger` (`rulesets/LINGUISTICS.md`,
+four agents, also printing the per-session message file), and the language reference of `/git:changelogger` (`rulesets/LINGUISTICS.md`,
 reduced to what a changelog needs).
 
 ### Skills not carried over
@@ -290,15 +303,53 @@ the same day: its rules were one person's), `hedgedoc-commit` (one upstream proj
 - [Private marketplaces do not auto-update] → README documents the manual update; the
   version bump is part of every release.
 - [Two copies of each requirement in `rules` (main spec and change delta)] → edited
-  together, checked with `openspec validate --strict`; see D11.
+  together; `scripts/check-marketplace.sh` in `rules` validates them and compares the main
+  specs with the archived change in CI; see D11.
 - [Optional plugins depend on infrastructure the spec does not define] → each declares its
   prerequisites and stops with a clear message when one is missing.
+
+## Not yet proven in the reference instance
+
+These requirements go beyond what `k1` does, or were written from its documentation and
+headers without reading the implementation. An instance verifies them first.
+
+**`k1` does not do it yet:**
+
+- CI job with `claude plugin validate` on every merge or pull request.
+- `scanner` and `scan_py` in every `summary.json` (`k1` writes them only from `summarize`).
+- One key per forge host and the key check on GitHub (`k1` checks GitLab only).
+- The two gates and the instance data file (`k1` hard-codes one corporate, multinational
+  instance).
+- Licences chosen per repository in `personal` mode, and signatures taken from the profile.
+- `{LOCAL_TZ}` as a POSIX string (`k1`'s `/git:changelogger` uses an IANA name).
+- The per-session message file printed by the trailer helper with a `mktemp` fallback
+  (`k1` has a separate script that stops without a session id).
+
+**Written without reading the implementation:**
+
+- `plugin-provision` beyond its skill and README: plan inspection, replacement detection
+  and the ARP re-check inside the control plane's scripts.
+- The scenarios of `/security:os`, `/security:java`, `/security:node`, `/security:python`
+  and `/security:cve` (from their descriptions only), and the scanner pinning file.
+- The exact content of `HANDOFF.md` in `plugin-llm`.
+- `/sdd:readiness` replying in the same thread on a re-assessment (taken from `k1`'s pending
+  tests, not from a run).
+
+**Checked only by hand or on one platform:**
+
+- The gates stopping the build is a task rule (tasks 1.0 and 1.1), not a tool.
+- Git Bash and daylight-saving dates were checked with `date` on macOS only.
+- Whether `autoUpdate` and `--scope project` are honoured is pending in `k1` too.
 
 ## Migration Plan
 
 For a new instance:
 
-1. Copy `openspec/changes/bootstrap-skill-marketplace/` into the new repository's
+1. Pick a release tag of <https://github.com/incognia/rules> and record it as `{ORIGIN_REF}`.
+   From that tag (all of `marketplace/` is MIT), copy `marketplace/kit/skeleton/` as the
+   repository skeleton, the instance file and changelog header of the chosen modes from
+   `marketplace/kit/templates/`, the CI of `{GIT_HOST}` from `marketplace/kit/ci/`, and
+   `marketplace/openspec/changes/bootstrap-skill-marketplace/` into the new repository's
    `openspec/changes/`, with an empty `openspec/specs/`.
 2. Pass both gates: choose `{PROJECT_MODE}` (`corporate` or `personal`) and `{FORMAT_MODE}`
    (and, for `regional`, `{LOCAL_TZ}` and `{REGION_LANGUAGE}`). Then fill the rest of the parameter table in the copy of this

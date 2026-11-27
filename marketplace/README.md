@@ -1,6 +1,6 @@
 # *Marketplace* de *plugins* para Claude Code: especificación genérica
 
-*Última modificación: 27 de noviembre de 2026, 14:17 (CST)*
+*Última modificación: 27 de noviembre de 2026, 15:34 (CST)*
 
 Proyecto de OpenSpec que especifica cómo construir **desde cero** un *marketplace* de *plugins* y *skills* de Claude Code para cualquier organización o proyecto. Nace de llevar a *plugins* reutilizables las *skills* personales de este repositorio (`.agents/skills/`, `cot/` y `rulesets/`) y toma como referencia de resultado el *marketplace* `k1`, que es solo un ejemplo de instancia, no un requisito.
 
@@ -9,6 +9,11 @@ Proyecto de OpenSpec que especifica cómo construir **desde cero** un *marketpla
 ```text
 marketplace/
 ├── README.md                          # este archivo
+├── LICENSE                            # MIT: todo marketplace/, specs y kit
+├── kit/                               # kit de arranque copiable (su README.md explica cómo usarlo)
+│   ├── skeleton/                      # raíz de un marketplace nuevo con un plugin de ejemplo
+│   ├── templates/                     # instance.json y encabezados de CHANGELOG por modo
+│   └── ci/                            # CI de ejemplo para GitHub y GitLab
 └── openspec/
     ├── config.yaml                    # contexto y reglas del proyecto (idioma, parámetros)
     ├── .markdownlint.yaml             # hereda el lint del repositorio y admite el formato de OpenSpec
@@ -32,6 +37,8 @@ marketplace/
 
 Las *specs*, el *proposal*, el *design* y las *tasks* están en inglés internacional (UK), como el código y los *commits*; este README sigue la regla del repositorio y va en español mexicano.
 
+**Licencia:** todo `marketplace/`, *specs* y kit, se distribuye bajo la licencia MIT ([LICENSE](LICENSE)), no bajo la GPLv3 del resto de este repositorio, como declara el [NOTICE](../NOTICE) de la raíz. Así cualquier organización, también una corporativa que licencia su trabajo bajo MIT, puede copiarlo como base de su propio *marketplace* sin heredar el *copyleft*.
+
 ## Capacidades
 
 Una capacidad por *plugin* y dos compartidas por todos:
@@ -40,7 +47,7 @@ Una capacidad por *plugin* y dos compartidas por todos:
 |-----------|-----------|-----------:|
 | `marketplace-repository` | Estructura del repositorio y del catálogo (`marketplace.json`), manifiesto de cada *plugin*, versionado semántico por *plugin*, validación con `claude plugin validate`, instalación por SSH, actualizaciones, revisión por equipo, página de catálogo opcional y los *gates* de tipo de proyecto y de formato | 23 |
 | `cross-cutting-rules` | Python con parches de seguridad vigentes, secretos que nunca llegan al repositorio, las salidas ni la conversación, idioma de la conversación según el perfil, fechas para personas según el formato y marcas de tiempo de máquina en UTC, documentación multilingüe sincronizada, comandos no interactivos, confirmación antes de publicar o crear, firma del contenido saliente desde el perfil y llaves SSH ed25519 (las de otro algoritmo se recomienda cambiarlas, sin bloquear) | 20 |
-| `plugin-git` | Perfil e identidad (`/git:init`, con datos de la compañía en modo corporativo y una llave válida por forja de cada repositorio objetivo, generada si hace falta), CHANGELOG en UTC (`/git:changelog`) y en hora local (cadena POSIX) con el idioma del repositorio (`/git:changelogger`), elegidos por el *gate* de formato, *commits* atómicos con su *gate* (`/git:commit`), *merge requests* y *pull requests* (`/git:mr`), *releases* (`/git:release`) y licencia (`/git:license`), en GitLab y GitHub | 34 |
+| `plugin-git` | Perfil e identidad (`/git:init`, con datos de la compañía en modo corporativo y una llave válida por forja de cada repositorio objetivo, generada si hace falta), CHANGELOG en UTC (`/git:changelog`) y en hora local (cadena POSIX) con el idioma del repositorio (`/git:changelogger`), elegidos por el *gate* de formato, *commits* atómicos con su *gate* (`/git:commit`), *merge requests* y *pull requests* (`/git:mr`), *releases* (`/git:release`) y licencia (`/git:license`: una fija en modo corporativo, a elegir por repositorio en modo personal), en GitLab y GitHub | 35 |
 | `plugin-ai` | `AGENTS.md` como única fuente de instrucciones y un `CLAUDE.md` de texto que lo importa (`/ai:init`) | 6 |
 | `plugin-sdd` | Evaluación de una especificación de la wiki para OpenSpec, publicada como comentario solo tras confirmar (`/sdd:readiness`) | 6 |
 | `plugin-llm` | Bifurcar sesiones de agentes de código a otra máquina por SSH (`/llm:fork-session`) | 8 |
@@ -96,31 +103,46 @@ Este repositorio es público: ni las *specs* ni el ejemplo llevan direcciones in
 
 ```mermaid
 flowchart LR
-    A["rules/marketplace<br/>specs + change"] -->|copiar el change| B["repositorio nuevo<br/>openspec/changes/"]
+    A["rules en un tag<br/>kit + change"] -->|copiar kit y change| B["repositorio nuevo<br/>openspec/changes/"]
     B -->|gates, parámetros<br/>y plugins| C["openspec validate --strict"]
     C -->|tasks.md| D["marketplace construido"]
     D -->|openspec archive| E["specs de la instancia"]
 ```
 
-1. En el repositorio nuevo, inicializa OpenSpec y copia el *change*:
+1. Elige un *tag* del repositorio público <https://github.com/incognia/rules> (será `{ORIGIN_REF}` en tu `design.md`) y clónalo aparte:
+
+   ```bash
+   git clone --depth 1 --branch <tag> https://github.com/incognia/rules.git ../rules-origin
+   ```
+
+2. En el repositorio nuevo, copia el kit de arranque (MIT, como todo `marketplace/`; los detalles están en `marketplace/kit/README.md`). No se copia `kit/` entero: solo `skeleton/` va tal cual a la raíz, y `templates/` y `ci/` se toman pieza por pieza:
+   - `kit/skeleton/` es la raíz del *marketplace*: `.claude-plugin/marketplace.json`, un *plugin* de ejemplo (la *skill* `hello` en línea y `report` con *fork*, con `scripts/` y `references/`), `scripts/python_check.py` con sus pruebas, `AGENTS.md`, `CLAUDE.md`, `CONTRIBUTING.md`, `RELEASING.md`, `README.md` y `.gitignore`;
+   - de `kit/templates/`, el `instance.*.json` del modo de proyecto (como `scripts/instance.json` del *plugin* `git`) y el `CHANGELOG.*.md` del modo de formato;
+   - de `kit/ci/`, el CI de tu forja.
+
+   Después inicializa OpenSpec y copia el *change*:
+
+   ```bash
+   cp -R ../rules-origin/marketplace/kit/skeleton/. .
+   ```
 
    ```bash
    openspec init --tools none .
    ```
 
    ```bash
-   cp -R ~/rules/marketplace/openspec/changes/bootstrap-skill-marketplace openspec/changes/
+   cp -R ../rules-origin/marketplace/openspec/changes/bootstrap-skill-marketplace openspec/changes/
    ```
 
-2. Pasa los dos *gates* (`{PROJECT_MODE}`; `{FORMAT_MODE}` y, si es `regional`, `{LOCAL_TZ}` y `{REGION_LANGUAGE}`), llena el resto de la tabla de parámetros del `design.md` copiado y define `{PLUGINS}`; borra las *specs* delta y las tareas de los *plugins* opcionales que no vayas a incluir.
-3. Valida el *change* instanciado:
+3. Pasa los dos *gates* (`{PROJECT_MODE}`; `{FORMAT_MODE}` y, si es `regional`, `{LOCAL_TZ}` y `{REGION_LANGUAGE}`), llena el resto de la tabla de parámetros del `design.md` copiado y define `{PLUGINS}`; borra las *specs* delta y las tareas de los *plugins* opcionales que no vayas a incluir.
+4. Valida el *change* instanciado:
 
    ```bash
    openspec validate bootstrap-skill-marketplace --strict
    ```
 
-4. Trabaja `tasks.md` en orden (parámetros, repositorio, reglas compartidas, `git`, los demás *plugins*, CI y verificación).
-5. Al terminar, archiva el *change*: las *specs* principales de la instancia son el resultado.
+5. Trabaja `tasks.md` en orden (parámetros, repositorio, reglas compartidas, `git`, los demás *plugins*, CI y verificación).
+6. Al terminar, archiva el *change*: las *specs* principales de la instancia son el resultado.
 
    ```bash
    openspec archive bootstrap-skill-marketplace --yes
@@ -128,16 +150,12 @@ flowchart LR
 
 ## Mantenimiento en este repositorio
 
-Aquí el *change* no se archiva: es la plantilla que se copia. Las *specs* principales son exactamente lo que produce archivarlo, así que un requisito se edita en los dos lugares en el mismo *commit*. Para comprobar que siguen iguales:
+Aquí el *change* no se archiva: es la plantilla que se copia. Las *specs* principales son exactamente lo que produce archivarlo, así que un requisito se edita, con la misma edición, en los dos lugares y en el mismo *commit*; nunca se regeneran las *specs* sobrescribiéndolas.
+
+Una sola verificación cubre todo: `openspec validate --all --strict`, que las *specs* principales sigan iguales al *change* archivado en una copia temporal, y las pruebas del kit. También corre en el CI de este repositorio, con la versión de OpenSpec fijada en `package.json`:
 
 ```bash
-tmp=$(mktemp -d) && cp -R openspec "$tmp/" && rm -rf "$tmp/openspec/specs/"* && (cd "$tmp" && openspec archive bootstrap-skill-marketplace --yes >/dev/null) && diff -r "$tmp/openspec/specs" openspec/specs && echo "specs sincronizadas"; rm -rf "$tmp"
-```
-
-Validación completa, desde `marketplace/`:
-
-```bash
-openspec validate --all --strict
+bash scripts/check-marketplace.sh
 ```
 
 OpenSpec escribe requisitos y escenarios sin línea en blanco después del encabezado, así que `openspec/.markdownlint.yaml` hereda la configuración del repositorio y solo desactiva MD022 y MD032 en esa carpeta.

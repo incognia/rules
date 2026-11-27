@@ -84,5 +84,8 @@ None: this is the first change of the project.
   under `{CACHE_DIR}`; the global Git configuration is never touched.
 - **CI:** one validation job, and optionally the catalogue page and the central scan
   project, on runners chosen by the instance.
-- **Origin repository (`rules`):** its skills stay as they are; the plugins are
-  tool-agnostic rewrites, not links to it.
+- **Origin repository (`rules`, public at <https://github.com/incognia/rules>):** its skills
+  stay as they are; the plugins are tool-agnostic rewrites, not links to it. An instance
+  starts from a tag of it (`{ORIGIN_REF}`) and copies its starter kit (`marketplace/kit/`).
+  All of `marketplace/`, specs and kit, is MIT although the rest of `rules` is GPLv3, so a
+  corporate instance can use it.

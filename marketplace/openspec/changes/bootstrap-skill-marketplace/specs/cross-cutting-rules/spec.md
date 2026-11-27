@@ -19,6 +19,10 @@ Every Python entry script SHALL run the shared version check before anything els
 - **WHEN** a script runs on a branch newer than every branch in `{PYTHON_MINIMUMS}`
 - **THEN** the check passes
 
+#### Scenario: Old system Python on macOS
+- **WHEN** `python3` on a Mac resolves to the interpreter bundled with the operating system, below the minimums
+- **THEN** the message names that interpreter's path and says which supported interpreter to install and put first in `PATH`
+
 ### Requirement: The version check explains on old interpreters
 The shared version check SHALL use only syntax and modules that old Python 3 releases can import, so an unsupported interpreter prints the fix-it message instead of failing with a syntax or import error.
 
@@ -173,5 +177,5 @@ Skills SHALL NOT change the user's global Git configuration or write outside the
 Helper scripts SHALL print results as JSON on standard output, errors on standard error, and SHALL document their exit codes in their header; a validation error SHALL name its field as `ERROR [field] <reason>`.
 
 #### Scenario: Invalid profile field
-- **WHEN** a profile is saved with a personal email
+- **WHEN** a profile of a `corporate` instance is saved with an email outside `{EMAIL_DOMAINS}`
 - **THEN** the script exits non-zero and prints `ERROR [email]` with the reason, so the skill asks only that field again

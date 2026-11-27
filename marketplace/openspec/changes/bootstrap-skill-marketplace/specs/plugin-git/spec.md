@@ -179,9 +179,13 @@ When one run adds several bullets, they SHALL be ordered by the atomic commits t
 ### Requirement: Identity check before committing
 Once per session and repository, `/git:commit` SHALL check that the repository's `user.name` and `user.email` match the profile, the email is in `{EMAIL_DOMAINS}` (corporate instances), `core.sshCommand` uses the profile key and `origin` is SSH; any mismatch stops it and suggests `/git:init`.
 
-#### Scenario: Personal email in the repository
-- **WHEN** a repository is configured with a personal email
+#### Scenario: Email outside the allowed domains
+- **WHEN** a repository of a `corporate` instance is configured with an email outside `{EMAIL_DOMAINS}`
 - **THEN** `/git:commit` stops before staging anything
+
+#### Scenario: Email that differs from the profile
+- **WHEN** a repository of a `personal` instance is configured with an email other than the profile's
+- **THEN** `/git:commit` stops before staging anything and suggests `/git:init`
 
 ### Requirement: Changelog gate
 `/git:commit` SHALL abort when `CHANGELOG.md` has no staged, unstaged or untracked change and suggest a changelog skill; the gate checks that the changelog changed, not its language or time zone.
@@ -202,11 +206,15 @@ Each commit SHALL hold one logical change, staged with explicit paths, with a Co
 - **THEN** its commit messages are still in international English (UK)
 
 ### Requirement: One message file per session
-`/git:commit` SHALL write each message to `<tmp>/<session-id>-commit.txt`, with the id of the active agent session (Claude Code, Codex, Copilot CLI or Antigravity), stop when there is no session id or more than one, never use a fixed shared file, and delete its file after pushing.
+`/git:commit` SHALL write each message to `<tmp>/<tool>-<session-id>-commit.txt` for the active agent session (Claude Code, Codex, Copilot CLI or Antigravity), the path the trailer helper prints with `--message-file`; outside an agent session it SHALL use a new `mktemp` file. It SHALL never use a fixed shared file and SHALL delete its file after pushing.
 
 #### Scenario: Two sessions commit at once
 - **WHEN** an orchestrating session and a session it started commit in parallel on the same machine
 - **THEN** each writes its own message file and neither overwrites the other's
+
+#### Scenario: Commit outside an agent session
+- **WHEN** the helper finds no active agent session
+- **THEN** the message goes to a new file made with `mktemp` and the commit goes on
 
 ### Requirement: Co-author trailer from the active session
 Before each commit, `/git:commit` SHALL build the `Co-Authored-By` trailer from the active session's tool, model and effort; when that fails, it SHALL use the attribution the tool supplies, or omit the trailer and say so. It SHALL never copy a trailer from history or another session.
@@ -214,6 +222,10 @@ Before each commit, `/git:commit` SHALL build the `Co-Authored-By` trailer from 
 #### Scenario: Model changed mid-session
 - **WHEN** the user switches model between two commits
 - **THEN** each commit's trailer names the model active when it was made
+
+#### Scenario: Never in a forked context
+- **WHEN** `/git:commit` is defined
+- **THEN** its frontmatter does not declare `context: fork`: a forked subagent cannot read the main session, so the trailer would name the wrong model or none
 
 ### Requirement: Push and verify
 After the last commit, `/git:commit` SHALL push (setting the upstream on the first push) and show the latest commits and branch status.
@@ -293,12 +305,27 @@ The skill SHALL fast-forward the default branch from `dev` when it exists, creat
 - **WHEN** the previous tag comes from the upstream repository
 - **THEN** the notes say this is the fork's first own release
 
-### Requirement: The organisation's licence file
-`/git:license` SHALL write `LICENSE` with the `{LICENCE}` text, the current year and `{LICENCE_HOLDER}` after showing a plan of the file's state (missing, same, differs, other licence); replacing a differing or other licence SHALL require the user's approval.
+### Requirement: The licence file
+`/git:license` SHALL write `LICENSE` with a licence from `{LICENCES}`, the current year and `{LICENCE_HOLDER}`, after showing a plan of the file's state (missing, same, differs, other licence); replacing a differing or other licence SHALL require the user's approval.
 
 #### Scenario: Licence from an earlier year
 - **WHEN** `LICENSE` holds the same licence with last year's date
 - **THEN** the skill shows the difference and replaces it only after approval
+
+### Requirement: Licence choice follows the project mode
+In a `corporate` instance, `{LICENCES}` SHALL hold exactly one licence, which the skill applies without asking. In a `personal` instance, the skill SHALL keep the licence a repository already has when it is in `{LICENCES}`, and otherwise ask per repository among `{LICENCES}`, the first one being the default.
+
+#### Scenario: Corporate repository
+- **WHEN** `/git:license` runs in a corporate instance whose `{LICENCES}` is `MIT`
+- **THEN** it applies MIT without asking which licence to use
+
+#### Scenario: New personal repository
+- **WHEN** a personal instance allows `MIT` and `GPL-3.0-or-later` and the repository has no licence
+- **THEN** the skill asks which one to apply, with MIT offered as the default
+
+#### Scenario: Personal repository that already has an allowed licence
+- **WHEN** a personal repository already carries GPLv3 and GPLv3 is in `{LICENCES}`
+- **THEN** the skill keeps GPLv3 and only updates the year and holder if needed
 
 ### Requirement: Licence footer between markers
 The skill SHALL write the licence footer, crediting the author from the profile (with job title and company in a `corporate` instance, the name only in a `personal` one), between `<!-- licence:start -->` and `<!-- licence:end -->` in `README.md` and every `README.<lang>.md`, in `{LICENCE_FOOTER_LANGUAGE}` unless the user asks for another, changing nothing outside the markers.

@@ -1,45 +1,49 @@
 # Tasks
 
+"Origin" paths below are files of the public `rules` repository,
+<https://github.com/incognia/rules>, at the tag recorded as `{ORIGIN_REF}`.
+
 ## 1. Parameters
 
 - [ ] 1.0 **Project gate:** choose `{PROJECT_MODE}`: `corporate` (company data in every profile: `{COMPANY_FIELDS}`, `{EMAIL_DOMAINS}`, the company's licence and `{TEAMS}`) or `personal` (flat profile, any email the owner has, their own licence). No later task starts until it is recorded
 - [ ] 1.1 **Format gate:** choose `{FORMAT_MODE}`: `multinational` (UTC, recommended when teams span time zones) or `regional` (for example Mexico: `{LOCAL_TZ}` `CST6`, `{REGION_LANGUAGE}` Spanish Mexican). Commits stay in international English (UK) in both. No later task starts until it is recorded
-- [ ] 1.2 Fill the parameter table of `design.md` with the instance's values (`{ORG}`, `{MARKETPLACE}`, `{GIT_HOST}`, `{EMAIL_DOMAINS}`, languages, `{LOCAL_TZ}`, `{LICENCE}`, `{CONFIG_DIR}`, `{ENV_PREFIX}`, `{PYTHON_MINIMUMS}` and the rest)
+- [ ] 1.2 Fill the parameter table of `design.md` with the instance's values (`{ORIGIN_REF}`, `{ORG}`, `{MARKETPLACE}`, `{GIT_HOST}`, `{EMAIL_DOMAINS}`, languages, `{LOCAL_TZ}`, `{LICENCES}`, `{CONFIG_DIR}`, `{ENV_PREFIX}`, `{PYTHON_MINIMUMS}` and the rest); in `corporate` mode `{LICENCES}` holds exactly one licence
 - [ ] 1.3 Choose `{PLUGINS}` and delete the delta specs and tasks of the optional plugins the instance leaves out
 - [ ] 1.4 Check the current Python security releases and set `{PYTHON_MINIMUMS}` from them, never from this table's example
 - [ ] 1.5 Run `openspec validate --strict` on the instantiated change
 
 ## 2. Repository skeleton
 
-- [ ] 2.1 Create the repository on `{GIT_HOST}` and set the maintainer's identity and SSH remote (with the origin `git-init` skill until `/git:init` exists)
-- [ ] 2.2 Add `LICENSE` (`{LICENCE}`, `{LICENCE_HOLDER}`) and a `.gitignore` that excludes environment files, keys, Python caches, editor files and the generated catalogue output
+- [ ] 2.0 Copy the origin's starter kit (`marketplace/kit/`, MIT like all of `marketplace/`, so a corporate instance can use it; `marketplace/kit/README.md` explains it): `kit/skeleton/` as the repository root (`.claude-plugin/marketplace.json`, the example plugin with the inline skill `hello`, the forked skill `report`, `scripts/` and `references/`, `scripts/python_check.py`, `tests/`, `AGENTS.md`, `CLAUDE.md`, `CONTRIBUTING.md`, `RELEASING.md`, `README.md` and `.gitignore`), then remove or rename the example plugin. Only `kit/skeleton/` is copied as is; `kit/templates/` and `kit/ci/` are taken piece by piece in tasks 2.7, 4.4 and 10.2
+- [ ] 2.1 Create the repository on `{GIT_HOST}` and set the maintainer's identity and SSH remote, until `/git:init` exists, with the origin's `.agents/skills/git-init/SKILL.md`, `cot/git_init.md`, `rulesets/GIT.md` and `scripts/git-init-context.sh` (adapt its personal and corporate contexts and default keys to the maintainer's own)
+- [ ] 2.2 Add `LICENSE` (the first of `{LICENCES}`, `{LICENCE_HOLDER}`) and a `.gitignore` that excludes environment files, keys, Python caches, editor files and the generated catalogue output
 - [ ] 2.3 Create `.claude-plugin/marketplace.json` with `name` `{MARKETPLACE}`, the multilingual description, `owner` and an empty `plugins` list
 - [ ] 2.4 Write `AGENTS.md` (what the repository is, plugin rules, languages, Git workflow, parameters) and a `CLAUDE.md` holding only `@AGENTS.md`
 - [ ] 2.5 Write `CONTRIBUTING.md`: layout, manifest fields, description languages, version rule, validation commands, documentation languages, Git workflow, review and security
 - [ ] 2.6 Write `README.md` in `{DOC_LANGUAGE}`: installation, access check, updates, team-repository scope, plugin table, layout, contributing and security; then one `README.<lang>.md` per `{DOC_TRANSLATIONS}` with the same structure
-- [ ] 2.7 Create `TODO.md` and `CHANGELOG.md` with the canonical header of the declared `{FORMAT_MODE}` (UTC or `{LOCAL_TZ}`)
+- [ ] 2.7 Create `TODO.md`, and `CHANGELOG.md` from the kit's `templates/CHANGELOG.multinational.md` or `templates/CHANGELOG.regional.md`, as `{FORMAT_MODE}` declares (UTC or `{LOCAL_TZ}`)
 - [ ] 2.8 Run `claude plugin validate .`
 
 ## 3. Shared rules
 
-- [ ] 3.1 Write `scripts/python_check.py`: minimums per branch, exit code `10`, fix-it message, `{ENV_PREFIX}ALLOW_PYTHON` escape hatch, importable by old interpreters
+- [ ] 3.1 Adapt the kit's `scripts/python_check.py`: minimums per branch from task 1.4, exit code `10`, fix-it message (with the macOS system-Python case), `{ENV_PREFIX}ALLOW_PYTHON` escape hatch, importable by old interpreters; keep its `tests/` passing
 - [ ] 3.2 Test it on an end-of-life interpreter, on each supported branch below and at its minimum, and on a newer branch
 - [ ] 3.3 Document in `AGENTS.md` and `CONTRIBUTING.md` the rules of `cross-cutting-rules`: secrets, conversation language, README synchronisation, non-interactive commands, confirmation before outward actions
 
 ## 4. `git` plugin
 
 - [ ] 4.1 Create `plugins/git/` with `plugin.json` (`0.1.0`), `README.md` and a copy of `python_check.py`; register it in the catalogue
-- [ ] 4.2 Write `scripts/profile.py`: `detect`, `save`, `show`, `verify` (exit `0`, `1`, `2`), `keygen` and `open-keys-page`, with the profile shape of `{PROJECT_MODE}` (company fields and email allow-list only in `corporate`) one key per forge host, the identities-only key check on each host, ed25519 for every generated key and a non-blocking recommendation for RSA, ECDSA or DSA keys
+- [ ] 4.2 Write `scripts/profile.py`: `detect`, `save`, `show`, `verify` (exit `0`, `1`, `2`), `keygen` and `open-keys-page`, with the profile shape of `{PROJECT_MODE}` (company fields and email allow-list only in `corporate`), one key per forge host, the identities-only key check on each host, ed25519 for every generated key and a non-blocking recommendation for RSA, ECDSA or DSA keys
 - [ ] 4.3 Write `scripts/git-init.sh` (repository-level identity, `core.sshCommand`, branch, SSH-only `origin`) and the `/git:init` skill with its two-step form, the key check against the target remote's host, key creation and registration guide
-- [ ] 4.4 Write the plugin's instance data file (`scripts/instance.json`: `{PROJECT_MODE}`, `{ORG}`, `{LICENCE}`, `{LICENCE_HOLDER}`, `{FORMAT_MODE}`, `{LOCAL_TZ}`, `{REGION_LANGUAGE}`) that the profile, licence and changelog skills read
+- [ ] 4.4 Write the plugin's instance data file (`scripts/instance.json`, from the kit's `templates/instance.corporate.json` or `templates/instance.personal.json`, with the keys `project_mode`, `org`, `licence_holder`, `licences` (SPDX list, first one the default), `email_domains`, `company_fields`, `format_mode`, `local_tz` and `region_language`) that the profile, licence and changelog skills read
 - [ ] 4.5 Write the `/git:changelog` skill (UTC, international English (UK), deterministic modes, insert-only edits, forked context, format gate in create mode)
-- [ ] 4.6 Write the `/git:changelogger` skill (`TZ={LOCAL_TZ}` as a POSIX string, repository language, format gate in create mode) and the language reference it reads in `references/`, starting from the origin's `changelogger` and `rulesets/LINGUISTICS.md`
+- [ ] 4.6 Write the `/git:changelogger` skill (`TZ={LOCAL_TZ}` as a POSIX string, repository language, format gate in create mode) and the language reference it reads as `${CLAUDE_PLUGIN_ROOT}/references/<file>.md`, starting from the origin's `.agents/skills/changelogger/SKILL.md`, `cot/changelog.md`, the changelog section of `rulesets/COMMITTING.md` and `rulesets/LINGUISTICS.md` (which already prescribes `TZ=CST6`)
 - [ ] 4.7 Test `/git:changelogger` in Git Bash on Windows between 18:00 and 23:59 local time: the entry keeps the local date
-- [ ] 4.8 Write `scripts/commit_msg.py` (per-session message file, `--clean`) and `scripts/commit_trailer.py` (four agents, active session only), starting from the origin's `scripts/commit_trailer.py`
-- [ ] 4.9 Write the `/git:commit` skill: identity check, changelog gate, atomic plan, message checked against the staged diff, push and clean-up
+- [ ] 4.8 Write `scripts/commit_trailer.py` (four agents, active session only, and `--message-file` printing `<tmp>/<tool>-<session-id>-commit.txt`), starting from the origin's `scripts/commit_trailer.py`; no separate message-file script
+- [ ] 4.9 Write the `/git:commit` skill, inline (never `context: fork`), from the origin's `.agents/skills/commit/SKILL.md` and `cot/committing.md`: identity check, changelog gate, atomic plan, message file from the trailer helper or `mktemp` outside an agent session, message checked against the staged diff, push and clean-up
 - [ ] 4.10 Write `scripts/forge.py` (`info`, `normalise`; exit `3` on an unknown host) and the `/git:mr` skill for GitLab and GitHub
 - [ ] 4.11 Write the `/git:release` skill: version format, preconditions, tag history, SemVer check, annotated tag, notes from the changelog, fork safety
-- [ ] 4.12 Write `scripts/license.py` (`plan`, `apply`, markers, approval exit codes) and the `/git:license` skill with the `{ORG_NAMESPACES}` check
+- [ ] 4.12 Write `scripts/license.py` (`plan`, `apply`, markers, approval exit codes, the choice among `{LICENCES}`) and the `/git:license` skill with the `{ORG_NAMESPACES}` check, from the origin's `.agents/skills/licensing/SKILL.md`, `cot/licensing.md`, `rulesets/LICENSING.md` and `rulesets/ATTRIBUTION.md`
 - [ ] 4.13 Validate the plugin, update the README table and its translations, and record the release in `CHANGELOG.md`
 - [ ] 4.14 From here on, commit the marketplace with its own changelog skill (the one of its `{FORMAT_MODE}`) and `/git:commit`
 
@@ -51,8 +55,8 @@
 ## 6. `sdd` plugin (if selected)
 
 - [ ] 6.1 Create `plugins/sdd/` with its manifest, README and a copy of `python_check.py`
-- [ ] 6.2 Write the rubric in `skills/readiness/references/` from the origin's `rulesets/SDD_READINESS.md`, with Platform Readiness criteria fitted to the organisation's stack
-- [ ] 6.3 Write the `{WIKI}` client and comment builder in `scripts/` (setup check without secrets, post, find the marked thread, reply) and the `/sdd:readiness` skill
+- [ ] 6.2 Write the rubric in `skills/readiness/references/` from the origin's `rulesets/SDD_READINESS.md` (in Spanish: translate it), `cot/sdd_readiness.md` and `.agents/skills/sdd-readiness/SKILL.md`, with Platform Readiness criteria fitted to the organisation's stack
+- [ ] 6.3 Write the `{WIKI}` client and comment builder in `scripts/` (setup check without secrets, post, find the marked thread, reply), starting from the origin's `scripts/atlassian/` (`adf_lib.py`, `find_marked_comment.py`, `confluence-management.sh`), and the `/sdd:readiness` skill
 - [ ] 6.4 Test it on a real page through the connector only and with the user's token, including a re-assessment in the same thread
 
 ## 7. `llm` plugin (if selected)
@@ -83,13 +87,13 @@
 ## 10. CI and catalogue
 
 - [ ] 10.1 Add a CI job that compares every copy of `python_check.py` with `scripts/python_check.py`
-- [ ] 10.2 Add a CI job that runs `claude plugin validate` on the marketplace and every plugin on each merge or pull request, on a glibc slim image with an explicit version
+- [ ] 10.2 Starting from the kit's `ci/gitlab-ci.yaml` or `ci/github.yaml` (by `{GIT_HOST}`), add a CI job that runs `claude plugin validate` on the marketplace and every plugin on each merge or pull request, on a glibc slim image with an explicit version
 - [ ] 10.3 If `{CATALOGUE}` is enabled, write `scripts/build_catalogue.py` and a job that publishes the page from the default branch on an isolated runner
 - [ ] 10.4 Turn off the forge's shared fallback runners if the instance's policy requires its own, and put tags on every job
 
 ## 11. Verification
 
-- [ ] 11.1 Install every plugin from scratch on a clean machine with a member's own SSH key, following only the README
+- [ ] 11.1 Install every plugin from scratch, one by one, on a clean machine with a member's own SSH key, following only the README; then check that `claude plugin update` works there
 - [ ] 11.2 Run `/git:init`, `/git:changelog`, `/git:commit`, `/git:mr` and `/git:release` on a real repository of each forge, a fork included, checking nothing lands upstream
 - [ ] 11.3 Run the Git workflow with one member per team and conversation language
 - [ ] 11.4 Have a native speaker review each README translation

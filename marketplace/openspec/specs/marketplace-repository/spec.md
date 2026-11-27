@@ -75,8 +75,12 @@ Each plugin SHALL live in `plugins/<plugin>/` with `.claude-plugin/plugin.json`,
 - **WHEN** a skill body runs a helper through the Bash tool
 - **THEN** the command uses the `${CLAUDE_PLUGIN_ROOT}` path substituted in the skill body and never relies on it as an environment variable of the shell
 
+#### Scenario: Reference material
+- **WHEN** a skill needs a file from its plugin's `references/`
+- **THEN** its body tells the agent to read `${CLAUDE_PLUGIN_ROOT}/references/<file>.md`, never a relative Markdown link, which does not resolve inside an installed skill
+
 ### Requirement: Plugin manifest
-Each `plugin.json` SHALL declare `name`, `version` (semantic versioning, `MAJOR.MINOR.PATCH`), `description` in every `{DESCRIPTION_LANGUAGES}`, `license` set to `{LICENCE}` and `author`.
+Each `plugin.json` SHALL declare `name`, `version` (semantic versioning, `MAJOR.MINOR.PATCH`), `description` in every `{DESCRIPTION_LANGUAGES}`, `license` set to the marketplace's own licence (the first of `{LICENCES}`) and `author`.
 
 #### Scenario: Manifest of a new plugin
 - **WHEN** a plugin is created
@@ -126,14 +130,14 @@ The `description` of every plugin, catalogue entry and skill SHALL carry a brief
 - **THEN** its description is updated in every language of `{DESCRIPTION_LANGUAGES}` in the same commit
 
 ### Requirement: Mandatory validation
-`claude plugin validate .` and `claude plugin validate ./plugins/<plugin>` for each changed plugin SHALL pass before every commit, and the same validation SHALL run in CI on every merge or pull request.
+`claude plugin validate .` and `claude plugin validate ./plugins/<plugin>` for each changed plugin SHALL pass before every commit, and the same validation SHALL run in the CI of `{GIT_HOST}` (a `.gitlab-ci.yml` job or a GitHub Actions workflow) on every merge or pull request.
 
 #### Scenario: Invalid manifest
 - **WHEN** a change leaves a `plugin.json` or the catalogue invalid
 - **THEN** the validation fails and the change is neither committed nor merged
 
 ### Requirement: Repository documents
-The repository root SHALL hold `README.md`, its translations, `CONTRIBUTING.md`, `AGENTS.md` with a `CLAUDE.md` that imports it, `TODO.md`, `CHANGELOG.md` and `LICENSE` (`{LICENCE}`, `{LICENCE_HOLDER}`), plus a `.gitignore` that excludes secrets, caches and generated output.
+The repository root SHALL hold `README.md`, its translations, `CONTRIBUTING.md`, `AGENTS.md` with a `CLAUDE.md` that imports it, `TODO.md`, `CHANGELOG.md` and `LICENSE` (the first of `{LICENCES}`, `{LICENCE_HOLDER}`), plus a `.gitignore` that excludes secrets, caches and generated output.
 
 #### Scenario: New contributor
 - **WHEN** someone wants to publish a plugin
@@ -147,11 +151,15 @@ The repository root SHALL hold `README.md`, its translations, `CONTRIBUTING.md`,
 - **THEN** its row in the README table shows the new version and skills in `README.md` and every translation, in the same commit
 
 ### Requirement: Installation over SSH without prompts
-The README SHALL state that members install with their own Git credentials over SSH, that the key must load without a prompt and the forge host must be in `known_hosts`, and SHALL give a non-interactive access check.
+The README SHALL state that members install with their own Git credentials over SSH, that every machine needs a key with read access that loads without a prompt and the forge host in `known_hosts`, and SHALL give a non-interactive access check.
 
 #### Scenario: Checking access before installing
 - **WHEN** a member runs `git -c core.askPass= ls-remote {MARKETPLACE_URL} HEAD`
 - **THEN** it either prints a commit or fails without prompting, telling them whether installation will work
+
+#### Scenario: Machine with a read-only deploy key
+- **WHEN** a machine reads the marketplace through a deploy key instead of the member's own key
+- **THEN** the README shows an SSH host alias in `~/.ssh/config` that pins that key, and the marketplace URL written with that alias
 
 ### Requirement: Team repositories can declare the marketplace
 The README SHALL document `claude plugin marketplace add {MARKETPLACE_URL} --scope project`, which writes the entry to the repository's `.claude/settings.json` so whoever clones and trusts the repository sees the marketplace.
@@ -161,11 +169,15 @@ The README SHALL document `claude plugin marketplace add {MARKETPLACE_URL} --sco
 - **THEN** a member who clones the repository and trusts the folder is offered the marketplace
 
 ### Requirement: Updates are documented
-The README SHALL state that automatic updates are off for private marketplaces, how to turn them on or update by hand (`/plugin marketplace update {MARKETPLACE}`), and that an open session keeps its version until `/reload-plugins` or a new session.
+The README SHALL state that automatic updates are off for private marketplaces, how to turn them on or update by hand (`/plugin marketplace update {MARKETPLACE}`), that an open session keeps its version until `/reload-plugins` or a new session, and that each plugin is installed once on every machine before it can be updated.
 
 #### Scenario: New plugin version published
 - **WHEN** a member wants the version just released
 - **THEN** the README tells them to update the marketplace and reload plugins or start a new session
+
+#### Scenario: Plugin never installed on this machine
+- **WHEN** a member runs `claude plugin update <plugin>@{MARKETPLACE}` on a machine where that plugin was never installed
+- **THEN** the README explains that it fails with "is not installed" and that plugins are installed one by one on each machine
 
 ### Requirement: Ownership and review
 In a `corporate` instance, each plugin SHALL belong to one of `{TEAMS}`, every change SHALL go through a reviewed merge or pull request, and a team SHALL NOT change another team's plugin without that team's review; once more than one team publishes, `CODEOWNERS` SHALL map each plugin folder to its team. A `personal` instance has one owner and no team rules.
