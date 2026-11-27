@@ -26,6 +26,7 @@ Respondo en un plazo de siete días naturales. Si confirmo el problema, acordamo
 ## Credenciales y datos sensibles
 
 - Las credenciales y los datos sensibles viven solo en el archivo `.env`, que no se versiona (modo 600). La plantilla pública es `.env.example`, sin valores reales.
+- `scripts/sync_secrets.py` refleja el `.env` en la sección `RULES_ENV` de `~/.secrets.yaml` (también modo 600), sin imprimir valores; el `.env` es la fuente y el espejo nunca se edita a mano.
 - Los archivos versionados usan marcadores como `<client_ip>` o `{GATEWAY_IP}` en lugar de valores reales.
 - El CI ejecuta gitleaks en cada *push* y *pull request* hacia `main` para detectar secretos nuevos.
 

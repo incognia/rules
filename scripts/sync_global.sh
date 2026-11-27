@@ -20,7 +20,8 @@
 #   4. Copies .warp/workflows/*.yaml to Warp's workflow directory and removes
 #      workflows it installed earlier that no longer exist in the repository.
 #   5. When the clone is not ~/rules itself, copies cot/, rulesets/,
-#      templates/ and scripts/atlassian/ to ~/rules, plus .env with mode 600.
+#      templates/ and scripts/atlassian/ to ~/rules, plus .env with mode 600;
+#      then mirrors .env into the RULES_ENV block of ~/.secrets.yaml.
 #
 # Author: Rodrigo Álvarez (incognia) <incognia@gmail.com>
 # Licence: GNU General Public License v3.0 (GPLv3)
@@ -302,6 +303,13 @@ else
 fi
 if [ ! -f "$RULES_GLOBAL_DST/.env" ]; then
     echo "  ⚠ No $RULES_GLOBAL_DST/.env: copy .env.example to .env and fill in the Atlassian credentials"
+elif [ -f "$HOME/.secrets.yaml" ] && command -v python3 >/dev/null 2>&1; then
+    # Keep the RULES_ENV block of ~/.secrets.yaml equal to .env; values are never printed.
+    if python3 "$REPO_ROOT/scripts/sync_secrets.py" --env "$RULES_GLOBAL_DST/.env" >/dev/null; then
+        echo "  ✓ .env mirrored in ~/.secrets.yaml (RULES_ENV block)"
+    else
+        echo "  ! Could not mirror .env into ~/.secrets.yaml; run scripts/sync_secrets.py to see why"
+    fi
 fi
 echo ""
 

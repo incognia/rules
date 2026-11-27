@@ -1,6 +1,6 @@
 # Mecanismo de sincronización global
 
-*Última modificación: 7 de noviembre de 2026, 14:06 (CST)*
+*Última modificación: 27 de noviembre de 2026, 16:11 (CST)*
 
 Este documento describe cómo funciona `scripts/sync_global.sh` (macOS, Linux y WSL) y su contraparte para Windows nativo, `scripts/sync_global.ps1`: qué copian, a dónde, qué limpian y por qué existe cada decisión de diseño.
 
@@ -169,6 +169,8 @@ Hay dos casos en los que no copia nada:
 - **`~/rules` es otro *checkout* de git**: copiar encima lo dejaría con cambios sin confirmar; el *script* avisa y sugiere actualizarlo con `git pull`.
 
 Al final, si no existe `~/rules/.env`, recuerda copiar `.env.example` a `.env` y llenar las credenciales de Atlassian. El *script* nunca imprime el contenido de `.env`.
+
+Si existen `~/rules/.env` y `~/.secrets.yaml`, `sync_global.sh` ejecuta `scripts/sync_secrets.py`, que refleja las variables del `.env` en la sección `RULES_ENV` de `~/.secrets.yaml`, entre marcadores y sin tocar el resto del archivo. Antes de cambiarlo guarda un respaldo `~/.secrets.yaml_<fecha>.bkp` con modo 600. El `.env` es la fuente: el espejo no se edita a mano. Para comprobarlo sin escribir: `python3 ~/rules/scripts/sync_secrets.py --check`. `sync_global.ps1` todavía no lo ejecuta; en Windows nativo se corre a mano.
 
 ## Estructura instalada
 
